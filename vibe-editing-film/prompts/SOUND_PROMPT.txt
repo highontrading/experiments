@@ -1,0 +1,7 @@
+Add sound. Synthesize everything in Python with numpy and scipy: no samples, no words. 48 kHz stereo WAV, 12.0 s, read every event from timeline.py and land each hit on its frame.
+
+Music: a cute lo-fi beat at 120 BPM. Before the pop only a soft pad and ticking hats under the typing; the beat drops on the pop: kick, snare, hats, a rubbery bass on F G Am C, glassy FM keys on the off-beats, a kick pump on the bed. On VIBE IT a C major brass stab, then the chord rings out to a 0.5 s fade.
+
+Effects: a key tap for every few typed letters, two glass knocks, a sticker peel and a riser, a pop with breaking glass and a sub boom; a boing on every take-off and a soft pomf on every landing, whooshes on the big leaps; a chunky click and a UI blip on each tool chip, four snaps as the clips land on V1, a tick for every caption, a swish and sparkles for the titles; a select blip for the look card, a thwack for the kick, a whoosh as it flies and a magic shimmer with bells for the grade; rising glockenspiel dings C E G C for the four SFX stamps; tape-rewind chirps, a skate roll and scrub ticks for the playhead; a power-down zap and a whoosh for each falling panel, a boom when they land; yay chirps and sparkles at the end.
+
+Master: a compressor and a limiter at -1 dBFS. Print the loudness per half second.

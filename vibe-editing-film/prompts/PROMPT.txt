@@ -1,0 +1,22 @@
+BRAND
+HERO: Bro, the IdeaBro Studio mascot as one smooth toy: a chunky lightbulb 9 units tall, glass body FFC93C with a warm filament glow, chrome screw base, two short dark legs, two side nubs, two black eye slits, rosy cheeks, soft rounded bevels
+APP: a pixel-faithful Vibe Editing workspace by IdeaBro Studio, dark violet theme: top bar (logo, File Edit Vibe View Help, launch_reel.vibe, Share, Export), Media (four clips, bro.png, vibe_beat.wav and a Looks list: Teal & Orange, Film 35, Noir, Pastel Pop, Mono Punch, VHS 89), Preview with transport and timecode, a Vibe Copilot panel with a typed prompt, six tool chips (Cut to beat, Captions, Motion GFX, B-roll, Sound FX, Transitions), a log and a big VIBE IT button, and a Timeline with MG, CAP, V1, SFX and A1 tracks. Real layout and labels, no other logos
+RESULT: the 8 s reel Bro builds: four clips cut on the beat, word-by-word captions "NO TIMELINE GRIND. / JUST TYPE THE VIBE. / AI DOES THE EDIT.", a VIBE EDITING title with a pen swoosh and a spark, a lower third, a 10x badge, a teal-and-orange grade, four SFX hits, and an end card: VIBE EDITING / BY IDEABRO STUDIO
+SET: every panel is a floating slab over a dark violet studio floor; the UI glows like a screen
+
+FORMAT: Blender 5 Python, Cycles GPU, 1920x1080, 30 fps, 12.0 s at 120 BPM. Build the interface in HTML and screenshot it with puppeteer into a 3840x2160 texture; draw the comp, the timeline clips and the timecode on a canvas, one PNG per frame. One timeline.py holds the layout in UI pixels and every event; the HTML, the Blender scene and the sound all read it.
+
+BEATS (seconds):
+0-1.5 Bro is a flat bro.png layer in the comp, selection handles around him, the prompt types itself into Copilot; he knocks twice from inside
+1.5-2.0 peels off the screen as a flat card and pops into 3D; the preview glass cracks, shards fly
+2.5-3.5 lands on Cut to beat, Captions and Motion GFX: each press drops clips on V1, captions on CAP, titles on MG, and the comp updates
+4.0-5.5 flips across the comp to Media > Looks, a Teal & Orange card pops up, he kicks it into the comp: the grade wipes across
+6.0-7.5 four hops along the SFX track; each stamps a hit on a cut and the comp jumps to it
+8.0-9.6 hops on the playhead, it rewinds to 0, he surfs it to the end while the full edit plays
+10-12 VIBE IT: flash, EXPORTED; every other panel powers down and falls away; Bro waves next to the finished end card
+
+CAMERA: starts wide on the whole workspace, follows every hop at Bro height with shallow focus, whips to each button, ends on the comp alone.
+
+LOOK: UI as emission under black glossy glass; keep the lights out of the UI reflections so nothing blows out; bloom, 0.5 shutter blur, AgX; the glass body must read FFC93C, never orange.
+
+CHECKS: render the UI texture and a comp contact sheet first, then 18 stills at half res before the full render.
