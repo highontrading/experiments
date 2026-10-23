@@ -1,0 +1,678 @@
+{
+ "takes": [
+  {
+   "id": "take_01",
+   "slides": [
+    1
+   ]
+  },
+  {
+   "id": "take_02",
+   "slides": [
+    2
+   ]
+  },
+  {
+   "id": "take_03",
+   "slides": [
+    3
+   ]
+  },
+  {
+   "id": "take_04",
+   "slides": [
+    4
+   ]
+  },
+  {
+   "id": "take_05",
+   "slides": [
+    5
+   ]
+  },
+  {
+   "id": "take_06",
+   "slides": [
+    6
+   ]
+  },
+  {
+   "id": "take_07",
+   "slides": [
+    7,
+    8
+   ]
+  },
+  {
+   "id": "take_08",
+   "slides": [
+    9
+   ]
+  },
+  {
+   "id": "take_09",
+   "slides": [
+    10
+   ]
+  },
+  {
+   "id": "take_10",
+   "slides": [
+    11
+   ]
+  },
+  {
+   "id": "take_11",
+   "slides": [
+    12
+   ]
+  },
+  {
+   "id": "take_12",
+   "slides": [
+    13
+   ]
+  },
+  {
+   "id": "take_13",
+   "slides": [
+    14
+   ]
+  },
+  {
+   "id": "take_14",
+   "slides": [
+    15
+   ]
+  },
+  {
+   "id": "take_15",
+   "slides": [
+    16
+   ]
+  },
+  {
+   "id": "take_16",
+   "slides": [
+    17
+   ]
+  },
+  {
+   "id": "take_17",
+   "slides": [
+    18
+   ]
+  },
+  {
+   "id": "take_18",
+   "slides": [
+    19
+   ]
+  },
+  {
+   "id": "take_19",
+   "slides": [
+    21
+   ]
+  },
+  {
+   "id": "take_20",
+   "slides": [
+    20
+   ]
+  },
+  {
+   "id": "take_21",
+   "slides": [
+    22,
+    23
+   ]
+  },
+  {
+   "id": "take_22",
+   "slides": [
+    24
+   ]
+  },
+  {
+   "id": "take_23",
+   "slides": [
+    25
+   ]
+  }
+ ],
+ "segments": [
+  {
+   "take": "take_01",
+   "slide": 1,
+   "text": "Ek jagruk nagrik ka safar.",
+   "t0": 0.0,
+   "t1": 2.16
+  },
+  {
+   "take": "take_02",
+   "slide": 2,
+   "text": "Shehar ke kaam mein nagrik ki asli bhagidaari kaisi hoti hai?",
+   "t0": 0.0,
+   "t1": 4.6
+  },
+  {
+   "take": "take_02",
+   "slide": 2,
+   "text": "Kya iska matlab sirf chunaav mein vote dena, tax bharna,",
+   "t0": 4.64,
+   "t1": 8.693
+  },
+  {
+   "take": "take_02",
+   "slide": 2,
+   "text": "complaint karna, ya kabhi-kabhi kisi public consultation mein jaana hai?",
+   "t0": 8.747,
+   "t1": 13.6
+  },
+  {
+   "take": "take_03",
+   "slide": 3,
+   "text": "Asli bhagidaari isse kahin zyada hai.",
+   "t0": 0.0,
+   "t1": 3.08
+  },
+  {
+   "take": "take_03",
+   "slide": 3,
+   "text": "Ye ek lagaataar safar hai, jismein nagrik apni zarooratein batate hain,",
+   "t0": 3.12,
+   "t1": 7.84
+  },
+  {
+   "take": "take_03",
+   "slide": 3,
+   "text": "faislon mein hissa lete hain, kaam ki pragati par nazar rakhte hain,",
+   "t0": 7.92,
+   "t1": 11.96
+  },
+  {
+   "take": "take_03",
+   "slide": 3,
+   "text": "aur apni city sarkar ko jawabdeh banate hain.",
+   "t0": 12.0,
+   "t1": 15.2
+  },
+  {
+   "take": "take_04",
+   "slide": 4,
+   "text": "Shehar ke digital platform tax bharna, licence ke liye apply karna",
+   "t0": 0.0,
+   "t1": 4.4
+  },
+  {
+   "take": "take_04",
+   "slide": 4,
+   "text": "aur complaint darj karna aasaan bana dete hain.",
+   "t0": 4.48,
+   "t1": 7.64
+  },
+  {
+   "take": "take_04",
+   "slide": 4,
+   "text": "Lekin bhagidaari ka ek zaroori hissa aksar chhoot jaata hai.",
+   "t0": 7.68,
+   "t1": 12.2
+  },
+  {
+   "take": "take_04",
+   "slide": 4,
+   "text": "Nagrik faisle hone se pehle apni zarooratein kaise bataayein,",
+   "t0": 12.24,
+   "t1": 16.44
+  },
+  {
+   "take": "take_04",
+   "slide": 4,
+   "text": "aur un faislon mein apni baat kaise rakhein?",
+   "t0": 16.48,
+   "t1": 19.44
+  },
+  {
+   "take": "take_05",
+   "slide": 5,
+   "text": "Iske liye city sarkaron ko chaar zaroori vaade karne honge.",
+   "t0": 0.0,
+   "t1": 4.36
+  },
+  {
+   "take": "take_05",
+   "slide": 5,
+   "text": "Pehla vaada: LISTEN, yaani nagrikon ki zarooraton ko sunna.",
+   "t0": 4.4,
+   "t1": 9.84
+  },
+  {
+   "take": "take_06",
+   "slide": 6,
+   "text": "Ek achhi bhagidaari ka safar nagrik se shuru hota hai.",
+   "t0": 0.0,
+   "t1": 3.947
+  },
+  {
+   "take": "take_06",
+   "slide": 6,
+   "text": "Maan lijiye, ek mahila ko lagta hai",
+   "t0": 3.973,
+   "t1": 6.16
+  },
+  {
+   "take": "take_06",
+   "slide": 6,
+   "text": "ki uske mohalle mein ek public garden hona chahiye.",
+   "t0": 6.2,
+   "t1": 9.6
+  },
+  {
+   "take": "take_07",
+   "slide": 7,
+   "text": "Ek digital \"Needs and Wants\" portal par",
+   "t0": 0.0,
+   "t1": 2.64
+  },
+  {
+   "take": "take_07",
+   "slide": 7,
+   "text": "wo apna ye vichaar proposal ke roop mein rakh sakti hai,",
+   "t0": 2.72,
+   "t1": 5.88
+  },
+  {
+   "take": "take_07",
+   "slide": 8,
+   "text": "aur mohalle ke baaki log us proposal ka samarthan kar sakte hain,",
+   "t0": 5.92,
+   "t1": 9.72
+  },
+  {
+   "take": "take_07",
+   "slide": 8,
+   "text": "aur apni zarooratein bhi rakh sakte hain.",
+   "t0": 9.76,
+   "t1": 12.0
+  },
+  {
+   "take": "take_08",
+   "slide": 9,
+   "text": "Iske baad city ke adhikari in sabki saamuhik zarooraton ko dekh sakte hain,",
+   "t0": 0.0,
+   "t1": 5.08
+  },
+  {
+   "take": "take_08",
+   "slide": 9,
+   "text": "aur local development aur budget planning ke samay inpar vichaar kar sakte hain.",
+   "t0": 5.12,
+   "t1": 9.76
+  },
+  {
+   "take": "take_09",
+   "slide": 10,
+   "text": "Isse nagrik sirf faisla hone ke baad nahi,",
+   "t0": 0.0,
+   "t1": 3.24
+  },
+  {
+   "take": "take_09",
+   "slide": 10,
+   "text": "balki praathmiktaayein tay hote samay hi apni baat rakh paate hain.",
+   "t0": 3.28,
+   "t1": 8.04
+  },
+  {
+   "take": "take_09",
+   "slide": 10,
+   "text": "Lekin nagrikon ko kaise pata chale ki aage kya hua?",
+   "t0": 8.08,
+   "t1": 12.28
+  },
+  {
+   "take": "take_09",
+   "slide": 10,
+   "text": "Yahin se aata hai agla vaada.",
+   "t0": 12.32,
+   "t1": 14.96
+  },
+  {
+   "take": "take_10",
+   "slide": 11,
+   "text": "Doosra vaada: INFORM,",
+   "t0": 0.0,
+   "t1": 2.4
+  },
+  {
+   "take": "take_10",
+   "slide": 11,
+   "text": "yaani transparent aur aasaani se milne wale data ke zariye jaankari dena.",
+   "t0": 2.48,
+   "t1": 8.24
+  },
+  {
+   "take": "take_11",
+   "slide": 12,
+   "text": "Open Data Portal aur dashboard ke zariye",
+   "t0": 0.0,
+   "t1": 2.72
+  },
+  {
+   "take": "take_11",
+   "slide": 12,
+   "text": "nagrik city sarkar ke plans, budget, timelines",
+   "t0": 2.8,
+   "t1": 6.6
+  },
+  {
+   "take": "take_11",
+   "slide": 12,
+   "text": "aur chal rahe projects ki jaankari dekh sakte hain.",
+   "t0": 6.64,
+   "t1": 9.76
+  },
+  {
+   "take": "take_12",
+   "slide": 13,
+   "text": "Nagrik apne proposal ki pragati,",
+   "t0": 0.0,
+   "t1": 2.28
+  },
+  {
+   "take": "take_12",
+   "slide": 13,
+   "text": "aur apne ilaake ke baaki projects ko bhi track kar sakte hain.",
+   "t0": 2.32,
+   "t1": 6.08
+  },
+  {
+   "take": "take_13",
+   "slide": 14,
+   "text": "Lekin agar nagrik santusht na hon, tab kya?",
+   "t0": 0.0,
+   "t1": 3.76
+  },
+  {
+   "take": "take_14",
+   "slide": 15,
+   "text": "Yahin aata hai teesra vaada: RESPOND,",
+   "t0": 0.0,
+   "t1": 3.32
+  },
+  {
+   "take": "take_14",
+   "slide": 15,
+   "text": "yaani ek prabhaavi shikayat nivaaran system ke zariye jawab dena.",
+   "t0": 3.36,
+   "t1": 7.84
+  },
+  {
+   "take": "take_15",
+   "slide": 16,
+   "text": "Ek centralised complaint system nagrikon ko ek hi aasaan platform deta hai.",
+   "t0": 0.0,
+   "t1": 5.4
+  },
+  {
+   "take": "take_15",
+   "slide": 16,
+   "text": "Yahan wo complaint darj kar sakte hain,",
+   "t0": 5.44,
+   "t1": 7.56
+  },
+  {
+   "take": "take_15",
+   "slide": 16,
+   "text": "uski acknowledgement yaani paavti paa sakte hain,",
+   "t0": 7.6,
+   "t1": 11.16
+  },
+  {
+   "take": "take_15",
+   "slide": 16,
+   "text": "uska samaadhan track kar sakte hain,",
+   "t0": 11.2,
+   "t1": 13.48
+  },
+  {
+   "take": "take_15",
+   "slide": 16,
+   "text": "aur jaan sakte hain ki kaunsa vibhaag iske liye zimmedar hai.",
+   "t0": 13.52,
+   "t1": 17.44
+  },
+  {
+   "take": "take_16",
+   "slide": 17,
+   "text": "City sarkar ko samay par kaam karna chahiye,",
+   "t0": 0.0,
+   "t1": 2.92
+  },
+  {
+   "take": "take_16",
+   "slide": 17,
+   "text": "aur har kadam par saaf jaankari deni chahiye.",
+   "t0": 2.96,
+   "t1": 6.2
+  },
+  {
+   "take": "take_16",
+   "slide": 17,
+   "text": "Aur samasya hal hone ke baad nagrik us kaam ki quality par feedback de sakein,",
+   "t0": 6.24,
+   "t1": 11.4
+  },
+  {
+   "take": "take_16",
+   "slide": 17,
+   "text": "taaki complaint sirf band na ho, balki sach mein hal ho.",
+   "t0": 11.44,
+   "t1": 15.28
+  },
+  {
+   "take": "take_17",
+   "slide": 18,
+   "text": "Aur ant mein, chautha vaada: FACILITATE,",
+   "t0": 0.0,
+   "t1": 3.6
+  },
+  {
+   "take": "take_17",
+   "slide": 18,
+   "text": "yaani digital transaction systems ke zariye kaam aasaan banana.",
+   "t0": 3.68,
+   "t1": 8.4
+  },
+  {
+   "take": "take_18",
+   "slide": 19,
+   "text": "Ek single window digital system",
+   "t0": 0.0,
+   "t1": 2.16
+  },
+  {
+   "take": "take_18",
+   "slide": 19,
+   "text": "municipal corporation ke saath har kaam ko aasaan banata hai.",
+   "t0": 2.24,
+   "t1": 6.32
+  },
+  {
+   "take": "take_18",
+   "slide": 19,
+   "text": "Property tax bharne se lekar licence ke liye apply karne tak,",
+   "t0": 6.347,
+   "t1": 10.44
+  },
+  {
+   "take": "take_18",
+   "slide": 19,
+   "text": "nagrik saari municipal sevaayein online le sakte hain,",
+   "t0": 10.48,
+   "t1": 13.72
+  },
+  {
+   "take": "take_18",
+   "slide": 19,
+   "text": "aur unhe alag-alag daftaron ke chakkar nahi lagaane padte.",
+   "t0": 13.76,
+   "t1": 17.2
+  },
+  {
+   "take": "take_19",
+   "slide": 21,
+   "text": "Iske liye property tax ka system bhi mazboot hona chahiye:",
+   "t0": 0.0,
+   "t1": 3.72
+  },
+  {
+   "take": "take_19",
+   "slide": 21,
+   "text": "har property ka digital database, GIS technology,",
+   "t0": 3.76,
+   "t1": 7.56
+  },
+  {
+   "take": "take_19",
+   "slide": 21,
+   "text": "saaf aur transparent valuation, self-assessment ki suvidha,",
+   "t0": 7.6,
+   "t1": 11.56
+  },
+  {
+   "take": "take_19",
+   "slide": 21,
+   "text": "samay-samay par revision, aur sevaaon ko tax data se jodna.",
+   "t0": 11.6,
+   "t1": 15.84
+  },
+  {
+   "take": "take_20",
+   "slide": 20,
+   "text": "Aaj digital technology in chaaron hisson ko",
+   "t0": 0.0,
+   "t1": 3.12
+  },
+  {
+   "take": "take_20",
+   "slide": 20,
+   "text": "nagrik bhagidaari ke ek lagaataar safar mein jod sakti hai.",
+   "t0": 3.2,
+   "t1": 7.0
+  },
+  {
+   "take": "take_20",
+   "slide": 20,
+   "text": "Isse shehar nagrikon ki baat sun sakte hain, unhe jaankari de sakte hain,",
+   "t0": 7.04,
+   "t1": 11.64
+  },
+  {
+   "take": "take_20",
+   "slide": 20,
+   "text": "unki praathmiktaaon par kaam kar sakte hain,",
+   "t0": 11.68,
+   "t1": 14.213
+  },
+  {
+   "take": "take_20",
+   "slide": 20,
+   "text": "aur unki shikayaton ka hal nikaal sakte hain.",
+   "t0": 14.24,
+   "t1": 17.24
+  },
+  {
+   "take": "take_20",
+   "slide": 20,
+   "text": "Kai Bharatiya shehar pehle se hi achhe udaaharan pesh kar rahe hain.",
+   "t0": 17.28,
+   "t1": 21.28
+  },
+  {
+   "take": "take_21",
+   "slide": 22,
+   "text": "Pune ka Open Data Portal shehar ki jaankari sabke liye aasaan banata hai,",
+   "t0": 0.0,
+   "t1": 5.12
+  },
+  {
+   "take": "take_21",
+   "slide": 22,
+   "text": "aur Mumbai mein BMC ka WhatsApp chatbot",
+   "t0": 5.2,
+   "t1": 8.24
+  },
+  {
+   "take": "take_21",
+   "slide": 22,
+   "text": "municipal sevaaon tak pahunch ko aasaan karta hai.",
+   "t0": 8.32,
+   "t1": 11.56
+  },
+  {
+   "take": "take_21",
+   "slide": 22,
+   "text": "Ye pahal raasta dikhati hain,",
+   "t0": 11.6,
+   "t1": 13.56
+  },
+  {
+   "take": "take_21",
+   "slide": 23,
+   "text": "lekin ek sach mein smart city sirf apni technology se nahi pehchaani jaati.",
+   "t0": 13.6,
+   "t1": 18.28
+  },
+  {
+   "take": "take_21",
+   "slide": 23,
+   "text": "Wo pehchaani jaati hai responsive, transparent aur participatory hone se,",
+   "t0": 18.32,
+   "t1": 23.4
+  },
+  {
+   "take": "take_21",
+   "slide": 23,
+   "text": "yaani jo jawab de, jo kuch na chhupaaye, aur jo sabko saath le.",
+   "t0": 23.44,
+   "t1": 28.32
+  },
+  {
+   "take": "take_22",
+   "slide": 24,
+   "text": "Jab city sarkarein sunti hain, jaankari deti hain,",
+   "t0": 0.0,
+   "t1": 3.52
+  },
+  {
+   "take": "take_22",
+   "slide": 24,
+   "text": "jawab deti hain aur kaam aasaan banati hain,",
+   "t0": 3.6,
+   "t1": 6.84
+  },
+  {
+   "take": "take_22",
+   "slide": 24,
+   "text": "tab nagrik local governance mein sakriya saajhedaar ban jaate hain.",
+   "t0": 6.88,
+   "t1": 11.04
+  },
+  {
+   "take": "take_23",
+   "slide": 25,
+   "text": "Saath milkar, wo aaj ki zarooraton ko",
+   "t0": 0.0,
+   "t1": 2.88
+  },
+  {
+   "take": "take_23",
+   "slide": 25,
+   "text": "kal ke un shehron mein badal sakte hain, jinmein hum rehna chahte hain.",
+   "t0": 2.92,
+   "t1": 6.88
+  }
+ ]
+}

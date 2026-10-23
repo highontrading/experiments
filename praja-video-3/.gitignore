@@ -1,0 +1,6 @@
+build/*
+!build/vo/
+!build/sfx/
+!build/music/
+node_modules/
+__pycache__/

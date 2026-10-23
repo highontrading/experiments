@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Praja Video 3 stage</title>
+<style>
+@font-face { font-family: "Anton"; src: url(fonts/Anton-400.ttf); }
+@font-face { font-family: "Archivo Black"; src: url(fonts/ArchivoBlack-400.ttf); }
+@font-face { font-family: "Special Elite"; src: url(fonts/SpecialElite-400.ttf); }
+@font-face { font-family: "Courier Prime"; src: url(fonts/CourierPrime-400.ttf); font-weight: 400; }
+@font-face { font-family: "Courier Prime"; src: url(fonts/CourierPrime-700.ttf); font-weight: 700; }
+@font-face { font-family: "Abril Fatface"; src: url(fonts/AbrilFatface-400.ttf); }
+@font-face { font-family: "Bebas Neue"; src: url(fonts/BebasNeue-400.ttf); }
+@font-face { font-family: "Caveat"; src: url(fonts/Caveat-500.ttf); font-weight: 500; }
+@font-face { font-family: "Caveat"; src: url(fonts/Caveat-700.ttf); font-weight: 700; }
+@font-face { font-family: "Oswald"; src: url(fonts/Oswald-500.ttf); font-weight: 500; }
+@font-face { font-family: "Oswald"; src: url(fonts/Oswald-700.ttf); font-weight: 700; }
+@font-face { font-family: "Playfair Display"; src: url(fonts/PlayfairDisplay-900.ttf); font-weight: 900; }
+@font-face { font-family: "Rubik Mono One"; src: url(fonts/RubikMonoOne-400.ttf); }
+@font-face { font-family: "Alfa Slab One"; src: url(fonts/AlfaSlabOne-400.ttf); }
+@font-face { font-family: "Permanent Marker"; src: url(fonts/PermanentMarker-400.ttf); }
+
+/* design tokens, sampled from the "American File" collage */
+:root {
+  --blue: #67839b;      /* dusty slate board */
+  --blue-d: #4f6a80;
+  --cream: #efe6d3;     /* aged paper */
+  --cream-2: #e6dcc6;
+  --white: #f7f3ea;
+  --ink: #161412;
+  --ink-soft: #3a352e;
+  --yellow: #efc031;    /* tape + marker */
+  --pencil: #22313f;
+  --tape: rgba(232, 222, 192, .78);
+}
+html, body { margin: 0; background: #000; }
+#stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--blue); }
+.scene { position: absolute; inset: 0; overflow: hidden; display: none; background-color: var(--blue); }
+.cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+.board { position: absolute; inset: 0; }
+.it { position: absolute; transform-origin: 50% 50%; will-change: transform, opacity; }
+.it > .inner { position: relative; width: 100%; height: 100%; }
+.shadow { filter: drop-shadow(0 6px 7px rgba(10, 20, 30, .32)) drop-shadow(0 1px 1px rgba(10, 20, 30, .25)); }
+.sheet { position: absolute; inset: 0; background-color: var(--cream); }
+.sheet.white { background-color: var(--white); }
+.news { position: absolute; inset: 18px 22px; overflow: hidden; column-count: 3; column-gap: 18px;
+  font: 400 11.5px/1.45 "Courier Prime", monospace; color: rgba(35, 30, 25, .42); text-align: justify; }
+.news b { display: block; font: 900 19px/1.1 "Playfair Display", serif; color: rgba(25, 20, 15, .55); margin: 4px 0 6px; }
+.chip { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; white-space: nowrap;
+  font-family: "Archivo Black", sans-serif; color: var(--ink); text-transform: uppercase; letter-spacing: .5px; }
+.tape { position: absolute; inset: 0; background: var(--tape); }
+.ytape { position: absolute; inset: 0; background: var(--yellow); }
+.svgfull { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ink { fill: none; stroke: var(--ink); stroke-width: 4.5; stroke-linecap: round; stroke-linejoin: round; }
+.ink .y, .y { fill: var(--yellow); }
+.ink .c, .c { fill: var(--cream); }
+.ink .w, .w { fill: var(--white); }
+.ink .k, .k { fill: var(--ink); }
+.ink .ht, .ht { fill: url(#ht); }
+.ink .nf { fill: none; }
+.hand { font-family: "Caveat", cursive; font-weight: 700; color: var(--pencil); white-space: nowrap; }
+.type { font-family: "Special Elite", monospace; color: var(--ink); }
+.mono { font-family: "Courier Prime", monospace; }
+.ui-head { position: absolute; left: 0; right: 0; top: 0; height: 64px; background: var(--ink); color: var(--white);
+  display: flex; align-items: center; padding: 0 26px; gap: 14px; font: 700 28px "Oswald", sans-serif; letter-spacing: 1.5px; }
+.ui-head .dots { display: flex; gap: 8px; }
+.ui-head .dots i { width: 13px; height: 13px; border-radius: 50%; background: var(--cream); opacity: .8; display: block; }
+.btn { position: absolute; display: flex; align-items: center; justify-content: center; border: 3.5px solid var(--ink);
+  font: 700 26px "Oswald", sans-serif; letter-spacing: 1px; color: var(--ink); background: var(--white); }
+.btn.y { background: var(--yellow); }
+.field { position: absolute; border-bottom: 3px solid var(--ink); font: 700 25px "Courier Prime", monospace; color: var(--ink); }
+.field small { display: block; font: 500 17px "Oswald", sans-serif; letter-spacing: 1.5px; color: var(--ink-soft); }
+.bar { position: absolute; height: 100%; left: 0; top: 0; background: var(--yellow); }
+.hl-y > .inner > .sheet { background-color: var(--yellow) !important; }
+.ransom { position: absolute; display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
+
+/* overlay */
+#overlay { position: absolute; inset: 0; pointer-events: none; z-index: 50; }
+#caption { position: absolute; left: 50%; top: 985px; transform: translate(-50%, -50%); max-width: 1480px;
+  padding: 12px 34px 13px; text-align: center; font: 700 31px/1.28 "Courier Prime", monospace; color: var(--ink);
+  background-color: var(--cream); }
+#caption-wrap { position: absolute; inset: 0; filter: drop-shadow(0 4px 5px rgba(10, 20, 30, .35)); }
+#wipe { position: absolute; top: -40px; height: 1160px; width: 1100px; display: none; z-index: 40;
+  filter: drop-shadow(-14px 0 18px rgba(10, 20, 30, .35)) drop-shadow(14px 0 18px rgba(10, 20, 30, .35)); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <pattern id="ht" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <circle cx="3.5" cy="3.5" r="1.9" fill="#161412" /></pattern>
+      <pattern id="ht2" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <circle cx="3" cy="3" r="2.3" fill="#161412" /></pattern>
+      <pattern id="htl" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <circle cx="3.5" cy="3.5" r="1.1" fill="#161412" /></pattern>
+      <pattern id="hty" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+        <circle cx="4" cy="4" r="2.4" fill="#efc031" /></pattern>
+      <pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(40)">
+        <line x1="0" y1="0" x2="0" y2="9" stroke="#161412" stroke-width="2" /></pattern>
+    </defs>
+  </svg>
+  <div id="scenes"></div>
+  <div id="overlay"></div>
+</div>
+<script src="build/timeline.js"></script>
+<script src="stage.js"></script>
+</body>
+</html>
