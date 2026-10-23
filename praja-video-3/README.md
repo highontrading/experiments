@@ -7,7 +7,7 @@ masking tape, yellow tape, a yellow marker and halftone ink.
 
 | File | What it is |
 | --- | --- |
-| `out/praja_video_3.mp4` | the video: 1920x1080, 30 fps, 5:10, H.264 + AAC, -14 LUFS |
+| `out/praja_video_3_web.mp4` | the video: 1920x1080, 30 fps, 5:10, H.264 + AAC, -14 LUFS (82 MB). `./make.sh encode` also writes the 188 MB master `out/praja_video_3.mp4`, which is kept out of git because of its size |
 | `script.py` | the VO script from the PDF. Each line holds the on-screen caption (Roman, word for word from the PDF) and the Devanagari the voice reads |
 | `vo.py` | ElevenLabs TTS: one take per slide (7+8 and 22+23 as one take), with character timings |
 | `sfx.py` | ElevenLabs sound effects (paper, tape, stamp, typewriter, marker, UI) and the music bed |

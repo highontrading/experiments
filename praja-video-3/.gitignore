@@ -4,3 +4,4 @@ build/*
 !build/music/
 node_modules/
 __pycache__/
+out/praja_video_3.mp4

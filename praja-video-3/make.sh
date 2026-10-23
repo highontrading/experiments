@@ -35,4 +35,7 @@ ffmpeg -loglevel error -y -f concat -safe 0 -i build/segs.txt -i build/mix.wav \
   -vf "fade=t=in:st=0:d=0.5,fade=t=out:st=$(python3 -c "print($DUR-1.0)"):d=1.0,format=yuv420p" \
   -map 0:v -map 1:a -c:v libx264 -profile:v high -preset slow -crf 18 -r 30 \
   -c:a aac -b:a 256k -movflags +faststart -shortest out/praja_video_3.mp4
-echo "-> out/praja_video_3.mp4"
+# web copy under GitHub's 100 MB limit (the master above is kept out of git)
+ffmpeg -loglevel error -y -i out/praja_video_3.mp4 -c:v libx264 -profile:v high -preset slow -crf 23 \
+  -maxrate 2600k -bufsize 5200k -c:a aac -b:a 192k -movflags +faststart out/praja_video_3_web.mp4
+echo "-> out/praja_video_3.mp4, out/praja_video_3_web.mp4"
