@@ -7,21 +7,8 @@ to MP4 with ffmpeg.
 
 ## How the carousels work
 
-- **Format:** 1080x1350 (4:5), one MP4 per slide, 4–6 s per slide, 30 fps, built
-  to loop without a visible jump. Instagram allows up to 20 photos or videos per
-  carousel and crops every slide to the first one's ratio, so all slides are 4:5.
-- **Consistency:** every slide uses the same frame: the brand bar at the top, a
-  progress dots row, the slide number, a "swipe" cue on slides 1 to N-1, and Bro
-  (the lightbulb mascot) who appears on every slide doing the step.
-- **Motion vocabulary**, the same on every slide:
-  1. *Enter* (0–0.8 s): the headline lands word by word, then the visual builds.
-  2. *Act* (0.8–3.5 s): the one thing the slide teaches happens on screen
-     (clips snap to the beat, a prompt types itself, a look wipes across).
-  3. *Hold + loop* (3.5–5 s): a quiet loop (cursor blink, Bro bob, glow pulse)
-     that comes back to the first frame.
-- **One source of truth:** `slides.json` holds the copy and timing of every slide
-  in a carousel; the HTML and the render read it. A new carousel = a new JSON file.
-- **Slide arc:** Hook → Problem → Shift → Steps (3–5) → Recap/Save → CTA.
+See `README.md` for the design system and the build. Every slide is a looping 1080x1350
+MP4. The slide order is Hook → Problem → Shift → Steps (3–5) → Recap/Save → CTA.
 
 ## Topic bank
 
@@ -65,7 +52,7 @@ reel, and comment VIBE for the free prompt pack.
 #vibeediting #videoediting #reelstips #contentcreator #aivideoediting #editingtips
 #instagramreels #creatortips
 
-## Next
+## Status
 
-Waiting on the design system (colors, fonts, logo, handle, mascot or not). Then:
-build the slide template, render carousel 01, and review stills before the full render.
+- Carousel 01 is built in the reference design system (hands and cards instead of Bro): `carousels/01-five-step-system.js` -> `out/01-five-step-system/`. The table above is the original script; the built copy is in the carousel file.
+- Next: pick the next topic from the bank and copy carousel 01 as its template.
