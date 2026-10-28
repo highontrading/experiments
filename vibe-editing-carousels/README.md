@@ -21,14 +21,18 @@ gets its own layout.
 | --- | --- | --- | --- | --- |
 | 01 | The 5-Step Vibe Editing System | 10 | cloud sky, hands holding cards, iOS Notes card | `carousels/01-five-step-system.js` |
 | 02 | The Vibe Prompt Formula | 6 | iOS Calendar, text selection, keyboard, film grain | `carousels/02-prompt-formula.js` |
+| 03 | Cut to the Beat | 6 | near-black stage, 3D ring of cards, orange italic footnote | `carousels/03-cut-to-the-beat.js` |
 | 04 | Captions That Keep People Watching | 6 | pink retro: grid paper, stripes, tags, heart stickers | `carousels/04-captions.js` |
 | 05 | One-Word Color Grades | 6 | white shelves, stamp frames, serif on pink box | `carousels/05-color-grades.js` |
+| 06 | 4 SFX Every Reel Needs | 6 | pixel clouds, silver tray held up, script with white outline | `carousels/06-four-sfx.js` |
+| 07 | Hook Edits for the First 1.5 Seconds | 6 | dark linen, cream caps, silver letter beads, felt patch | `carousels/07-hook-edits.js` |
 | 08 | Vibe Editing vs Timeline Editing | 6 | retro CRT in a meadow, Windows 95 Notepad | `carousels/08-vibe-vs-timeline.js` |
+| 09 | 1 Long Video → 10 Reels | 6 | light grey, chunky rounded type, fanned cards, pixel cursor | `carousels/09-one-video-ten-reels.js` |
+| 10 | 7 Vibe Editing Mistakes | 6 | halftone collage, torn note, serif, speech-blob stickers | `carousels/10-seven-mistakes.js` |
+| 11 | The Director Pass | 6 | cutting mat, paper sheet, highlighter, die-cut stickers | `carousels/11-director-pass.js` |
 | 12 | 10 Prompts to Save | 6 | grey desk, macOS folders, Cut/Copy/Paste menu | `carousels/12-ten-prompts.js` |
-
-Still waiting on design systems: 03 Cut to the Beat, 06 4 SFX Every Reel Needs, 07 Hook
-Edits for the First 1.5 Seconds, 09 1 Long Video → 10 Reels, 10 7 Vibe Editing Mistakes,
-11 The Director Pass, 13 Raw Footage to Posted in 15 Minutes, 14 Brand Your Edits.
+| 13 | Raw Footage to Posted in 15 Minutes | 6 | blue fabric header, manila folder tabs, typewriter caps | `carousels/13-raw-to-posted.js` |
+| 14 | Brand Your Edits | 6 | dusty-blue editorial, thin sans + script, corner caps | `carousels/14-brand-your-edits.js` |
 
 Carousel 01 runs on `lib/stage.js`. Carousels 02 onward set `kit: true` and run on
 `lib/kit.js`: each slide is `{ bg, els, fg }`, and an element is `{ x, y, rot, in, at,

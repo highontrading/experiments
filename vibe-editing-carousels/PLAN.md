@@ -54,5 +54,4 @@ reel, and comment VIBE for the free prompt pack.
 
 ## Status
 
-- Built: 01, 02, 04, 05, 08, 12 (see `README.md` for the design system of each).
-- Waiting on design systems for 03, 06, 07, 09, 10, 11, 13, 14.
+- All 14 topics are built (see `README.md` for each design system).
