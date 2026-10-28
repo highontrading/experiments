@@ -11,6 +11,17 @@
   @font-face { font-family: InterL; src: url(assets/fonts/Inter-Bold.otf); font-weight: 700; }
   @font-face { font-family: InterL; src: url(assets/fonts/Inter-ExtraBold.otf); font-weight: 800; }
   @font-face { font-family: Caveat; src: url(assets/fonts/Caveat-600.ttf); font-weight: 600; }
+  @font-face { font-family: InterL; src: url(assets/fonts/Inter-Light.otf); font-weight: 300; }
+  @font-face { font-family: InterL; src: url(assets/fonts/Inter-Regular.otf); font-weight: 400; }
+  @font-face { font-family: InterD; src: url(assets/fonts/InterDisplay-Light.otf); font-weight: 300; }
+  @font-face { font-family: InterD; src: url(assets/fonts/InterDisplay-SemiBold.otf); font-weight: 600; }
+  @font-face { font-family: InterD; src: url(assets/fonts/InterDisplay-Bold.otf); font-weight: 700; }
+  @font-face { font-family: InterD; src: url(assets/fonts/InterDisplay-ExtraBold.otf); font-weight: 800; }
+  @font-face { font-family: InterD; src: url(assets/fonts/InterDisplay-Black.otf); font-weight: 900; }
+  @font-face { font-family: Playfair; src: url(assets/fonts/PlayfairDisplay-500.ttf); font-weight: 500; }
+  @font-face { font-family: Playfair; src: url(assets/fonts/PlayfairDisplay-500i.ttf); font-weight: 500; font-style: italic; }
+  @font-face { font-family: Fredoka; src: url(assets/fonts/Fredoka-700.ttf); font-weight: 700; }
+  @font-face { font-family: VT323; src: url(assets/fonts/VT323.ttf); font-weight: 400; }
   html, body { margin: 0; background: #000; }
   canvas { display: block; }
 </style>
@@ -20,12 +31,15 @@
 <script>
   // ?c=01-five-step-system&s=3  -> carousel file and slide number
   const q = new URLSearchParams(location.search);
-  const files = ["lib/util.js", "lib/footage.js", "lib/hands.js", "lib/cards.js",
-    `carousels/${q.get("c") || "01-five-step-system"}.js`, "lib/stage.js"];
-  window.stageReady = files.reduce((p, f) => p.then(() => new Promise((ok, no) => {
+  // Carousel 01 runs on lib/stage.js; carousels that set `kit: true` run on lib/kit.js.
+  const files = ["lib/util.js", "lib/footage.js", "lib/hands.js", "lib/cards.js", "lib/kit.js",
+    `carousels/${q.get("c") || "01-five-step-system"}.js`];
+  const load = (f) => new Promise((ok, no) => {
     const s = document.createElement("script"); s.src = f; s.onload = ok; s.onerror = () => no(new Error(f));
     document.body.appendChild(s);
-  })), Promise.resolve()).then(() => window.stageReady);
+  });
+  window.stageReady = files.reduce((p, f) => p.then(() => load(f)), Promise.resolve())
+    .then(() => (window.CAROUSEL.kit ? K.start() : load("lib/stage.js").then(() => window.stageReady)));
 </script>
 </body>
 </html>

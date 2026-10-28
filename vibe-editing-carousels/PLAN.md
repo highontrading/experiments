@@ -54,5 +54,5 @@ reel, and comment VIBE for the free prompt pack.
 
 ## Status
 
-- Carousel 01 is built in the reference design system (hands and cards instead of Bro): `carousels/01-five-step-system.js` -> `out/01-five-step-system/`. The table above is the original script; the built copy is in the carousel file.
-- Next: pick the next topic from the bank and copy carousel 01 as its template.
+- Built: 01, 02, 04, 05, 08, 12 (see `README.md` for the design system of each).
+- Waiting on design systems for 03, 06, 07, 09, 10, 11, 13, 14.

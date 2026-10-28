@@ -11,7 +11,32 @@ rendered frame by frame with headless Chromium, the same way `../vibe-editing-fi
 | `out/<carousel>/still_NN.jpg` | a still of each slide (frame 91) as a fallback image |
 | `out/<carousel>/preview_all_slides.mp4` | every slide back to back, to check the swipe-through |
 
-## Design system
+## Carousels
+
+Every carousel follows the same flow (hook → content → CTA: comment "VIBE" for the free
+prompt pack, save, follow) and keeps one design system across its slides, while each slide
+gets its own layout.
+
+| # | Topic | Slides | Design system | File |
+| --- | --- | --- | --- | --- |
+| 01 | The 5-Step Vibe Editing System | 10 | cloud sky, hands holding cards, iOS Notes card | `carousels/01-five-step-system.js` |
+| 02 | The Vibe Prompt Formula | 6 | iOS Calendar, text selection, keyboard, film grain | `carousels/02-prompt-formula.js` |
+| 04 | Captions That Keep People Watching | 6 | pink retro: grid paper, stripes, tags, heart stickers | `carousels/04-captions.js` |
+| 05 | One-Word Color Grades | 6 | white shelves, stamp frames, serif on pink box | `carousels/05-color-grades.js` |
+| 08 | Vibe Editing vs Timeline Editing | 6 | retro CRT in a meadow, Windows 95 Notepad | `carousels/08-vibe-vs-timeline.js` |
+| 12 | 10 Prompts to Save | 6 | grey desk, macOS folders, Cut/Copy/Paste menu | `carousels/12-ten-prompts.js` |
+
+Still waiting on design systems: 03 Cut to the Beat, 06 4 SFX Every Reel Needs, 07 Hook
+Edits for the First 1.5 Seconds, 09 1 Long Video → 10 Reels, 10 7 Vibe Editing Mistakes,
+11 The Director Pass, 13 Raw Footage to Posted in 15 Minutes, 14 Brand Your Edits.
+
+Carousel 01 runs on `lib/stage.js`. Carousels 02 onward set `kit: true` and run on
+`lib/kit.js`: each slide is `{ bg, els, fg }`, and an element is `{ x, y, rot, in, at,
+draw }`. The kit plays the entrance (`pop`, `up`, `down`, `left`, `right`, `drop`, `fade`,
+`grow`), a gentle float, and the exit in the last 0.32 s so every slide loops cleanly.
+Each carousel file holds its own design system (backdrop, type, components).
+
+## Carousel 01 design system
 
 Taken from the reference reel and kept on every slide, so all carousels match:
 
@@ -36,11 +61,12 @@ Taken from the reference reel and kept on every slide, so all carousels match:
 
 ## Make a new carousel
 
-Copy `carousels/01-five-step-system.js`, change the copy and the cards, then:
+Copy the carousel file closest to what you want, change the copy and the layout, then:
 
 ```bash
-./make.sh 02-my-topic stills    # one still per slide -> build/02-my-topic/contact_sheet.png
-./make.sh 02-my-topic           # all frames -> out/02-my-topic/*.mp4
+./make.sh 15-my-topic stills    # one still per slide -> build/15-my-topic/contact_sheet.png
+./make.sh 15-my-topic           # all frames -> out/15-my-topic/*.mp4
+./build_all.sh 02-prompt-formula 04-captions   # several in a row
 ```
 
 Each slide has `notes` (kicker, title, body, and optional `pills` or `checklist`) and

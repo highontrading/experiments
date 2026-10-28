@@ -10,12 +10,6 @@ const path = require("path");
 const args = process.argv.slice(2);
 const opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
 const CAR = opt("--c", "01-five-step-system");
-const count = (() => {
-  const src = fs.readFileSync(path.join(__dirname, "carousels", CAR + ".js"), "utf8");
-  const w = {}; new Function("window", src)(w); return w.CAROUSEL.slides.length;
-})();
-const slides = opt("--s") ? opt("--s").split(",").map(Number) : Array.from({ length: count }, (_, i) => i + 1);
-const pad = (n, k = 2) => String(n).padStart(k, "0");
 
 async function renderSlide(browser, s) {
   const page = await browser.newPage({ viewport: { width: 1080, height: 1350 }, deviceScaleFactor: 1 });
@@ -42,8 +36,18 @@ async function renderSlide(browser, s) {
   await page.close();
 }
 
+const pad = (n, k = 2) => String(n).padStart(k, "0");
+
 (async () => {
   const browser = await chromium.launch({ args: ["--font-render-hinting=none"] });
+  let slides = opt("--s") ? opt("--s").split(",").map(Number) : null;
+  if (!slides) {                              // ask the page how many slides there are
+    const page = await browser.newPage();
+    await page.goto(`file://${path.join(__dirname, "stage.html")}?c=${CAR}&s=1`);
+    const n = await page.evaluate(async () => { await window.stageReady; return window.SLIDE_INFO.count; });
+    await page.close();
+    slides = Array.from({ length: n }, (_, i) => i + 1);
+  }
   const queue = [...slides];
   const workers = Array.from({ length: Math.min(+opt("--jobs", 3), queue.length) }, async () => {
     while (queue.length) await renderSlide(browser, queue.shift());
