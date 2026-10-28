@@ -248,7 +248,7 @@ const CARDS = {
     const look = p.look || "teal";
     const u = p.at != null ? lerp(0.08, 0.92, inOut(win(p.at, p.at + 1.4, t))) : 0.5 + 0.38 * Math.sin((2 * Math.PI * t) / 5);
     FOOTAGE.drawFootage(c, p.scene || "sunrise", t * 0.25, w, h, "log");
-    c.save(); c.beginPath(); c.rect(w * u, 0, w * (1 - u), h); c.clip();
+    c.save(); c.beginPath(); c.rect(0, 0, w * u, h); c.clip();
     FOOTAGE.drawFootage(c, p.scene || "sunrise", t * 0.25, w, h, look);
     c.restore();
     c.fillStyle = "#fff"; c.fillRect(w * u - 2, 0, 4, h);
@@ -260,8 +260,8 @@ const CARDS = {
       c.fillStyle = "rgba(0,0,0,.6)"; rr(c, al === "right" ? x - tw : x, 12, tw, 26, 13); c.fill();
       txt(c, s, al === "right" ? x - tw / 2 : x + tw / 2, 30, F.ui(14, 800), "#fff", "center");
     };
-    tag("BEFORE", 12, "left");
-    tag(p.name || "TEAL & ORANGE", w - 12, "right");
+    tag(p.name || "TEAL & ORANGE", 12, "left");
+    tag("BEFORE", w - 12, "right");
   },
 
   // Looks list: the selection lands on one look.

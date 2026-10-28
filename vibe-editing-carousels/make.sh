@@ -26,12 +26,13 @@ list=$(mktemp)
 for d in "build/$C"/s[0-9]*/; do
   n=$(basename "$d")                       # s01
   ffmpeg -loglevel error -y -framerate 30 -i "$d/f%04d.png" \
-    -c:v libx264 -profile:v high -preset slow -crf 17 -pix_fmt yuv420p -r 30 -movflags +faststart \
+    -c:v libx264 -profile:v high -preset slow -crf 24 -pix_fmt yuv420p -r 30 -movflags +faststart \
     "$OUT/slide_${n#s}.mp4"
   ffmpeg -loglevel error -y -i "$d/f0091.png" -q:v 2 "$OUT/still_${n#s}.jpg"
   echo "file '$PWD/$OUT/slide_${n#s}.mp4'" >> "$list"
 done
 # every slide back to back, to preview the swipe-through
-ffmpeg -loglevel error -y -f concat -safe 0 -i "$list" -c copy "$OUT/preview_all_slides.mp4"
+ffmpeg -loglevel error -y -f concat -safe 0 -i "$list" -vf scale=720:-2 -c:v libx264 -crf 25 -preset slow \
+  -pix_fmt yuv420p -movflags +faststart "$OUT/preview_all_slides.mp4"
 rm -f "$list"
 ls -la "$OUT"
