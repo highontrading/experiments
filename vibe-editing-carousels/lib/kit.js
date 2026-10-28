@@ -189,7 +189,8 @@ K.start = async function () {
   const fonts = ["700 40px InterD", "800 40px InterD", "900 40px InterD", "300 40px InterD", "600 40px InterD",
     "300 40px InterL", "400 40px InterL", "500 40px InterL", "600 40px InterL", "700 40px InterL", "800 40px InterL",
     "500 40px Playfair", "italic 500 40px Playfair", "700 40px Fredoka", "400 40px VT323", "600 40px Caveat",
-    "800 40px ArchX", "900 40px ArchX9", ...(CAR.fonts || [])];
+    "800 40px ArchX", "900 40px ArchX9", "700 40px Dancing", "400 40px GreatVibes", "400 40px Lexend", "800 40px Lexend",
+    "400 40px DMSerif", "400 40px SpaceMono", "700 40px SpaceMono", "400 40px ArchivoBlack", ...(CAR.fonts || [])];
   await Promise.all(fonts.map((f) => document.fonts.load(f)));
   const img = (src) => new Promise((ok) => { const i = new Image(); i.onload = () => ok(i); i.src = src; });
   K.IMG.pack = await img("assets/img/pack-1.png");
