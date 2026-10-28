@@ -38,7 +38,7 @@ Each carousel file holds its own design system (backdrop, type, components).
 
 ## Carousel 01 design system
 
-Taken from the reference reel and kept on every slide, so all carousels match:
+Taken from the first reference reel and kept on every slide of carousel 01:
 
 - **Backdrop:** a soft blue cumulus sky (`make_sky.py` paints `assets/img/sky.jpg`) that
   drifts and breathes slowly, under live film grain (6 noise tiles, overlay blend).
@@ -69,7 +69,7 @@ Copy the carousel file closest to what you want, change the copy and the layout,
 ./build_all.sh 02-prompt-formula 04-captions   # several in a row
 ```
 
-Each slide has `notes` (kicker, title, body, and optional `pills` or `checklist`) and
+In carousel 01, each slide has `notes` (kicker, title, body, and optional `pills` or `checklist`) and
 `items`: `{ kind, x, y, w, h, rot, hands, p }`, where `kind` is a card from `lib/cards.js`,
 `x, y` is the card centre in the 1080x1350 frame, and `p` holds that card's copy and cue
 times in seconds. A `tap` item is a pointing hand that presses at `taps: [seconds]`.
