@@ -16,7 +16,7 @@ fi
 rm -rf build/frames && node render.js
 mkdir -p out
 ffmpeg -v error -y -framerate 30 -i build/frames/f%04d.jpg -i build/mix.wav \
-  -c:v libx264 -preset slow -crf 16 -pix_fmt yuv420p -profile:v high -tune film \
+  -c:v libx264 -preset slow -crf 21 -pix_fmt yuv420p -profile:v high -tune film \
   -c:a aac -b:a 256k -ar 48000 -movflags +faststart -shortest out/ep01_what_is_vibe_editing.mp4
 ffmpeg -v error -y -ss 9.9 -i out/ep01_what_is_vibe_editing.mp4 -frames:v 1 -q:v 2 out/cover.jpg
 echo "-> out/ep01_what_is_vibe_editing.mp4"
