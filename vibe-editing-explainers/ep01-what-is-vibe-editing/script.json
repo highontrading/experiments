@@ -1,0 +1,15 @@
+{
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "voice_name": "Eric - Smooth, Trustworthy",
+  "model_id": "eleven_multilingual_v2",
+  "lines": [
+    {"id": "hook",    "text": "This video was never edited on a timeline. Not one clip was dragged. It was written in code, by AI."},
+    {"id": "name",    "text": "This is vibe editing."},
+    {"id": "past",    "text": "For over a century, editing meant this. Cutting film by hand. Then dragging clips, frame by frame, for hours."},
+    {"id": "flip",    "text": "Vibe editing flips that. You describe the video you want. The mood, the pace, the look. In plain words."},
+    {"id": "how",     "text": "An AI agent turns those words into code. The code places every clip, every caption, every sound, and renders the final video."},
+    {"id": "scale",   "text": "And because the video is code, one line changes everything. Make it faster. Make it in Hindi. Make a hundred versions."},
+    {"id": "role",    "text": "You stop clicking. You start directing."},
+    {"id": "outro",   "text": "That's vibe editing. Episode one of the watchlist. Follow for the next one."}
+  ]
+}
