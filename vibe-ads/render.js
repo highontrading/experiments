@@ -38,10 +38,20 @@ async function page(browser) {
   // each worker takes a contiguous chunk, so its frame cache stays warm
   const per = Math.ceil(jobs.length / JOBS);
   await Promise.all(Array.from({ length: Math.min(JOBS, jobs.length) }, async (_, w) => {
-    const p = await page(browser);
+    let p = await page(browser);
     for (const j of jobs.slice(w * per, (w + 1) * per)) {
-      await p.evaluate((t) => window.renderAt(t), j.t);
-      await p.screenshot({ path: path.join(__dirname, j.file), type: "png" });
+      for (let tries = 0; ; tries++) {              // a crashed capture gets a fresh page and another go
+        try {
+          await p.evaluate((t) => window.renderAt(t), j.t);
+          await p.screenshot({ path: path.join(__dirname, j.file), type: "png" });
+          break;
+        } catch (e) {
+          if (tries >= 3) throw e;
+          console.error(`retry ${j.file}: ${e.message.split("\n")[0]}`);
+          try { await p.close(); } catch (_) {}
+          p = await page(browser);
+        }
+      }
       if (++done % 150 === 0) console.log(`${done}/${jobs.length}  ${((Date.now() - t0) / done).toFixed(0)} ms/frame`);
     }
     await p.close();
