@@ -63,9 +63,9 @@ function frame(gt) {
       const sa = lerp(1, 1.1, p); c.translate(W / 2, H / 2); c.scale(sa, sa); c.translate(-W / 2, -H / 2);
       c.drawImage(LA, 0, 0); c.restore();
     } else if (tr.type === "push") {                  // fly through the blue window into the next scene
-      const r = SCENES[A.name].blue, fw = Math.max(16, r.w * 0.055);
+      const r = SCENES[A.name].blue, gl = SCENES[A.name].glass(r);
       const p = inOut(e);
-      const sMax = Math.max(W / (r.w - 2 * fw), H / (r.h - 2 * fw)) * 1.25;
+      const sMax = Math.max(W / gl.w, H / gl.h) * 1.2;
       const s = Math.exp(Math.log(sMax) * p);
       const cx = lerp(r.x, W / 2, p), cy = lerp(r.y, H / 2, p);
       onLayer(LA, A, gt, true); onLayer(LB, B, gt, true);
@@ -73,7 +73,7 @@ function frame(gt) {
       // B shows through the window's glass and grows with it
       c.save();
       c.translate(cx, cy); c.scale(s, s); c.translate(-r.x, -r.y);
-      c.beginPath(); c.rect(r.x - r.w / 2 + fw, r.y - r.h / 2 + fw, r.w - 2 * fw, r.h - 2 * fw); c.clip();
+      c.beginPath(); c.rect(gl.x, gl.y, gl.w, gl.h); c.clip();
       c.setTransform(1, 0, 0, 1, 0, 0);
       c.globalAlpha = ss(0.0, 0.35, p);
       c.drawImage(LB, 0, 0); c.restore();
@@ -94,8 +94,10 @@ window.FILM_INFO = { dur: T.dur, fps: T.fps };
 window.renderAt = async (gt) => { await withFrames(() => frame(gt)); };
 window.stageReady = (async () => {
   U.makeGrain();
-  const names = ["grass", "clouds_1", "wood", "cut_rope", "cut_clothespin", "cut_clothespin_2", "cut_clothespin_3", "cut_bow_1", "cut_bow_2",
-    "cut_tram", "cut_train", "cut_charminar", "cut_kite_1", "cut_kite_2", "cut_kite_3", "cut_kite_4", "cut_auto"];
+  const names = ["grass", "clouds_1", "cut_rope", "peg_1", "peg_2", "cut_bow_1", "cut_tram_2", "cut_train_2", "cut_auto",
+    "cut_kite_1", "cut_kite_2", "cut_kite_3", "cut_kite_4", "cut_kite_5",
+    ...["wood", "red", "blue"].flatMap((k) => [`cut_window_${k}_shutter_l`, `cut_window_${k}_shutter_r`]), "cut_window_wood_frame", "cut_window_red_frame"];
+  await Promise.all(["tram", "marina", "kites"].map(async (n) => { IMG["ph_" + n] = await loadImg(`assets/img/${n}.jpg`); }));
   await Promise.all(names.map(async (n) => {
     for (const ext of ["png", "jpg"]) { const im = await loadImg(`assets/img/${n}.${ext}`); if (im) { IMG[n] = im; break; } }
   }));

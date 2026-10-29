@@ -70,7 +70,10 @@ async function withFrames(draw) {
 }
 
 // Footage: build/frames/<clip>/0001.jpg … (30 fps), meta in window.FOOT
+// Shots with no usable video are real 4K photos (IMG.ph_<name>), moved with a slow camera.
+const isPhoto = (name) => !!IMG["ph_" + name];
 function clipFrame(name, t, mode = "hold") {
+  if (isPhoto(name)) return IMG["ph_" + name];
   const m = window.FOOT[name];
   if (!m) return null;
   let f = Math.floor(t * FPS);
@@ -95,6 +98,11 @@ function footage(c, name, t, x, y, w, h, o = {}) {
   if (!im) { c.fillStyle = "#9db7cf"; c.fillRect(x, y, w, h); return; }
   c.save();
   if (o.filter) c.filter = o.filter;
+  if (isPhoto(name)) {                            // slow push-in with a gentle drift
+    const k = Math.max(0, t);
+    cover(c, im, x, y, w, h, clamp((o.fx ?? 0.5) + 0.006 * k), o.fy ?? 0.5, (o.z ?? 1) * (1.03 + 0.014 * k));
+    c.restore(); return;
+  }
   cover(c, im, x, y, w, h, o.fx ?? 0.5, o.fy ?? 0.5, o.z ?? 1);
   if (o.blur) {                                   // smear the previous frames on fast moves
     for (let k = 1; k <= 2; k++) {
@@ -166,9 +174,10 @@ function grass(c, top, o = {}) {
   c.lineTo(W + 10, H + 10); c.lineTo(-10, H + 10); c.closePath();
   c.clip();
   if (im) {
-    const z = o.z ?? 1, s = Math.max(W / im.naturalWidth, (H - top + 200) / im.naturalHeight) * z;
-    const iw = im.naturalWidth * s, ih = im.naturalHeight * s;
-    c.drawImage(im, (W - iw) / 2 + (o.dx || 0), top - bulge - (o.crop ?? 0.18) * ih, iw, ih);
+    const sy = im.naturalHeight * 0.64, sh = im.naturalHeight - sy;     // below the hill crest: all grass
+    const dh = H - (top - bulge), sc = Math.max(W / im.naturalWidth, dh / sh) * (o.z ?? 1);
+    const sw = W / sc;
+    c.drawImage(im, (im.naturalWidth - sw) / 2, sy, sw, Math.min(sh, dh / sc), 0, top - bulge, W, Math.min(sh * sc, dh));
   } else { c.fillStyle = C.grass; c.fillRect(0, 0, W, H); }
   // atmospheric haze at the horizon
   const g = c.createLinearGradient(0, top - bulge, 0, top + 160);
@@ -216,15 +225,15 @@ function drawRope(c, R, thick = 16, upto = 1) {
 }
 // Clothespin: drawn hanging from a rope point; (x,y) is where it bites the rope.
 function peg(c, x, y, rot = 0, s = 1, which = 0) {
-  const im = IMG["cut_clothespin" + (which && IMG["cut_clothespin_" + (which + 1)] ? "_" + (which + 1) : "")] || IMG.cut_clothespin;
-  const h = 210 * s;
+  const im = IMG[which % 2 ? "peg_2" : "peg_1"] || IMG.peg_1;
+  const h = 230 * s;
   c.save(); c.translate(x, y); c.rotate(rot);
-  c.shadowColor = "rgba(30,40,70,.35)"; c.shadowBlur = 14 * s; c.shadowOffsetX = 6 * s; c.shadowOffsetY = 10 * s;
+  c.shadowColor = "rgba(30,40,70,.38)"; c.shadowBlur = 14 * s; c.shadowOffsetX = 7 * s; c.shadowOffsetY = 11 * s;
   if (im) {
     const w = h * im.naturalWidth / im.naturalHeight;
-    c.drawImage(im, -w / 2, -h * 0.42, w, h);
+    c.drawImage(im, -w / 2, -h * 0.66, w, h);
   } else {
-    c.fillStyle = C.wood; rr(c, -18 * s, -h * 0.42, 36 * s, h, 6 * s); c.fill();
+    c.fillStyle = C.wood; rr(c, -18 * s, -h * 0.66, 36 * s, h, 6 * s); c.fill();
   }
   c.restore();
 }
@@ -331,12 +340,16 @@ function voiceBubble(c, v, vt, x, y, o = {}) {
   if (v.en && o.en !== false) {
     const a = clamp(e * 1.6) * out * ss(0.2, 0.7, vt);
     c.save(); c.globalAlpha = a;
-    label(c, x - w / 2 + 30, y - padY - px * 0.62 + h + 72, "“" + v.en + "”", 31, C.lime, "left", F.ui(31, 700));
+    c.font = F.ui(31, 700);
+    const lines = layoutWords(c, ("“" + v.en + "”").split(" ").map((s) => ({ s, t0: 0 })), F.ui(31, 700), Math.min(980, Math.max(560, w)), 40);
+    let ly = y - padY - px * 0.62 + h + 72;
+    const rows = {}; lines.items.forEach((it) => (rows[it.y] = rows[it.y] || []).push(it.s));
+    Object.keys(rows).forEach((k) => label(c, clamp(x - w / 2 + 30, 40, 9999), ly + +k, rows[k].join(" "), 31, C.lime, "left", F.ui(31, 700)));
     c.restore();
   }
 }
 
 window.U = { W, H, FPS, clamp, lerp, win, smooth, ss, outCubic, inCubic, inOut, outQuint, outBack, apple, spring, rnd, rr,
-  C, F, FAM, IMG, loadImg, need, withFrames, clipFrame, clipDur, cover, footage, sky, makeGrain, grain, grass,
+  C, F, FAM, IMG, isPhoto, loadImg, need, withFrames, clipFrame, clipDur, cover, footage, sky, makeGrain, grain, grass,
   rope, drawRope, peg, print, pill, label, microLabel, words, layoutWords, voiceBubble };
 })();

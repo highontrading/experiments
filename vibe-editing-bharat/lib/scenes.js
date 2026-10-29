@@ -123,24 +123,18 @@ function cloudText(key, lines, font, lh) {
   const r = rnd(42), step = 6;
   for (let y = 0; y < ch; y += step) for (let x = 0; x < cw; x += step) {
     if (md[(y * cw + x) * 4 + 3] < 128) continue;
-    const rad = 9 + r() * 16, jx = (r() - 0.5) * 8, jy = (r() - 0.5) * 8;
+    const rad = 8 + r() * 14, jx = (r() - 0.5) * 7, jy = (r() - 0.5) * 7;
     const g = ox.createRadialGradient(x + jx, y + jy, 0, x + jx, y + jy, rad);
-    g.addColorStop(0, "rgba(255,255,255,.55)"); g.addColorStop(1, "rgba(255,255,255,0)");
+    g.addColorStop(0, "rgba(255,255,255,.95)"); g.addColorStop(0.55, "rgba(255,255,255,.5)"); g.addColorStop(1, "rgba(255,255,255,0)");
     ox.fillStyle = g; ox.fillRect(x + jx - rad, y + jy - rad, rad * 2, rad * 2);
   }
-  // shade with a real cloud photo and a soft blue-grey underside
-  if (IMG.clouds_1) {
-    ox.save(); ox.globalCompositeOperation = "source-atop"; ox.globalAlpha = 0.5;
-    ox.filter = "grayscale(1) contrast(1.35) brightness(1.08)";
-    cover(ox, IMG.clouds_1, 0, 0, cw, ch); ox.restore();
-  }
-  ox.save(); ox.globalCompositeOperation = "source-atop";
-  lines.forEach((_, i) => {
-    const y0 = 80 + lh * i, g = ox.createLinearGradient(0, y0, 0, y0 + lh);
-    g.addColorStop(0, "rgba(255,255,255,.25)"); g.addColorStop(0.55, "rgba(255,255,255,0)"); g.addColorStop(1, "rgba(120,140,170,.35)");
-    ox.fillStyle = g; ox.fillRect(0, y0, cw, lh);
-  });
-  ox.restore();
+  // volume: a blue-grey copy of the puffs, nudged down, darkens each lobe's underside
+  const sh = document.createElement("canvas"); sh.width = cw; sh.height = ch;
+  const sx = sh.getContext("2d"); sx.drawImage(o, 0, 9); sx.globalCompositeOperation = "source-in"; sx.fillStyle = "rgba(255,255,255,1)"; sx.fillRect(0, 0, cw, ch);
+  const inner = document.createElement("canvas"); inner.width = cw; inner.height = ch;
+  const ix = inner.getContext("2d"); ix.drawImage(o, 0, 0); ix.globalCompositeOperation = "destination-out"; ix.drawImage(sh, 0, -9);
+  ix.globalCompositeOperation = "source-in"; ix.fillStyle = "rgba(132,152,184,.55)"; ix.fillRect(0, 0, cw, ch);
+  ox.save(); ox.globalCompositeOperation = "source-atop"; ox.filter = "blur(6px)"; ox.drawImage(inner, 0, 0); ox.restore();
   return (CLOUDTXT[key] = o);
 }
 function drawCloudText(c, cv, x, y, p, s = 1) {
@@ -382,8 +376,8 @@ SCENES.bn = { sky: true, draw(c, lt, S, gt) {
   // the tram hangs from two pegs like the cow in the reference poster
   const tx = lerp(170, 640, ss(0, S.dur, lt)), tw = 470;
   const tramIn = spring(lt, 0.25, 0.8), tramOut = inCubic(win(S.dur - 1.2, S.dur - 0.5, lt));
-  if (IMG.cut_tram && tramIn > 0) {
-    const im = IMG.cut_tram, th = tw * im.naturalHeight / im.naturalWidth;
+  if (IMG.cut_tram_2 && tramIn > 0) {
+    const im = IMG.cut_tram_2, th = tw * im.naturalHeight / im.naturalWidth;
     const p1 = RA.atX(tx), p2 = RA.atX(tx + tw * 0.62);
     const bump = BEATS.reduce((a, b) => a + (gt > b ? Math.exp(-(gt - b) * 9) : 0), 0) * (lt > E ? 1 : 0.35);
     const rot = Math.atan2(p2.y - p1.y, p2.x - p1.x) + deg(2 * Math.sin(gt * 2));
@@ -401,9 +395,11 @@ SCENES.bn = { sky: true, draw(c, lt, S, gt) {
   const P = hang(RB, 330, 790, 640, 18, gt, 1);
   const drop = spring(lt, 0.2, 0.7);
   const bts = beatsIn(G + E, G + S.dur - 1.1);
-  let ct = lt * 0.9, flash = 0, bump = 0;
-  const SEG = [3.1, 0.6, 4.4, 1.7, 5.3, 2.4, 0.2, 3.8, 1.2, 4.9, 2.0, 5.8];
-  bts.forEach((b, k) => { if (gt >= b) { ct = SEG[k % SEG.length] + (gt - b); flash = Math.exp(-(gt - b) * 14); bump = Math.exp(-(gt - b) * 10); } });
+  // before: one slow shot of the tram. after: a cut on every beat across real Kolkata footage
+  const SEG = [["tram", 0, 0.15, 0.55, 1.5], ["howrah", 1.0], ["tram", 0, 0.85, 0.4, 1.9], ["howrah", 4.2], ["tram", 0, 0.5, 0.75, 2.4],
+    ["howrah", 6.0], ["tram", 0, 0.3, 0.3, 1.25], ["howrah", 2.6]];
+  let seg = ["tram", 0, 0.5, 0.5, 1], ct = lt, flash = 0, bump = 0;
+  bts.forEach((b, k) => { if (gt >= b) { seg = SEG[k % SEG.length]; ct = seg[1] + (gt - b); flash = Math.exp(-(gt - b) * 14); bump = Math.exp(-(gt - b) * 10); } });
   const base = { x: P.x, y: P.y - (1 - drop) * 1400, w: 600 * (1 + bump * 0.03), h: 640 * (1 + bump * 0.03), rot: P.rot + deg(2.5), b: 18 };
   const fk = flyK(S, lt);
   const r = fk > 0 ? fly(base, 1, fk) : base;
@@ -418,7 +414,7 @@ SCENES.bn = { sky: true, draw(c, lt, S, gt) {
       const e = spring(gt, b - 0.02, 0.4);
       if (e <= 0) return;
       const p = RC.atX(x), bow = IMG[k % 2 ? "cut_bow_2" : "cut_bow_1"] || IMG.cut_bow_1;
-      c.save(); c.translate(p.x, p.y + 4); c.rotate(p.ang + deg((k % 2 ? 6 : -6))); c.scale(e, e);
+      c.save(); c.translate(p.x, p.y + 4); c.rotate(p.ang + deg((k % 2 ? 6 : -6))); c.scale(e, e); if (k % 2) c.filter = "hue-rotate(150deg) saturate(.6) brightness(1.15)";
       if (bow) { const bw = 96, bh = bw * bow.naturalHeight / bow.naturalWidth; c.drawImage(bow, -bw / 2, -bh / 2, bw, bh); }
       c.restore();
     });
@@ -431,7 +427,7 @@ SCENES.bn = { sky: true, draw(c, lt, S, gt) {
     label(c, 60, 1500, "♩ cut on every beat", 32, C.lime, "left", F.ui(32, 700));
     c.restore();
   }
-  heroPrint(c, clip, ct, r, { mode: "loop", after: (cc, w, h) => { if (flash > 0) { cc.fillStyle = `rgba(255,255,255,${0.35 * flash})`; cc.fillRect(0, 0, w, h); } } });
+  heroPrint(c, seg[0], ct, r, { mode: "loop", fx: seg[2], fy: seg[3], z: seg[4], after: (cc, w, h) => { if (flash > 0) { cc.fillStyle = `rgba(255,255,255,${0.35 * flash})`; cc.fillRect(0, 0, w, h); } } });
   if (fk === 0 && drop > 0.2) pegsOn(c, RB, [330, 790], 0.8);
   microLabel(c, 70, 1110, "Tram-", "since 1873", 32);
   handWord(c, "beat-e beat-e!", 520, 1540, 96, E + 0.1, lt, -5, S.dur - 1.3);
@@ -468,9 +464,9 @@ SCENES.mr = { sky: false, draw(c, lt, S, gt) {
   checkerPath(c, travel, HZ, ss(0, 0.5, lt));
   // the train races down the path toward camera after the ask
   const tk = win(E + 0.2, E + 1.5, lt);
-  if (IMG.cut_train && tk > 0 && tk < 1) {
+  if (IMG.cut_train_2 && tk > 0 && tk < 1) {
     const z = lerp(14, 0.9, Math.pow(tk, 1.6)), s = 640 / z;
-    const im = IMG.cut_train, tw = 3.2 * s, th = tw * im.naturalHeight / im.naturalWidth;
+    const im = IMG.cut_train_2, tw = 2.2 * s, th = tw * im.naturalHeight / im.naturalWidth;
     c.save(); c.globalAlpha = clamp(tk * 6);
     c.drawImage(im, 540 + 0.9 * s - tw / 2, HZ + 0.95 * s - th, tw, th); c.restore();
   }
@@ -503,44 +499,50 @@ SCENES.mr = { sky: false, draw(c, lt, S, gt) {
 } };
 
 // 6 · Telugu · Hyderabad — windows on the green hill; warm the colour
-const TE_WIN = { yellow: { x: 360, y: 1010, w: 560, h: 600 }, red: { x: 880, y: 760, w: 230, h: 250 }, blue: { x: 760, y: 1440, w: 400, h: 380 } };
-function windowFrame(c, r, col, open, body) {
-  const fw = Math.max(16, r.w * 0.055);
-  c.save(); c.translate(r.x, r.y);
-  // glass area shows the scene inside
-  c.save(); c.beginPath(); c.rect(-r.w / 2 + fw, -r.h / 2 + fw, r.w - 2 * fw, r.h - 2 * fw); c.clip();
-  c.translate(-r.w / 2 + fw, -r.h / 2 + fw); body(c, r.w - 2 * fw, r.h - 2 * fw); c.restore();
-  const wood = IMG.wood;
-  const paint = (x, y, w, h, shade = 0) => {
-    c.fillStyle = col; c.fillRect(x, y, w, h);
-    if (wood) { c.save(); c.globalCompositeOperation = "multiply"; c.globalAlpha = 0.35; c.beginPath(); c.rect(x, y, w, h); c.clip(); cover(c, wood, x, y, Math.max(w, 60), Math.max(h, 60)); c.restore(); }
-    if (shade) { c.fillStyle = `rgba(0,0,0,${shade})`; c.fillRect(x, y, w, h); }
-  };
+const TE_WIN = { yellow: { x: 430, y: 1000, w: 430, h: 470 }, red: { x: 880, y: 700, w: 190, h: 200 }, blue: { x: 760, y: 1470, w: 340, h: 360 } };
+const WIN_IN = 0.1;                                    // frame thickness as a share of the window
+// Real window cut-outs, tinted to the poster palette. The frame's panes are transparent.
+const TINT = {};
+function tinted(name, col) {
+  const key = name + col;
+  if (TINT[key]) return TINT[key];
+  const im = IMG[name]; if (!im) return null;
+  if (!col) return (TINT[key] = im);
+  const k = document.createElement("canvas"); k.width = im.naturalWidth; k.height = im.naturalHeight;
+  const x = k.getContext("2d");
+  x.drawImage(im, 0, 0);
+  x.globalCompositeOperation = "color"; x.fillStyle = col; x.fillRect(0, 0, k.width, k.height);
+  x.globalCompositeOperation = "soft-light"; x.globalAlpha = 0.45; x.fillRect(0, 0, k.width, k.height);
+  x.globalCompositeOperation = "destination-in"; x.globalAlpha = 1; x.drawImage(im, 0, 0);
+  return (TINT[key] = k);
+}
+const WINDOWS = {
+  yellow: { frame: ["cut_window_wood_frame", "#e8b81f"], l: ["cut_window_wood_shutter_l", "#e8b81f"], r: ["cut_window_wood_shutter_r", "#e8b81f"] },
+  red: { frame: ["cut_window_red_frame", null], l: ["cut_window_red_shutter_l", null], r: ["cut_window_red_shutter_r", null] },
+  blue: { frame: ["cut_window_wood_frame", "#6f9fd8"], l: ["cut_window_blue_shutter_l", null], r: ["cut_window_blue_shutter_r", null] },
+};
+const glass = (r) => ({ x: r.x - r.w / 2 + r.w * WIN_IN, y: r.y - r.h / 2 + r.h * WIN_IN, w: r.w * (1 - 2 * WIN_IN), h: r.h * (1 - 2 * WIN_IN) });
+function windowFrame(c, r, kind, open, body) {
+  const K = WINDOWS[kind], g = glass(r);
+  c.save();
+  // the view inside
+  c.save(); c.beginPath(); c.rect(g.x, g.y, g.w, g.h); c.clip(); c.translate(g.x, g.y); body(c, g.w, g.h); c.restore();
+  const fr = tinted(...K.frame);
   c.save(); c.shadowColor = "rgba(20,40,20,.45)"; c.shadowBlur = 30; c.shadowOffsetY = 16; c.shadowOffsetX = 10;
-  c.fillStyle = col; c.beginPath(); c.rect(-r.w / 2, -r.h / 2, r.w, r.h); c.rect(-r.w / 2 + fw, -r.h / 2 + fw, r.w - 2 * fw, r.h - 2 * fw); c.fill("evenodd");
+  if (fr) c.drawImage(fr, r.x - r.w / 2, r.y - r.h / 2, r.w, r.h);
   c.restore();
-  paint(-r.w / 2, -r.h / 2, r.w, fw); paint(-r.w / 2, r.h / 2 - fw, r.w, fw, 0.1);
-  paint(-r.w / 2, -r.h / 2, fw, r.h, 0.04); paint(r.w / 2 - fw, -r.h / 2, fw, r.h, 0.08);
-  // inner bevel
-  c.strokeStyle = "rgba(0,0,0,.25)"; c.lineWidth = 3; c.strokeRect(-r.w / 2 + fw, -r.h / 2 + fw, r.w - 2 * fw, r.h - 2 * fw);
-  c.strokeStyle = "rgba(255,255,255,.35)"; c.lineWidth = 2; c.strokeRect(-r.w / 2 + 2, -r.h / 2 + 2, r.w - 4, r.h - 4);
-  // shutters swing open on their hinges, foreshortened, the far edge growing as it nears the camera
-  const th = open * Math.PI * 0.83, sw0 = r.w / 2 - fw;
-  [-1, 1].forEach((sd) => {
-    const x0 = sd * (r.w / 2 - fw);                          // hinge
-    const tip = x0 - sd * sw0 * Math.cos(th);
-    const skew = sw0 * Math.sin(th) * 0.1;
-    const top = -r.h / 2 + fw, bot = r.h / 2 - fw;
-    c.save();
-    c.beginPath(); c.moveTo(x0, top); c.lineTo(tip, top - skew); c.lineTo(tip, bot + skew); c.lineTo(x0, bot); c.closePath();
-    c.shadowColor = "rgba(20,40,20,.35)"; c.shadowBlur = 18; c.shadowOffsetX = sd * 6;
-    c.fillStyle = col; c.fill(); c.shadowColor = "transparent";
-    c.clip();
-    const xl = Math.min(x0, tip), xw = Math.abs(tip - x0) + 2;
-    if (wood) { c.globalCompositeOperation = "multiply"; c.globalAlpha = 0.35; cover(c, wood, xl, top - skew, Math.max(xw, 40), r.h); c.globalCompositeOperation = "source-over"; c.globalAlpha = 1; }
-    c.strokeStyle = "rgba(0,0,0,.2)"; c.lineWidth = 3;                    // louvres
-    for (let y = top + 24; y < bot - 8; y += 22) { c.beginPath(); c.moveTo(xl, y); c.lineTo(xl + xw, y); c.stroke(); }
-    c.fillStyle = `rgba(0,0,0,${0.22 * Math.sin(th)})`; c.fillRect(xl, -r.h, xw, r.h * 2);   // turned away from the light
+  // shutters: hinged on the outer edges, swinging out until they lie flat against the wall
+  const th = Math.PI * 0.97 * clamp(open);
+  [["l", -1], ["r", 1]].forEach(([side, sd]) => {
+    const im = tinted(...K[side]); if (!im) return;
+    const sw = r.w * 0.5, sh = r.h * 1.02;
+    const hx = r.x + sd * r.w / 2;
+    c.save(); c.translate(hx, r.y);
+    c.transform(Math.cos(th), sd * -Math.sin(th) * 0.1, 0, 1, 0, 0);
+    c.shadowColor = "rgba(20,40,20,.35)"; c.shadowBlur = 16;
+    c.drawImage(im, sd < 0 ? 0 : -sw, -sh / 2, sw, sh);
+    c.shadowColor = "transparent";
+    c.globalAlpha = 0.28 * Math.sin(th); c.fillStyle = "#000"; c.fillRect(sd < 0 ? 0 : -sw, -sh / 2, sw, sh);
     c.restore();
   });
   c.restore();
@@ -549,16 +551,18 @@ const WARM = (k) => `sepia(${0.32 * k}) saturate(${1 + 0.4 * k}) hue-rotate(${-8
 SCENES.te = { sky: false, draw(c, lt, S, gt) {
   const E = editAt(S), clip = "charminar";
   const warm = ss(E, E + 1.0, lt);
-  sky(c, gt, { dy: 160 });
-  grass(c, 780, { bulge: 150, tilt: 30, crop: 0.1 });
+  cover(c, IMG.grass, 0, 0, W, H, 0.5, 0.5, 1.04 + 0.01 * lt);
+  // an auto-rickshaw putters along the hill, tiny, like the running figures in the poster
+  if (IMG.cut_auto) { const im = IMG.cut_auto, aw = 150, ah = aw * im.naturalHeight / im.naturalWidth, ax = lerp(-160, 520, lt / S.dur);
+    c.save(); c.translate(ax, 1745 - ax * 0.05 + Math.sin(lt * 18) * 1.5); c.scale(-1, 1); c.drawImage(im, -aw / 2, -ah, aw, ah); c.restore(); }
   // windows pop up out of the hill
   const wy = (at) => (1 - spring(lt, at, 0.8)) * 700;
   const bl = TE_WIN.blue, rd = TE_WIN.red, yl = TE_WIN.yellow;
-  windowFrame(c, { ...rd, y: rd.y + wy(0.35) }, C.red, spring(lt, 0.8, 0.9), (cc, w, h) => cover(cc, clipFrame("tram", 1.5), 0, 0, w, h));
-  windowFrame(c, { ...bl, y: bl.y + wy(0.5) }, C.blue, spring(lt, 1.1, 0.9), (cc, w, h) => footage(cc, "marina", 0, 0, 0, w, h, { fy: 0.5 }));
+  windowFrame(c, { ...rd, y: rd.y + wy(0.35) }, "red", spring(lt, 0.8, 0.9), (cc, w, h) => cover(cc, clipFrame("tram", 1.5), 0, 0, w, h));
+  windowFrame(c, { ...bl, y: bl.y + wy(0.5) }, "blue", spring(lt, 1.1, 0.9), (cc, w, h) => footage(cc, "marina", 0, 0, 0, w, h, { fy: 0.5 }));
   const fk = flyK(S, lt);
-  windowFrame(c, { ...yl, y: yl.y + wy(0.15) }, C.yellow, spring(lt, 0.6, 0.9), (cc, w, h) => {
-    if (fk < 0.02) footage(cc, clip, lt * 0.8, 0, 0, w, h, { mode: "loop", filter: WARM(warm) });
+  windowFrame(c, { ...yl, y: yl.y + wy(0.15) }, "yellow", spring(lt, 0.6, 0.9), (cc, w, h) => {
+    if (fk < 0.02) footage(cc, clip, 0.2 + lt * 0.55, 0, 0, w, h, { mode: "hold", fx: 0.3, filter: WARM(warm) });
     else { cc.fillStyle = "#cfe3f3"; cc.fillRect(0, 0, w, h); }
   });
   // golden-hour light over everything once the colour warms
@@ -575,7 +579,7 @@ SCENES.te = { sky: false, draw(c, lt, S, gt) {
   // a lime "warm" slider, like a grade control
   const sl = spring(lt, E - 0.2, 0.5) * (1 - ss(S.dur - 1.3, S.dur - 1.0, lt));
   if (sl > 0) {
-    c.save(); c.globalAlpha = clamp(sl * 2); c.translate(90, 600);
+    c.save(); c.globalAlpha = clamp(sl * 2); c.translate(620, 1790);
     c.font = F.ui(30, 800); c.fillStyle = C.lime; c.fillText("WARMTH", 0, 0);
     c.fillStyle = "rgba(255,255,255,.55)"; rr(c, 0, 22, 420, 10, 5); c.fill();
     c.fillStyle = C.lime; rr(c, 0, 22, 420 * (0.5 + 0.4 * warm), 10, 5); c.fill();
@@ -586,15 +590,16 @@ SCENES.te = { sky: false, draw(c, lt, S, gt) {
   // parenthetical labels placed like the Vanke poster's (Summer)。(Nature)。
   const le = ss(0.6, 1.2, lt) * (1 - ss(S.dur - 1.2, S.dur - 0.8, lt));
   c.save(); c.globalAlpha = le;
-  label(c, 70, 1350, "(Telugu)。", 40, "#fff", "left", F.ui(40, 600));
-  label(c, 1010, 600, "(Hyderabad)。", 40, "#fff", "right", F.ui(40, 600));
+  label(c, 70, 1330, "(Telugu)。", 40, "#fff", "left", F.ui(40, 600));
+  label(c, 1010, 880, "(Hyderabad)。", 40, "#fff", "right", F.ui(40, 600));
   label(c, 470, 1680, "(Next)。", 34, "#fff", "left", F.ui(34, 600));
   c.restore();
-  if (fk > 0) heroPrint(c, clip, lt * 0.8, fly({ x: yl.x, y: yl.y, w: yl.w - 62, h: yl.h - 62, rot: 0, b: 0 }, 3, fk), { mode: "loop", filter: WARM(warm) });
-  handWord(c, "warm karo", 560, 560, 104, E + 0.25, lt, -5, S.dur - 1.3);
+  if (fk > 0) { const g = glass(yl); heroPrint(c, clip, 0.2 + lt * 0.55, fly({ x: g.x + g.w / 2, y: g.y + g.h / 2, w: g.w, h: g.h, rot: 0, b: 0 }, 3, fk), { mode: "hold", fx: 0.3, filter: WARM(warm) }); }
+  handWord(c, "warm karo", 60, 1480, 104, E + 0.25, lt, -5, S.dur - 1.3);
   voiceBubble(c, V.te, vt("te", gt), 540, 300 + 110, { px: 56, hold: S.dur - S.vo - 1.4 });
 } };
 SCENES.te.blue = TE_WIN.blue;
+SCENES.te.glass = glass;
 
 // 7 · Tamil · Chennai — full-bleed beach; make the captions bigger
 SCENES.ta = { sky: true, draw(c, lt, S, gt) {
@@ -615,6 +620,7 @@ SCENES.ta = { sky: true, draw(c, lt, S, gt) {
     c.save(); c.translate(540, cy); c.rotate(deg(-3 * big));
     c.textAlign = "center"; c.textBaseline = "alphabetic";
     c.font = F.lang("ta", lerp(54, 230, big), 800);
+    const cw = c.measureText(CITY.ta[0]).width; if (cw > 960) c.scale(960 / cw, 960 / cw);
     c.lineJoin = "round"; c.strokeStyle = "rgba(11,11,12,.55)"; c.lineWidth = lerp(6, 18, big);
     c.strokeText(CITY.ta[0], 0, 0);
     c.fillStyle = big > 0.02 ? C.lime : "#fff"; c.fillText(CITY.ta[0], 0, 0);
@@ -675,10 +681,18 @@ SCENES.gu = { sky: true, draw(c, lt, S, gt) {
       c.restore();
     });
   }
-  heroPrint(c, clip, lt * 0.9, r, { mode: "loop" });
+  heroPrint(c, clip, lt * 0.9, r, { mode: "loop", fx: 0.42, fy: 0.42, z: 1.25, after: (cc, w, h) => {
+    // real patang cut-outs flying in the shot, strings trailing down to the rooftops
+    [["cut_kite_2", 0.3, 0.32, 0.26, 0.0], ["cut_kite_5", 0.72, 0.22, 0.2, 1.7], ["cut_kite_3", 0.6, 0.62, 0.15, 3.1], ["cut_kite_4", 0.18, 0.7, 0.11, 4.4]].forEach(([n, x, y, sz, ph]) => {
+      const im = IMG[n]; if (!im) return;
+      const kx = w * x + Math.sin(gt * 1.3 + ph) * w * 0.03, ky = h * y + Math.cos(gt * 1.1 + ph) * h * 0.02, kw = w * sz, kh = kw * im.naturalHeight / im.naturalWidth;
+      cc.strokeStyle = "rgba(255,255,255,.7)"; cc.lineWidth = 1.5; cc.beginPath(); cc.moveTo(kx, ky + kh * 0.4); cc.quadraticCurveTo(kx + w * 0.1, ky + h * 0.3, kx + w * 0.05, h); cc.stroke();
+      cc.save(); cc.translate(kx, ky); cc.rotate(deg(Math.sin(gt * 1.9 + ph) * 9)); cc.drawImage(im, -kw / 2, -kh / 2, kw, kh); cc.restore();
+    });
+  } });
   if (fk === 0 && drop > 0.2) pegsOn(c, R, [150, 590], 0.8);
   voiceBubble(c, V.gu, vt("gu", gt), 470, 1590, { px: 56, hold: S.dur - S.vo - 1.4 });
-  label(c, 60, 400, "(Gujarati · Ahmedabad)。", 34, C.lime, "left", F.ui(34, 700));
+  label(c, 60, 340, "(Gujarati · Ahmedabad)。", 34, C.lime, "left", F.ui(34, 700));
 } };
 
 // 9 · the finished reel, cut on the beat, with every edit applied
@@ -756,7 +770,7 @@ SCENES.outro = { sky: true, draw(c, lt, S, gt) {
     c.restore();
   });
   // VIBE EDITING, written in cloud
-  const cv = cloudText("ve", ["VIBE", "EDITING"], F.title(250, 900), 250);
+  const cv = cloudText("ve", ["VIBE", "EDITING"], F.title(178, 900), 205);
   drawCloudText(c, cv, 540, 820, ss(w(9) - 0.1, w(9) + 1.1, lt), 1);
   const he = V.hi_end, ht = vt("hi_end", gt);
   voiceBubble(c, he, ht, 540, 1300, { px: 70, rot: -2, hold: 99 });
@@ -770,7 +784,7 @@ SCENES.outro = { sky: true, draw(c, lt, S, gt) {
   const ge = ss(ht - 0.2 + 0.5, ht + 1.4, lt + 0) ;
   const back = ss(V.hi_end.at - S.start + 0.4, V.hi_end.at - S.start + 1.6, lt);
   if (back > 0) GREET.forEach((g, k) => {
-    const pos = [[160, 380], [920, 360], [120, 1560], [940, 1580], [170, 1760], [900, 1760], [540, 1700], [110, 1100], [980, 1120], [540, 300]][k];
+    const pos = [[200, 400], [880, 380], [200, 1560], [880, 1580], [220, 1760], [860, 1760], [540, 1680], [150, 560], [930, 590], [540, 330]][k];
     greetPill(c, [g[0], pos[0], pos[1], g[3], g[4]], (lt - (V.hi_end.at - S.start + 0.4)) - k * 0.07, k, gt, { s: 0.62, alpha: back });
   });
 } };
