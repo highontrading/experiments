@@ -95,27 +95,43 @@ for (const l of Object.values(TL.lines)) {
 }
 K.PHRASES = PHRASES;
 K.captions = (g, t, s = {}) => {
+  // s: {y, size, weight, family, color, hi, hiText, radius, shadow, upper, maxW, box, boxPad, lineH}
+  // Long phrases wrap onto two balanced lines; `box` draws a rounded backing box (e.g. "rgba(0,0,0,0.55)").
   const ph = PHRASES.find((p, i) => t >= p[0].t0 - 0.12 && t < (PHRASES[i + 1] ? Math.min(PHRASES[i + 1][0].t0 - 0.12, p[p.length - 1].t1 + 0.6) : p[p.length - 1].t1 + 0.6));
   if (!ph) return;
-  const fs = s.size || 46;
+  const fs = s.size || 46, maxW = s.maxW || 900, lh = s.lineH || fs * 1.3;
   K.font(g, fs, s.weight || 700, s.family || "Inter");
   const words = ph.map((w) => { const r = w.raw.replace(/[.,:]$/, ""); return s.upper ? r.toUpperCase() : r; });
   const sp = g.measureText(" ").width;
-  const widths = words.map((w) => g.measureText(w).width + sp);
-  const total = widths.reduce((a, b) => a + b, 0) - sp;
-  let x = K.W / 2 - total / 2; const y = s.y || 1530;
+  const ww = words.map((w) => g.measureText(w).width);
+  const lineW = (a, b) => ww.slice(a, b).reduce((x, y) => x + y, 0) + sp * Math.max(0, b - a - 1);
+  let lines = [[0, words.length]];
+  if (lineW(0, words.length) > maxW && words.length > 1) {   // best 2-line split
+    let best = 1, bestD = 1e9;
+    for (let k = 1; k < words.length; k++) { const d = Math.abs(lineW(0, k) - lineW(k, words.length)); if (d < bestD) { bestD = d; best = k; } }
+    lines = [[0, best], [best, words.length]];
+  }
+  const y0 = (s.y || 1530) - (lines.length - 1) * lh / 2;
   const endA = 1 - K.win(ph[ph.length - 1].t1 + 0.35, ph[ph.length - 1].t1 + 0.6, t);
   g.save(); g.textBaseline = "middle"; g.textAlign = "left";
-  ph.forEach((w, i) => {
-    const p = K.outCubic(K.win(w.t0 - 0.08, w.t0 + 0.18, t));
-    const active = t >= w.t0 - 0.05 && t < w.t1 + 0.05;
-    g.globalAlpha = (0.3 + 0.7 * p) * endA;
-    if (active && s.hi) { g.fillStyle = s.hi; K.rr(g, x - 9, y - fs * 0.64, widths[i] - sp + 18, fs * 1.28, s.radius ?? 6); g.fill(); }
-    if (s.shadow && !(active && s.hi)) { g.shadowColor = s.shadow; g.shadowBlur = 10; g.shadowOffsetY = 3; }
-    g.fillStyle = active ? (s.hiText || s.color || "#fff") : (s.color || "#fff");
-    g.fillText(words[i], x, y + 4 * (1 - p) + 2);
-    K.noShadow(g);
-    x += widths[i];
+  if (s.box) {
+    const bw = Math.max(...lines.map(([a, b]) => lineW(a, b))) + (s.boxPad ?? 26) * 2, bh = lines.length * lh + (s.boxPad ?? 26) * 0.9;
+    g.globalAlpha = endA; g.fillStyle = s.box; K.rr(g, K.W / 2 - bw / 2, y0 - lh / 2 - (s.boxPad ?? 26) * 0.45, bw, bh, s.boxRadius ?? 14); g.fill();
+  }
+  lines.forEach(([a, b], li) => {
+    let x = K.W / 2 - lineW(a, b) / 2; const y = y0 + li * lh;
+    for (let i = a; i < b; i++) {
+      const w = ph[i];
+      const p = K.outCubic(K.win(w.t0 - 0.08, w.t0 + 0.18, t));
+      const active = t >= w.t0 - 0.05 && t < w.t1 + 0.05;
+      g.globalAlpha = (0.3 + 0.7 * p) * endA;
+      if (active && s.hi) { g.fillStyle = s.hi; K.rr(g, x - 9, y - fs * 0.64, ww[i] + 18, fs * 1.28, s.radius ?? 6); g.fill(); }
+      if (s.shadow && !(active && s.hi)) { g.shadowColor = s.shadow; g.shadowBlur = 10; g.shadowOffsetY = 3; }
+      g.fillStyle = active ? (s.hiText || s.color || "#fff") : (s.color || "#fff");
+      g.fillText(words[i], x, y + 4 * (1 - p) + 2);
+      K.noShadow(g);
+      x += ww[i] + sp;
+    }
   });
   g.restore();
 };

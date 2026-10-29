@@ -1,0 +1,44 @@
+{
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "voice_name": "Eric - Smooth, Trustworthy",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "use_speaker_boost": true
+  },
+  "lines": [
+    {
+      "id": "hook",
+      "text": "Most people ask AI for a video, then wonder why it looks generic."
+    },
+    {
+      "id": "fix",
+      "text": "Here's the prompt that fixes that."
+    },
+    {
+      "id": "goal",
+      "text": "Start with the goal. Who's watching, and what should they feel?"
+    },
+    {
+      "id": "format",
+      "text": "Then the format. Vertical, forty-five seconds, captions on."
+    },
+    {
+      "id": "vibe",
+      "text": "Then the vibe. Not 'make it cool.' Say calm, fast, cinematic, or playful."
+    },
+    {
+      "id": "refs",
+      "text": "Then references. Name the edits you love, and what you love about them."
+    },
+    {
+      "id": "rules",
+      "text": "And last, the rules. Real footage only. End on the logo."
+    },
+    {
+      "id": "outro",
+      "text": "Goal. Format. Vibe. References. Rules. Five lines, and the AI stops guessing. Follow for more vibe editing."
+    }
+  ]
+}

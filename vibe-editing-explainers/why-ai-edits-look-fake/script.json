@@ -1,0 +1,40 @@
+{
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "voice_name": "Eric - Smooth, Trustworthy",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "use_speaker_boost": true
+  },
+  "lines": [
+    {
+      "id": "hook",
+      "text": "Most AI edits look fake. You can spot them in one second. Here's why."
+    },
+    {
+      "id": "stock",
+      "text": "One. Generic stock footage. The same clips everyone else uses."
+    },
+    {
+      "id": "pace",
+      "text": "Two. Robotic pacing. Every cut lands on the same beat, like a metronome."
+    },
+    {
+      "id": "caps",
+      "text": "Three. Captions that shout. Every word bouncing. Every word yellow."
+    },
+    {
+      "id": "pov",
+      "text": "Four. No point of view. It says everything, and means nothing."
+    },
+    {
+      "id": "fix",
+      "text": "The fix isn't more AI. It's more you. Your footage. Your timing. Your opinion."
+    },
+    {
+      "id": "outro",
+      "text": "Let AI do the clicking. You keep the taste. Follow for more vibe editing."
+    }
+  ]
+}

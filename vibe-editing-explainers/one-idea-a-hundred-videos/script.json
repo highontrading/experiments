@@ -1,0 +1,44 @@
+{
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "voice_name": "Eric - Smooth, Trustworthy",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "use_speaker_boost": true
+  },
+  "lines": [
+    {
+      "id": "hook",
+      "text": "One editor. One idea. One hundred videos."
+    },
+    {
+      "id": "doubt",
+      "text": "Sounds impossible. It isn't. Here's why."
+    },
+    {
+      "id": "code",
+      "text": "When an edit is code, every choice is a setting. The text. The music. The language. The length."
+    },
+    {
+      "id": "new",
+      "text": "Change a setting, and you get a new video."
+    },
+    {
+      "id": "math",
+      "text": "Ten hooks to test. Five languages. Three formats. Multiply them, and one project becomes a hundred and fifty videos."
+    },
+    {
+      "id": "old",
+      "text": "The old way? Every version is a new edit, by hand."
+    },
+    {
+      "id": "vibe",
+      "text": "The vibe editing way? One template, and a list."
+    },
+    {
+      "id": "outro",
+      "text": "That's how small teams are starting to post like big studios. Follow for more vibe editing."
+    }
+  ]
+}

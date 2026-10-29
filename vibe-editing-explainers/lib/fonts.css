@@ -17,3 +17,13 @@
 @font-face { font-family: "Mono"; font-weight: 100 900; src: url("../assets/fonts/JetBrainsMono.ttf"); }
 html, body { margin: 0; background: #000; }
 canvas { display: block; }
+@font-face { font-family: "Anton"; src: url("../assets/fonts/Anton.ttf"); }
+@font-face { font-family: "Bebas Neue"; src: url("../assets/fonts/BebasNeue.ttf"); }
+@font-face { font-family: "Instrument Serif"; src: url("../assets/fonts/InstrumentSerif.ttf"); }
+@font-face { font-family: "Instrument Serif"; font-style: italic; src: url("../assets/fonts/InstrumentSerif-Italic.ttf"); }
+@font-face { font-family: "Pixelify Sans"; font-weight: 400 700; src: url("../assets/fonts/PixelifySans.ttf"); }
+@font-face { font-family: "Press Start 2P"; src: url("../assets/fonts/PressStart2P.ttf"); }
+@font-face { font-family: "Bungee"; src: url("../assets/fonts/Bungee.ttf"); }
+@font-face { font-family: "Archivo Black"; src: url("../assets/fonts/ArchivoBlack.ttf"); }
+@font-face { font-family: "Inter Var"; font-weight: 100 900; src: url("../assets/fonts/Inter.ttf"); }
+@font-face { font-family: "Inter Var"; font-weight: 100 900; font-style: italic; src: url("../assets/fonts/Inter-Italic.ttf"); }

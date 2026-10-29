@@ -1,0 +1,40 @@
+{
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "voice_name": "Eric - Smooth, Trustworthy",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "use_speaker_boost": true
+  },
+  "lines": [
+    {
+      "id": "hook",
+      "text": "In 1939, at the New York World's Fair, Bell Labs showed off a machine that could talk. It was called the Voder."
+    },
+    {
+      "id": "doubt",
+      "text": "Few believed a machine would ever sound human."
+    },
+    {
+      "id": "ibm",
+      "text": "In 1961, an IBM computer at Bell Labs sang a song. Daisy Bell."
+    },
+    {
+      "id": "phones",
+      "text": "Fifty years later, phones started talking back."
+    },
+    {
+      "id": "neural",
+      "text": "Then neural networks learned to breathe, pause and laugh."
+    },
+    {
+      "id": "today",
+      "text": "The voice you're hearing right now took seconds to make. One line of text. Any language. Any tone."
+    },
+    {
+      "id": "outro",
+      "text": "Nearly a century later, the narrator is just another setting in your edit. Follow for more vibe editing."
+    }
+  ]
+}

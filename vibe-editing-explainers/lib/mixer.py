@@ -62,7 +62,9 @@ class Mixer:
             fade[:fi] = np.linspace(0, 1, fi); fade[-fo:] = np.linspace(1, 0, fo)
             seg *= fade[:, None]
             i = int((l["t0"] - 0.06) * SR)
-            vo[i:i + len(seg)] += seg[: self.N - i]
+            if i < 0: seg, i = seg[-i:], 0          # a line that starts at 0:00
+            seg = seg[: self.N - i]
+            vo[i:i + len(seg)] += seg
         vo = filt(vo, "highpass", 75)
         n = int(0.03 * SR)
         rms = np.sqrt(np.maximum(uniform_filter1d(vo.mean(1) ** 2, n), 0)) + 1e-9   # moving average, O(N)
