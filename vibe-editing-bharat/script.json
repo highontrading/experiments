@@ -1,0 +1,33 @@
+{
+  "voices": {
+    "en": "1U02n4nD6AdIZ9CjF053",
+    "hi": "9w21nMuk8CWXIME31V1S",
+    "bn": "1JOQMQINvsOLiEu2pZFd",
+    "mr": "aZaMD7e0iu6aJpSocGIY",
+    "te": "4XvBGCPMXWyVQa75dbZg",
+    "ta": "gJvkwI7wGFW2czmyfJhp",
+    "gu": "3L29IUUN61xcyvsKscMy"
+  },
+  "lines": [
+    {"id": "g_hi", "voice": "hi", "lang": "hi", "text": "नमस्ते!", "en": "Namaste"},
+    {"id": "g_bn", "voice": "bn", "lang": "bn", "text": "নমস্কার!", "en": "Nomoshkar"},
+    {"id": "g_ta", "voice": "ta", "lang": "ta", "text": "வணக்கம்!", "en": "Vanakkam"},
+    {"id": "g_gu", "voice": "gu", "lang": "gu", "text": "કેમ છો!", "en": "Kem cho"},
+    {"id": "g_te", "voice": "te", "lang": "te", "text": "నమస్కారం!", "en": "Namaskaram"},
+    {"id": "g_mr", "voice": "mr", "lang": "mr", "text": "नमस्कार!", "en": "Namaskar"},
+    {"id": "g_pa", "voice": "hi", "lang": "pa", "text": "ਸਤ ਸ੍ਰੀ ਅਕਾਲ!", "en": "Sat Sri Akal"},
+    {"id": "g_kn", "voice": "mr", "lang": "kn", "text": "ನಮಸ್ಕಾರ!", "en": "Namaskara"},
+    {"id": "g_ml", "voice": "ta", "lang": "ml", "text": "നമസ്കാരം!", "en": "Namaskaram"},
+    {"id": "g_or", "voice": "bn", "lang": "or", "text": "ନମସ୍କାର!", "en": "Namaskar"},
+    {"id": "en1", "voice": "en", "lang": "en", "text": "India speaks in hundreds of languages. For years, editing software understood just one."},
+    {"id": "en2", "voice": "en", "lang": "en", "text": "Not anymore. Here's an empty timeline. Watch six languages edit one video."},
+    {"id": "hi", "voice": "hi", "lang": "hi", "text": "घाट वाला शॉट डालो, और शुरू के दो सेकंड काट दो।", "en": "Add the ghat shot, and cut the first two seconds."},
+    {"id": "bn", "voice": "bn", "lang": "bn", "text": "ট্রামের শটটা দাও, আর মিউজিকের বিটে বিটে কাট করো।", "en": "Add the tram shot, and cut on every beat."},
+    {"id": "mr", "voice": "mr", "lang": "mr", "text": "लोकलचा शॉट टाका, आणि थोडा फास्ट करा.", "en": "Add the local train shot, and speed it up a little."},
+    {"id": "te", "voice": "te", "lang": "te", "text": "చార్మినార్ షాట్ పెట్టండి, కలర్ కొంచెం వార్మ్ చేయండి.", "en": "Add the Charminar shot, and make the colour a little warmer."},
+    {"id": "ta", "voice": "ta", "lang": "ta", "text": "மெரினா ஷாட் போடுங்க, கேப்ஷன்ஸ் கொஞ்சம் பெருசா பண்ணுங்க.", "en": "Add the Marina shot, and make the captions bigger."},
+    {"id": "gu", "voice": "gu", "lang": "gu", "text": "પતંગનો શોટ મૂકો, ને સબટાઇટલ બધી ભાષામાં આપો.", "en": "Add the kite shot, and give subtitles in every language."},
+    {"id": "en3", "voice": "en", "lang": "en", "text": "Six languages. One video. Not a single clip dragged. That's vibe editing."},
+    {"id": "hi_end", "voice": "hi", "lang": "hi", "text": "अब edit करो, अपनी भाषा में।", "en": "Now edit, in your own language."}
+  ]
+}

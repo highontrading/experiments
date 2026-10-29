@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Edit in Your Language stage</title>
+<style>
+  @font-face { font-family: ArchX; src: url(assets/fonts/Archivo-Expanded-800.ttf); font-weight: 800; }
+  @font-face { font-family: ArchX9; src: url(assets/fonts/Archivo-Expanded-900.ttf); font-weight: 900; }
+  @font-face { font-family: InterL; src: url(assets/fonts/Inter-Medium.otf); font-weight: 500; }
+  @font-face { font-family: InterL; src: url(assets/fonts/Inter-SemiBold.otf); font-weight: 600; }
+  @font-face { font-family: InterL; src: url(assets/fonts/Inter-Bold.otf); font-weight: 700 900; }
+  @font-face { font-family: Caveat; src: url(assets/fonts/Caveat-600.ttf); font-weight: 600; }
+  html, body { margin: 0; background: #000; }
+  canvas { display: block; }
+</style>
+<style id="baloo"></style>
+<script>
+  // one Baloo family per script, two weights each
+  const BALOO = ["Baloo2", "BalooDa2", "BalooThambi2", "BalooTammudu2", "BalooBhai2", "BalooPaaji2", "BalooTamma2", "BalooChettan2", "BalooBhaina2"];
+  document.getElementById("baloo").textContent = BALOO.map((f) =>
+    `@font-face{font-family:${f};src:url(assets/fonts/${f}-500.woff);font-weight:400 600}` +
+    `@font-face{font-family:${f};src:url(assets/fonts/${f}-800.woff);font-weight:700 900}`).join("\n");
+</script>
+</head>
+<body>
+<canvas id="cv" width="1080" height="1920"></canvas>
+<script>
+  const files = ["build/timing.js", "build/footage.js", "build/music.js", "lib/core.js", "lib/scenes.js", "lib/film.js"];
+  window.stageLoaded = files.reduce((p, f) => p.then(() => new Promise((ok) => {
+    const s = document.createElement("script"); s.src = f; s.onload = ok; s.onerror = ok;   // music.js is optional
+    document.body.appendChild(s);
+  })), Promise.resolve()).then(() => window.stageReady);
+</script>
+</body>
+</html>
