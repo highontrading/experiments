@@ -1,0 +1,36 @@
+[
+ {
+  "key": "ff_cup",
+  "src": "assets_raw/mixkit/v4992.mp4",
+  "t": 5,
+  "box": [
+   680,
+   190,
+   1300,
+   910
+  ],
+  "model": "u2net"
+ },
+ {
+  "key": "ff_moviola",
+  "src": "assets_raw/web/how_to_use_the_moviola.mp4",
+  "t": 27,
+  "box": [
+   60,
+   20,
+   600,
+   480
+  ]
+ },
+ {
+  "key": "ff_vcr",
+  "src": "assets_raw/mixkit/v48530.mp4",
+  "t": 0.3,
+  "box": [
+   0,
+   255,
+   1085,
+   668
+  ]
+ }
+]

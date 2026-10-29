@@ -1,0 +1,51 @@
+[
+ {
+  "name": "hw_dev",
+  "mixkit": 1735,
+  "ss": 1,
+  "dur": 9,
+  "vf": "scale=960:-2"
+ },
+ {
+  "name": "hw_filming",
+  "mixkit": 44069,
+  "ss": 0,
+  "dur": 8,
+  "vf": "scale=960:-2"
+ },
+ {
+  "name": "hw_reels",
+  "mixkit": 49354,
+  "ss": 2,
+  "dur": 8,
+  "vf": "scale=960:-2"
+ },
+ {
+  "name": "hw_editscreen",
+  "mixkit": 50610,
+  "ss": 0,
+  "dur": 6,
+  "vf": "scale=960:-2"
+ },
+ {
+  "name": "hw_coffee",
+  "mixkit": 1750,
+  "ss": 0,
+  "dur": 8,
+  "vf": "scale=960:-2"
+ },
+ {
+  "name": "hw_listening",
+  "mixkit": 44742,
+  "ss": 3,
+  "dur": 8,
+  "vf": "scale=960:-2"
+ },
+ {
+  "name": "hw_podcast",
+  "mixkit": 44036,
+  "ss": 0,
+  "dur": 8,
+  "vf": "scale=960:-2"
+ }
+]

@@ -1,0 +1,40 @@
+[
+ {
+  "key": "ai_clapper",
+  "src": "assets_raw/mixkit/v46353.mp4",
+  "t": 14.5,
+  "box": [
+   225,
+   12,
+   845,
+   565
+  ],
+  "sticker": true
+ },
+ {
+  "key": "ai_director",
+  "src": "assets_raw/mixkit/v44069.mp4",
+  "t": 6.0,
+  "box": [
+   600,
+   0,
+   1720,
+   1080
+  ],
+  "sticker": true,
+  "model": "u2net"
+ },
+ {
+  "key": "ai_bearded",
+  "src": "assets_raw/mixkit/v23058.mp4",
+  "t": 1.0,
+  "box": [
+   0,
+   30,
+   420,
+   720
+  ],
+  "sticker": true,
+  "model": "u2net"
+ }
+]

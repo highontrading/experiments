@@ -1,0 +1,4 @@
+[
+ {"key": "cw_bags", "src": "assets_raw/mixkit/v8866.mp4", "t": 0.2, "box": [15, 225, 500, 645]},
+ {"key": "cw_lily", "src": "assets_raw/mixkit/v17802.mp4", "t": 11.6, "box": [120, 0, 1040, 720], "model": "u2net"}
+]

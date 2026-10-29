@@ -1,0 +1,37 @@
+[
+ {
+  "key": "hw_laptop",
+  "src": "assets_raw/mixkit/v45343.mp4",
+  "t": 4,
+  "box": [
+   290,
+   140,
+   1035,
+   685
+  ],
+  "screen": false
+ },
+ {
+  "key": "hw_camera",
+  "src": "assets_raw/mixkit/v2992.mp4",
+  "t": 1.0,
+  "box": [
+   140,
+   160,
+   1720,
+   930
+  ]
+ },
+ {
+  "key": "hw_clock",
+  "src": "assets_raw/mixkit/o39828.mp4",
+  "t": 1.0,
+  "box": [
+   690,
+   30,
+   1385,
+   1030
+  ],
+  "model": "isnet-general-use"
+ }
+]

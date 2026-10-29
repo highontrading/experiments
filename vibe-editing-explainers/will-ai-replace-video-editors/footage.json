@@ -1,0 +1,10 @@
+[
+ {"name": "ai_editor",   "mixkit": 41273, "ss": 2.0, "dur": 9,  "vf": "scale=960:-2"},
+ {"name": "ai_beard",    "mixkit": 23058, "ss": 3.0, "dur": 9,  "vf": "scale=960:-2"},
+ {"name": "ai_thinker",  "mixkit": 44071, "ss": 4.0, "dur": 9,  "vf": "scale=960:-2"},
+ {"name": "ai_camera",   "mixkit": 44069, "ss": 3.0, "dur": 9,  "vf": "scale=960:-2"},
+ {"name": "ai_studio",   "mixkit": 44062, "ss": 1.0, "dur": 9,  "vf": "scale=960:-2"},
+ {"name": "ai_grade",    "mixkit": 47208, "ss": 22.0, "dur": 9, "vf": "scale=960:-2"},
+ {"name": "ai_click",    "mixkit": 24688, "ss": 4.0, "dur": 8,  "vf": "scale=960:-2"},
+ {"name": "ai_vertical", "mixkit": 41292, "ss": 0.5, "dur": 9,  "vf": "scale=540:-2"}
+]

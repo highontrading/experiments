@@ -1,0 +1,72 @@
+[
+ {
+  "name": "cw_meadow",
+  "mixkit": 4075,
+  "ss": 0,
+  "dur": 18.4,
+  "vf": "crop=780:1080:600:0,scale=1080:-2"
+ },
+ {
+  "name": "cw_sky",
+  "mixkit": 51586,
+  "ss": 0,
+  "dur": 18.2,
+  "vf": "crop=780:1080:560:0,scale=1080:-2"
+ },
+ {
+  "name": "cw_studio",
+  "mixkit": 44079,
+  "ss": 0.5,
+  "dur": 7,
+  "vf": "scale=900:-2"
+ },
+ {
+  "name": "cw_software",
+  "mixkit": 50605,
+  "ss": 0.5,
+  "dur": 7,
+  "vf": "scale=900:-2"
+ },
+ {
+  "name": "cw_mic",
+  "mixkit": 44049,
+  "ss": 2,
+  "dur": 7,
+  "vf": "scale=900:-2"
+ },
+ {
+  "name": "cw_teacher",
+  "mixkit": 28224,
+  "ss": 0,
+  "dur": 9,
+  "vf": "scale=960:-2"
+ },
+ {
+  "name": "cw_florist",
+  "mixkit": 15122,
+  "ss": 1,
+  "dur": 9,
+  "vf": "scale=960:-2"
+ },
+ {
+  "name": "cw_florist_tab",
+  "mixkit": 6424,
+  "ss": 1,
+  "dur": 8,
+  "vf": "scale=720:-2"
+ },
+ {
+  "name": "cw_creator",
+  "mixkit": 34478,
+  "ss": 2.2,
+  "dur": 8,
+  "vf": "scale=960:-2"
+ },
+ {
+  "name": "cw_classroom",
+  "mixkit": 36046,
+  "ss": 0,
+  "dur": 8,
+  "vf": "scale=720:-2"
+ }
+]

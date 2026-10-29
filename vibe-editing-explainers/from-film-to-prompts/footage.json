@@ -1,0 +1,16 @@
+[
+  {"name": "ff_moviola_wide",  "url": "https://archive.org/download/202411_How_to_Use_the_Moviola/202411_How_to_Use_the_Moviola_master.intros.mp4", "ss": 110, "dur": 8, "vf": "scale=880:-2:flags=lanczos,unsharp=5:5:0.5"},
+  {"name": "ff_moviola_film",  "url": "https://archive.org/download/202411_How_to_Use_the_Moviola/202411_How_to_Use_the_Moviola_master.intros.mp4", "ss": 151.5, "dur": 7, "vf": "scale=880:-2:flags=lanczos,unsharp=5:5:0.5"},
+  {"name": "ff_moviola_hands", "url": "https://archive.org/download/202411_How_to_Use_the_Moviola/202411_How_to_Use_the_Moviola_master.intros.mp4", "ss": 162, "dur": 6.5, "vf": "scale=880:-2:flags=lanczos,unsharp=5:5:0.5"},
+  {"name": "ff_reel",      "mixkit": 49354, "ss": 2, "dur": 9, "vf": "scale=960:-2"},
+  {"name": "ff_vhs",       "mixkit": 48531, "ss": 1, "dur": 9, "vf": "scale=960:-2"},
+  {"name": "ff_vcr",       "mixkit": 48530, "ss": 0, "dur": 8, "vf": "scale=960:-2"},
+  {"name": "ff_cassette",  "mixkit": 46996, "ss": 0, "dur": 8, "vf": "scale=960:-2"},
+  {"name": "ff_projector", "mixkit": 13943, "ss": 0, "dur": 8, "vf": "scale=960:-2"},
+  {"name": "ff_strip",     "mixkit": 28418, "ss": 2, "dur": 8, "vf": "scale=960:-2"},
+  {"name": "ff_floppy",    "mixkit": 48937, "ss": 0, "dur": 5.5, "vf": "scale=960:-2"},
+  {"name": "ff_mouse",     "mixkit": 14819, "ss": 2, "dur": 8, "vf": "scale=960:-2"},
+  {"name": "ff_editkeys",  "mixkit": 41266, "ss": 2, "dur": 8, "vf": "scale=960:-2"},
+  {"name": "ff_typing",    "mixkit": 99901, "page": "a-young-focused-man-wearing-a-denim-jacket-is-typing-99901", "ss": 2, "dur": 7, "vf": "scale=960:-2"},
+  {"name": "ff_coffee",    "mixkit": 4992, "ss": 0, "dur": 8, "vf": "scale=960:-2"}
+]
