@@ -6,8 +6,8 @@ const { deg, FX, cut, paper, codePanel, promptBox, phone, chorusPills, joinButto
 const PURPLE = "#7678d4", INK = "#262322", PEACH = "#f4dccd", TEAL = "#4fb3a4", RUST = "#c98c6c";
 
 function bg(c, gt) {
-  paper(c, "paper_peach", PEACH, { tint: IMG.paper_peach ? null : null, filter: "sepia(.25) saturate(1.2)" });
-  if (IMG.paper_peach) { c.save(); c.globalCompositeOperation = "multiply"; c.fillStyle = "rgba(244,214,196,.55)"; c.fillRect(0, 0, W, H); c.restore(); }
+  paper(c, "paper_peach", PEACH, { filter: "grayscale(.85) brightness(1.32) contrast(.75)" });
+  if (IMG.paper_peach) { c.save(); c.globalCompositeOperation = "multiply"; c.fillStyle = "#f6d3c0"; c.fillRect(0, 0, W, H); c.restore(); }
   // halftone patches like the reference
   halftoneDisc(c, 120, 1520, 150, "rgba(201,140,108,.55)", { cell: 8 });
   halftoneDisc(c, 1000, 260, 120, "rgba(201,140,108,.5)", { cell: 8 });
@@ -34,13 +34,19 @@ function grunge(c, s, x, y, px, lt, t0, o = {}) {
   c.restore();
 }
 const LM = {   // landmark cut-outs: name, treatment
-  delhi: ["cut_indiagate", "bw"], agra: ["cut_tajmahal", "duo"], mumbai: ["cut_gateway", "bw"], kolkata: ["cut_howrah", "bw"],
+  delhi: ["cut_indiagate", "bw"], agra: ["cut_tajmahal", "duo"], mumbai: ["cut_gateway", "bw"], kolkata: ["cut_howrah", "bw"], taxi: ["cut_taxi", "color"],
   chennai: ["cut_meenakshi", "duo"], hyd: ["cut_charminar", "bw"], jaipur: ["cut_hawamahal", "duo"], amritsar: ["cut_goldentemple", "bw"],
 };
 function landmark(c, key, x, y, h, lt, t0, o = {}) {
   const e = spring(step(lt), t0, 0.4); if (e <= 0) return;
   const j = jitter(lt, x * 7 + y);
-  const [n, mode] = LM[key];
+  let [n, mode] = LM[key];
+  if (!IMG[n] && key === "chennai") {             // no temple cut-out: a real Marina Beach print stands in
+    const k = clamp(e * 2); c.save(); c.globalAlpha = k; c.translate(x + j[0], y + j[1] - h * (o.ay ?? 1) + h / 2); c.rotate(deg(-4) + j[2]);
+    c.shadowColor = "rgba(0,0,0,.3)"; c.shadowBlur = 20; c.shadowOffsetY = 10; c.fillStyle = "#fbf8f2"; c.fillRect(-h * 0.42, -h * 0.36, h * 0.84, h * 0.72); c.shadowColor = "transparent";
+    footage(c, "marina", lt, -h * 0.39, -h * 0.33, h * 0.78, h * 0.58, {}); c.restore(); return;
+  }
+  if (!IMG[n]) { const alt = { kolkata: IMG.cut_victoria ? "cut_victoria" : "cut_taxi", jaipur: "cut_tajmahal", amritsar: "cut_gateway" }[key]; if (alt) { n = alt; mode = alt === "cut_taxi" ? "color" : alt === "cut_victoria" ? "bw" : mode; } }
   cut(c, n, x + j[0], y + j[1] + (1 - e) * 60, h * (0.7 + 0.3 * e), { mode, tint: TEAL, rot: (o.rot || 0) + j[2], ay: o.ay ?? 1, alpha: clamp(e * 2) });
 }
 const SUB = { hi: "भारत का एक दिन", bn: "ভারতের একটি দিন", mr: "भारतातील एक दिवस", te: "భారతదేశంలో ఒక రోజు", ta: "இந்தியாவில் ஒரு நாள்",
@@ -55,6 +61,7 @@ function videoCard(cc, w, h, lang, photo = "marina", t = 0) {
   cc.fillText(s, w / 2, h * 0.86);
 }
 
+const NAT = { hi: "हिन्दी", ta: "தமிழ்", bn: "বাংলা", te: "తెలుగు", mr: "मराठी", gu: "ગુજરાતી", kn: "ಕನ್ನಡ", ml: "മലയാളം", pa: "ਪੰਜਾਬੀ" };
 const S = {};
 S.hook = { draw(c, lt, Sc, gt) {
   const w = (n) => wd("a3_1", n, Sc);
@@ -81,10 +88,10 @@ S.problem = { draw(c, lt, Sc, gt) {
     LS.forEach((l, k) => {
       const e = spring(step(lt), w(n) + 0.12 + k * 0.06, 0.3); if (e <= 0) return;
       const j = jitter(lt, r * 31 + k);
-      tag(c, l.toUpperCase(), 690 + k * 34 + j[0], y + 10 + (k % 2) * 8 + j[1], FX.bebas(34), { bg: k % 2 ? "#fff" : "#efe7dd", fg: INK, h: 70, w: 110, r: 4, rot: deg(-8 + k * 2), s: e, blur: 8 });
+      tag(c, NAT[l], 650 + k * 42 + j[0], y + 10 + (k % 2) * 10 + j[1], FX.baloo(l, 30), { bg: k % 2 ? "#fff" : "#efe7dd", fg: INK, h: 76, w: 130, r: 4, rot: deg(-10 + k * 2.5), s: e, blur: 8 });
     });
   });
-  grunge(c, "ITNA TIME?", 540, 1240, 200, lt, w(12), { col: INK, rot: deg(-3) });
+  grunge(c, "ITNA TIME?", 540, 1270, 180, lt, w(12), { col: INK, rot: deg(-3) });
   stampWord(c, "×9", 940, 560, FX.anton(120), PURPLE, w(6), lt, { shadow: false });
 } };
 S.oneline = { draw(c, lt, Sc, gt) {
@@ -92,7 +99,7 @@ S.oneline = { draw(c, lt, Sc, gt) {
   const e = spring(lt, 0.05, 0.6);
   const flip = win(w(11) - 0.1, w(11) + 0.25, lt), sx = Math.abs(Math.cos(Math.PI * flip));
   c.save(); c.translate(540, 980); c.scale(Math.max(0.02, sx), 1); c.translate(-540, -980);
-  phone(c, 540, 980 + (1 - e) * 900, 900, deg(-2), (cc, pw, ph) => videoCard(cc, pw, ph, flip < 0.5 ? "hi" : "ta", "marina", lt));
+  K.handPhone(c, 470, 1180 + (1 - e) * 900, 1500, deg(-2), (cc, pw, ph) => videoCard(cc, pw, ph, flip < 0.5 ? "hi" : "ta", "marina", lt));
   c.restore();
   const ep = spring(lt, w(4) - 0.2, 0.5);
   if (ep > 0) { c.save(); c.globalAlpha = clamp(ep * 2); promptBox(c, 540, 420, 900, "Ise Tamil mein bhi banao.", win(w(5), w(10), lt), { accent: PURPLE, px: 46 }); c.restore(); }
@@ -146,7 +153,7 @@ const RAIN = [["hi", "अ"], ["ta", "த"], ["bn", "ক"], ["te", "తె"], ["g
 S.future = { draw(c, lt, Sc, gt) {
   const w = (n) => wd("a3_6", n, Sc);
   RAIN.forEach(([l, s], i) => {
-    const r = rnd(i + 3), x = 90 + r() * 900, y0 = -100 - r() * 400, sp = 500 + r() * 400, y = y0 + step(lt) * sp;
+    const r = rnd(i + 3), x = 90 + r() * 900, y0 = -150 - r() * 900, sp = 700 + r() * 500, y = y0 + step(lt) * sp;
     c.save(); c.globalAlpha = 0.85; c.font = l === "en" ? FX.anton(120) : FX.baloo(l, 120); c.fillStyle = i % 2 ? PURPLE : INK; c.textAlign = "center";
     c.translate(x, y); c.rotate(deg(-20 + r() * 40)); c.fillText(s, 0, 0); c.restore();
   });
@@ -182,6 +189,6 @@ function caption(c, ws, active, since, alpha) {
 
 window.AD = { bg, scenes: S, caption, grain: 0.24,
   trans: { hook: { type: "tear", d: 0.6 }, problem: { type: "whip", d: 0.5 }, oneline: { type: "slide", d: 0.5 }, auto: { type: "up", d: 0.6 }, future: { type: "tear", d: 0.6, horizontal: true } },
-  images: ["paper_peach", "cut_plane", "cut_indiagate", "cut_tajmahal", "cut_gateway", "cut_howrah", "cut_meenakshi", "cut_charminar", "cut_hawamahal", "cut_goldentemple", "cut_taxi", "cut_tram_2"],
+  images: ["paper_peach", "cut_victoria", "cut_hand_phone_screenhole", "cut_plane", "cut_indiagate", "cut_tajmahal", "cut_gateway", "cut_howrah", "cut_meenakshi", "cut_charminar", "cut_hawamahal", "cut_goldentemple", "cut_taxi", "cut_tram_2"],
   photos: ["marina", "tram", "kites"] };
 })();

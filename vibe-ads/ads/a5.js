@@ -6,16 +6,16 @@ const { deg, FX, cut, paper, grid, codePanel, promptBox, phone, reel, chorusPill
 const INK = "#1f2a44", RED = "#d13b3b";
 
 function bg(c, gt, S) {
-  paper(c, IMG.graph_desk ? "graph_desk" : "graph_paper", "#d9d9d4", { filter: "grayscale(.85) brightness(.97)" });
-  if (!IMG.graph_desk && !IMG.graph_paper) grid(c, 0, 0, W, H, 58, "rgba(40,40,50,.22)", 1.5);
+  paper(c, IMG.graph_desk ? "graph_desk" : "paper_white", "#d9d9d4", { filter: "grayscale(1) brightness(1.02) contrast(.55)" });
+  if (!IMG.graph_desk) grid(c, 0, 0, W, H, 58, "rgba(40,40,50,.24)", 1.5);
   // soft overhead light and a vignette, like a photo of a real desk
   const g = c.createRadialGradient(540, 800, 200, 540, 900, 1300); g.addColorStop(0, "rgba(255,255,255,.12)"); g.addColorStop(1, "rgba(0,0,0,.28)");
   c.fillStyle = g; c.fillRect(0, 0, W, H);
 }
 // the objects around the desk; each slides in from off-desk once and then stays put
 function props(c, lt, gt, o = {}) {
-  const P = [["cut_map", -40, 140, 520, -25, 0.0], ["cut_folder", 1010, 1050, 620, 12, 0.08], ["cut_receipt", 980, 900, 420, -8, 0.14],
-    ["cut_chai", 930, 260, 260, 0, 0.2], ["cut_notebook", 120, 1700, 560, 8, 0.26], ["cut_pen", 860, 1640, 420, 35, 0.32], ["cut_headphones", 150, 1080, 380, -15, 0.38]];
+  const P = [["cut_clapper", 40, 170, 420, -18, 0.0], ["cut_folder", 1040, 1100, 640, 12, 0.08], ["cut_teacup", 980, 1560, 300, 0, 0.14],
+    ["cut_chai", 960, 260, 260, 0, 0.2], ["cut_notebook", 110, 1730, 520, 8, 0.26], ["cut_pen", 880, 1780, 380, 35, 0.32], ["cut_headphones", 120, 1100, 360, -75, 0.38]];
   P.forEach(([n, x, y, h, r, t0]) => {
     if (o.skip && o.skip.includes(n)) return;
     const e = apple(win(t0, t0 + 0.6, o.inAt ?? lt));
@@ -73,7 +73,7 @@ const S = {};
 S.desk = { draw(c, lt, Sc, gt) {
   const w = (n) => wd("a5_1", n, Sc);
   props(c, lt, gt);
-  phone(c, 260, 520, 520, deg(-12), (cc, pw, ph) => { cc.fillStyle = "#0e0e10"; cc.fillRect(0, 0, pw, ph); });
+  cut(c, "cut_phone", 290, 520, 520, { rot: deg(8) });
   todo(c, lt, [["Ek reel edit karna…", w(8) + 0.2, false], ["…poora din", w(10), false]], { y: 1000 });
   stampWord(c, "POORA DIN?!", 600, 1440, FX.marker(90), RED, w(11) + 0.1, lt, { rot: deg(-6), shadow: false });
 } };
@@ -102,6 +102,7 @@ S.prompt = { draw(c, lt, Sc, gt) {
   props(c, 9, gt, { skip: ["cut_headphones"] });
   phone(c, 300, 760, 820, deg(-6), (cc, pw, ph) => {
     cc.fillStyle = "#f2f2f5"; cc.fillRect(0, 0, pw, ph);
+    cc.fillStyle = "#2b2b2b"; cc.fillRect(0, 0, pw, 120); cc.font = FX.inter(30, 800); cc.fillStyle = "#fff"; cc.textAlign = "center"; cc.fillText("Vibe Editing", pw / 2, 92);
     cc.save(); cc.translate(pw / 2, ph * 0.72); promptBox(cc, 0, 0, pw - 30, "Tees second ki reel, fast cuts, bold captions.", win(w(3), w(11), lt), { px: 26, accent: "#2b2b2b" }); cc.restore();
   });
   const ec = spring(lt, w(12) - 0.2, 0.6);
@@ -147,5 +148,5 @@ function caption(c, ws, active, since, alpha) {
 
 window.AD = { bg, scenes: S, caption, grain: 0.18,
   trans: { stuck: { type: "zoom", d: 0.5, fx: 540, fy: 820 }, prompt: { type: "slide", d: 0.55 }, langs: { type: "up", d: 0.6 } },
-  images: ["graph_desk", "graph_paper", "grass", "cut_map", "cut_folder", "cut_receipt", "cut_chai", "cut_notebook", "cut_pen", "cut_headphones", "cut_stickynote", "cut_creator"] };
+  images: ["graph_desk", "paper_white", "grass", "cut_phone", "cut_clapper", "cut_teacup", "cut_folder", "cut_chai", "cut_notebook", "cut_pen", "cut_headphones", "cut_stickynote", "cut_creator"] };
 })();

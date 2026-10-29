@@ -7,11 +7,11 @@ const YEL = "#f0b323", TEALG = "#1f9e8f", INK = "#111", RED = "#e2412f";
 const HZ = 1240;   // where the grass starts
 
 function bg(c, gt, S) {
-  paper(c, "graph_paper", "#f3f3f0", { filter: "grayscale(.7) brightness(1.08)" });
-  if (!IMG.graph_paper) grid(c, 0, 0, W, HZ, 64, "rgba(60,60,70,.2)", 1.6);
+  paper(c, IMG.graph_paper ? "graph_paper" : "paper_white", "#f3f3f0", { filter: "grayscale(.7) brightness(1.08)" });
+  if (!IMG.graph_paper) grid(c, 0, 0, W, HZ, 64, "rgba(60,60,70,.22)", 1.6);
 }
 function sun(c, warm = 0, r = 330, body) {
-  c.save(); c.translate(540, 1040);
+  c.save(); c.translate(540, 720);
   c.shadowColor = "rgba(0,0,0,.12)"; c.shadowBlur = 20;
   c.fillStyle = warm ? `rgb(${240},${Math.round(lerp(179, 140, warm))},${Math.round(lerp(35, 30, warm))})` : YEL;
   c.beginPath(); c.arc(0, 0, r, 0, 7); c.fill(); c.shadowColor = "transparent";
@@ -24,7 +24,7 @@ function field(c, gt) {
   if (im) {
     // only the grass part of the photo, tinted teal like the reference
     const sy = im.naturalHeight * (IMG.grass_field ? 0.35 : 0.72), sh = im.naturalHeight - sy, sw = sh * W / (H - HZ);
-    c.filter = "hue-rotate(38deg) saturate(1.35) brightness(.95)";
+    c.filter = "hue-rotate(96deg) saturate(.95) brightness(.9)";
     c.drawImage(im, (im.naturalWidth - sw) / 2 + Math.sin(gt * 0.5) * 10, sy, sw, sh, 0, HZ, W, H - HZ);
   }
   else { c.fillStyle = TEALG; c.fillRect(0, HZ, W, H - HZ); }
@@ -34,19 +34,24 @@ function field(c, gt) {
 // the landmark wrapped in a tangle; tangle 0..1 (how much is left), tilt in degrees
 function tower(c, gt, tangle = 1, tilt = 0) {
   c.save(); c.translate(540, HZ + 120); c.rotate(deg(tilt));
-  cut(c, "cut_qutub", 0, 0, 1080, { mode: "bw", ay: 1, shadow: true });
+  if (IMG.cut_qutub) cut(c, "cut_qutub", 0, 0, 1080, { mode: "bw", ay: 1, shadow: true });
+  else cut(c, "cut_charminar", 0, 40, 640, { mode: "bw", ay: 1, shadow: true });
   if (tangle > 0) {
     c.globalAlpha = clamp(tangle * 1.3);
     const lift = (1 - tangle) * 900;
-    cut(c, IMG.cut_filmtangle ? "cut_filmtangle" : "cut_cables", 0, -520 - lift, 760 * (0.8 + 0.2 * tangle), { mode: "bw", ay: 0.5, rot: deg(Math.sin(gt * 2) * 2) });
+    const tg = IMG.cut_filmtangle ? "cut_filmtangle" : "cut_cables";      // two layers of the real wire tangle, darkened
+    c.filter = "brightness(.35) contrast(1.6)";
+    cut(c, tg, 0, -380 - lift, 620 * (0.8 + 0.2 * tangle), { mode: "bw", ay: 0.5, rot: deg(Math.sin(gt * 2) * 2) });
+    cut(c, tg, 20, -300 - lift, 560 * (0.8 + 0.2 * tangle), { mode: "bw", ay: 0.5, flip: true, rot: deg(90 + Math.sin(gt * 1.7) * 3) });
+    c.filter = "none";
   }
   c.restore();
 }
 // the giant hand from the top, pinching a thread that runs down to the tangle
 function hand(c, gt, y, o = {}) {
   const sway = Math.sin(gt * 1.1) * 8;
-  if (o.thread !== false) { c.save(); c.strokeStyle = "rgba(30,30,30,.8)"; c.lineWidth = 3; c.beginPath(); c.moveTo(540 + sway, y + 40); c.lineTo(540, o.toY ?? 500); c.stroke(); c.restore(); }
-  cut(c, o.name || "cut_hand_pinch", 540 + sway, y, 620, { mode: "bw", ay: 0.92, rot: deg(o.rot || 180), shadow: true });
+  if (o.thread !== false) { c.save(); c.strokeStyle = "rgba(30,30,30,.8)"; c.lineWidth = 3; c.beginPath(); c.moveTo(540 + sway, y - 10); c.lineTo(540, o.toY ?? 500); c.stroke(); c.restore(); }
+  cut(c, o.name || "cut_hand_pinch", 540 + sway, y, 620, { mode: "bw", ay: 0.92, rot: deg(o.rot || 0), shadow: true });
 }
 
 const S = {};
@@ -54,16 +59,16 @@ S.hook = { draw(c, lt, Sc, gt) {
   const w = (n) => wd("a4_1", n, Sc);
   sun(c); field(c, gt);
   tower(c, gt, 1, Math.sin(gt * 1.5) * 1.2);
-  hand(c, gt, lerp(-300, 70, apple(win(0, 0.8, lt))), { toY: 420 });
-  stampWord(c, "ULJHI", 70, 420, FX.anton(170), INK, w(4), lt, { align: "left", rot: deg(-4) });
-  stampWord(c, "HUI?", 1010, 600, FX.anton(200), RED, w(6), lt, { align: "right", rot: deg(5) });
+  hand(c, gt, lerp(-300, 460, apple(win(0, 0.8, lt))), { toY: 620 });
+  stampWord(c, "ULJHI", 60, 300, FX.anton(170), INK, w(4), lt, { align: "left", rot: deg(-4) });
+  stampWord(c, "HUI?", 1020, 470, FX.anton(200), RED, w(6), lt, { align: "right", rot: deg(5) });
 } };
 S.problem = { draw(c, lt, Sc, gt) {
   const w = (n) => wd("a4_2", n, Sc);
   const g = w(4), tilt = lerp(0, 5.5, apple(win(g, g + 0.6, lt)));
   sun(c); field(c, gt);
   tower(c, gt, 1, tilt);
-  hand(c, gt, 70, { toY: 420 });
+  hand(c, gt, 460, { toY: 620 });
   [["KEYFRAMES", 0, 230, 640, -8], ["LAYERS", 1, 850, 760, 6], ["TRANSITIONS", 2, 260, 920, 4]].forEach(([s, n, x, y, r]) => {
     const e = spring(lt, w(n) - 0.05, 0.5), pull = apple(win(w(n) + 0.5, w(n) + 1.4, lt));
     if (e <= 0 || pull >= 1) return;
@@ -81,9 +86,9 @@ S.shift = { draw(c, lt, Sc, gt) {
   sun(c); field(c, gt);
   tower(c, gt, 1, lerp(5.5, 2, ss(0, 1, lt)));
   const open = lt > w(2);
-  hand(c, gt, lerp(70, -60, ss(w(2), w(3), lt)), { name: open ? "cut_hand_point" : "cut_hand_pinch", thread: !open, toY: 420, rot: open ? 160 : 180 });
-  stampWord(c, "UNGLIYON SE ✕", 540, 520, FX.anton(110), INK, w(1), lt, { stroke: "#fff", strokeW: 12 });
-  stampWord(c, "SHABDON SE ✓", 540, 690, FX.anton(130), RED, w(3), lt, { stroke: "#fff", strokeW: 12, rot: deg(-2) });
+  hand(c, gt, lerp(460, 380, ss(w(2), w(3), lt)), { name: open ? "cut_hand_point" : "cut_hand_pinch", thread: !open, toY: 620, rot: open ? 180 : 0 });
+  stampWord(c, "UNGLIYON SE ✕", 540, 1040, FX.anton(110), INK, w(1), lt, { stroke: "#fff", strokeW: 12 });
+  stampWord(c, "SHABDON SE ✓", 540, 1190, FX.anton(130), RED, w(3), lt, { stroke: "#fff", strokeW: 12, rot: deg(-2) });
 } };
 S.commands = { draw(c, lt, Sc, gt) {
   const w = (n) => wd("a4_4", n, Sc);
@@ -101,7 +106,7 @@ S.commands = { draw(c, lt, Sc, gt) {
   });
   field(c, gt);
   tower(c, gt, 1 - done / 3, 2 - done * 0.7);
-  hand(c, gt, lerp(70, -40, done / 3), { toY: lerp(420, -400, done / 3) });
+  hand(c, gt, lerp(460, 120, done / 3), { toY: lerp(620, -300, done / 3) });
   C3.forEach(([s, n], i) => {
     const e = spring(lt, w(n) - 0.6, 0.5); if (e <= 0) return;
     const ok = lt > w(n) + 0.3;
@@ -128,17 +133,17 @@ S.langs = { draw(c, lt, Sc, gt) {
     c.save(); c.strokeStyle = "#0f6f63"; c.lineWidth = 6; c.beginPath(); c.moveTo(x, y0 + 200); c.quadraticCurveTo(x + 20, y + 80, x, y + 40); c.stroke(); c.restore();
     tag(c, s, x, y, FX.baloo(l, 46), { bg: i % 2 ? "#fff" : YEL, fg: INK, h: 86, r: 43, rot: deg(Math.sin(gt * 2 + i) * 4) });
   });
-  stampWord(c, "APNI BHASHA MEIN", 540, 480, FX.anton(120), INK, w(3), lt, { stroke: "#fff", strokeW: 12, rot: deg(-2) });
+  stampWord(c, "APNI BHASHA MEIN", 540, 300, FX.anton(120), INK, w(3), lt, { stroke: "#fff", strokeW: 12, rot: deg(-2) });
 } };
 S.cta = { draw(c, lt, Sc, gt) {
   const w = (n) => wd("a4_7", n, Sc);
   sun(c, 1); field(c, gt); tower(c, gt, 0, 0);
-  stampWord(c, "ULJHAN ✕", 540, 400, FX.anton(130), INK, w(0), lt, { stroke: "#fff", strokeW: 12, out: w(2) });
-  stampWord(c, "VIBE EDITING", 540, 420, FX.anton(170), INK, w(2), lt, { stroke: "#fff", strokeW: 14, rot: deg(-2) });
+  stampWord(c, "ULJHAN ✕", 540, 1100, FX.anton(130), INK, w(0), lt, { stroke: "#fff", strokeW: 12, out: w(2) });
+  stampWord(c, "VIBE EDITING", 540, 1100, FX.anton(150), INK, w(2), lt, { stroke: "#fff", strokeW: 14, rot: deg(-2) });
   // the hand comes back down holding the join button
-  const hy = lerp(-500, 330, apple(win(w(2), w(4), lt)));
-  cut(c, "cut_hand_pinch", 540, hy, 520, { mode: "bw", ay: 0.92, rot: deg(180) });
-  if (hy > 0) joinButton(c, 540, hy + 160, gt, Sc.start + w(3), { bg: RED, text: "JOIN VIBE EDITING  →", font: FX.arch(44), w: 700, h: 124 });
+  const hy = lerp(-500, 560, apple(win(w(2), w(4), lt)));
+  cut(c, "cut_hand_pinch", 540, hy, 520, { mode: "bw", ay: 0.92 });
+  if (hy > 0) joinButton(c, 540, hy + 120, gt, Sc.start + w(3), { bg: RED, text: "JOIN VIBE EDITING  →", font: FX.arch(44), w: 700, h: 124 });
   chorusPills(c, gt, [[280, 1400, -4], [800, 1440, 4], [300, 1600, 3], [790, 1640, -3]], { px: 40, bg: (i) => (i % 2 ? YEL : "#fff"), fg: () => INK });
 } };
 
@@ -159,5 +164,5 @@ function caption(c, ws, active, since, alpha) {
 
 window.AD = { bg, scenes: S, caption, grain: 0.2,
   trans: { problem: { type: "zoom", d: 0.5, fx: 540, fy: 900 }, commands: { type: "tear", d: 0.6 } },
-  images: ["graph_paper", "grass_field", "grass", "cut_qutub", "cut_cables", "cut_filmtangle", "cut_hand_pinch", "cut_hand_point"] };
+  images: ["graph_paper", "paper_white", "cut_charminar", "grass_field", "grass", "cut_qutub", "cut_cables", "cut_filmtangle", "cut_hand_pinch", "cut_hand_point"] };
 })();

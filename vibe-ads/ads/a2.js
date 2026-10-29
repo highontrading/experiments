@@ -6,8 +6,8 @@ const { deg, FX, cut, paper, grid, codePanel, promptBox, phone, reel, chorusPill
 const BLUE = "#1f4fe0", RED = "#e8432e", INK = "#141414", YEL = "#f2c230";
 
 function bg(c, gt) {
-  paper(c, "graph_paper", "#f4f4f1", { filter: "grayscale(.6) brightness(1.06)" });
-  if (!IMG.graph_paper) grid(c, 0, 0, W, H, 60, "rgba(80,90,110,.22)", 1.5);
+  paper(c, IMG.graph_paper ? "graph_paper" : "paper_white", "#f4f4f1", { filter: "grayscale(.6) brightness(1.3) contrast(.78)" });
+  if (!IMG.graph_paper) grid(c, 0, 0, W, H, 60, "rgba(80,90,110,.24)", 1.5);
 }
 // the "0:08" badge from the reference, used as a year counter
 function badge(c, s, lt, at0 = 0) {
@@ -60,16 +60,19 @@ S.machines = { draw(c, lt, Sc, gt) {
   let yr = "1913"; yrs.forEach(([y, t]) => { if (lt >= t) yr = y; });
   badge(c, yr, lt, -1);
   tank(c, 0, 1250, W, 700, 0.5, gt);
-  const ITEMS = [["cut_moviola", 250, 820, 640, w(0), "MOVIOLA"], ["cut_crt", 770, 700, 470, w(4), "COMPUTER"], ["cut_laptop", 560, 1150, 470, w(6), "TIMELINE"]];
+  const ITEMS = [["cut_moviola", 210, 760, 640, w(0), "MOVIOLA"], ["cut_steenbeck", 760, 600, 360, w(1), "STEENBECK"],
+    [IMG.cut_crt ? "cut_crt" : "laptop_dark", 780, 990, 330, w(4), "COMPUTER"], ["laptop_tl", 400, 1150, 330, w(6), "TIMELINE"]];
   ITEMS.forEach(([n, x, y, h, t0, lab], i) => {
     const e = spring(lt, t0 - 0.05, 0.6); if (e <= 0) return;
-    cut(c, n, x, y + (1 - e) * 120, h * (0.6 + 0.4 * e), { mode: "bw" });
+    if (n === "laptop_dark") K.laptop(c, x, y + (1 - e) * 120, h * (0.6 + 0.4 * e), 0, null, { mode: "bw" });
+    else if (n === "laptop_tl") K.laptop(c, x, y + (1 - e) * 120, h * (0.6 + 0.4 * e), 0, (cc, ww, hh) => K.timelineUI(cc, ww, hh, lt), { mode: "bw" });
+    else cut(c, n, x, y + (1 - e) * 120, h * (0.6 + 0.4 * e), { mode: "bw" });
     bolt(c, x + 170, y - h / 2, 1.1, deg(i % 2 ? -18 : 18), RED, clamp(e * 2));
     tag(c, lab, x, y + h / 2 + 30, FX.rubik(36), { bg: "#fff", fg: INK, h: 64, r: 32, alpha: clamp(e * 2) });
   });
   // a flat blue timeline track under the laptop
   const tl = win(w(6), w(7) + 0.4, lt);
-  if (tl > 0) for (let k = 0; k < 7; k++) { c.fillStyle = k % 2 ? "#7da2ff" : "#fff"; rr(c, 120 + k * 120, 1520, 110 * clamp(tl * 7 - k), 52, 10); c.fill(); }
+  if (tl > 0) for (let k = 0; k < 7; k++) { c.fillStyle = k % 2 ? "#7da2ff" : "#fff"; rr(c, 120 + k * 120, 1560, 110 * clamp(tl * 7 - k), 52, 10); c.fill(); }
 } };
 S.same = { draw(c, lt, Sc, gt) {
   const w = (n) => wd("a2_3", n, Sc);
@@ -79,7 +82,7 @@ S.same = { draw(c, lt, Sc, gt) {
   tank(c, 90, 520, 900, 1040, lvl, gt);
   filmFrame(c, 540, 760, 640, 470, deg(-2), "editing_vintage", lt, { filter: "grayscale(1) contrast(1.1)" });
   const DO = [["KHEENCHO", 8], ["KAATO", 9], ["JODO", 10]];
-  DO.forEach(([s, n], i) => stampWord(c, s, 540, 1180 + i * 150, FX.anton(130), i === 1 ? RED : "#fff", w(n), lt, { rot: deg([-3, 2, -2][i]), shadow: false }));
+  DO.forEach(([s, n], i) => stampWord(c, s, 540, [1100, 1230, 1520][i], FX.anton(130), i === 1 ? RED : "#fff", w(n), lt, { rot: deg([-3, 2, -2][i]), shadow: false }));
   stampWord(c, "GHANTON TAK…", 540, 420, FX.anton(110), INK, w(11), lt, { rot: deg(-2) });
   cut(c, "cut_hand_point", 860 + Math.sin(lt * 5) * 30, 1060, 420, { mode: "bw", rot: deg(-30) });
 } };
@@ -169,5 +172,5 @@ function caption(c, ws, active, since, alpha) {
 
 window.AD = { bg, scenes: S, caption, grain: 0.18,
   trans: { phalke: { type: "slide", d: 0.6 }, same: { type: "whip", d: 0.5 }, experiment: { type: "zoom", d: 0.6, fx: 720, fy: 760 }, langs: { type: "slide", d: 0.6 } },
-  images: ["graph_paper", "cut_phalke", "cut_moviola", "cut_crt", "cut_laptop", "cut_filmstrip", "cut_scissors", "cut_hand_point"] };
+  images: ["graph_paper", "paper_white", "cut_phalke", "cut_moviola", "cut_steenbeck", "cut_crt", "cut_laptop", "cut_filmstrip", "cut_scissors", "cut_hand_point"] };
 })();

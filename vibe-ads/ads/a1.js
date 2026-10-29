@@ -6,7 +6,7 @@ const { deg, FX, cut, paper, grid, halftoneDisc, codePanel, promptBox, phone, re
 const RED = "#c63d4f", INK = "#1d1b1b", GREEN = "#7fb27f", PINK = "#f3c9c9";
 
 function bg(c, gt, S) {
-  paper(c, "paper_white", "#f1eee8", { filter: "brightness(1.04) contrast(.95)" });
+  paper(c, "paper_white", "#f1eee8", { filter: "brightness(1.32) contrast(.8) saturate(.6)" });
   // pink blush at the top, like the reference print
   const g = c.createRadialGradient(540, -100, 50, 540, -100, 900); g.addColorStop(0, "rgba(243,201,201,.75)"); g.addColorStop(1, "rgba(243,201,201,0)");
   c.fillStyle = g; c.fillRect(0, 0, W, H);
@@ -42,7 +42,10 @@ function octopus(c, gt, k, cutK = 0, o = {}) {
 // the old software: a B&W computer standing in for the bank building
 function software(c, gt, lt, o = {}) {
   const y = o.y ?? 1000;
-  cut(c, "cut_crt", 540 + (o.dx || 0), y, o.h || 600, { mode: "bw", ay: 0.5, rot: deg(o.rot || 0) });
+  if (IMG.cut_crt) return cut(c, "cut_crt", 540 + (o.dx || 0), y, o.h || 600, { mode: "bw", ay: 0.5, rot: deg(o.rot || 0) });
+  K.laptop(c, 540 + (o.dx || 0), y, o.h || 470, deg(o.rot || 0), (cc, w, h) => { K.timelineUI(cc, w, h, lt); cc.fillStyle = "rgba(0,0,0,.15)"; cc.fillRect(0, 0, w, h); }, { mode: "bw" });
+  // one tentacle curls over the front of it
+  if (o.tentacle !== false) cut(c, "cut_tentacle", 300 + Math.sin(gt * 1.4) * 10, y + 120, 520, { mode: "duo", tint: "#d0445a", rot: deg(-20 + Math.sin(gt * 1.6) * 4) });
 }
 
 const S = {};
@@ -82,11 +85,11 @@ S.night = { draw(c, lt, Sc, gt) {
   // the evening disappearing on a clock
   const m = Math.floor(lerp(19 * 60, 23 * 60 + 48, ss(0.3, Sc.dur - 0.3, lt)));
   const clock = `${String(Math.floor(m / 60) - 12).padStart(2, "0")}:${String(m % 60).padStart(2, "0")} PM`;
-  stampWord(c, clock, 540, 1560, FX.anton(150), dusk > 0.5 ? "#f4f2ec" : INK, 0.1, lt, { shadow: false });
+  stampWord(c, clock, 540, 1700, FX.anton(150), dusk > 0.5 ? "#f4f2ec" : INK, 0.1, lt, { shadow: false });
   const prog = ss(0.3, Sc.dur, lt) * 0.07;
-  c.fillStyle = "rgba(255,255,255,.35)"; rr(c, 240, 1280, 600, 22, 11); c.fill();
-  c.fillStyle = RED; rr(c, 240, 1280, 600 * prog, 22, 11); c.fill();
-  c.font = FX.rubik(30); c.fillStyle = dusk > 0.5 ? "#fff" : INK; c.textAlign = "center"; c.fillText(`Rendering… ${Math.round(prog * 100)}%`, 540, 1250);
+  c.fillStyle = "rgba(255,255,255,.35)"; rr(c, 240, 1480, 600, 22, 11); c.fill();
+  c.fillStyle = RED; rr(c, 240, 1480, 600 * prog, 22, 11); c.fill();
+  c.font = FX.rubik(30); c.fillStyle = dusk > 0.5 ? "#fff" : INK; c.textAlign = "center"; c.fillText(`Rendering… ${Math.round(prog * 100)}%`, 540, 1450);
 } };
 S.cut = { draw(c, lt, Sc, gt) {
   const s1 = at("a1_4", Sc) + 1.75, s2 = s1 + 0.3;
@@ -150,7 +153,7 @@ S.daur = { draw(c, lt, Sc, gt) {
   const inn = apple(win(w(4) + 0.4, w(7), lt));
   if (inn > 0) {
     c.save(); c.translate((1 - inn) * 1100, 0);
-    cut(c, "cut_laptop", 540, 1000, 560, { mode: "color" });
+    K.laptop(c, 540, 1000, 470, 0, (cc, w, h) => reel(cc, w, h, lt));
     plaque(c, 540, 560, 1, "NAYA DAUR", { px: 80, top: "#d24a5c", bot: "#9d2b3b" });
     c.restore();
   }
@@ -161,8 +164,8 @@ S.cta = { draw(c, lt, Sc, gt) {
   const w = (n) => wd("a1_8", n, Sc);
   // the building again, now it is ours
   const k = spring(lt, 0, 0.8);
-  cut(c, "cut_laptop", 540, 880 + (1 - k) * 600, 520, { mode: "color" });
-  phone(c, 540, 860 + (1 - k) * 600, 520, deg(-3), (cc, pw, ph) => reel(cc, pw, ph, lt + 2));
+  K.laptop(c, 400, 930 + (1 - k) * 600, 360, deg(-3), (cc, w, h) => K.codePanel(cc, w / 2, h / 2, w, h, 1, { px: 12 }));
+  phone(c, 760, 900 + (1 - k) * 600, 560, deg(4), (cc, pw, ph) => reel(cc, pw, ph, lt + 2));
   plaque(c, 540, 470 - (1 - spring(lt, 0.2, 0.8)) * 500, 1.1, "VIBE EDITING", { px: 78, top: "#d24a5c", bot: "#9d2b3b" });
   stampWord(c, "EDITING KA NAYA DAUR", 540, 610, FX.rubik(46), INK, 0.5, lt, { shadow: false });
   joinButton(c, 540, 1150, gt, Sc.start + w(3), { bg: RED, text: "JOIN VIBE EDITING  →", font: FX.arch(46) });
@@ -188,5 +191,5 @@ function caption(c, ws, active, since, alpha) {
 
 window.AD = { bg, scenes: S, caption, grain: 0.2,
   trans: { cut: { type: "tear", d: 0.7 }, langs: { type: "whip", d: 0.5 }, daur: { type: "up", d: 0.7 } },
-  images: ["paper_white", "cut_octopus_1", "cut_octopus_2", "cut_crt", "cut_laptop", "cut_scissors"] };
+  images: ["paper_white", "cut_octopus_1", "cut_octopus_2", "cut_tentacle", "cut_crt", "cut_laptop", "cut_scissors"] };
 })();

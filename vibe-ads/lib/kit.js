@@ -207,8 +207,11 @@ function chorusPills(c, gt, spots, o = {}) {
   T.voices.filter((v) => v.role === "chorus").forEach((v, i) => {
     const e = spring(gt, v.at - 0.05, 0.5);
     if (e <= 0) return;
-    const [x, y, r] = spots[i % spots.length];
+    let [x, y, r] = spots[i % spots.length];
     const lang = v.lang, txt = CHORUS_TXT[lang];
+    c.font = FX.baloo(lang, o.px || 44, 800);
+    const half = (c.measureText(txt).width + 60) / 2;
+    x = clamp(x, 34 + half, W - 34 - half);                // keep every pill inside the frame
     c.save(); c.translate(x, y); c.rotate(deg(r)); c.scale(0.5 + 0.5 * e, 0.5 + 0.5 * e); c.globalAlpha = clamp(e * 2);
     c.font = FX.baloo(lang, o.px || 44, 800);
     const w = c.measureText(txt).width + 60, h = (o.px || 44) * 1.9;
@@ -269,6 +272,36 @@ function bolt(c, x, y, s, rot, col = "#e8432e", alpha = 1) {
   c.restore();
 }
 
-window.K = { deg, FX, VO, at, wd, endOf, stampWord, tag, bolt, treated, cut, step, jitter, paper, grid, halftoneDisc, chunks, captions, CODE, codePanel, promptBox, phone, reel,
+// the real laptop cut-out with content on its screen (screen measured from the photo)
+function laptop(c, x, y, h, rot, body, o = {}) {
+  const im = treated("cut_laptop", o.mode || "color"); if (!im) return;
+  const w = h * im.width / im.height;
+  c.save(); c.translate(x, y); c.rotate(rot);
+  c.shadowColor = "rgba(0,0,0,.3)"; c.shadowBlur = 26; c.shadowOffsetY = 14; c.drawImage(im, -w / 2, -h / 2, w, h); c.shadowColor = "transparent";
+  if (body) { const sx = -w / 2 + w * 0.125, sy = -h / 2 + h * 0.035, sw = w * 0.72, sh = h * 0.74;
+    c.save(); c.beginPath(); c.rect(sx, sy, sw, sh); c.clip(); c.translate(sx, sy); body(c, sw, sh); c.restore(); }
+  c.restore();
+}
+// a real hand holding a phone; the video plays through its transparent screen
+function handPhone(c, x, y, h, rot, body) {
+  const im = IMG.cut_hand_phone_screenhole; if (!im) return phone(c, x, y, h * 0.6, rot, body);
+  const w = h * im.naturalWidth / im.naturalHeight;
+  c.save(); c.translate(x, y); c.rotate(rot);
+  const sx = -w / 2 + w * 0.344, sy = -h / 2 + h * 0.043, sw = w * 0.537, sh = h * 0.542;
+  c.save(); rr(c, sx - 4, sy - 4, sw + 8, sh + 8, 18); c.clip(); c.translate(sx - 4, sy - 4); body(c, sw + 8, sh + 8); c.restore();
+  c.shadowColor = "rgba(0,0,0,.3)"; c.shadowBlur = 26; c.shadowOffsetY = 14; c.drawImage(im, -w / 2, -h / 2, w, h);
+  c.restore();
+}
+// an editing timeline UI, the "old way"
+function timelineUI(cc, w, h, t, o = {}) {
+  cc.fillStyle = o.bg || "#1e1f24"; cc.fillRect(0, 0, w, h);
+  cc.fillStyle = "#2b2d34"; cc.fillRect(0, 0, w, h * 0.42);
+  cc.fillStyle = "#3a3d46"; cc.fillRect(w * 0.3, h * 0.05, w * 0.4, h * 0.32);
+  const cols = ["#5b7bd5", "#d55b8a", "#5bd5a2", "#d5b75b"], r = rnd(5);
+  for (let tr = 0; tr < 5; tr++) { let x = r() * 30; const y = h * 0.47 + tr * h * 0.1;
+    while (x < w) { const cw = 40 + r() * 140; cc.fillStyle = cols[(tr + Math.floor(x)) % 4]; cc.globalAlpha = 0.85; cc.fillRect(x, y, cw - 4, h * 0.08); x += cw + r() * 30; } cc.globalAlpha = 1; }
+  cc.fillStyle = "#ff3b30"; cc.fillRect(((t * 60) % w), h * 0.44, 3, h * 0.56);
+}
+window.K = { laptop, handPhone, timelineUI, deg, FX, VO, at, wd, endOf, stampWord, tag, bolt, treated, cut, step, jitter, paper, grid, halftoneDisc, chunks, captions, CODE, codePanel, promptBox, phone, reel,
   CHORUS_TXT, chorusPills, joinButton };
 })();
