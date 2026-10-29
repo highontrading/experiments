@@ -35,12 +35,25 @@ The transitions are continuous camera moves rather than cuts:
 - Telugu → Tamil: the camera flies through the blue window.
 - After every language: its shot shrinks and flies into its slot on the tracker.
 
+## Two cuts
+
+| Cut | Narrator | Under each bubble | Output |
+| --- | --- | --- | --- |
+| English | Viraj (Indian English) | English meaning | `out/edit_in_your_language_share.mp4` |
+| Hinglish | Raju (Hindi), lines like "India में सैकड़ों भाषाएँ बोली जाती हैं…" | Hinglish meaning, e.g. "Tram ka shot daalo, aur music ki har beat pe cut karo." | `out/edit_in_your_language_hinglish_share.mp4` |
+
+The six language lines and the greetings are the same in both cuts. In the Hinglish cut the
+on-screen words are Hinglish too ("khaali!", "6 bhashayein · 1 video · 0 clip drag kiye").
+The cuts share every scene; the narrator's word cues and on-screen strings live in `CUE` and
+`STR` at the top of `lib/scenes.js`.
+
 ## Build
 
 ```bash
 ./make.sh            # full build -> out/
 ./make.sh stills     # contact sheet of key moments -> build/sheet.jpg
 ./make.sh encode     # re-mix and re-encode from existing frames
+VERSION=hinglish ./make.sh   # the Hinglish cut (same flags)
 ```
 
 | File | Role |

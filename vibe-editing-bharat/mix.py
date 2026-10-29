@@ -1,7 +1,8 @@
 # Mix the soundtrack from build/timing.json -> build/mix.wav
 # music (ducked under the voices) + every voice line on cue + city ambience + SFX.
 import json, os, subprocess
-T = json.load(open("build/timing.json"))
+SUF = "" if os.environ.get("VERSION", "en") == "en" else "_" + os.environ["VERSION"]
+T = json.load(open(f"build/timing{SUF}.json"))
 MUSIC_START = 0.0
 dur = T["dur"]
 inputs, chains, vox, bed = [], [], [], []
@@ -11,7 +12,7 @@ ms = lambda s: max(0, int(round(s * 1000)))
 
 # voices
 for v in T["voices"]:
-    i = add(f"voice/{v['id']}.mp3")
+    i = add(f"voice/{v.get('file', v['id'])}.mp3")
     g = 0.95 if v["id"].startswith("g_") else 1.0
     chains.append(f"[{i}:a]aresample=48000,aformat=channel_layouts=stereo,volume={g},adelay={ms(v['at'])}|{ms(v['at'])}[v{i}]")
     vox.append(f"[v{i}]")
@@ -37,6 +38,6 @@ chains.append(f"{''.join(vox)}amix=inputs={n}:normalize=0:duration=longest,aspli
 chains.append("[mus][key]sidechaincompress=threshold=0.02:ratio=5:attack=15:release=420:makeup=1[ducked]")
 chains.append(f"[vox][ducked]{''.join(bed)}amix=inputs={2 + len(bed)}:normalize=0:duration=longest,"
               f"apad=whole_dur={dur},atrim=0:{dur},loudnorm=I=-14:TP=-1.2:LRA=9,aresample=48000[out]")
-cmd = ["ffmpeg", "-loglevel", "error", "-y", *inputs, "-filter_complex", ";".join(chains), "-map", "[out]", "-ac", "2", "build/mix.wav"]
+cmd = ["ffmpeg", "-loglevel", "error", "-y", *inputs, "-filter_complex", ";".join(chains), "-map", "[out]", "-ac", "2", f"build/mix{SUF}.wav"]
 subprocess.run(cmd, check=True)
-print("build/mix.wav", subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", "build/mix.wav"]).decode().strip(), "s")
+print(f"build/mix{SUF}.wav", subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f"build/mix{SUF}.wav"]).decode().strip(), "s")

@@ -18,6 +18,22 @@ const SUB = {   // "A Day in India", the reel's subtitle, in every language
   hi: "भारत का एक दिन", bn: "ভারতের একটি দিন", mr: "भारतातील एक दिवस", te: "భారతదేశంలో ఒక రోజు",
   ta: "இந்தியாவில் ஒரு நாள்", gu: "ભારતનો એક દિવસ", en: "A Day in India",
 };
+// The narrator's words differ per cut, so animations key off word numbers from this table.
+const HX = T.version === "hinglish";
+const CUE = HX ? {
+  hand: [["India", 0], ["mein", 1], ["sainkadon…", 2]], countFrom: 2, countTo: 3, drop: 9, oneBy: 12, micro: 3, menu: 10,
+  rope: 4, note: 5, six: 8, gone: 10,
+} : {
+  hand: [["India", 0], ["speaks", 1], ["in…", 2]], countFrom: 3, countTo: 5, drop: 9, oneBy: 12, micro: 5, menu: 10,
+  rope: 3, note: 5, six: 7, gone: 9,
+};
+const STR = HX ? {
+  census: "bhashayein (Census of India, 2011)", one: "bhasha. Sirf English.", empty: "khaali!", langs: "BHASHAYEIN",
+  edit1: ["Edit-", "ek video"], outro: ["bhashayein", "video", "clip drag kiye"], beat: "♩ har beat pe cut", reel: "(6 bhashaon mein edit)。",
+} : {
+  census: "languages (Census of India, 2011)", one: "language. Just English.", empty: "empty!", langs: "LANGUAGES",
+  edit1: ["Edit-", "one video"], outro: ["languages", "video", "clips dragged"], beat: "♩ cut on every beat", reel: "(edited in 6 languages)。",
+};
 const ENAME = { hi: "Hindi", bn: "Bangla", mr: "Marathi", te: "Telugu", ta: "Tamil", gu: "Gujarati" };
 // local time of a voice line's n-th word, inside its scene
 const wordAt = (id, n, scene) => V[id].at - SC[scene].start + words(V[id])[n].t0;
@@ -183,8 +199,8 @@ const MICRO = [
 SCENES.speaks = { sky: true, draw(c, lt, S, gt) {
   const w = (n) => wordAt("en1", n, "speaks");
   // magenta handwriting, stacked like the poster's "The earth is your playground"
-  const hand = [["India", 0], ["speaks", 1], ["in…", 2]];
-  const drop = inCubic(win(w(9), w(9) + 0.7, lt));               // "editing": the old world falls away
+  const hand = CUE.hand;
+  const drop = inCubic(win(w(CUE.drop), w(CUE.drop) + 0.7, lt));               // "editing": the old world falls away
   c.save(); c.translate(70, 620); c.rotate(deg(-7));
   hand.forEach(([s, n], i) => {
     const e = spring(lt, w(n) - 0.05, 0.5);
@@ -196,9 +212,9 @@ SCENES.speaks = { sky: true, draw(c, lt, S, gt) {
   });
   c.restore();
   // the lime number: counts to 121 on "hundreds", then collapses to 1 on "editing"
-  const up = ss(w(3) - 0.1, w(5) + 0.2, lt), dn = ss(w(9), w(12) + 0.3, lt);
+  const up = ss(w(CUE.countFrom) - 0.1, w(CUE.countTo) + 0.2, lt), dn = ss(w(CUE.drop), w(CUE.oneBy) + 0.3, lt);
   const one = dn > 0.8, n = one ? 1 : Math.round(lerp(lerp(1, 121, up), 1, dn / 0.8));
-  const e = spring(lt, w(3) - 0.15, 0.6);
+  const e = spring(lt, w(CUE.countFrom) - 0.15, 0.6);
   if (e > 0) {
     c.save(); c.translate(one ? 760 : 1010, 1270); c.scale(0.6 + 0.4 * e, 0.6 + 0.4 * e);
     c.font = F.title(one ? 520 : 330); c.fillStyle = C.lime; c.textAlign = "right"; c.textBaseline = "alphabetic";
@@ -209,23 +225,23 @@ SCENES.speaks = { sky: true, draw(c, lt, S, gt) {
     if (one) c.fillText("EN", 6, -330);
     c.restore();
     c.save(); c.globalAlpha = clamp(e) * (1 - dn);
-    label(c, 1010, 1330, "languages (Census of India, 2011)", 32, C.lime, "right", F.ui(32, 700));
+    label(c, 1010, 1330, STR.census, 32, C.lime, "right", F.ui(32, 700));
     c.restore();
     c.save(); c.globalAlpha = dn;
-    label(c, 1010, 1330, "language. Just English.", 34, C.lime, "right", F.ui(34, 700));
+    label(c, 1010, 1330, STR.one, 34, C.lime, "right", F.ui(34, 700));
     c.restore();
   }
   // tiny scattered labels, one per script, like the poster's "Record- the beauty"
   MICRO.forEach(([x, y, a, b, l], i) => {
-    const e2 = ss(w(5) + i * 0.12, w(5) + i * 0.12 + 0.4, lt);
-    const f = inCubic(win(w(9) + i * 0.06, w(9) + i * 0.06 + 0.8, lt));
+    const e2 = ss(w(CUE.micro) + i * 0.12, w(CUE.micro) + i * 0.12 + 0.4, lt);
+    const f = inCubic(win(w(CUE.drop) + i * 0.06, w(CUE.drop) + i * 0.06 + 0.8, lt));
     if (e2 <= 0) return;
     c.save(); c.globalAlpha = e2 * (1 - f); c.translate(0, f * 700);
     microLabel(c, x, y, a, b, 34, C.lime);
     c.restore();
   });
   // the English-only editor menu, pegged up on "software"
-  drawMenu(c, lt, w(10), gt, 0);
+  drawMenu(c, lt, w(CUE.menu), gt, 0);
 } };
 // An English-only editing app menu bar hanging from two pegs.
 function drawMenu(c, lt, at, gt, fall) {
@@ -262,36 +278,36 @@ SCENES.empty = { sky: true, draw(c, lt, S, gt) {
   }
   drawMenu(c, 99, 0, gt, win(w(0), w(1) + 0.6, lt));
   if (lt < 0.2) {                                   // the "1 language" note, fading as the number pops
-    c.save(); c.globalAlpha = 1 - win(0, 0.2, lt); label(c, 1010, 1330, "language. Just English.", 34, C.lime, "right", F.ui(34, 700)); c.restore();
+    c.save(); c.globalAlpha = 1 - win(0, 0.2, lt); label(c, 1010, 1330, STR.one, 34, C.lime, "right", F.ui(34, 700)); c.restore();
   }
   // the empty timeline: a rope with six blank prints, one per language
-  const ropeIn = apple(win(w(3) - 0.3, w(3) + 0.5, lt));
+  const ropeIn = apple(win(w(CUE.rope) - 0.3, w(CUE.rope) + 0.5, lt));
   const k = inOut(win(S.dur - 1.3, S.dur - 0.15, lt));
   if (ropeIn > 0) {
     drawLine(c, k, gt, {
       upto: ropeIn,
-      drop: (i) => spring(lt, w(3) + 0.25 + i * 0.12, 0.55),
-      wiggle: (i) => 6 * Math.exp(-3 * Math.max(0, lt - (w(7) + i * 0.13))) * Math.sin(Math.max(0, lt - (w(7) + i * 0.13)) * 14) * (lt > w(7) + i * 0.13 ? 1 : 0),
+      drop: (i) => spring(lt, w(CUE.rope) + 0.25 + i * 0.12, 0.55),
+      wiggle: (i) => { const a = w(CUE.six) + i * 0.13; return lt > a ? 6 * Math.exp(-3 * (lt - a)) * Math.sin((lt - a) * 14) : 0; },
     });
   }
   // handwritten note + lime "6"
-  const ne = spring(lt, w(5) - 0.1, 0.6) * (1 - ss(S.dur - 1.5, S.dur - 1.1, lt));
+  const ne = spring(lt, w(CUE.note) - 0.1, 0.6) * (1 - ss(S.dur - 1.5, S.dur - 1.1, lt));
   if (ne > 0) {
     c.save(); c.globalAlpha = clamp(ne * 2); c.translate(170, 1080); c.rotate(deg(-6)); c.scale(0.7 + 0.3 * ne, 0.7 + 0.3 * ne);
-    c.font = F.hand(130); c.fillStyle = C.magenta; c.fillText("empty!", 0, 0);
+    c.font = F.hand(130); c.fillStyle = C.magenta; c.fillText(STR.empty, 0, 0);
     c.strokeStyle = C.magenta; c.lineWidth = 7; c.lineCap = "round";
     c.beginPath(); c.moveTo(60, -120); c.quadraticCurveTo(10, -200, 70, -260); c.stroke();
     c.beginPath(); c.moveTo(48, -238); c.lineTo(70, -262); c.lineTo(94, -244); c.stroke();
     c.restore();
   }
-  const sx = spring(lt, w(7) - 0.1, 0.6) * (1 - ss(S.dur - 1.5, S.dur - 1.1, lt));
+  const sx = spring(lt, w(CUE.six) - 0.1, 0.6) * (1 - ss(S.dur - 1.5, S.dur - 1.1, lt));
   if (sx > 0) {
     c.save(); c.globalAlpha = clamp(sx * 2); c.translate(980, 1330); c.scale(0.6 + 0.4 * sx, 0.6 + 0.4 * sx);
     c.font = F.title(360); c.fillStyle = C.lime; c.textAlign = "right"; c.fillText("6", 0, 0);
-    c.font = F.title(54); c.textAlign = "right"; c.fillText("LANGUAGES", 0, 70);
+    c.font = F.title(54); c.textAlign = "right"; c.fillText(STR.langs, 0, 70);
     c.restore();
     c.save(); c.globalAlpha = clamp(sx * 2);
-    microLabel(c, 660, 1500, "Edit-", "one video", 34);
+    microLabel(c, 660, 1500, STR.edit1[0], STR.edit1[1], 34);
     c.restore();
   }
 } };
@@ -426,7 +442,7 @@ SCENES.bn = { sky: true, draw(c, lt, S, gt) {
       c.fillStyle = C.lime; c.fillRect(px - 3, p.y - 70, 6, 120);
       c.beginPath(); c.arc(px, p.y - 74, 12, 0, 7); c.fill();
     }
-    label(c, 60, 1500, "♩ cut on every beat", 32, C.lime, "left", F.ui(32, 700));
+    label(c, 60, 1500, STR.beat, 32, C.lime, "left", F.ui(32, 700));
     c.restore();
   }
   heroPrint(c, seg[0], ct, r, { mode: "loop", fx: seg[2], fy: seg[3], z: seg[4], after: (cc, w, h) => { if (flash > 0) { cc.fillStyle = `rgba(255,255,255,${0.35 * flash})`; cc.fillRect(0, 0, w, h); } } });
@@ -752,15 +768,15 @@ SCENES.reel = { sky: true, draw(c, lt, S, gt) {
   c.restore();
   c.save(); c.globalAlpha = k * (1 - out);
   label(c, 60, 270, "A DAY IN INDIA", 40, C.lime, "left", F.title(40, 900));
-  label(c, 1020, 270, "(edited in 6 languages)。", 32, C.lime, "right", F.ui(32, 700));
+  label(c, 1020, 270, STR.reel, 32, C.lime, "right", F.ui(32, 700));
   c.restore();
 } };
 
 // 10 · "Six languages. One video. Not a single clip dragged. That's vibe editing." + "अब edit करो…"
 SCENES.outro = { sky: true, draw(c, lt, S, gt) {
   const w = (n) => wordAt("en3", n, "outro");
-  const gone = inCubic(win(w(9) - 0.1, w(9) + 0.6, lt));
-  const nums = [["6", "languages", 90, 700, 0, -4], ["1", "video", 560, 1000, 2, 5], ["0", "clips dragged", 90, 1330, 4, -3]];
+  const gone = inCubic(win(w(CUE.gone) - 0.1, w(CUE.gone) + 0.6, lt));
+  const nums = [["6", STR.outro[0], 90, 700, 0, -4], ["1", STR.outro[1], 560, 1000, 2, 5], ["0", STR.outro[2], 90, 1330, 4, -3]];
   nums.forEach(([n, s, x, y, wi, rot], i) => {
     const e = spring(lt, w(wi) - 0.05, 0.6);
     if (e <= 0 || gone >= 1) return;
@@ -772,10 +788,10 @@ SCENES.outro = { sky: true, draw(c, lt, S, gt) {
   });
   // VIBE EDITING, written in cloud
   const cv = cloudText("ve", ["VIBE", "EDITING"], F.title(178, 900), 205);
-  drawCloudText(c, cv, 540, 820, ss(w(9) - 0.1, w(9) + 1.1, lt), 1);
+  drawCloudText(c, cv, 540, 820, ss(w(CUE.gone) - 0.1, w(CUE.gone) + 1.1, lt), 1);
   const he = V.hi_end, ht = vt("hi_end", gt);
   voiceBubble(c, he, ht, 540, 1300, { px: 70, rot: -2, hold: 99 });
-  const e = ss(w(9) + 0.6, w(9) + 1.2, lt);
+  const e = ss(w(CUE.gone) + 0.6, w(CUE.gone) + 1.2, lt);
   if (e > 0) {
     c.save(); c.globalAlpha = e;
     label(c, 540, 1110, "(Apni bhasha. Apna edit.)。", 38, C.lime, "center", F.ui(38, 700));

@@ -25,7 +25,8 @@
 <body>
 <canvas id="cv" width="1080" height="1920"></canvas>
 <script>
-  const files = ["build/timing.js", "build/footage.js", "build/music.js", "lib/core.js", "lib/scenes.js", "lib/film.js"];
+  const V = new URLSearchParams(location.search).get("v") || "en";      // which cut: en | hinglish
+  const files = [V === "en" ? "build/timing.js" : `build/timing_${V}.js`, "build/footage.js", "build/music.js", "lib/core.js", "lib/scenes.js", "lib/film.js"];
   window.stageLoaded = files.reduce((p, f) => p.then(() => new Promise((ok) => {
     const s = document.createElement("script"); s.src = f; s.onload = ok; s.onerror = ok;   // music.js is optional
     document.body.appendChild(s);

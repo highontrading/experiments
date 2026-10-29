@@ -8,12 +8,13 @@ const fs = require("fs"), path = require("path");
 const args = process.argv.slice(2);
 const opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
 const JOBS = +opt("--jobs", 4);
+const VERSION = process.env.VERSION || "en", SUF = VERSION === "en" ? "" : "_" + VERSION;
 
 async function page(browser) {
   const p = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
   p.on("pageerror", (e) => { console.error("page error:", e.message); process.exit(1); });
   p.on("console", (m) => { if (m.type() === "error" && !/music\.js/.test(m.text())) console.error(m.text()); });
-  await p.goto(`file://${path.join(__dirname, "stage.html")}`);
+  await p.goto(`file://${path.join(__dirname, "stage.html")}?v=${VERSION}`);
   await p.evaluate(() => window.stageLoaded);
   return p;
 }
@@ -24,10 +25,10 @@ async function page(browser) {
   await probe.close();
   let jobs;
   if (opt("--times")) {
-    jobs = opt("--times").split(",").map(Number).map((t) => ({ t, file: `build/stills/t${t.toFixed(2)}.png` }));
+    jobs = opt("--times").split(",").map(Number).map((t) => ({ t, file: `build/stills${SUF}/t${t.toFixed(2)}.png` }));
   } else {
     const a = Math.round(+opt("--from", 0) * info.fps), b = Math.round(+opt("--to", info.dur) * info.fps);
-    jobs = []; for (let f = a; f < b; f++) jobs.push({ t: f / info.fps, file: `build/frames_out/f${String(f + 1).padStart(5, "0")}.png` });
+    jobs = []; for (let f = a; f < b; f++) jobs.push({ t: f / info.fps, file: `build/frames_out${SUF}/f${String(f + 1).padStart(5, "0")}.png` });
     // resume: frames already on disk are kept unless --force
     if (!args.includes("--force")) jobs = jobs.filter((j) => !fs.existsSync(path.join(__dirname, j.file)));
     if (!jobs.length) { console.log("all frames present"); await browser.close(); return; }
