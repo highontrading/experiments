@@ -18,7 +18,12 @@ function sun(c, warm = 0, r = 330, body) {
   if (body) { c.save(); c.beginPath(); c.arc(0, 0, r - 14, 0, 7); c.clip(); body(c, r - 14); c.restore(); }
   c.restore();
 }
+let FIELD = null;
 function field(c, gt) {
+  if (!FIELD) { FIELD = document.createElement("canvas"); FIELD.width = W; FIELD.height = H; fieldRaw(FIELD.getContext("2d"), 0); }
+  c.drawImage(FIELD, 0, 0);
+}
+function fieldRaw(c, gt) {
   c.save(); c.beginPath(); c.rect(0, HZ, W, H - HZ); c.clip();
   const im = IMG.grass_field || IMG.grass;
   if (im) {

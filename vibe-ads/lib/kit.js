@@ -62,7 +62,17 @@ const step = (t, fps = 12) => Math.floor(t * fps) / fps;
 const jitter = (t, seed, amt = 2.2) => { const r = rnd(seed * 997 + Math.floor(t * 12)); return [(r() - 0.5) * amt, (r() - 0.5) * amt, (r() - 0.5) * amt * 0.004]; };
 
 // ------------------------------------------------------------ backgrounds --
+// Backgrounds are cached once per ad: filtering a full-size photo every frame is slow.
+const BGCACHE = {};
 function paper(c, name, fallback, o = {}) {
+  const key = [name, fallback, o.filter, o.alpha, o.blend, o.z, o.tint, !!IMG[name]].join("|");
+  if (!BGCACHE[key]) {
+    const k = document.createElement("canvas"); k.width = W; k.height = H;
+    paperRaw(k.getContext("2d"), name, fallback, o); BGCACHE[key] = k;
+  }
+  c.drawImage(BGCACHE[key], 0, 0);
+}
+function paperRaw(c, name, fallback, o = {}) {
   c.fillStyle = fallback; c.fillRect(0, 0, W, H);
   const im = IMG[name];
   if (im) {
