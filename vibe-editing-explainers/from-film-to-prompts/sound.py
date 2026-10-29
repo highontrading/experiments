@@ -8,7 +8,14 @@ from scipy.signal import oaconvolve
 # lib/mixer.py smooths the voice envelope with np.convolve and a 12,000-tap kernel; done directly
 # that takes many minutes on a loaded machine. Same result via FFT (overlap-add), in seconds.
 _np_convolve = np.convolve
-np.convolve = lambda a, v, mode="full": oaconvolve(a, v, mode=mode) if min(len(a), len(v)) > 256 else _np_convolve(a, v, mode)
+def _fast_convolve(a, v, mode="full"):
+    if min(len(a), len(v)) <= 256:
+        return _np_convolve(a, v, mode)
+    out = oaconvolve(a, v, mode=mode)
+    return np.abs(out) if (np.min(a) >= 0 and np.min(v) >= 0) else out   # FFT noise can dip below 0
+
+
+np.convolve = _fast_convolve
 from mixer import Mixer
 
 m = Mixer(__file__, music="sleepy_cat_alejandro_magana.mp3", music_db=-10)
