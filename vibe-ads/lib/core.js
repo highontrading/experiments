@@ -55,7 +55,7 @@ function loadImg(src) {
   PENDING.set(src, p); return p;
 }
 function trim() {
-  while (CACHE.size > 260) CACHE.delete(CACHE.keys().next().value);
+  while (CACHE.size > 110) CACHE.delete(CACHE.keys().next().value);
 }
 function need(src) {
   const i = CACHE.get(src);

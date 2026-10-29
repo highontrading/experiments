@@ -19,7 +19,7 @@ async function page(browser) {
   return p;
 }
 (async () => {
-  const browser = await chromium.launch({ args: ["--font-render-hinting=none", "--allow-file-access-from-files"] });
+  const browser = await chromium.launch({ args: ["--font-render-hinting=none", "--allow-file-access-from-files", "--disable-dev-shm-usage"] });
   const probe = await page(browser);
   const info = await probe.evaluate(() => window.FILM_INFO);
   await probe.close();
@@ -38,8 +38,9 @@ async function page(browser) {
   // each worker takes a contiguous chunk, so its frame cache stays warm
   const per = Math.ceil(jobs.length / JOBS);
   await Promise.all(Array.from({ length: Math.min(JOBS, jobs.length) }, async (_, w) => {
-    let p = await page(browser);
+    let p = await page(browser), since = 0;
     for (const j of jobs.slice(w * per, (w + 1) * per)) {
+      if (++since > 250) { await p.close(); p = await page(browser); since = 0; }   // keep each page's memory small
       for (let tries = 0; ; tries++) {              // a crashed capture gets a fresh page and another go
         try {
           await p.evaluate((t) => window.renderAt(t), j.t);
