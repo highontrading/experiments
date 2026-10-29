@@ -14,8 +14,17 @@ order.
 | From film to prompts | "Let's get cozy": serif + pixel type on butter yellow, real objects | 50 s | `from-film-to-prompts/out/` |
 | Will AI replace video editors? | spiral wall calendar, royal-blue day cell, die-cut stickers | 46 s | `will-ai-replace-video-editors/out/` |
 | How vibe editing is changing the world | garden glass: real sky and meadow, frosted browser, pastel cards | 38 s | `vibe-editing-changes-the-world/out/` |
+| How to prompt a vibe edit | cinematic dark 3D: crosshair lines, curved thumbnail wall, glowing serif, gold tags | 41 s | `how-to-prompt-a-vibe-edit/out/` |
+| One idea, a hundred videos | money-doc collage: textured backdrops, real cut-outs, rolling counters, bold condensed type | 40 s | `one-idea-a-hundred-videos/out/` |
+| Why AI edits look fake | retro grunge pixel: real footage dithered to red/cream, CRTs, pop-ups, spotlights | 39 s | `why-ai-edits-look-fake/out/` |
+| Robot voices to AI narrators | sports-doc history collage: stacked years, archival film, stamped cards, cloud wipes | 41 s | `robot-voices-to-ai-narrators/out/` |
 
 Each folder has `out/<name>.mp4`, `out/cover.jpg` and a `CREDITS.md` listing every source.
+
+The last four follow four reference reels the user supplied: fast documentary-reel pacing
+(voice from 0:00, a new layout every 1–2 s, word-synced type, punchy whooshes and impacts).
+Their voiceovers use ElevenLabs **Eleven v4** (`eleven_v4`); the earlier five use
+`eleven_multilingual_v2`. Music and sound effects are from Mixkit.
 
 ## What every video shares
 
