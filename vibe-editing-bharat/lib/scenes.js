@@ -177,8 +177,8 @@ SCENES.greet = { sky: true, draw(c, lt, S, gt) {
 
 // 1 · "India speaks in hundreds of languages. For years, editing software understood just one."
 const MICRO = [
-  [70, 420, "बोलो-", "अपनी भाषा में", "hi"], [600, 1240, "বলো-", "নিজের ভাষায়", "bn"], [80, 1450, "பேசு-", "உன் மொழியில்", "ta"],
-  [700, 1490, "మాట్లాడు-", "నీ భాషలో", "te"], [720, 410, "બોલો-", "તમારી ભાષામાં", "gu"],
+  [70, 420, "बोलो-", "अपनी भाषा में", "hi"], [390, 1620, "বলো-", "নিজের ভাষায়", "bn"], [80, 1440, "பேசு-", "உன் மொழியில்", "ta"],
+  [700, 1440, "మాట్లాడు-", "నీ భాషలో", "te"], [720, 410, "બોલો-", "તમારી ભાષામાં", "gu"],
 ];
 SCENES.speaks = { sky: true, draw(c, lt, S, gt) {
   const w = (n) => wordAt("en1", n, "speaks");
@@ -200,7 +200,7 @@ SCENES.speaks = { sky: true, draw(c, lt, S, gt) {
   const one = dn > 0.8, n = one ? 1 : Math.round(lerp(lerp(1, 121, up), 1, dn / 0.8));
   const e = spring(lt, w(3) - 0.15, 0.6);
   if (e > 0) {
-    c.save(); c.translate(one ? 760 : 1010, 1120); c.scale(0.6 + 0.4 * e, 0.6 + 0.4 * e);
+    c.save(); c.translate(one ? 760 : 1010, 1270); c.scale(0.6 + 0.4 * e, 0.6 + 0.4 * e);
     c.font = F.title(one ? 520 : 330); c.fillStyle = C.lime; c.textAlign = "right"; c.textBaseline = "alphabetic";
     c.shadowColor = "rgba(30,60,10,.25)"; c.shadowBlur = 16;
     c.fillText(String(n), 0, 0);
@@ -209,10 +209,10 @@ SCENES.speaks = { sky: true, draw(c, lt, S, gt) {
     if (one) c.fillText("EN", 6, -330);
     c.restore();
     c.save(); c.globalAlpha = clamp(e) * (1 - dn);
-    label(c, 1010, 1180, "languages (Census of India, 2011)", 32, C.lime, "right", F.ui(32, 700));
+    label(c, 1010, 1330, "languages (Census of India, 2011)", 32, C.lime, "right", F.ui(32, 700));
     c.restore();
     c.save(); c.globalAlpha = dn;
-    label(c, 1010, 1180, "language. Just English.", 34, C.lime, "right", F.ui(34, 700));
+    label(c, 1010, 1330, "language. Just English.", 34, C.lime, "right", F.ui(34, 700));
     c.restore();
   }
   // tiny scattered labels, one per script, like the poster's "Record- the beauty"
@@ -231,10 +231,12 @@ SCENES.speaks = { sky: true, draw(c, lt, S, gt) {
 function drawMenu(c, lt, at, gt, fall) {
   const e = spring(lt, at, 0.7);
   if (e <= 0) return;
-  const R = rope(-40, 1330, 1120, 1350, 22);
+  const R = rope(-40, 1490, 1120, 1510, 22);
   c.save(); c.translate(0, (1 - e) * -500);
-  drawRope(c, R, 13);
+  const gone = ss(0.35, 0.9, fall);
+  c.save(); c.globalAlpha = 1 - gone; c.translate(0, gone * 500); drawRope(c, R, 13); c.restore();
   const P = hang(R, 280, 800, 84, 0, gt, 0.6);
+  if (fall >= 1) { c.restore(); return; }
   c.save(); c.translate(P.x, P.y + fall * fall * 1600); c.rotate(P.rot + fall * deg(25));
   c.shadowColor = "rgba(20,35,70,.3)"; c.shadowBlur = 30; c.shadowOffsetY = 14;
   c.fillStyle = "#f3f3f5"; rr(c, -380, -48, 760, 96, 14); c.fill(); c.shadowColor = "transparent";
@@ -253,14 +255,14 @@ SCENES.empty = { sky: true, draw(c, lt, S, gt) {
   const pop = win(w(0), w(1) + 0.45, lt);
   if (pop < 1) {
     const s = pop < 0.3 ? lerp(1, 1.15, pop / 0.3) : lerp(1.15, 0, (pop - 0.3) / 0.7);
-    c.save(); c.translate(760, 1120); c.scale(s, s); c.rotate(deg(pop * 30));
+    c.save(); c.translate(760, 1270); c.scale(s, s); c.rotate(deg(pop * 30));
     c.font = F.title(520); c.fillStyle = C.lime; c.textAlign = "right"; c.fillText("1", 0, 0);
     c.font = F.title(120); c.textAlign = "left"; c.fillText("EN", 6, -330);
     c.restore();
   }
   drawMenu(c, 99, 0, gt, win(w(0), w(1) + 0.6, lt));
   if (lt < 0.2) {                                   // the "1 language" note, fading as the number pops
-    c.save(); c.globalAlpha = 1 - win(0, 0.2, lt); label(c, 1010, 1180, "language. Just English.", 34, C.lime, "right", F.ui(34, 700)); c.restore();
+    c.save(); c.globalAlpha = 1 - win(0, 0.2, lt); label(c, 1010, 1330, "language. Just English.", 34, C.lime, "right", F.ui(34, 700)); c.restore();
   }
   // the empty timeline: a rope with six blank prints, one per language
   const ropeIn = apple(win(w(3) - 0.3, w(3) + 0.5, lt));
@@ -289,7 +291,7 @@ SCENES.empty = { sky: true, draw(c, lt, S, gt) {
     c.font = F.title(54); c.textAlign = "right"; c.fillText("LANGUAGES", 0, 70);
     c.restore();
     c.save(); c.globalAlpha = clamp(sx * 2);
-    microLabel(c, 640, 1420, "Edit-", "one video", 34);
+    microLabel(c, 660, 1500, "Edit-", "one video", 34);
     c.restore();
   }
 } };
