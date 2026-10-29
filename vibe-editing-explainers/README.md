@@ -1,67 +1,64 @@
 # Vibe Editing: Explainer Series
 
-Short vertical explainers (1080x1920, 30 fps) about **vibe editing**: editing video by
-describing it in words and letting AI write the edit as code. Each episode is built the way
-it describes: a script, a voiceover, and code that renders every frame.
+Short vertical explainers (1080x1920, 30 fps, English voiceover) about **vibe editing**:
+editing video by describing it in words and letting AI write the edit as code. Each video
+is built the way it describes: a script, a voiceover, and code that renders every frame.
 
-| Episode | Folder | Output |
-| --- | --- | --- |
-| 01 · What is vibe editing? (English) | `ep01-what-is-vibe-editing/` | `out/ep01_what_is_vibe_editing.mp4`, `out/cover.jpg` |
+The videos form one series but carry **no episode numbers**, so they can be posted in any
+order.
 
-## Design system: the green cutting mat
+| Video | Design system | Length | Output |
+| --- | --- | --- | --- |
+| What is vibe editing? | green cutting mat, label blocks, desk objects | 57 s | `what-is-vibe-editing/out/` |
+| How vibe editing works | "What's on my desk" catalog: grey paper, numbered product cut-outs, lime pill | 51 s | `how-vibe-editing-works/out/` |
+| From film to prompts | "Let's get cozy": serif + pixel type on butter yellow, real objects | 50 s | `from-film-to-prompts/out/` |
+| Will AI replace video editors? | spiral wall calendar, royal-blue day cell, die-cut stickers | 46 s | `will-ai-replace-video-editors/out/` |
+| How vibe editing is changing the world | garden glass: real sky and meadow, frosted browser, pastel cards | 38 s | `vibe-editing-changes-the-world/out/` |
 
-Rebuilt from the reference post ("Creative block watchlist"):
+Each folder has `out/<name>.mp4`, `out/cover.jpg` and a `CREDITS.md` listing every source.
 
-- **Mat:** green self-healing cutting mat (`#4c8a3f`) with a pale yellow-green grid every
-  96 px, soft mottling, knife scratches and live film grain.
-- **Label blocks:** lowercase **Poppins ExtraBold** on slabs of brown `#6b4628` (white text),
-  yellow `#ffe600` (brown text) or white (brown text), tilted a few degrees, laid down like
-  tape (the slab wipes in left to right, then settles on a soft spring).
-- **Small type:** white Poppins SemiBold lines with a soft shadow; yellow sticker tags
-  (`EP 01`); brown tags for asides.
-- **Ornaments:** yellow four-point sparkles that twinkle, the yellow `_ □ ×` window tiles,
-  the YouTube logo, a white toggle that switches on, a chat bubble, white dashed frames and
-  arrows, a yellow cursor, and torn-paper stars cut from a real 1918 film magazine.
-- **Cards:** footage plays inside white YouTube-style cards (thumbnail, title, meta,
-  duration). Code sits in a dark editor card with the yellow window tiles.
-- **Desk objects:** real objects (phones, a pencil, a notebook, an alarm-clock sticker)
-  cut out of Mixkit desk footage. The phones' green screens show the film's own footage.
-- **Camera:** one camera glides from board to board across the mat. Each glide takes 1 s
-  with a slight pull-back and tilt; each board gets a slow push-in. Glides are rendered
-  with real motion blur (4–14 sub-frames per frame).
-- **Captions:** the spoken phrase at the bottom, with the current word on a yellow
-  highlight. Board content stays above the captions, and the bottom 300 px stays clear
-  for the Reels/Shorts UI.
+## What every video shares
 
-## Sound
-
-Lo-fi bed (Lily J, *Lo-Fi 02*) that dips under the voice, plus close, quiet foley on every
-move: paper slides when a block lays down, an air pass on each camera glide, soft pops for
-tags and sparkles, real keyboard typing while text types, mouse clicks, a camera shutter when
-the render finishes, and a switch tap on "follow". Every sound is placed on the same word
-cue as the picture, and the mix is normalised to −14 LUFS (−1.5 dB true peak).
+- **Real assets only.** Footage from Mixkit (free licence) and public-domain films on
+  Archive.org (Prelinger Archives); objects are real photographs cut out of footage frames
+  with `rembg`. Labels, cards, stickers and UI are drawn as part of each design.
+- **Diverse layouts, one continuous flow.** Every voice line gets its own composition, and
+  the layouts hand over to each other with eased camera glides, shared-element moves, page
+  lifts, zooms into a cell or card, and mask wipes. Fast moves are rendered with real
+  motion blur.
+- **Sound.** One music bed per design that dips under the voice, plus close, quiet foley on
+  every on-screen event, cued to the same spoken words as the picture. Mixed to −14 LUFS.
+- **Safe zones.** Captions sit at y≈1530 with the spoken word highlighted; content stays
+  between y≈160 and y≈1440; the bottom 300 px stays clear for the Reels/Shorts UI.
 
 ## Build
 
 ```bash
-./fetch_assets.sh                    # once: download footage, objects, paper; cut them out
-cd ep01-what-is-vibe-editing
-python3 tts.py                       # only to re-record the voice (uses ElevenLabs credits)
-./make.sh stills                     # quick contact sheet -> build/contact_sheet.jpg
-./make.sh                            # full render -> out/ep01_what_is_vibe_editing.mp4
+./fetch_assets.sh                              # assets for "What is vibe editing?"
+python3 -I lib/fetch.py <video>                # footage for any other video (footage.json)
+python3 lib/cutout.py <video>                  # its cut-out objects (objects.json)
+python3 lib/tts.py <video>                     # voiceover, only if vo/ is missing (uses ElevenLabs credits)
+lib/make.sh <video> stills                     # contact sheet -> <video>/build/contact_sheet.jpg
+lib/make.sh <video>                            # full render -> <video>/out/<video>.mp4
 ```
 
-| File | What it does |
+Some videos have an extra prep script for one tricky asset (`how-vibe-editing-works/laptop_screen.py`,
+`vibe-editing-changes-the-world/prepare.sh`). "What is vibe editing?" predates `lib/` and
+builds with its own `./make.sh`.
+
+| `lib/` file | What it does |
 | --- | --- |
-| `script.json` | the voiceover script, voice and model |
-| `tts.py` | records the voice with ElevenLabs and saves word timings (`vo/`) |
-| `timeline.py` | places each line on the clock and names every cue after its word |
-| `stage.html`, `stage.js` | the whole film as `renderAt(t)` on a canvas |
-| `sound.py` | voice + music + foley, all on the same cues -> `build/mix.wav` |
-| `render.js` | renders frames with headless Chromium, 4 workers, motion blur on glides |
-| `../cutout.py` | cuts the desk objects out of footage frames and measures the phone screens |
+| `core.js` | stage helpers: easing, springs, image/footage loading, captions, grain, `K.run` |
+| `fonts.css` | every font (all SIL OFL, in `assets/fonts`) |
+| `render.js` | renders `stage.html` with headless Chromium, 4 workers, motion blur on fast moves |
+| `tl.py` | places voiceover lines on the clock and names cues after spoken words |
+| `mixer.py` | voice + ducked music + foley helpers, loudness normalisation |
+| `tts.py` | ElevenLabs voiceover with word timings |
+| `fetch.py`, `cutout.py` | real footage/photo fetching and object cut-outs |
+| `make.sh` | timeline → sound → frames → MP4 + cover |
+
+Each video folder holds `script.json`, `vo/`, `timeline.py`, `stage.html`, `stage.js`,
+`sound.py`, `footage.json`, `objects.json` and `CREDITS.md`.
 
 Needs Node with `playwright`, Python 3 with `numpy`, `scipy`, `Pillow`, `rembg`, plus `ffmpeg`
 and ImageMagick. `ELEVENLABS_API_KEY` is read from the environment.
-
-Sources and licences: see `CREDITS.md`.

@@ -1,4 +1,4 @@
-# Credits and licences
+# What is vibe editing?: credits
 
 Every image, clip and sound in the explainers is real, from a free-to-use source. Nothing is
 AI-generated except the voiceover (ElevenLabs).
