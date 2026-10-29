@@ -56,13 +56,13 @@ function offsetCard(c, w, h, r = 14, fill = "#fff", sh = PINK) {
   c.fillStyle = fill; rr(c, -w / 2, -h / 2, w, h, r); c.fill();
   c.strokeStyle = INK; c.lineWidth = 3; c.stroke();
 }
+// A real hand holding the phone, with a pink offset shadow like the reference's frames.
 function phone(c, w, h, paint) {
-  c.fillStyle = PINK; rr(c, -w / 2 + 12, -h / 2 + 12, w, h, 34); c.fill();
-  c.fillStyle = "#111"; rr(c, -w / 2, -h / 2, w, h, 34); c.fill();
-  c.save(); rr(c, -w / 2 + 10, -h / 2 + 10, w - 20, h - 20, 26); c.clip(); c.translate(-w / 2 + 10, -h / 2 + 10);
-  paint(c, w - 20, h - 20);
+  const H = h * 1.6;
+  c.save(); c.translate(0, h * 0.28);
+  c.shadowColor = PINK; c.shadowBlur = 0; c.shadowOffsetX = 12; c.shadowOffsetY = 12;
+  K.drawCut(c, "hand_green", H, (c, sw, sh) => { c.fillStyle = "#000"; c.fillRect(0, 0, sw, sh); paint(c, sw, sh); });
   c.restore();
-  c.fillStyle = "#111"; rr(c, -40, -h / 2 + 16, 80, 20, 10); c.fill();
 }
 // Captions over footage. mode: pop (word by word), karaoke (line shows, word lights up), keyword.
 function captions(c, w, h, t, lines, mode, at = 0.8, every = 0.38, y0 = 0.62) {
@@ -141,6 +141,7 @@ window.CAROUSEL = {
   kit: true,
   title: "Captions That Keep People Watching",
   dur: D,
+  cuts: ["hand_green"],
   fg: paper,
   slides: [
     // 1 · Hook
@@ -153,7 +154,7 @@ window.CAROUSEL = {
         { x: 760, y: 345, rot: 6, in: "pop", at: 0.7, draw: (c) => tag(c, "on the bus") },
         { x: 820, y: 475, rot: -4, in: "pop", at: 0.9, draw: (c) => tag(c, "in bed, 1am") },
         { x: 95, y: 560, in: "fade", at: 1.1, draw: (c) => K.text(c, "your captions are the edit.", 0, 0, T(58, 800, { color: PINK2 })) },
-        { x: 720, y: 980, rot: 7, in: "up", at: 0.4, float: 1, draw: (c, t) => phone(c, 330, 600, (c, w, h) => { K.photo(c, 0, 0, w, h, "city", t * 0.4, "teal"); captions(c, w, h, t, [["READ", "THIS"], ["WITHOUT"], ["SOUND?"]], "pop", 1.2, 0.35, 0.56); }) },
+        { x: 720, y: 980, rot: 7, in: "up", at: 0.4, float: 1, draw: (c, t) => phone(c, 330, 600, (c, w, h) => { K.photo(c, 0, 0, w, h, "influencer_talk", t, "raw", 0, 0.5); captions(c, w, h, t, [["READ", "THIS"], ["WITHOUT"], ["SOUND?"]], "pop", 1.2, 0.35, 0.56); }) },
         { x: 260, y: 900, rot: -4, in: "left", at: 0.6, float: 1, draw: (c, t) => {
           offsetCard(c, 360, 230, 18);
           K.text(c, "sound off:", -150, -50, T(36, 800));
@@ -170,9 +171,9 @@ window.CAROUSEL = {
       bg: (c) => grid(c),
       els: [
         { x: 600, y: 640, in: "pop", at: 0.05, draw: (c) => { K.text(c, "caption", 0, 0, T(120, 800, { align: "center" })); K.text(c, "styles", 0, 110, T(120, 800, { align: "center", color: PINK })); } },
-        { x: 215, y: 330, rot: -8, in: "left", at: 0.3, float: 1, draw: (c, t) => styleCard(c, 330, 440, "style 01", "word pop", t, (c, w, h) => { K.photo(c, 0, 0, w, h, "sunrise", t * 0.3, "teal"); captions(c, w, h, t, [["ONE"], ["WORD"]], "pop", 0.9, 0.45, 0.6); }) },
-        { x: 860, y: 300, rot: 7, in: "right", at: 0.45, float: 1, draw: (c, t) => styleCard(c, 330, 440, "style 02", "karaoke", t, (c, w, h) => { K.photo(c, 0, 0, w, h, "city", t * 0.3, "film"); captions(c, w, h, t, [["THE", "WORD"], ["LIGHTS", "UP"]], "karaoke", 0.9, 0.35, 0.55); }) },
-        { x: 290, y: 1050, rot: 6, in: "left", at: 0.6, float: 1, draw: (c, t) => styleCard(c, 330, 440, "style 03", "keyword color", t, (c, w, h) => { K.photo(c, 0, 0, w, h, "ocean", t * 0.3, "pastel"); captions(c, w, h, t, [["SAVE", "*TIME"], ["EVERY", "*EDIT"]], "keyword", 0.9, 0.4, 0.55); }) },
+        { x: 215, y: 330, rot: -8, in: "left", at: 0.3, float: 1, draw: (c, t) => styleCard(c, 330, 440, "style 01", "word pop", t, (c, w, h) => { K.photo(c, 0, 0, w, h, "street_vlog", t, "raw", 0, 0.5); captions(c, w, h, t, [["ONE"], ["WORD"]], "pop", 0.9, 0.45, 0.6); }) },
+        { x: 860, y: 300, rot: 7, in: "right", at: 0.45, float: 1, draw: (c, t) => styleCard(c, 330, 440, "style 02", "karaoke", t, (c, w, h) => { K.photo(c, 0, 0, w, h, "vlog_talk", t, "raw", 0, 0.5); captions(c, w, h, t, [["THE", "WORD"], ["LIGHTS", "UP"]], "karaoke", 0.9, 0.35, 0.55); }) },
+        { x: 290, y: 1050, rot: 6, in: "left", at: 0.6, float: 1, draw: (c, t) => styleCard(c, 330, 440, "style 03", "keyword color", t, (c, w, h) => { K.photo(c, 0, 0, w, h, "skincare", t, "raw", 0, 0.5); captions(c, w, h, t, [["SAVE", "*TIME"], ["EVERY", "*EDIT"]], "keyword", 0.9, 0.4, 0.55); }) },
         { x: 820, y: 1070, rot: -6, in: "right", at: 0.75, float: 1, draw: (c, t) => {
           offsetCard(c, 360, 300, 18, "#fff");
           K.text(c, "all 3 work.", -150, -70, T(40, 800));
@@ -193,7 +194,7 @@ window.CAROUSEL = {
           K.text(c, "style 01 · word pop", -260, -408, T(34, 800));
           c.fillStyle = PINK2; for (let i = 0; i < 3; i++) { c.beginPath(); c.arc(270 + i * 18, -420, 5, 0, 7); c.fill(); }
           c.save(); rr(c, -320, -370, 640, 700, 16); c.clip(); c.translate(-320, -370);
-          K.photo(c, 0, 0, 640, 700, "sunrise", t * 0.35, "teal");
+          K.photo(c, 0, 0, 640, 700, "dance_girls", t, "raw", 0, 0.5);
           captions(c, 640, 700, t, [["ONE", "WORD"], ["PER", "BEAT."]], "pop", 0.9, 0.45, 0.66);
           c.restore();
           const y = 400;
@@ -211,7 +212,7 @@ window.CAROUSEL = {
       els: [
         { x: 1000, y: 200, in: "right", at: 0.1, draw: (c, t) => bubble(c, "what are karaoke captions?", "right", t, 0.4) },
         { x: 80, y: 360, in: "left", at: 0.1, draw: (c, t) => bubble(c, "the whole line shows… and the word being said lights up.", "left", t, 1.0, { maxW: 600 }) },
-        { x: 600, y: 900, rot: 4, in: "up", at: 0.3, float: 1, draw: (c, t) => phone(c, 440, 720, (c, w, h) => { K.photo(c, 0, 0, w, h, "city", t * 0.35, "film"); captions(c, w, h, t, [["YOUR", "EYES"], ["FOLLOW", "THE", "WORD"]], "karaoke", 1.2, 0.32, 0.6); }) },
+        { x: 600, y: 900, rot: 4, in: "up", at: 0.3, float: 1, draw: (c, t) => phone(c, 440, 720, (c, w, h) => { K.photo(c, 0, 0, w, h, "podcast_women", t, "raw", 0, 0.5); captions(c, w, h, t, [["YOUR", "EYES"], ["FOLLOW", "THE", "WORD"]], "karaoke", 1.2, 0.32, 0.6); }) },
         { x: 190, y: 760, rot: -8, in: "pop", at: 1.6, draw: (c) => tag(c, "style 02") },
         { x: 210, y: 1050, rot: -5, in: "left", at: 1.9, float: 1, draw: (c) => {
           offsetCard(c, 330, 250, 18);
@@ -241,7 +242,7 @@ window.CAROUSEL = {
             c.restore();
           });
         } },
-        { x: 800, y: 980, rot: 5, in: "right", at: 0.5, float: 1, draw: (c, t) => phone(c, 300, 520, (c, w, h) => { K.photo(c, 0, 0, w, h, "ocean", t * 0.35, "pastel"); captions(c, w, h, t, [["THIS", "*SAVED"], ["MY", "*REEL"]], "keyword", 0, 0.4, 0.58); }) },
+        { x: 800, y: 980, rot: 5, in: "right", at: 0.5, float: 1, draw: (c, t) => phone(c, 300, 520, (c, w, h) => { K.photo(c, 0, 0, w, h, "makeup", t, "raw", 0, 0.5); captions(c, w, h, t, [["THIS", "*SAVED"], ["MY", "*REEL"]], "keyword", 0, 0.4, 0.58); }) },
         { x: 330, y: 1080, rot: -2, in: "up", at: 2.4, draw: (c, t) => {
           offsetCard(c, 460, 280, 16);
           K.text(c, "the prompt:", -200, -80, T(30, 800, { color: PINK2 }));

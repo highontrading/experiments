@@ -50,7 +50,11 @@ function pixelRainbow(c, len, s) {
 const PX_BOLT = ["  XXX", " XXX ", "XXXXX", "  XX ", " XX  ", " X   "];
 function pixelBolt(c, s) { PX_BOLT.forEach((row, j) => [...row].forEach((ch, i) => { if (ch === "X") { c.fillStyle = "#f6d847"; c.fillRect((i - 2.5) * s, (j - 3) * s, s, s); } })); }
 function skyBg(c, t) {
-  c.drawImage(SKY, 0, 0);
+  FOOTAGE.drawFootage(c, "clouds_wind", t, K.W, K.H, "raw", 0.5);      // real sky
+  c.globalAlpha = 0.35; c.drawImage(SKY, 0, 0); c.globalAlpha = 1;       // knit texture + cloud bed
+  const bed = c.createLinearGradient(0, K.H - 260, 0, K.H);
+  bed.addColorStop(0, "rgba(255,255,255,0)"); bed.addColorStop(1, "rgba(255,255,255,.85)");
+  c.fillStyle = bed; c.fillRect(0, K.H - 260, K.W, 260);
   [[60, 80, 9], [380, 40, 7], [780, 100, 8], [930, 300, 6], [120, 420, 6]].forEach(([x, y, s], i) => {
     const dx = ((t * (10 + i * 3)) % 60) - 30;
     pixelCloud(c, x + dx, y, s);
@@ -122,6 +126,26 @@ function waveCard(c, w, h, t, shape, hits = []) {
   const ph = -w / 2 + 30 + (w - 60) * ((t % 2.5) / 2.5);
   c.fillStyle = "#e8424f"; c.fillRect(ph, -h / 2 + 20, 3, h - 40);
 }
+// A real hand presenting a phone; paint(c, w, h, t) fills the screen.
+function handPhone(c, t, h, paint, rot = 0, mirror = false) {
+  c.save(); c.rotate(rot); if (mirror) c.scale(-1, 1);
+  c.shadowColor = "rgba(30,50,90,.35)"; c.shadowBlur = 30; c.shadowOffsetX = 8; c.shadowOffsetY = 18;
+  K.drawCut(c, "hand_green", h, (c, w, hh) => { if (mirror) { c.translate(w, 0); c.scale(-1, 1); } c.fillStyle = "#fff"; c.fillRect(0, 0, w, hh); paint(c, w, hh, t); });
+  c.restore();
+}
+function sfxScreen(t, at) {
+  return (c, w, h) => {
+    c.fillStyle = "#eef4fb"; c.fillRect(0, 0, w, h);
+    c.save(); c.scale(0.5, 0.5);
+    SFX.forEach(([l, k], i) => {
+      const ct = at + i * 0.3, e = outBack(win(ct, ct + 0.35, t), 2.4);
+      if (t < ct) return;
+      c.save(); c.translate(w * (i % 2 ? 1.5 : 0.5), (Math.floor(i / 2) ? h * 1.45 : h * 0.75) - (1 - e) * 80); c.globalAlpha = clamp(e * 2);
+      sfxCard(c, w * 0.85, h * 0.6, l, k, t, ct + 1.6 + i * 0.5); c.restore();
+    });
+    c.restore();
+  };
+}
 const el = (x, y, draw, at = 0.1, inn = "fade", o = {}) => ({ x, y, in: inn, at, draw, ...o });
 
 // ----------------------------------------------------------------- slides --
@@ -130,6 +154,7 @@ window.CAROUSEL = {
   kit: true,
   title: "4 SFX Every Reel Needs",
   dur: D,
+  cuts: ["hand_green", "mic", "clapper"],
   setup: () => { SKY = paintSky(); },
   bg: skyBg,
   fg: (c, t) => K.grain(c, t, 0.07),
@@ -139,8 +164,8 @@ window.CAROUSEL = {
       els: [
         el(540, 330, (c) => K.text(c, "sound is half", 0, 0, HEAVY(150, { align: "center" })), 0.05, "down"),
         el(540, 480, (c) => script(c, "the edit.", 170), 0.25, "pop"),
-        el(870, 205, (c, t) => K.bro(c, 0, 0, 0.9, { eyes: "happy", glow: 0.5 + 0.3 * Math.sin(t * 4) }), 0.4, "grow", { float: 1.5 }),
-        el(560, 780, (c, t) => { trayHand(c, 400); tray(c, 400, servedCards(t, 0.7), t); }, 0.3, "up", { far: 0.6 }),
+        el(905, 640, (c) => { c.shadowColor = "rgba(30,50,90,.35)"; c.shadowBlur = 20; c.shadowOffsetY = 10; K.drawCut(c, "mic", 200); }, 0.4, "grow", { float: 1.5, rot: 12 }),
+        el(540, 900, (c, t) => handPhone(c, t, 820, sfxScreen(t, 0.7), -0.05), 0.3, "up", { far: 0.6 }),
         el(780, 1010, (c) => bubbly(c, "4 sounds", 96), 1.0, "pop", { rot: -3 }),
         el(780, 1080, (c) => K.text(c, "every reel needs", 0, 0, BODY(34, { align: "center" })), 1.2),
         el(140, 640, (c, t) => pixelHeart(c, 7), 1.4, "grow", { float: 2 }),
@@ -158,10 +183,10 @@ window.CAROUSEL = {
           K.panel(c, -400, -230, 800, 460, 30, "#fff", { color: "rgba(30,50,90,.25)", blur: 26, y: 12 });
           c.save(); rr(c, -380, -210, 760, 420, 20); c.clip();
           const sw = (t % 2) / 2, u = inOut(win(0.75, 1.15, t % 2 + 0.0001));
-          K.photo(c, -380, -210, 760, 420, Math.floor(t / 2) % 2 ? "city" : "sunrise", t * 0.3, "teal");
+          K.photo(c, -380, -210, 760, 420, Math.floor(t / 2) % 2 ? "dance_girls" : "street_vlog", t, "raw", 0, 0.5);
           if (u > 0 && u < 1) {
             c.save(); c.beginPath(); c.rect(-380 + 760 * (1 - u), -210, 760 * u, 420); c.clip();
-            K.photo(c, -380, -210, 760, 420, Math.floor(t / 2) % 2 ? "sunrise" : "city", t * 0.3, "teal"); c.restore();
+            K.photo(c, -380, -210, 760, 420, Math.floor(t / 2) % 2 ? "street_vlog" : "dance_girls", t, "raw", 0, 0.5); c.restore();
             c.filter = "blur(10px)"; c.fillStyle = "rgba(255,255,255,.55)"; c.fillRect(-380 + 760 * (1 - u) - 40, -210, 80, 420); c.filter = "none";
           }
           c.restore();
@@ -173,16 +198,7 @@ window.CAROUSEL = {
     // 3 · Pop
     {
       els: [
-        el(720, 500, (c, t) => {
-          c.rotate(0.06); trayHand(c, 330);
-          tray(c, 330, (c, R, ry) => {
-            c.save(); c.translate(0, -ry * 0.2);
-            K.panel(c, -150, -470, 300, 470, 22, "#111", { color: "rgba(30,50,90,.3)", blur: 20, y: 10 });
-            c.save(); rr(c, -142, -462, 284, 454, 16); c.clip(); c.translate(-142, -462);
-            CARDS.reel(c, 284, 454, t, { look: "pastel", caps: [["POP"], ["POP"], ["POP!"]], capsAt: 0.8, capEvery: 0.6, capY: 0.45, flash: false }, { D });
-            c.restore(); c.restore();
-          }, t);
-        }, 0.1, "right"),
+        el(760, 470, (c, t) => handPhone(c, t, 820, (c, w, h) => CARDS.reel(c, w, h, t, { scenes: ["girl_record"], caps: [["POP"], ["POP"], ["POP!"]], capsAt: 0.8, capEvery: 0.6, capY: 0.45, capSize: 26, flash: false }, { D }), 0.06, true), 0.1, "right"),
         el(80, 930, (c) => K.text(c, "02", 0, 0, HEAVY(240)), 0.2, "left"),
         el(600, 960, (c) => script(c, "pop", 200), 0.35, "pop", { rot: -5 }),
         el(80, 1140, (c) => K.text(c, "on captions, stickers", 0, 0, BODY(42)), 0.5),
@@ -204,11 +220,11 @@ window.CAROUSEL = {
           c.translate(Math.sin(t * 90) * 24 * sh, Math.cos(t * 70) * 14 * sh);
           c.scale(1 + 0.05 * sh, 1 + 0.05 * sh);
           K.panel(c, -380, -260, 760, 520, 30, "#fff", { color: "rgba(30,50,90,.25)", blur: 26, y: 12 });
-          K.photo(c, -360, -240, 720, 480, "city", t * 0.3, t > 1.5 ? "teal" : "log", 20);
+          K.photo(c, -360, -240, 720, 480, "tiktok_dance", t, t > 1.5 ? "raw" : "log", 20, 0.5);
           if (t > 1.5) { const e = outBack(win(1.5, 1.8, t), 3); c.save(); c.scale(e, e); K.text(c, "REVEAL", 0, 30, { family: "ArchX9", size: 100, weight: 900, color: "#fff", align: "center", stroke: "#000", strokeW: 12 }); c.restore(); }
           const f = sh; if (f > 0.03) { c.fillStyle = `rgba(255,255,255,${0.6 * Math.min(1, f)})`; rr(c, -360, -240, 720, 480, 20); c.fill(); }
         }, 0.2, "up"),
-        el(540, 1200, (c, t) => tray(c, 300, (c, R, ry) => { c.save(); c.translate(0, -ry * 0.2); sfxCard(c, 170, 200, "BOOM", "hit", t, 1.5); c.restore(); }, t), 0.4, "up"),
+        el(540, 1215, (c, t) => { const b = 1 + 0.12 * (pulse(t, 1.5, 8) + pulse(t, 3.0, 8)); c.scale(b, b); c.shadowColor = "rgba(30,50,90,.4)"; c.shadowBlur = 24; c.shadowOffsetY = 12; K.drawCut(c, "clapper", 250); }, 0.4, "up", { rot: -6 }),
         el(130, 1080, (c, t) => pixelBolt(c, 10), 1.5, "grow", { float: 2 }),
         el(950, 1060, (c, t) => pixelBolt(c, 9), 3.0, "grow", { float: 2 }),
       ],
@@ -239,16 +255,8 @@ window.CAROUSEL = {
       els: [
         el(540, 290, (c) => K.text(c, "comment", 0, 0, HEAVY(170, { align: "center" })), 0.05, "down"),
         el(540, 460, (c, t) => { const e = 1 + 0.04 * Math.sin(t * 5); c.scale(e, e); script(c, "\"VIBE\"", 200); }, 0.25, "pop"),
-        el(560, 840, (c, t) => {
-          trayHand(c, 400);
-          tray(c, 400, (c, R, ry) => {
-            c.save(); c.translate(0, -ry * 0.2 - 20);
-            K.panel(c, -190, -250, 380, 250, 14, "#fff", { color: "rgba(30,50,90,.3)", blur: 20, y: 10 });
-            c.drawImage(K.IMG.pack, -180, -240, 360, 230);
-            c.restore();
-            K.bro(c, R * 0.62, -ry * 0.1, 0.75, { eyes: "happy", glow: 0.5, wave: 0.8 + 0.4 * Math.sin(t * 9) });
-          }, t);
-        }, 0.35, "up", { far: 0.6 }),
+        el(560, 930, (c, t) => handPhone(c, t, 780, (c, w, h) => { c.fillStyle = "#0e0b17"; c.fillRect(0, 0, w, h); const k = w / 1000; c.save(); c.translate(w / 2, h / 2); c.rotate(Math.PI / 2); c.drawImage(K.IMG.pack, -h / 2, -w / 2, h, w); c.restore(); }, 0.04), 0.35, "up", { far: 0.6 }),
+        el(250, 640, (c) => { c.shadowColor = "rgba(30,50,90,.35)"; c.shadowBlur = 20; c.shadowOffsetY = 10; K.drawCut(c, "mic", 220); }, 0.6, "grow", { float: 1.5, rot: -14 }),
         el(780, 1060, (c) => bubbly(c, "free prompt pack", 74), 1.0, "pop", { rot: -3 }),
         el(780, 1130, (c) => K.text(c, "save this · follow for more", 0, 0, BODY(32, { align: "center" })), 1.2),
         el(150, 700, (c) => pixelHeart(c, 7), 1.3, "grow", { float: 2 }),

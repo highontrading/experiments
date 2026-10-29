@@ -30,8 +30,8 @@ function cover(c, w, h, o) {
   c.save(); c.shadowColor = "rgba(20,35,60,.3)"; c.shadowBlur = 24; c.shadowOffsetY = 12;
   c.fillStyle = o.paper || "#f7f4ee"; c.fillRect(-w / 2, -h / 2, w, h); c.restore();
   c.save(); c.beginPath(); c.rect(-w / 2, -h / 2, w, h); c.clip(); c.translate(-w / 2, -h / 2);
-  if (o.full) FOOTAGE.drawFootage(c, o.scene, NOW * 0.25, w, h, o.look);
-  else { c.save(); c.beginPath(); c.rect(18, h * 0.24, w - 36, h * 0.56); c.clip(); c.translate(18, h * 0.24); FOOTAGE.drawFootage(c, o.scene, NOW * 0.25, w - 36, h * 0.56, o.look); c.restore(); }
+  if (o.full) FOOTAGE.drawFootage(c, o.scene, NOW, w, h, o.look, 0.5);
+  else { c.save(); c.beginPath(); c.rect(18, h * 0.24, w - 36, h * 0.56); c.clip(); c.translate(18, h * 0.24); FOOTAGE.drawFootage(c, o.scene, NOW, w - 36, h * 0.56, o.look, 0.5); c.restore(); }
   if (o.mast) K.text(c, o.mast, 18, h * 0.18, { family: o.mastFont || "ArchivoBlack", size: w * 0.17, weight: 400, color: o.mastCol || "#d6302a", track: -w * 0.006 });
   if (o.small) K.text(c, o.small, 18, h * 0.88, CAPS(Math.max(12, w * 0.045), { color: "#333", maxW: w - 36 }));
   c.restore();
@@ -42,7 +42,7 @@ function grid9(c, s, looks, t, fix = 99) {
     const x = -s / 2 + (i % 3) * (cell + g), y = -s / 2 + Math.floor(i / 3) * (cell + g);
     const look = t > fix + i * 0.08 ? "film" : looks[i % looks.length];
     c.save(); c.beginPath(); c.rect(x, y, cell, cell); c.clip(); c.translate(x, y);
-    FOOTAGE.drawFootage(c, ["city", "sunrise", "ocean"][i % 3], i * 0.6 + NOW * 0.2, cell, cell, look);
+    FOOTAGE.drawFootage(c, ["vlog_talk", "dance_girls", "street_vlog", "skincare", "podcast_women", "girl_record", "makeup", "latte", "influencer_talk"][i], NOW, cell, cell, look, 0.5);
     c.restore();
     if (t > fix + i * 0.08 && t < fix + i * 0.08 + 0.25) { c.fillStyle = "rgba(255,255,255,.5)"; c.fillRect(x, y, cell, cell); }
   }
@@ -61,19 +61,21 @@ window.CAROUSEL = {
   kit: true,
   title: "Brand Your Edits",
   dur: D,
+  cuts: ["vlogger"],
   bg: pg,
   fg: (c, t) => K.grain(c, t, 0.08),
   slides: [
     // 1 · Hook
     {
       els: [
+        el(540, 820, (c) => { c.shadowColor = "rgba(20,35,60,.3)"; c.shadowBlur = 40; K.drawCut(c, "vlogger", 1150); }, 0.05, "fade", { out: "fade" }),
         el(60, 120, (c) => corner(c, ["WHY YOUR FEED"]), 0.05, "fade"),
         el(40, 330, (c) => K.text(c, "Brand", 0, 0, THIN(250)), 0.1, "left"),
         el(560, 330, (c) => K.text(c, "your edits", 0, 0, SCRIPT(170)), 0.35, "fade", { rot: -4 }),
         el(1020, 460, (c) => corner(c, ["DOESN'T", "LOOK"], "right"), 0.5),
-        coverEl(185, 760, 330, 440, { scene: "city", look: "vhs", mast: "VHS!", small: "post 1 · vhs, neon" }, 0.5, "left", -1),
-        coverEl(540, 760, 330, 440, { scene: "sunrise", look: "noir", mast: "NOIR", mastCol: "#111", small: "post 2 · black & white" }, 0.62, "up"),
-        coverEl(895, 760, 330, 440, { scene: "ocean", look: "pastel", mast: "pastel", mastFont: "Playfair", mastCol: "#c94f8c", small: "post 3 · pastel pop" }, 0.74, "right", 1),
+        coverEl(185, 760, 330, 440, { scene: "girl_record", look: "vhs", mast: "VHS!", small: "post 1 · vhs, neon" }, 0.5, "left", -1),
+        coverEl(540, 760, 330, 440, { scene: "vlog_talk", look: "noir", mast: "NOIR", mastCol: "#111", small: "post 2 · black & white" }, 0.62, "up"),
+        coverEl(895, 760, 330, 440, { scene: "skincare", look: "pastel", mast: "pastel", mastFont: "Playfair", mastCol: "#c94f8c", small: "post 3 · pastel pop" }, 0.74, "right", 1),
         el(60, 1130, (c) => corner(c, ["LIKE ONE", "CREATOR"]), 0.9),
         el(1020, 1130, (c) => corner(c, ["3 RULES", "TO FIX IT"], "right"), 1.0),
         el(960, 1260, (c, t) => arrow(c, t), 1.2, "right"),
@@ -102,9 +104,9 @@ window.CAROUSEL = {
         el(1020, 120, (c) => corner(c, ["PICK IT ONCE"], "right"), 0.1),
         el(40, 400, (c) => K.text(c, "Look", 0, 0, THIN(300)), 0.1, "left"),
         el(640, 420, (c) => K.text(c, "just one", 0, 0, SCRIPT(160)), 0.35, "fade", { rot: -5 }),
-        coverEl(200, 850, 340, 470, { scene: "city", look: "film", full: true }, 0.5, "left", -3),
-        coverEl(540, 830, 340, 470, { scene: "sunrise", look: "film", full: true }, 0.62, "up"),
-        coverEl(880, 850, 340, 470, { scene: "ocean", look: "film", full: true }, 0.74, "right", 3),
+        coverEl(200, 850, 340, 470, { scene: "filmmaker", look: "film", full: true }, 0.5, "left", -3),
+        coverEl(540, 830, 340, 470, { scene: "street_vlog", look: "film", full: true }, 0.62, "up"),
+        coverEl(880, 850, 340, 470, { scene: "beach_walk", look: "film", full: true }, 0.74, "right", 3),
         el(540, 1180, (c) => K.text(c, "FILM 35 · EVERY POST", 0, 0, CAPS(34, { align: "center" })), 0.9),
         el(1020, 1270, (c) => corner(c, ["USE IT ALWAYS"], "right"), 1.0),
       ],
@@ -153,7 +155,7 @@ window.CAROUSEL = {
         el(1020, 120, (c) => corner(c, ["WITH MY BRAND", "PROMPT"], "right"), 0.1),
         el(540, 400, (c) => K.text(c, "Comment", 0, 0, THIN(200, { align: "center" })), 0.1, "left"),
         el(560, 640, (c, t) => { const e = 1 + 0.03 * Math.sin(t * 5); c.scale(e, e); K.text(c, "\"VIBE\"", 0, 0, SCRIPT(210, { align: "center" })); }, 0.35, "fade", { rot: -5 }),
-        coverEl(270, 930, 380, 260, { scene: "sunrise", look: "film", full: true }, 0.6, "left", -3),
+        coverEl(270, 930, 380, 260, { scene: "filmmaker", look: "film", full: true }, 0.6, "left", -3),
         el(760, 930, (c) => { c.save(); c.shadowColor = "rgba(20,35,60,.3)"; c.shadowBlur = 24; c.shadowOffsetY = 12; c.drawImage(K.IMG.pack, -200, -125, 400, 250); c.restore(); }, 0.75, "right", { rot: 3, float: 1 }),
         el(60, 1210, (c) => corner(c, ["SAVE THIS", "SHARE IT"]), 0.9),
         el(1020, 1210, (c) => corner(c, ["FOLLOW FOR", "MORE"], "right"), 1.0),

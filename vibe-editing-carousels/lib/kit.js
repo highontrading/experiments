@@ -8,7 +8,33 @@
 const { clamp, lerp, win, outBack, outCubic, inCubic, spring, rnd, rr } = U;
 const W = 1080, H = 1350, FPS = 30;
 
-const K = { W, H, FPS, IMG: {} };
+const K = { W, H, FPS, IMG: {}, CUT: {} };
+
+// Cutouts made by footage/make_cutouts.py: build/cut/<name>.png plus <name>.json
+// (size and, for devices, the screen corners in image pixels).
+K.loadCut = async function (name) {
+  const im = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error("cut " + name)); i.src = `build/cut/${name}.png`; });
+  return { im, ...((window.CUT_INDEX || {})[name] || {}) };
+};
+// Draw cutout `name` centred at (0,0) at height h. If `screen` is given, paint(c, w, h)
+// fills the device screen first (mapped onto its corners), then the cutout goes on top.
+K.drawCut = function (c, name, h, paint) {
+  const C = K.CUT[name]; if (!C) return;
+  const s = h / C.im.height, w = C.im.width * s;
+  c.save(); c.translate(-w / 2, -h / 2); c.scale(s, s);
+  if (paint && C.screen) {
+    const [p0, p1, , p3] = C.screen;                       // tl, tr, br, bl
+    const sw = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]), sh = Math.hypot(p3[0] - p0[0], p3[1] - p0[1]);
+    c.save(); c.shadowColor = "transparent";
+    c.beginPath(); C.screen.forEach(([x, y], i) => (i ? c.lineTo(x, y) : c.moveTo(x, y))); c.closePath(); c.clip();
+    c.transform((p1[0] - p0[0]) / sw, (p1[1] - p0[1]) / sw, (p3[0] - p0[0]) / sh, (p3[1] - p0[1]) / sh, p0[0], p0[1]);
+    paint(c, sw, sh);
+    c.restore();
+  }
+  c.drawImage(C.im, 0, 0);
+  c.restore();
+  return w;
+};
 
 // ------------------------------------------------------------- elements --
 function place(el, t, D, i) {
@@ -117,8 +143,10 @@ K.card = function (c, kind, x, y, w, h, t, p = {}, r = 14, D = 5) {
   CARDS[kind](c, w, h, t, p, { D, IMG: K.IMG });
   c.restore();
 };
-K.bro = function (c, x, y, s, st = {}) {
-  c.save(); c.translate(x, y); c.scale(s, s); FOOTAGE.drawBro(c, { vol: 1, ...st }); c.restore();
+// Round avatar with real footage of a face inside.
+K.avatar = function (c, x, y, r, clip = "influencer_talk", focus = 0.5) {
+  c.save(); c.beginPath(); c.arc(x, y, r, 0, 7); c.clip(); c.translate(x - r, y - r);
+  FOOTAGE.drawFootage(c, clip, 0, r * 2, r * 2, "raw", focus); c.restore();
 };
 K.arrowCursor = function (c, x, y, s = 1, fill = "#111", edge = "#fff") {
   c.save(); c.translate(x, y); c.scale(s, s);
@@ -193,20 +221,25 @@ K.start = async function () {
     "400 40px DMSerif", "400 40px SpaceMono", "700 40px SpaceMono", "400 40px ArchivoBlack", ...(CAR.fonts || [])];
   await Promise.all(fonts.map((f) => document.fonts.load(f)));
   const img = (src) => new Promise((ok) => { const i = new Image(); i.onload = () => ok(i); i.src = src; });
+  await FOOTAGE.init();
   K.IMG.pack = await img("assets/img/pack-1.png");
+  if ((CAR.cuts || []).length) await new Promise((ok) => { const e = document.createElement("script"); e.src = "build/cut/index.js"; e.onload = ok; e.onerror = ok; document.head.appendChild(e); });
+  for (const n of CAR.cuts || []) K.CUT[n] = await K.loadCut(n);
   for (const [k, src] of Object.entries(CAR.images || {})) K.IMG[k] = await img(src);
   makeGrain();
   const S = { D, idx: IDX, n: CAR.slides.length, W, H, CAR };
   if (CAR.setup) await CAR.setup(S);
   window.SLIDE_INFO = { dur: D, fps: FPS, count: CAR.slides.length };
-  window.renderAt = function (t) {
-    c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = 1;
+  const draw = (t) => {
+    c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = 1; c.filter = "none";
     c.clearRect(0, 0, W, H);
     (SL.bg || CAR.bg)(c, t, S);
     K.drawEls(c, t, D, SL.els || [], S);
     if (SL.fg) SL.fg(c, t, S);
     if (CAR.fg) CAR.fg(c, t, S);
   };
+  // footage frames load on demand: a collect pass, then the real draw
+  window.renderAt = (t) => FOOTAGE.prepare(t, () => draw(t));
   return true;
 };
 

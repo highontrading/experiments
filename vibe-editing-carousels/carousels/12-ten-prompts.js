@@ -120,8 +120,8 @@ window.CAROUSEL = {
         { x: 540, y: 480, in: "fade", at: 0.25, draw: (c) => K.text(c, "THIS FOLDER", 0, 0, LIGHT(116, { align: "center" })) },
         { x: 175, y: 650, rot: -3, in: "left", at: 0.5, float: 1, draw: (c) => folder(c, 230) },
         { x: 720, y: 720, in: "pop", at: 0.7, draw: (c, t) => list(c, 520, ["10 vibe edit prompts", "copy-paste ready", "worth saving"], t, 1.0, 0.7) },
-        ...[[-280, -10, "sunrise", "teal"], [0, 8, "city", "film"], [280, -6, "ocean", "pastel"]].map(([dx, rot, sc, lk], i) => ({
-          x: 540 + dx, y: 1085, rot, in: "up", at: 0.6 + i * 0.12, far: 0.5, draw: (c, t) => print(c, 300, 330, (c, w, h) => FOOTAGE.drawFootage(c, sc, t * 0.3, w, h, lk, 0.6)),
+        ...[[-280, -10, "vlog_talk", "raw"], [0, 8, "dance_girls", "raw"], [280, -6, "skincare", "raw"]].map(([dx, rot, sc, lk], i) => ({
+          x: 540 + dx, y: 1085, rot, in: "up", at: 0.6 + i * 0.12, far: 0.5, draw: (c, t) => print(c, 300, 330, (c, w, h) => FOOTAGE.drawFootage(c, sc, t, w, h, lk, 0.5)),
         })),
         { x: 540, y: 1160, in: "up", at: 0.2, draw: (c) => pocket(c, "vibe editing · swipe →") },
         { x: 0, y: 0, in: "none", at: 0, draw: (c, t) => { const [x, y] = mov(820, 900, 590, 470, 1.4, 2.4, t); K.pixelCursor(c, x, y, 4.2); } },
@@ -166,7 +166,7 @@ window.CAROUSEL = {
           x: 540 + (j - 1) * 310, y: 690 + (j === 1 ? -40 : 30), rot: (j - 1) * 7, in: "up", at: 0.5 + j * 0.25, far: 0.7, float: 1,
           draw: (c, t) => print(c, 300, 470, (c, w, h) => {
             c.fillStyle = "#fff"; c.fillRect(0, 0, w, h);
-            const vis = [(c, w, h) => CARDS.grade(c, w, h, t, { scene: "sunrise", at: 1.4, look: "teal", name: "T&O" }, {}),
+            const vis = [(c, w, h) => CARDS.grade(c, w, h, t, { scene: "filmmaker", at: 1.4, look: "teal", name: "T&O" }, {}),
               (c, w, h) => CARDS.reel(c, w, h, t, { look: "film", caps: [["SAY"], ["IT", "*LOUD"]].map((l) => l.map((x) => x.replace("*", ""))), capsAt: 1.6, capEvery: 0.35 }, { D }),
               (c, w, h) => CARDS.sfx(c, w, h, t, { at: 1.8, gap: 0.35, list: ["WHOOSH", "POP", "HIT"] }, {})][j];
             c.save(); rr(c, 0, 0, w, h * 0.56, 4); c.clip(); vis(c, w, h * 0.56); c.restore();
@@ -203,11 +203,11 @@ window.CAROUSEL = {
       els: [
         ...header("09—10", "THE SCALE"),
         { x: 540, y: 470, rot: -1, in: "right", at: 0.2, draw: (c, t) => promptCard(c, 9, 900, t, 0.2, { size: 46 }) },
-        { x: 250, y: 790, rot: -3, in: "left", at: 0.5, draw: (c, t) => print(c, 360, 230, (c, w, h) => FOOTAGE.drawFootage(c, "ocean", t * 0.3, w, h, "teal")) },
-        ...[0, 1, 2].map((i) => ({ x: 560 + i * 150, y: 790, rot: (i - 1) * 4, in: "pop", at: 1.2 + i * 0.25, draw: (c, t) => print(c, 136, 230, (c, w, h) => CARDS.reel(c, w, h, t, { look: "teal", scenes: [["ocean", "city", "sunrise"][i]], caps: [[["HOOK"], ["TIP"], ["CTA"]][i]], capsAt: 1.6 + i * 0.25, capSize: 18 }, { D })) })),
+        { x: 250, y: 790, rot: -3, in: "left", at: 0.5, draw: (c, t) => print(c, 360, 230, (c, w, h) => FOOTAGE.drawFootage(c, "street_vlog", t, w, h, "raw", 0.5)) },
+        ...[0, 1, 2].map((i) => ({ x: 560 + i * 150, y: 790, rot: (i - 1) * 4, in: "pop", at: 1.2 + i * 0.25, draw: (c, t) => print(c, 136, 230, (c, w, h) => CARDS.reel(c, w, h, t, { look: "raw", scenes: ["street_vlog"], focus: [0.25, 0.5, 0.75][i], caps: [[["HOOK"], ["TIP"], ["CTA"]][i]], capsAt: 1.6 + i * 0.25, capSize: 18 }, { D })) })),
         { x: 470, y: 790, in: "fade", at: 1.0, draw: (c) => K.text(c, "→", 0, 16, LIGHT(70, { align: "center" })) },
         { x: 540, y: 1070, rot: 1, in: "right", at: 0.6, draw: (c, t) => promptCard(c, 10, 900, t, 0.6, { size: 46 }) },
-        ...[0, 1, 2].map((i) => ({ x: 250 + i * 290, y: 1260, rot: (i - 1) * -3, in: "up", at: 2.0 + i * 0.2, far: 0.4, draw: (c, t) => print(c, 250, 170, (c, w, h) => FOOTAGE.drawFootage(c, ["sunrise", "city", "ocean"][i], t * 0.3 + i, w, h, t > 3.0 ? "film" : ["raw", "log", "noir"][i])) })),
+        ...[0, 1, 2].map((i) => ({ x: 250 + i * 290, y: 1260, rot: (i - 1) * -3, in: "up", at: 2.0 + i * 0.2, far: 0.4, draw: (c, t) => print(c, 250, 170, (c, w, h) => FOOTAGE.drawFootage(c, ["latte", "vlog_talk", "waves"][i], t, w, h, t > 3.0 ? "film" : ["raw", "log", "noir"][i], 0.5)) })),
       ],
     },
     // 6 · CTA

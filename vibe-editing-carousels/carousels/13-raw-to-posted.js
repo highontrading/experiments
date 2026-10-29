@@ -18,7 +18,13 @@ function paintFabric() {
   });
 }
 let NOW = 0;
-function bg(c, t) { NOW = t; c.fillStyle = "#e9e3d9"; c.fillRect(0, 0, K.W, K.H); c.drawImage(FABRIC, 0, 0); }
+function bg(c, t) {
+  NOW = t; c.fillStyle = "#e9e3d9"; c.fillRect(0, 0, K.W, K.H);
+  c.save(); c.beginPath(); c.rect(0, 0, K.W, 320); c.clip();
+  FOOTAGE.drawFootage(c, "fabric_blue", t, K.W, 320, "raw", 0.5);          // real blue fabric
+  c.fillStyle = "rgba(20,50,110,.25)"; c.fillRect(0, 0, K.W, 320);
+  c.restore();
+}
 
 // ------------------------------------------------------------ components --
 // Folder divider with a tab; drawn from its top-left corner (0,0).
@@ -58,17 +64,14 @@ function photo(c, w, h, back, device, paint, clipAt = "tr") {
   c.save(); c.beginPath(); c.rect(-iw / 2, -ih / 2, iw, ih); c.clip();
   c.fillStyle = back; c.fillRect(-iw / 2, -ih / 2, iw, ih);
   c.fillStyle = "rgba(0,0,0,.12)"; c.beginPath(); c.ellipse(0, ih * 0.38, iw * 0.38, ih * 0.08, 0, 0, 7); c.fill();
-  if (device === "laptop") {
-    const sw = iw * 0.72, sh = sw * 0.6;
-    c.fillStyle = "#2a2a2e"; rr(c, -sw / 2 - 10, -sh / 2 - 30, sw + 20, sh + 20, 12); c.fill();
-    c.save(); c.translate(-sw / 2, -sh / 2 - 20); c.beginPath(); c.rect(0, 0, sw, sh); c.clip(); paint(c, sw, sh); c.restore();
-    c.fillStyle = "#c9cbd1"; c.beginPath(); c.moveTo(-sw / 2 - 40, sh / 2 - 6); c.lineTo(sw / 2 + 40, sh / 2 - 6); c.lineTo(sw / 2 + 60, sh / 2 + 22); c.lineTo(-sw / 2 - 60, sh / 2 + 22); c.fill();
-    c.fillStyle = "#9da0a8"; c.fillRect(-40, sh / 2 + 4, 80, 6);
-  } else {
-    const ph = ih * 0.82, pw = device === "phone" ? ph * 0.5 : ph * 0.72;
-    c.save(); c.rotate(device === "phone" ? -0.12 : 0.06);
-    c.fillStyle = "#151517"; rr(c, -pw / 2 - 8, -ph / 2 - 8, pw + 16, ph + 16, device === "phone" ? 30 : 22); c.fill();
-    c.save(); rr(c, -pw / 2, -ph / 2, pw, ph, device === "phone" ? 24 : 16); c.clip(); c.translate(-pw / 2, -ph / 2); paint(c, pw, ph); c.restore();
+  if (device === "laptop") {                     // a real desk shot
+    FOOTAGE.drawFootage(c, "editor_team", NOW, iw, ih, "raw", 0.5);
+  } else if (device === "print") {
+    c.save(); c.translate(-iw / 2, -ih / 2); paint(c, iw, ih); c.restore();
+  } else {                                       // a real hand holding the phone
+    c.save(); c.rotate(device === "phone" ? -0.08 : 0.06); c.translate(0, ih * 0.12);
+    c.shadowColor = "rgba(0,0,0,.3)"; c.shadowBlur = 20; c.shadowOffsetY = 10;
+    K.drawCut(c, "hand_green", ih * 1.25, (c, sw, sh) => { const z = 1.7; c.fillStyle = "#fff"; c.fillRect(0, 0, sw, sh); c.scale(1 / z, 1 / z); paint(c, sw * z, sh * z); });
     c.restore();
   }
   c.restore();
@@ -93,6 +96,7 @@ window.CAROUSEL = {
   kit: true,
   title: "Raw Footage to Posted in 15 Minutes",
   dur: D,
+  cuts: ["hand_green"],
   setup: () => { FABRIC = paintFabric(); },
   bg,
   fg: (c, t) => K.grain(c, t, 0.06),
@@ -156,8 +160,8 @@ window.CAROUSEL = {
           K.text(c, "3 NOTES,", 60, 150, MONOB(96, { color: "#fff" }));
           K.text(c, "1 RE-CUT.", 60, 250, MONOB(96, { color: "#fff" }));
         }, 0.15, "up", { far: 0.8 }),
-        el(290, 960, (c) => photo(c, 380, 500, "#f2b6c4", "phone", reel({ look: "log", scenes: ["city"], caps: [["before"]], capsAt: 0, capEvery: 0.01, capSize: 26, flash: false })), 0.4, "left", { rot: -5 }),
-        el(780, 960, (c) => photo(c, 380, 500, "#e9a23b", "phone", reel({ look: "teal", scenes: ["city"], title: "AFTER", titleAt: 1.8, caps: [["PUNCHY."]], capsAt: 2.0, capSize: 26 })), 0.55, "right", { rot: 4 }),
+        el(290, 960, (c) => photo(c, 380, 500, "#f2b6c4", "phone", reel({ look: "log", scenes: ["influencer_talk"], caps: [["before"]], capsAt: 0, capEvery: 0.01, capSize: 26, flash: false })), 0.4, "left", { rot: -5 }),
+        el(780, 960, (c) => photo(c, 380, 500, "#e9a23b", "phone", reel({ look: "raw", scenes: ["influencer_talk"], title: "AFTER", titleAt: 1.8, caps: [["PUNCHY."]], capsAt: 2.0, capSize: 26 })), 0.55, "right", { rot: 4 }),
         el(540, 1290, (c, t) => { ["punchier 2s", "bigger caps", "end on logo"].forEach((x, i) => { if (t > 1.0 + i * 0.4) { c.save(); c.globalAlpha = win(1.0 + i * 0.4, 1.3 + i * 0.4, t); K.text(c, `${i + 1}·${x}`, (i - 1) * 330, 0, MONOB(28, { color: "#fff", align: "center" })); c.restore(); } }); }, 0.6, "none"),
       ],
     },
@@ -174,7 +178,7 @@ window.CAROUSEL = {
         el(300, 880, (c, t) => photo(c, 480, 660, "#2d5aa2", "phone", (c, w, h) => {
           c.fillStyle = "#fff"; c.fillRect(0, 0, w, h);
           K.text(c, "vibe.editing", 16, 30, MONOB(14));
-          c.save(); c.beginPath(); c.rect(0, 44, w, w); c.clip(); c.translate(0, 44); FOOTAGE.drawFootage(c, "sunrise", NOW * 0.3, w, w, "teal"); c.restore();
+          c.save(); c.beginPath(); c.rect(0, 44, w, w); c.clip(); c.translate(0, 44); FOOTAGE.drawFootage(c, "skincare", NOW, w, w, "raw", 0.5); c.restore();
           const s = K.typed("raw to posted in 15 min. comment VIBE for the prompts #vibeediting #reels", NOW, 1.2, 26);
           K.text(c, s, 14, w + 74, MONO(13, { maxW: w - 28, lh: 1.4, track: 0 }));
         }), 0.4, "left", { rot: -4 }),
@@ -195,7 +199,7 @@ window.CAROUSEL = {
           K.text(c, "\"VIBE\"", 50, 170, MONOB(130));
           rows(c, ["→ THE FREE PROMPT PACK"], 50, 270, 560, t, 0.8);
         }, 0.2, "up", { far: 0.8 }),
-        el(790, 540, (c) => photo(c, 420, 300, "#2f7a4a", "laptop", (c, w, h) => c.drawImage(K.IMG.pack, 0, 0, w, h)), 0.4, "right", { rot: 3 }),
+        el(790, 540, (c) => photo(c, 420, 300, "#2f7a4a", "print", (c, w, h) => c.drawImage(K.IMG.pack, 0, 0, w, h)), 0.4, "right", { rot: 3 }),
         el(0, 730, (c, t) => {
           divider(c, K.W, 360, PEACH, { x: 690, w: 350, label: "SAVE" });
           rows(c, ["SAVE THIS WORKFLOW", "TRY IT ON YOUR NEXT", "REEL TONIGHT"], 50, 120, 560, t, 1.1);

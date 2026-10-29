@@ -6,7 +6,8 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 C="${1:-01-five-step-system}"
-[[ -f assets/img/sky.jpg ]] || python3 make_sky.py
+[[ -f build/footage/index.js ]] || python3 footage/fetch_footage.py
+[[ -f build/cut/index.js ]] || python3 footage/make_cutouts.py
 
 if [[ "${2:-}" == "stills" ]]; then
   rm -rf "build/$C/stills"

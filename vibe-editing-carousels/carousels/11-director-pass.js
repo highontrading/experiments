@@ -66,20 +66,23 @@ function asterisk(c, s = 1, t = 0) {
   for (let i = 0; i < 6; i++) { c.save(); c.rotate((i / 6) * Math.PI * 2); rr(c, -16, -80, 32, 80, 16); c.fillStyle = "#f4c430"; c.fill(); c.restore(); }
   c.restore();
 }
-function broSticker(c, t) {
-  c.save(); c.shadowColor = "rgba(0,0,0,.3)"; c.shadowBlur = 12; c.shadowOffsetY = 6;
-  c.beginPath(); c.arc(0, -50, 82, 0, 7); c.fillStyle = "#fff"; c.fill(); c.restore();
-  K.bro(c, 0, 8, 1.15, { eyes: "happy", glow: 0.5 + 0.2 * Math.sin(t * 4) });
-}
-function clapper(c) {
-  c.save(); c.shadowColor = "rgba(0,0,0,.3)"; c.shadowBlur = 10; c.shadowOffsetY = 5;
-  rr(c, -80, -40, 160, 110, 10); c.fillStyle = "#fff"; c.fill(); c.restore();
-  c.fillStyle = "#1c1c1c"; rr(c, -70, -10, 140, 72, 6); c.fill();
-  c.save(); c.translate(-70, -16); c.rotate(-0.22); c.fillStyle = "#1c1c1c"; c.fillRect(0, -18, 144, 18);
-  for (let i = 0; i < 6; i++) { c.fillStyle = "#fff"; c.beginPath(); c.moveTo(8 + i * 24, -18); c.lineTo(20 + i * 24, -18); c.lineTo(12 + i * 24, 0); c.lineTo(0 + i * 24, 0); c.fill(); }
+// Real die-cut stickers: a white border traced around a cutout, with a glossy sheen.
+function realSticker(c, name, h) {
+  const C = K.CUT[name]; if (!C) return;
+  const s = h / C.im.height, w = C.im.width * s;
+  c.save(); c.shadowColor = "rgba(0,0,0,.35)"; c.shadowBlur = 14; c.shadowOffsetY = 7;
+  for (let a = 0; a < 16; a++) { const d = 9; c.drawImage(stickerWhite(name), -w / 2 + Math.cos(a / 16 * Math.PI * 2) * d, -h / 2 + Math.sin(a / 16 * Math.PI * 2) * d, w, h); }
   c.restore();
-  K.text(c, "TAKE 2", 0, 36, { family: "InterD", size: 22, weight: 800, color: "#fff", align: "center" });
+  c.drawImage(C.im, -w / 2, -h / 2, w, h);
 }
+const whites = {};
+function stickerWhite(name) {
+  if (whites[name]) return whites[name];
+  const C = K.CUT[name];
+  return (whites[name] = K.once(C.im.width, C.im.height, (o) => { o.drawImage(C.im, 0, 0); o.globalCompositeOperation = "source-in"; o.fillStyle = "#fff"; o.fillRect(0, 0, C.im.width, C.im.height); }));
+}
+const broSticker = (c) => realSticker(c, "camera", 150);
+const clapper = (c) => realSticker(c, "clapper", 150);
 const phonePaint = (p) => (c, w, h) => CARDS.reel(c, w, h, NOW, p, { D: 5 });
 const el = (x, y, draw, at = 0.1, inn = "fade", o = {}) => ({ x, y, in: inn, at, draw, ...o });
 
@@ -89,6 +92,7 @@ window.CAROUSEL = {
   kit: true,
   title: "The Director Pass",
   dur: D,
+  cuts: ["camera", "clapper"],
   setup: () => { MATCV = paintMat(); },
   bg: mat,
   fg: (c, t) => K.grain(c, t, 0.06),
@@ -137,10 +141,10 @@ window.CAROUSEL = {
         el(80, 350, (c, t) => hl(c, "punchier", 0, 0, 130, t, 0.4, YEL, { color: INK }), 0.15, "left"),
         el(80, 490, (c, t) => hl(c, "first 2 seconds", 0, 0, 120, t, 0.65, YEL, { color: INK }), 0.2, "left"),
         el(300, 900, (c) => { sheet(c, 400, 560); }, 0.3, "left", { rot: -4 }),
-        el(300, 880, (c) => dieCut(c, (c, w, h) => { const a = clamp(((NOW - 0.6) % 2.4) / 1.6); FOOTAGE.drawFootage(c, "sunrise", NOW * 0.2, w, h, "film"); c.fillStyle = `rgba(0,0,0,${1 - a})`; c.fillRect(0, 0, w, h); }, 320, 420), 0.35, "left", { rot: -4 }),
+        el(300, 880, (c) => dieCut(c, (c, w, h) => { const a = clamp(((NOW - 0.6) % 2.4) / 1.6); FOOTAGE.drawFootage(c, "influencer_talk", NOW, w, h, "raw", 0.5); c.fillStyle = `rgba(0,0,0,${1 - a})`; c.fillRect(0, 0, w, h); }, 320, 420), 0.35, "left", { rot: -4 }),
         el(300, 1200, (c) => K.text(c, "before: slow fade-in", 0, 0, HAND(48, { align: "center" })), 0.5, "fade", { rot: -4 }),
         el(780, 900, (c) => { sheet(c, 400, 560); }, 0.4, "right", { rot: 4 }),
-        el(780, 880, (c) => dieCut(c, (c, w, h) => { const k = ((NOW - 0.6) % 2.4 + 2.4) % 2.4, z = 1.3 - 0.3 * outCubic(clamp(k / 0.4)); c.save(); c.translate(w / 2, h / 2); c.scale(z, z); c.translate(-w / 2, -h / 2); FOOTAGE.drawFootage(c, "city", NOW * 0.4, w, h, "teal"); c.restore(); K.text(c, "WATCH THIS", w / 2, h * 0.3, { family: "ArchX9", size: 34, weight: 900, color: "#fff", align: "center", stroke: "#000", strokeW: 8 }); }, 320, 420), 0.45, "right", { rot: 4 }),
+        el(780, 880, (c) => dieCut(c, (c, w, h) => { const k = ((NOW - 0.6) % 2.4 + 2.4) % 2.4, z = 1.3 - 0.3 * outCubic(clamp(k / 0.4)); c.save(); c.translate(w / 2, h / 2); c.scale(z, z); c.translate(-w / 2, -h / 2); FOOTAGE.drawFootage(c, "influencer_talk", NOW, w, h, "raw", 0.5); c.restore(); K.text(c, "WATCH THIS", w / 2, h * 0.3, { family: "ArchX9", size: 34, weight: 900, color: "#fff", align: "center", stroke: "#000", strokeW: 8 }); }, 320, 420), 0.45, "right", { rot: 4 }),
         el(780, 1200, (c) => K.text(c, "after: open mid-action", 0, 0, HAND(48, { align: "center" })), 0.6, "fade", { rot: 4 }),
         el(540, 760, (c) => K.text(c, "→", 0, 0, HAND(110, { color: "#fff", align: "center" })), 0.8, "pop"),
         el(540, 640, (c) => tape(c, 160, 0.1), 0.5),
@@ -159,11 +163,11 @@ window.CAROUSEL = {
         el(470, 770, (c) => pinkLabel(c, "NOTE 3", 30), 0.5, "fade", { rot: 3 }),
         el(470, 870, (c, t) => hl(c, "end on the logo", 0, 0, 62, t, 1.4), 0.5, "fade", { rot: 3 }),
         el(730, 1100, (c) => dieCut(c, (c, w, h) => {
-          c.fillStyle = "#14101f"; c.fillRect(0, 0, w, h);
+          c.save(); c.filter = "brightness(0.45) blur(2px)"; FOOTAGE.drawFootage(c, "vlog_studio", NOW, w, h, "raw", 0.5); c.restore();
           const e = outBack(win(1.8, 2.2, NOW), 2);
-          c.save(); c.translate(w / 2, h * 0.62); c.scale(e, e);
-          K.bro(c, 0, -10, 0.7, { eyes: "happy", glow: 0.7 });
-          K.text(c, "VIBE EDITING", 0, 40, { family: "InterD", size: 40, weight: 900, color: "#ffe08a", align: "center" });
+          c.save(); c.translate(w / 2, h * 0.58); c.scale(e, e);
+          K.text(c, "VIBE EDITING", 0, 10, { family: "InterD", size: 54, weight: 900, color: "#ffe08a", align: "center" });
+          K.text(c, "follow for more", 0, 52, { family: "InterD", size: 22, weight: 600, color: "#fff", align: "center" });
           c.restore();
         }, 460, 250), 0.6, "fade", { rot: 3 }),
         el(930, 300, (c, t) => asterisk(c, 0.7, t), 0.8, "grow"),

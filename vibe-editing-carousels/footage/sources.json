@@ -1,0 +1,272 @@
+{
+ "vlog_talk": {
+  "id": 41290,
+  "start": 1.0,
+  "note": "vlogger speaking to the camera"
+ },
+ "vlog_studio": {
+  "id": 41272,
+  "start": 1.0,
+  "note": "youtuber vlogging in his studio"
+ },
+ "influencer_talk": {
+  "id": 42323,
+  "start": 1.0,
+  "note": "influencer talking to the camera"
+ },
+ "girl_record": {
+  "id": 42308,
+  "start": 1.0,
+  "note": "girl recording herself, colourful backdrop"
+ },
+ "dance_girls": {
+  "id": 42289,
+  "start": 1.0,
+  "note": "two girls dancing in front of the camera"
+ },
+ "tiktok_dance": {
+  "id": 42315,
+  "start": 1.0,
+  "note": "influencers recording a dance video"
+ },
+ "skincare": {
+  "id": 50423,
+  "start": 1.0,
+  "note": "influencer recording a skincare video"
+ },
+ "makeup": {
+  "id": 34483,
+  "start": 1.0,
+  "note": "makeup tutorial on set"
+ },
+ "podcast_two": {
+  "id": 44030,
+  "start": 1.0,
+  "note": "two men recording a podcast"
+ },
+ "podcast_face": {
+  "id": 44033,
+  "start": 1.0,
+  "note": "man talking on a podcast"
+ },
+ "podcast_women": {
+  "id": 52178,
+  "start": 1.0,
+  "note": "three young women on a podcast"
+ },
+ "mic_close": {
+  "id": 44049,
+  "start": 1.0,
+  "note": "condenser microphone close-up"
+ },
+ "editor_screen": {
+  "id": 50610,
+  "start": 1.0,
+  "note": "screen of a video editing app"
+ },
+ "editor_cursor": {
+  "id": 50605,
+  "start": 1.0,
+  "note": "cursor in video editing software"
+ },
+ "editor_man": {
+  "id": 41292,
+  "start": 1.0,
+  "note": "man editing a video on his computer"
+ },
+ "editor_team": {
+  "id": 23148,
+  "start": 1.0,
+  "note": "young creatives editing video"
+ },
+ "color_grade": {
+  "id": 47208,
+  "start": 1.0,
+  "note": "colour correction close-up"
+ },
+ "scopes": {
+  "id": 44077,
+  "start": 1.0,
+  "note": "lumetri scopes close-up"
+ },
+ "edit_timelapse": {
+  "id": 5381,
+  "start": 1.0,
+  "note": "timelapse of a person editing a video"
+ },
+ "dslr": {
+  "id": 44076,
+  "start": 1.0,
+  "note": "close shot on a DSLR camera"
+ },
+ "lens": {
+  "id": 2377,
+  "start": 0.5,
+  "note": "lens focus in motion"
+ },
+ "clapper": {
+  "id": 46353,
+  "start": 0.5,
+  "note": "clapperboard starts a shot"
+ },
+ "street_vlog": {
+  "id": 34468,
+  "start": 1.0,
+  "note": "girl vlogging while walking down the street"
+ },
+ "filmmaker": {
+  "id": 49642,
+  "start": 1.0,
+  "note": "filmmaker films a young woman"
+ },
+ "watch_ad": {
+  "id": 44067,
+  "start": 1.0,
+  "note": "man recording a watch commercial"
+ },
+ "watch_close": {
+  "id": 44070,
+  "start": 1.0,
+  "note": "elegant watch close-up"
+ },
+ "scrolling": {
+  "id": 4801,
+  "start": 1.0,
+  "note": "young man scrolling his phone"
+ },
+ "phone_couch": {
+  "id": 100067,
+  "start": 1.0,
+  "note": "young woman scrolling social media"
+ },
+ "texting": {
+  "id": 4915,
+  "start": 1.0,
+  "note": "hands typing on a phone"
+ },
+ "typing": {
+  "id": 1781,
+  "start": 0.5,
+  "note": "typing on a laptop close-up"
+ },
+ "sunset_sea": {
+  "id": 4119,
+  "start": 1.0,
+  "note": "sunset seen from the sea"
+ },
+ "city_night": {
+  "id": 40654,
+  "start": 1.0,
+  "note": "night panorama of skyscrapers"
+ },
+ "night_drive": {
+  "id": 42039,
+  "start": 1.0,
+  "note": "car window, night traffic"
+ },
+ "waves": {
+  "id": 5016,
+  "start": 1.0,
+  "note": "waves reaching the beach"
+ },
+ "beach_walk": {
+  "id": 1214,
+  "start": 1.0,
+  "note": "silhouette walking on the beach at sunset"
+ },
+ "latte": {
+  "id": 810,
+  "start": 1.0,
+  "note": "latte art"
+ },
+ "road_retro": {
+  "id": 49697,
+  "start": 1.0,
+  "note": "road through nature, retro look"
+ },
+ "pink_flowers": {
+  "id": 1168,
+  "start": 0.5,
+  "note": "pink flowers in the breeze"
+ },
+ "clouds": {
+  "id": 51102,
+  "start": 0.5,
+  "note": "white clouds moving across a blue sky"
+ },
+ "clouds_wind": {
+  "id": 26112,
+  "start": 0.5,
+  "note": "blue sky with clouds moving in the wind"
+ },
+ "daisies": {
+  "id": 44950,
+  "start": 0.5,
+  "note": "wild daisies blooming in a meadow"
+ },
+ "daisy_field": {
+  "id": 19506,
+  "start": 0.5,
+  "note": "white daisy field in the meadow"
+ },
+ "meadow_lapse": {
+  "id": 4070,
+  "start": 0.5,
+  "note": "time-lapse of a green meadow"
+ },
+ "green_hills": {
+  "id": 100408,
+  "start": 0.5,
+  "note": "aerial view of green hills"
+ },
+ "fabric_blue": {
+  "id": 40219,
+  "start": 0.5,
+  "note": "blue fabric moving in the wind"
+ },
+ "fabric_gray": {
+  "id": 40225,
+  "start": 0.5,
+  "note": "grey fabric texture"
+ },
+ "hand_phone_blue": {
+  "id": 8839,
+  "start": 1.0,
+  "note": "hand holding a phone, blue screen, green backdrop"
+ },
+ "hand_phone_green": {
+  "id": 28300,
+  "start": 1.0,
+  "note": "hand holding a phone, green screen and backdrop"
+ },
+ "sunflower": {
+  "id": 111,
+  "start": 0.5,
+  "note": "sunflower close-up"
+ },
+ "small_pink": {
+  "id": 1186,
+  "start": 0.5,
+  "note": "small pink flowers"
+ },
+ "pink_bouquet": {
+  "id": 115,
+  "start": 0.5,
+  "note": "bouquet of pink flowers"
+ },
+ "tv_boombox": {
+  "id": 4143,
+  "start": 1.0,
+  "note": "retro boombox with a built-in TV"
+ },
+ "tv_static": {
+  "id": 46290,
+  "start": 0.5,
+  "note": "TV static"
+ },
+ "tv_dark": {
+  "id": 46291,
+  "start": 1.0,
+  "note": "old TV with static on a rug, dark room"
+ }
+}

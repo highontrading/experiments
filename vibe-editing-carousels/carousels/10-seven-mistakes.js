@@ -10,32 +10,7 @@ const SMALL = (size, o = {}) => ({ family: "InterD", size, weight: 700, color: "
 const BLOBS = ["#8fd0c8", "#ee8a50", "#f3c74a", "#c8b3e3", "#a9c6e6", "#bfe3a8"];
 
 // ------------------------------------------------------------ backdrop --
-let BACK = null;
-function paintBack() {
-  return K.once(K.W, K.H, (c, W, H) => {
-    const r = rnd(12);
-    const sky = c.createLinearGradient(0, 0, 0, 760); sky.addColorStop(0, "#86b4e6"); sky.addColorStop(1, "#d8e9f6");
-    c.fillStyle = sky; c.fillRect(0, 0, W, H);
-    c.filter = "blur(18px)";
-    for (let i = 0; i < 10; i++) { c.fillStyle = "rgba(255,255,255,.75)"; c.beginPath(); c.ellipse(r() * W, 100 + r() * 450, 140 + r() * 160, 50 + r() * 50, 0, 0, 7); c.fill(); }
-    c.filter = "none";
-    [[880, "#7fb04a"], [980, "#5e9a35"], [1110, "#4a8a2a"], [1240, "#3d7a22"]].forEach(([y, col], i) => {
-      c.fillStyle = col; c.beginPath(); c.moveTo(0, H);
-      for (let x = 0; x <= W; x += 20) c.lineTo(x, y - 70 * Math.sin(x * 0.006 + i * 1.7) - 30 * Math.sin(x * 0.015 + i));
-      c.lineTo(W, H); c.fill();
-      const g = c.createLinearGradient(0, y - 100, 0, y + 100); g.addColorStop(0, "rgba(255,255,220,.25)"); g.addColorStop(1, "rgba(0,0,0,0)");
-      c.fillStyle = g; c.fillRect(0, y - 100, W, 200);
-    });
-    // halftone dots
-    const img = c.getImageData(0, 0, W, H);
-    c.fillStyle = "rgba(20,40,60,.16)";
-    for (let y = 0; y < H; y += 9) for (let x = (y / 9) % 2 ? 4.5 : 0; x < W; x += 9) {
-      const i = (Math.floor(y) * W + Math.floor(x)) * 4, l = (img.data[i] + img.data[i + 1] + img.data[i + 2]) / 765;
-      const rad = (1 - l) * 3.6;
-      if (rad > 0.3) { c.beginPath(); c.arc(x, y, rad, 0, 7); c.fill(); }
-    }
-  });
-}
+let DOTS = null;
 
 // ------------------------------------------------------------ components --
 function tornNote(c, w, h, seed) {
@@ -68,16 +43,11 @@ function blob(c, text, col, w, h, seed, o = {}) {
   const lines = K.lines(c, text.toUpperCase(), f);
   lines.forEach((l, i) => K.text(c, l, 0, (i - (lines.length - 1) / 2) * f.size * 1.15 + f.size * 0.36, { ...f, maxW: 0 }));
 }
+// A real sunflower cutout where the reference had a clover.
 function clover(c, s = 1, t = 0) {
-  c.save(); c.scale(s, s); c.rotate(Math.sin(t * 1.5) * 0.06);
-  c.strokeStyle = "#3f8a2e"; c.lineWidth = 6; c.lineCap = "round"; c.beginPath(); c.moveTo(0, 10); c.quadraticCurveTo(10, 60, 30, 90); c.stroke();
-  for (let i = 0; i < 4; i++) {
-    c.save(); c.rotate((i / 4) * Math.PI * 2 + 0.3);
-    c.beginPath(); c.moveTo(0, 0); c.bezierCurveTo(-34, -20, -30, -58, -4, -50); c.bezierCurveTo(0, -60, 0, -60, 4, -50); c.bezierCurveTo(30, -58, 34, -20, 0, 0);
-    c.fillStyle = i % 2 ? "#4f9e38" : "#5db244"; c.fill(); c.strokeStyle = "rgba(255,255,255,.35)"; c.lineWidth = 2; c.beginPath(); c.moveTo(0, -6); c.lineTo(0, -40); c.stroke();
-    c.restore();
-  }
-  c.restore();
+  c.save(); c.rotate(Math.sin(t * 1.5) * 0.06);
+  c.shadowColor = "rgba(0,0,0,.3)"; c.shadowBlur = 16; c.shadowOffsetY = 8;
+  K.drawCut(c, "sunflower", 150 * s); c.restore();
 }
 function qr(c, s, label) {
   const r = rnd(77), n = 21, cell = s / n;
@@ -111,8 +81,17 @@ window.CAROUSEL = {
   kit: true,
   title: "7 Vibe Editing Mistakes",
   dur: D,
-  setup: () => { BACK = paintBack(); },
-  bg: (c, t) => { const u = (2 * Math.PI * t) / D; c.drawImage(BACK, -10 + 6 * Math.sin(u), -10, K.W + 20, K.H + 20); },
+  cuts: ["sunflower"],
+  setup: () => {
+    DOTS = K.once(K.W, K.H, (c, W, H) => {                                 // halftone screen
+      c.fillStyle = "#fff"; c.fillRect(0, 0, W, H); c.fillStyle = "#7d8a96";
+      for (let y = 0; y < H; y += 9) for (let x = (y / 9) % 2 ? 4.5 : 0; x < W; x += 9) { c.beginPath(); c.arc(x, y, 1.6, 0, 7); c.fill(); }
+    });
+  },
+  bg: (c, t) => {
+    FOOTAGE.drawFootage(c, "meadow_lapse", t, K.W, K.H, "raw", 0.5);       // real sky and hills
+    c.save(); c.globalCompositeOperation = "multiply"; c.globalAlpha = 0.45; c.drawImage(DOTS, 0, 0); c.restore();
+  },
   fg: (c, t) => K.grain(c, t, 0.06),
   slides: [
     // 1 · Hook
@@ -146,7 +125,7 @@ window.CAROUSEL = {
         el(690, 960, (c) => { tornNote(c, 620, 520, 12); mistake(c, 2, "Too many effects", "one look, one transition, one caption style", 620); }, 0.3, "right", { rot: 3 }),
         el(200, 1000, (c, t) => demo(c, 260, 360, (c, w, h) => {
           const k = Math.floor(t * 4) % 4;
-          FOOTAGE.drawFootage(c, ["city", "sunrise", "ocean", "city"][k], t, w, h, ["vhs", "noir", "pastel", "teal"][k]);
+          FOOTAGE.drawFootage(c, ["dance_girls", "tiktok_dance", "girl_record", "street_vlog"][k], t, w, h, ["vhs", "noir", "pastel", "teal"][k], 0.5);
           c.save(); c.translate(w / 2, h / 2); c.rotate(t * 3); c.fillStyle = "rgba(255,0,200,.25)"; c.fillRect(-w, -8, w * 2, 16); c.restore();
         }), 0.6, "left", { rot: -6, float: 1 }),
         el(200, 1240, (c, t) => clover(c, 0.6, t), 1.0, "grow"),
@@ -157,12 +136,10 @@ window.CAROUSEL = {
       els: [
         el(560, 330, (c) => { tornNote(c, 860, 400, 21); mistake(c, 3, "Off-beat cuts", "ask for cuts on every beat, or every 2nd beat", 860); }, 0.05, "down", { rot: -2 }),
         el(250, 860, (c, t) => demo(c, 360, 520, (c, w, h) => {
-          FOOTAGE.drawFootage(c, "sunrise", t * 0.3, w, h, "film");
-          c.fillStyle = "#f2c9a0"; c.beginPath(); c.arc(w / 2, h * 0.42, 70, 0, 7); c.fill();
-          c.fillStyle = "#222"; c.beginPath(); c.arc(w / 2 - 22, h * 0.4, 6, 0, 7); c.arc(w / 2 + 22, h * 0.4, 6, 0, 7); c.fill();
-          const low = t > 2.2, y = lerp(h * 0.42, h * 0.78, inOut(win(2.0, 2.5, t)));
+          FOOTAGE.drawFootage(c, "influencer_talk", t, w, h, "raw", 0.5);
+          const low = t > 2.2, y = lerp(h * 0.3, h * 0.78, inOut(win(2.0, 2.5, t)));
           K.text(c, "CAPTIONS HERE", w / 2, y + 12, { family: "ArchX9", size: 30, weight: 900, color: "#fff", align: "center", stroke: "#000", strokeW: 7 });
-          if (!low) { c.strokeStyle = "#e5484d"; c.lineWidth = 6; c.beginPath(); c.arc(w / 2, h * 0.42, 95, 0, 7); c.stroke(); }
+          if (!low) { c.strokeStyle = "#e5484d"; c.lineWidth = 6; c.beginPath(); c.arc(w / 2, h * 0.3, 95, 0, 7); c.stroke(); }
         }), 0.3, "left", { rot: -4, float: 1 }),
         el(720, 900, (c) => { tornNote(c, 560, 560, 22); mistake(c, 4, "Captions over faces", "keep them center-low, above the app buttons", 560); }, 0.4, "right", { rot: 3 }),
         sticker(860, 640, -8, "move them down ↓", BLOBS[0], 280, 140, 2.2, 31, 26),
@@ -174,7 +151,7 @@ window.CAROUSEL = {
         el(420, 340, (c) => { tornNote(c, 680, 460, 31); mistake(c, 5, "A new look every post", "pick one look and keep it for every reel", 680); }, 0.05, "left", { rot: -3 }),
         el(880, 380, (c, t) => {
           const looks = ["vhs", "noir", "pastel", "teal", "film", "log", "teal", "vhs", "pastel"];
-          for (let i = 0; i < 9; i++) { c.save(); c.translate(((i % 3) - 1) * 96, (Math.floor(i / 3) - 1) * 96); demo(c, 84, 84, (c, w, h) => FOOTAGE.drawFootage(c, ["city", "sunrise", "ocean"][i % 3], i, w, h, t > 3 ? "film" : looks[i])); c.restore(); }
+          for (let i = 0; i < 9; i++) { c.save(); c.translate(((i % 3) - 1) * 96, (Math.floor(i / 3) - 1) * 96); demo(c, 84, 84, (c, w, h) => FOOTAGE.drawFootage(c, ["vlog_talk", "dance_girls", "street_vlog", "skincare", "podcast_face", "girl_record", "makeup", "tiktok_dance", "influencer_talk"][i], 0, w, h, t > 3 ? "film" : looks[i])); c.restore(); }
         }, 0.4, "right", { rot: 5, float: 1 }),
         el(640, 920, (c) => { tornNote(c, 700, 480, 32); mistake(c, 6, "No sound design", "a whoosh on cuts, a pop on text, a hit on the drop", 700); }, 0.3, "right", { rot: 2 }),
         el(180, 1060, (c, t) => {

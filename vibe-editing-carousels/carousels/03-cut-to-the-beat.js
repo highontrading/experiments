@@ -25,14 +25,14 @@ function header(c, items) {
 // ------------------------------------------------------------------ ring --
 // Card faces: each is paint(c, w, h, t).
 const FACES = [
-  (c, w, h, t) => FOOTAGE.drawFootage(c, "sunrise", t * 0.3, w, h, "teal"),
+  (c, w, h, t) => FOOTAGE.drawFootage(c, "dance_girls", t, w, h, "raw"),
   (c, w, h) => { c.fillStyle = "#1f6f5c"; c.fillRect(0, 0, w, h); K.text(c, "cut on", 20, 70, BIG(46)); K.text(c, "the beat.", 20, 118, BIG(46)); },
   (c, w, h, t) => CARDS.wave(c, w, h, t, { at: 0.3, gap: 0.1, beatPx: 34 }, {}),
-  (c, w, h, t) => FOOTAGE.drawFootage(c, "city", t * 0.3, w, h, "vhs"),
+  (c, w, h, t) => FOOTAGE.drawFootage(c, "tiktok_dance", t, w, h, "vhs"),
   (c, w, h) => { const g = c.createLinearGradient(0, 0, w, h); g.addColorStop(0, "#c9b6ff"); g.addColorStop(0.5, "#ffd1e8"); g.addColorStop(1, "#bff0ff"); c.fillStyle = g; c.fillRect(0, 0, w, h); K.text(c, "120", w / 2, h / 2 + 10, BIG(84, { color: "#1a1a1a", align: "center" })); K.text(c, "BPM", w / 2, h / 2 + 56, LBL(28, { color: "#333", align: "center" })); },
   (c, w, h, t) => CARDS.reel(c, w, h, t, { look: "teal", caps: [["ON"], ["BEAT."]], capsAt: 0.4, capEvery: 0.5, cutEvery: 0.5 }, { D: 5 }),
   (c, w, h) => { c.fillStyle = "#f2efe9"; c.fillRect(0, 0, w, h); K.text(c, "\"cut on", 20, 70, { family: "Playfair", size: 40, weight: 500, color: "#111" }); K.text(c, "every beat\"", 20, 116, { family: "Playfair", size: 40, weight: 500, italic: true, color: "#111" }); },
-  (c, w, h, t) => FOOTAGE.drawFootage(c, "ocean", t * 0.3, w, h, "film"),
+  (c, w, h, t) => FOOTAGE.drawFootage(c, "filmmaker", t, w, h, "film"),
   (c, w, h, t) => CARDS.bpm(c, w, h, t, {}, {}),
   (c, w, h) => { c.fillStyle = "#2b2140"; c.fillRect(0, 0, w, h); K.text(c, "VIBE", w / 2, h / 2, BIG(60, { align: "center", color: "#ffc93c" })); K.text(c, "EDITING", w / 2, h / 2 + 44, LBL(26, { align: "center" })); },
 ];
@@ -125,7 +125,7 @@ window.CAROUSEL = {
           [["off", "city", "log"], ["on", "city", "teal"]].forEach(([k, sc, lk], i) => {
             c.save(); c.translate((i - 0.5) * 470, 0);
             const cut = i === 1 ? Math.floor(t / BEAT) : Math.floor((t + 0.21) / 0.63);
-            K.photo(c, -210, -120, 420, 240, ["sunrise", "city", "ocean"][cut % 3], t * 0.3, lk, 18);
+            K.photo(c, -210, -120, 420, 240, ["dance_girls", "street_vlog", "girl_record"][cut % 3], t, lk, 18, 0.5);
             const fl = i === 1 ? pulse(t % BEAT, 0, 12) : 0;
             if (fl > 0.05) { c.fillStyle = `rgba(255,255,255,${0.3 * fl})`; rr(c, -210, -120, 420, 240, 18); c.fill(); }
             c.restore();

@@ -15,51 +15,14 @@ const MONO = (size, o = {}) => ({ family: "VT323", size, weight: 400, color: "#1
 const W95 = (size, o = {}) => ({ family: "InterL", size, weight: 500, color: "#111", ...o });
 
 // --------------------------------------------------------------- meadow --
-let MEADOW = null;
-function paintMeadow() {
-  return K.once(K.W, K.H, (c, W, H) => {
-    const r = rnd(21);
-    const sky = c.createLinearGradient(0, 0, 0, 520);
-    sky.addColorStop(0, "#b8c7d3"); sky.addColorStop(0.7, "#dde3e1"); sky.addColorStop(1, "#e9ebe3");
-    c.fillStyle = sky; c.fillRect(0, 0, W, 560);
-    c.filter = "blur(30px)";
-    for (let i = 0; i < 9; i++) { c.fillStyle = "rgba(255,255,255,.55)"; c.beginPath(); c.ellipse(r() * W, 80 + r() * 250, 160 + r() * 200, 50 + r() * 50, 0, 0, 7); c.fill(); }
-    c.filter = "blur(6px)";
-    c.fillStyle = "#7d8d6a"; c.beginPath(); c.moveTo(0, 520);
-    for (let x = 0; x <= W; x += 40) c.lineTo(x, 470 + Math.sin(x * 0.01) * 14 + r() * 18);
-    c.lineTo(W, 560); c.lineTo(0, 560); c.fill();
-    c.filter = "none";
-    const g = c.createLinearGradient(0, 500, 0, H);
-    g.addColorStop(0, "#9aa77a"); g.addColorStop(0.35, "#768a4c"); g.addColorStop(1, "#4d6630");
-    c.fillStyle = g; c.fillRect(0, 500, W, H - 500);
-    // grass strokes, softer and smaller toward the horizon
-    for (let i = 0; i < 9000; i++) {
-      const y = 500 + Math.pow(r(), 0.8) * (H - 500), k = (y - 500) / (H - 500);
-      const x = r() * W, len = 6 + k * 34;
-      c.strokeStyle = r() < 0.5 ? `rgba(60,85,30,${0.25 + 0.3 * k})` : `rgba(170,190,120,${0.18 + 0.25 * k})`;
-      c.lineWidth = 0.8 + k * 1.6;
-      c.beginPath(); c.moveTo(x, y); c.lineTo(x + (r() - 0.5) * len * 0.6, y - len); c.stroke();
-    }
-    // clover flowers and pink daisies
-    for (let i = 0; i < 900; i++) {
-      const y = 520 + Math.pow(r(), 0.9) * (H - 520), k = (y - 500) / (H - 500);
-      const x = r() * W, s = 1.5 + k * 7;
-      if (r() < 0.12) {
-        c.fillStyle = r() < 0.5 ? "#f0a5c3" : "#e5799f";
-        for (let p = 0; p < 6; p++) { const a = (p / 6) * Math.PI * 2; c.beginPath(); c.ellipse(x + Math.cos(a) * s, y + Math.sin(a) * s * 0.6, s * 0.9, s * 0.45, a, 0, 7); c.fill(); }
-        c.fillStyle = "#f6d36b"; c.beginPath(); c.arc(x, y, s * 0.5, 0, 7); c.fill();
-      } else {
-        c.fillStyle = `rgba(250,250,245,${0.6 + 0.4 * k})`; c.beginPath(); c.arc(x, y, s * 0.7, 0, 7); c.fill();
-      }
-    }
-    const haze = c.createLinearGradient(0, 440, 0, 760);
-    haze.addColorStop(0, "rgba(230,234,228,.7)"); haze.addColorStop(1, "rgba(230,234,228,0)");
-    c.fillStyle = haze; c.fillRect(0, 440, W, 320);
-  });
-}
 function meadowBg(c, t, zoom = 1) {
-  const u = (2 * Math.PI * t) / 5, k = zoom * (1.02 + 0.01 * Math.sin(u));
-  c.drawImage(MEADOW, (K.W - K.W * k) / 2 + 8 * Math.sin(u), (K.H - K.H * k) / 2, K.W * k, K.H * k);
+  // real meadow footage, a touch hazy like the reference
+  c.save(); c.translate(K.W / 2, K.H / 2); c.scale(zoom, zoom); c.translate(-K.W / 2, -K.H / 2);
+  FOOTAGE.drawFootage(c, "daisy_field", t, K.W, K.H, "raw", 0.5);
+  c.restore();
+  const haze = c.createLinearGradient(0, 0, 0, K.H * 0.5);
+  haze.addColorStop(0, "rgba(225,232,236,.45)"); haze.addColorStop(1, "rgba(225,232,236,0)");
+  c.fillStyle = haze; c.fillRect(0, 0, K.W, K.H * 0.5);
 }
 
 // ------------------------------------------------------------ components --
@@ -97,41 +60,30 @@ function win95(c, w, h, title, paint, o = {}) {
   c.restore();
 }
 // Beige CRT monitor centred at the screen centre. paint(c, sw, sh) draws the screen.
+// The real retro TV (a boombox with a built-in screen). `w` is its width on the page;
+// paint(c, sw, sh) fills the screen in a 725 px wide space, as the old CRT did.
 function crt(c, w, paint, t) {
-  const h = w * 0.86, sw = w * 0.78, sh = h * 0.66, sy = -h * 0.06;
-  c.save(); c.shadowColor = "rgba(30,40,20,.35)"; c.shadowBlur = 50; c.shadowOffsetY = 30;
-  c.fillStyle = "#e2dccb"; c.beginPath(); c.ellipse(0, h * 0.5 + w * 0.06, w * 0.3, w * 0.07, 0, 0, 7); c.fill();
+  const C = K.CUT.tv, h = w * C.im.height / C.im.width;
+  c.save(); c.shadowColor = "rgba(25,35,15,.45)"; c.shadowBlur = 50; c.shadowOffsetY = 30;
+  K.drawCut(c, "tv", h, (c, sw, sh) => {
+    const k = 725 / sw;
+    c.save(); c.scale(1 / k, 1 / k);
+    const W2 = sw * k, H2 = sh * k;
+    c.fillStyle = "#000"; c.fillRect(0, 0, W2, H2);
+    c.save(); paint(c, W2, H2); c.restore();
+    c.fillStyle = "rgba(0,0,0,.06)"; for (let y = 0; y < H2; y += 4) c.fillRect(0, y, W2, 1.5);
+    const gl = c.createLinearGradient(0, 0, W2 * 0.7, H2 * 0.7);
+    gl.addColorStop(0, "rgba(255,255,255,.18)"); gl.addColorStop(0.5, "rgba(255,255,255,0)");
+    c.fillStyle = gl; c.fillRect(0, 0, W2, H2);
+    const vg = c.createRadialGradient(W2 / 2, H2 / 2, H2 * 0.3, W2 / 2, H2 / 2, H2 * 0.85);
+    vg.addColorStop(0, "rgba(0,0,0,0)"); vg.addColorStop(1, "rgba(0,0,0,.35)");
+    c.fillStyle = vg; c.fillRect(0, 0, W2, H2);
+    c.restore();
+  });
   c.restore();
-  c.fillStyle = "#d8d1bd"; rr(c, -w * 0.16, h * 0.4, w * 0.32, w * 0.1, 10); c.fill();
-  const body = c.createLinearGradient(-w / 2, -h / 2, w / 2, h / 2);
-  body.addColorStop(0, "#f4efe3"); body.addColorStop(0.6, "#e8e2d2"); body.addColorStop(1, "#d6cfbb");
-  c.save(); c.shadowColor = "rgba(30,40,20,.35)"; c.shadowBlur = 40; c.shadowOffsetY = 20;
-  rr(c, -w / 2, -h / 2, w, h, w * 0.05); c.fillStyle = body; c.fill(); c.restore();
-  c.strokeStyle = "rgba(255,255,255,.7)"; c.lineWidth = 3; rr(c, -w / 2 + 3, -h / 2 + 3, w - 6, h - 6, w * 0.05); c.stroke();
-  // bezel recess
-  const bz = 26;
-  const bg = c.createLinearGradient(0, sy - sh / 2 - bz, 0, sy + sh / 2 + bz);
-  bg.addColorStop(0, "#c9c2ad"); bg.addColorStop(1, "#ece6d8");
-  rr(c, -sw / 2 - bz, sy - sh / 2 - bz, sw + bz * 2, sh + bz * 2, 30); c.fillStyle = bg; c.fill();
-  c.save(); rr(c, -sw / 2, sy - sh / 2, sw, sh, 24); c.clip();
-  c.translate(-sw / 2, sy - sh / 2);
-  c.save(); paint(c, sw, sh); c.restore();
-  c.fillStyle = "rgba(0,0,0,.05)"; for (let y = 0; y < sh; y += 4) c.fillRect(0, y, sw, 1.5);
-  const gl = c.createLinearGradient(0, 0, sw * 0.7, sh * 0.7);
-  gl.addColorStop(0, "rgba(255,255,255,.22)"); gl.addColorStop(0.5, "rgba(255,255,255,0)");
-  c.fillStyle = gl; c.fillRect(0, 0, sw, sh);
-  const vg = c.createRadialGradient(sw / 2, sh / 2, sh * 0.3, sw / 2, sh / 2, sh * 0.85);
-  vg.addColorStop(0, "rgba(0,0,0,0)"); vg.addColorStop(1, "rgba(0,0,0,.28)");
-  c.fillStyle = vg; c.fillRect(0, 0, sw, sh);
-  c.restore();
-  // chin: vent, buttons, power
-  const cy = sy + sh / 2 + bz + (h / 2 - sy - sh / 2 - bz) / 2;
-  c.strokeStyle = "rgba(0,0,0,.12)"; c.lineWidth = 2; rr(c, -w * 0.4, cy - 18, w * 0.18, 36, 6); c.stroke();
-  for (const dx of [0.17, 0.23]) { c.fillStyle = "#ddd6c4"; c.beginPath(); c.ellipse(w * dx, cy + 4, 20, 13, 0, 0, 7); c.fill(); c.strokeStyle = "rgba(0,0,0,.18)"; c.stroke(); }
-  c.fillStyle = "#e9e3d4"; c.beginPath(); c.arc(w * 0.38, cy - 4, 26, 0, 7); c.fill(); c.strokeStyle = "rgba(0,0,0,.2)"; c.stroke();
-  c.fillStyle = Math.floor(t * 2) % 2 ? "#57d36b" : "#3fbf55"; c.beginPath(); c.arc(w * 0.31, cy - 4, 5, 0, 7); c.fill();
-  return { sw, sh };
+  return { sw: 725 };
 }
+
 function pinkBox(c, s, size, o = {}) {
   const f = SERIF(size, { align: "center", italic: o.italic });
   const w = K.measure(c, s, f) + size * 0.6, h = size * 1.3;
@@ -156,7 +108,7 @@ window.CAROUSEL = {
   kit: true,
   title: "Vibe Editing vs Timeline Editing",
   dur: D,
-  setup: () => { MEADOW = paintMeadow(); },
+  cuts: ["tv"],
   fg: (c, t) => { K.grain(c, t, 0.1); K.vignette(c, 0.12); },
   slides: [
     // 1 · Hook
@@ -165,15 +117,15 @@ window.CAROUSEL = {
       els: [
         floatWin(175, 95, -4, 330, 280, "editor.exe", (c, w, h, t) => CARDS.editor(c, w, h, t, { mode: "messy" }, {}), 0.4, "left"),
         floatWin(880, 85, 5, 320, 300, "Untitled - Notepad", (c, w, h, t) => CARDS.reel(c, w, h, t, { look: "teal", caps: [["JUST"], ["VIBE."]], capsAt: 1.0 }, { D }), 0.5, "right"),
-        { x: 540, y: 640, in: "up", at: 0.05, float: 0.6, draw: (c, t) => crt(c, 930, (c, sw, sh) => {
-          c.save(); c.translate(-((K.W - sw) / 2), -720); meadowBg(c, t, 1.1); c.restore();
+        { x: 540, y: 640, in: "up", at: 0.05, float: 0.6, draw: (c, t) => crt(c, 1300, (c, sw, sh) => {
+          FOOTAGE.drawFootage(c, "meadow_lapse", t, sw, sh, "raw", 0.5);
           c.translate(sw / 2, 0);
           const e1 = outBack(win(0.5, 0.9, t), 2), e2 = outBack(win(0.8, 1.2, t), 2), e3 = outBack(win(1.1, 1.5, t), 2.4);
           c.save(); c.translate(0, 190); c.scale(e1, e1); white(c, "Same reel.", 0, 0, 132, { align: "center" }); c.restore();
           c.save(); c.translate(0, 320); c.scale(e2, e2); pinkBox(c, "3 hours vs 15 min", 76); c.restore();
           c.save(); c.translate(0, 450); c.rotate(-0.04); c.scale(e3, e3); bubbly(c, "timeline vs vibe", 70); c.restore();
         }, t) },
-        floatWin(150, 1180, 6, 300, 300, "before.bmp", (c, w, h, t) => K.photo(c, 0, 0, w, h, "sunrise", t * 0.2, "log"), 0.7, "left"),
+        floatWin(150, 1180, 6, 300, 300, "before.bmp", (c, w, h, t) => K.photo(c, 0, 0, w, h, "street_vlog", t, "log", 0, 0.5), 0.7, "left"),
         floatWin(860, 1200, -5, 360, 300, "Untitled - Notepad", notepadText(["(some) things", "i don't miss:", "* rendering", "* 46 clips"], 1.0), 0.8, "right"),
         { x: 900, y: 1050, rot: -6, in: "pop", at: 1.8, draw: (c, t) => { c.translate(Math.sin(t * 5) * 6, 0); bubbly(c, "swipe →", 52, { edge: "#555" }); } },
       ],
@@ -182,7 +134,7 @@ window.CAROUSEL = {
     {
       bg: (c, t) => meadowBg(c, t, 1.08),
       els: [
-        { x: 420, y: 520, rot: -4, in: "left", at: 0.05, float: 0.6, draw: (c, t) => crt(c, 760, (c, sw, sh) => CARDS.editor(c, sw, sh, t, { mode: "messy", seed: 3 }, {}), t) },
+        { x: 420, y: 520, rot: -4, in: "left", at: 0.05, float: 0.6, draw: (c, t) => crt(c, 1050, (c, sw, sh) => CARDS.editor(c, sw, sh, t, { mode: "messy", seed: 3 }, {}), t) },
         floatWin(820, 300, 4, 420, 200, "Rendering...", (c, w, h, t) => {
           K.text(c, "reel_FINAL_v7.mp4", 16, 34, W95(20));
           c.fillStyle = "#fff"; c.fillRect(16, 52, w - 32, 30); bevel(c, 16, 52, w - 32, 30, true);
@@ -210,7 +162,7 @@ window.CAROUSEL = {
       els: [
         { x: 290, y: 175, rot: -4, in: "pop", at: 0.05, draw: (c) => bubbly(c, "the vibe way", 84) },
         { x: 300, y: 300, in: "left", at: 0.25, draw: (c) => pinkBox(c, "type it. done.", 70, { italic: true }) },
-        { x: 640, y: 720, rot: 3, in: "right", at: 0.1, float: 0.6, draw: (c, t) => crt(c, 860, (c, sw, sh) => CARDS.prompt(c, sw, sh, t, { text: "30s reel, punchy, cut on the beat, captions, teal & orange", at: 0.7, cps: 30, fs: 30, press: 3.0, doneLabel: "✓  EDIT READY" }, { D }), t) },
+        { x: 640, y: 720, rot: 3, in: "right", at: 0.1, float: 0.6, draw: (c, t) => crt(c, 1180, (c, sw, sh) => CARDS.prompt(c, sw, sh, t, { text: "30s reel, punchy, cut on the beat, captions, teal & orange", at: 0.7, cps: 30, fs: 30, press: 3.0, doneLabel: "✓  EDIT READY" }, { D }), t) },
         floatWin(230, 1140, -4, 420, 300, "log.txt - Notepad", notepadText(["> cut 46 clips to beat", "> captions synced", "> graded teal&orange", "> 4 sfx added", "> done in 0:42"], 3.1, { cps: 40, size: 32, color: "#0a6b2a" }), 0.5, "left"),
         floatWin(900, 260, 6, 300, 240, "result.mp4", (c, w, h, t) => CARDS.reel(c, w, h, t, { look: "teal", title: "VIBE", titleAt: 3.3 }, { D }), 3.0, "pop"),
       ],
@@ -250,9 +202,8 @@ window.CAROUSEL = {
         floatWin(330, 480, -4, 520, 210, "1_pick.txt - Notepad", notepadText(["pick the best", "moments"], 0.8, { size: 44 }), 0.4, "left"),
         floatWin(420, 730, 2, 520, 210, "2_vibe.txt - Notepad", notepadText(["write the vibe", "in one sentence"], 1.5, { size: 44 }), 0.9, "left"),
         floatWin(330, 980, -3, 520, 210, "3_notes.txt - Notepad", notepadText(["give 3 notes,", "then post"], 2.2, { size: 44 }), 1.4, "left"),
-        { x: 830, y: 1090, rot: 4, in: "right", at: 0.6, float: 0.6, draw: (c, t) => crt(c, 440, (c, sw, sh) => {
-          c.fillStyle = "#14101f"; c.fillRect(0, 0, sw, sh);
-          K.bro(c, sw / 2, sh * 0.86, 1.5, { eyes: t > 2.6 ? "happy" : null, glow: 0.6, wave: t > 2.6 ? 0.9 + 0.3 * Math.sin(t * 9) : 0 });
+        { x: 830, y: 1090, rot: 4, in: "right", at: 0.6, float: 0.6, draw: (c, t) => crt(c, 640, (c, sw, sh) => {
+          FOOTAGE.drawFootage(c, "vlog_studio", t, sw, sh, "raw", 0.5);
         }, t) },
         { x: 820, y: 760, rot: 6, in: "pop", at: 2.8, draw: (c) => bubbly(c, "AI does the rest", 50) },
       ],
@@ -263,8 +214,8 @@ window.CAROUSEL = {
       els: [
         floatWin(180, 120, -5, 330, 230, "prompt_pack.pdf", (c, w, h) => c.drawImage(K.IMG.pack, 0, 0, w, h), 0.4, "left", { menu: false }),
         floatWin(880, 110, 5, 340, 230, "Untitled - Notepad", notepadText(["new vibe", "edit tips", "every day"], 1.0, { size: 38 }), 0.5, "right"),
-        { x: 540, y: 660, in: "up", at: 0.05, float: 0.6, draw: (c, t) => crt(c, 930, (c, sw, sh) => {
-          c.save(); c.translate(-((K.W - sw) / 2), -720); meadowBg(c, t, 1.1); c.restore();
+        { x: 540, y: 660, in: "up", at: 0.05, float: 0.6, draw: (c, t) => crt(c, 1300, (c, sw, sh) => {
+          FOOTAGE.drawFootage(c, "meadow_lapse", t, sw, sh, "raw", 0.5);
           c.translate(sw / 2, 0);
           const e1 = outBack(win(0.4, 0.8, t), 2), e2 = outBack(win(0.7, 1.1, t), 2), e3 = outBack(win(1.0, 1.4, t), 2.4);
           c.save(); c.translate(0, 190); c.scale(e1, e1); white(c, "Comment", 0, 0, 130, { align: "center" }); c.restore();

@@ -39,7 +39,7 @@ function waveAmp(i, seed = 3) {
 const CARDS = {
   // A single clip thumbnail: footage plus a filename strip.
   thumb(c, w, h, t, p) {
-    FOOTAGE.drawFootage(c, p.scene || "sunrise", t * 0.3, w, h, p.look || "raw");
+    FOOTAGE.drawFootage(c, p.scene || "street_vlog", t, w, h, p.look || "raw", p.focus ?? 0.5);
     if (p.label) {
       c.fillStyle = "rgba(0,0,0,.55)"; c.fillRect(0, h - 34, w, 34);
       txt(c, p.label, 12, h - 11, F.ui(15, 600), "#fff");
@@ -52,18 +52,18 @@ const CARDS = {
     c.fillStyle = "#0b0b0d"; c.fillRect(0, 0, w, h);
     const m = 7, sw = w - m * 2, sh = h - m * 2;
     c.save(); c.translate(m, m); rr(c, 0, 0, sw, sh, 18); c.clip();
-    const scenes = p.scenes || ["sunrise", "city", "ocean"];
+    const scenes = p.scenes || ["influencer_talk", "street_vlog", "dance_girls"];
     const cutEvery = p.cutEvery ?? 1;
     const at = p.at ?? 0.6;
     const k = Math.max(0, Math.floor((t - at) / cutEvery));
     const lt = ((t - at) % cutEvery + cutEvery) % cutEvery;
     const look = p.lookAt != null ? (t >= p.lookAt ? p.look : "log") : (p.look || "raw");
-    FOOTAGE.drawFootage(c, scenes[k % scenes.length], lt * 0.6 + k, sw, sh, look, 0.62);
+    FOOTAGE.drawFootage(c, scenes[k % scenes.length], t, sw, sh, look, p.focus ?? 0.5);
     if (p.lookAt != null) {                         // grade wipe across the phone
       const u = inOut(win(p.lookAt - 0.35, p.lookAt, t));
       if (u > 0 && u < 1) {
         c.save(); rr(c, 0, 0, sw * u, sh, 0); c.clip();
-        FOOTAGE.drawFootage(c, scenes[k % scenes.length], lt * 0.6 + k, sw, sh, p.look, 0.62);
+        FOOTAGE.drawFootage(c, scenes[k % scenes.length], t, sw, sh, p.look, p.focus ?? 0.5);
         c.restore();
         c.fillStyle = "#fff"; c.fillRect(sw * u - 2, 0, 4, sh);
       }
@@ -247,9 +247,9 @@ const CARDS = {
   grade(c, w, h, t, p) {
     const look = p.look || "teal";
     const u = p.at != null ? lerp(0.08, 0.92, inOut(win(p.at, p.at + 1.4, t))) : 0.5 + 0.38 * Math.sin((2 * Math.PI * t) / 5);
-    FOOTAGE.drawFootage(c, p.scene || "sunrise", t * 0.25, w, h, "log");
+    FOOTAGE.drawFootage(c, p.scene || "street_vlog", t, w, h, "log", p.focus ?? 0.5);
     c.save(); c.beginPath(); c.rect(0, 0, w * u, h); c.clip();
-    FOOTAGE.drawFootage(c, p.scene || "sunrise", t * 0.25, w, h, look);
+    FOOTAGE.drawFootage(c, p.scene || "street_vlog", t, w, h, look, p.focus ?? 0.5);
     c.restore();
     c.fillStyle = "#fff"; c.fillRect(w * u - 2, 0, 4, h);
     c.beginPath(); c.arc(w * u, h / 2, 16, 0, 7); c.fill();
@@ -382,7 +382,7 @@ const CARDS = {
     darkBg(c, w, h, "MEDIA");
     const n = p.n || 9, cols = p.cols || 3, gap = 8, tw = (w - 24 - gap * (cols - 1)) / cols, th = tw * 0.62;
     const at = p.at ?? 0.8, step = p.gap ?? 0.14;
-    const scenes = ["sunrise", "city", "ocean"], looks = ["raw", "log", "film"];
+    const scenes = ["vlog_talk", "city_night", "dance_girls", "street_vlog", "latte", "podcast_two", "waves", "skincare", "night_drive"], looks = ["raw", "log", "raw"];
     let shown = 0;
     for (let i = 0; i < n; i++) {
       const ct = at + i * step, e = outBack(win(ct, ct + 0.3, t), 2.2);
@@ -391,7 +391,7 @@ const CARDS = {
       const x = 12 + (i % cols) * (tw + gap), y = 44 + Math.floor(i / cols) * (th + gap);
       c.save(); c.translate(x + tw / 2, y + th / 2); c.scale(e, e); c.translate(-tw / 2, -th / 2);
       rr(c, 0, 0, tw, th, 7); c.save(); c.clip();
-      FOOTAGE.drawFootage(c, scenes[i % 3], i * 0.7, tw, th, looks[Math.floor(i / 3) % 3]);
+      FOOTAGE.drawFootage(c, scenes[i % scenes.length], 0, tw, th, looks[i % 3]);
       c.restore(); c.restore();
     }
     const rows = Math.ceil(n / cols), ay = 44 + rows * (th + gap) + 4;
@@ -481,11 +481,11 @@ const CARDS = {
   saved(c, w, h, t, p) {
     c.fillStyle = "#fff"; c.fillRect(0, 0, w, h);
     c.fillStyle = "#e9e3ff"; c.beginPath(); c.arc(28, 26, 14, 0, 7); c.fill();
-    c.save(); c.translate(28, 39); c.scale(0.18, 0.18); FOOTAGE.drawBro(c, { vol: 1, eyes: "happy" }); c.restore();
+    K.avatar(c, 28, 26, 14, "influencer_talk");
     txt(c, p.user || "vibe.editing", 50, 32, F.ui(15, 700), LT.ink);
     const ih = h - 112;
     c.save(); c.beginPath(); c.rect(0, 50, w, ih); c.clip(); c.translate(0, 50);
-    FOOTAGE.drawFootage(c, p.scene || "sunrise", t * 0.3, w, ih, "teal");
+    FOOTAGE.drawFootage(c, p.scene || "influencer_talk", t, w, ih, "raw");
     c.restore();
     const y = 50 + ih + 30;
     icon.heart(c, 26, y, 28, null, LT.ink); icon.bubble(c, 66, y, 26, LT.ink); icon.plane(c, 106, y, 26, LT.ink);
@@ -558,7 +558,7 @@ const CARDS = {
     const g = c.createLinearGradient(0, 0, w, 0); g.addColorStop(0, "#7c3aed"); g.addColorStop(1, "#ec4899");
     c.fillStyle = g; c.beginPath(); c.arc(56, 62, 38, 0, 7); c.fill();
     c.fillStyle = "#1a1528"; c.beginPath(); c.arc(56, 62, 33, 0, 7); c.fill();
-    c.save(); c.translate(56, 86); c.scale(0.45, 0.45); FOOTAGE.drawBro(c, { vol: 1, eyes: t > (p.press ?? 9) ? "happy" : null, glow: 0.5 }); c.restore();
+    K.avatar(c, 56, 62, 33, "vlog_talk");
     txt(c, p.name || "Vibe Editing", 108, 54, F.ui(21, 800), LT.ink);
     txt(c, p.sub || "One vibe edit a day", 108, 80, F.ui(15, 500), LT.dim);
     const press = p.press ?? 2.4, done = t >= press, b = pulse(t, press, 10);
@@ -649,7 +649,7 @@ const CARDS = {
     c.fillStyle = LT.lilac; rr(c, bx, by, bw, 26, [10, 10, 0, 0]); c.fill();
     if (playing) {
       c.save(); rr(c, bx, by + 26, bw, bh - 26, [0, 0, 10, 10]); c.clip(); c.translate(bx, by + 26);
-      FOOTAGE.drawFootage(c, p.scene || "city", (t - press) * 0.6, bw, bh - 26, "teal"); c.restore();
+      FOOTAGE.drawFootage(c, p.scene || "street_vlog", t, bw, bh - 26, "raw"); c.restore();
       c.fillStyle = "rgba(255,255,255,.5)"; rr(c, bx + 10, by + bh - 14, bw - 20, 4, 2); c.fill();
       c.fillStyle = "#fff"; rr(c, bx + 10, by + bh - 14, (bw - 20) * win(press, env.D, t), 4, 2); c.fill();
     } else {

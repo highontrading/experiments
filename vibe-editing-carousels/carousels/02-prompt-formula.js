@@ -135,9 +135,7 @@ function folder(c, s = 1) {
 function sticker(c, t, w = 170, h = 190) {
   K.panel(c, -w / 2, -h / 2, w, h, 6, "#fff", { color: "rgba(0,0,0,.25)", blur: 16, y: 6 });
   c.save(); rr(c, -w / 2 + 10, -h / 2 + 10, w - 20, h - 20, 2); c.clip(); c.translate(-w / 2 + 10, -h / 2 + 10);
-  c.fillStyle = "#06213f"; c.fillRect(0, 0, w - 20, h - 20);
-  c.globalCompositeOperation = "screen"; c.filter = "grayscale(1) invert(1) sepia(1) hue-rotate(170deg) saturate(3)";
-  FOOTAGE.drawFootage(c, "city", t * 0.4, w - 20, h - 20, "raw");
+  FOOTAGE.drawFootage(c, "city_night", t, w - 20, h - 20, "raw", 0.5);     // a real night-city print
   c.restore();
 }
 // iOS keyboard. `typing` = { s, at, cps } presses the key for each character.
@@ -229,7 +227,7 @@ window.CAROUSEL = {
         } },
         { x: 760, y: 980, rot: 4, in: "right", at: 0.6, float: 1, draw: (c, t) => {
           photoWindow(c, 440, 560, "result.mov", (c, w, h) => {
-            K.photo(c, 0, 0, w, h, "ocean", t * 0.2, "log");
+            K.photo(c, 0, 0, w, h, "latte", t, "log", 0, 0.5);
             K.text(c, "nice video", w / 2, h * 0.78, { family: "InterL", size: 30, weight: 400, color: "#fff", align: "center" });
           });
           const b = outBack(win(3.0, 3.35, t), 2.6);
@@ -339,11 +337,11 @@ window.CAROUSEL = {
       bg: bgCal(null, { today: 28, fade: 0.3 }),
       els: [
         { x: 290, y: 600, rot: -5, in: "left", at: 0.1, float: 1, draw: (c, t) => {
-          photoWindow(c, 440, 640, "\"make it cool\"", (c, w, h) => { K.photo(c, 0, 0, w, h, "city", t * 0.2, "log"); K.text(c, "cool video", w / 2, h * 0.8, { family: "InterL", size: 28, weight: 400, color: "#fff", align: "center" }); });
+          photoWindow(c, 440, 640, "\"make it cool\"", (c, w, h) => { K.photo(c, 0, 0, w, h, "street_vlog", t, "log", 0, 0.5); K.text(c, "cool video", w / 2, h * 0.8, { family: "InterL", size: 28, weight: 400, color: "#fff", align: "center" }); });
           c.save(); c.translate(0, -360); pill(c, "before", { size: 28, fill: "#ececf0", color: GREY }); c.restore();
         } },
         { x: 790, y: 650, rot: 4, in: "right", at: 0.25, float: 1, draw: (c, t) => {
-          photoWindow(c, 440, 640, "the formula", (c, w, h) => CARDS.reel(c, w, h, t, { look: "teal", title: "VIBE EDITING", titleAt: 1.2, caps: [["JUST"], ["VIBE."]], capsAt: 1.6, capEvery: 0.4, capY: 0.66 }, { D }));
+          photoWindow(c, 440, 640, "the formula", (c, w, h) => CARDS.reel(c, w, h, t, { scenes: ["street_vlog"], look: "teal", title: "VIBE EDITING", titleAt: 1.2, caps: [["JUST"], ["VIBE."]], capsAt: 1.6, capEvery: 0.4, capY: 0.66 }, { D }));
           if (t > 2.2) transformBox(c, 470, 670, t, 0.4);
           const b = outBack(win(2.6, 2.95, t), 2.6);
           if (t > 2.6) { c.save(); c.translate(200, -310); c.scale(b, b); c.fillStyle = BLUE; c.beginPath(); c.arc(0, 0, 40, 0, 7); c.fill(); U.icon.check(c, 0, 2, 44, "#fff", 4); c.restore(); }

@@ -89,7 +89,7 @@ function arrow(c, t) {
 }
 const LOOKS = [["teal", "Teal & Orange"], ["film", "Film 35"], ["noir", "Noir"], ["pastel", "Pastel Pop"], ["vhs", "VHS 89"]];
 const frame = (x, shelfY, w, h, at, paint, o = {}) => ({ x, y: shelfY - 16, in: o.in || "drop", at, float: 0, draw: (c, t) => stamp(c, w, h, (c, ww, hh) => paint(c, ww, hh, t)) });
-const graded = (scene, look, k = 0.3) => (c, w, h, t) => FOOTAGE.drawFootage(c, scene, t * k, w, h, look, 0.62);
+const graded = (scene, look) => (c, w, h, t) => FOOTAGE.drawFootage(c, scene, t, w, h, look, 0.5);
 const label = (x, y, draw, at, inn = "fade", rot = 0) => ({ x, y, rot, in: inn, at, draw });
 
 // ----------------------------------------------------------------- slides --
@@ -104,9 +104,9 @@ window.CAROUSEL = {
     {
       bg: bgRoom([330, 640, 900, 1110, 1290]),
       els: [
-        frame(230, 330, 240, 270, 0.1, graded("sunrise", "teal")),
-        frame(540, 330, 240, 270, 0.2, graded("sunrise", "film")),
-        frame(850, 330, 240, 270, 0.3, graded("sunrise", "noir")),
+        frame(230, 330, 240, 270, 0.1, graded("filmmaker", "teal")),
+        frame(540, 330, 240, 270, 0.2, graded("filmmaker", "film")),
+        frame(850, 330, 240, 270, 0.3, graded("filmmaker", "noir")),
         label(540, 600, (c) => K.text(c, "One Word", 0, 0, HEAVY(178, { align: "center" })), 0.25, "left"),
         label(540, 790, (c) => pinkBox(c, "Color Grades", 128), 0.4, "right"),
         label(540, 1000, (c) => bubbly(c, "5 looks", 92), 0.6, "pop", -3),
@@ -122,7 +122,7 @@ window.CAROUSEL = {
         label(540, 290, (c) => pinkBox(c, "get a whole mood", 84, { italic: true }), 0.25, "right"),
         { x: 540, y: 1064, in: "drop", at: 0.3, draw: (c, t) => stamp(c, 600, 660, (c, w, h) => {
           const k = Math.floor(Math.max(0, t - 0.9) / 0.7) % LOOKS.length;
-          FOOTAGE.drawFootage(c, "city", t * 0.3, w, h, t < 0.9 ? "log" : LOOKS[k][0], 0.62);
+          FOOTAGE.drawFootage(c, "street_vlog", t, w, h, t < 0.9 ? "log" : LOOKS[k][0], 0.5);
           const f = pulse(Math.max(0, t - 0.9) % 0.7, 0, 12);
           if (t > 0.9 && f > 0.03) { c.fillStyle = `rgba(255,255,255,${0.5 * f})`; c.fillRect(0, 0, w, h); }
         }) },
@@ -145,7 +145,7 @@ window.CAROUSEL = {
           K.text(c, "TEAL", w / 2, h / 2 - 6, { family: "InterD", size: 44, weight: 900, color: "#fff", align: "center" });
           K.text(c, "& ORANGE", w / 2, h / 2 + 40, { family: "InterD", size: 30, weight: 800, color: "#fff", align: "center" });
         }),
-        { x: 330, y: 1174, in: "drop", at: 0.3, draw: (c, t) => stamp(c, 500, 560, (c, w, h) => CARDS.grade(c, w, h, t, { scene: "sunrise", at: 1.0, look: "teal", name: "TEAL & ORANGE" }, {})) },
+        { x: 330, y: 1174, in: "drop", at: 0.3, draw: (c, t) => stamp(c, 500, 560, (c, w, h) => CARDS.grade(c, w, h, t, { scene: "filmmaker", at: 1.0, look: "teal", name: "TEAL & ORANGE" }, {})) },
         label(790, 250, (c) => bubbly(c, "01", 110), 0.2, "pop", 4),
         label(790, 420, (c) => K.text(c, "Teal &", 0, 0, HEAVY(112, { align: "center" })), 0.3, "right"),
         label(790, 528, (c) => K.text(c, "Orange", 0, 0, HEAVY(112, { align: "center" })), 0.38, "right"),
@@ -165,11 +165,11 @@ window.CAROUSEL = {
     {
       bg: bgRoom([620, 1240]),
       els: [
-        frame(770, 620, 420, 470, 0.1, graded("ocean", "film")),
+        frame(770, 620, 420, 470, 0.1, graded("beach_walk", "film")),
         label(270, 230, (c) => bubbly(c, "02", 100), 0.2, "pop", -4),
         label(270, 380, (c) => K.text(c, "Film 35", 0, 0, HEAVY(112, { align: "center" })), 0.3, "left"),
         label(270, 500, (c) => pinkBox(c, "vlogs, nostalgia", 52, { italic: true }), 0.5, "left"),
-        frame(310, 1240, 420, 470, 0.6, graded("sunrise", "noir")),
+        frame(310, 1240, 420, 470, 0.6, graded("vlog_talk", "noir")),
         label(800, 850, (c) => bubbly(c, "03", 100), 0.7, "pop", 4),
         label(800, 1000, (c) => K.text(c, "Noir", 0, 0, HEAVY(130, { align: "center" })), 0.8, "right"),
         label(800, 1120, (c) => pinkBox(c, "drama, quotes", 52, { italic: true }), 1.0, "right"),
@@ -179,8 +179,8 @@ window.CAROUSEL = {
     {
       bg: bgRoom([430, 830, 1250]),
       els: [
-        frame(290, 430, 330, 330, 0.1, graded("ocean", "pastel")),
-        frame(790, 430, 330, 330, 0.2, graded("city", "vhs", 0.6)),
+        frame(290, 430, 330, 330, 0.1, graded("skincare", "pastel")),
+        frame(790, 430, 330, 330, 0.2, graded("night_drive", "vhs")),
         label(290, 540, (c) => bubbly(c, "04 pastel pop", 56), 0.4, "pop", -3),
         label(790, 540, (c) => bubbly(c, "05 vhs 89", 56), 0.5, "pop", 3),
         { x: 540, y: 814, in: "drop", at: 0.6, draw: (c, t) => stamp(c, 860, 200, (c, w, h) => {

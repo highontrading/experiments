@@ -23,7 +23,11 @@ function paintLinen() {
 let NOW = 0;                                   // slide time, for card painters
 function bg(c, t) {
   NOW = t;
-  c.drawImage(LINEN, 0, 0);
+  // real fabric, darkened and warmed into brown linen
+  c.save(); c.filter = "grayscale(1) brightness(0.42) sepia(0.9) saturate(1.3) hue-rotate(-12deg) contrast(1.15)";
+  FOOTAGE.drawFootage(c, "fabric_gray", t, K.W, K.H, "raw", 0.5);
+  c.restore();
+  c.globalAlpha = 0.35; c.drawImage(LINEN, 0, 0); c.globalAlpha = 1;
   K.text(c, "Vibe Editing", 70, 72, BODY(26, { weight: 700 }));
   K.text(c, "Hook School", K.W - 70, 72, BODY(26, { weight: 700, align: "right" }));
 }
@@ -56,30 +60,16 @@ function photoCard(c, w, h, paint) {
   c.save(); rr(c, -w / 2 + 12, -h / 2 + 12, w - 24, h - 24, 14); c.clip(); c.translate(-w / 2 + 12, -h / 2 + 12);
   paint(c, w - 24, h - 24, NOW); c.restore();
 }
+// Real cutouts in place of the felt patch and the charm: a sunflower and a camera.
 function hibiscus(c, s, t) {
-  c.save(); c.scale(s, s); c.rotate(Math.sin(t * 1.3) * 0.05);
-  for (let i = 0; i < 5; i++) {
-    c.save(); c.rotate((i / 5) * Math.PI * 2);
-    c.beginPath(); c.moveTo(0, 0); c.bezierCurveTo(-70, -40, -60, -120, 0, -125); c.bezierCurveTo(60, -120, 70, -40, 0, 0);
-    c.fillStyle = "#f2a0b8"; c.fill();
-    c.save(); c.scale(0.86, 0.86); c.beginPath(); c.moveTo(0, 0); c.bezierCurveTo(-70, -40, -60, -120, 0, -125); c.bezierCurveTo(60, -120, 70, -40, 0, 0);
-    const g = c.createRadialGradient(0, -20, 5, 0, -60, 110); g.addColorStop(0, "#e2551f"); g.addColorStop(1, "#f6a23a");
-    c.fillStyle = g; c.fill(); c.restore();
-    c.setLineDash([6, 6]); c.strokeStyle = "rgba(255,240,200,.6)"; c.lineWidth = 2.5;
-    c.beginPath(); c.moveTo(0, -10); c.lineTo(0, -95); c.stroke(); c.setLineDash([]);
-    c.restore();
-  }
-  c.fillStyle = "#f7d84a"; c.beginPath(); c.arc(0, 0, 18, 0, 7); c.fill();
-  c.strokeStyle = "#d99a1e"; c.lineWidth = 6; c.beginPath(); c.moveTo(0, 0); c.lineTo(30, -50); c.stroke();
-  c.restore();
+  c.save(); c.rotate(Math.sin(t * 1.3) * 0.05);
+  c.shadowColor = "rgba(0,0,0,.5)"; c.shadowBlur = 24; c.shadowOffsetY = 12;
+  K.drawCut(c, "sunflower", 260 * s); c.restore();
 }
 function sunCharm(c, s, t) {
-  c.save(); c.scale(s, s); c.rotate(t * 0.4);
-  const g = c.createRadialGradient(-10, -10, 4, 0, 0, 70); g.addColorStop(0, "#fff1a8"); g.addColorStop(0.5, "#e2b23c"); g.addColorStop(1, "#8a6316");
-  for (let i = 0; i < 12; i++) { c.save(); c.rotate((i / 12) * Math.PI * 2); c.beginPath(); c.moveTo(-10, -36); c.quadraticCurveTo(0, -80, 14, -66); c.quadraticCurveTo(4, -50, 10, -36); c.fillStyle = g; c.fill(); c.restore(); }
-  c.beginPath(); c.arc(0, 0, 38, 0, 7); c.fillStyle = g; c.fill();
-  c.strokeStyle = "#7a5512"; c.lineWidth = 3; c.beginPath(); c.arc(0, 0, 20, 0.3, 2.6); c.stroke();
-  c.restore();
+  c.save(); c.rotate(-0.2 + Math.sin(t * 1.1) * 0.04);
+  c.shadowColor = "rgba(0,0,0,.55)"; c.shadowBlur = 20; c.shadowOffsetY = 10;
+  K.drawCut(c, "sunflower", 150 * s); c.restore();
 }
 // A 0-1.5 s ruler that fills while the hook plays.
 function clock15(c, w, t, at) {
@@ -98,6 +88,7 @@ window.CAROUSEL = {
   kit: true,
   title: "Hook Edits for the First 1.5 Seconds",
   dur: D,
+  cuts: ["sunflower"],
   setup: () => { LINEN = paintLinen(); },
   bg,
   fg: (c, t) => K.grain(c, t, 0.08),
@@ -110,7 +101,7 @@ window.CAROUSEL = {
         el(70, 590, (c) => K.text(c, "TO", 0, 0, CAPS(140)), 0.25, "left"),
         el(560, 545, (c, t) => beads(c, "HOOK", 128, t, 0.5), 0, "none"),
         el(985, 690, (c, t) => hibiscus(c, 0.6, t), 0.6, "grow", { float: 1 }),
-        ...[["city", "teal", [["WAIT"], ["FOR IT"]]], ["sunrise", "film", [["STOP"], ["SCROLLING"]]], ["ocean", "vhs", [["POV:"], ["YOU"]]]].map(([sc, lk, caps], i) =>
+        ...[["vlog_talk", "raw", [["WAIT"], ["FOR IT"]]], ["girl_record", "raw", [["STOP"], ["SCROLLING"]]], ["dance_girls", "raw", [["POV:"], ["YOU"]]]].map(([sc, lk, caps], i) =>
           el(250 + i * 380, 960, (c, t) => photoCard(c, 350, 470, reel({ scenes: [sc], look: lk, caps, capsAt: 0.9 + i * 0.2, capEvery: 0.3 })), 0.4 + i * 0.12, "right", { far: 0.7 })),
         el(150, 1220, (c, t) => sunCharm(c, 0.9, t), 0.9, "grow"),
         el(1010, 1260, (c, t) => { c.translate(Math.sin(t * 5) * 8, 0); K.text(c, "5 HOOKS →", 0, 0, CAPS(40, { align: "right" })); }, 1.2),
@@ -127,7 +118,7 @@ window.CAROUSEL = {
         el(560, 1000, (c, t) => photoCard(c, 760, 430, (c, w, h) => {
           const lt = (t - 0.6) % 2.4, z = 1.25 - 0.25 * outCubic(clamp(lt / 1.5));
           c.save(); c.translate(w / 2, h / 2); c.scale(z, z); c.translate(-w / 2, -h / 2);
-          FOOTAGE.drawFootage(c, "city", Math.max(0, lt) * 1.4 + 3, w, h, "teal"); c.restore();
+          FOOTAGE.drawFootage(c, "tiktok_dance", 0, w, h, "raw"); c.restore();
           K.text(c, "▶ 0:00", 24, 48, BODY(28, { color: "#fff", weight: 800 }));
         }), 0.5, "up"),
         el(560, 1280, (c, t) => clock15(c, 700, t, 0.6), 0.7),
@@ -141,11 +132,11 @@ window.CAROUSEL = {
         el(780, 230, (c, t) => beads(c, "03", 100, t, 0.3), 0, "none"),
         el(300, 380, (c) => { K.text(c, "TEXT IN", 0, 0, CAPS(78, { align: "center" })); K.text(c, "FRAME 1", 0, 80, CAPS(78, { align: "center" })); }, 0.2, "left"),
         el(780, 380, (c) => { K.text(c, "PUNCH-IN", 0, 0, CAPS(78, { align: "center" })); K.text(c, "ZOOM", 0, 80, CAPS(78, { align: "center" })); }, 0.35, "right"),
-        el(300, 870, (c, t) => photoCard(c, 420, 640, reel({ scenes: ["sunrise"], look: "film", caps: [["DON'T", "SKIP"], ["THE", "END"]], capsAt: 0, capEvery: 0.01, capY: 0.3, flash: false })), 0.4, "up", { rot: -4 }),
+        el(300, 870, (c, t) => photoCard(c, 420, 640, reel({ scenes: ["skincare"], look: "raw", caps: [["DON'T", "SKIP"], ["THE", "END"]], capsAt: 0, capEvery: 0.01, capY: 0.3, flash: false })), 0.4, "up", { rot: -4 }),
         el(780, 870, (c, t) => photoCard(c, 420, 640, (c, w, h) => {
           const k = ((t - 0.5) % 1.6 + 1.6) % 1.6, z = 1 + 0.35 * (k > 0.8 ? outBack(clamp((k - 0.8) / 0.15), 2) : 0);
           c.save(); c.translate(w / 2, h * 0.45); c.scale(z, z); c.translate(-w / 2, -h * 0.45);
-          FOOTAGE.drawFootage(c, "ocean", t * 0.3, w, h, "teal"); c.restore();
+          FOOTAGE.drawFootage(c, "influencer_talk", t, w, h, "raw"); c.restore();
           if (k > 0.8 && k < 0.95) { c.fillStyle = "rgba(255,255,255,.35)"; c.fillRect(0, 0, w, h); }
         }), 0.55, "up", { rot: 4 }),
         el(300, 1250, (c) => K.text(c, "readable before they blink", 0, 0, BODY(28, { align: "center" })), 0.8),
@@ -174,7 +165,7 @@ window.CAROUSEL = {
         }, 0.5, "up"),
         el(330, 1140, (c, t) => photoCard(c, 420, 300, (c, w, h) => {
           const lt = ((t - 0.6) % 2.4 + 2.4) % 2.4;
-          if (lt < 0.2) { c.fillStyle = "#000"; c.fillRect(0, 0, w, h); } else FOOTAGE.drawFootage(c, "city", t * 0.3, w, h, "teal");
+          if (lt < 0.2) { c.fillStyle = "#000"; c.fillRect(0, 0, w, h); } else FOOTAGE.drawFootage(c, "podcast_face", t, w, h, "raw");
           const k = pulse(lt, 0, 5);
           c.save(); c.translate(w - 50, 50); c.fillStyle = "#fff"; c.beginPath(); c.moveTo(-18, -8); c.lineTo(-6, -8); c.lineTo(8, -20); c.lineTo(8, 20); c.lineTo(-6, 8); c.lineTo(-18, 8); c.fill();
           c.strokeStyle = `rgba(255,255,255,${0.4 + k})`; c.lineWidth = 3; for (let r = 0; r < 2; r++) { c.beginPath(); c.arc(8, 0, 16 + r * 10 + k * 8, -0.8, 0.8); c.stroke(); } c.restore();
@@ -190,7 +181,7 @@ window.CAROUSEL = {
         el(70, 540, (c) => K.text(c, "END FIRST.", 0, 0, CAPS(120)), 0.25, "left"),
         el(560, 790, (c, t) => photoCard(c, 760, 360, (c, w, h) => {
           const back = t > 1.6 && t < 2.4;
-          FOOTAGE.drawFootage(c, t < 1.6 ? "sunrise" : "city", t < 1.6 ? 2 : Math.max(0, 2.4 - t) * 2, w, h, t < 1.6 ? "teal" : "log");
+          FOOTAGE.drawFootage(c, "makeup", 0, w, h, t < 1.6 ? "raw" : "log");
           K.text(c, t < 1.6 ? "THE RESULT" : back ? "◀◀ REWIND" : "HOW I MADE IT", w / 2, h * 0.58, { family: "ArchX9", size: 56, weight: 900, color: "#fff", align: "center", stroke: "#000", strokeW: 10 });
           if (back) { c.fillStyle = "rgba(255,255,255,.08)"; for (let y = 0; y < h; y += 10) c.fillRect(0, y + (t * 300) % 10, w, 3); }
         }), 0.4, "up"),

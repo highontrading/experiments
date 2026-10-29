@@ -21,8 +21,9 @@ function card(c, w, h, paint, r = 24) {
   c.save(); rr(c, -w / 2, -h / 2, w, h, r); c.clip(); c.translate(-w / 2, -h / 2); paint(c, w, h); c.restore();
 }
 const CAPS = [["HOOK", "#1"], ["THE", "TIP"], ["WAIT", "WHAT"], ["MY", "SECRET"], ["DON'T", "DO", "THIS"], ["3", "RULES"], ["THE", "TWIST"], ["SAVE", "THIS"], ["REAL", "TALK"], ["PART", "10"]];
-const SCN = ["city", "sunrise", "ocean"], LK = ["teal", "film", "pastel", "vhs", "teal"];
-const reelFace = (i, t, at = 0.6) => (c, w, h) => CARDS.reel(c, w, h, t, { scenes: [SCN[i % 3]], look: LK[i % 5], caps: [CAPS[i % 10].slice(0, 2), CAPS[i % 10].slice(2)].filter((x) => x.length), capsAt: at + (i % 4) * 0.15, capEvery: 0.3, capSize: 24 }, { D: 5 });
+const SCN = ["podcast_women", "podcast_two", "podcast_face", "podcast_women"], LK = ["raw", "raw", "film", "raw", "raw"];
+const FOC = [0.5, 0.3, 0.7, 0.45, 0.6];
+const reelFace = (i, t, at = 0.6) => (c, w, h) => CARDS.reel(c, w, h, t, { scenes: [SCN[i % 4]], look: LK[i % 5], focus: FOC[i % 5], caps: [CAPS[i % 10].slice(0, 2), CAPS[i % 10].slice(2)].filter((x) => x.length), capsAt: at + (i % 4) * 0.15, capEvery: 0.3, capSize: 24 }, { D: 5 });
 // Cards fanned along an arc centred below the frame; `shift` slides them along the arc.
 function fan(c, t, n, o) {
   const R = o.R || 1500, step = o.step || 0.2, shift = o.shift || 0;
@@ -71,7 +72,7 @@ window.CAROUSEL = {
         el(540, 330, (c) => K.text(c, "drop the", 0, 0, HEAD(140, { align: "center" })), 0.1, "down"),
         el(540, 470, (c) => K.text(c, "long one.", 0, 0, HEAD(140, { align: "center" })), 0.2, "down"),
         el(540, 790, (c, t) => card(c, 900, 500, (c, w, h) => {
-          FOOTAGE.drawFootage(c, "city", t * 0.2, w, h, "film");
+          FOOTAGE.drawFootage(c, "podcast_two", t, w, h, "raw", 0.5);
           c.fillStyle = "rgba(0,0,0,.45)"; c.fillRect(0, h - 70, w, 70);
           const u = clamp((t - 1.2) / 3.5);
           c.fillStyle = "rgba(255,255,255,.35)"; rr(c, 30, h - 42, w - 200, 10, 5); c.fill();
@@ -83,7 +84,7 @@ window.CAROUSEL = {
         el(0, 0, (c, t) => {
           if (t > 1.3) return;
           const [x, y] = mov(980, 1250, 600, 760, 0.4, 1.2, t);
-          c.save(); c.translate(x, y); card(c, 150, 100, (c, w, h) => FOOTAGE.drawFootage(c, "city", 0, w, h, "film"), 12); c.restore();
+          c.save(); c.translate(x, y); card(c, 150, 100, (c, w, h) => FOOTAGE.drawFootage(c, "podcast_two", 0, w, h, "raw", 0.5), 12); c.restore();
           cursor(c, x + 40, y + 30);
         }, 0, "none"),
         el(540, 1150, (c) => { K.text(c, "a podcast, a vlog, a live,", 0, 0, SUB(42, { align: "center" })); K.text(c, "anything over 10 minutes.", 0, 54, SUB(42, { align: "center" })); }, 0.6),
@@ -126,7 +127,7 @@ window.CAROUSEL = {
         el(540, 170, (c) => pill(c, "step 3"), 0.05, "pop"),
         el(540, 330, (c) => K.text(c, "one look,", 0, 0, HEAD(140, { align: "center" })), 0.1, "down"),
         el(540, 470, (c) => K.text(c, "ten reels.", 0, 0, HEAD(140, { align: "center" })), 0.2, "down"),
-        el(0, 0, (c, t) => fan(c, t, 10, { x: 540, y: 840, w: 240, h: 410, step: 0.19, at: 0.6, gap: 0.18, face: (i, t) => (c, w, h) => CARDS.reel(c, w, h, t, { scenes: [SCN[i % 3]], look: "teal", caps: [["PART"], [String(i + 1)]], capsAt: 0.8 + i * 0.18, capEvery: 0.05, capSize: 30 }, { D }) }), 0, "none"),
+        el(0, 0, (c, t) => fan(c, t, 10, { x: 540, y: 840, w: 240, h: 410, step: 0.19, at: 0.6, gap: 0.18, face: (i, t) => (c, w, h) => CARDS.reel(c, w, h, t, { scenes: [SCN[i % 4]], focus: FOC[i % 5], look: "raw", caps: [["PART"], [String(i + 1)]], capsAt: 0.8 + i * 0.18, capEvery: 0.05, capSize: 30 }, { D }) }), 0, "none"),
         el(540, 1160, (c, t) => { const n = clamp(Math.floor((t - 0.6) / 0.18) + 1, 0, 10); K.text(c, `${n}/10`, 0, 0, HEAD(80, { align: "center" })); }, 0.5),
         el(540, 1230, (c) => K.text(c, "same captions, same look, same end card", 0, 0, SUB(34, { align: "center" })), 0.8),
         el(540, 1305, (c) => logo(c), 0.7, "up"),
