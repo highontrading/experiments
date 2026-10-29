@@ -15,6 +15,7 @@ Every effect is peak-normalised to -1 dBFS before its gain, so gains are compara
 """
 import json, pathlib, subprocess
 import numpy as np
+from scipy.ndimage import uniform_filter1d
 from scipy.signal import butter, sosfilt
 
 SR = 48000
@@ -64,7 +65,7 @@ class Mixer:
             vo[i:i + len(seg)] += seg[: self.N - i]
         vo = filt(vo, "highpass", 75)
         n = int(0.03 * SR)
-        rms = np.sqrt(np.convolve(vo.mean(1) ** 2, np.ones(n) / n, "same")) + 1e-9
+        rms = np.sqrt(np.maximum(uniform_filter1d(vo.mean(1) ** 2, n), 0)) + 1e-9   # moving average, O(N)
         lvl = 20 * np.log10(rms)
         vo *= db(np.where(lvl > -24, (-24 + (lvl + 24) / 3) - lvl, 0))[:, None]   # 3:1 leveller
         return vo * db(-3) / (np.abs(vo).max() + 1e-9)
@@ -75,7 +76,7 @@ class Mixer:
         mus = np.zeros((self.N, 2)); mus[: min(self.N, len(bed))] = bed[: self.N]
         t = np.arange(self.N) / SR
         n = int(0.25 * SR)
-        on = np.clip(np.convolve((np.abs(self.vo).mean(1) > 0.01).astype(float), np.ones(n) / n, "same") * 3, 0, 1)
+        on = np.clip(uniform_filter1d((np.abs(self.vo).mean(1) > 0.01).astype(float), n) * 3, 0, 1)
         duck = np.zeros(self.N); a_in, a_out = 1 - np.exp(-1 / (0.08 * SR)), 1 - np.exp(-1 / (0.5 * SR))
         for i in range(1, self.N):
             v = on[i]; duck[i] = duck[i - 1] + (v - duck[i - 1]) * (a_in if v > duck[i - 1] else a_out)
@@ -89,7 +90,7 @@ class Mixer:
 
     @staticmethod
     def _peak(x):
-        return int(np.argmax(np.convolve(np.abs(x).mean(1), np.ones(480) / 480, "same")))
+        return int(np.argmax(uniform_filter1d(np.abs(x).mean(1), 480)))
 
     def hit(self, name, at, gain_db=-12, pan=0.0, align="onset", rate=1.0, length=None, hp=None):
         x = self.SFX[name]
