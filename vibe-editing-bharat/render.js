@@ -2,6 +2,7 @@
 //   node render.js                       every frame -> build/frames_out/f00001.png …
 //   node render.js --times 3,21.5,40     stills -> build/stills/t<sec>.png
 //   node render.js --from 20 --to 30     only part of the film
+//   (frames already in build/frames_out are skipped; --force re-renders them)
 const { chromium } = require("playwright");
 const fs = require("fs"), path = require("path");
 const args = process.argv.slice(2);
@@ -27,6 +28,9 @@ async function page(browser) {
   } else {
     const a = Math.round(+opt("--from", 0) * info.fps), b = Math.round(+opt("--to", info.dur) * info.fps);
     jobs = []; for (let f = a; f < b; f++) jobs.push({ t: f / info.fps, file: `build/frames_out/f${String(f + 1).padStart(5, "0")}.png` });
+    // resume: frames already on disk are kept unless --force
+    if (!args.includes("--force")) jobs = jobs.filter((j) => !fs.existsSync(path.join(__dirname, j.file)));
+    if (!jobs.length) { console.log("all frames present"); await browser.close(); return; }
   }
   fs.mkdirSync(path.dirname(path.join(__dirname, jobs[0].file)), { recursive: true });
   const t0 = Date.now(); let done = 0;

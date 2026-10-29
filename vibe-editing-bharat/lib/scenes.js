@@ -454,9 +454,8 @@ function checkerPath(c, travel, horizon, alpha = 1) {
   }
   c.restore();
 }
-SCENES.mr = { sky: false, draw(c, lt, S, gt) {
+SCENES.mr = { sky: true, draw(c, lt, S, gt) {
   const E = editAt(S), clip = "local", HZ = 960;
-  sky(c, gt, { dy: 160 });
   grass(c, HZ, { bulge: 0, crop: 0.12 });
   // speed: 1x, then ramps to 2.4x after the ask
   const ramp = ss(E, E + 0.6, lt);
@@ -495,7 +494,7 @@ SCENES.mr = { sky: false, draw(c, lt, S, gt) {
   }
   bigWord(c, "2.4×", 1030, 1310, 210, E + 0.05, lt, { align: "right", out: S.dur - 1.3 });
   handWord(c, "fast kara!", 70, 1310, 110, E + 0.25, lt, -6, S.dur - 1.3);
-  langBits(c, "mr", lt, S, gt, { by: 1560, ly: 300 + 0, cy: 300, px: 64 });
+  langBits(c, "mr", lt, S, gt, { by: 1560, ly: 520, cy: 520, px: 64 });
 } };
 
 // 6 · Telugu · Hyderabad — windows on the green hill; warm the colour

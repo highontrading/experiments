@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Build "Edit in Your Language": timing -> frames -> render -> mix -> MP4.
-#   ./make.sh            full build -> out/edit_in_your_language.mp4
+#   ./make.sh            build -> out/edit_in_your_language.mp4 (resumes an interrupted render)
+#   ./make.sh fresh      throw away rendered frames and render everything again
 #   ./make.sh stills     contact sheet of key moments -> build/sheet.jpg
 #   ./make.sh encode     re-mix and re-encode from existing frames
 set -euo pipefail
@@ -15,8 +16,8 @@ if [[ "${1:-}" == "stills" ]]; then
   echo "-> build/sheet.jpg"; exit 0
 fi
 if [[ "${1:-}" != "encode" ]]; then
-  rm -rf build/frames_out
-  node render.js --jobs 4
+  [[ "${1:-}" == "fresh" ]] && rm -rf build/frames_out
+  node render.js --jobs 4          # resumes: frames already rendered are kept
 fi
 python3 mix.py
 mkdir -p out

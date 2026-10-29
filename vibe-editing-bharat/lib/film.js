@@ -41,18 +41,12 @@ function frame(gt) {
       onLayer(LA, A, gt, false); onLayer(LB, B, gt, false);
       c.save(); c.globalAlpha = 1 - p * 0.6; c.translate(-W * 0.85 * p, 0); c.drawImage(LA, 0, 0); c.restore();
       c.save(); c.translate(W * (1 - p), 0); c.drawImage(LB, 0, 0); c.restore();
-    } else if (tr.type === "tilt") {                  // camera tilts down from the sky onto the grass
+    } else if (tr.type === "tilt") {                  // camera tilts down: the far sky barely moves, the ground rises into frame
       const p = inOut(e);
-      onLayer(LA, A, gt, true); onLayer(LB, B, gt, true);
-      c.drawImage(LA, 0, -H * 0.55 * p);
-      // B rises from below; its top edge is feathered into A's sky, hardening as it lands
-      const fh = 520 * (1 - p), x = LB.getContext("2d");
-      if (fh > 1) {
-        x.save(); x.globalCompositeOperation = "destination-in";
-        const g = x.createLinearGradient(0, 0, 0, fh); g.addColorStop(0, "rgba(0,0,0,0)"); g.addColorStop(1, "rgba(0,0,0,1)");
-        x.fillStyle = g; x.fillRect(0, 0, W, fh); x.restore();
-      }
-      c.drawImage(LB, 0, H * 0.55 * (1 - p));
+      sky(c, gt, { dy: -110 * Math.sin(Math.PI * p) });     // drifts and settles back, so nothing jumps at either end
+      onLayer(LA, A, gt, false); onLayer(LB, B, gt, false);
+      c.drawImage(LA, 0, -H * 0.6 * p);
+      c.drawImage(LB, 0, H * 0.6 * (1 - p));
     } else if (tr.type === "dissolve") {              // soft zoom-dissolve with a breath of blur
       const p = inOut(e), bl = Math.sin(Math.PI * p) * 10;
       onLayer(LA, A, gt, true); onLayer(LB, B, gt, true);

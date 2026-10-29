@@ -174,7 +174,7 @@ function grass(c, top, o = {}) {
   c.lineTo(W + 10, H + 10); c.lineTo(-10, H + 10); c.closePath();
   c.clip();
   if (im) {
-    const sy = im.naturalHeight * 0.64, sh = im.naturalHeight - sy;     // below the hill crest: all grass
+    const sy = im.naturalHeight * 0.74, sh = im.naturalHeight - sy;     // below the hill crest: all grass
     const dh = H - (top - bulge), sc = Math.max(W / im.naturalWidth, dh / sh) * (o.z ?? 1);
     const sw = W / sc;
     c.drawImage(im, (im.naturalWidth - sw) / 2, sy, sw, Math.min(sh, dh / sc), 0, top - bulge, W, Math.min(sh * sc, dh));
