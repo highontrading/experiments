@@ -198,17 +198,18 @@ function camera(t) {
 const BOARD = {};
 
 BOARD.hook = (g, t) => {
-  const BY = -118, BH = 150 * 0.95, top = BY - BH / 2;
+  const BY = -330, BH = 150 * 0.95, top = BY - BH / 2;
   // left column of pixel icons + a small real photo tile (as in the reference)
   sprite(g, "sparkles", -440, BY - 84, 7, COL.ink, spring(win(0.3, 1.0, t)));
   sprite(g, "mug", -440, BY, 7, COL.ink, spring(win(0.45, 1.15, t)));
   sprite(g, "cloud", -440, BY + 84, 7, COL.ink, spring(win(0.6, 1.3, t)));
   frameTile(g, { at: 0.35, x: -262, y: BY, w: 200, h: 160, r: 4, border: false, clip: "ff_moviola_wide", ss: 2, rin: 0, grain: true }, t);
-  serif(g, "Video editing has been", -400, -330, 92, t, C.hook_editing - 0.55, { stagger: 0.09 });
-  pixBlock(g, "REINVENTED", -150, BY, 150, t, C.hook_reinvented - 0.15, { w: 690 });
+  serif(g, "Video editing", -420, -650, 118, t, C.hook_editing - 0.55, { stagger: 0.09 });
+  serif(g, "has been", -420, -510, 118, t, C.hook_editing + 0.2, { stagger: 0.09 });
+  pixBlock(g, "REINVENTED", -140, BY, 150, t, C.hook_reinvented - 0.15, { w: 640 });
   // a 1960s Moviola stands on the block; its cut-off base hides behind it
   g.save(); g.beginPath(); g.rect(-700, -1000, 1400, 1000 + top + 1); g.clip();
-  object(g, "ff_moviola", 345, top + 64, 240, t, C.hook_reinvented + 0.25);
+  object(g, "ff_moviola", 370, top + 64, 230, t, C.hook_reinvented + 0.25);
   g.restore();
   // three times... and a fourth
   ["film", "tape", "timeline"].forEach((nm, i) => {
@@ -216,21 +217,23 @@ BOARD.hook = (g, t) => {
     const p = spring(win(at, at + 0.7, t));
     if (p <= 0) return;
     g.save(); g.globalAlpha = clamp(p * 2);
-    g.translate(-300 + i * 160, 150 + (1 - p) * 30);
+    g.translate(-300 + i * 170, -80 + (1 - p) * 30);
     g.font = `84px "${PIX}"`; g.fillStyle = COL.ink; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(String(i + 1), 0, 0);
     g.font = `italic 500 32px "${SERIF}"`; g.fillStyle = COL.soft; g.fillText(nm, 0, 62);
     g.restore();
   });
   const four = spring(win(C.hook_again - 0.15, C.hook_again + 0.6, t));
   if (four > 0) {
-    g.save(); g.translate(180, 150); g.scale(four, four);
+    g.save(); g.translate(210, -80); g.scale(four, four);
     g.fillStyle = COL.butter; g.fillRect(-56, -52, 112, 104);
     g.font = `92px "${PIX}"`; g.fillStyle = COL.ink; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("4", 0, 4);
     g.restore();
-    small(g, "now", 180, 212, 32, t, C.hook_again, { align: "center" });
-    sprite(g, "sparkle", 258, 92, 6, COL.ink, spring(win(C.hook_again + 0.1, C.hook_again + 0.8, t)));
+    small(g, "now", 210, -18, 32, t, C.hook_again, { align: "center" });
+    sprite(g, "sparkle", 288, -138, 6, COL.ink, spring(win(C.hook_again + 0.1, C.hook_again + 0.8, t)));
   }
-  object(g, "ff_cup", 360, 470, 250, t, 0.15, { rot: -12 });
+  object(g, "ff_cup", 350, 470, 260, t, 0.15, { rot: -12 });
+  frameTile(g, { at: C.hook_now - 0.3, x: -210, y: 260, w: 420, h: 315, r: 18, clip: "moviola", ss: 1, rot: -3, grain: true }, t);
+  small(g, "an editor at work, 1954", -415, 452, 28, t, C.hook_now);
 };
 
 // film era: color footage of a Moviola, then the strip itself, cut and spliced.
@@ -521,7 +524,7 @@ function recap(g, t) {   // 2x2 tiles, then "Tell a better story"
   // the end card: a cup of coffee is the O in STORY (after the cup in "Cozy")
   const e0 = C.o_goal - 0.1;
   serif(g, "The goal never does.", W / 2, 470, 60, t, e0, { align: "center", italic: true, color: COL.soft });
-  serif(g, "Tell a better", W / 2 - 330, 690, 120, t, C.o_tell - 0.2, {});
+  serif(g, "Tell a better", 110, 690, 120, t, C.o_tell - 0.2, {});
   const b = pixBlock(g, "ST RY", W / 2 - 330, 880, 230, t, C.o_story - 0.25, { pad: 46, cps: 30 });
   const cupP = spring(win(C.o_story + 0.05, C.o_story + 0.8, t));
   if (cupP > 0) {
@@ -534,7 +537,7 @@ function recap(g, t) {   // 2x2 tiles, then "Tell a better story"
       g.drawImage(im, -cw / 2, -cw * im.height / im.width / 2, cw, cw * im.height / im.width); g.restore(); }
   }
   g.save(); g.beginPath(); g.rect(0, 0, W, 880 - 230 * 0.95 / 2 + 2); g.clip();
-  object(g, "ff_moviola", W / 2 + 330, 880 - 230 * 0.95 / 2 + 80, 230, t, C.o_story + 0.25);
+  object(g, "ff_moviola", W / 2 + 380, 880 - 230 * 0.95 / 2 + 70, 190, t, C.o_story + 0.25);
   g.restore();
   sprite(g, "sparkles", W / 2 - 400, 1080, 7, COL.ink, spring(win(C.o_story + 0.4, C.o_story + 1.0, t)));
   sprite(g, "mug", W / 2 - 300, 1080, 7, COL.ink, spring(win(C.o_story + 0.5, C.o_story + 1.1, t)));
@@ -567,6 +570,7 @@ function frame(g, t) {
     const cardA = clamp((0.6 - cam.z) / 0.3);
     for (const [k, bx] of Object.entries(B)) {
       if (Math.abs(bx - cam.x) * cam.z > W / 2 + 700 * cam.z) continue;
+      if (k === "hook" && t > C.s_film + 1.2) continue;   // the intro board isn't part of the era row
       if (cardA > 0 && k !== "hook") {
         g.save(); g.globalAlpha = worldA * cardA; g.fillStyle = "#fff"; g.shadowColor = "rgba(40,45,60,0.14)"; g.shadowBlur = 120; g.shadowOffsetY = 40;
         K.rr(g, bx - 560, -960, 1120, 1520, 60); g.fill(); g.restore();

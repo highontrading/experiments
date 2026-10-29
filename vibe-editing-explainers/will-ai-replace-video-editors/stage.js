@@ -252,15 +252,15 @@ const DAYS3 = [["WEDNESDAY", "28"], ["THURSDAY", "29"], ["FRIDAY", "30"]];
 // 1 · the month page, three days wide, "29" in the blue cell
 function L_hook(g, t) {
   page(g);
-  const intro = outQuint(win(0, 1.2, t));
-  fadeTxt(g, "October", 70, 330, 92, 0.1, t, { weight: 700, track: -1 });
-  fadeTxt(g, "2026", 1010, 330, 80, 0.2, t, { weight: 700, align: "right", family: "Jost", track: -1 });
+  const intro = outQuint(win(0, 0.6, t));
+  fadeTxt(g, "October", 70, 330, 92, 0, t, { weight: 700, track: -1 });
+  fadeTxt(g, "2026", 1010, 330, 80, 0.05, t, { weight: 700, align: "right", family: "Jost", track: -1 });
   g.save(); g.globalAlpha = intro;
   grid(g, [360, 720], [440, 560, 1170, 1440]);
   DAYS3.forEach(([d], i) => txt(g, d, 180 + i * 360, 520, 30, { align: "center", weight: 500, track: 5, color: COL.ink }));
   g.restore();
   // blue cell fills from the top
-  const fill = outExpo(win(0.35, 1.05, t));
+  const fill = outExpo(win(0.2, 0.85, t));
   blueCell(g, 362, 562, 357, 606, fill);
   [["28", 330], ["30", 1050]].forEach(([n, x]) => fadeTxt(g, n, x, 640, 50, 0.4, t, { align: "right", weight: 500 }));
   fadeTxt(g, "29", 690, 640, 50, 0.6, t, { align: "right", weight: 500, color: "#fff" });
@@ -302,13 +302,13 @@ function L_good(g, t) {
   });
   // MON: cut silences
   const y0 = ROWS[0][2];
-  footCell(g, "timeline", 262, y0 + 10, 330, 186, t, C.good_cutting - 0.6, { ss: 1 });
-  g.save(); g.globalAlpha = outCubic(win(C.good_cutting - 0.4, C.good_cutting, t));
+  footCell(g, "timeline", 262, y0 + 10, 330, 186, t, C.s_good - 0.1, { ss: 1 });
+  g.save(); g.globalAlpha = outCubic(win(C.s_good + 0.1, C.s_good + 0.5, t));
   waveform(g, 620, y0 + 40, 390, 130, t, { cut: C.good_silences + 0.1, seed: 31 }); g.restore();
   sticker(g, { at: C.good_silences, x: 830, y: y0 + 210, rot: -5, text: "cut silences", size: 36, bg: COL.orange, icon: ICON.scissors, check: C.good_silences + 0.4 }, t);
   // TUE: captions land on the beat of the words
   const y1 = ROWS[1][2];
-  footCell(g, "ai_editor", 262, y1 + 10, 330, 186, t, C.good_syncing - 0.6, { ss: 1 });
+  footCell(g, "ai_editor", 262, y1 + 10, 330, 186, t, C.s_good + 0.05, { ss: 1 });
   const words = ["welcome", "back", "to", "the", "edit"];
   words.forEach((wd, i) => {
     const at = C.good_captions - 0.2 + i * 0.16;
@@ -320,7 +320,7 @@ function L_good(g, t) {
     g.fillStyle = COL.navy; g.fillRect(x, y1 + 186, 2, 12);
     g.restore();
   });
-  g.save(); g.globalAlpha = outCubic(win(C.good_syncing - 0.4, C.good_syncing, t));
+  g.save(); g.globalAlpha = outCubic(win(C.s_good + 0.25, C.s_good + 0.65, t));
   waveform(g, 620, y1 + 30, 390, 76, t, { seed: 44, color: COL.grey }); g.restore();
   sticker(g, { at: C.good_captions, x: 850, y: y1 + 225, rot: 4, text: "sync captions", size: 36, bg: COL.lav, icon: ICON.cc, check: C.good_captions + 0.45 }, t);
   // WED: one video, three shapes
@@ -432,12 +432,19 @@ function L_change(g, t) {
   // less clicking  |  more deciding
   const less = outCubic(win(C.change_less, C.change_less + 0.6, t)), more = outCubic(win(C.change_more - 0.1, C.change_more + 0.6, t));
   const lw = lerp(460, 360, more), rx = 70 + lw + 20, rw = 940 - lw - 20;
-  g.save(); g.globalAlpha = outCubic(win(C.change_less - 0.3, C.change_less + 0.2, t));
+  g.save();
   g.save(); g.translate(70 + lw / 2, 1050); const ls = 1 - 0.1 * less; g.scale(ls, ls); g.translate(-(70 + lw / 2), -1050);
-  footCell(g, "ai_click", 70, 760, lw, 560, t, C.change_less - 0.3, { ss: 1, tint: `rgba(250,250,248,${0.35 * more})`, fx: 0.5 });
+  footCell(g, "ai_click", 70, 760, lw, 560, t, s + 0.6, { ss: 1, tint: `rgba(250,250,248,${0.35 * more})`, fx: 0.5 });
   g.restore();
   sticker(g, { at: C.change_less, x: 70 + lw / 2, y: 1330, rot: -5, text: "less clicking", size: 36, bg: COL.orange, icon: ICON.cursor }, t);
   g.restore();
+  {
+    const ep = outCubic(win(s + 0.7, s + 1.2, t)) * (1 - more);
+    if (ep > 0) { g.save(); g.globalAlpha = ep; g.strokeStyle = COL.line; g.lineWidth = 2.5; g.setLineDash([12, 9]);
+      K.rr(g, rx, 760, rw, 560, 14); g.stroke(); g.setLineDash([]);
+      txt(g, "THU", rx + rw - 24, 820, 30, { align: "right", weight: 500, track: 5 }); txt(g, "?", rx + rw / 2, 1110, 180, { align: "center", weight: 300, color: "rgba(27,31,138,0.25)" });
+      g.restore(); }
+  }
   if (more > 0) {
     g.save(); g.globalAlpha = more;
     blueCell(g, rx, 760, rw, 560 * more);
@@ -507,7 +514,7 @@ function L_dir(g, t) {
   g.restore();
   fadeTxt(g, "director.", 100, 905, 130, C.outro_director - 0.15, t, { weight: 700, color: "#fff", track: -4 });
   photoSticker(g, "ai_director", 700, 1150, 520, 6, t, C.outro_director - 0.05);
-  photoSticker(g, "ai_clapper", 270, 1190, 380, -10, t, C.outro_future + 0.1);
+  photoSticker(g, "ai_clapper", 270, 1190, 380, -10, t, s + 0.75);
   sparkle(g, 980, 430, 28, t, C.outro_director + 0.2, 12); sparkle(g, 460, 1060, 20, t, C.outro_director + 0.35, 13);
 }
 

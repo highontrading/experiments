@@ -1,7 +1,15 @@
 """Sound for "Will AI replace video editors?": voice, Curiosity (Diego Nava) bed, quiet paper foley.
 Every hit sits on the same cue stage.js uses.   python sound.py -> build/mix.wav"""
 import sys; sys.path.insert(0, "../lib")
+import numpy as np
+from scipy.signal import fftconvolve
+import mixer
 from mixer import Mixer
+
+# lib/mixer.py smooths with np.convolve, which is direct (O(n·k)) and takes minutes on a
+# 12 000-tap window; the same "same"-mode result via FFT takes a fraction of a second.
+mixer.np = type("np", (), {**{k: getattr(np, k) for k in dir(np) if not k.startswith("__")},
+                           "convolve": staticmethod(lambda a, v, mode="full": np.maximum(fftconvolve(a, v, mode=mode), 0))})  # inputs are never negative
 
 m = Mixer(__file__, music="curiosity_diego_nava.mp3", music_db=-10, music_offset=8)
 C = m.C
@@ -35,10 +43,10 @@ m.hit("paper_quick", C["hook_honest"] - 0.05, -22)
 slap(C["hook_honest"] + 0.15, 320, -13); m.hit("long_pop", C["hook_honest"] + 0.2, -20)
 
 # good: Mon / Tue / Wed jobs
-m.card(C["good_cutting"] - 0.6, -200, quiet=-2)
+m.card(C["s_good"] - 0.1, -200, quiet=-3)
 m.hit("scissors_cut", C["good_silences"] + 0.1, -16, pan=0.2)
 slap(C["good_silences"], 300); tick(C["good_silences"] + 0.45, 300)
-m.card(C["good_syncing"] - 0.6, -200, quiet=-2)
+m.card(C["s_good"] + 0.05, -200, quiet=-4)
 for i in range(5):
     m.hit("ui_click", C["good_captions"] - 0.2 + i * 0.16, -26, pan=0.2 + i * 0.08)
 slap(C["good_captions"], 300); tick(C["good_captions"] + 0.5, 300)
@@ -71,7 +79,7 @@ m.hit("ui_click", C["change_disappearing"] - 0.3, -22)
 m.hit("paper_quick", C["change_disappearing"] + 0.45, -16, rate=1.1); m.hit("paper_quick", C["change_disappearing"] + 0.7, -18, rate=0.9)
 m.hit("ui_click", C["change_changing"] - 0.3, -22)
 tick(C["change_changing"] + 0.1, -300)
-m.card(C["change_less"] - 0.3, -250, quiet=-2)
+m.card(C["s_change"] + 0.15, -250, quiet=-2)
 for i in range(3):
     m.hit("mouse_click", C["change_less"] + 0.1 + i * 0.22, -16 - i * 2, pan=-0.3)
 slap(C["change_less"], -250)
@@ -87,8 +95,8 @@ for i in range(6):
 
 # director
 slap(C["outro_director"] - 0.05, 160, -13)
-m.hit("camera_shutter", C["outro_future"] + 0.12, -14, pan=-0.3)     # the clapperboard
-slap(C["outro_future"] + 0.1, -270, -16)
+m.hit("camera_shutter", C["s_dir"] + 0.32, -14, pan=-0.3)     # the clapperboard
+slap(C["s_dir"] + 0.3, -270, -16)
 
 # this week
 m.hit("paper_quick", C["outro_week"] - 0.35, -20)

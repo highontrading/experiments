@@ -28,13 +28,6 @@
   "vf": "scale=900:-2"
  },
  {
-  "name": "cw_mic",
-  "mixkit": 44049,
-  "ss": 2,
-  "dur": 7,
-  "vf": "scale=900:-2"
- },
- {
   "name": "cw_teacher",
   "mixkit": 28224,
   "ss": 0,
@@ -61,12 +54,5 @@
   "ss": 2.2,
   "dur": 8,
   "vf": "scale=960:-2"
- },
- {
-  "name": "cw_classroom",
-  "mixkit": 36046,
-  "ss": 0,
-  "dur": 8,
-  "vf": "scale=720:-2"
  }
 ]

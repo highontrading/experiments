@@ -88,7 +88,7 @@ function glass(g, x, y, w, h, r, o = {}) {
   const a = o.alpha ?? 1;
   if (a <= 0 || w < 2 || h < 2) return;
   g.save();
-  g.globalAlpha = a;
+  g.globalAlpha *= a;
   K.shadow(g, 40, 18, 0.18 * (o.shadow ?? 1), "20,40,60");
   rr(g, x, y, w, h, r); g.fillStyle = "rgba(255,255,255,0.05)"; g.fill();
   K.noShadow(g);
@@ -144,9 +144,9 @@ function bar(g, t) {
     if (txt.caret && Math.floor(t * 2.2) % 2 === 0) g.fillRect(x + 108 + cw, cy - 22, 3.5, 46);
     if (!txt.s && txt.ph) { g.globalAlpha *= 0.6; g.fillText(txt.ph, x + 104, cy + 2); }
     // send button
-    const sx = x + w - 70;
+    const sx = x + w - 70, press = Math.sin(Math.PI * win(C.time + 0.55, C.time + 0.85, t));
     g.globalAlpha = appear * prompt;
-    g.fillStyle = "#fff"; g.beginPath(); g.arc(sx, cy, 40, 0, 7); g.fill();
+    g.fillStyle = press > 0 ? "#efc3da" : "#fff"; g.beginPath(); g.arc(sx, cy, 40 * (1 - 0.12 * press), 0, 7); g.fill();
     g.strokeStyle = INK; g.lineWidth = 4.2; g.lineCap = g.lineJoin = "round";
     g.beginPath(); g.moveTo(sx, cy + 16); g.lineTo(sx, cy - 15); g.moveTo(sx - 13, cy - 3); g.lineTo(sx, cy - 16); g.lineTo(sx + 13, cy - 3); g.stroke();
   }
@@ -182,7 +182,7 @@ function card(g, x, y, w, h, o, t) {
   const s = w / 900, r = 46 * Math.max(0.55, s), R = Math.max(36, 66 * s);
   const ncx = x + w - R - 14 * s, ncy = y + h - R - 14 * s;
   g.save();
-  g.globalAlpha = o.alpha ?? 1;
+  g.globalAlpha *= o.alpha ?? 1;
   // body, minus the notch (clip everything except the notch circle)
   g.save();
   g.beginPath(); g.rect(x - 200, y - 200, w + 400, h + 400); g.arc(ncx, ncy, R + 16 * Math.max(0.6, s), 0, Math.PI * 2, true); g.clip("evenodd");
@@ -235,7 +235,7 @@ function bubble(g, x, y, text, t, at, o = {}) {
   const right = o.side === "r";
   g.save();
   g.translate(x, y); g.scale(p, p);
-  g.globalAlpha = clamp(p * 2);
+  g.globalAlpha *= clamp(p * 2);
   const bx = right ? -w : 0;
   K.shadow(g, 18, 8, 0.18, "40,30,60");
   g.fillStyle = o.pink ? PINK_BUBBLE : "#fff";
@@ -256,7 +256,7 @@ function obj(g, key, x, y, w, rot, t, at, o = {}) {
   const im = K.object(key); if (!im) return;
   const h = w * im.height / im.width, bob = Math.sin(t * 1.3 + x * 0.01) * 4;
   g.save(); g.translate(x, y + bob + 60 * (1 - p)); g.rotate((rot + (1 - p) * (o.spin ?? 10)) * Math.PI / 180); g.scale(0.7 + 0.3 * p, 0.7 + 0.3 * p);
-  g.globalAlpha = clamp(p * 2);
+  g.globalAlpha *= clamp(p * 2);
   g.shadowColor = "rgba(25,35,25,0.35)"; g.shadowBlur = 34; g.shadowOffsetY = 22;
   g.drawImage(im, -w / 2, -h / 2, w, h);
   K.noShadow(g);
@@ -277,10 +277,10 @@ function obj(g, key, x, y, w, rot, t, at, o = {}) {
 function label(g, text, x, y, size, t, at, o = {}) {  // big white Nunito line
   const p = outQuint(win(at, at + 0.7, t)) * (o.out != null ? 1 - inCubic(win(o.out, o.out + 0.35, t)) : 1);
   if (p <= 0) return;
-  g.save(); g.globalAlpha = p;
+  g.save(); g.globalAlpha *= p;
   font(g, size, o.weight ?? 800, "Nunito"); if (o.italic) g.font = "italic " + g.font;
   g.textAlign = o.align || "center"; g.textBaseline = "middle"; g.fillStyle = o.color || "#fff";
-  g.shadowColor = "rgba(30,50,80,0.35)"; g.shadowBlur = 18; g.shadowOffsetY = 4;
+  if (!o.soft) { g.shadowColor = "rgba(30,50,80,0.35)"; g.shadowBlur = 18; g.shadowOffsetY = 4; }
   g.fillText(text, x, y + 30 * (1 - p));
   g.restore();
 }
@@ -290,11 +290,12 @@ function chip(g, text, x, y, t, at, o = {}) {   // small glass chip
   font(g, o.fs || 36, 700, o.fam || "Nunito");
   const tw = g.measureText(text).width, w = tw + 56, h = (o.fs || 36) * 1.75;
   g.save(); g.translate(x, y); g.scale(p, p);
-  glass(g, -w / 2, -h / 2, w, h, h / 2, { tint: o.tint ?? 0.3, shadow: 0.6 });
-  g.fillStyle = o.color || "#fff"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(text, 0, 2);
+  if (o.solid) { K.shadow(g, 16, 6, 0.18, "40,30,60"); g.fillStyle = o.pink ? PINK_BUBBLE : "#fff"; rr(g, -w / 2, -h / 2, w, h, h / 2); g.fill(); K.noShadow(g); }
+  else glass(g, -w / 2, -h / 2, w, h, h / 2, { tint: o.tint ?? 0.3, shadow: 0.6 });
+  g.fillStyle = o.solid ? (o.pink ? "#3b2733" : INK) : (o.color || "#fff"); g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(text, 0, 2);
   if (o.strike) {
     const sp = outCubic(win(o.strike, o.strike + 0.35, t));
-    g.strokeStyle = "#fff"; g.lineWidth = 4; g.lineCap = "round";
+    g.strokeStyle = o.solid ? INK : "#fff"; g.lineWidth = 4; g.lineCap = "round";
     g.beginPath(); g.moveTo(-tw / 2 - 4, 2); g.lineTo(-tw / 2 - 4 + (tw + 8) * sp, 2); g.stroke();
   }
   g.restore();
@@ -308,10 +309,10 @@ function sceneBefore(g, t) {
   if (a <= 0) return;
   glass(g, x, y, w, h, lerp(56, 75, win(n0, n1, t)), { alpha: a, tint: 0.16 });
   if (t > n1) return;
-  const out = win(n0 - 0.1, n0 + 0.45, t);          // contents lift away first
+  const out = win(n0 - 0.4, n0 + 0.1, t);          // contents lift away before the bar morphs
   g.save(); g.globalAlpha = 1 - out; g.translate(0, -120 * inCubic(out));
-  label(g, "not long ago,", 540, 430, 56, t, 0.9, { weight: 300, italic: true });
-  label(g, "a good video needed…", 540, 510, 56, t, 1.4, { weight: 700 });
+  label(g, "not long ago,", 540, 430, 58, t, 0.9, { weight: 400, italic: true, color: INK, soft: true });
+  label(g, "a good video needed…", 540, 515, 62, t, 1.4, { weight: 800, color: INK, soft: true });
   const c1 = spring(win(C.studio - 0.45, C.studio + 0.55, t)), c2 = spring(win(C.software - 0.45, C.software + 0.55, t));
   if (c1 > 0) { g.save(); g.globalAlpha *= clamp(c1 * 2); g.translate(0, 70 * (1 - c1));
     card(g, 110, 600, 420, 520, { col: CARD.taupe, num: 1, the: "The", word: "studio", media: clip("cw_studio", C.studio - 0.45), mh: 0.52 }, t); g.restore(); }
@@ -325,7 +326,7 @@ function sceneBefore(g, t) {
 
 function sceneNow(g, t) {
   if (t < n0 || t > te1) return;
-  const out = win(te0 - 0.05, te0 + 0.4, t);
+  const out = win(te0 - 0.35, te0 + 0.05, t);
   g.save(); g.globalAlpha = 1 - out; g.translate(0, -80 * inCubic(out));
   label(g, "an idea", 540, 610, 150, t, C.idea - 0.12);
   label(g, "+ a few sentences", 540, 760, 74, t, C.sentences - 0.15, { weight: 300, italic: true });
@@ -339,7 +340,7 @@ function sceneNow(g, t) {
 }
 
 function sceneTeacher(g, t) {
-  if (t < te0 || t > wy1 + 0.2) return;
+  if (t < te0 || t > ou1 + 0.1) return;
   const [x, y, w, h] = track(TEACH, t);
   const grow = win(te0 + 0.15, te1 + 0.1, t);
   if (h < 4) return;
@@ -351,16 +352,16 @@ function sceneTeacher(g, t) {
   g.restore();
   if (t < sh1) {
     const out = sh0;
-    obj(g, "notebook", 205, 1290, 330, -14, t, C.teacher - 0.2, { out });
-    obj(g, "pencil", 860, 395, 380, 34, t, C.teacher + 0.05, { out });
+    obj(g, "notebook", 150, 420, 250, -16, t, C.teacher - 0.2, { out });
+    obj(g, "pencil", 905, 1010, 340, 62, t, C.teacher + 0.05, { out });
     bubble(g, 140, 1060, "tomorrow: maps & oceans", t, C.lesson - 0.25, { fs: 36, out });
     bubble(g, 945, 1160, "your video is ready", t, C.tonight - 0.1, { side: "r", pink: true, fs: 36, out });
-    chip(g, "tonight · 9:40 pm", 760, 1250, t, C.tonight + 0.25, { fs: 30, out });
+    chip(g, "tonight · 9:40 pm", 760, 1250, t, C.tonight + 0.25, { fs: 30, out, solid: true });
   }
 }
 
 function sceneShop(g, t) {
-  if (t < sh0 || t > wy1 + 0.2) return;
+  if (t < sh0 || t > ou1 + 0.1) return;
   const [x, y, w, h] = track(SHOP, t);
   card(g, x, y, w, h, { col: CARD.pink, num: 4, the: "The", word: "shop", media: clip("cw_florist", sh0), saved: win(C.agency + 0.2, C.agency + 0.5, t) }, t);
   if (t < cr1) {
@@ -368,8 +369,8 @@ function sceneShop(g, t) {
     g.save(); g.translate(dx, dy);
     obj(g, "cw_lily", 210, 420, 330, -12, t, C.shop - 0.15, { out });
     obj(g, "cw_bags", 270, 1215, 360, -4, t, C.ads + 0.05, { out });
-    obj(g, "cw_tablet", 780, 1130, 330, 8, t, C.ads - 0.35, { out, screen: adScreen, sr: 0.05 });
-    chip(g, "agency", 520, 1010, t, C.agency - 0.35, { strike: C.agency + 0.1, out });
+    obj(g, "cw_tablet", 780, 1130, 330, 8, t, C.ads - 0.35, { out, screen: adScreen, sr: 0.05, flip: true });
+    chip(g, "an agency", 520, 1010, t, C.agency - 0.35, { strike: C.agency + 0.1, out, solid: true, fs: 42 });
     bubble(g, 945, 990, "made it myself", t, C.agency + 0.45, { side: "r", pink: true, fs: 34, out });
     g.restore();
   }
@@ -379,13 +380,14 @@ function adScreen(g, w, h, t) {  // the ad being assembled on the tablet
   const p1 = outQuint(win(C.ads + 0.1, C.ads + 0.6, t)), p2 = outQuint(win(C.ads + 0.5, C.ads + 1.0, t));
   g.fillStyle = `rgba(168,82,122,${0.82 * p1})`; g.fillRect(-w / 2, h / 2 - h * 0.3 * p1, w, h * 0.3);
   g.fillStyle = "#fff"; g.textAlign = "left"; g.textBaseline = "alphabetic";
-  font(g, w * 0.13, 800, "Nunito"); g.globalAlpha = p1; g.fillText("Fresh lilies", -w / 2 + w * 0.08, h / 2 - h * 0.15);
-  font(g, w * 0.075, 600, "Nunito"); g.globalAlpha = p2; g.fillText("today only · order in store", -w / 2 + w * 0.08, h / 2 - h * 0.07);
-  g.globalAlpha = 1;
+  const ba = g.globalAlpha;
+  font(g, w * 0.13, 800, "Nunito"); g.globalAlpha = ba * p1; g.fillText("Fresh lilies", -w / 2 + w * 0.08, h / 2 - h * 0.15);
+  font(g, w * 0.075, 600, "Nunito"); g.globalAlpha = ba * p2; g.fillText("today only · order in store", -w / 2 + w * 0.08, h / 2 - h * 0.07);
+  g.globalAlpha = ba;
 }
 
 function sceneCreator(g, t) {
-  if (t < cr0 || t > wy1 + 0.2) return;
+  if (t < cr0 || t > ou1 + 0.1) return;
   const [x, y, w, h] = track(CREAT, t);
   card(g, x, y, w, h, { col: CARD.mauve, num: 5, the: "The", word: "creator", media: clip("cw_creator", cr0, 1, 0.5, 0.35), mh: 0.5, saved: win(C.project + 0.3, C.project + 0.6, t) }, t);
   if (t < wy1) {
@@ -397,11 +399,11 @@ function sceneCreator(g, t) {
       g2.fillStyle = "rgba(0,0,0,0.55)"; rr(g2, -tw / 2 - 16, h2 * 0.28, tw + 32, w2 * 0.16, 10); g2.fill();
       g2.fillStyle = "#fff"; g2.textAlign = "center"; g2.textBaseline = "middle"; g2.fillText(txt, 0, h2 * 0.28 + w2 * 0.08);
     };
-    obj(g, "phone", 300, 1095, 410, -10, t, C.english - 0.35, { out, screen: cap("Hi everyone!", "Nunito") });
-    obj(g, "phone_rose", 790, 1105, 400, 8, t, C.hindi - 0.35, { out, screen: cap("नमस्ते दोस्तों!", "Poppins") });
-    chip(g, "English", 300, 860, t, C.english - 0.1, { fs: 34, out });
-    chip(g, "हिन्दी", 790, 860, t, C.hindi - 0.1, { fs: 34, fam: "Poppins", out });
-    chip(g, "one project", 545, 960, t, C.project - 0.15, { fs: 32, out, tint: 0.4 });
+    obj(g, "phone", 300, 930, 360, -10, t, C.english - 0.35, { out, screen: cap("Hi everyone!", "Nunito"), flip: true });
+    obj(g, "phone_rose", 790, 935, 350, 8, t, C.hindi - 0.35, { out, screen: cap("नमस्ते दोस्तों!", "Poppins"), flip: true });
+    chip(g, "English", 300, 1165, t, C.english - 0.1, { fs: 34, out, solid: true });
+    chip(g, "हिन्दी", 790, 1165, t, C.hindi - 0.1, { fs: 34, fam: "Poppins", out, solid: true });
+    chip(g, "one project", 545, 1045, t, C.project - 0.15, { fs: 32, out, solid: true, pink: true });
     g.restore();
   }
 }
@@ -445,7 +447,7 @@ function sceneOutro(g, t) {
     const i = Math.min(n - 1, Math.max(0, Math.floor(lt * 30)));
     const im = K.img(`../assets/footage/cw_lily_bloom/f${String(i + 1).padStart(4, "0")}.png`);
     if (im) {
-      const w = 900, h = w * im.height / im.width, x = 540 - w / 2, y = 1260 - h + 40 * (1 - lp);
+      const w = 860, h = w * im.height / im.width, x = 540 - w / 2, y = 1300 - h + 40 * (1 - lp);
       const tmp = LILY.getContext("2d"); tmp.clearRect(0, 0, LILY.width, LILY.height);
       tmp.drawImage(im, 0, 0, LILY.width, LILY.height);
       tmp.globalCompositeOperation = "destination-in";   // soft fade at the top, where the clip is cut
@@ -461,9 +463,43 @@ function sceneOutro(g, t) {
   label(g, "changing", 540, 450, 150, t, C.world - 0.7);
   label(g, "the world.", 540, 590, 150, t, C.world - 0.35);
   g.restore();
-  bubble(g, 965, 1400, "one sentence at a time", t, C.time + 0.5, { side: "r", pink: true, fs: 36 });
 }
 const LILY = K.makeCanvas(600, 470);
+
+// ------------------------------------------------------------------ captions --
+// like K.captions, but long phrases wrap onto two balanced lines instead of running off-screen
+function captions(g, t) {
+  const P = K.PHRASES;
+  const ph = P.find((p, i) => t >= p[0].t0 - 0.12 && t < (P[i + 1] ? Math.min(P[i + 1][0].t0 - 0.12, p[p.length - 1].t1 + 0.6) : p[p.length - 1].t1 + 0.6));
+  if (!ph) return;
+  const fs = 48; font(g, fs, 800, "Nunito");
+  const words = ph.map((w) => w.raw.replace(/[.,:]$/, "")), sp = g.measureText(" ").width;
+  const ww = words.map((w) => g.measureText(w).width);
+  const full = ww.reduce((a, b) => a + b + sp, -sp);
+  let lines = [[...words.keys()]];
+  if (full > 940) {  // split where the two halves are closest in width
+    let best = 1, bd = 1e9, acc = 0;
+    for (let i = 0; i < words.length - 1; i++) { acc += ww[i] + sp; const d = Math.abs(acc - (full - acc)); if (d < bd) { bd = d; best = i + 1; } }
+    lines = [[...words.keys()].slice(0, best), [...words.keys()].slice(best)];
+  }
+  const endA = 1 - win(ph[ph.length - 1].t1 + 0.35, ph[ph.length - 1].t1 + 0.6, t);
+  g.save(); g.textBaseline = "middle"; g.textAlign = "left";
+  lines.forEach((ids, li) => {
+    const lw = ids.reduce((a, i) => a + ww[i] + sp, -sp);
+    let x = W / 2 - lw / 2; const y = 1530 + (li - (lines.length - 1) / 2) * fs * 1.32;
+    for (const i of ids) {
+      const w = ph[i], p = outCubic(win(w.t0 - 0.08, w.t0 + 0.18, t)), active = t >= w.t0 - 0.05 && t < w.t1 + 0.05;
+      g.globalAlpha = (0.3 + 0.7 * p) * endA;
+      if (active) { g.fillStyle = PINK_BUBBLE; rr(g, x - 10, y - fs * 0.62, ww[i] + 20, fs * 1.24, 22); g.fill(); }
+      else { g.shadowColor = "rgba(30,50,80,0.5)"; g.shadowBlur = 10; g.shadowOffsetY = 3; }
+      g.fillStyle = active ? "#3b2733" : "#fff";
+      g.fillText(words[i], x, y + 4 * (1 - p) + 2);
+      K.noShadow(g);
+      x += ww[i] + sp;
+    }
+  });
+  g.restore();
+}
 
 // ------------------------------------------------------------------ frame --
 function frame(g, t) {
@@ -486,7 +522,7 @@ function frame(g, t) {
   sceneOutro(g, t);
   bar(g, t);
   // light sweep + grain
-  K.captions(g, t, { y: 1530, size: 48, weight: 800, family: "Nunito", color: "#fff", hi: PINK_BUBBLE, hiText: "#3b2733", radius: 22, shadow: "rgba(30,50,80,0.5)" });
+  captions(g, t);
   K.grain(g, t, 0.05);
   let speed = 0, moving = false;
   for (const [a, b] of GLIDES) if (t > a && t < b) { moving = true; speed = Math.max(speed, Math.sin(Math.PI * win(a, b, t))); }

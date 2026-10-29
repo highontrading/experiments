@@ -1,6 +1,18 @@
 """Sound: Ideas and Experiments (Diego Nava) under the voice, plus close, quiet foley on the
 same cues the picture uses (stage.js).  python sound.py -> build/mix.wav"""
 import sys; sys.path.insert(0, "../lib")
+import numpy as np
+from scipy.signal import fftconvolve
+
+# lib/mixer.py smooths with np.convolve and a 12,000-tap kernel, which takes minutes on a
+# busy CPU; the FFT version gives the same result in a fraction of a second.
+_np_convolve = np.convolve
+def _convolve(a, v, mode="full"):
+    if min(len(a), len(v)) <= 256:
+        return _np_convolve(a, v, mode)
+    out = fftconvolve(a, v, mode)
+    return np.maximum(out, 0) if (np.min(a) >= 0 and np.min(v) >= 0) else out   # FFT round-off can dip below 0
+np.convolve = _convolve
 from mixer import Mixer
 
 m = Mixer(__file__, music="ideas_and_experiments_diego_nava.mp3", music_db=-10)

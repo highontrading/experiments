@@ -193,7 +193,8 @@ function cover(g, t, o = {}) {   // o.mini: draw the finished cover (for a scree
 }
 
 // ------------------------------------------------------------ BRIEF --
-const BRIEF_TXT = "A 45-second explainer. Calm and clear. Clean catalog look, lime accents.";
+const BRIEF_LINES = ["45 seconds long.", "Calm, clear voice.", "Clean catalog look."];
+const BRIEF_TXT = BRIEF_LINES.join(" ");
 const NB = { x: 300, y: 690, w: 440, rot: -6 };
 function brief(g, t, P) {
   const push = -1100 * P.o;           // leaves with a vertical push
@@ -210,34 +211,27 @@ function brief(g, t, P) {
   // footage of hands typing the brief
   clip(g, "typing", 610, 500, 390, 440, t, { p: win(C.brief_one, C.brief_one + 0.8, t), at: C.brief_one, fx: 0.55 });
   label(g, "typing the brief · real footage", 620, 970, 24, { color: GREY, a: win(C.brief_one + 0.5, C.brief_one + 1, t) });
-  // the prompt card types itself
+  // the prompt card types itself; each line gets its tag (length · mood · look)
   const cp = spring(win(C.brief_write - 0.5, C.brief_write + 0.4, t));
   if (cp > 0) {
     g.save(); g.translate(0, 60 * (1 - cp)); g.globalAlpha *= clamp(cp * 2);
-    card(g, 80, 1010, 920, 250);
+    card(g, 80, 1010, 920, 330);
     pill(g, "prompt", 120, 1062, 26, { align: "left" });
-    K.font(g, 40, 500, FONT); g.fillStyle = INK; g.textAlign = "left"; g.textBaseline = "top";
-    const typed = K.typed(BRIEF_TXT, t, C.brief_write, 31);
-    const lines = K.wrap(g, BRIEF_TXT, 840);
-    let n = typed.length, y = 1110, pos = {};
-    lines.forEach((ln) => {
-      const s = ln.slice(0, Math.max(0, n)); n -= ln.length + 1;
-      g.fillText(s, 120, y);
-      for (const key of ["45-second", "Calm and clear", "catalog look"]) {
-        const i = ln.indexOf(key);
-        if (i >= 0) pos[key] = [120 + g.measureText(ln.slice(0, i)).width + g.measureText(key).width / 2, y + 48];
+    K.font(g, 44, 500, FONT); g.textAlign = "left"; g.textBaseline = "middle";
+    let n = Math.floor((t - C.brief_write) * 24);
+    BRIEF_LINES.forEach((ln, i) => {
+      const y = 1135 + i * 66, s2 = ln.slice(0, Math.max(0, n)); n -= ln.length;
+      g.fillStyle = INK; g.fillText(s2, 120, y);
+      const [nm, at] = [["length", C.brief_length], ["mood", C.brief_mood], ["look", C.brief_look]][i];
+      const lp = win(at - 0.1, at + 0.4, t);
+      if (lp > 0) {
+        const x0 = 120 + g.measureText(ln).width + 18;
+        leader(g, x0, y, 800, y, outCubic(lp));
+        pill(g, nm, 870, y, 30, { p: spring(win(at, at + 0.7, t)), rot: i === 1 ? -3 : 3 });
+        K.font(g, 44, 500, FONT); g.textAlign = "left"; g.textBaseline = "middle";
       }
-      y += 54;
     });
-    if (typed.length < BRIEF_TXT.length && Math.floor(t * 2.4) % 2 === 0) { /* caret */ }
     g.restore();
-    // length · mood · look
-    [["length", "45-second", C.brief_length, 230], ["mood", "Calm and clear", C.brief_mood, 540], ["look", "catalog look", C.brief_look, 850]].forEach(([nm, key, at, px]) => {
-      const lp = win(at - 0.1, at + 0.45, t);
-      if (!pos[key] || lp <= 0) return;
-      leader(g, pos[key][0], pos[key][1] + 60 * (1 - cp), px, 1356, outCubic(lp));
-      pill(g, nm, px, 1385, 34, { p: spring(win(at, at + 0.7, t)), rot: nm === "mood" ? -3 : 3 });
-    });
   }
   g.restore();
 }
@@ -329,9 +323,9 @@ const CODE = [
   "// the agent's edit, as code",
   "clip(g, \"typing\", 610, 500, 390, 440, t)",
   "item(g, \"notebook\", 300, 690, 440, -6)",
-  "pill(g, \"mood\", 540, 1385, 34)",
+  "pill(g, nm, 870, y, 30, { rot: 3 })",
   "K.captions(g, t, { hi: LIME })",
-  "m.lay(C.brief_mood, 540)",
+  "m.pop(C[\"brief_mood\"], 0, -17)",
   "folder(g, fp, t)",
 ];
 const HL = { 1: "agent_cut", 4: "agent_caption", 5: "agent_sound" };
@@ -481,7 +475,7 @@ function phoneScreen(g, w, h, t) {   // the phone plays this video's own cover
 const ROWS = [["Brief", "notebook", "outro_brief"], ["Assets", "hw_camera", "outro_assets"], ["Agent", "hw_laptop", "outro_agent"], ["Render", "hw_clock", "outro_render"], ["Notes", "phone_rose", "outro_notes"]];
 const RW = { notebook: 150, hw_camera: 190, hw_laptop: 160, hw_clock: 80, phone_rose: 120 };
 function outro(g, t, P) {
-  const end = inOutQuint(win(C.outro_that - 0.2, C.outro_that + 0.9, t));
+  const end = inOutQuint(win(C.outro_that - 0.35, C.outro_that + 0.3, t));
   // index list: one row per part, lit as it's named
   ROWS.forEach(([n, key, cue], i) => {
     const y = 470 + i * 190;
@@ -504,8 +498,8 @@ function outro(g, t, P) {
     label(g, c.n, c.lx, c.ly, 32, { a: e });
   });
   if (end > 0) {
-    head(g, "That's the", W / 2, 860, 150, { align: "center", p: win(C.outro_that - 0.05, C.outro_that + 0.6, t) });
-    head(g, "whole machine", W / 2, 1010, 150, { align: "center", p: win(C.outro_machine - 0.25, C.outro_machine + 0.45, t) });
+    head(g, "That's the", W / 2, 860, 150, { align: "center", p: win(C.outro_that + 0.2, C.outro_that + 0.85, t) });
+    head(g, "whole machine", W / 2, 1010, 150, { align: "center", p: win(C.outro_machine - 0.1, C.outro_machine + 0.55, t) });
     pill(g, "vibe editing", W / 2, 1110, 38, { p: spring(win(C.outro_machine + 0.4, C.outro_machine + 1.2, t)) });
   }
 }
