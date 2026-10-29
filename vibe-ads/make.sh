@@ -22,7 +22,11 @@ python3 mix.py
 mkdir -p out
 ffmpeg -loglevel error -y -framerate 30 -i "build/$AD/frames/f%05d.png" -i "build/$AD/mix.wav" \
   -c:v libx264 -profile:v high -preset slow -crf 19 -pix_fmt yuv420p -r 30 -c:a aac -b:a 192k -shortest -movflags +faststart "out/${NAME}_master.mp4"
-( cd /tmp && ffmpeg -loglevel error -y -i "$OLDPWD/out/${NAME}_master.mp4" -c:v libx264 -preset slow -b:v 7000k -pass 1 -an -f null /dev/null \
-  && ffmpeg -loglevel error -y -i "$OLDPWD/out/${NAME}_master.mp4" -c:v libx264 -preset slow -b:v 7000k -maxrate 10M -bufsize 20M -pass 2 \
+( cd /tmp && ffmpeg -loglevel error -y -i "$OLDPWD/out/${NAME}_master.mp4" -c:v libx264 -preset slow -b:v 7000k -pass 1 -passlogfile "/tmp/2pass_$AD" -an -f null /dev/null \
+  && ffmpeg -loglevel error -y -i "$OLDPWD/out/${NAME}_master.mp4" -c:v libx264 -preset slow -b:v 7000k -maxrate 10M -bufsize 20M -pass 2 -passlogfile "/tmp/2pass_$AD" \
      -pix_fmt yuv420p -c:a copy -movflags +faststart "$OLDPWD/out/${NAME}.mp4" )
 ls -la out | grep "$NAME"
+# frames are big (3-5 MB each): drop them once the master is encoded and complete
+DUR=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "out/${NAME}_master.mp4" | cut -d. -f1)
+WANT=$(python3 -c "import json;print(int(json.load(open('build/$AD/timing.json'))['dur']))")
+[[ "$DUR" -ge "$WANT" && "${KEEP_FRAMES:-0}" != 1 ]] && rm -rf "build/$AD/frames" || true
