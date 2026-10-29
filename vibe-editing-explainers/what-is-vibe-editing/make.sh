@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Build EP 01 end to end.
-#   ./make.sh          voiceover timings -> timeline -> sound -> frames -> out/ep01_what_is_vibe_editing.mp4
+# Build "What is vibe editing?" end to end.
+#   ./make.sh          voiceover timings -> timeline -> sound -> frames -> out/what-is-vibe-editing.mp4
 #   ./make.sh stills   a contact sheet of stills only (fast check)
 # The voiceover itself (tts.py) is generated once and kept in vo/, so rebuilding costs no ElevenLabs credits.
 set -euo pipefail
@@ -17,6 +17,6 @@ rm -rf build/frames && node render.js
 mkdir -p out
 ffmpeg -v error -y -framerate 30 -i build/frames/f%04d.jpg -i build/mix.wav \
   -c:v libx264 -preset slow -crf 21 -pix_fmt yuv420p -profile:v high -tune film \
-  -c:a aac -b:a 256k -ar 48000 -movflags +faststart -shortest out/ep01_what_is_vibe_editing.mp4
-ffmpeg -v error -y -ss 9.9 -i out/ep01_what_is_vibe_editing.mp4 -frames:v 1 -q:v 2 out/cover.jpg
-echo "-> out/ep01_what_is_vibe_editing.mp4"
+  -c:a aac -b:a 256k -ar 48000 -movflags +faststart -shortest out/what-is-vibe-editing.mp4
+ffmpeg -v error -y -ss 9.9 -i out/what-is-vibe-editing.mp4 -frames:v 1 -q:v 2 out/cover.jpg
+echo "-> out/what-is-vibe-editing.mp4"

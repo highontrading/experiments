@@ -1,4 +1,4 @@
-// EP 01 · What is vibe editing?
+// What is vibe editing?
 // The whole film is renderAt(t): a green cutting mat, real desk objects, real footage
 // in cards, and label blocks, filmed by one camera that glides from board to board.
 (function () {
@@ -170,7 +170,7 @@ function note(g, o, t) {
   g.restore();
 }
 
-function tag(g, o, t) {  // yellow sticker tag, e.g. "EP 01"
+function tag(g, o, t) {  // yellow sticker tag, e.g. "the watchlist"
   const p = spring(win(o.at, o.at + 0.8, t)) * (o.out != null ? 1 - inCubic(win(o.out, o.out + 0.3, t)) : 1);
   if (p <= 0) return;
   font(g, o.size || 34, 600);
@@ -581,7 +581,7 @@ BOARDS.hook = (g, t) => {
   block(g, { at: C.hook_timeline - 0.05, out: C.hook_written - 0.1, x: 170, y: 380, text: "on a timeline", bg: COL.white, fg: COL.ink, size: 92, rot: 3 }, t);
   tag(g, { at: C.hook_dragged, out: C.hook_written - 0.1, x: 280, y: 60, text: "0 clips dragged", rot: -4, size: 36 }, t);
   // the new way: code
-  codeCard(g, { at: C.hook_written - 0.1, x: 10, y: -310, w: 880, fs: 30, rot: 2, file: "ep01/timeline.py",
+  codeCard(g, { at: C.hook_written - 0.1, x: 10, y: -310, w: 880, fs: 30, rot: 2, file: "timeline.py",
     typeAt: C.hook_written + 0.2, cps: 46,
     lines: ["CUE = {", "  \"hook_never\": w(\"hook\", \"never\"),", "  \"title_vibe\": w(\"name\", \"vibe\"),", "  \"past_hand\":  w(\"past\", \"hand\"),", "  \"flip_mood\":  w(\"flip\", \"mood\"),", "}"],
     out: C.s_title + 0.1 }, t);
@@ -616,7 +616,7 @@ BOARDS.title = (g, t) => {
   paperStar(g, -470, 640, 44, 30, 13, t, at + 0.9);
   toggle(g, 380, -150, 70, t, at + 0.3);
   titleComp(g, t, at, ["vibe", "editing", "explained"],
-    { tag: "EP 01", tag2: "for creators", l1: "editing with AI + code", l2: "what it is · how it works · why it matters" });
+    { tag: "the watchlist", tag2: "for creators", l1: "editing with AI + code", l2: "what it is · how it works · why it matters" });
 };
 
 BOARDS.past = (g, t) => {
@@ -666,7 +666,7 @@ const CODE_HOW = [
   "block({ text: \"by hand\", at: C.past_hand })",
   "captions(TL.lines)",
   "sfx(\"paper_slide\", C.flip_mood)",
-  "render(\"ep01.mp4\", { fps: 30 })",
+  "render(\"what-is-vibe-editing.mp4\")",
 ];
 BOARDS.how = (g, t) => {
   const C = CUE;
@@ -676,7 +676,7 @@ BOARDS.how = (g, t) => {
   block(g, { at: C.how_agent - 0.1, x: -150, y: -385, text: "AI agent", bg: COL.yellow, fg: COL.brown, size: 92, rot: -2 }, t);
   sparkle(g, 60, -440, 30, t, C.how_agent + 0.1, 12);
   dashLine(g, -150, -315, -150, -230, t, C.how_code - 0.4);
-  codeCard(g, { at: C.how_code - 0.3, out: C.how_video - 0.15, x: 0, y: 30, w: 940, fs: 28, rot: 1.5, file: "ep01/stage.js",
+  codeCard(g, { at: C.how_code - 0.3, out: C.how_video - 0.15, x: 0, y: 30, w: 940, fs: 28, rot: 1.5, file: "stage.js",
     typeAt: C.how_code, cps: 70, lines: CODE_HOW,
     hl: {
       1: (g2, x, y, w, h, tt) => hlBar(g2, x, y, w, h, tt, C.how_clip),
@@ -695,12 +695,12 @@ BOARDS.how = (g, t) => {
     shadow(g, 14, 6, 0.3); g.fillStyle = "#fff"; rr(g, -380, -24, 760, 48, 24); g.fill(); noShadow(g);
     g.fillStyle = COL.yellow; rr(g, -372, -16, 744 * inOutCubic(rp), 32, 16); g.fill();
     font(g, 24, 700); g.fillStyle = COL.ink; g.textAlign = "center"; g.textBaseline = "middle";
-    g.fillText(rp < 1 ? `rendering · frame ${Math.floor(rp * TL.dur * TL.fps)} / ${Math.round(TL.dur * TL.fps)}` : "ep01.mp4 ✓", 0, 1);
+    g.fillText(rp < 1 ? `rendering · frame ${Math.floor(rp * TL.dur * TL.fps)} / ${Math.round(TL.dur * TL.fps)}` : "what-is-vibe-editing.mp4 ✓", 0, 1);
     g.restore();
   }
   ytCard(g, { at: C.how_video - 0.1, x: 20, y: -10, w: 760, rot: -3, dx: 0,
     draw: (g2, x, y, w, h, tt) => miniCover(g2, x, y, w, h, tt),
-    title: "What is vibe editing?", meta: "EP 01 · rendered from code", dur: "0:56" }, t);
+    title: "What is vibe editing?", meta: "rendered from code", dur: "0:56" }, t);
   ytLogo(g, 330, -250, 130, t, C.how_video + 0.15, 8);
 };
 function hlBar(g, x, y, w, h, t, at) {  // a highlighter stroke sweeping across a line
@@ -713,14 +713,14 @@ function miniCover(g, x, y, w, h, t) {  // the cover board, drawn small into a t
   g.fillStyle = COL.mat; g.fillRect(x, y, w, h);
   g.translate(x + w / 2, y + h / 2); const s = Math.min(w / 1050, h / 1150); g.scale(s, s);
   drawGrid(g, -1000, -700, 2000, 1400);
-  titleComp(g, 99, 0, ["vibe", "editing", "explained"], { tag: "EP 01", tag2: "for creators", l1: "editing with AI + code", l2: "" });
+  titleComp(g, 99, 0, ["vibe", "editing", "explained"], { tag: "the watchlist", tag2: "for creators", l1: "editing with AI + code", l2: "" });
   g.restore();
 }
 
 BOARDS.scale = (g, t) => {
   const C = CUE;
   block(g, { at: C.s_scale + 0.35, x: -130, y: -780, text: "the video is code", bg: COL.brown, fg: COL.white, size: 84, rot: -4 }, t);
-  codeCard(g, { at: C.s_scale + 0.25, x: 0, y: -420, w: 900, fs: 34, rot: -1.5, file: "ep01/settings.py",
+  codeCard(g, { at: C.s_scale + 0.25, x: 0, y: -420, w: 900, fs: 34, rot: -1.5, file: "settings.py",
     lines: ["LANG     = \"en\"", "PACE     = 1.0", "VERSIONS = 1", "VOICE    = \"Eric\""],
     replace: {
       0: (tt) => (tt > C.scale_hindi ? "LANG     = \"hi\"" : null),
@@ -786,9 +786,9 @@ BOARDS.outro = (g, t) => {
   paperStar(g, 430, -700, 64, 12, 31, t, at - 0.2);
   paperStar(g, 450, 600, 50, -12, 32, t, at + 0.5);
   titleComp(g, t, at, ["vibe", "editing", "watchlist"],
-    { tag: "EP 01 ✓", tag2: "ep 02 next", l1: "the videos that explain it all", l2: "next: how it works under the hood" });
+    { tag: "watched ✓", tag2: "more soon", l1: "the videos that explain it all", l2: "next: how it works under the hood" });
   toggle(g, -330, -610, 80, t, C.outro_follow - 0.6, C.outro_follow + 0.15);
-  note(g, { at: C.outro_follow - 0.4, x: -230, y: -610, text: "follow for ep 02", size: 46, weight: 700, align: "left" }, t);
+  note(g, { at: C.outro_follow - 0.4, x: -230, y: -610, text: "follow for the next one", size: 46, weight: 700, align: "left" }, t);
 };
 
 // ------------------------------------------------------------------ captions --

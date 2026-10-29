@@ -66,7 +66,7 @@ CUE = {
     "role_stop": w("role", "stop"), "role_clicking": w("role", "clicking"),
     "role_start": w("role", "start"), "role_directing": w("role", "directing"),
 
-    "outro_episode": w("outro", "episode"), "outro_follow": w("outro", "follow"),
+    "outro_watchlist": w("outro", "watchlist"), "outro_follow": w("outro", "follow"),
 }
 
 out = {"fps": FPS, "w": W, "h": H, "dur": DUR, "lines": lines, "cue": {k: round(v, 3) for k, v in CUE.items()}}
