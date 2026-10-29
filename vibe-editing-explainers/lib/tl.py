@@ -33,6 +33,8 @@ class Timeline:
     def E(self, k): return self.lines[k]["t1"]
 
     def save(self, cues):
+        if "end" in cues and abs(cues["end"] - self.dur) > 1e-6:   # "end" is reserved for the film's length
+            print(f"WARNING: cue 'end' ({cues['end']:.2f}) is reserved and becomes the duration ({self.dur}); rename your cue")
         cues = {**cues, "end": self.dur}
         out = {"fps": self.fps, "w": self.wd, "h": self.ht, "dur": self.dur, "lines": self.lines,
                "cue": {k: round(v, 3) for k, v in cues.items()}}
