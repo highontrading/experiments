@@ -29,4 +29,6 @@ ls -la out | grep "$NAME"
 # frames are big (3-5 MB each): drop them once the master is encoded and complete
 DUR=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "out/${NAME}_master.mp4" | cut -d. -f1)
 WANT=$(python3 -c "import json;print(int(json.load(open('build/$AD/timing.json'))['dur']))")
-[[ "$DUR" -ge "$WANT" && "${KEEP_FRAMES:-0}" != 1 ]] && rm -rf "build/$AD/frames" || true
+BLACK=$(ffmpeg -i "out/${NAME}_master.mp4" -vf "blackdetect=d=0.01:pix_th=0.06:pic_th=0.9" -an -f null - 2>&1 | grep -c black_start || true)
+[[ "$BLACK" -gt 0 ]] && echo "WARNING: $BLACK black segment(s) in the master; frames kept for inspection"
+[[ "$DUR" -ge "$WANT" && "$BLACK" -eq 0 && "${KEEP_FRAMES:-0}" != 1 ]] && rm -rf "build/$AD/frames" || true

@@ -44,6 +44,11 @@ async function page(browser) {
       for (let tries = 0; ; tries++) {              // a crashed capture gets a fresh page and another go
         try {
           await p.evaluate((t) => window.renderAt(t), j.t);
+          // every ad has an opaque background, so an all-black sample means the page failed
+          const blank = await p.evaluate(() => { const x = document.getElementById("cv").getContext("2d");
+            return [[20, 20], [540, 300], [1060, 40], [100, 960], [980, 1000], [540, 1700], [30, 1900], [1050, 1880], [540, 960]]
+              .every(([a, b]) => { const d = x.getImageData(a, b, 1, 1).data; return d[0] + d[1] + d[2] < 12; }); });
+          if (blank) throw new Error("blank frame");
           await p.screenshot({ path: path.join(__dirname, j.file), type: "png" });
           break;
         } catch (e) {
