@@ -1,0 +1,315 @@
+{
+ "voices": {
+  "bunty": "FZkK3TvQ0pjyDmT8fzIW",
+  "raju": "zT03pEAEi0VHKciJODfn",
+  "monika": "2zRM7PkgwBPiau2jvVXc",
+  "bn": "1JOQMQINvsOLiEu2pZFd",
+  "ta": "gJvkwI7wGFW2czmyfJhp",
+  "te": "4XvBGCPMXWyVQa75dbZg",
+  "mr": "aZaMD7e0iu6aJpSocGIY",
+  "gu": "3L29IUUN61xcyvsKscMy",
+  "hi": "9w21nMuk8CWXIME31V1S"
+ },
+ "lines": [
+  {
+   "id": "a1_1",
+   "voice": "bunty",
+   "lang": "hi",
+   "text": "रुको! ये octopus नहीं है… ये आपका editing software है।",
+   "roman": "Ruko! Ye octopus nahi hai… ye aapka editing software hai."
+  },
+  {
+   "id": "a1_2",
+   "voice": "bunty",
+   "lang": "hi",
+   "text": "पचास menus, सौ plugins, घंटों का render… और हर महीने subscription का बिल।",
+   "roman": "Pachaas menus, sau plugins, ghanton ka render… aur har mahine subscription ka bill."
+  },
+  {
+   "id": "a1_3",
+   "voice": "bunty",
+   "lang": "hi",
+   "text": "एक reel edit करने बैठे, और पूरी शाम इसी जाल में चली गई।",
+   "roman": "Ek reel edit karne baithe, aur poori shaam isi jaal mein chali gayi."
+  },
+  {
+   "id": "a1_4",
+   "voice": "bunty",
+   "lang": "hi",
+   "text": "अब इस जाल को काटो।",
+   "roman": "Ab is jaal ko kaato."
+  },
+  {
+   "id": "a1_5",
+   "voice": "bunty",
+   "lang": "hi",
+   "text": "Vibe Editing में आप बस बोलते हो कि video कैसा चाहिए… और AI code लिखकर पूरा edit बना देता है।",
+   "roman": "Vibe Editing mein aap bas bolte ho ki video kaisa chahiye… aur AI code likhkar poora edit bana deta hai."
+  },
+  {
+   "id": "a1_6",
+   "voice": "bunty",
+   "lang": "hi",
+   "text": "Hindi में बोलो, Tamil में बोलो, Bangla में बोलो — किसी भी भाषा में।",
+   "roman": "Hindi mein bolo, Tamil mein bolo, Bangla mein bolo — kisi bhi bhasha mein."
+  },
+  {
+   "id": "a1_7",
+   "voice": "bunty",
+   "lang": "hi",
+   "text": "Timeline नहीं, सीधी बात। यही है editing का नया दौर।",
+   "roman": "Timeline nahi, seedhi baat. Yahi hai editing ka naya daur."
+  },
+  {
+   "id": "a1_8",
+   "voice": "bunty",
+   "lang": "hi",
+   "text": "आज ही Vibe Editing join करो।",
+   "roman": "Aaj hi Vibe Editing join karo."
+  },
+  {
+   "id": "a2_1",
+   "voice": "raju",
+   "lang": "hi",
+   "text": "1913. दादासाहेब फाल्के ने भारत की पहली feature film बनाई… और उसे हाथों से काट-काट कर जोड़ा।",
+   "roman": "1913. Dadasaheb Phalke ne Bharat ki pehli feature film banayi… aur use haathon se kaat-kaat kar joda."
+  },
+  {
+   "id": "a2_2",
+   "voice": "raju",
+   "lang": "hi",
+   "text": "फिर आईं editing machines। फिर computer। फिर timeline।",
+   "roman": "Phir aayi editing machines. Phir computer. Phir timeline."
+  },
+  {
+   "id": "a2_3",
+   "voice": "raju",
+   "lang": "hi",
+   "text": "सौ साल बदल गए… पर काम वही रहा: clip खींचो, काटो, जोड़ो। घंटों तक।",
+   "roman": "Sau saal badal gaye… par kaam wahi raha: clip kheencho, kaato, jodo. Ghanton tak."
+  },
+  {
+   "id": "a2_4",
+   "voice": "raju",
+   "lang": "hi",
+   "text": "अब editing का सबसे बड़ा experiment कामयाब हो चुका है।",
+   "roman": "Ab editing ka sabse bada experiment kaamyaab ho chuka hai."
+  },
+  {
+   "id": "a2_5",
+   "voice": "raju",
+   "lang": "hi",
+   "text": "Vibe Editing: आप idea बोलते हो, AI code लिखता है, और video तैयार।",
+   "roman": "Vibe Editing: aap idea bolte ho, AI code likhta hai, aur video taiyaar."
+  },
+  {
+   "id": "a2_6",
+   "voice": "raju",
+   "lang": "hi",
+   "text": "और ये सिर्फ English वालों के लिए नहीं — हिंदी, तमिल, बांग्ला, तेलुगु… हर भाषा में।",
+   "roman": "Aur ye sirf English walon ke liye nahi — Hindi, Tamil, Bangla, Telugu… har bhasha mein."
+  },
+  {
+   "id": "a2_7",
+   "voice": "raju",
+   "lang": "hi",
+   "text": "ये है editing का future। Future में पहला कदम रखो — Vibe Editing join करो।",
+   "roman": "Ye hai editing ka future. Future mein pehla kadam rakho — Vibe Editing join karo."
+  },
+  {
+   "id": "a3_1",
+   "voice": "monika",
+   "lang": "hi",
+   "text": "एक video बनाओ… और पूरा India देखे।",
+   "roman": "Ek video banao… aur poora India dekhe."
+  },
+  {
+   "id": "a3_2",
+   "voice": "monika",
+   "lang": "hi",
+   "text": "पर हर भाषा के लिए फिर से edit, फिर से captions, फिर से voice? इतना time किसके पास है?",
+   "roman": "Par har bhasha ke liye phir se edit, phir se captions, phir se voice? Itna time kiske paas hai?"
+  },
+  {
+   "id": "a3_3",
+   "voice": "monika",
+   "lang": "hi",
+   "text": "Vibe Editing में बस एक line बोलो: 'इसे Tamil में भी बनाओ।' हो गया।",
+   "roman": "Vibe Editing mein bas ek line bolo: 'Ise Tamil mein bhi banao.' Ho gaya."
+  },
+  {
+   "id": "a3_4",
+   "voice": "monika",
+   "lang": "hi",
+   "text": "Delhi से Chennai, Kolkata से Mumbai — एक ही video, नौ भाषाओं में।",
+   "roman": "Delhi se Chennai, Kolkata se Mumbai — ek hi video, nau bhashaon mein."
+  },
+  {
+   "id": "a3_5",
+   "voice": "monika",
+   "lang": "hi",
+   "text": "Captions, voice, timing — सब code से, अपने आप।",
+   "roman": "Captions, voice, timing — sab code se, apne aap."
+  },
+  {
+   "id": "a3_6",
+   "voice": "monika",
+   "lang": "hi",
+   "text": "Editing का future multilingual है।",
+   "roman": "Editing ka future multilingual hai."
+  },
+  {
+   "id": "a3_7",
+   "voice": "monika",
+   "lang": "hi",
+   "text": "Vibe Editing join करो, और हर भाषा में छा जाओ।",
+   "roman": "Vibe Editing join karo, aur har bhasha mein chha jao."
+  },
+  {
+   "id": "a4_1",
+   "voice": "bunty",
+   "lang": "hi",
+   "text": "क्या आपकी editing भी ऐसी ही उलझी हुई है?",
+   "roman": "Kya aapki editing bhi aisi hi uljhi hui hai?"
+  },
+  {
+   "id": "a4_2",
+   "voice": "bunty",
+   "lang": "hi",
+   "text": "Keyframes, layers, transitions… एक गलती, और सब बिगड़ गया।",
+   "roman": "Keyframes, layers, transitions… ek galti, aur sab bigad gaya."
+  },
+  {
+   "id": "a4_3",
+   "voice": "bunty",
+   "lang": "hi",
+   "text": "अब उंगलियों से नहीं, शब्दों से edit करो।",
+   "roman": "Ab ungliyon se nahi, shabdon se edit karo."
+  },
+  {
+   "id": "a4_4",
+   "voice": "bunty",
+   "lang": "hi",
+   "text": "Vibe Editing में बस बोलो: 'beat पर cut करो, colour warm करो, captions बड़े करो।'",
+   "roman": "Vibe Editing mein bas bolo: 'beat par cut karo, colour warm karo, captions bade karo.'"
+  },
+  {
+   "id": "a4_5",
+   "voice": "bunty",
+   "lang": "hi",
+   "text": "AI ये सब code में करता है — साफ़ और तेज़।",
+   "roman": "AI ye sab code mein karta hai — saaf aur tez."
+  },
+  {
+   "id": "a4_6",
+   "voice": "bunty",
+   "lang": "hi",
+   "text": "और आप ये अपनी भाषा में बोल सकते हो।",
+   "roman": "Aur aap ye apni bhasha mein bol sakte ho."
+  },
+  {
+   "id": "a4_7",
+   "voice": "bunty",
+   "lang": "hi",
+   "text": "उलझन छोड़ो। Vibe Editing join करो।",
+   "roman": "Uljhan chhodo. Vibe Editing join karo."
+  },
+  {
+   "id": "a5_1",
+   "voice": "monika",
+   "lang": "hi",
+   "text": "ये आपकी desk है। और ये आपकी to-do list: 'एक reel edit करना… पूरा दिन।'",
+   "roman": "Ye aapki desk hai. Aur ye aapki to-do list: 'Ek reel edit karna… poora din.'"
+  },
+  {
+   "id": "a5_2",
+   "voice": "monika",
+   "lang": "hi",
+   "text": "Footage तैयार है, idea तैयार है… पर editing पर आकर सब रुक जाता है।",
+   "roman": "Footage taiyaar hai, idea taiyaar hai… par editing par aakar sab ruk jaata hai."
+  },
+  {
+   "id": "a5_3",
+   "voice": "monika",
+   "lang": "hi",
+   "text": "अब मिलिए Vibe Editing से।",
+   "roman": "Ab miliye Vibe Editing se."
+  },
+  {
+   "id": "a5_4",
+   "voice": "monika",
+   "lang": "hi",
+   "text": "आप लिखो या बोलो: 'तीस second की reel, fast cuts, bold captions।' और AI code से पूरा edit बना देता है।",
+   "roman": "Aap likho ya bolo: 'Tees second ki reel, fast cuts, bold captions.' Aur AI code se poora edit bana deta hai."
+  },
+  {
+   "id": "a5_5",
+   "voice": "monika",
+   "lang": "hi",
+   "text": "Hindi, Marathi, Gujarati, Tamil — जिस भाषा में सोचते हो, उसी में edit करो।",
+   "roman": "Hindi, Marathi, Gujarati, Tamil — jis bhasha mein sochte ho, usi mein edit karo."
+  },
+  {
+   "id": "a5_6",
+   "voice": "monika",
+   "lang": "hi",
+   "text": "Editing हो गई। अब बाकी दिन? Content बनाओ।",
+   "roman": "Editing ho gayi. Ab baaki din? Content banao."
+  },
+  {
+   "id": "a5_7",
+   "voice": "monika",
+   "lang": "hi",
+   "text": "अपनी desk बदलो। आज ही Vibe Editing join करो।",
+   "roman": "Apni desk badlo. Aaj hi Vibe Editing join karo."
+  },
+  {
+   "id": "cta_bn",
+   "voice": "bn",
+   "lang": "bn",
+   "text": "Vibe Editing-এ join করুন!"
+  },
+  {
+   "id": "cta_ta",
+   "voice": "ta",
+   "lang": "ta",
+   "text": "Vibe Editing-ல join பண்ணுங்க!"
+  },
+  {
+   "id": "cta_te",
+   "voice": "te",
+   "lang": "te",
+   "text": "Vibe Editing లో join అవ్వండి!"
+  },
+  {
+   "id": "cta_mr",
+   "voice": "mr",
+   "lang": "mr",
+   "text": "Vibe Editing मध्ये join व्हा!"
+  },
+  {
+   "id": "cta_gu",
+   "voice": "gu",
+   "lang": "gu",
+   "text": "Vibe Editing માં join થાઓ!"
+  },
+  {
+   "id": "cta_kn",
+   "voice": "mr",
+   "lang": "kn",
+   "text": "Vibe Editing ಗೆ join ಆಗಿ!"
+  },
+  {
+   "id": "cta_ml",
+   "voice": "ta",
+   "lang": "ml",
+   "text": "Vibe Editing-ൽ join ചെയ്യൂ!"
+  },
+  {
+   "id": "cta_pa",
+   "voice": "hi",
+   "lang": "pa",
+   "text": "Vibe Editing ਨਾਲ join ਕਰੋ!"
+  }
+ ]
+}

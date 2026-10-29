@@ -1,0 +1,4 @@
+build/
+assets/_raw/
+out/*_master.mp4
+node_modules/
