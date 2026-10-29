@@ -1,0 +1,35 @@
+{
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "voice_name": "Eric - Smooth, Trustworthy",
+  "model_id": "eleven_multilingual_v2",
+  "lines": [
+    {
+      "id": "hook",
+      "text": "Here's what really happens when you vibe edit a video."
+    },
+    {
+      "id": "brief",
+      "text": "One. The brief. You write what you want in plain words. The length, the mood, the look."
+    },
+    {
+      "id": "assets",
+      "text": "Two. The assets. Your footage, your music, your voiceover. Real files, in one folder."
+    },
+    {
+      "id": "agent",
+      "text": "Three. The agent. An AI reads your brief, looks at your files, and writes code. Every cut, every caption, every sound becomes a line."
+    },
+    {
+      "id": "render",
+      "text": "Four. The render. The computer draws every frame, thirty times a second, and stitches them into a video."
+    },
+    {
+      "id": "notes",
+      "text": "Five. You. You watch it, give notes, and the agent rewrites the code. Until it feels right."
+    },
+    {
+      "id": "outro",
+      "text": "Brief. Assets. Agent. Render. Notes. That's the whole machine behind vibe editing."
+    }
+  ]
+}

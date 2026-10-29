@@ -1,0 +1,35 @@
+{
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "voice_name": "Eric - Smooth, Trustworthy",
+  "model_id": "eleven_multilingual_v2",
+  "lines": [
+    {
+      "id": "hook",
+      "text": "Not long ago, a good video needed a studio, expensive software, and years of practice."
+    },
+    {
+      "id": "now",
+      "text": "Today, it needs an idea and a few sentences."
+    },
+    {
+      "id": "teacher",
+      "text": "A teacher can turn tomorrow's lesson into a video tonight."
+    },
+    {
+      "id": "shop",
+      "text": "A small shop can make its own ads, without an agency."
+    },
+    {
+      "id": "creator",
+      "text": "A creator can publish in English and Hindi from the same project."
+    },
+    {
+      "id": "why",
+      "text": "When editing becomes language, anyone with something to say can be seen."
+    },
+    {
+      "id": "outro",
+      "text": "That's how vibe editing is changing the world. One sentence at a time."
+    }
+  ]
+}

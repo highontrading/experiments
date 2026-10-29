@@ -1,0 +1,35 @@
+{
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "voice_name": "Eric - Smooth, Trustworthy",
+  "model_id": "eleven_multilingual_v2",
+  "lines": [
+    {
+      "id": "hook",
+      "text": "Will AI replace video editors? Let's be honest about it."
+    },
+    {
+      "id": "good",
+      "text": "AI is great at the repetitive work. Cutting silences. Syncing captions. Resizing one video for every platform."
+    },
+    {
+      "id": "time",
+      "text": "Jobs that ate a whole afternoon can now take minutes."
+    },
+    {
+      "id": "cant",
+      "text": "But on its own, it doesn't have taste. Which moment matters. When to hold a shot. When to cut."
+    },
+    {
+      "id": "change",
+      "text": "So the job isn't disappearing. It's changing. Less clicking. More deciding."
+    },
+    {
+      "id": "team",
+      "text": "An editor who can direct AI can do the work of a small team."
+    },
+    {
+      "id": "outro",
+      "text": "The editor of the future is a director. And the future starts this week."
+    }
+  ]
+}

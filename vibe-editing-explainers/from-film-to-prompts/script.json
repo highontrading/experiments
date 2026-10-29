@@ -1,0 +1,35 @@
+{
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "voice_name": "Eric - Smooth, Trustworthy",
+  "model_id": "eleven_multilingual_v2",
+  "lines": [
+    {
+      "id": "hook",
+      "text": "Video editing has been reinvented three times. Right now, it's happening again."
+    },
+    {
+      "id": "film",
+      "text": "First, film. Editors cut the actual strip by hand, and spliced the pieces back together."
+    },
+    {
+      "id": "tape",
+      "text": "Then, tape. Video lived on magnetic tape, and editing meant copying shots from one machine to another, in order."
+    },
+    {
+      "id": "timeline",
+      "text": "Then, the timeline. Computers turned clips into blocks you could drag, trim, and undo."
+    },
+    {
+      "id": "prompt",
+      "text": "And now, the prompt. You describe the edit in words, and AI builds it."
+    },
+    {
+      "id": "why",
+      "text": "Every step made editing faster, and opened it up to more people."
+    },
+    {
+      "id": "outro",
+      "text": "Film. Tape. Timeline. Text. The tools keep changing. The goal never does. Tell a better story."
+    }
+  ]
+}

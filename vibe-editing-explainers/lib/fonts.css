@@ -1,0 +1,19 @@
+/* Every font the explainers use (all SIL OFL, in assets/fonts). */
+@font-face { font-family: "Inter Tight"; font-weight: 100 900; src: url("../assets/fonts/InterTight.ttf"); }
+@font-face { font-family: "Inter Tight"; font-weight: 100 900; font-style: italic; src: url("../assets/fonts/InterTight-Italic.ttf"); }
+@font-face { font-family: "EB Garamond"; font-weight: 400 800; src: url("../assets/fonts/EBGaramond.ttf"); }
+@font-face { font-family: "EB Garamond"; font-weight: 400 800; font-style: italic; src: url("../assets/fonts/EBGaramond-Italic.ttf"); }
+@font-face { font-family: "VT323"; src: url("../assets/fonts/VT323.ttf"); }
+@font-face { font-family: "Silkscreen"; src: url("../assets/fonts/Silkscreen.ttf"); }
+@font-face { font-family: "Jost"; font-weight: 100 900; src: url("../assets/fonts/Jost.ttf"); }
+@font-face { font-family: "Jost"; font-weight: 100 900; font-style: italic; src: url("../assets/fonts/Jost-Italic.ttf"); }
+@font-face { font-family: "Caveat"; font-weight: 400 700; src: url("../assets/fonts/Caveat.ttf"); }
+@font-face { font-family: "Nunito"; font-weight: 200 1000; src: url("../assets/fonts/Nunito.ttf"); }
+@font-face { font-family: "Nunito"; font-weight: 200 1000; font-style: italic; src: url("../assets/fonts/Nunito-Italic.ttf"); }
+@font-face { font-family: "Poppins"; font-weight: 500; src: url("../assets/fonts/Poppins-Medium.ttf"); }
+@font-face { font-family: "Poppins"; font-weight: 600; src: url("../assets/fonts/Poppins-SemiBold.ttf"); }
+@font-face { font-family: "Poppins"; font-weight: 700; src: url("../assets/fonts/Poppins-Bold.ttf"); }
+@font-face { font-family: "Poppins"; font-weight: 800; src: url("../assets/fonts/Poppins-ExtraBold.ttf"); }
+@font-face { font-family: "Mono"; font-weight: 100 900; src: url("../assets/fonts/JetBrainsMono.ttf"); }
+html, body { margin: 0; background: #000; }
+canvas { display: block; }
