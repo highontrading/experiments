@@ -26,7 +26,7 @@ function vignette(g, a = 0.75) {
 }
 // thin wide-tracked sans, revealed word by word on the spoken words
 function words(g, list, x, y, t, o = {}) {
-  const fs = o.size || 46;
+  const fs = (o.size || 46) * 1.35;              // scaled up so the airy type reads on a phone
   g.save();
   g.font = `${o.weight || 300} ${fs}px "${SANS}"`;
   if (g.letterSpacing !== undefined) g.letterSpacing = `${o.track ?? 1}px`;
@@ -370,8 +370,9 @@ S.vibe = (g, t) => {
     const shade = g.createLinearGradient(0, 0, 0, H); shade.addColorStop(0, "rgba(8,8,10,0.7)"); shade.addColorStop(0.5, "rgba(8,8,10,0.2)"); shade.addColorStop(1, "rgba(8,8,10,0.75)");
     g.fillStyle = shade; g.fillRect(0, 0, W, H);
     crosshair(g, 540, 820, t, C.s_vibe, { color: "rgba(220,220,230,0.25)" });
-    trail(g, [[980, 300], [760, 420], [700, 520], [540, 560], [380, 600], [240, 760], [120, 900]], t, C.vibe - 0.1, 1.1, "190,140,255");
-    glowSerif(g, "vibe.", 540, 640 - 20 * win(C.vibe, C.calm, t), 150, "#f2e9ff", "rgba(180,120,255,0.8)", t, C.vibe);
+    trail(g, [[980, 300], [760, 420], [700, 520], [540, 560], [380, 600], [240, 760], [120, 900]], t, C.s_vibe, 1.1, "190,140,255");
+    words(g, [["Then", C.s_vibe + 0.05], ["the", C.s_vibe + 0.2]], 540, 500, t, { size: 40, alpha: 0.85 });
+    glowSerif(g, "vibe.", 540, 640 - 20 * win(C.vibe, C.calm, t), 150, "#f2e9ff", "rgba(180,120,255,0.8)", t, Math.min(C.vibe, C.s_vibe + 0.25));
     words(g, [["Not", C.not], ["'make", C.not + 0.4], ["it", C.not + 0.64], ["cool.'", C.cool]], 540, 880, t, { size: 52 });
     // strike it out with a red light line
     const sp = outExpo(win(C.cool + 0.35, C.cool + 0.7, t));
@@ -449,7 +450,7 @@ S.rules = (g, t) => {
     const fl = g.createLinearGradient(0, 1080, 0, H); fl.addColorStop(0, "rgba(40,110,55,0)"); fl.addColorStop(0.12, "rgba(40,110,55,0.55)"); fl.addColorStop(1, "rgba(0,0,0,0.9)");
     g.fillStyle = fl; g.fillRect(0, 1080, W, H - 1080);
     const cam = K.object("hw_camera");
-    const dp = win(C.s_rules + 0.2, C.s_rules + 0.85, t), bounce = spring(win(C.s_rules + 0.6, C.s_rules + 1.5, t));
+    const dp = win(C.s_rules - 0.1, C.s_rules + 0.4, t), bounce = spring(win(C.s_rules + 0.2, C.s_rules + 1.1, t));
     if (cam) {
       const w = 640, h = w * cam.height / cam.width;
       const y = lerp(-500, 950, outCubic(dp)) - (1 - bounce) * 30 * (dp >= 1 ? 1 : 0);
@@ -461,7 +462,7 @@ S.rules = (g, t) => {
       g.restore();
     }
     words(g, [["And", C.s_rules + 0.1], ["last,", C.last]], 540, 300, t, { size: 42 });
-    glowSerif(g, "the rules.", 540, 400, 120, "#eaffef", "rgba(90,220,120,0.85)", t, C.rules);
+    glowSerif(g, "the rules.", 540, 410, 120, "#eaffef", "rgba(90,220,120,0.85)", t, Math.min(C.rules, C.s_rules + 0.3));
     goldTag(g, "real footage only", 540, 1300, t, C.only, { size: 40 });
     vignette(g, 0.65);
     return;
@@ -570,8 +571,8 @@ function frame(g, t) {
   // quick strobe on the mood beats
   for (const s of STROBE) { const q = win(s, s + 0.16, t); if (q > 0 && q < 1) { g.fillStyle = `rgba(255,255,255,${(1 - q) * 0.7})`; g.fillRect(0, 0, W, H); } }
   // minimal lower captions: small and quiet, dark on the light scenes
-  const light = name === "fix" || name === "refs" || name === "final";
-  K.captions(g, t, { y: 1560, size: 32, weight: 400, family: SANS, color: light ? "rgba(30,30,32,0.85)" : "rgba(255,255,255,0.78)", hiText: light ? "#000" : "#fff", maxW: 860 });
+  K.captions(g, t, { y: 1560, size: 34, weight: 400, family: SANS, color: "rgba(255,255,255,0.82)", hiText: "#fff", maxW: 860,
+    box: "rgba(12,12,14,0.55)", boxPad: 22, boxRadius: 26 });
   K.grain(g, t, 0.07);
   return { moving, speed };
 }
