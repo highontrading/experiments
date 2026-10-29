@@ -443,7 +443,7 @@ S.refs = (g, t) => {
 // 7 · rules: green spotlight reveal of a real camera, then god rays on the logo card
 S.rules = (g, t) => {
   const lt = t - C.s_rules;
-  if (t < C.end - 0.12) {
+  if (t < C.endw - 0.12) {
     voidBg(g, "#071009", { c: "rgba(70,170,90,0.55)", y: 820, r: 760 });
     // floor
     const fl = g.createLinearGradient(0, 1080, 0, H); fl.addColorStop(0, "rgba(40,110,55,0)"); fl.addColorStop(0.12, "rgba(40,110,55,0.55)"); fl.addColorStop(1, "rgba(0,0,0,0.9)");
@@ -468,7 +468,7 @@ S.rules = (g, t) => {
   }
   // logo card rising on orange god rays
   voidBg(g, "#120603", { c: "rgba(255,110,40,0.55)", y: 1180, r: 900 });
-  const rp = win(C.end - 0.12, C.end + 0.9, t);
+  const rp = win(C.endw - 0.12, C.endw + 0.9, t);
   g.save(); g.translate(540, 1500); g.globalCompositeOperation = "lighter";
   for (let i = 0; i < 9; i++) {
     const a = -Math.PI / 2 + (i - 4) * 0.2 + 0.03 * Math.sin(t * 0.8 + i);
@@ -478,8 +478,8 @@ S.rules = (g, t) => {
     g.fillStyle = gr; g.beginPath(); g.moveTo(-16, 0); g.lineTo(Math.cos(a - 0.05) * len, Math.sin(a - 0.05) * len); g.lineTo(Math.cos(a + 0.05) * len, Math.sin(a + 0.05) * len); g.lineTo(16, 0); g.fill();
   }
   g.restore();
-  const up = spring(win(C.end, C.end + 1.0, t));
-  g.save(); g.translate(540, lerp(1350, 820, up)); g.rotate(-0.12 + 0.04 * Math.sin(lt)); g.transform(1, 0, -0.08, 1, 0, 0);
+  const up = spring(win(C.endw, C.endw + 1.0, t));
+  g.save(); g.translate(540, lerp(1400, 900, up)); g.rotate(-0.12 + 0.04 * Math.sin(lt)); g.transform(1, 0, -0.08, 1, 0, 0);
   g.shadowColor = "rgba(255,120,40,0.6)"; g.shadowBlur = 60;
   g.fillStyle = "#121214"; K.rr(g, -260, -330, 520, 660, 18); g.fill(); K.noShadow(g);
   g.strokeStyle = "rgba(255,255,255,0.1)"; g.lineWidth = 2; g.stroke();
@@ -488,7 +488,7 @@ S.rules = (g, t) => {
   g.font = `italic 400 110px "${SERIF}"`; g.textAlign = "center"; g.fillStyle = "#f4efe8"; g.fillText("vibe", 0, 90);
   g.font = `300 44px "${SANS}"`; if (g.letterSpacing !== undefined) g.letterSpacing = "8px"; g.fillText("EDITING", 8, 170);
   g.restore();
-  words(g, [["End", C.end], ["on", C.end + 0.32], ["the", C.end + 0.48]], 540, 300, t, { size: 44 });
+  words(g, [["End", C.endw], ["on", C.endw + 0.32], ["the", C.endw + 0.48]], 540, 300, t, { size: 44 });
   glowSerif(g, "logo.", 540, 400, 130, "#fff1e4", "rgba(255,120,40,0.9)", t, C.logo);
   vignette(g, 0.6);
 };
@@ -526,7 +526,7 @@ const CUTS = [
   [C.s_vibe, "vibe", "whipUp"],
   [C.s_refs, "refs", "flash"],
   [C.s_rules, "rules", "zoom"],
-  [C.end - 0.12, "rules", "flash"],          // camera → logo (inside the same scene)
+  [C.endw - 0.12, "rules", "flash"],          // camera → logo (inside the same scene)
   [C.s_outro, "outro", "whip"],
   [C.s_final, "final", "flash"],
 ];

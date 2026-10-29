@@ -32,7 +32,7 @@ C = {
     "what": w("refs", "what"), "love2": w("refs", "love", 2), "them": w("refs", "them"),
     # rules
     "last": w("rules", "last"), "rules": w("rules", "rules"), "real": w("rules", "real"),
-    "only": w("rules", "only"), "end": w("rules", "end"), "logo": w("rules", "logo"),
+    "only": w("rules", "only"), "endw": w("rules", "end"), "logo": w("rules", "logo"),
     # outro
     "o_goal": w("outro", "goal"), "o_format": w("outro", "format"), "o_vibe": w("outro", "vibe"),
     "o_refs": w("outro", "references"), "o_rules": w("outro", "rules"), "five": w("outro", "five"),

@@ -60,7 +60,7 @@ m.hit("whoosh_fast", C["what"] - 0.1, -19)
 m.hit("riser_trailer", C["real"] - 1.2, -20, length=1.3)
 m.hit("stomp_impact", C["real"] + 0.1, -13)
 m.hit("hit_swoosh_quick", C["only"], -17)
-m.hit("impact_trailer", C["end"], -12)
+m.hit("impact_trailer", C["endw"], -12)
 m.hit("crystal_chime", C["logo"] + 0.1, -19)
 
 # outro: five tags on a light trail, "stops guessing", final click

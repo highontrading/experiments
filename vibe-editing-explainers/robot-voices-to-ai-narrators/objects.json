@@ -1,0 +1,4 @@
+[
+ {"key": "rv_tvbox", "src": "assets_raw/mixkit/v4143.mp4", "t": 1.0, "box": [60, 0, 1900, 1080]},
+ {"key": "rv_radio", "src": "assets_raw/mixkit/v43370.mp4", "t": 0.2, "box": [530, 95, 1480, 935]}
+]
