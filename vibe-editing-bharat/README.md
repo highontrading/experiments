@@ -8,7 +8,8 @@ lime and magenta type).
 
 | Output | What it is |
 | --- | --- |
-| `out/edit_in_your_language.mp4` | the film, 1080x1920, 30 fps, AAC stereo at -14 LUFS |
+| `out/edit_in_your_language_share.mp4` | the film, 1080x1920, 30 fps, about 7.4 Mbps, AAC stereo at -14 LUFS (84 MB; this is the copy kept in git) |
+| `out/edit_in_your_language.mp4` | the high-bitrate master (275 MB). Too big for GitHub, so `make.sh` rebuilds it and it is not committed |
 | `out/poster.jpg` | a still from the finished reel |
 
 ## Running order
