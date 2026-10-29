@@ -30,7 +30,7 @@ async function page(browser) {
     const a = Math.round(+opt("--from", 0) * info.fps), b = Math.round(+opt("--to", info.dur) * info.fps);
     jobs = []; for (let f = a; f < b; f++) jobs.push({ t: f / info.fps, file: `build/${AD}/frames/f${String(f + 1).padStart(5, "0")}.png` });
     // resume: frames already on disk are kept unless --force
-    if (!args.includes("--force")) jobs = jobs.filter((j) => !fs.existsSync(path.join(__dirname, j.file)));
+    if (!args.includes("--force")) jobs = jobs.filter((j) => { const p = path.join(__dirname, j.file); return !fs.existsSync(p) || fs.statSync(p).size === 0; });
     if (!jobs.length) { console.log("all frames present"); await browser.close(); return; }
   }
   fs.mkdirSync(path.dirname(path.join(__dirname, jobs[0].file)), { recursive: true });
