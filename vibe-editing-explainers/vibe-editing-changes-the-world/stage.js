@@ -94,9 +94,9 @@ function glass(g, x, y, w, h, r, o = {}) {
   K.noShadow(g);
   g.save(); rr(g, x, y, w, h, r); g.clip();
   const m = g.getTransform(); g.setTransform(1, 0, 0, 1, 0, 0); g.drawImage(BLUR, 0, 0, W, H); g.setTransform(m);
-  g.fillStyle = `rgba(255,255,255,${o.tint ?? 0.2})`; g.fillRect(x, y, w, h);
+  g.fillStyle = o.dark ? `rgba(60,70,80,${o.dark})` : `rgba(255,255,255,${o.tint ?? 0.2})`; g.fillRect(x, y, w, h);
   const hl = g.createLinearGradient(0, y, 0, y + Math.min(h, 220));
-  hl.addColorStop(0, "rgba(255,255,255,0.22)"); hl.addColorStop(1, "rgba(255,255,255,0)");
+  hl.addColorStop(0, `rgba(255,255,255,${o.dark ? 0.14 : 0.22})`); hl.addColorStop(1, "rgba(255,255,255,0)");
   g.fillStyle = hl; g.fillRect(x, y, w, h);
   g.restore();
   rr(g, x + 0.75, y + 0.75, w - 1.5, h - 1.5, r); g.lineWidth = 1.5; g.strokeStyle = "rgba(255,255,255,0.6)"; g.stroke();
@@ -109,7 +109,7 @@ function bar(g, t) {
   const appear = outCubic(win(0.15, 0.8, t));
   if (appear <= 0) return;
   const r = h / 2;
-  glass(g, x, y, w, h, r, { alpha: appear, tint: 0.24 });
+  glass(g, x, y, w, h, r, { alpha: appear, dark: 0.42 });
   const prompt = clamp((h - 100) / 40);           // 0 = browser, 1 = prompt
   g.save(); g.globalAlpha = appear;
   rr(g, x, y, w, h, r); g.clip();
@@ -122,11 +122,12 @@ function bar(g, t) {
     ic(x + 114, (cx) => { g.moveTo(cx - 5, cy - 9); g.lineTo(cx + 4, cy); g.lineTo(cx - 5, cy + 9); });
     // url field
     const ux = x + 158, uw = w - 300;
-    g.fillStyle = "rgba(255,255,255,0.22)"; rr(g, ux, cy - 30, uw, 60, 30); g.fill();
+    g.fillStyle = "rgba(255,255,255,0.14)"; rr(g, ux, cy - 30, uw, 60, 30); g.fill();
     g.strokeStyle = "rgba(255,255,255,0.95)"; g.lineWidth = 3; g.beginPath();   // home
     g.moveTo(ux + 26, cy + 1); g.lineTo(ux + 40, cy - 12); g.lineTo(ux + 54, cy + 1); g.moveTo(ux + 30, cy - 2); g.lineTo(ux + 30, cy + 12); g.lineTo(ux + 50, cy + 12); g.lineTo(ux + 50, cy - 2); g.stroke();
-    font(g, 34, 600, "Nunito"); g.fillStyle = "#fff"; g.textBaseline = "middle"; g.textAlign = "left";
-    g.fillText(url(t), ux + 74, cy + 1);
+    font(g, 34, 700, "Nunito"); g.fillStyle = "#fff"; g.textBaseline = "middle"; g.textAlign = "left";
+    g.shadowColor = "rgba(0,0,0,0.3)"; g.shadowBlur = 4; g.shadowOffsetY = 1;
+    g.fillText(url(t), ux + 74, cy + 1); K.noShadow(g);
     // reload + plus
     const rx = x + w - 112; g.beginPath(); g.arc(rx, cy, 13, -1.2, 4.2); g.stroke();
     g.beginPath(); g.moveTo(rx + 13 * Math.cos(-1.2) + 6, cy + 13 * Math.sin(-1.2) - 6); g.lineTo(rx + 13 * Math.cos(-1.2), cy + 13 * Math.sin(-1.2)); g.lineTo(rx + 13 * Math.cos(-1.2) - 8, cy + 13 * Math.sin(-1.2) - 1); g.stroke();
@@ -138,10 +139,10 @@ function bar(g, t) {
     spark(g, x + 62, cy, 20, t);
     const txt = promptText(t);
     font(g, 40, 600, "Nunito"); g.fillStyle = "#fff"; g.textBaseline = "middle"; g.textAlign = "left";
-    g.shadowColor = "rgba(30,50,80,0.25)"; g.shadowBlur = 8;
+    g.shadowColor = "rgba(0,0,0,0.35)"; g.shadowBlur = 5; g.shadowOffsetY = 1.5;
     g.fillText(txt.s, x + 104, cy + 2);
     const cw = g.measureText(txt.s).width; K.noShadow(g);
-    if (txt.caret && Math.floor(t * 2.2) % 2 === 0) g.fillRect(x + 108 + cw, cy - 22, 3.5, 46);
+    if (txt.caret && Math.floor(t * 2.2) % 2 === 0) { g.fillStyle = "#fff"; rr(g, x + 109 + cw, cy - 25, 4.5, 52, 2); g.fill(); }
     if (!txt.s && txt.ph) { g.globalAlpha *= 0.6; g.fillText(txt.ph, x + 104, cy + 2); }
     // send button
     const sx = x + w - 70, press = Math.sin(Math.PI * win(C.time + 0.55, C.time + 0.85, t));

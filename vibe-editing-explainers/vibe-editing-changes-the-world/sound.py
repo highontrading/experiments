@@ -2,14 +2,6 @@
 meadow (birds, breeze) + soft glassy foley on every move. Cues mirror stage.js.
     python sound.py  ->  build/mix.wav"""
 import sys; sys.path.insert(0, "../lib")
-import numpy as np
-from scipy.signal import fftconvolve
-# lib/mixer.py smooths with np.convolve and 12k-tap kernels (direct O(N*M): minutes per mix).
-# FFT convolution gives the same "same"-mode result in well under a second.
-def _fast_convolve(a, v, mode="full"):
-    r = fftconvolve(a, v, mode=mode)
-    return np.maximum(r, 0) if a.min() >= 0 and v.min() >= 0 else r   # no -1e-17 round-off under sqrt
-np.convolve = _fast_convolve
 from mixer import Mixer
 
 m = Mixer(__file__, music="a_new_start_alejandro_magana.mp3", music_db=-9)
