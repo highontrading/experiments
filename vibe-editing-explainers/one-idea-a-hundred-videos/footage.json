@@ -1,0 +1,21 @@
+[
+ {"name": "oh_wood",   "mixkit": 3827,  "ss": 0,   "dur": 4,   "vf": "scale=720:-2"},
+ {"name": "oh_bulb",   "mixkit": 47241, "ss": 0,   "dur": 3.4, "vf": "crop=ih*9/16:ih,scale=720:1280"},
+ {"name": "oh_sticky", "mixkit": 9124,  "ss": 0.5, "dur": 4,   "vf": "crop=ih*9/16:ih:iw*0.55:0,scale=720:1280"},
+ {"name": "oh_text",   "mixkit": 50710, "ss": 2,   "dur": 3,   "vf": "scale=960:-2"},
+ {"name": "oh_music",  "mixkit": 32294, "ss": 1,   "dur": 3,   "vf": "scale=960:-2"},
+ {"name": "oh_lang",   "mixkit": 42085, "ss": 1,   "dur": 3,   "vf": "scale=960:-2"},
+ {"name": "oh_length", "mixkit": 3679,  "ss": 2,   "dur": 3,   "vf": "scale=540:-2"},
+ {"name": "oh_flag_in","mixkit": 42085, "ss": 6,   "dur": 2.5, "vf": "scale=640:-2"},
+ {"name": "oh_flag_br","mixkit": 42091, "ss": 2,   "dur": 2.5, "vf": "scale=640:-2"},
+ {"name": "oh_flag_jp","mixkit": 42108, "ss": 2,   "dur": 2.5, "vf": "scale=640:-2"},
+ {"name": "oh_flag_cn","mixkit": 42111, "ss": 1,   "dur": 2.5, "vf": "scale=640:-2"},
+ {"name": "oh_flag_us","mixkit": 42117, "ss": 1,   "dur": 2.5, "vf": "scale=480:-2"},
+ {"name": "oh_coins",  "mixkit": 47017, "ss": 0,   "dur": 4,   "vf": "crop=ih*9/16:ih:iw*0.18:0,scale=720:1280"},
+ {"name": "oh_bills",  "mixkit": 9532,  "ss": 2,   "dur": 4,   "vf": "crop=ih*9/16:ih,scale=720:1280"},
+ {"name": "oh_papers", "mixkit": 45923, "ss": 0,   "dur": 4,   "vf": "crop=ih*9/16:ih:iw*0.5:0,scale=720:1280"},
+ {"name": "oh_team",   "mixkit": 8960,  "ss": 0,   "dur": 3.5, "vf": "scale=960:-2"},
+ {"name": "oh_studio", "mixkit": 44079, "ss": 0,   "dur": 4,   "vf": "crop=ih*9/16:ih,scale=720:1280"},
+ {"name": "oh_list",   "mixkit": 17289, "ss": 5,   "dur": 3,   "vf": "scale=960:-2"},
+ {"name": "oh_chalk",  "still": "mixkit:45418", "t": 0.2}
+]

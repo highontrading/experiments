@@ -1,0 +1,7 @@
+[
+ {"name": "pr_fast", "mixkit": 25517, "ss": 0, "dur": 6, "vf": "scale=960:-2"},
+ {"name": "pr_play", "mixkit": 23469, "ss": 0, "dur": 6, "vf": "scale=960:-2"},
+ {"name": "pr_watch", "mixkit": 10462, "ss": 0, "dur": 7, "vf": "scale=960:-2"},
+ {"name": "pr_leaks", "mixkit": 48495, "ss": 0, "dur": 8, "vf": "scale=960:-2"},
+ {"name": "pr_flare", "mixkit": 48494, "ss": 0, "dur": 6, "vf": "scale=960:-2"}
+]

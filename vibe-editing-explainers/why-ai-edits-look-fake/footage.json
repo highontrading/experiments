@@ -1,0 +1,15 @@
+[
+ {"name": "fk_stock", "mixkit": 23113, "ss": 0, "dur": 9.3, "vf": "scale=480:-2"},
+ {"name": "fk_applause", "mixkit": 23085, "ss": 0, "dur": 9.5, "vf": "scale=480:-2"},
+ {"name": "fk_meeting", "mixkit": 153, "ss": 0, "dur": 8, "vf": "scale=480:-2"},
+ {"name": "fk_tired", "mixkit": 39852, "ss": 0, "dur": 7.9, "vf": "scale=360:-2"},
+ {"name": "fk_editor", "mixkit": 41273, "ss": 0, "dur": 8, "vf": "scale=480:-2"},
+ {"name": "fk_timeline", "mixkit": 50605, "ss": 0, "dur": 8, "vf": "scale=480:-2"},
+ {"name": "fk_presenter", "mixkit": 22961, "ss": 6, "dur": 8, "vf": "scale=640:-2"},
+ {"name": "fk_filmcam", "mixkit": 49644, "ss": 0, "dur": 8, "vf": "scale=640:-2"},
+ {"name": "fk_adjust", "mixkit": 49655, "ss": 1, "dur": 8, "vf": "scale=640:-2"},
+ {"name": "fk_creator", "mixkit": 34478, "ss": 0, "dur": 10, "vf": "scale=640:-2"},
+ {"name": "fk_keys", "mixkit": 41268, "ss": 0, "dur": 10, "vf": "scale=960:-2"},
+ {"name": "fk_static", "mixkit": 25350, "ss": 0, "dur": 6, "vf": "scale=540:-2"},
+ {"name": "fk_tvframe", "still": "mixkit:4143", "t": 1.0}
+]
