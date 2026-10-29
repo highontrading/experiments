@@ -75,7 +75,7 @@ m.hit("small_sweep", C["tape_order"] + 0.05, -24)
 # timeline: blocks, drag, trim, undo
 serif_line(C["s_timeline"] + 0.35, -400)
 pixel_word(C["tl_timeline"] - 0.12, "TIMELINE")
-m.card(C["tl_computers"] - 0.35); m.card(C["tl_computers"] + 0.2, 330, quiet=-3)
+m.card(C["s_timeline"] + 0.45); m.card(C["tl_computers"] + 0.2, 330, quiet=-3)
 for i in range(4):
     m.pop(C["tl_blocks"] - 0.25 + i * 0.09 + 0.1, -300 + i * 200, -21)
 m.hit("mouse_click", C["tl_drag"] - 0.05, -12); m.hit("ui_click", C["tl_drag"] + 0.55, -18)

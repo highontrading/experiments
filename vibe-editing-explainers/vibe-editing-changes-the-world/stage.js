@@ -281,7 +281,7 @@ function label(g, text, x, y, size, t, at, o = {}) {  // big white Nunito line
   g.save(); g.globalAlpha *= p;
   font(g, size, o.weight ?? 800, "Nunito"); if (o.italic) g.font = "italic " + g.font;
   g.textAlign = o.align || "center"; g.textBaseline = "middle"; g.fillStyle = o.color || "#fff";
-  if (!o.soft) { g.shadowColor = "rgba(30,50,80,0.35)"; g.shadowBlur = 18; g.shadowOffsetY = 4; }
+  if (!o.soft) { g.shadowColor = "rgba(20,35,60,0.55)"; g.shadowBlur = 16; g.shadowOffsetY = 3; }
   g.fillText(text, x, y + 30 * (1 - p));
   g.restore();
 }
@@ -330,7 +330,7 @@ function sceneNow(g, t) {
   const out = win(te0 - 0.35, te0 + 0.05, t);
   g.save(); g.globalAlpha = 1 - out; g.translate(0, -80 * inCubic(out));
   label(g, "an idea", 540, 610, 150, t, C.idea - 0.12);
-  label(g, "+ a few sentences", 540, 760, 74, t, C.sentences - 0.15, { weight: 300, italic: true });
+  label(g, "+ a few sentences", 540, 760, 76, t, C.sentences - 0.15, { weight: 500, italic: true });
   g.restore();
   // little sparkles drifting up from the prompt bar
   const p = win(C.idea, C.idea + 2.4, t) * (1 - out);
@@ -460,7 +460,7 @@ function sceneOutro(g, t) {
     }
   }
   g.save(); g.globalAlpha = a;
-  label(g, "that's how vibe editing is", 540, 330, 54, t, C.s_outro + 0.7, { weight: 300, italic: true });
+  label(g, "that's how vibe editing is", 540, 330, 56, t, C.s_outro + 0.7, { weight: 500, italic: true });
   label(g, "changing", 540, 450, 150, t, C.world - 0.7);
   label(g, "the world.", 540, 590, 150, t, C.world - 0.35);
   g.restore();

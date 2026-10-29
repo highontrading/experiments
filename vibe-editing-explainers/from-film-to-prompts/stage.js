@@ -351,7 +351,7 @@ BOARD.timeline = (g, t) => {
   serif(g, "Then, the", -400, -740, 104, t, C.s_timeline + 0.35);
   pixBlock(g, "TIMELINE", -400, -620, 150, t, C.tl_timeline - 0.12, { pad: 34 });
   small(g, "1990s – today", 260, -620, 34, t, C.tl_timeline + 0.2);
-  const L = K.life(t, C.tl_computers - 0.35, null, 1.0);
+  const L = K.life(t, C.s_timeline + 0.45, null, 1.0);
   if (!L.on) return;
   const w = 900, h = 900, x0 = -w / 2, y0 = -470;
   // edit state at time t: the blue block is dragged to the front, the last one trimmed, then undo
