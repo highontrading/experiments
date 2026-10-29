@@ -157,7 +157,7 @@ S.daur = { draw(c, lt, Sc, gt) {
     plaque(c, 540, 560, 1, "NAYA DAUR", { px: 80, top: "#d24a5c", bot: "#9d2b3b" });
     c.restore();
   }
-  stampWord(c, "TIMELINE ✕", 540, 330, FX.anton(110), INK, w(0), lt, { out: w(4) - 0.1 });
+  stampWord(c, "TIMELINE ✕", 540, 330, FX.anton(110), INK, w(0), lt, { out: w(2) - 0.15 });
   stampWord(c, "SEEDHI BAAT.", 540, 330, FX.anton(110), RED, w(2), lt, { out: w(4) - 0.1 });
 } };
 S.cta = { draw(c, lt, Sc, gt) {
