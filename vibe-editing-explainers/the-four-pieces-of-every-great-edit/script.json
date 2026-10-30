@@ -1,0 +1,40 @@
+{
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "voice_name": "Eric - Smooth, Trustworthy",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "use_speaker_boost": true
+  },
+  "lines": [
+    {
+      "id": "hook",
+      "text": "Every great edit has the same four pieces. Miss one, and people scroll."
+    },
+    {
+      "id": "hookp",
+      "text": "The hook. The first second that makes them stop."
+    },
+    {
+      "id": "context",
+      "text": "The context. Why this matters, in one line."
+    },
+    {
+      "id": "build",
+      "text": "The build-up. Every shot raising the stakes."
+    },
+    {
+      "id": "payoff",
+      "text": "The payoff. The moment they came for."
+    },
+    {
+      "id": "vibe",
+      "text": "With vibe editing, you write all four into the brief, and the AI builds around them."
+    },
+    {
+      "id": "outro",
+      "text": "Save this for your next edit, and join vibe editing."
+    }
+  ]
+}

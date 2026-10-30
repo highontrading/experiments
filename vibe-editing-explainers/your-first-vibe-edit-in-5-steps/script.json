@@ -1,0 +1,40 @@
+{
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "voice_name": "Eric - Smooth, Trustworthy",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "use_speaker_boost": true
+  },
+  "lines": [
+    {
+      "id": "hook",
+      "text": "This is how you make your first vibe edit in under ten minutes. No timeline. No keyframes."
+    },
+    {
+      "id": "s1",
+      "text": "Step one. Put everything in one folder. Your clips, your music, your logo."
+    },
+    {
+      "id": "s2",
+      "text": "Step two. Open an AI agent in that folder, and write the brief. Platform, length, mood, and how it ends."
+    },
+    {
+      "id": "s3",
+      "text": "Step three. Let it build. It writes the edit as code, and renders a first draft."
+    },
+    {
+      "id": "s4",
+      "text": "Step four. Watch it once, and give three notes. Not fifty. Three."
+    },
+    {
+      "id": "s5",
+      "text": "Step five. Export, and keep the project. Next time, you only change the brief."
+    },
+    {
+      "id": "outro",
+      "text": "Want my brief template? Comment VIBE, and join vibe editing."
+    }
+  ]
+}

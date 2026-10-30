@@ -1,0 +1,40 @@
+{
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "voice_name": "Eric - Smooth, Trustworthy",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "use_speaker_boost": true
+  },
+  "lines": [
+    {
+      "id": "hook",
+      "text": "Some editors call it cheating. A video, made from a few sentences."
+    },
+    {
+      "id": "claim",
+      "text": "The accusation? The AI did the work. No timeline. No keyframes. No late nights."
+    },
+    {
+      "id": "twist",
+      "text": "But there was a twist."
+    },
+    {
+      "id": "history",
+      "text": "Every new editing tool got the same reaction. Cutting on a computer. Templates. Presets."
+    },
+    {
+      "id": "you",
+      "text": "And the AI still can't pick the story, the moment, or the feeling. You do."
+    },
+    {
+      "id": "verdict",
+      "text": "So, is it cheating? Only if you stop thinking."
+    },
+    {
+      "id": "outro",
+      "text": "Comment your verdict, and join vibe editing."
+    }
+  ]
+}

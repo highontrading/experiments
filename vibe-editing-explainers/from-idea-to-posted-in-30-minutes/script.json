@@ -1,0 +1,40 @@
+{
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "voice_name": "Eric - Smooth, Trustworthy",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "use_speaker_boost": true
+  },
+  "lines": [
+    {
+      "id": "hook",
+      "text": "At nine PM, there's only an idea. By nine thirty, it's posted. Here's how."
+    },
+    {
+      "id": "t900",
+      "text": "Nine o'clock. The idea. Explain vibe editing in one minute."
+    },
+    {
+      "id": "t905",
+      "text": "Nine oh five. The brief. Four sentences, in plain English."
+    },
+    {
+      "id": "t912",
+      "text": "Nine twelve. The first draft. Every clip placed. Every caption timed."
+    },
+    {
+      "id": "t920",
+      "text": "Nine twenty. The notes. Faster start. Warmer music. Bigger captions."
+    },
+    {
+      "id": "t930",
+      "text": "Nine thirty. Posted."
+    },
+    {
+      "id": "outro",
+      "text": "Smart editors don't spend the whole night on this. They direct it. Join vibe editing."
+    }
+  ]
+}
