@@ -355,8 +355,10 @@ scene(C.s_ex, C.s_twist, { type: "zoom", d: 0.45 }, (g, t, lt) => {
     g.save(); g.globalAlpha = 1 - back * 2;
     shade(g, 1100, 1500, 0.55);
     redTag(g, "EXHIBIT A", W / 2, 300, 54, t, C.s_ex + 0.1);
-    serifWord(g, "No", W / 2 - 230, 1260, 150, t, C.no_tl - 0.3, { color: "#fff" });
-    serifWord(g, "timeline.", W / 2 + 90, 1260, 150, t, C.no_tl - 0.05, { color: "#fff" });
+    g.font = `italic 400 150px "Instrument Serif"`;
+    const wNo = g.measureText("No ").width, wTl = g.measureText("timeline.").width, x0 = (W - wNo - wTl) / 2;
+    serifWord(g, "No", x0, 1260, 150, t, C.no_tl - 0.3, { color: "#fff", align: "left" });
+    serifWord(g, "timeline.", x0 + wNo, 1260, 150, t, C.no_tl - 0.05, { color: "#fff", align: "left" });
     g.restore();
   }
   // crossed out exhibits get the verdict of the accusation
@@ -505,6 +507,8 @@ const COMMENTS = [
   { who: "reelroom", text: "Verdict: it's directing.", at: () => C.join - 0.25, x: -20, rot: -1 },
 ];
 scene(C.s_outro, C.end + 1, { type: "zoom", d: 0.45 }, (g, t, lt) => {
+  const z = lerp(1.0, 1.06, inOutCubic(clamp((t - C.join) / (C.end - C.join))));   // slow push-in on the CTA
+  g.translate(W / 2, H * 0.45); g.scale(z, z); g.translate(-W / 2, -H * 0.45);
   wood(g, lt, 0.5);
   vignette(g, 0.7, 0.3);
   extruded(g, "YOUR", W / 2, 250, 110, "#f6c90e", "#a8790a", t, C.comment - 0.15, { rot: -3, depth: 12 });
@@ -557,6 +561,7 @@ scene(C.s_outro, C.end + 1, { type: "zoom", d: 0.45 }, (g, t, lt) => {
   }
   // fade out
   const fo = win(C.end - 0.5, C.end, t);
+  g.setTransform(1, 0, 0, 1, 0, 0);
   if (fo > 0) { g.fillStyle = `rgba(0,0,0,${fo})`; g.fillRect(0, 0, W, H); }
 });
 function cursor(g, x, y, press) {
