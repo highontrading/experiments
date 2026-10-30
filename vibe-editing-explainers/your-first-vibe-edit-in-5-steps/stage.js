@@ -536,10 +536,10 @@ function sStep2b(g, t) {
 
 // ---------------------------------------------------------------- step 3: code + render --
 const CODE = [
-  ["clips", " = [", "\"walk.mp4\"", ", ", "\"waves.mp4\"", ", ", "\"field.mp4\"", ", ", "\"beach.mp4\"", "]"],
+  ["clips", " = [", "\"walk\"", ", ", "\"waves\"", ", ", "\"field\"", ", ", "\"beach\"", "]"],
   ["music", "(", "\"music.mp3\"", ", duck_under_voice=", "True", ")"],
   ["for", " i, c ", "in", " enumerate(clips):"],
-  ["    clip", "(c, start=i * ", "7.5", ", grade=", "\"warm\"", ")"],
+  ["    clip", "(c + ", "\".mp4\"", ", start=i * ", "7.5", ", grade=", "\"warm\"", ")"],
   ["captions", "(style=", "\"clean\"", ")"],
   ["logo", "(", "\"logo.png\"", ", at=", "28.5", ")"],
   ["render", "(", "\"first-draft.mp4\"", ", ", "1080", ", ", "1920", ")"],
@@ -818,7 +818,7 @@ function sOutro2(g, t) {
   object(g, "phone", px, py, pw, 34.6 - 4 + Math.sin(t * 1.3) * 0.8, { portrait: true, screen: (g2, w, h) => phoneUI(g2, w, h, t) });
   clickRing(g, px + 0.30 * pw * 0.48, py + 0.32 * pw * 0.93, t, C.o_vibe + 0.4);
   title(g, "COMMENT", 540, 280, 150, t, C.o_comment - 0.1, { out: C.o_join - 0.3 });
-  title(g, "“VIBE”", 540, 440, 170, t, C.o_vibe - 0.1, { lime: true, color: LIME, out: C.o_join - 0.3 });
+  title(g, "“VIBE”", 540, 455, 170, t, C.o_vibe - 0.1, { lime: true, color: LIME, out: C.o_join - 0.3 });
   title(g, "JOIN", 540, 330, 200, t, C.o_join - 0.05, {});
   title(g, "VIBE EDITING", 540, 520, 190, t, C.o_vibe2 - 0.05, { lime: true, color: LIME });
   pill(g, "we'll send you the brief template 🔥", 540, 650, t, C.o_editing + 0.2, { size: 34 });
