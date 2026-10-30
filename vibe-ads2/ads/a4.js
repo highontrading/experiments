@@ -64,7 +64,7 @@ S.push({ at: at("a4_2", 3), tr: { type: "glitch", d: 0.24 }, sfx: [["glitch", [ 
     scribble(c, "circle", 540, 980, 760, 400, win(g + 0.2, g + 0.6, t), { lw: 10 });
   }
   title(c, "EK GALTI…", 540, 420, 150, 0.02, t);
-  title(c, "SAB BIGAD GAYA", 540, 1580, 120, L(Sh, "a4_2", 6), t, { color: "#ff8a7a" });
+  title(c, "SAB BIGAD GAYA", 540, 1480, 120, L(Sh, "a4_2", 6), t, { color: "#ff8a7a" });
 } });
 // 6 · Ab ungliyon se nahi — a real hand on the mat, crossed out
 S.push({ at: at("a4_3", 0), tr: { type: "cloud", d: 0.6 }, draw(c, t, gt, Sh) {
