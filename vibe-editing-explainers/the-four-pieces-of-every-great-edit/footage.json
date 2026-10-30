@@ -4,36 +4,8 @@
   "image": "https://images.metmuseum.org/CRDImages/ep/original/DP346474.jpg"
  },
  {
-  "name": "fp_selfportrait",
-  "image": "https://images.metmuseum.org/CRDImages/ep/original/DT1502_cropped2.jpg"
- },
- {
-  "name": "fp_roses",
-  "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT1950.jpg"
- },
- {
-  "name": "fp_olive",
-  "image": "https://images.metmuseum.org/CRDImages/ep/original/DT1946.jpg"
- },
- {
-  "name": "fp_shoes",
-  "image": "https://images.metmuseum.org/CRDImages/ep/original/DT1947.jpg"
- },
- {
-  "name": "fp_naples",
-  "image": "https://images.metmuseum.org/CRDImages/ep/original/DT1878.jpg"
- },
- {
   "name": "fp_rouen",
   "image": "https://images.metmuseum.org/CRDImages/ep/original/DT1863.jpg"
- },
- {
-  "name": "fp_siesta",
-  "image": "https://images.metmuseum.org/CRDImages/ep/original/DT1952.jpg"
- },
- {
-  "name": "fp_laundress",
-  "image": "https://images.metmuseum.org/CRDImages/ep/original/DT2141.jpg"
  },
  {
   "name": "fp_balloon",
@@ -68,35 +40,6 @@
   "mixkit": 13703,
   "ss": 10.4,
   "dur": 6.6,
-  "vf": "scale=960:-2"
- },
- {
-  "name": "fp_gallery",
-  "mixkit": 49294,
-  "ss": 0,
-  "dur": 7,
-  "vf": "scale=960:-2"
- },
- {
-  "name": "fp_leaves",
-  "mixkit": 17439,
-  "ss": 0,
-  "dur": 8,
-  "vf": "scale=960:-2"
- },
- {
-  "name": "fp_brush",
-  "mixkit": 5269,
-  "ss": 0,
-  "dur": 6,
-  "vf": "scale=960:-2"
- },
- {
-  "name": "fp_artist",
-  "mixkit": 100452,
-  "page": "artist-in-a-vintage-studio-painting-on-canvas-100452",
-  "ss": 0,
-  "dur": 7,
   "vf": "scale=960:-2"
  }
 ]

@@ -11,7 +11,6 @@ Downloaded from `images.metmuseum.org` and shrunk to 1600 px (`prepare.sh`).
 | --- | --- | --- |
 | The jigsaw spine, the brief puzzle, the iris cut-out | Vincent van Gogh, *Irises*, 1890 | `ep/original/DP346474.jpg` |
 | Context station (inside the frame) and the brief strip | Camille Pissarro, *Morning, An Overcast Day, Rouen*, 1896 | `ep/original/DT1863.jpg` |
-| Fetched, not shown | Van Gogh, *Self-Portrait with a Straw Hat*, 1887 (`DT1502_cropped2`); *Roses*, 1890 (`web-large/DT1950`); *Olive Trees*, 1889 (`DT1946`); *Shoes*, 1888 (`DT1947`); Renoir, *The Bay of Naples*, 1881 (`DT1878`); Gauguin, *The Siesta* (`DT1952`); Daumier, *The Laundress* (`DT2141`) | — |
 
 ## Footage (Mixkit, Mixkit Stock Video Free License)
 
@@ -23,7 +22,6 @@ Downloaded from `images.metmuseum.org` and shrunk to 1600 px (`prepare.sh`).
 | Build-up III: rope swing jump and splash | #13703 *A young man on a swing and dives into the…* (from 10.4 s, played at 2.2×) |
 | The payoff: the reveal | #42070 *A very excited girl opening her Christmas presents* (from 6.8 s) |
 | Desk surface (shared) | #3827 wood (`oh_wood`, fetched for *One idea, a hundred videos*) |
-| Fetched, not shown | #49294 gallery tour, #17439 autumn leaves, #5269 brush, #100452 artist in a vintage studio |
 
 ## Cut-out objects
 

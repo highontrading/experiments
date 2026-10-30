@@ -590,7 +590,7 @@ function sStep3(g, t) {
     }
   });
   g.restore();
-  title(g, "IT WRITES CODE", 540, 290, 150, t, C.s3_writes - 0.1, { lime: true, color: LIME, out: C.s3_draft - 0.25 });
+  title(g, "IT WRITES CODE", 540, 290, 150, t, C.s3_writes - 0.1, { lime: true, color: LIME, out: C.s3_draft - 0.5 });
   title(g, "LET IT BUILD", 540, 290, 150, t, C.s3_let - 0.05, { out: C.s3_writes - 0.4 });
   // the first draft slides in over the panel
   const dp = outQuint(win(C.s3_draft - 0.2, C.s3_draft + 0.45, t));
@@ -651,7 +651,7 @@ function sStep4(g, t) {
     }
   }
   NOTES.forEach(([s, x, y, rot], i) => sticky(g, s, x, y, rot, spring(win(C.s4_three - 0.05 + i * 0.22, C.s4_three + 0.5 + i * 0.22, t))));
-  title(g, "THREE NOTES", 540, 290, 150, t, C.s4_three - 0.05, { lime: true, color: LIME, out: C.s4_not - 0.15 });
+  title(g, "THREE NOTES", 540, 290, 150, t, C.s4_three - 0.05, { lime: true, color: LIME, out: C.s4_not - 0.4 });
   if (fl > 0 && away < 1) {
     title(g, "NOT 50", 540, 290, 170, t, C.s4_fifty - 0.1, { color: "#ff5a4a", glow: "rgba(255,80,60,0.6)", out: C.s4_three2 - 0.15 });
   }
@@ -817,8 +817,8 @@ function sOutro2(g, t) {
   // phone: the cut-out is photographed at an angle, so turn it upright (+34.6°) with a small tilt
   object(g, "phone", px, py, pw, 34.6 - 4 + Math.sin(t * 1.3) * 0.8, { portrait: true, screen: (g2, w, h) => phoneUI(g2, w, h, t) });
   clickRing(g, px + 0.30 * pw * 0.48, py + 0.32 * pw * 0.93, t, C.o_vibe + 0.4);
-  title(g, "COMMENT", 540, 280, 150, t, C.o_comment - 0.1, { out: C.o_join - 0.3 });
-  title(g, "“VIBE”", 540, 455, 170, t, C.o_vibe - 0.1, { lime: true, color: LIME, out: C.o_join - 0.3 });
+  title(g, "COMMENT", 540, 280, 150, t, C.o_comment - 0.1, { out: C.o_join - 0.5 });
+  title(g, "“VIBE”", 540, 455, 170, t, C.o_vibe - 0.1, { lime: true, color: LIME, out: C.o_join - 0.5 });
   title(g, "JOIN", 540, 330, 200, t, C.o_join - 0.05, {});
   title(g, "VIBE EDITING", 540, 520, 190, t, C.o_vibe2 - 0.05, { lime: true, color: LIME });
   pill(g, "we'll send you the brief template 🔥", 540, 650, t, C.o_editing + 0.2, { size: 34 });
