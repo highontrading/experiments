@@ -1,0 +1,8 @@
+[
+  {"name": "ip_mantel", "mixkit": 15661, "ss": 1, "dur": 9, "vf": "scale=1280:-2"},
+  {"name": "ip_wallclock", "mixkit": 28886, "ss": 0, "dur": 9, "vf": "scale=1440:-2"},
+  {"name": "ip_hourglass", "mixkit": 28892, "ss": 0, "dur": 8, "vf": "scale=1440:-2"},
+  {"name": "ip_lamp", "mixkit": 50133, "ss": 0, "dur": 8, "vf": "scale=1440:-2"},
+  {"name": "ip_writing", "mixkit": 46768, "ss": 1, "dur": 8, "vf": "scale=1280:-2"},
+  {"name": "ip_feed", "mixkit": 100067, "page": "a-young-smiling-woman-enjoys-social-media-scrolling-on-her-100067", "ss": 3, "dur": 9, "vf": "scale=1280:-2"}
+]

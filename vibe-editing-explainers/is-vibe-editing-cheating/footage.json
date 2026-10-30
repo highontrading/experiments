@@ -1,0 +1,47 @@
+[
+ {
+  "name": "ch_reader",
+  "mixkit": 41191,
+  "ss": 0.5,
+  "dur": 6,
+  "vf": "crop=608:1080:886:0,scale=720:1280"
+ },
+ {
+  "name": "ch_detective",
+  "mixkit": 49443,
+  "ss": 0,
+  "dur": 7,
+  "vf": "crop=405:720:566:0,scale=720:1280"
+ },
+ {
+  "name": "ch_blueprint",
+  "mixkit": 35380,
+  "ss": 9,
+  "dur": 9,
+  "vf": "crop=405:720:560:0,scale=720:1280",
+  "force": true
+ },
+ {
+  "name": "ch_chess",
+  "mixkit": 100105,
+  "page": "a-young-man-sitting-at-the-table-with-a-focused-100105",
+  "ss": 0,
+  "dur": 4.3,
+  "vf": "crop=405:720:437:0,scale=720:1280"
+ },
+ {
+  "name": "ch_dark",
+  "mixkit": 100112,
+  "page": "a-young-man-sitting-in-a-dark-room-focuses-on-100112",
+  "ss": 0,
+  "dur": 8,
+  "vf": "crop=405:720:374:0,scale=720:1280"
+ },
+ {
+  "name": "ch_thinker",
+  "mixkit": 41187,
+  "ss": 2,
+  "dur": 8,
+  "vf": "crop=608:1080:752:0,scale=720:1280"
+ }
+]

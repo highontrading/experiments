@@ -1,0 +1,8 @@
+[
+  {"name": "fs_walk",   "mixkit": 4629,  "ss": 0, "dur": 8, "vf": "scale=960:-2"},
+  {"name": "fs_beach",  "mixkit": 2169,  "ss": 0, "dur": 8, "vf": "scale=960:-2"},
+  {"name": "fs_couple", "mixkit": 44474, "ss": 0, "dur": 8, "vf": "scale=960:-2"},
+  {"name": "fs_waves",  "mixkit": 6891,  "ss": 0, "dur": 8, "vf": "scale=960:-2"},
+  {"name": "fs_field",  "mixkit": 9113,  "ss": 0, "dur": 8, "vf": "scale=960:-2"},
+  {"name": "fs_foggy",  "mixkit": 35513, "ss": 0, "dur": 8, "vf": "scale=960:-2"}
+]
