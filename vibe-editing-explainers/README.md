@@ -18,12 +18,17 @@ order.
 | One idea, a hundred videos | money-doc collage: textured backdrops, real cut-outs, rolling counters, bold condensed type | 40 s | `one-idea-a-hundred-videos/out/` |
 | Why AI edits look fake | retro grunge pixel: real footage dithered to red/cream, CRTs, pop-ups, spotlights | 39 s | `why-ai-edits-look-fake/out/` |
 | Robot voices to AI narrators | sports-doc history collage: stacked years, archival film, stamped cards, cloud wipes | 41 s | `robot-voices-to-ai-narrators/out/` |
+| Your first vibe edit in 5 steps | green-grid tutorial: lime glow titles, Win95 dialogs, agent UI, click rings | 45 s | `your-first-vibe-edit-in-5-steps/out/` |
+| From idea to posted in 30 minutes | warm documentary: gold clock times, amber cards, desk top-downs | 39 s | `from-idea-to-posted-in-30-minutes/out/` |
+| Is vibe editing cheating? | news mystery: newspaper exhibits, blueprint grid, serif twist, 3D verdict type | 36 s | `is-vibe-editing-cheating/out/` |
+| The four pieces of every great edit | painterly gallery: Van Gogh's Irises as a 4-piece puzzle, gilded frames | 33 s | `the-four-pieces-of-every-great-edit/out/` |
 
 Each folder has `out/<name>.mp4`, `out/cover.jpg` and a `CREDITS.md` listing every source.
 
-The last four follow four reference reels the user supplied: fast documentary-reel pacing
+The last eight follow eight reference reels the user supplied: fast documentary-reel pacing
 (voice from 0:00, a new layout every 1–2 s, word-synced type, punchy whooshes and impacts).
-Their voiceovers use ElevenLabs **Eleven v4** (`eleven_v4`); the earlier five use
+Their voiceovers use ElevenLabs **Eleven v4** (`eleven_v4`), and each ends on a
+"join vibe editing" call to action; the earlier five use
 `eleven_multilingual_v2`. Music and sound effects are from Mixkit.
 
 ## What every video shares

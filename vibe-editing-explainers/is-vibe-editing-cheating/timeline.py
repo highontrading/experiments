@@ -6,7 +6,7 @@ T = Timeline(__file__, gaps={"hook": 0.0, "claim": 0.5, "twist": 0.9, "history":
                              "you": 0.55, "verdict": 0.65, "outro": 0.6}, tail=4.0)
 w, L, E = T.w, T.L, T.E
 T.save({
-    "cover": L("claim") + 3.0,
+    "cover": w("hook", "sentences") + 0.25,
     # hook
     "cheating": w("hook", "cheating"), "video": w("hook", "video"), "made": w("hook", "made"),
     "few": w("hook", "few"), "sentences": w("hook", "sentences"),
