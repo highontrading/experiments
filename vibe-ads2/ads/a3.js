@@ -79,7 +79,7 @@ S.push({ at: at("a3_2", 14), tr: { type: "warp", d: 0.26 }, sfx: [["tick", 0.05,
   c.lineCap = "round"; c.lineWidth = 16; c.beginPath(); c.moveTo(0, 0); const a = t * 14; c.lineTo(Math.sin(a) * 230, -Math.cos(a) * 230); c.stroke();
   c.strokeStyle = RED; c.lineWidth = 10; c.beginPath(); c.moveTo(0, 0); c.lineTo(Math.sin(a / 12) * 170, -Math.cos(a / 12) * 170); c.stroke(); c.restore();
   block(c, "ITNA TIME", 540, 560, 210, RED, 0.02, t, { stroke: "#fff" });
-  block(c, "KISKE PAAS?", 540, 1580, 150, BLUE, L(Sh, "a3_2", 16), t, { stroke: "#fff" });
+  block(c, "KISKE PAAS?", 540, 1500, 150, BLUE, L(Sh, "a3_2", 16), t, { stroke: "#fff" });
 } });
 // 5 · Vibe Editing mein bas ek line bolo
 S.push({ at: at("a3_3", 0), tr: { type: "warp", d: 0.28 }, draw(c, t, gt, Sh) {
