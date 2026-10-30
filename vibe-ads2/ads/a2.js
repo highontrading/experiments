@@ -171,7 +171,7 @@ S.push({ at: at("a2_7", 0), tr: { type: "flash", d: 0.22 }, sfx: [["impact", 0.0
   title(c, "FUTURE", 540, 1060, 260, L(Sh, "a2_7", 4), t, { flat: RED, side: "#6b0d12", depth: 14 });
 } });
 // 24 · CTA: pehla kadam rakho — Vibe Editing join karo
-S.push({ at: at("a2_7", 5), tr: { type: "slide", d: 0.35, vertical: true }, sfx: [["chime", [ "a2_7", 13 ], 0.8]], draw(c, t, gt, Sh) {
+S.push({ at: at("a2_7", 7), tr: { type: "slide", d: 0.35, vertical: true }, sfx: [["chime", [ "a2_7", 13 ], 0.8]], draw(c, t, gt, Sh) {
   bgWhite(c, 0.0); cam(c, t, { z0: 1.03, z1: 1.0, dur: 3 });
   title(c, "PEHLA KADAM", 540, 330, 110, 0.05, t, { flat: RED, side: "#6b0d12", depth: 8 });
   title(c, "RAKHO.", 540, 470, 110, L(Sh, "a2_7", 9), t, { flat: "#111", side: "#555", depth: 6 });
