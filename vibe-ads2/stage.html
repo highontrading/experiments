@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vibe Editing ad stage</title>
+<style>
+  @font-face { font-family: ArchX9; src: url(assets/fonts/Archivo-Expanded-900.ttf); font-weight: 900; }
+  @font-face { font-family: InterL; src: url(assets/fonts/Inter-Medium.otf); font-weight: 500; }
+  @font-face { font-family: InterL; src: url(assets/fonts/Inter-SemiBold.otf); font-weight: 600; }
+  @font-face { font-family: InterL; src: url(assets/fonts/Inter-Bold.otf); font-weight: 700 900; }
+  @font-face { font-family: Caveat; src: url(assets/fonts/Caveat-600.ttf); font-weight: 600; }
+  @font-face { font-family: Anton; src: url(assets/fonts/Anton.woff2); }
+  @font-face { font-family: BebasNeue; src: url(assets/fonts/BebasNeue.woff2); }
+  @font-face { font-family: Oswald; src: url(assets/fonts/Oswald-700.woff2); font-weight: 700; }
+  @font-face { font-family: Playfair; src: url(assets/fonts/Playfair-800.woff2); font-weight: 800; }
+  @font-face { font-family: SpaceGrotesk; src: url(assets/fonts/SpaceGrotesk-700.woff2); font-weight: 700; }
+  @font-face { font-family: JBMono; src: url(assets/fonts/JetBrainsMono-500.woff2); font-weight: 500; }
+  @font-face { font-family: PermanentMarker; src: url(assets/fonts/PermanentMarker.woff2); }
+  @font-face { font-family: Rubik; src: url(assets/fonts/Rubik-500.woff2); font-weight: 500; }
+  @font-face { font-family: Rubik; src: url(assets/fonts/Rubik-700.woff2); font-weight: 700; }
+  @font-face { font-family: BodoniModa; src: url(assets/fonts/BodoniModa-800.woff2); font-weight: 800; }
+  @font-face { font-family: BodoniModaI; src: url(assets/fonts/BodoniModa-600i.woff2); font-weight: 600; font-style: italic; }
+  @font-face { font-family: PlayfairI; src: url(assets/fonts/Playfair-500i.woff2); font-weight: 500; font-style: italic; }
+  @font-face { font-family: Silkscreen; src: url(assets/fonts/Silkscreen-700.woff2); font-weight: 700; }
+  @font-face { font-family: ArchivoBlack; src: url(assets/fonts/ArchivoBlack.woff2); }
+  html, body { margin: 0; background: #000; }
+  canvas { display: block; }
+</style>
+<style id="baloo"></style>
+<script>
+  const BALOO = ["Baloo2", "BalooDa2", "BalooThambi2", "BalooTammudu2", "BalooBhai2", "BalooPaaji2", "BalooTamma2", "BalooChettan2", "BalooBhaina2"];
+  document.getElementById("baloo").textContent = BALOO.map((f) =>
+    `@font-face{font-family:${f};src:url(assets/fonts/${f}-500.woff);font-weight:400 600}` +
+    `@font-face{font-family:${f};src:url(assets/fonts/${f}-800.woff);font-weight:700 900}`).join("\n");
+</script>
+</head>
+<body>
+<canvas id="cv" width="1080" height="1920"></canvas>
+<script>
+  // ?ad=a1 -> build/a1/timing.js + ads/a1.js
+  const AD_ID = new URLSearchParams(location.search).get("ad") || "a1";
+  const files = [`build/${AD_ID}/timing.js`, "build/footage.js", "lib/core.js", "lib/kit.js", "lib/fx.js", `ads/${AD_ID}.js`, "lib/film.js"];
+  window.stageLoaded = files.reduce((p, f) => p.then(() => new Promise((ok, no) => {
+    const s = document.createElement("script"); s.src = f; s.onload = ok; s.onerror = () => no(new Error(f));
+    document.body.appendChild(s);
+  })), Promise.resolve()).then(() => window.stageReady);
+</script>
+</body>
+</html>
