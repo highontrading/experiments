@@ -1,0 +1,100 @@
+{
+ "composition_plan": {
+  "positive_global_styles": [
+   "premium brand advertisement",
+   "modern cinematic hip-hop electronic",
+   "punchy tight drums",
+   "deep warm sub bass",
+   "plucked synth motif",
+   "subtle Indian tabla and shaker accents",
+   "clean polished mix",
+   "instrumental",
+   "96 bpm"
+  ],
+  "negative_global_styles": [
+   "vocals",
+   "singing",
+   "lo-fi hiss",
+   "cheesy",
+   "corporate ukulele",
+   "orchestral epic"
+  ],
+  "sections": [
+   {
+    "section_name": "Hook intro",
+    "positive_local_styles": [
+     "minimal plucked synth motif",
+     "soft kick and finger snaps",
+     "curious, confident"
+    ],
+    "negative_local_styles": [
+     "full drums"
+    ],
+    "duration_ms": 5500,
+    "lines": []
+   },
+   {
+    "section_name": "Question tension",
+    "positive_local_styles": [
+     "drums drop out",
+     "suspended pad",
+     "ticking hi-hat",
+     "questioning mood"
+    ],
+    "negative_local_styles": [
+     "bass drop"
+    ],
+    "duration_ms": 4500,
+    "lines": []
+   },
+   {
+    "section_name": "Build",
+    "positive_local_styles": [
+     "groove enters with tabla accents",
+     "warm bass",
+     "filtered aquatic feel",
+     "gradually building energy"
+    ],
+    "negative_local_styles": [],
+    "duration_ms": 7500,
+    "lines": []
+   },
+   {
+    "section_name": "Reveal hits",
+    "positive_local_styles": [
+     "three big rhythmic stabs with space between",
+     "riser",
+     "anticipation"
+    ],
+    "negative_local_styles": [],
+    "duration_ms": 4000,
+    "lines": []
+   },
+   {
+    "section_name": "Main groove",
+    "positive_local_styles": [
+     "full confident groove",
+     "punchy drums",
+     "bass and pluck motif",
+     "uplifting, driving"
+    ],
+    "negative_local_styles": [],
+    "duration_ms": 12000,
+    "lines": []
+   },
+   {
+    "section_name": "Finale",
+    "positive_local_styles": [
+     "lift with brighter synths",
+     "energetic call to action",
+     "final big hit then short clean resolve and ending"
+    ],
+    "negative_local_styles": [
+     "fade out slowly"
+    ],
+    "duration_ms": 10000,
+    "lines": []
+   }
+  ]
+ }
+}
