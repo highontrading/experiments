@@ -1,0 +1,7 @@
+[
+ {"name": "pa_exhausted", "mixkit": 39854, "ss": 0, "dur": 11, "vf": "scale=720:-2"},
+ {"name": "pa_papers", "mixkit": 39847, "ss": 1.5, "dur": 8, "vf": "scale=960:-2"},
+ {"name": "pa_moon", "mixkit": 46898, "ss": 0, "dur": 14, "vf": "scale=960:-2"},
+ {"name": "pa_fire", "mixkit": 31352, "ss": 0, "dur": 10, "vf": "scale=960:-2"},
+ {"name": "pa_sunset", "mixkit": 35096, "ss": 7, "dur": 12, "vf": "scale=1280:-2"}
+]
