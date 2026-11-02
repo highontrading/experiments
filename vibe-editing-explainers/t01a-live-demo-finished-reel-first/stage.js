@@ -490,9 +490,9 @@ function layoutJust(g, t) {
   const a = win(C.s_just - 0.35, C.s_just - 0.3, t) * (1 - win(C.s_outro - 0.3, C.s_outro + 0.05, t));
   if (a <= 0) return;
   // scattered italic words, as the voice says them
-  const words = [["No", 210, 250, C.timeline - 0.15], ["timeline.", 640, 330, C.timeline], ["No", 300, 980, C.keyframes - 0.2], ["keyframes.", 700, 1050, C.keyframes]];
+  const words = [["No", 210, 250, C.s_just - 0.1], ["timeline.", 640, 330, C.timeline], ["No", 300, 980, C.keyframes - 0.2], ["keyframes.", 700, 1050, C.keyframes]];
   words.forEach(([w, x, y, at]) => serif(g, w, x, y, 66, { italic: true, alpha: a * outCubic(win(at - 0.05, at + 0.3, t)) * (1 - win(C.talking - 0.3, C.talking, t)) }));
-  const n1 = outCubic(win(C.timeline - 0.15, C.timeline + 0.25, t)), f1 = win(C.timeline + 0.55, C.timeline + 1.0, t);
+  const n1 = outCubic(win(C.s_just - 0.1, C.timeline + 0.1, t)), f1 = win(C.timeline + 0.55, C.timeline + 1.0, t);
   if (n1 > 0 && f1 < 1) {
     nle(g, 120, 430 - 30 * f1, 840, t, a * n1 * (1 - f1));
     strike(g, 140, 450, 940, 660, win(C.timeline + 0.25, C.timeline + 0.5, t), a * (1 - f1));
@@ -533,7 +533,7 @@ function outroPanel(g, t) {
 function outroCTA(g, t) {
   const a = win(C.s_outro - 0.3, C.s_outro + 0.15, t);
   if (a <= 0) return;
-  neon(g, "That's vibe editing.", 540, 1325, 78, { alpha: a * outCubic(win(C.thats - 0.1, C.thats + 0.3, t)) * (1 - win(C.join - 0.3, C.join, t)) });
+  neon(g, "That's vibe editing.", 540, 1325, 78, { alpha: a * outCubic(win(C.thats - 0.1, C.thats + 0.3, t)) * (1 - win(C.follow - 0.25, C.follow - 0.05, t)) });
   // CTA: follow, then join
   const f = win(C.follow - 0.15, C.follow + 0.3, t);
   const j = outCubic(win(C.join - 0.15, C.join + 0.35, t));
