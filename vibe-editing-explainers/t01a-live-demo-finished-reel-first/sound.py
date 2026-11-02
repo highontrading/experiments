@@ -19,8 +19,8 @@ m.lay(C["s_raw"] + 0.25, 0)
 m.hit("paper_crinkle", C["noedits"] - 0.1, -16, pan=0.2, length=0.6)
 
 # the agent: background push, mic on
-for k in ("s_tell", "s_c1", "s_c2", "s_c3", "s_c4", "s_just"):
-    m.glide(C[k] - 0.05, k=hash(k) % 2, g=-17)
+for i, k in enumerate(("s_tell", "s_c1", "s_c2", "s_c3", "s_c4", "s_just")):
+    m.glide(C[k] - 0.05, k=i, g=-17)
 m.hit("ui_start", C["tell"] - 0.2, -16)
 
 # four commands: a click as each lands, a tone on each "Done"

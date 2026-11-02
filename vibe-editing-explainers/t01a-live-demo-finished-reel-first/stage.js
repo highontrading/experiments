@@ -345,7 +345,7 @@ function drawDock(g, t) {
 
 // ------------------------------------------------------------------ layouts --
 function layoutRaw(g, t) {
-  const a = win(C.s_raw + 0.1, C.s_raw + 0.6, t) * (1 - win(C.s_tell - 0.3, C.s_tell, t));
+  const a = win(C.s_raw + 0.1, C.s_raw + 0.6, t);
   if (a <= 0) return;
   g.save(); g.globalAlpha = a;
   serif(g, "the", 300, 200, 64, { italic: true, alpha: a });
@@ -353,10 +353,10 @@ function layoutRaw(g, t) {
   g.restore();
 }
 function rawTape(g, t) {   // taped across the polaroid, so it is drawn after the card
-  tape(g, 560, 1250, 660, "raw  ·  0:47  ·  no edits", 0.06, outCubic(win(C.noedits - 0.15, C.noedits + 0.35, t)) * (1 - win(C.s_tell - 0.3, C.s_tell, t)));
+  tape(g, 560, 1250, 660, "raw  ·  0:47  ·  no edits", 0.06, outCubic(win(C.noedits - 0.15, C.noedits + 0.35, t)));
 }
 function layoutTell(g, t) {
-  const a = win(C.s_tell + 0.1, C.s_tell + 0.5, t) * (1 - win(C.s_c1 - 0.3, C.s_c1, t));
+  const a = win(C.s_tell - 0.35, C.s_tell - 0.3, t);
   if (a <= 0) return;
   serif(g, "just tell the agent", 540, 170, 54, { italic: true, alpha: a });
   // real props on the table
@@ -393,7 +393,7 @@ function timelineStrip(g, t, x, y, w, a) {   // waveform with silent gaps that s
   void scale;
 }
 function layoutC1(g, t) {
-  const a = win(C.s_c1 + 0.1, C.s_c1 + 0.5, t) * (1 - win(C.s_c2 - 0.3, C.s_c2, t));
+  const a = win(C.s_c1 - 0.35, C.s_c1 - 0.3, t);
   if (a <= 0) return;
   tape(g, 540, 185, 640, "cut the pauses", 0.03, outCubic(win(C.cut - 0.1, C.cut + 0.3, t)) * a);
   timelineStrip(g, t, 150, 1065, 780, a);
@@ -405,14 +405,14 @@ function layoutC1(g, t) {
   check(g, 760, 240, 52, win(C.done1, C.done1 + 0.5, t) * a);
 }
 function layoutC2(g, t) {
-  const a = win(C.s_c2 + 0.05, C.s_c2 + 0.5, t) * (1 - win(C.s_c3 - 0.3, C.s_c3, t));
+  const a = win(C.s_c2 - 0.35, C.s_c2 - 0.3, t);
   if (a <= 0) return;
   dashedFrame(g, 540 - 290, 760 - 520, 580, 1040, t, a);
   neon(g, "bold captions", 540, 175, 64, { alpha: a * outCubic(win(C.bold - 0.1, C.bold + 0.3, t)) });
   check(g, 800, 275, 52, win(C.done2, C.done2 + 0.5, t) * a);
 }
 function layoutC3(g, t) {
-  const a = win(C.s_c3 + 0.05, C.s_c3 + 0.5, t) * (1 - win(C.s_c4 - 0.3, C.s_c4, t));
+  const a = win(C.s_c3 - 0.35, C.s_c3 - 0.3, t);
   if (a <= 0) return;
   // "before" polaroid drops in behind (cool, ungraded)
   const p = outCubic(win(C.warmer, C.warmer + 0.6, t));
@@ -444,7 +444,7 @@ function renderBefore(t) {
   bg2.filter = "saturate(0.7) contrast(0.9) brightness(1.05)"; bg2.drawImage(fr, 0, 0, 360, 640); bg2.filter = "none";
 }
 function layoutC4(g, t) {
-  const a = win(C.s_c4 + 0.05, C.s_c4 + 0.5, t) * (1 - win(C.s_just - 0.3, C.s_just, t));
+  const a = win(C.s_c4 - 0.35, C.s_c4 - 0.3, t);
   if (a <= 0) return;
   // real alarm clock + duration snapping to 0:30
   const clock = K.object("clock");
@@ -481,13 +481,13 @@ function kfGraph(g, x, y, w, t, a) {   // keyframes on a value graph
   for (let i = 0; i <= 6; i++) { const px = x + 40 + i * 10 * (w - 80) / 60, py = y + 110 + Math.sin(i * 10 * 0.22) * 60 * Math.cos(i * 10 * 0.07); g.save(); g.translate(px, py); g.rotate(Math.PI / 4); g.fillRect(-10, -10, 20, 20); g.restore(); }
   g.restore();
 }
-function strike(g, x0, y0, x1, y1, p) {
-  if (p <= 0) return;
-  g.save(); g.strokeStyle = RED; g.lineWidth = 12; g.lineCap = "round";
+function strike(g, x0, y0, x1, y1, p, a = 1) {
+  if (p <= 0 || a <= 0) return;
+  g.save(); g.globalAlpha = a; g.strokeStyle = RED; g.lineWidth = 12; g.lineCap = "round";
   g.beginPath(); g.moveTo(x0, y0); g.lineTo(lerp(x0, x1, p), lerp(y0, y1, p)); g.stroke(); g.restore();
 }
 function layoutJust(g, t) {
-  const a = win(C.s_just + 0.05, C.s_just + 0.45, t) * (1 - win(C.s_outro - 0.3, C.s_outro, t));
+  const a = win(C.s_just - 0.35, C.s_just - 0.3, t) * (1 - win(C.s_outro - 0.3, C.s_outro + 0.05, t));
   if (a <= 0) return;
   // scattered italic words, as the voice says them
   const words = [["No", 210, 250, C.timeline - 0.15], ["timeline.", 640, 330, C.timeline], ["No", 300, 980, C.keyframes - 0.2], ["keyframes.", 700, 1050, C.keyframes]];
@@ -495,12 +495,12 @@ function layoutJust(g, t) {
   const n1 = outCubic(win(C.timeline - 0.15, C.timeline + 0.25, t)), f1 = win(C.timeline + 0.55, C.timeline + 1.0, t);
   if (n1 > 0 && f1 < 1) {
     nle(g, 120, 430 - 30 * f1, 840, t, a * n1 * (1 - f1));
-    strike(g, 140, 450, 940, 660, win(C.timeline + 0.25, C.timeline + 0.5, t) * (1 - f1));
+    strike(g, 140, 450, 940, 660, win(C.timeline + 0.25, C.timeline + 0.5, t), a * (1 - f1));
   }
   const n2 = outCubic(win(C.keyframes - 0.15, C.keyframes + 0.25, t)), f2 = win(C.keyframes + 0.55, C.keyframes + 1.0, t);
   if (n2 > 0 && f2 < 1) {
     kfGraph(g, 120, 1110 - 30 * f2, 840, t, a * n2 * (1 - f2));
-    strike(g, 140, 1130, 940, 1310, win(C.keyframes + 0.25, C.keyframes + 0.5, t) * (1 - f2));
+    strike(g, 140, 1130, 940, 1310, win(C.keyframes + 0.25, C.keyframes + 0.5, t), a * (1 - f2));
   }
   // just talking: the mic, centre stage, in a dashed screen
   const j = outCubic(win(C.talking - 0.25, C.talking + 0.3, t));
@@ -511,7 +511,7 @@ function layoutJust(g, t) {
   }
 }
 function outroPanel(g, t) {
-  const a = win(C.s_outro, C.s_outro + 0.45, t);
+  const a = win(C.s_outro - 0.3, C.s_outro + 0.15, t);
   if (a <= 0) return;
   // the actual editing timeline UI, dark
   g.save(); g.globalAlpha = a;
@@ -531,7 +531,7 @@ function outroPanel(g, t) {
   g.restore();
 }
 function outroCTA(g, t) {
-  const a = win(C.s_outro, C.s_outro + 0.45, t);
+  const a = win(C.s_outro - 0.3, C.s_outro + 0.15, t);
   if (a <= 0) return;
   neon(g, "That's vibe editing.", 540, 1325, 78, { alpha: a * outCubic(win(C.thats - 0.1, C.thats + 0.3, t)) * (1 - win(C.join - 0.3, C.join, t)) });
   // CTA: follow, then join
@@ -555,6 +555,21 @@ function outroCTA(g, t) {
   }
 }
 
+// Where scene k's layout sits at time t: [dx, dy] while it is on screen (pushing in or out), else null.
+function sceneOffset(k, t) {
+  const j = SCENES.findIndex((s) => s.k === k), i = sceneAt(t);
+  if (i === j) {
+    const p = inOutCubic(win(SCENES[j].t - 0.3, SCENES[j].t - 0.3 + TR, t)), [dx, dy] = SCENES[j].dir || [0, 0];
+    return [dx * W * (1 - p), dy * H * (1 - p)];
+  }
+  if (i === j + 1) {
+    const p = inOutCubic(win(SCENES[i].t - 0.3, SCENES[i].t - 0.3 + TR, t)), [dx, dy] = SCENES[i].dir || [0, 0];
+    if (p >= 1 || !(dx || dy)) return null;
+    return [-dx * W * p, -dy * H * p];
+  }
+  return null;
+}
+
 // ------------------------------------------------------------------ frame --
 function sceneAt(t) { let i = 0; while (i < SCENES.length - 1 && t >= SCENES[i + 1].t - 0.3) i++; return i; }
 function frame(g, t) {
@@ -571,14 +586,16 @@ function frame(g, t) {
       moving = p > 0.02 && p < 0.98; speed = Math.sin(Math.PI * p);
     } else drawBg(g, sc.bg, t);
   }
-  layoutRaw(g, t); layoutTell(g, t); layoutC1(g, t); layoutC2(g, t); layoutC3(g, t); layoutC4(g, t); layoutJust(g, t);
+  // each layout rides along with its background during the pushes
+  const lay = { raw: layoutRaw, tell: layoutTell, c1: layoutC1, c2: layoutC2, c3: layoutC3, c4: layoutC4, just: layoutJust };
+  for (const k in lay) { const o = sceneOffset(k, t); if (o) { g.save(); g.translate(o[0], o[1]); lay[k](g, t); g.restore(); } }
   const st = reelState(t);
   renderReel(st.lt, st, t);
   const rc = cardRect(t);
   outroPanel(g, t);
   drawCard(g, t, rc);
   if (rc.moving) { moving = true; speed = Math.max(speed, rc.speed * 0.8); }
-  rawTape(g, t);
+  { const o = sceneOffset("raw", t); if (o) { g.save(); g.translate(o[0], o[1]); rawTape(g, t); g.restore(); } }
   outroCTA(g, t);
   drawDock(g, t);
   // the hook's own label

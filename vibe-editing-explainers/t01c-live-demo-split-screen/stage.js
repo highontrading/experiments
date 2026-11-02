@@ -193,9 +193,10 @@ function creator(lt) { return K.footage("tc_creator", 1.0 + (((lt % 7.2) + 7.2) 
 const RAW_F = "saturate(0.72) contrast(0.9) brightness(1.0)";
 const WARM_F = "saturate(1.3) sepia(0.22) contrast(1.08) brightness(1.04)";
 const CAPS = ["MY", "GO-TO", "KIT", "FOR", "EVERY", "SHOOT"];
+let EXTRA_F = "";   // appended to every clip filter (e.g. a blur for the hook preview)
 function drawImg(g, im, x, y, w, h, filter, zoom = 1) {
   if (!im) return;
-  g.filter = filter; K.drawFit(g, im, x, y, w, h, { zoom, fx: 0.5, fy: 0.42 }); g.filter = "none";
+  g.filter = filter + EXTRA_F; K.drawFit(g, im, x, y, w, h, { zoom, fx: 0.5, fy: 0.42 }); g.filter = "none";
 }
 // st: {warm 0..1 | wipe 0..1, caps 0..1, music 0..1, cut 0/1, bug 0..1, logo 0..1, tc}
 function drawClip(g, x, y, w, h, lt, st = {}) {
@@ -210,7 +211,7 @@ function drawClip(g, x, y, w, h, lt, st = {}) {
   } else {
     const wm = st.warm || 0;
     if (wm < 1) drawImg(g, im, x, y, w, h, RAW_F, z);
-    if (wm > 0) { g.globalAlpha = wm; drawImg(g, im, x, y, w, h, WARM_F, z); g.globalAlpha = 1; }
+    if (wm > 0) { const a0 = g.globalAlpha; g.globalAlpha = a0 * wm; drawImg(g, im, x, y, w, h, WARM_F, z); g.globalAlpha = a0; }
   }
   if (st.wipe != null && st.wipe > 0 && st.wipe < 1) {            // the wipe handle
     const wx = x + w * st.wipe;
@@ -358,7 +359,14 @@ function hook(g, t) {
   const r = win95(g, 40, 440, 1000, 980, "split_view.exe", { right: "RAW | FINISHED", rightColor: LIME });
   g.fillStyle = "#0a1712"; g.fillRect(r.x, r.y, r.w, r.h);
   g.restore();
-  // right slot: the finished reel, wiped in from the divider on "finished"
+  // right slot: a dim, blurred preview until the finished reel wipes in on "finished"
+  if (outP < 1) {
+    const [cx, cy, w] = SLOT_R, h = w * 16 / 9;
+    g.save(); g.globalAlpha *= 0.35 * clamp(inP * 2) * (1 - outP); EXTRA_F = " blur(16px) brightness(0.7)"; g.translate(cx, cy);
+    drawClip(g, -w / 2, -h / 2, w, h, t, { warm: 1 }); EXTRA_F = ""; g.restore();
+    g.save(); g.globalAlpha *= clamp(inP * 2) * (1 - outP) * (1 - clamp(win(C.h_finished - 0.15, C.h_finished + 0.2, t)));
+    txt(g, "?", cx, cy + 60, 220, { color: "rgba(244,247,242,0.7)" }); g.restore();
+  }
   const rp = inOutQuint(win(C.h_finished - 0.15, C.h_finished + 0.45, t));
   if (rp > 0) {
     const [cx, cy, w] = SLOT_R, h = w * 16 / 9;
@@ -449,7 +457,7 @@ function agent(g, t) {
       const fadeIn = clamp(win(L.t0 - 0.15, L.t0 + 0.1, t)), fadeOut = clamp(win(nextT - 0.2, nextT, t));
       g.save(); g.globalAlpha *= m * fadeIn * (1 - fadeOut);
       g.font = `700 38px "${UI}"`; g.textAlign = "left"; g.textBaseline = "middle";
-      let cx = x + 118; const cy = y + h / 2 + 2 - 14 * fadeOut;
+      let cx = x + 132; const cy = y + h / 2 + 2 - 14 * fadeOut;
       g.fillStyle = "rgba(244,247,242,0.5)"; g.fillText("“", cx - 18, cy);
       for (const wd of words) {
         const p = clamp(win(wd.t0 - 0.05, wd.t0 + 0.15, t)); if (p <= 0) break;
@@ -524,8 +532,10 @@ function cutStamp(g, t, pn) {     // "−9s" lands on the panel after the cut
 function sCaps(g, t) {            // c2
   popChip(g, "BOLD CAPTIONS", 300, 1385, 34, t, C.c2_bold, { rot: -5, tick: true, out: C.c3 - 0.3 });
 }
-function sWarm(g, t) {            // c3: temperature chip + the music track
+function tempChip(g, t) {
   popChip(g, "TEMP  +18", 870, 300, 32, t, C.c3_warmer + 0.2, { rot: 7, bg: "#ff9b3d", fg: "#2a1300", out: C.c4 - 0.3 });
+}
+function sWarm(g, t) {            // c3: temperature chip + the music track
   const p = outQuint(win(C.c3_soft - 0.1, C.c3_soft + 0.6, t)), q = inCubic(win(C.c4 - 0.3, C.c4, t));
   if (p <= 0 || q >= 1) return;
   g.save(); g.globalAlpha *= clamp(p * 2) * (1 - q);
@@ -647,7 +657,7 @@ function sOutro(g, t) {
   if (p <= 0) return;
   object(g, "phone", PH.x, PH.y + 520 * (1 - p), PH.w, PH.rot + Math.sin(t * 1.2) * 0.6, { a: clamp(p * 2), screen: (g2, w, h) => phoneUI(g2, w, h, t) });
   // follow button sits ~ at (w*0.79, h*0.84) of the screen; approximate on-canvas spot for the ring
-  clickRing(g, 690, 1265, t, C.o_follow + 0.2);
+  clickRing(g, 680, 1145, t, C.o_follow + 0.2);
   wordsLine(g, [["THAT'S", C.outro - 0.05], ["VIBE", C.o_vibe, LIME], ["EDITING", C.o_vibe + 0.22, LIME]], 540, 250, 150, t, { out: C.o_join - 0.25 });
   title(g, "JOIN", 540, 215, 120, t, C.o_join, {});
   title(g, "VIBE EDITING", 540, 370, 170, t, C.o_vibe2, { lime: true });
@@ -666,14 +676,14 @@ function frame(g, t) {
   for (const k of MK.slice(1)) { const p = win(k[0], k[0] + MOVE, t); if (p > 0.04 && p < 0.96) { moving = true; speed = Math.max(speed, Math.sin(Math.PI * p)); } }
 
   hook(g, t);
-  sRaw(g, t); sTell(g, t); sCut(g, t); sCaps(g, t); sWarm(g, t); sPrints(g, t); sLength(g, t);
+  sRaw(g, t); sTell(g, t); sCut(g, t); sWarm(g, t); sPrints(g, t); sLength(g, t);
   // the shared clip panel (raw from the start; fades out as the outro begins)
   const pa = 1 - clamp(win(C.just + 0.4, C.just + 1.0, t));
   if (pa > 0) {
     const tc = t < C.c1 ? "RAW  " + dur(t) : dur(t);
     panel(g, pn.cx, pn.cy, pn.w, pn.rot, t, { ...st, tc, tcColor: t >= C.c1_pauses + 0.5 ? LIME : "#fff" }, { a: pa });
   }
-  rawTag(g, t, pn); cutStamp(g, t, pn);
+  rawTag(g, t, pn); cutStamp(g, t, pn); sCaps(g, t); tempChip(g, t);
   agent(g, t);
   sJust(g, t);
   sOutro(g, t);

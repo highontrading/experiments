@@ -255,20 +255,20 @@ function sceneHook(g, t) {
   if (ck) {
     const p = spring(win(C.hook_night - 0.3, C.hook_night + 0.6, t));
     if (p > 0) {
-      g.save(); g.translate(900, 300); g.rotate(-0.12 + 0.03 * Math.sin(t * 14) * (1 - win(C.hook_night, C.hook_night + 1, t))); g.scale(p * 0.95, p * 0.95);
+      g.save(); g.translate(175, 230); g.rotate(-0.12 + 0.03 * Math.sin(t * 14) * (1 - win(C.hook_night, C.hook_night + 1, t))); g.scale(p * 0.95, p * 0.95);
       g.globalAlpha = 0.95; K.shadow(g, 30, 14, 0.6, "0,0,0");
       const w = 230, h = w * ck.height / ck.width; g.drawImage(ck, -w / 2, -h / 2, w, h); K.noShadow(g);
       g.restore();
-      tag(g, "2:47 AM", 900, 470, 30, RED, "#fff", p, -4);
+      tag(g, "2:47 AM", 330, 300, 30, RED, "#fff", p, -4);
     }
   }
   // titles
-  serif(g, "this was me,", 300, 300, 64, outCubic(win(C.hook_me - 0.15, C.hook_me + 0.3, t)), { align: "center" });
-  creep(g, "EVERY NIGHT.", 540, 430, 128, { p: outQuint(win(C.hook_night - 0.1, C.hook_night + 0.35, t)), rot: -3 });
+  serif(g, "this was me,", 720, 280, 64, outCubic(win(C.hook_me - 0.15, C.hook_me + 0.3, t)), { align: "center" });
+  creep(g, "EVERY NIGHT.", 540, 470, 128, { p: outQuint(win(C.hook_night - 0.1, C.hook_night + 0.35, t)), rot: -3 });
   const fp = outQuint(win(C.hook_fight - 0.08, C.hook_fight + 0.3, t));
   if (fp > 0) {
-    extrude(g, "FIGHTING", 540, 640, 150, YEL, "#8a5a00", { p: fp, rot: -2 });
-    extrude(g, "THE TIMELINE", 540, 790, 112, "#cfe1ff", BLUE, { p: outQuint(win(C.hook_timeline - 0.05, C.hook_timeline + 0.3, t)), rot: 1 });
+    extrude(g, "FIGHTING", 540, 670, 150, YEL, "#8a5a00", { p: fp, rot: -2 });
+    extrude(g, "THE TIMELINE", 540, 820, 112, "#cfe1ff", BLUE, { p: outQuint(win(C.hook_timeline - 0.05, C.hook_timeline + 0.3, t)), rot: 1 });
   }
   // the messy timeline he is fighting
   const np = outCubic(win(0, 0.5, t));
@@ -280,22 +280,22 @@ function sceneHook(g, t) {
 
 function sceneHours(g, t, lt) {
   slate(g, 0, 0.4);
-  moon(g, 760, 470, 300, t, outCubic(win(0, 0.6, lt)));
+  moon(g, 790, 380, 250, t, outCubic(win(0, 0.6, lt)));
   bats(g, t, 5, [0, 160, 0, 760], 7);
   // 3:00:00 counting up fast
   const cp = outCubic(win(0.1, 1.2, lt));
   const secs = Math.floor(lerp(0, 3 * 3600, cp));
   const s = `${Math.floor(secs / 3600)}:${String(Math.floor(secs / 60) % 60).padStart(2, "0")}:${String(secs % 60).padStart(2, "0")}`;
-  creep(g, s, 540, 900, 220, { p: outQuint(win(0, 0.3, lt)), color: RED, glow: "rgba(255,30,0,0.7)", from: 1.4 });
-  serif(g, "three", 250, 720, 70, outCubic(win(C.L_hours - C.s_hours - 0.1, C.L_hours - C.s_hours + 0.3, lt)));
-  serif(g, "hours.", 380, 790, 70, outCubic(win(0.65, 1.05, lt)));
+  creep(g, s, 540, 1000, 220, { p: outQuint(win(0, 0.3, lt)), color: RED, glow: "rgba(255,30,0,0.7)", from: 1.4 });
+  serif(g, "three", 230, 740, 70, outCubic(win(C.L_hours - C.s_hours - 0.1, C.L_hours - C.s_hours + 0.3, lt)));
+  serif(g, "hours.", 360, 815, 70, outCubic(win(0.65, 1.05, lt)));
   // one reel: a single pinned polaroid on a red string
   const rp = spring(win(C.hours_one - C.s_hours - 0.25, C.hours_one - C.s_hours + 0.55, lt));
   if (rp > 0) {
-    redString(g, -20, 1100, 1110, 70);
-    polaroid(g, 540, 1220 + (1 - rp) * 300, 300, 380, -4 + (1 - rp) * 20, (gg, x, y, w, h) =>
+    redString(g, -20, 1100, 1150, 60);
+    polaroid(g, 540, 1275 + (1 - rp) * 300, 260, 330, -4 + (1 - rp) * 20, (gg, x, y, w, h) =>
       footage(gg, "cw_creator", t, x, y, w, h, { grade: "night", gradeA: 0.5 }), "one reel.", { a: clamp(rp * 2) });
-    tag(g, "1 REEL", 760, 1110, 34, YEL, INK, spring(win(C.hours_reel - C.s_hours - 0.1, C.hours_reel - C.s_hours + 0.5, lt)), 6);
+    tag(g, "1 REEL", 760, 1160, 34, YEL, INK, spring(win(C.hours_reel - C.s_hours - 0.1, C.hours_reel - C.s_hours + 0.5, lt)), 6);
   }
 }
 
@@ -373,7 +373,7 @@ function sceneGrind(g, t, lt) {
   slate(g, 0, 0.45);
   moon(g, 980, 140, 150, t, 0.8);
   bats(g, t + 3, 3, [0, 60, 0, 240], 11);
-  const sx0 = -20, sx1 = 1100, sy = 230, sag = 60;
+  const sx0 = -20, sx1 = 1100, sy = 200, sag = 50;
   redString(g, sx0, sx1, sy, sag);
   const now = t;
   GRIND.forEach((b, i) => {
@@ -381,9 +381,9 @@ function sceneGrind(g, t, lt) {
     if (now < a) return;
     const enter = spring(win(a, a + 0.75, now));
     const leave = inOutCubic(win(nxt - 0.05, nxt + 0.55, now));       // shrink and fly up to the string
-    const pinX = 230 + i * 310, pinY = stringY(sx0, sx1, sy, sag, pinX) + 120;
-    const bx = lerp(540, pinX, leave), by = lerp(820, pinY, leave) + (1 - enter) * 900;
-    const bw = lerp(760, 250, leave), bh = bw * 0.82;
+    const pinX = 200 + i * 300, pinY = stringY(sx0, sx1, sy, sag, pinX) + 92;
+    const bx = lerp(540, pinX, leave), by = lerp(870, pinY, leave) + (1 - enter) * 900;
+    const bw = lerp(700, 200, leave), bh = bw * 0.82;
     const rot = lerp(i % 2 ? 3 : -3, [-7, 4, -3][i], leave) + (1 - enter) * 10;
     const lt2 = now - a;
     polaroid(g, bx, by, bw, bh, rot, (gg, x, y, w, h) => {
@@ -397,7 +397,7 @@ function sceneGrind(g, t, lt) {
       if (i === 1) captionType(g, ux, uy, uw, uh, now, lt2);
       if (i === 2) frameNudge(g, ux, uy, uw, uh, now, lt2);
       g.restore();
-      creep(g, b.title, 540, 395, 120, { p: outQuint(win(a + 0.05, a + 0.4, now)) * ui, rot: [-4, 3, -2][i] });
+      creep(g, b.title, 540, 505, 120, { p: outQuint(win(a + 0.05, a + 0.4, now)) * ui, rot: [-4, 3, -2][i] });
     }
   });
   // "frame by frame": a frantic frame counter in the corner
@@ -506,7 +506,7 @@ function sceneAI(g, t, lt) {
   const beatP = win(C.ai_times - C.s_ai - 0.1, C.ai_music - C.s_ai + 0.6, lt);
   const ap = spring(win(0, 0.7, lt));
   polaroid(g, 540, 600 + (1 - ap) * 120, 470, 590, -2, (gg, x, y, w, h) => reelPreview(gg, x, y, w, h, t, outCubic(capP)), "the same reel", { a: clamp(ap * 2) });
-  creep(g, "THE AI", 210, 300, 96, { p: outQuint(win(0.2, 0.55, lt)), rot: -6 });
+  creep(g, "THE AI", 540, 215, 96, { p: outQuint(win(0.2, 0.55, lt)), rot: -6 });
   tag(g, "CUT ✓", 200, 1005, 36, YEL, INK, spring(win(C.ai_cuts - C.s_ai, C.ai_cuts - C.s_ai + 0.6, lt)), -4);
   tag(g, "CAPTIONED ✓", 520, 1005, 36, YEL, INK, spring(win(C.ai_capt - C.s_ai, C.ai_capt - C.s_ai + 0.6, lt)), 2);
   tag(g, "ON BEAT ✓", 860, 1005, 36, BLUE, "#fff", spring(win(C.ai_music - C.s_ai - 0.1, C.ai_music - C.s_ai + 0.5, lt)), -3);
@@ -536,7 +536,7 @@ function sceneNote(g, t, lt) {
   slate(g, 0.9, 0.5);
   const out = inOutCubic(win(C.n_post - C.s_note - 0.55, C.n_post - C.s_note - 0.1, lt));
   polaroid(g, lerp(540, -320, out), lerp(600, 560, out), 470, 590, lerp(-2, -12, out), (gg, x, y, w, h) => reelPreview(gg, x, y, w, h, t, 1), "the same reel");
-  sticky(g, lerp(800, 80, out), 430, 300, 7, "punchier first 2 seconds", spring(win(C.n_note - C.s_note - 0.3, C.n_note - C.s_note + 0.35, lt)),
+  sticky(g, lerp(800, -260, out), 430, 300, 7, "punchier first 2 seconds", spring(win(C.n_note - C.s_note - 0.3, C.n_note - C.s_note + 0.35, lt)),
     win(C.n_note - C.s_note + 0.25, C.n_note - C.s_note + 0.7, lt));
   creep(g, "ONE NOTE.", 540, 1060, 120, { p: outQuint(win(C.n_note - C.s_note - 0.1, C.n_note - C.s_note + 0.3, lt)) * (1 - out), rot: -3 });
   // the phone posts it

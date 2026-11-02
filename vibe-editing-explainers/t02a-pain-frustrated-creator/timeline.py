@@ -20,7 +20,7 @@ T.save({
     "s_same": L("same") - 0.25, "same_fifteen": w("same", "fifteen"),
     "s_outro": L("outro") - 0.3, "o_join": w("outro", "join"), "o_evenings": w("outro", "evenings"),
     "o_tv": E("outro") + 0.2,
-    "cover": 1.6,
+    "cover": 3.6,
 })
 for k, l in T.lines.items():
     print(f"{k:6} {l['t0']:6.2f}-{l['t1']:6.2f} " + " ".join(f"{x['w']}@{x['t0']:.2f}" for x in l["words"]))
