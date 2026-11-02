@@ -1,0 +1,30 @@
+[
+ {
+  "id": "hook",
+  "text": "Still editing reels manually?",
+  "t0": 0.0,
+  "t1": 2.08,
+  "words": [
+   {
+    "w": "Still",
+    "t0": 0.0,
+    "t1": 0.4
+   },
+   {
+    "w": "editing",
+    "t0": 0.48,
+    "t1": 0.8
+   },
+   {
+    "w": "reels",
+    "t0": 0.88,
+    "t1": 1.2
+   },
+   {
+    "w": "manually?",
+    "t0": 1.28,
+    "t1": 2.08
+   }
+  ]
+ }
+]

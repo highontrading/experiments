@@ -1,0 +1,44 @@
+{
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "voice_name": "Eric - Smooth, Trustworthy",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "use_speaker_boost": true
+  },
+  "lines": [
+    {
+      "id": "raw",
+      "text": "Here's the raw clip. No edits."
+    },
+    {
+      "id": "tell",
+      "text": "I just tell the agent what I want."
+    },
+    {
+      "id": "c1",
+      "text": "Cut the pauses. Done."
+    },
+    {
+      "id": "c2",
+      "text": "Add bold captions. Done."
+    },
+    {
+      "id": "c3",
+      "text": "Warmer color, and soft music. Done."
+    },
+    {
+      "id": "c4",
+      "text": "Thirty seconds, and end on the logo. Done."
+    },
+    {
+      "id": "just",
+      "text": "No timeline. No keyframes. Just talking."
+    },
+    {
+      "id": "outro",
+      "text": "That's vibe editing. Follow, and join vibe editing."
+    }
+  ]
+}

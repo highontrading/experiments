@@ -1,0 +1,44 @@
+{
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "voice_name": "Eric - Smooth, Trustworthy",
+  "model_id": "eleven_v4",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "use_speaker_boost": true
+  },
+  "lines": [
+    {
+      "id": "hours",
+      "text": "Three hours. One reel."
+    },
+    {
+      "id": "grind",
+      "text": "Trimming every pause by hand. Typing every caption. Nudging every cut, frame by frame."
+    },
+    {
+      "id": "then",
+      "text": "Then I tried something else."
+    },
+    {
+      "id": "brief",
+      "text": "One sentence: what I want, and how it should feel."
+    },
+    {
+      "id": "ai",
+      "text": "The AI cuts it, captions it, and times it to the music."
+    },
+    {
+      "id": "note",
+      "text": "I give one note, and post."
+    },
+    {
+      "id": "same",
+      "text": "Same reel. Fifteen minutes."
+    },
+    {
+      "id": "outro",
+      "text": "Join vibe editing, and get your evenings back."
+    }
+  ]
+}
