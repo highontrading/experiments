@@ -25,6 +25,23 @@ order.
 
 Each folder has `out/<name>.mp4`, `out/cover.jpg` and a `CREDITS.md` listing every source.
 
+## Hook tests (T01, T02)
+
+Two A/B/C tests. Within a test, all three variants share the **same body voiceover take** and
+music bed; only the first 2–4 seconds change. The voiceovers are built with
+`lib/compose_vo.py <video> _vo/<hook> _vo/<body>` from parts recorded in `_vo/`.
+
+| Test | Opening | Design | Length | Folder |
+| --- | --- | --- | --- | --- |
+| T01A live demo | finished reel first, then a VHS rewind to the raw clip | amber invention story | 29 s | `t01a-live-demo-finished-reel-first/` |
+| T01B live demo | "Watch me edit this by just talking" + live mic | cinematic dark | 29 s | `t01b-live-demo-watch-me-edit/` |
+| T01C live demo | split screen: raw left, finished right | green-grid tutorial | 29 s | `t01c-live-demo-split-screen/` |
+| T02A pain | frustrated creator in front of a messy timeline | night horror | 35 s | `t02a-pain-frustrated-creator/` |
+| T02B pain | bold text "Still editing reels manually?" | medical-history doc | 32 s | `t02b-pain-still-editing-manually/` |
+| T02C pain | clock racing through hours while someone edits | news mystery | 33 s | `t02c-pain-clock-time-lapse/` |
+
+Because each variant also has its own design, a test result reflects hook **and** look together.
+
 The last eight follow eight reference reels the user supplied: fast documentary-reel pacing
 (voice from 0:00, a new layout every 1–2 s, word-synced type, punchy whooshes and impacts).
 Their voiceovers use ElevenLabs **Eleven v4** (`eleven_v4`), and each ends on a
