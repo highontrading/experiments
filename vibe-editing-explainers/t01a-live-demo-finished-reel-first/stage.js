@@ -564,8 +564,8 @@ function sceneOffset(k, t) {
   }
   if (i === j + 1) {
     const p = inOutCubic(win(SCENES[i].t - 0.3, SCENES[i].t - 0.3 + TR, t)), [dx, dy] = SCENES[i].dir || [0, 0];
-    if (p >= 1 || !(dx || dy)) return null;
-    return [-dx * W * p, -dy * H * p];
+    if (p >= 1) return null;
+    return [-dx * W * p, -dy * H * p];   // no direction: stays put and crossfades
   }
   return null;
 }
