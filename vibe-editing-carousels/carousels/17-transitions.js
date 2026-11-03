@@ -18,7 +18,8 @@ function paintHolo() {
   });
 }
 function holo(c, t) {
-  c.save(); c.translate(K.W / 2, K.H / 2); c.rotate(t * 0.08); c.drawImage(HOLO, -750, -750); c.restore();
+  c.fillStyle = "#eef0ff"; c.fillRect(0, 0, K.W, K.H);
+  c.save(); c.translate(K.W / 2, K.H / 2); c.rotate(t * 0.08); c.drawImage(HOLO, -1000, -1000, 2000, 2000); c.restore();   // big enough that no corner shows
   const r = rnd(4);
   for (let i = 0; i < 14; i++) {
     const x = r() * K.W, y = r() * K.H, s = 8 + r() * 18, tw = 0.5 + 0.5 * Math.sin(t * 3 + i * 1.7);
