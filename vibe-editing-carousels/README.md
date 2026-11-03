@@ -35,6 +35,16 @@ gets its own layout.
 | 12 | 10 Prompts to Save | 6 | grey desk, macOS folders, Cut/Copy/Paste menu, real prints | `carousels/12-ten-prompts.js` |
 | 13 | Raw Footage to Posted in 15 Minutes | 6 | real blue fabric header, manila folder tabs, real hand-held phones | `carousels/13-raw-to-posted.js` |
 | 14 | Brand Your Edits | 6 | dusty-blue editorial, a real creator cutout, thin sans + script | `carousels/14-brand-your-edits.js` |
+| 15 | Cover Frames That Get Tapped | 6 | Swiss grid: off-white, signal red, huge numerals, crop marks | `carousels/15-cover-frames.js` |
+| 16 | 5 B-Roll Shots to Film Today | 6 | darkroom: red safelight, 35 mm strips, grease pencil, Super 8 | `carousels/16-broll-shots.js` |
+| 17 | Transitions That Don't Look Cheap | 6 | Y2K chrome: holographic gradient, chrome type, live demos | `carousels/17-transitions.js` |
+| 18 | Edit a Talking Head in 5 Minutes | 6 | newspaper broadsheet: newsprint, ink-printed footage, stamp | `carousels/18-talking-head.js` |
+| 19 | One Reel, Five Platforms | 6 | frosted glass over blurred night city, aspect-ratio frames | `carousels/19-one-reel-five-platforms.js` |
+| 20 | 4 Prompts for Product Ads That Sell | 6 | black and gold luxury, Roman numerals, real watch cutout | `carousels/20-product-ads.js` |
+| 21 | Read Your Retention Graph | 6 | phosphor-green terminal, scanlines, live retention curves | `carousels/21-retention-graph.js` |
+| 22 | Match the Music to the Mood | 6 | 70s record store: rainbow stripes, sleeves, spinning vinyl | `carousels/22-music-mood.js` |
+| 23 | Film Like a Pro on Your Phone | 6 | live camera viewfinder HUD over full-bleed footage | `carousels/23-phone-camera.js` |
+| 24 | Batch a Week of Content in One Evening | 6 | pastel bento grid, rounded tiles, progress bars | `carousels/24-batch-week.js` |
 
 Every carousel sets `kit: true` and runs on `lib/kit.js`: each slide is `{ bg, els, fg }`, and an element is `{ x, y, rot, in, at,
 draw }`. The kit plays the entrance (`pop`, `up`, `down`, `left`, `right`, `drop`, `fade`,

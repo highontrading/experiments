@@ -133,6 +133,8 @@ RECIPES = {
     "mic": lambda: simple("mic", "mic_close", 100),
     "vlogger": lambda: simple("vlogger", "street_vlog", 100, "isnet-general-use"),
     "watch": lambda: simple("watch", "watch_close", 90),
+    "super8": lambda: simple("super8", "old_camera", 60),
+    "bottle": lambda: simple("bottle", "sneakers_tie", 20),
 }
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ Every clip is from [Mixkit](https://mixkit.co) and used under the
 [Mixkit Stock Video Free License](https://mixkit.co/license/#videoFree)
 (free for commercial and personal projects, no attribution required).
 `footage/fetch_footage.py` downloads them; `footage/make_cutouts.py` cuts the hand,
-TV, sunflower, mic, camera, clapper, watch and vlogger out of their frames.
+TV, sunflower, mic, camera, clapper, watch, Super 8 camera and vlogger out of their frames.
 
 | Name | What it shows | Mixkit page |
 | --- | --- | --- |
@@ -62,3 +62,28 @@ TV, sunflower, mic, camera, clapper, watch and vlogger out of their frames.
 | `tv_boombox` | retro boombox with a built-in TV | https://mixkit.co/free-stock-video/a-retro-ghetto-blaster-with-built-in-television-4143/ |
 | `tv_static` | TV static | https://mixkit.co/free-stock-video/tv-static-on-an-old-tv-screen-in-the-dark-46290/ |
 | `tv_dark` | old TV with static on a rug, dark room | https://mixkit.co/free-stock-video/tv-static-playing-on-a-tv-screen-in-a-dark-46291/ |
+| `barista` | barista preparing iced coffee | https://mixkit.co/free-stock-video/a-barista-preparing-coffee-with-milk-and-ice-796/ |
+| `cafe_coffee` | woman drinking coffee in a cafe | https://mixkit.co/free-stock-video/woman-drinking-coffee-in-a-cafe-223/ |
+| `sneakers_tie` | tying sneakers before running | https://mixkit.co/free-stock-video/tying-sneakers-before-running-15059/ |
+| `running_track` | legs running on a track | https://mixkit.co/free-stock-video/legs-of-a-woman-when-running-on-a-running-track-32812/ |
+| `skate_park` | boy skating in a park with ramps | https://mixkit.co/free-stock-video/boy-skating-with-a-skateboard-in-a-park-with-ramps-34389/ |
+| `skate_road` | man skateboarding along an open road | https://mixkit.co/free-stock-video/man-riding-a-skateboard-along-a-long-open-road-48684/ |
+| `skate_feet` | skateboarders' feet on the street, tracking shot | https://mixkit.co/free-stock-video/feet-of-skateboarders-on-the-street-tracking-shot-21420/ |
+| `neon_biker` | biker riding through colourful neon | https://mixkit.co/free-stock-video/futuristic-urban-biker-wearing-a-helmet-drives-trough-colorful-neon-99868/ |
+| `neon_sign` | neon hotel sign flickering | https://mixkit.co/free-stock-video/neon-light-of-a-hotel-flickering-in-the-dark-41154/ |
+| `times_square` | Times Square on a rainy night | https://mixkit.co/free-stock-video/times-square-during-a-rainy-night-4332/ |
+| `product_shoot` | photographer taking product photos on a set | https://mixkit.co/free-stock-video/female-photographer-taking-product-photos-on-a-set-44119/ |
+| `fashion_shoot` | fashion shoot in a studio | https://mixkit.co/free-stock-video/creative-studio-for-a-fashion-shoot-with-a-photographer-and-50639/ |
+| `model_pose` | model posing for a photographer | https://mixkit.co/free-stock-video/model-turns-to-pose-as-a-photographer-takes-photos-in-50641/ |
+| `beauty_ad` | influencer filming a beauty product commercial | https://mixkit.co/free-stock-video/video-of-influencer-making-video-commercial-of-beauty-products-49141/ |
+| `guitar_dark` | man playing guitar in the dark | https://mixkit.co/free-stock-video/man-playing-guitar-in-the-dark-42845/ |
+| `band_girls` | three-piece girl band playing | https://mixkit.co/free-stock-video/musical-band-of-three-girls-playing-guitar-bass-and-drums-51895/ |
+| `rapper` | rapper recording in the studio | https://mixkit.co/free-stock-video/a-rapper-with-headphones-recording-in-the-studio-13019/ |
+| `sound_engineer` | sound engineer at the desk | https://mixkit.co/free-stock-video/sound-engineer-working-on-a-recording-studio-13015/ |
+| `film_strip` | film strip with grain | https://mixkit.co/free-stock-video/film-strip-with-grain-25362/ |
+| `tokyo_train` | train in Tokyo at night | https://mixkit.co/free-stock-video/full-shot-of-a-train-in-tokyo-night-46122/ |
+| `old_camera` | adjusting the lens of an old film camera | https://mixkit.co/free-stock-video/a-young-man-adjust-the-lens-of-an-old-film-49646/ |
+| `beach_couple` | couple walking along a beach at sunset | https://mixkit.co/free-stock-video/couple-walking-along-a-beach-at-sunset-44474/ |
+| `aerial_wave` | aerial view of a wave rolling onto the shore | https://mixkit.co/free-stock-video/aerial-view-of-long-running-wave-crashing-onto-shore-48525/ |
+| `phone_model` | smartphone recording a model for a social post | https://mixkit.co/free-stock-video/smartphone-recording-a-young-woman-modeling-for-social-media-post-50466/ |
+| `street_steps` | footsteps walking down the street | https://mixkit.co/free-stock-video/footsteps-of-a-young-man-walking-down-the-street-4893/ |

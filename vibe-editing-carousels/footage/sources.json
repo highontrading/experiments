@@ -268,5 +268,130 @@
   "id": 46291,
   "start": 1.0,
   "note": "old TV with static on a rug, dark room"
+ },
+ "barista": {
+  "id": 796,
+  "start": 1.0,
+  "note": "barista preparing iced coffee"
+ },
+ "cafe_coffee": {
+  "id": 223,
+  "start": 1.0,
+  "note": "woman drinking coffee in a cafe"
+ },
+ "sneakers_tie": {
+  "id": 15059,
+  "start": 1.0,
+  "note": "tying sneakers before running"
+ },
+ "running_track": {
+  "id": 32812,
+  "start": 1.0,
+  "note": "legs running on a track"
+ },
+ "skate_park": {
+  "id": 34389,
+  "start": 1.0,
+  "note": "boy skating in a park with ramps"
+ },
+ "skate_road": {
+  "id": 48684,
+  "start": 1.0,
+  "note": "man skateboarding along an open road"
+ },
+ "skate_feet": {
+  "id": 21420,
+  "start": 1.0,
+  "note": "skateboarders' feet on the street, tracking shot"
+ },
+ "neon_biker": {
+  "id": 99868,
+  "start": 1.0,
+  "note": "biker riding through colourful neon"
+ },
+ "neon_sign": {
+  "id": 41154,
+  "start": 1.0,
+  "note": "neon hotel sign flickering"
+ },
+ "times_square": {
+  "id": 4332,
+  "start": 1.0,
+  "note": "Times Square on a rainy night"
+ },
+ "product_shoot": {
+  "id": 44119,
+  "start": 1.0,
+  "note": "photographer taking product photos on a set"
+ },
+ "fashion_shoot": {
+  "id": 50639,
+  "start": 1.0,
+  "note": "fashion shoot in a studio"
+ },
+ "model_pose": {
+  "id": 50641,
+  "start": 1.0,
+  "note": "model posing for a photographer"
+ },
+ "beauty_ad": {
+  "id": 49141,
+  "start": 1.0,
+  "note": "influencer filming a beauty product commercial"
+ },
+ "guitar_dark": {
+  "id": 42845,
+  "start": 1.0,
+  "note": "man playing guitar in the dark"
+ },
+ "band_girls": {
+  "id": 51895,
+  "start": 1.0,
+  "note": "three-piece girl band playing"
+ },
+ "rapper": {
+  "id": 13019,
+  "start": 1.0,
+  "note": "rapper recording in the studio"
+ },
+ "sound_engineer": {
+  "id": 13015,
+  "start": 1.0,
+  "note": "sound engineer at the desk"
+ },
+ "film_strip": {
+  "id": 25362,
+  "start": 1.0,
+  "note": "film strip with grain"
+ },
+ "tokyo_train": {
+  "id": 46122,
+  "start": 1.0,
+  "note": "train in Tokyo at night"
+ },
+ "old_camera": {
+  "id": 49646,
+  "start": 1.0,
+  "note": "adjusting the lens of an old film camera"
+ },
+ "beach_couple": {
+  "id": 44474,
+  "start": 1.0,
+  "note": "couple walking along a beach at sunset"
+ },
+ "aerial_wave": {
+  "id": 48525,
+  "start": 1.0,
+  "note": "aerial view of a wave rolling onto the shore"
+ },
+ "phone_model": {
+  "id": 50466,
+  "start": 1.0,
+  "note": "smartphone recording a model for a social post"
+ },
+ "street_steps": {
+  "id": 4893,
+  "start": 1.0,
+  "note": "footsteps walking down the street"
  }
 }
