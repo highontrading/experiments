@@ -1,0 +1,520 @@
+{
+ "source": "reference reel, 720x1280, 30fps, 33.03s, 991 frames",
+ "words": [
+  {
+   "word": "Wait,",
+   "t": 0.0,
+   "frame": 0
+  },
+  {
+   "word": "how",
+   "t": 0.68,
+   "frame": 20
+  },
+  {
+   "word": "are",
+   "t": 0.88,
+   "frame": 26
+  },
+  {
+   "word": "these",
+   "t": 0.98,
+   "frame": 29
+  },
+  {
+   "word": "words",
+   "t": 1.12,
+   "frame": 34
+  },
+  {
+   "word": "going",
+   "t": 1.36,
+   "frame": 41
+  },
+  {
+   "word": "behind",
+   "t": 1.7,
+   "frame": 51
+  },
+  {
+   "word": "my",
+   "t": 1.98,
+   "frame": 59
+  },
+  {
+   "word": "head?",
+   "t": 2.22,
+   "frame": 67
+  },
+  {
+   "word": "Oh",
+   "t": 2.86,
+   "frame": 86
+  },
+  {
+   "word": "sh*t!",
+   "t": 3.04,
+   "frame": 91
+  },
+  {
+   "word": "And",
+   "t": 4.9,
+   "frame": 147
+  },
+  {
+   "word": "every",
+   "t": 5.0,
+   "frame": 150
+  },
+  {
+   "word": "time",
+   "t": 5.28,
+   "frame": 158
+  },
+  {
+   "word": "I",
+   "t": 5.52,
+   "frame": 166
+  },
+  {
+   "word": "move",
+   "t": 5.66,
+   "frame": 170
+  },
+  {
+   "word": "it",
+   "t": 5.94,
+   "frame": 178
+  },
+  {
+   "word": "switches",
+   "t": 6.16,
+   "frame": 185
+  },
+  {
+   "word": "up",
+   "t": 6.46,
+   "frame": 194
+  },
+  {
+   "word": "like",
+   "t": 6.8,
+   "frame": 204
+  },
+  {
+   "word": "glowing",
+   "t": 7.04,
+   "frame": 211
+  },
+  {
+   "word": "letters",
+   "t": 7.66,
+   "frame": 230
+  },
+  {
+   "word": "or",
+   "t": 8.04,
+   "frame": 241
+  },
+  {
+   "word": "big",
+   "t": 8.38,
+   "frame": 251
+  },
+  {
+   "word": "white",
+   "t": 8.86,
+   "frame": 266
+  },
+  {
+   "word": "capitals",
+   "t": 9.08,
+   "frame": 272
+  },
+  {
+   "word": "or",
+   "t": 9.66,
+   "frame": 290
+  },
+  {
+   "word": "chunky",
+   "t": 9.98,
+   "frame": 299
+  },
+  {
+   "word": "italics.",
+   "t": 10.6,
+   "frame": 318
+  },
+  {
+   "word": "I've",
+   "t": 11.52,
+   "frame": 346
+  },
+  {
+   "word": "set",
+   "t": 11.66,
+   "frame": 350
+  },
+  {
+   "word": "Claude",
+   "t": 11.78,
+   "frame": 353
+  },
+  {
+   "word": "Code",
+   "t": 12.0,
+   "frame": 360
+  },
+  {
+   "word": "up",
+   "t": 12.24,
+   "frame": 367
+  },
+  {
+   "word": "to",
+   "t": 12.4,
+   "frame": 372
+  },
+  {
+   "word": "design",
+   "t": 12.54,
+   "frame": 376
+  },
+  {
+   "word": "all",
+   "t": 12.86,
+   "frame": 386
+  },
+  {
+   "word": "my",
+   "t": 13.08,
+   "frame": 392
+  },
+  {
+   "word": "captions,",
+   "t": 13.24,
+   "frame": 397
+  },
+  {
+   "word": "even",
+   "t": 13.96,
+   "frame": 419
+  },
+  {
+   "word": "the",
+   "t": 14.12,
+   "frame": 424
+  },
+  {
+   "word": "words",
+   "t": 14.32,
+   "frame": 430
+  },
+  {
+   "word": "behind",
+   "t": 14.54,
+   "frame": 436
+  },
+  {
+   "word": "my",
+   "t": 14.88,
+   "frame": 446
+  },
+  {
+   "word": "head.",
+   "t": 15.1,
+   "frame": 453
+  },
+  {
+   "word": "It's",
+   "t": 16.1,
+   "frame": 483
+  },
+  {
+   "word": "tracking",
+   "t": 16.32,
+   "frame": 490
+  },
+  {
+   "word": "my",
+   "t": 16.54,
+   "frame": 496
+  },
+  {
+   "word": "face",
+   "t": 16.78,
+   "frame": 503
+  },
+  {
+   "word": "10",
+   "t": 17.0,
+   "frame": 510
+  },
+  {
+   "word": "times",
+   "t": 17.32,
+   "frame": 520
+  },
+  {
+   "word": "a",
+   "t": 17.62,
+   "frame": 529
+  },
+  {
+   "word": "second",
+   "t": 17.82,
+   "frame": 535
+  },
+  {
+   "word": "and",
+   "t": 18.06,
+   "frame": 542
+  },
+  {
+   "word": "it",
+   "t": 18.32,
+   "frame": 550
+  },
+  {
+   "word": "knows",
+   "t": 18.44,
+   "frame": 553
+  },
+  {
+   "word": "where",
+   "t": 18.68,
+   "frame": 560
+  },
+  {
+   "word": "all",
+   "t": 18.84,
+   "frame": 565
+  },
+  {
+   "word": "of",
+   "t": 18.98,
+   "frame": 569
+  },
+  {
+   "word": "Instagram's",
+   "t": 19.1,
+   "frame": 573
+  },
+  {
+   "word": "buttons",
+   "t": 19.7,
+   "frame": 591
+  },
+  {
+   "word": "are,",
+   "t": 19.92,
+   "frame": 598
+  },
+  {
+   "word": "so",
+   "t": 20.26,
+   "frame": 608
+  },
+  {
+   "word": "my",
+   "t": 20.42,
+   "frame": 613
+  },
+  {
+   "word": "captions",
+   "t": 20.62,
+   "frame": 619
+  },
+  {
+   "word": "never",
+   "t": 20.98,
+   "frame": 629
+  },
+  {
+   "word": "end",
+   "t": 21.38,
+   "frame": 641
+  },
+  {
+   "word": "up",
+   "t": 21.68,
+   "frame": 650
+  },
+  {
+   "word": "underneath",
+   "t": 21.86,
+   "frame": 656
+  },
+  {
+   "word": "them.",
+   "t": 22.22,
+   "frame": 667
+  },
+  {
+   "word": "Normally",
+   "t": 22.88,
+   "frame": 686
+  },
+  {
+   "word": "you",
+   "t": 23.2,
+   "frame": 696
+  },
+  {
+   "word": "have",
+   "t": 23.38,
+   "frame": 701
+  },
+  {
+   "word": "to",
+   "t": 23.54,
+   "frame": 706
+  },
+  {
+   "word": "cut",
+   "t": 23.68,
+   "frame": 710
+  },
+  {
+   "word": "yourself",
+   "t": 23.84,
+   "frame": 715
+  },
+  {
+   "word": "out",
+   "t": 24.22,
+   "frame": 727
+  },
+  {
+   "word": "frame",
+   "t": 24.46,
+   "frame": 734
+  },
+  {
+   "word": "by",
+   "t": 24.74,
+   "frame": 742
+  },
+  {
+   "word": "frame,",
+   "t": 24.94,
+   "frame": 748
+  },
+  {
+   "word": "all",
+   "t": 25.42,
+   "frame": 763
+  },
+  {
+   "word": "for",
+   "t": 25.64,
+   "frame": 769
+  },
+  {
+   "word": "one",
+   "t": 25.82,
+   "frame": 775
+  },
+  {
+   "word": "word,",
+   "t": 26.04,
+   "frame": 781
+  },
+  {
+   "word": "but",
+   "t": 26.56,
+   "frame": 797
+  },
+  {
+   "word": "I'm",
+   "t": 26.88,
+   "frame": 806
+  },
+  {
+   "word": "just",
+   "t": 27.06,
+   "frame": 812
+  },
+  {
+   "word": "lying",
+   "t": 27.22,
+   "frame": 817
+  },
+  {
+   "word": "here.",
+   "t": 27.5,
+   "frame": 825
+  },
+  {
+   "word": "And",
+   "t": 27.78,
+   "frame": 833
+  },
+  {
+   "word": "this",
+   "t": 28.2,
+   "frame": 846
+  },
+  {
+   "word": "room",
+   "t": 28.38,
+   "frame": 851
+  },
+  {
+   "word": "doesn't",
+   "t": 28.7,
+   "frame": 861
+  },
+  {
+   "word": "actually",
+   "t": 29.54,
+   "frame": 886
+  },
+  {
+   "word": "exist.",
+   "t": 29.74,
+   "frame": 892
+  },
+  {
+   "word": "Comment",
+   "t": 30.56,
+   "frame": 917
+  },
+  {
+   "word": "captions",
+   "t": 30.9,
+   "frame": 927
+  },
+  {
+   "word": "and",
+   "t": 31.42,
+   "frame": 943
+  },
+  {
+   "word": "I'll",
+   "t": 31.78,
+   "frame": 953
+  },
+  {
+   "word": "send",
+   "t": 31.88,
+   "frame": 956
+  },
+  {
+   "word": "you",
+   "t": 32.1,
+   "frame": 963
+  },
+  {
+   "word": "a",
+   "t": 32.24,
+   "frame": 967
+  },
+  {
+   "word": "breakdown.",
+   "t": 32.3,
+   "frame": 969
+  }
+ ]
+}
