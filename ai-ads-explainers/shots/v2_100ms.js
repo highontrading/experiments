@@ -31,7 +31,7 @@ export default (TL) => {
     { from: 9, scene: 'city', P: { mode: 'shops', shopsOn: seg(1.2, 7.0) }, cam: { p0: [-9, 3.0, 9], p1: [7, 3.2, 8], l0: [-6, 2.4, -2], l1: [8, 2.4, -2], fov: 44 },
       ov: [{ type: 'data', atT: W(9, 'two') - 0.2, label: '#NOTJUSTACADBURYAD · 2021', source: 'WPP case study', accent: 'g', items: [{ label: 'LOCAL STORES FEATURED', value: '2,000+', c: 'g' }] }] },
     { from: 10, scene: 'desk', P: { scroll: () => 560, timer: (lt) => Math.min(100, 88 + lt * 12), orbPulse: pulse(0.6), ad: 2 }, cam: { p0: [-0.1, 1.35, 3.8], p1: [-0.3, 1.3, 3.2], l0: [-0.4, 1.25, 0.3], l1: [-0.4, 1.25, 0.3], fov: 30 }, cut: 'ding' },
-    { from: 11, scene: 'city', P: { mode: 'board', board: () => ({ a: 'city', b: 'city', k: 0 }), cityGlow: (lt) => 0.6 + 0.5 * seg(0, 3)(lt) }, cam: { p0: [0, 12, 30], p1: [0, 40, 60], l0: [0, 8, -10], l1: [0, 4, -20], fov: 46 } },
+    { from: 11, scene: 'city', P: { mode: 'board', board: () => ({ a: 'city', b: 'city', k: 0 }), cityGlow: (lt) => 0.8 + 0.6 * seg(0, 3)(lt) }, cam: { p0: [0, 10, 26], p1: [6, 24, 40], l0: [0, 9, -12], l1: [0, 6, -22], fov: 50 } },
     { from: 12, scene: 'servers', P: {}, cam: { p0: [0, 1.6, 2], p1: [0, 1.7, -10], l0: [0, 1.6, -25], l1: [0, 1.6, -30] },
       ov: [{ type: 'data', atT: W(12, 'sixty') - 0.2, label: 'META · AI-POWERED AD TOOLS', source: 'Meta Q3 2025 earnings call', accent: 'g', items: [{ label: 'ANNUAL REVENUE RUN RATE', value: '$60B+', c: 'g', size: 64 }] }] },
     { from: 13, scene: 'grid', P: { obj: 'bottle', stages: [[0, 'wire'], [2.2, 'clay'], [4.2, 'final']] },
