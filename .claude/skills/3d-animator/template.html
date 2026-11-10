@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3D animation</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  #stage { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+  #stage canvas { display: block; }
+  #ui { position: fixed; left: 12px; bottom: 12px; display: flex; gap: 8px; z-index: 2; }
+  #ui button { font: 600 13px/1 -apple-system, system-ui, sans-serif; padding: 9px 14px; border: 0;
+    border-radius: 999px; background: rgba(255,255,255,.88); color: #111; cursor: pointer; }
+  #ui button:disabled { opacity: .5; cursor: default; }
+  body.capture #ui { display: none; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="stage"></div>
+<div id="ui"><button id="snd">Sound on</button><button id="rec">Save video</button></div>
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+/* ============ FORMAT (9:16 default; 1920x1080 for 16:9, 1080x1080 for 1:1) ============ */
+const W = 1080, H = 1920, FPS = 30, LOOP = 6;
+
+/* ============ MOTION KIT: everything below is a pure function of time ============ */
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, x) => a + (b - a) * x;
+const seg = (t, a, b) => clamp((t - a) / (b - a));               // 0..1 between times a and b
+const E = {
+  inOut: (x) => -(Math.cos(Math.PI * x) - 1) / 2,                  // travels, camera
+  out3: (x) => 1 - Math.pow(1 - x, 3),                             // arrivals
+  in2: (x) => x * x,                                               // falls, exits
+  back: (x, s = 1.7) => 1 + (s + 1) * Math.pow(x - 1, 3) + s * Math.pow(x - 1, 2), // pop with overshoot
+};
+// damped wobble that starts at t0: settle after a landing or a stop
+const settle = (t, t0, amp = 1, freq = 3, damp = 6) =>
+  t < t0 ? 0 : amp * Math.exp(-damp * (t - t0)) * Math.cos(2 * Math.PI * freq * (t - t0));
+// parabola from t0 lasting dur, peak height h (a jump)
+const hop = (t, t0, h, dur) => { const x = (t - t0) / dur; return x <= 0 || x >= 1 ? 0 : 4 * h * x * (1 - x); };
+// seeded random, call only while BUILDING the scene, never inside render()
+let seed = 7; const rng = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+// a seamless idle: n whole cycles per loop
+const loopSin = (t, n = 1, phase = 0) => Math.sin(2 * Math.PI * (n * t / LOOP + phase));
+
+/* ============ RENDERER, LIGHT RIG (see references/light.md) ============ */
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H, false);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 0.9;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+document.getElementById('stage').appendChild(renderer.domElement);
+
+/* EXAMPLE palette: replace with your three colours (background 60, hero 30, accent 10) */
+const PAL = { bg: '#e9e2d6', hero: '#d9774b', accent: '#f6d36b' };
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(PAL.bg);
+scene.fog = new THREE.Fog(PAL.bg, 14, 30);
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+const camera = new THREE.PerspectiveCamera(32, W / H, 0.1, 100);
+
+const key = new THREE.DirectionalLight('#fff1e0', 2.4);
+key.position.set(-4, 7, 5);
+key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048);
+key.shadow.radius = 6;
+key.shadow.bias = -0.0005;
+Object.assign(key.shadow.camera, { left: -4, right: 4, top: 4, bottom: -4, near: 1, far: 20 });
+scene.add(key);
+scene.add(new THREE.HemisphereLight('#dfe8ff', '#3a3030', 0.6));   // fill
+const rim = new THREE.DirectionalLight('#ffffff', 3);
+rim.position.set(3, 4, -6);
+scene.add(rim);
+
+/* ============ EXAMPLE SCENE: replace everything between here and render() ============ */
+// Logline: a soft block drops onto a pedestal, crouches, hops, and switches a lamp on.
+const mat = (color, o = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.6, ...o });
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(60, 60), mat(PAL.bg, { roughness: 0.9 }));
+floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+
+const pedestal = new THREE.Mesh(new THREE.CylinderGeometry(1.1, 1.2, 0.6, 64), mat('#f3eee6'));
+pedestal.position.y = 0.3; pedestal.castShadow = pedestal.receiveShadow = true; scene.add(pedestal);
+
+const hero = new THREE.Group(); scene.add(hero);
+const body = new THREE.Mesh(new RoundedBoxGeometry(1, 1, 1, 6, 0.22), mat(PAL.hero));
+body.position.y = 0.5; body.castShadow = true; hero.add(body);    // pivot at the base, so squash sits on the floor
+
+const lampOff = new THREE.Color('#bdb6aa'), lampOn = new THREE.Color(PAL.accent);
+const lamp = new THREE.Mesh(new THREE.SphereGeometry(0.28, 48, 24), mat('#bdb6aa', { emissive: PAL.accent, emissiveIntensity: 0 }));
+lamp.position.set(1.9, 1.5, -0.6); lamp.castShadow = true; scene.add(lamp);
+const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 1.2, 16), mat('#6d665c'));
+pole.position.set(1.9, 0.6, -0.6); pole.castShadow = true; scene.add(pole);
+const glow = new THREE.PointLight(PAL.accent, 0, 6, 2); glow.position.copy(lamp.position); scene.add(glow);
+
+/* EXAMPLE cue list: one sound per action, on the frame of contact (see references/sound.md) */
+const CUES = [
+  { t: 0.62, s: 'whoosh', gain: 0.35, pan: 0 },
+  { t: 0.62, s: 'thud', gain: 0.7, pitch: 1 },
+  { t: 0.98, s: 'thud', gain: 0.35, pitch: 1.3 },
+  { t: 2.55, s: 'thud', gain: 0.55, pitch: 1.1 },
+  { t: 2.6, s: 'click', gain: 0.6, pan: 0.4 },
+  { t: 2.75, s: 'chime', gain: 0.8, pan: 0.4 },
+  { t: 5.35, s: 'whoosh', gain: 0.3, pan: 0 },
+];
+
+/* ============ render(t): set EVERYTHING from t alone ============ */
+function render(t) {
+  t = ((t % LOOP) + LOOP) % LOOP;
+
+  // hero: falls 0..0.62 (ease in, stretched), squash on contact, small bounce, settle
+  const fall = E.in2(seg(t, 0, 0.62));
+  let y = lerp(7, 0.6, fall);
+  y += hop(t, 0.62, 0.35, 0.36);                                    // one smaller bounce
+  // anticipation crouch 1.9..2.15, hop 2.15..2.55, then rest
+  y += hop(t, 2.15, 1.1, 0.4);
+  // exit: rises out of frame 5.3..6 (ease in), so frame LOOP matches frame 0
+  y = lerp(y, 7, E.in2(seg(t, 5.3, 6)));
+  hero.position.set(0, y, 0);
+
+  let sq = 0;                                                       // + squash, - stretch
+  if (t < 0.62) sq = -0.12 * fall;                                  // stretch while falling
+  sq += 0.28 * Math.max(0, settle(t, 0.62, 1, 2.6, 7));             // impact squash, settles
+  sq += 0.22 * E.inOut(seg(t, 1.9, 2.12)) * (1 - seg(t, 2.12, 2.18)); // crouch before the hop
+  sq -= 0.1 * Math.sin(Math.PI * seg(t, 2.15, 2.55));               // stretch in the air
+  sq += 0.18 * Math.max(0, settle(t, 2.55, 1, 3, 8));               // second landing
+  sq += 0.012 * loopSin(t, 3);                                      // breathing, never dead
+  const s = 1 - sq;
+  hero.scale.set(1 / Math.sqrt(s), s, 1 / Math.sqrt(s));            // volume kept
+  hero.rotation.y = lerp(0, Math.PI / 2, E.out3(seg(t, 2.15, 2.7))) - Math.PI / 2 * E.inOut(seg(t, 5.3, 6));
+  hero.rotation.z = 0.06 * settle(t, 2.55, 1, 2, 5);                // follow-through wobble
+
+  // lamp: switches on at 2.6, holds, dims 4.9..5.6
+  const on = E.out3(seg(t, 2.6, 2.85)) * (1 - E.inOut(seg(t, 4.9, 5.6)));
+  lamp.material.emissiveIntensity = 2.4 * on;
+  lamp.material.color.copy(lampOff).lerp(lampOn, on);
+  glow.intensity = 6 * on;
+  lamp.scale.setScalar(1 + 0.15 * Math.max(0, settle(t, 2.6, 1, 4, 7)));
+
+  // camera: slow push in with a small crane; the aim lags the hero
+  const push = E.inOut(seg(t, 0, 5.2)) * (1 - E.inOut(seg(t, 5.2, 6)));
+  camera.position.set(lerp(-1.2, -0.6, push), lerp(2.6, 3.1, push), lerp(11.5, 10, push));
+  const aimY = lerp(1.2, 1.5, E.inOut(seg(t, 2.2, 2.9))) * (1 - E.inOut(seg(t, 5.2, 6))) + 1.2 * E.inOut(seg(t, 5.2, 6));
+  camera.lookAt(0.4, aimY, 0);
+
+  renderer.render(scene, camera);
+}
+
+/* ============ PLAYBACK, SOUND, SAVING: leave as is ============ */
+const stage = document.getElementById('stage');
+function fit() {
+  const k = Math.min(innerWidth / W, innerHeight / H);
+  stage.style.transform = `translate(${(innerWidth - W * k) / 2}px, ${(innerHeight - H * k) / 2}px) scale(${k})`;
+}
+addEventListener('resize', fit); fit();
+
+// Sound is made from CUES in code. Works on a live AudioContext and an OfflineAudioContext.
+function voice(ctx, out, noise, c, when) {
+  const p = c.pitch || 1, g = ctx.createGain(), pan = ctx.createStereoPanner();
+  pan.pan.value = c.pan || 0; g.connect(pan); pan.connect(out);
+  const env = (a, peak, d, at = when) => { g.gain.setValueAtTime(0, at); g.gain.linearRampToValueAtTime(peak, at + a); g.gain.exponentialRampToValueAtTime(0.0001, at + a + d); };
+  const osc = (type, f0, f1, dur, at = when) => { const o = ctx.createOscillator(); o.type = type; o.frequency.setValueAtTime(f0, at); o.frequency.exponentialRampToValueAtTime(f1, at + dur); o.connect(g); o.start(at); o.stop(at + dur + 0.05); return o; };
+  const hiss = (type, f, q, dur, at = when) => { const n = ctx.createBufferSource(); n.buffer = noise; const f2 = ctx.createBiquadFilter(); f2.type = type; f2.frequency.value = f; f2.Q.value = q; n.connect(f2); f2.connect(g); n.start(at); n.stop(at + dur); return f2; };
+  const v = (c.gain ?? 0.6);
+  switch (c.s) {
+    case 'pop': env(0.004, v, 0.14); osc('sine', 700 * p, 260 * p, 0.12); break;
+    case 'click': env(0.001, v, 0.05); hiss('highpass', 2500, 0.7, 0.03); osc('square', 1900 * p, 1200 * p, 0.02); break;
+    case 'tick': env(0.001, v * 0.6, 0.04); osc('sine', 2300 * p, 2000 * p, 0.03); break;
+    case 'thud': env(0.003, v, 0.38); osc('sine', 110 * p, 42 * p, 0.3); hiss('lowpass', 500 * p, 0.8, 0.08); break;
+    case 'whoosh': { const s0 = Math.max(0, when - 0.35), pk = Math.max(when, s0 + 0.05); // a whoosh near t = 0 starts at 0
+      g.gain.setValueAtTime(0, s0); g.gain.linearRampToValueAtTime(v, pk); g.gain.exponentialRampToValueAtTime(0.0001, pk + 0.25);
+      const f = hiss('bandpass', 400, 1.2, pk + 0.27 - s0, s0); f.frequency.setValueAtTime(350 * p, s0); f.frequency.exponentialRampToValueAtTime(2600 * p, pk); f.frequency.exponentialRampToValueAtTime(900 * p, pk + 0.25); break; }
+    case 'chime': env(0.005, v * 0.7, 1.6); osc('sine', 880 * p, 878 * p, 1.6); osc('sine', 1318 * p, 1316 * p, 1.2); osc('triangle', 1760 * p, 1758 * p, 0.7); break;
+    case 'swell': { const d = c.dur || 2; g.gain.setValueAtTime(0, when); g.gain.linearRampToValueAtTime(v * 0.5, when + d * 0.5); g.gain.linearRampToValueAtTime(0.0001, when + d);
+      const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900; lp.connect(g);
+      for (const f of [220, 221.5, 330]) { const o = ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = f * p; o.connect(lp); o.start(when); o.stop(when + d + 0.05); } break; }
+  }
+}
+function chain(ctx) {
+  const master = ctx.createGain(); master.gain.value = 0.55;
+  const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -14; comp.ratio.value = 4;
+  master.connect(comp); comp.connect(ctx.destination);
+  const noise = ctx.createBuffer(1, ctx.sampleRate * 1, ctx.sampleRate);
+  const d = noise.getChannelData(0); let s = 3; for (let i = 0; i < d.length; i++) { s = (s * 16807) % 2147483647; d[i] = s / 1073741823.5 - 1; }
+  return { master, comp, noise };
+}
+// every cue of loops [from, to) at audio time base + loop * LOOP + cue.t
+function schedule(ctx, rig, base, from, to) {
+  for (let k = from; k < to; k++) for (const c of CUES) {
+    const at = base + k * LOOP + c.t; if (at > ctx.currentTime + 0.01) voice(ctx, rig.master, rig.noise, c, at);
+  }
+}
+// Offline mix of n seconds, used by scripts/render.mjs: returns a 16-bit stereo WAV as base64
+window.renderAudio = async (secs = LOOP) => {
+  const sr = 48000, ctx = new OfflineAudioContext(2, Math.ceil(sr * secs), sr), rig = chain(ctx);
+  schedule(ctx, rig, 0, 0, Math.ceil(secs / LOOP)); const b = await ctx.startRendering();
+  const n = b.length, out = new DataView(new ArrayBuffer(44 + n * 4)), L = b.getChannelData(0), R = b.getChannelData(1);
+  const str = (o, s) => [...s].forEach((ch, i) => out.setUint8(o + i, ch.charCodeAt(0)));
+  str(0, 'RIFF'); out.setUint32(4, 36 + n * 4, true); str(8, 'WAVEfmt '); out.setUint32(16, 16, true); out.setUint16(20, 1, true); out.setUint16(22, 2, true);
+  out.setUint32(24, sr, true); out.setUint32(28, sr * 4, true); out.setUint16(32, 4, true); out.setUint16(34, 16, true); str(36, 'data'); out.setUint32(40, n * 4, true);
+  for (let i = 0; i < n; i++) { out.setInt16(44 + i * 4, clamp(L[i], -1, 1) * 32767, true); out.setInt16(46 + i * 4, clamp(R[i], -1, 1) * 32767, true); }
+  let bin = ''; const u8 = new Uint8Array(out.buffer); for (let i = 0; i < u8.length; i += 32768) bin += String.fromCharCode(...u8.subarray(i, i + 32768));
+  return btoa(bin);
+};
+
+// Live playback. scripts/render.mjs calls window.__render(t) instead and nothing here runs.
+window.__render = render; window.LOOP = LOOP; window.FPS = FPS; window.__ready = true;
+const capture = new URLSearchParams(location.search).has('capture');
+if (capture) document.body.classList.add('capture');
+let start = performance.now(), audio = null, rig = null, base = 0, upTo = 0;
+function frame(now) {
+  const el = (now - start) / 1000;
+  if (audio) { const need = Math.floor(el / LOOP) + 2; if (need > upTo) { schedule(audio, rig, base, upTo, need); upTo = need; } }
+  render(el);
+  requestAnimationFrame(frame);
+}
+if (!capture) requestAnimationFrame(frame); else render(0);
+function restart() {                                   // clock and sound both start at t = 0
+  start = performance.now(); if (!audio) return;
+  rig.master.disconnect(); rig = chain(audio); if (recDest) rig.comp.connect(recDest);
+  base = audio.currentTime + 0.02; upTo = 0;
+}
+let recDest = null;
+document.getElementById('snd').onclick = (e) => {
+  if (!audio) { audio = new AudioContext(); rig = chain(audio); }
+  audio.resume(); restart(); e.target.textContent = 'Restart';
+};
+document.getElementById('rec').onclick = async (e) => {
+  const btn = e.target; btn.disabled = true; btn.textContent = 'Recording...';
+  if (!audio) { audio = new AudioContext(); rig = chain(audio); }
+  await audio.resume(); recDest = audio.createMediaStreamDestination(); restart();
+  const stream = new MediaStream([...renderer.domElement.captureStream(FPS).getVideoTracks(), ...recDest.stream.getAudioTracks()]);
+  const type = ['video/mp4;codecs=avc1,mp4a.40.2', 'video/mp4;codecs=avc1', 'video/webm;codecs=vp9,opus', 'video/webm'].find((m) => MediaRecorder.isTypeSupported(m));
+  const rec = new MediaRecorder(stream, { mimeType: type, videoBitsPerSecond: 16e6 }), parts = [];
+  rec.ondataavailable = (ev) => parts.push(ev.data);
+  rec.onstop = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(parts, { type }));
+    a.download = 'animation.' + (type.includes('mp4') ? 'mp4' : 'webm'); a.click(); btn.disabled = false; btn.textContent = 'Save video'; recDest = null; };
+  rec.start(); setTimeout(() => rec.stop(), LOOP * 1000 + 150);
+};
+</script>
+</body>
+</html>
