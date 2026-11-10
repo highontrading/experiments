@@ -1,0 +1,19 @@
+{ "id": "v2_100ms", "title": "100 Milliseconds", "beats": [
+ {"vo": "You just scrolled past an ad. But before it reached you, an auction happened.", "head": "Before this ad [o]reached you...[/o]"},
+ {"vo": "And it was over in about a tenth of a second.", "head": "[g]~100 MILLISECONDS[/g]"},
+ {"vo": "Let's slow it down.", "head": "Let's [c]slow it down.[/c]"},
+ {"vo": "At zero milliseconds, your app tells an ad system: a screen is free, and here's who is probably looking.", "head": "[g]0 ms:[/g] a screen is free"},
+ {"vo": "This is a bid request.", "head": "This is a [c]bid request.[/c]"},
+ {"vo": "Now AI models predict how likely you are to click, buy, or skip, for thousands of ads at once.", "head": "AI predicts: [o]click? buy? skip?[/o]"},
+ {"vo": "Advertisers' systems bid. The best mix of price and predicted value wins.", "head": "Best [g]value[/g] wins"},
+ {"vo": "Then the ad is shaped for you. This is personalisation.", "head": "This is [c]personalisation.[/c]"},
+ {"vo": "In Meta's reported plan, the same car ad could show a snowy mountain to one person, and a city road to another.", "head": "Same ad. [g]Different[/g] world."},
+ {"vo": "India saw this early. In 2021, Cadbury used AI to recreate Shah Rukh Khan's face and voice, in ads for more than two thousand local stores.", "head": "[g]2,000+[/g] local stores. One star."},
+ {"vo": "At around a hundred milliseconds, the winning ad is on your screen.", "head": "[g]100 ms:[/g] on your screen"},
+ {"vo": "Now multiply that by billions of scrolls, every single day.", "head": "× [g]BILLIONS[/g] a day"},
+ {"vo": "That machine is why Meta said its AI powered ad tools passed a sixty billion dollar annual run rate, in 2025.", "head": "[g]$60B+[/g] a year"},
+ {"vo": "And the reported goal: give it a product image and a budget, and AI builds the rest, by the end of 2026.", "head": "Image + budget = [c]a whole ad[/c]"},
+ {"vo": "So who really runs your feed? The advertiser, or the algorithm?", "head": "Advertiser or [o]algorithm?[/o]"},
+ {"vo": "Tell us in the comments.", "head": "Tell us in the [g]COMMENTS[/g]"},
+ {"vo": "And if you want to be the one running these machines, join AI and Advertising, by IdeaBro Studio. Link in bio.", "head": "Join [g]AI & Advertising[/g]"}
+]}
