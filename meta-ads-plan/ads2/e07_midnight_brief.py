@@ -8,7 +8,7 @@ STEPS = ["Brief", "Concept", "Visuals", "Motion", "Edit", "Launch"]
 TS = [wt(s, 6.0) for s in STEPS]   # the step words come after "No shoot." (~6.5s)
 T_A, T_NEW, T_NO, T_BY, T_THATS = wt("A"), wt("New"), wt("No"), wt("By", 11.0), wt("That's")
 CARD = words[-1]["e"] + 0.5; DUR = CARD + 3.6
-STEP_CLIPS = [C(ST(1781), 3.0, 0.5), C(ST(41273), 6.0, 0.5), C(S["V13"], 2.0, 0.5), C(S["V09"], 4.6, 0.5), C(ST(44054), 5.0, 0.5), C(ST(50771), 3.0, 0.5)]
+STEP_CLIPS = [C(ST(1781), 3.0, 0.5), C(ST(41273), 6.0, 0.5), C(S["V13"], 2.0, 0.5), C(S["V09"], 4.6, 0.5), C(ST(41292), 3.0, 0.5), C(ST(50771), 3.0, 0.5)]
 items = [(T_A, C(ST(17450), 10.0, 0.5), "dip"), (T_NEW - T_A, C(ST(17450), 20.0, 0.6)), (T_NO - T_NEW, C(ST(24344), 3.0, 0.5)),
          (TS[0] - T_NO, C(ST(46353), 4.0, 0.5, gr=dict(lift=-25)))]
 for i in range(6): items.append(((TS[i + 1] if i < 5 else T_BY) - TS[i], STEP_CLIPS[i], "flash"))
