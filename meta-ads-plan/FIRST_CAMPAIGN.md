@@ -143,3 +143,20 @@ This is one campaign with one budget and 4 ads, built from videos you already ha
 **To rebuild:** run `python3 ads/ad1_showreel.py` (likewise `ad2_ugc.py`, `ad3_trailer.py`, `ad4_static.py`). Source clips go in `assets/`. Text, timings and shots are lists at the top of each script.
 
 **Upload tip:** in Ads Manager, upload Ad 4's 4:5 image and add the 9:16 image as the Stories/Reels placement version of the same ad.
+
+---
+
+## Launch record (published 2026-11-13)
+| Level | Name | ID | Status at launch |
+|---|---|---|---|
+| Campaign | `AIA | SALES | IN | ADV+ | launch` (Sales, ₹2,000/day, highest volume) | 120252219130830004 | ACTIVE |
+| Ad set | `AIA | IN | broad A+A | Purchase` (India, Advantage+ audience and placements, pixel "ideabro webinar" → Purchase, 7-day click / 1-day view) | 120252219131050004 | ACTIVE |
+| Ad | `AIA_SHOWREEL_VID_v1` | 120252219134690004 | In review |
+| Ad | `AIA_AIUGC_VID_v1` | 120252219137050004 | In review |
+| Ad | `AIA_TRAILER_VID_v1` | 120252219137090004 | In review |
+| Ad | `AIA_OLDNEW_IMG_v1` (4:5 Feed, 9:16 Stories/Reels/Status) | 120252219138630004 | In review |
+
+- **Tracking:** UTMs go on every click, `utm_campaign=aia_launch`. For the videos, `utm_content` is filled in from the ad name. Ad 4 has its UTMs baked into the link, because Meta hasn't enabled URL parameters on stand-alone creatives for this account yet.
+- **Advantage+ creative enhancements:** none were switched on.
+- **AI disclosure:** not set. It's the advertiser's decision, and it can't be added to these creatives later.
+- **Not done yet:** the purchaser exclusion and the existing-customer budget cap. Both need a custom audience or customer list, so add them in Ads Manager.
