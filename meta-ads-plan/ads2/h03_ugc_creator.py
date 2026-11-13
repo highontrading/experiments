@@ -7,8 +7,8 @@ words = VO("h03", hl=["UGC"], offset=OFF); wt = wt_of(words)
 T_YE2, T_SAB, T_BR, T_AUR, T_SEEKHO = wt("Ye", 1.5), wt("Sab"), wt("Brands"), wt("Aur"), wt("Seekho")
 CARD = words[-1]["e"] + 0.5; DUR = CARD + 3.6
 segs, _ = seq(0, [
-    (T_YE2, C(S["V02"], 3.0, 0.5), "dip"), (T_SAB - T_YE2, C(S["V03"], 4.0, 0.5)),
-    ((T_BR - T_SAB) / 2, C(S["V04"], 6.0, 0.5)), ((T_BR - T_SAB) / 2, C(D("O_vlog_prompt.mp4"), 2.0, 0.55)),
+    (T_YE2, C(S["V02"], 0.3, 0.44), "dip"), (T_SAB - T_YE2, C(S["V03"], 4.0, 0.5)),
+    ((T_BR - T_SAB) / 2, C(S["V04"], 6.0, 0.5)), ((T_BR - T_SAB) / 2, C(D("O_vlog_prompt.mp4"), 2.0, 0.68)),
     (T_AUR - T_BR, C(ST(50771), 3.0, 0.5)), ((T_SEEKHO - T_AUR) / 2, C(ST(41292), 3.0, 0.5)), ((T_SEEKHO - T_AUR) / 2, C(D("O_IC1N.mp4"), 0.5, 0.42)),
     (CARD - T_SEEKHO, phone_scroll([(6140, 7400)], S["V03"], 6.0, cy=0.40), "whip"),
 ])
