@@ -11,7 +11,7 @@ def aspect(path):
 A={}
 # --- public-domain sets (fallback to studio stills until collected) ---
 pd=sorted(glob.glob(f'{ROOT}/pd/strobe/*.jpg'))
-A['strobe']=[p[len(ROOT)+1:] for p in pd] or [img(i) for i in [1,3,5,6,8,9,10,12,13,15,16,17,19,21,22,23,24,25,26,27,28,29,30,31,33,34,35,36,37,38,39]]
+A['strobe']=([p[len(ROOT)+1:] for p in pd]+[img(i) for i in (19,26,28,39)]) if pd else [img(i) for i in [1,3,5,6,8,9,10,12,13,15,16,17,19,21,22,23,24,25,26,27,28,29,30,31,33,34,35,36,37,38,39]]
 old=sorted(glob.glob(f'{ROOT}/pd/old/*.jpg'))
 A['old']=[p[len(ROOT)+1:] for p in old][:9] or [img(i) for i in [10,15,18,24,25,27,8,2,16]]
 def era(name,fallback):
