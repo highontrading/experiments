@@ -18,7 +18,7 @@ segs += [Seg(OUTRO, CARD, grid([(S["V13"], 3.0, 0.5), (S["V12"], 2.0, 0.5), (S["
 thumbs = thumbs_from([(S["V13"], 3.0, 0.5), (S["V12"], 2.0, 0.5), (S["V09"], 9.0, 0.5)], 400, 540)
 segs.append(end_seg(CARD, DUR - CARD, lambda k: end_yellow(W, H, k, thumbs, headline=("12 tools.", "One workflow.", "Learn it."))))
 items = [("12 tools.", 0.1, INTRO)] + [(n, starts[i], starts[i + 1]) for i, (n, *_r) in enumerate(TOOLS)] + [("One workflow.", OUTRO, CARD - 0.05)]
-words, chunks, spans = script_words(items, hl=["workflow."])
+words, chunks, spans = script_words(items, hl=["one", "workflow"])
 for c, (s, e) in zip(chunks, spans):           # each tool lights up on its own beat
     for j in c: words[j]["s"] = s + 0.03 * (j - c[0]); words[j]["e"] = s + 0.42 * (e - s)   # flash filled, then hollow
 caps = Caps(W, H, words, chunks, "outline", y=1180, spans=spans, maxw=980, size=150)
