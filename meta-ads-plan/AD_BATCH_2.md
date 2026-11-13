@@ -1,5 +1,7 @@
 # Ad batch 2: 20 new ads for "AI & Advertising" (₹2,999)
 
+**Quick look:** `out2/OVERVIEW_20_ADS.jpg` shows all 20 on one board. `out2/index.html` plays every video, shows the statics, and lists the copy for each ad.
+
 These 20 ads are standalone. Each one has its own hook, angle, caption style and CTA:
 - **15 videos:** 11 English and 4 Hinglish.
 - **5 statics:** 4 English and 1 Hinglish, each in both 4:5 and 9:16.

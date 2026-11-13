@@ -4,9 +4,9 @@ R = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 OUT = os.path.join(R, "out2")
 md = open(os.path.join(R, "AD_BATCH_2.md")).read()
 
-rows = re.findall(r"^\| (\d+) \| `([A-Z0-9_]+)` \| ([^|]+)\| ([^|]+)\| ([^|]+)\| ([^|]+)\| ([^|]+)\| ([^|]+)\|", md, re.M)
+rows = re.findall(r"^\| (\d+) \| `([A-Za-z0-9_]+)` \| ([^|]+)\| ([^|]+)\| ([^|]+)\| ([^|]+)\| ([^|]+)\| ([^|]+)\|", md, re.M)
 copy = {}
-for m in re.finditer(r"^### \d+ · ([A-Z0-9_]+).*?\n(.*?)(?=^### |\Z|^## )", md, re.M | re.S):
+for m in re.finditer(r"^### \d+ · ([A-Za-z0-9_]+).*?\n(.*?)(?=^### |\Z|^## )", md, re.M | re.S):
     copy[m.group(1)] = m.group(2).strip()
 
 
