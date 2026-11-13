@@ -1,5 +1,5 @@
 """Single source of truth for the AI in Advertising trailer.
-Grid: 25 fps, 125 BPM -> 1 beat = 0.48 s = 12 frames exactly. Picture and sound both read this file."""
+v2: cut to one continuous ElevenLabs score (136 BPM, slow intro -> drops). Picture and sound both read this file."""
 import json, os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -8,9 +8,15 @@ GEN = os.path.join(ROOT, "generated")  # committed copies of the ElevenLabs VO /
 A = os.path.join(ROOT, "assets")
 FPS, W, H = 25, 1920, 1080
 PY0, PH = 107, 866              # 2.21:1 letterbox picture area (rows 107..972)
-BEAT = 0.48
-DUR = 61.92
-NF = int(round(DUR * FPS))      # 1548 frames
+GRID0, PER = 0.064, 0.4411     # beat grid of the score (136.02 BPM)
+BEAT = PER
+DUR = 56.0
+NF = int(round(DUR * FPS))      # 1400 frames
+
+
+def T(n):
+    """time of beat n of the score"""
+    return round(GRID0 + PER * n, 3)
 
 
 def F(t):
@@ -18,7 +24,8 @@ def F(t):
 
 
 # ---------------------------------------------------------------- voiceover
-VO_START = {"l1": 2.52, "l2": 13.56, "l3": 15.84, "l4": 19.74, "l5": 27.48, "l6": 39.48}
+VO_DIR = "vo2"   # v2 voice: 1.12x, no long pauses
+VO_START = {"l1": 1.36, "l2": 9.85, "l3": 11.70, "l4": 14.30, "l5": 28.35, "l6": 38.00}
 
 
 def gen_path(kind, name):
@@ -27,7 +34,7 @@ def gen_path(kind, name):
 
 
 def vo_words(key):
-    d = json.load(open(gen_path("vo", key + ".json")))
+    d = json.load(open(gen_path(VO_DIR, key + ".json")))
     a = d["alignment"]; out = []; cur = ""; s = e = None
     for c, a0, a1 in zip(a["characters"], a["character_start_times_seconds"], a["character_end_times_seconds"]):
         if c.isalnum() or c == "'":
@@ -46,60 +53,95 @@ def scr(n): return os.path.join(B, "screens", n)
 def seq(n): return os.path.join(B, "screens", "seq", n)
 
 
+# ---------------------------------------------------------------- structure (all on the score's beats)
+T_L1, T_BRIDGE, T_MACH, T_MODELS, T_BUILD, T_DROP1 = T(3), T(18), T(22), T(32), T(37), T(48)
+T_L5, T_PROOF, T_L6, T_BARRAGE, T_TITLE = T(64), T(77), T(86), T(104), T(110)
+T_DROP2, T_STOP, T_FINAL, T_HIT = T(70), T(100), T(102), T(120)
+SMEAR0 = T_MODELS - 0.26                 # horizontal smear exit of the ALGORITHMS card
+L5_GLITCH0, L5_DARK0 = T_DROP2, T_DROP2 + 0.40   # "FROM MAD MEN TO MIDJOURNEY" glitches out on drop 2
+L5_STROBE = 33.50                        # strobe decoder after "prompts"
+TITLE0, TITLE_LOCK, TITLE_FADE, T_TAIL = T_TITLE, T(111), T_HIT + 0.40, T_HIT + 1.30
+KICK_RANGES = [(T(29), T(37)), (T_DROP1, T_STOP), (T_FINAL, T_HIT + 0.1)]   # where cards/shots pulse on the beat
+HITS = [T(0), T(16), T(31), T_DROP1, T(64), T_DROP2, T_FINAL, T_HIT]
+
+
+def _shots(start_beat, plan):
+    """plan: list of (beats, kind, params) laid end to end from start_beat"""
+    out, b = [], start_beat
+    for nb, kind, p in plan:
+        out.append((T(b), T(b + nb), kind, p)); b += nb
+    return out
+
+
 # Footage shots: (start_s, end_s, kind, params).
-#   video: src, in, [z0, z1] zoom, [dx, dy] drift (fraction of frame), speed
-#   still: png, rect0 (cx, cy, w) in image px, rect1, (h = w / 2.217)
-#   seqv:  folder, i0, i1 (frame index range mapped across shot), rect
+#   video: src, t (in-point), z=(z0, z1) zoom
+#   still: png, r0/r1 = (cx, cy, w) crop in image px (h = w / 2.217)
+#   seqv:  dir, i0..i1 frame range across the shot, rect
 SHOTS = [
-    # ---- cold open (0 - 2.40)
+    # ---- cold open (0 - T3): channel-surf flashes on the opening boom
     (0.00, 0.24, "video", dict(src=hd(4332), t=6.0, z=(1.08, 1.16))),
-    (0.32, 0.44, "video", dict(src=arc("Televisi1960"), t=1043.6, z=(1.0, 1.04), bw=False)),
+    (0.32, 0.44, "video", dict(src=arc("Televisi1960"), t=1043.6, z=(1.0, 1.04))),
     (0.52, 0.64, "video", dict(src=hd(4447), t=8.0, z=(1.1, 1.14))),
-    (0.64, 1.52, "video", dict(src=arc("Designfo1956"), t=97.6, z=(1.02, 1.10))),
-    (1.52, 2.36, "video", dict(src=arc("Televisi1960"), t=683.45, z=(1.0, 1.06))),
-    # ---- bridge (11.04 - 13.44)
-    (11.04, 11.76, "video", dict(src=hd(36897), t=4.0, z=(1.0, 1.06))),
-    (11.76, 12.48, "video", dict(src=hd(44066), t=5.0, z=(1.05, 1.12))),
-    (12.48, 13.44, "video", dict(src=hd(22938), t=20.0, z=(1.0, 1.05))),
-    # ---- beat montage (21.60 - 27.36): one shot per beat
-    (21.60, 22.08, "video", dict(src=hd(23282), t=3.0, z=(1.0, 1.12))),
-    (22.08, 22.56, "seqv", dict(dir=seq("midjourney_scroll"), i0=20, i1=50, rect=(1100, 560, 1500))),
-    (22.56, 23.04, "video", dict(src=hd(47792), t=6.0, z=(1.05, 1.15))),
-    (23.04, 23.52, "seqv", dict(dir=seq("veo_hero"), i0=10, i1=40, rect=(960, 600, 1500))),
-    (23.52, 24.00, "video", dict(src=hd(5399), t=3.0, z=(1.0, 1.04))),
-    (24.00, 24.48, "seqv", dict(dir=seq("chatgpt_hd"), i0=40, i1=112, rect=(1120, 380, 1600))),
-    (24.48, 24.96, "video", dict(src=hd(12268), t=4.0, z=(1.0, 1.1))),
-    (24.96, 25.44, "seqv", dict(dir=seq("higgsfield_scroll"), i0=0, i1=40, rect=(960, 600, 1700))),
-    (25.44, 25.92, "video", dict(src=hd(47257), t=5.0, z=(1.05, 1.12))),
-    (25.92, 26.40, "still", dict(png=scr("elevenlabs_full.png"), r0=(1440, 1000, 2400), r1=(1640, 1050, 2300))),
-    (26.40, 26.88, "video", dict(src=hd(221), t=8.0, z=(1.1, 1.2))),
-    (26.88, 27.36, "still", dict(png=scr("runway_full.png"), r0=(1440, 760, 2600), r1=(1440, 800, 2200))),
-    # ---- proof montage (33.60 - 39.36)
-    (33.60, 34.56, "still", dict(png=scr("meta_wsj_full.png"), r0=(720, 560, 1300), r1=(740, 860, 1100))),
-    (34.56, 35.04, "video", dict(src=hd(13192), t=4.0, z=(1.0, 1.08))),
-    (35.04, 36.00, "seqv", dict(dir=seq("metalib_scroll"), i0=0, i1=59, rect=(860, 560, 1500))),
-    (36.00, 36.96, "still", dict(png=scr("coke_tr_full.png"), r0=(1170, 900, 1150), r1=(1170, 1300, 950))),
-    (36.96, 37.44, "video", dict(src=hd(8766), t=5.0, z=(1.05, 1.15))),
-    (37.44, 38.40, "still", dict(png=scr("adx_full.png"), r0=(1400, 850, 1500), r1=(1400, 880, 1150))),
-    (38.40, 38.88, "video", dict(src=hd(4401), t=6.0, z=(1.0, 1.06))),
-    (38.88, 39.36, "still", dict(png=scr("drum_full.png"), r0=(1050, 760, 950), r1=(1050, 770, 820))),
-    # ---- barrage (48.96 - 51.36)
-    (48.96, 49.08, "still", dict(png=scr("wpp_full.png"), r0=(1400, 400, 1500), r1=(1400, 470, 1500))),
-    (49.08, 49.20, "still", dict(png=scr("sm_full.png"), r0=(1100, 620, 1300), r1=(1100, 700, 1300))),
-    (49.20, 49.32, "still", dict(png=scr("veo_full.png"), r0=(1440, 760, 2400), r1=(1440, 820, 2300))),
-    (49.32, 49.44, "seqv", dict(dir=seq("midjourney_scroll"), i0=60, i1=69, rect=(1300, 600, 1100))),
-    (49.44, 49.56, "still", dict(png=scr("coke_tr_full.png"), r0=(1170, 1250, 1000), r1=(1170, 1330, 1000))),
-    (49.56, 49.68, "still", dict(png=scr("meta_wsj_full.png"), r0=(720, 520, 1200), r1=(720, 600, 1200))),
-    (49.68, 49.80, "still", dict(png=scr("anthropic_full.png"), r0=(1440, 520, 2200), r1=(1440, 590, 2200))),
-    (49.80, 51.36, "still", dict(png=scr("metalib_full.png"), r0=(900, 1500, 1500), r1=(1900, 1560, 1500))),
-]
+    (0.64, 1.04, "video", dict(src=arc("Designfo1956"), t=97.6, z=(1.02, 1.10))),
+    (1.04, T_L1, "video", dict(src=arc("Televisi1960"), t=683.6, z=(1.0, 1.06))),
+] + _shots(18, [  # ---- bridge
+    (2, "video", dict(src=hd(36897), t=4.0, z=(1.0, 1.08))),
+    (1, "video", dict(src=hd(44066), t=5.0, z=(1.05, 1.12))),
+    (1, "video", dict(src=hd(22938), t=20.0, z=(1.0, 1.05))),
+]) + _shots(37, [  # ---- build montage: cuts accelerate 2 -> 1 -> 1/2 beat into drop 1
+    (2, "video", dict(src=hd(23282), t=3.0, z=(1.0, 1.14))),
+    (2, "seqv", dict(dir=seq("midjourney_scroll"), i0=10, i1=45, rect=(1100, 560, 1500))),
+    (2, "video", dict(src=hd(47792), t=6.0, z=(1.05, 1.18))),
+    (1, "seqv", dict(dir=seq("veo_hero"), i0=10, i1=40, rect=(960, 600, 1500))),
+    (1, "video", dict(src=hd(5399), t=3.0, z=(1.0, 1.05))),
+    (1, "seqv", dict(dir=seq("chatgpt_hd"), i0=30, i1=90, rect=(1120, 380, 1600))),
+    (0.5, "video", dict(src=hd(12268), t=4.0, z=(1.0, 1.1))),
+    (0.5, "video", dict(src=hd(47050), t=6.0, z=(1.05, 1.15))),
+    (0.5, "video", dict(src=hd(4128), t=5.0, z=(1.05, 1.15))),
+    (0.5, "video", dict(src=hd(2374), t=4.0, z=(1.0, 1.1))),
+]) + _shots(48, [  # ---- drop 1: one shot per beat
+    (1, "video", dict(src=hd(23219), t=5.0, z=(1.0, 1.16))),
+    (1, "video", dict(src=hd(47257), t=5.0, z=(1.05, 1.14))),
+    (1, "still", dict(png=scr("elevenlabs_full.png"), r0=(1440, 1000, 2400), r1=(1600, 1040, 2150))),
+    (1, "video", dict(src=hd(221), t=8.0, z=(1.1, 1.22))),
+    (1, "still", dict(png=scr("runway_full.png"), r0=(1440, 760, 2600), r1=(1440, 800, 2150))),
+    (1, "video", dict(src=hd(20961), t=4.0, z=(1.05, 1.15))),
+    (1, "seqv", dict(dir=seq("midjourney_scroll"), i0=40, i1=69, rect=(1250, 600, 1300))),
+    (1, "video", dict(src=hd(32989), t=6.0, z=(1.0, 1.12))),
+    (1, "still", dict(png=scr("veo_full.png"), r0=(1440, 760, 2400), r1=(1440, 800, 2000))),
+    (1, "video", dict(src=hd(8811), t=5.0, z=(1.0, 1.1))),
+    (1, "seqv", dict(dir=seq("chatgpt_hd"), i0=80, i1=112, rect=(1300, 380, 1300))),
+    (1, "video", dict(src=hd(47051), t=4.0, z=(1.0, 1.12))),
+    (1, "still", dict(png=scr("anthropic_full.png"), r0=(1440, 520, 2400), r1=(1440, 560, 2000))),
+    (1, "video", dict(src=hd(41157), t=3.0, z=(1.0, 1.1))),
+    (1, "seqv", dict(dir=seq("higgsfield_scroll"), i0=0, i1=30, rect=(960, 640, 1500))),
+    (1, "seqv", dict(dir=seq("metalib_scroll"), i0=0, i1=20, rect=(860, 560, 1500))),
+]) + _shots(77, [  # ---- proof montage: headlines and the Ad Library
+    (2, "still", dict(png=scr("meta_wsj_full.png"), r0=(720, 560, 1300), r1=(740, 860, 1100))),
+    (1, "video", dict(src=hd(13192), t=4.0, z=(1.0, 1.08))),
+    (2, "seqv", dict(dir=seq("metalib_scroll"), i0=20, i1=59, rect=(860, 560, 1500))),
+    (1, "still", dict(png=scr("coke_tr_full.png"), r0=(1170, 900, 1150), r1=(1170, 1250, 950))),
+    (1, "still", dict(png=scr("adx_full.png"), r0=(1400, 850, 1500), r1=(1400, 880, 1150))),
+    (1, "video", dict(src=hd(4401), t=6.0, z=(1.0, 1.08))),
+    (1, "still", dict(png=scr("drum_full.png"), r0=(1050, 760, 950), r1=(1050, 770, 820))),
+]) + _shots(104, [  # ---- final-drop barrage: half-beat flashes, then a pan
+    (0.5, "still", dict(png=scr("wpp_full.png"), r0=(1400, 400, 1500), r1=(1400, 470, 1500))),
+    (0.5, "still", dict(png=scr("sm_full.png"), r0=(1100, 620, 1300), r1=(1100, 700, 1300))),
+    (0.5, "still", dict(png=scr("veo_full.png"), r0=(1440, 760, 2400), r1=(1440, 820, 2300))),
+    (0.5, "seqv", dict(dir=seq("midjourney_scroll"), i0=55, i1=69, rect=(1300, 600, 1100))),
+    (0.5, "still", dict(png=scr("coke_tr_full.png"), r0=(1170, 1250, 1000), r1=(1170, 1330, 1000))),
+    (0.5, "still", dict(png=scr("meta_wsj_full.png"), r0=(720, 520, 1200), r1=(720, 600, 1200))),
+    (0.5, "still", dict(png=scr("anthropic_full.png"), r0=(1440, 520, 2200), r1=(1440, 590, 2200))),
+    (0.5, "seqv", dict(dir=seq("higgsfield_scroll"), i0=30, i1=49, rect=(960, 600, 1500))),
+    (2, "still", dict(png=scr("metalib_full.png"), r0=(900, 1500, 1500), r1=(1900, 1560, 1500))),
+])
 
 # Transition / glitch events on footage: (start_s, end_s, type)
 FX = [
-    (0.24, 0.32, "black"), (0.44, 0.52, "black"),
-    (1.24, 1.36, "slice"), (1.40, 1.56, "mosh"), (2.20, 2.32, "slice"),
-    (13.32, 13.44, "slice"),
-    (49.80, 49.88, "rgbhit"), (21.60, 21.68, "rgbhit"), (33.60, 33.68, "rgbhit"),
+    (0.24, 0.32, "black"), (0.44, 0.52, "black"), (0.80, 0.88, "slice"), (0.92, 1.04, "mosh"), (1.28, 1.36, "slice"),
+    (T_MACH - 0.12, T_MACH, "slice"), (T(46) - 0.08, T(46), "slice"), (T(47), T(47) + 0.08, "slice"),
+    (T_DROP1, T_DROP1 + 0.08, "rgbhit"), (T(56), T(56) + 0.08, "slice"), (T(60), T(60) + 0.08, "rgbhit"),
+    (T_PROOF, T_PROOF + 0.08, "rgbhit"), (T(81), T(81) + 0.08, "slice"), (T_BARRAGE, T_BARRAGE + 0.08, "rgbhit"),
 ]
 
 # Logo row for the reveal (assets/logos_png)
@@ -112,27 +154,17 @@ TILES = [
 ]
 
 # ---------------------------------------------------------------- sound map
-MUSIC = [  # (start, end, file, offset_in_file, gain_db, fade_in, fade_out)
-    (0.00, 11.04, "score_a.mp3", 0.00, 0.0, 0.0, 0.04),
-    (2.20, 11.04, "bed_a.mp3", 17.0, -8.0, 0.8, 0.06),   # sustained drone under line 1
-    (11.04, 14.40, "drums_a.mp3", 0.031, 0.0, 0.0, 0.25),
-    (14.40, 18.72, "bed_a.mp3", 3.00, -1.0, 0.25, 0.0),
-    (19.68, 21.60, "bed_a.mp3", 8.00, -3.0, 0.40, 0.02),
-    (21.60, 27.36, "drums_a.mp3", 0.031 + 3.84, 0.0, 0.0, 0.03),
-    (27.36, 33.60, "bed_a.mp3", 10.0, -1.0, 0.05, 0.02),
-    (33.60, 39.36, "drums_a.mp3", 0.031, 0.0, 0.0, 0.03),
-    (39.36, 48.96, "bed_a.mp3", 14.0, -1.0, 0.05, 0.02),
-    (48.96, 58.56, "drums_b_A.mp3", None, 0.0, 0.0, 0.6),
+MUSIC = [  # (start, end, file, offset_in_file, gain_db, fade_in, fade_out): one continuous score, no gaps
+    (0.00, DUR, "score_v2.mp3", 0.0, 0.0, 0.0, 0.5),
+    (1.20, T(31), "bed_E.mp3", 3.0, -6.0, 0.6, 0.25),     # low drone (bed pitched to E) fills the quiet intro/bridge
+    (T(36), T_DROP1, "bed_E.mp3", 12.0, -12.0, 0.4, 0.04),  # ...and the build
 ]
 SFX = [  # (time, file, gain_db); for "riser" the time is where it ENDS
-    (0.00, "glitch2", -6), (0.24, "glitch1", -8), (0.52, "glitch1", -8), (1.24, "glitch2", -8), (1.40, "glitch3", -6),
-    (2.20, "glitch1", -8), (2.36, "powerdown", -10),
-    (13.32, "glitch2", -6), (13.44, "glitch1", -8), (13.50, "tick", -10),
-    (15.60, "glitch3", -9), (18.40, "whoosh", -3), (18.62, "powerdown", -8),
-    (19.74, "glitch1", -14), (20.68, "glitch2", -13), (21.60, "riser", -11),
-    (21.60, "boom2", -2), (27.36, "boom", -4),
-    (29.95, "glitch3", -4), (32.88, "zap", -4), (33.60, "boom2", -2),
-    (39.36, "boom", -5), (43.55, "glitch1", -8), (46.50, "glitch2", -7), (46.86, "zap", -3),
-    (48.96, "riser", -4), (48.96, "boom2", -1), (49.80, "whoosh", -6),
-    (51.36, "powerdown", -9), (51.60, "title", 0), (58.56, "boom", -2),
+    (0.00, "glitch2", -8), (0.24, "glitch1", -10), (0.52, "glitch1", -10), (0.92, "glitch3", -8),
+    (4.93, "glitch1", -10), (5.88, "glitch2", -10), (7.08, "glitch3", -9),
+    (T_BRIDGE, "whoosh", -9), (T_MACH - 0.12, "glitch2", -8), (11.45, "glitch3", -11), (SMEAR0, "whoosh", -5), (T_MODELS, "glitch1", -11),
+    (T(31), "riser", -9), (T_DROP1, "riser", -6), (T(46.5), "glitch2", -12),
+    (T_DROP1, "boom2", -5), (T_L5, "boom", -7), (L5_GLITCH0, "glitch3", -5), (L5_STROBE, "zap", -6), (T_PROOF, "boom2", -6),
+    (T_L6, "boom", -9), (41.55, "glitch1", -11), (43.90, "glitch2", -10), (T_STOP, "zap", -5), (T_FINAL, "boom2", -3),
+    (T_BARRAGE, "whoosh", -9), (T_TITLE, "title", -3), (T_HIT, "boom", -4),
 ]

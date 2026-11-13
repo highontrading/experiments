@@ -43,23 +43,20 @@ for (s, e, f, off, g, fin, fout) in MUSIC:
 # VO + ducking envelope
 vo = np.zeros((N, 2), np.float32); env = np.zeros(N, np.float32)
 for k, t in VO_START.items():
-    x = load(gen_path("vo", k + ".mp3"))
+    x = load(gen_path(VO_DIR, k + ".mp3"))
     x = x / (np.abs(x).max() + 1e-9) * db(-2.0)
     place(vo, x, t); i = int(t * SR); env[i:i + len(x)] = 1.0
 # smooth ducking (attack 60 ms, release 300 ms)
 dk = np.copy(env); a_, r_ = 1 / (0.06 * SR), 1 / (0.30 * SR); y = 0.0
 for i in range(N):
     y = y + (dk[i] - y) * (a_ if dk[i] > y else r_); dk[i] = y
-music *= (1 - dk * (1 - db(-11)))[:, None]
+music *= (1 - dk * (1 - db(-8)))[:, None]
 
 sfx = np.zeros((N, 2), np.float32)
 for t, name, g in SFX:
     x = load(gen_path("sfx", name + ".mp3"))
     if name == "riser": t = t - len(x) / SR  # risers end on their time
     place(sfx, x, t, db(g))
-# the hard digital silence (18.72 - 19.68): nothing but the tail of the whoosh
-i0, i1 = int(18.80 * SR), int(19.68 * SR)
-music[i0:i1] = 0; sfx[int(18.85 * SR):int(19.55 * SR)] = 0
 
 mix = music * db(-3) + vo * db(2) + sfx * db(-5)
 mix[:int(0.002 * SR)] = 0

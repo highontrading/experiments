@@ -24,7 +24,7 @@ case "${1:-all}" in
     (cd trailer && python3 sound.py && python3 render.py video 4)
     mkdir -p out
     ffmpeg -v error -y -i $Bd/picture.mp4 -i $Bd/mix.wav -map 0:v -map 1:a -c:v libx264 -preset slow -b:v 16M -maxrate 24M -bufsize 32M -tune grain -pix_fmt yuv420p \
-      -c:a aac -b:a 320k -movflags +faststart -shortest out/ai_in_advertising_trailer.mp4
-    echo "-> out/ai_in_advertising_trailer.mp4"
+      -c:a aac -b:a 320k -movflags +faststart -shortest out/ai_in_advertising_trailer_v2.mp4
+    echo "-> out/ai_in_advertising_trailer_v2.mp4"
     ;;
 esac

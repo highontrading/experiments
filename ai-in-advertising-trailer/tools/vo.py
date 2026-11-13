@@ -2,13 +2,13 @@
 import os, sys, json, base64, urllib.request
 OUT = sys.argv[1]
 VOICE = os.environ.get("VO_VOICE", "FF7KdobWPaiR0vkcALHF")  # David - Movie Trailer Narrator
-LINES = {
-    "l1": ("They said advertising was ruled by instinct. By gut... budget... and luck.", 0.92),
-    "l2": ("Then came the machines.", 0.95),
-    "l3": ("Algorithms learned the audience.", 1.0),
-    "l4": ("Models started creating.", 0.95),
-    "l5": ("From Mad Men to Midjourney. From briefs... to prompts.", 0.95),
-    "l6": ("Now, a new creative department emerges. Built not by agencies... but by AI.", 0.95),
+LINES = {  # v2: ~1.12x faster, no long pauses
+    "l1": ("They said advertising was ruled by instinct. By gut, budget, and luck.", 1.12),
+    "l2": ("Then came the machines.", 1.12),
+    "l3": ("Algorithms learned the audience.", 1.12),
+    "l4": ("Models started creating.", 1.12),
+    "l5": ("From Mad Men to Midjourney. From briefs to prompts.", 1.12),
+    "l6": ("Now, a new creative department emerges. Built not by agencies, but by AI.", 1.12),
 }
 only = sys.argv[2:] or list(LINES)
 for k in only:

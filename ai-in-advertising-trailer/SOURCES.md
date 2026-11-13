@@ -44,8 +44,8 @@ Showing a site's interface or a news headline in an educational trailer is gener
 From Simple Icons (`simple-icons@15.0.0`): OpenAI, Claude, Google Gemini, Meta, ElevenLabs, Google Ads. All are trademarks of their owners and are shown only to identify the tools the course covers.
 
 ## Audio: ElevenLabs (generated with the project's API key)
-- **VO:** voice "David – Movie Trailer Narrator" (`FF7KdobWPaiR0vkcALHF`), model `eleven_multilingual_v2`.
-- **Music:** Eleven Music `music_v1`. Three generated pieces are assembled on a 125 BPM grid: the ambient score, the drum section, and the finale.
+- **VO:** voice "David – Movie Trailer Narrator" (`FF7KdobWPaiR0vkcALHF`), model `eleven_multilingual_v2`, speed 1.12 for v2.
+- **Music (v2):** one continuous Eleven Music `music_v1` score generated from a composition plan (`tools/music_plan.py`, variant a), plus the v1 ambient bed pitched down to E as a low drone layer. v1 assembled three pieces on a 125 BPM grid.
 - **SFX:** ElevenLabs sound generation (12 effects; see `tools/sfx.py`).
 
 Commercial use of ElevenLabs output depends on the plan. The account is on **Starter**; confirm music commercial rights in your plan terms before monetising.

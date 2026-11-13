@@ -91,7 +91,7 @@ def grade(img):
 
 def shot_plate(fi, shot):
     t0, t1, kind, p = shot
-    i = fi - F(t0); n = F(t1) - F(t0); x = i / max(1, n - 1)
+    n = max(1, F(t1) - F(t0)); i = min(max(0, fi - F(t0)), n - 1); x = i / max(1, n - 1)
     if kind == "video":
         fr = Footage.frames(p["src"], p["t"], n, speed=p.get("speed", 1.0))[i]
         z0, z1 = p.get("z", (1.0, 1.05))
@@ -381,16 +381,16 @@ def code_rain(t, alpha):
 def card_machines(fi, t):
     pic = np.full((PH, W, 3), CHAR, np.uint8)
     t_l2 = wt("l2", 0, 1); t_l3 = wt("l3", 0, 1)
-    if t < 13.50:  # rainbow "T" blink
+    if t < T_MACH + 0.08:  # rainbow "T" blink
         layer = new_layer(); ln = Line("T", 72); draw_text(layer, ln, 760, CY)
         return composite_text(pic, layer, color=(255, 120, 220), fringe=7), dict(grain=4)
     algo = t >= t_l3 - 0.05
     green = ease((t - (t_l3 - 0.05)) / 0.2) if algo else 0.0
-    pic = tiles_layer(pic, t, 13.56, dim=0.55, green=green)
+    pic = tiles_layer(pic, t, VO_START["l2"], dim=0.55, green=green)
     # brackets
     l2 = Line("THEN CAME THE MACHINES", 72); ox = (W - l2.width) / 2
     bx0, by0 = ox - 2.6 * CELL, CY - 2.4 * CELL; bx1, by1 = ox + l2.width + 0.6 * CELL, CY + 0.6 * CELL
-    gl = 1.0 if t < 13.62 else 0.0
+    gl = 1.0 if t < T_MACH + 0.18 else 0.0
     pic = draw_brackets(pic, bx0, by0, bx1, by1, fi, glitch=gl)
     layer = new_layer()
     if not algo:
@@ -415,8 +415,8 @@ def card_machines(fi, t):
         rain = code_rain(t, 0.45 * green)
         pic = np.clip(pic.astype(np.float32) * (1 - rain * 0.2) + rain * np.array([60, 230, 90]), 0, 255).astype(np.uint8)
     out = composite_text(pic, layer)
-    if t >= 18.40:  # horizontal smear exit
-        out = hsmear(out, (t - 18.40) / 0.32)
+    if t >= SMEAR0:  # horizontal smear exit
+        out = hsmear(out, (t - SMEAR0) / (T_MODELS - SMEAR0))
     return out, dict(grain=4)
 
 
@@ -467,7 +467,7 @@ def card_L5(fi, t):
     wmax = max(la.width, lb.width); ox = (W - wmax) / 2
     bx0, by0 = ox - 2.6 * CELL, CY - 2.4 * CELL; bx1, by1 = ox + wmax + 0.6 * CELL, CY + 0.6 * CELL
     t_b = wt("l5", 5, 1)
-    strobe0 = 32.88
+    strobe0 = L5_STROBE
     if t >= strobe0:  # strobe decoder
         i = int(round((t - strobe0) * FPS)); white = strobe_pattern(i) == "W"
         pic = np.full((PH, W, 3), (236, 236, 232) if white else (16, 18, 20), np.uint8)
@@ -487,14 +487,14 @@ def card_L5(fi, t):
         else:
             out = out * (1 - hm) + hm * 255 + glow * np.array([90, 170, 255]) * 3.0
         return np.clip(out, 0, 255).astype(np.uint8), dict(grain=5)
-    pic = draw_brackets(pic, bx0, by0, bx1, by1, fi, glitch=1.0 if t < 27.52 else 0.0)
+    pic = draw_brackets(pic, bx0, by0, bx1, by1, fi, glitch=1.0 if t < T_L5 + 0.16 else 0.0)
     layer = new_layer()
-    if t < t_b - 0.5:
+    if t < L5_DARK0:
         segs = [(w, wt("l5", i, 1), wt("l5", i, 2)) for i, w in enumerate(["FROM", "MAD", "MEN", "TO", "MIDJOURNEY"])]
         n = count_revealed(typed_times(segs), t); draw_text(layer, la, ox, CY, upto=n)
         out = composite_text(pic, layer)
-        if t >= t_b - 1.0:  # heavy glitch-out
-            k = (t - (t_b - 1.0)) / 0.5
+        if t >= L5_GLITCH0:  # heavy glitch-out on drop 2
+            k = (t - L5_GLITCH0) / (L5_DARK0 - L5_GLITCH0)
             out = glitch_out(out, fi, k)
         return out, dict(grain=4)
     if t < t_b:
@@ -538,7 +538,7 @@ def card_L6(fi, t):
     bx0, by0 = xs[0] - 110, CY - 2.4 * CELL; bx1, by1 = xs[-1] + 40, CY + 0.6 * CELL
     t_built = wt("l6", 6, 1); t_but = wt("l6", 10, 1); t_ai = wt("l6", 12, 1)
     del0 = wt("l6", 5, 2) + 0.15
-    pic = draw_brackets(pic, bx0, by0, bx1, by1, fi, glitch=1.0 if t < 39.50 else 0.0)
+    pic = draw_brackets(pic, bx0, by0, bx1, by1, fi, glitch=1.0 if t < T_L6 + 0.14 else 0.0)
     layer = new_layer()
     if t < del0:
         segs = [(w, wt("l6", i, 1), wt("l6", i, 2)) for i, w in enumerate(["NOW", "A", "NEW", "CREATIVE", "DEPARTMENT", "EMERGES"])]
@@ -581,7 +581,7 @@ def draw_logos(pic, xs, n_on, fi, fade=1.0):
 
 def card_title(fi, t):
     pic = np.full((PH, W, 3), BLACK, np.uint8)
-    t0 = 51.60; t_lock = 52.08; t_fade = 58.0
+    t0 = TITLE0; t_lock = TITLE_LOCK; t_fade = TITLE_FADE
     if t < t0: return pic, dict(grain=3)
     big = Line("AI IN ADVERTISING", 168); ox = (W - big.width) / 2; cy = CY + 30
     layer = new_layer(); draw_text(layer, big, ox, cy)
@@ -601,12 +601,14 @@ def card_title(fi, t):
         arr *= max(0.0, 1 - (t - t_fade) / 0.8) * 0.75 + 0.0
     else:
         arr *= 0.93 + 0.07 * random.Random(fi).random()
+        if T_HIT <= t < T_HIT + 0.2:  # final hit: title glitches
+            arr = slice_h(arr.astype(np.uint8), fi).astype(np.float32) * 1.15
     return composite_text(pic, Image.fromarray(np.clip(arr, 0, 255).astype(np.uint8))), dict(grain=3)
 
 
 CARDS = [  # (start, end, fn)
-    (2.40, 11.04, card_L1), (13.44, 18.72, card_machines), (18.72, 19.68, None), (19.68, 21.60, card_models),
-    (27.36, 33.60, card_L5), (39.36, 48.96, card_L6), (51.36, 58.80, card_title),
+    (T_L1, T_BRIDGE, card_L1), (T_MACH, T_MODELS, card_machines), (T_MODELS, T_BUILD, card_models),
+    (T_L5, T_PROOF, card_L5), (T_L6, T_BARRAGE, card_L6), (T_TITLE, T_TAIL, card_title),
 ]
 
 
@@ -631,7 +633,7 @@ def render_frame(fi):
             pic, lk = card[2](fi, t); look.update(lk); look.update(vhs=1.0, chroma=0)
     elif shot is not None:
         pic = shot_plate(fi, shot); pic = vignette(pic)
-    elif t >= 58.80:
+    elif t >= T_TAIL:
         pic = np.full((PH, W, 3), CHAR, np.uint8); look = dict(grain=4, vhs=1.2, chroma=0)
     else:
         pic = np.full((PH, W, 3), BLACK, np.uint8); look = dict(grain=3, vhs=0.6, chroma=0)
@@ -642,11 +644,26 @@ def render_frame(fi):
         elif kind == "slice": pic = slice_glitch(pic, fi)
         elif kind == "mosh": pic = mosh(pic, _prev.get("pic"), fi, k)
         elif kind == "rgbhit": look["chroma"] = 14
+    pic = beat_pulse(pic, t, card is not None, look)
     pic = chroma(pic, look.get("chroma", 0))
     pic = vhs(pic, fi, look.get("vhs", 1.0), look.get("grain", 4))
     _prev["pic"] = pic
     out[PY0:PY0 + PH] = pic
     return out
+
+
+def beat_pulse(pic, t, is_card, look):
+    """zoom bump + chroma kick on every beat inside KICK_RANGES, bigger on HITS (the 'dopamine' pulse)"""
+    amp = 0.0
+    if any(a <= t < b for a, b in KICK_RANGES):
+        n = math.floor((t - GRID0) / PER); dt = t - (GRID0 + PER * n)
+        amp = (0.016 if is_card else 0.024) * math.exp(-dt / 0.09)
+        if n % 4 == 0: look["chroma"] = max(look.get("chroma", 0), int(7 * math.exp(-dt / 0.06)))
+    for h in HITS:
+        if 0 <= t - h < 0.3: amp = max(amp, 0.05 * math.exp(-(t - h) / 0.1)); look["chroma"] = max(look.get("chroma", 0), 10)
+    if amp < 0.002: return pic
+    s = 1 + amp; M = np.array([[s, 0, W / 2 * (1 - s)], [0, s, PH / 2 * (1 - s)]], np.float32)
+    return cv2.warpAffine(pic, M, (W, PH), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
 
 
 def render_range(a, b, path):
