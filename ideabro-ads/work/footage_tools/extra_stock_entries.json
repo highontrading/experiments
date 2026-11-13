@@ -1,0 +1,5 @@
+[
+ {"path": "/home/user/experiments/ideabro-ads/assets/stock/i_film-grain-overlay-generated.mp4", "category": "stock_i",
+  "description": "Vertical 1080x1920 film-grain overlay (mid-grey animated grain with slight flicker and vignette) generated with ffmpeg; use with overlay/soft-light blend",
+  "source_url": "generated locally (ffmpeg lavfi noise)", "license": "Generated in-house; no third-party rights"}
+]

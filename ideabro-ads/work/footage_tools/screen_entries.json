@@ -1,0 +1,51 @@
+[
+ {
+  "path": "/home/user/experiments/ideabro-ads/assets/screen/screen_mob_scroll.mp4",
+  "category": "screen",
+  "description": "Mobile 1080x1920 smooth top-to-bottom scroll through the whole AI & Advertising course page",
+  "source_url": "https://community.ideabrostudio.com/courses/ai-and-advertising",
+  "license": "Ideabro Studio's own course page (first-party screen recording)"
+ },
+ {
+  "path": "/home/user/experiments/ideabro-ads/assets/screen/screen_mob_hero.mp4",
+  "category": "screen",
+  "description": "Mobile 1080x1920 parked on the hero (headline 'Shoot-quality ads, without the shoot. Learn AI Advertising.', $29 CTA, campaign card fan)",
+  "source_url": "https://community.ideabrostudio.com/courses/ai-and-advertising",
+  "license": "Ideabro Studio's own course page (first-party screen recording)"
+ },
+ {
+  "path": "/home/user/experiments/ideabro-ads/assets/screen/screen_mob_table.mp4",
+  "category": "screen",
+  "description": "Mobile 1080x1920 parked on 'The shoot is optional now' old-way vs AI-way comparison table",
+  "source_url": "https://community.ideabrostudio.com/courses/ai-and-advertising",
+  "license": "Ideabro Studio's own course page (first-party screen recording)"
+ },
+ {
+  "path": "/home/user/experiments/ideabro-ads/assets/screen/screen_mob_curriculum.mp4",
+  "category": "screen",
+  "description": "Mobile 1080x1920 on 'What you'll learn' curriculum with modules 01 and 03 ('AI product photography') expanded, lessons listed",
+  "source_url": "https://community.ideabrostudio.com/courses/ai-and-advertising",
+  "license": "Ideabro Studio's own course page (first-party screen recording)"
+ },
+ {
+  "path": "/home/user/experiments/ideabro-ads/assets/screen/screen_mob_pricing.mp4",
+  "category": "screen",
+  "description": "Mobile 1080x1920 parked on the pricing card ($29, 70% off, feature list, Enroll button)",
+  "source_url": "https://community.ideabrostudio.com/courses/ai-and-advertising",
+  "license": "Ideabro Studio's own course page (first-party screen recording)"
+ },
+ {
+  "path": "/home/user/experiments/ideabro-ads/assets/screen/screen_desk_hero.mp4",
+  "category": "screen",
+  "description": "Desktop 1920x1080 parked on the hero",
+  "source_url": "https://community.ideabrostudio.com/courses/ai-and-advertising",
+  "license": "Ideabro Studio's own course page (first-party screen recording)"
+ },
+ {
+  "path": "/home/user/experiments/ideabro-ads/assets/screen/screen_desk_curriculum.mp4",
+  "category": "screen",
+  "description": "Desktop 1920x1080 on the curriculum; module 03 'AI product photography' expands, then a gentle scroll down to it",
+  "source_url": "https://community.ideabrostudio.com/courses/ai-and-advertising",
+  "license": "Ideabro Studio's own course page (first-party screen recording)"
+ }
+]

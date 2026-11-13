@@ -1,0 +1,43 @@
+import React from 'react';
+import * as A01 from './A01';
+import * as A02 from './A02';
+import * as A03 from './A03';
+import * as A04 from './A04';
+import * as A05 from './A05';
+import * as A06 from './A06';
+import * as A07 from './A07';
+import * as A08 from './A08';
+import * as A09 from './A09';
+import * as A10 from './A10';
+import * as A11 from './A11';
+import * as A12 from './A12';
+import * as A13 from './A13';
+import * as A14 from './A14';
+import * as A15 from './A15';
+import * as A16 from './A16';
+import * as A17 from './A17';
+import * as A18 from './A18';
+import * as A19 from './A19';
+import * as A20 from './A20';
+export const ADS: {id: string; dur: number; C: React.FC}[] = [
+  {id: 'A01-ShootIsOptional', dur: A01.dur, C: A01.A01},
+  {id: 'A02-OnePhotoCampaign', dur: A02.dur, C: A02.A02},
+  {id: 'A03-MidnightToMorning', dur: A03.dur, C: A03.A03},
+  {id: 'A04-PressGenerate', dur: A04.dur, C: A04.A04},
+  {id: 'A05-RealOrAI', dur: A05.dur, C: A05.A05},
+  {id: 'A06-Receipt', dur: A06.dur, C: A06.A06},
+  {id: 'A07-HI-D2CFounders', dur: A07.dur, C: A07.A07},
+  {id: 'A08-HI-Diwali', dur: A08.dur, C: A08.A08},
+  {id: 'A09-HI-Freelancers', dur: A09.dur, C: A09.A09},
+  {id: 'A10-HI-Students', dur: A10.dur, C: A10.A10},
+  {id: 'A11-HI-ClientChat', dur: A11.dur, C: A11.A11},
+  {id: 'A12-Tracklist', dur: A12.dur, C: A12.A12},
+  {id: 'A13-MadeWithWhatYouLearn', dur: A13.dur, C: A13.A13},
+  {id: 'A14-FourRules', dur: A14.dur, C: A14.A14},
+  {id: 'A15-LuxuryEditorial', dur: A15.dur, C: A15.A15},
+  {id: 'A16-StudentsSay', dur: A16.dur, C: A16.A16},
+  {id: 'A17-LaunchPrice', dur: A17.dur, C: A17.A17},
+  {id: 'A18-POVDirector', dur: A18.dur, C: A18.A18},
+  {id: 'A19-NoiseVsDirection', dur: A19.dur, C: A19.A19},
+  {id: 'A20-WhoItsFor', dur: A20.dur, C: A20.A20},
+];
