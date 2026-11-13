@@ -5,3 +5,6 @@ assets/stock/
 assets/*.jpg
 build/
 __pycache__/
+out2/_*
+build/logs/
+assets/brand/home.html

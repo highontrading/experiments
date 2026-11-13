@@ -195,9 +195,11 @@ def endcard_frame(W, H, k, thumbs, headline=("Shoot-quality ads,", "without the 
     hy = top + 90; fs = 134 if H > W * 1.5 else 118
     for i, ln in enumerate(headline):
         a = ease(e(0.05 + 0.08 * i)); f = serif(fs); w = d.textlength(ln, font=f)
+        if w > W - 110: f = serif(int(fs * (W - 110) / w)); w = d.textlength(ln, font=f)
         d.text(((W - w) / 2, hy + int((1 - a) * 30)), ln, font=f, fill=tuple(int(c * a + 241 * (1 - a)) for c in INK))
         hy += int(fs * 0.98)
     a = ease(e(0.25)); f = serif(fs); w = d.textlength(hl, font=f); pad = 20
+    if w > W - 150: f = serif(int(fs * (W - 150) / w)); w = d.textlength(hl, font=f)
     x0 = (W - w) / 2 - pad; asc, desc = f.getmetrics()
     d.rectangle([x0, hy + 8, x0 + (w + 2 * pad) * a, hy + asc + desc * 0.6], fill=PINK)
     d.text(((W - w) / 2, hy), hl, font=f, fill=INK); hy += int(fs * 1.25)
