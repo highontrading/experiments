@@ -16,10 +16,34 @@ ROWS = [("Studio, photographer, stylist", "One product photo"),
 
 
 def photo(src, t, w, h, fx=0.5, gray=False):
-    f = K.decode(src, t, 0.05, w, h, fx)[0]
-    if gray:
-        g = f.mean(axis=2, keepdims=True); f = (g * 0.9 + f * 0.1).astype(np.uint8); f = (f * 0.86 + 20).astype(np.uint8)
-    return Image.fromarray(f)
+    f = K.decode(src, t, 0.05, w, h, fx)[0].astype(np.float32)
+    if gray:   # muted, cinematic "old way" grade: mostly desaturated, warm, gentle vignette
+        g = f.mean(axis=2, keepdims=True); f = g * 0.72 + f * 0.28
+        f = (f - 128) * 1.12 + 128; f *= np.array([1.04, 1.0, 0.93])
+        yy, xx = np.mgrid[0:h, 0:w]; v = 1 - 0.35 * (((xx - w / 2) / (w / 2)) ** 2 + ((yy - h / 2) / (h / 2)) ** 2) ** 1.2 / 2
+        f *= v[..., None]
+    return Image.fromarray(np.clip(f, 0, 255).astype(np.uint8))
+
+
+def ai_grid(w, h, gap=6):
+    """2x2 grid of studio AI outputs on an ink background"""
+    S = {l.split()[0]: A(l.split()[1]) for l in open(A("studio", "index.txt"))}
+    tiles = [(S["V13"], 0.4, 0.5), (S["V09"], 14.6, 0.62), (S["V11"], 9.4, 0.5), (A("drive", "O_BAka.mp4"), 13.6, 0.5)]
+    tw, th = (w - gap) // 2, (h - gap) // 2
+    im = Image.new("RGB", (w, h), K.INK)
+    for k, (src, t, fx) in enumerate(tiles):
+        r, c = divmod(k, 2)
+        im.paste(Image.fromarray(K.decode(src, t, 0.05, tw, th, fx)[0]), (c * (tw + gap), r * (th + gap)))
+    return im
+
+
+def chips(im, x, y, w, h, words, bg):
+    d = ImageDraw.Draw(im); f = K.mono(24); cx = x + 18; cy = y + h - 18 - 44
+    for wd in words:
+        tw = d.textlength(wd, font=f)
+        if cx + tw + 24 > x + w - 12: break
+        d.rectangle([cx, cy, cx + tw + 24, cy + 44], fill=bg, outline=K.INK, width=2)
+        d.text((cx + 12, cy + 8), wd, font=f, fill=K.INK if bg != K.INK else K.WHITE); cx += tw + 24 + 8
 
 
 def card(im, img, x, y, w, h, label, lab_bg):
@@ -43,9 +67,11 @@ def build(W, H, path):
     d.rectangle([x - 20, y + 8, x + w + 20, y + asc + desc * 0.55], fill=K.PINK); d.text((x, y), t, font=f, fill=K.INK); y += int(fs * 1.22)
     # two photo cards
     cw = (W - 3 * 60) // 2; ch = int(cw * (1.32 if tall else 0.86))
-    old = photo(A("stock", "44119.mp4"), 3.6, cw, ch, 0.42, gray=True)
-    new = photo(A("studio", "1794509925138-fb291663-4730-49f2-b5ae-4cee07e984f0.mp4"), 3.0, cw, ch, 0.5)
+    old = photo(A("stock", "50639.mp4"), 1.0, cw, ch, 0.46, gray=True)
+    new = ai_grid(cw, ch)
     card(im, old, 60, y, cw, ch, "THE OLD WAY", K.WHITE); card(im, new, 120 + cw, y, cw, ch, "THE AI WAY", K.LIME)
+    chips(im, 60, y, cw, ch, ["STUDIO", "CREW", "MODEL"], K.WHITE)
+    chips(im, 120 + cw, y, cw, ch, ["1 PHOTO", "1 LAPTOP"], K.LIME)
     d = ImageDraw.Draw(im); y += ch + (56 if tall else 40)
     # comparison rows
     f1, f2 = K.mono(27 if tall else 25), K.mono(27 if tall else 25)
