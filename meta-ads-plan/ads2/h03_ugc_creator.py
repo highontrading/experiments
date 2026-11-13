@@ -8,8 +8,8 @@ T_YE2, T_SAB, T_BR, T_AUR, T_SEEKHO = wt("Ye", 1.5), wt("Sab"), wt("Brands"), wt
 CARD = words[-1]["e"] + 0.5; DUR = CARD + 3.6
 segs, _ = seq(0, [
     (T_YE2, C(S["V02"], 3.0, 0.5), "dip"), (T_SAB - T_YE2, C(S["V03"], 4.0, 0.5)),
-    ((T_BR - T_SAB) / 2, C(S["V04"], 6.0, 0.5)), ((T_BR - T_SAB) / 2, C(D("O_vlog_prompt.mp4"), 8.0, 0.5)),
-    (T_AUR - T_BR, C(ST(42133), 1.0, 0.5)), ((T_SEEKHO - T_AUR) / 2, C(ST(41292), 3.0, 0.5)), ((T_SEEKHO - T_AUR) / 2, C(D("O_IC1N.mp4"), 0.5, 0.42)),
+    ((T_BR - T_SAB) / 2, C(S["V04"], 6.0, 0.5)), ((T_BR - T_SAB) / 2, C(D("O_vlog_prompt.mp4"), 2.0, 0.55)),
+    (T_AUR - T_BR, C(ST(50771), 3.0, 0.5)), ((T_SEEKHO - T_AUR) / 2, C(ST(41292), 3.0, 0.5)), ((T_SEEKHO - T_AUR) / 2, C(D("O_IC1N.mp4"), 0.5, 0.42)),
     (CARD - T_SEEKHO, phone_scroll([(6140, 7400)], S["V03"], 6.0, cy=0.40), "whip"),
 ])
 thumbs = thumbs_from([(S["V03"], 8.0, 0.5), (S["V02"], 3.0, 0.5), (D("O_IC1N.mp4"), 0.5, 0.42)], 460, 620)

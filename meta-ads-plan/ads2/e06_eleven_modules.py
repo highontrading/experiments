@@ -10,7 +10,7 @@ MODS = [("AI in advertising:", "the new playbook", ST(41273), 3.0, 0.5),
         ("AI video ads and", "campaign films", D("O_BAka.mp4"), 8.0, 0.5),
         ("Sound, voice", "and music", ST(44054), 3.0, 0.5),
         ("AI UGC and brand", "ambassadors", S["V02"], 3.0, 0.5),
-        ("Meta ads: statics,", "variations, testing", ST(15818), 4.0, 0.5),
+        ("Meta ads: statics,", "variations, testing", ST(50771), 6.0, 0.5),
         ("Editing, end cards", "and brand kits", ST(41274), 4.0, 0.5),
         ("Hybrid ads:", "real shoot + AI", ST(50639), 3.0, 0.5),
         ("Capstone:", "your full campaign", S["V13"], 2.0, 0.5)]

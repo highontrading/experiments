@@ -7,7 +7,7 @@ beats = beat_grid("score_v2.mp3", MOFF)
 TOOLS = [("ChatGPT", "briefs & scripts", ST(1781), 3.0), ("Claude", "strategy & copy", ST(24448), 6.0), ("Gemini", "research & ideas", ST(41273), 7.0),
          ("Nano Banana", "product shots", S["V13"], 1.0), ("Midjourney", "art direction", S["V12"], 2.5), ("Veo", "video scenes", D("O_BAka.mp4"), 9.0),
          ("Kling", "motion", S["V09"], 4.6), ("Runway", "VFX edits", D("A_utOs.mp4"), 6.0), ("ElevenLabs", "voiceovers", ST(39774), 3.0),
-         ("Suno", "jingles", ST(41307), 4.0), ("CapCut", "the edit", ST(41274), 5.0), ("Meta Ads Manager", "the launch", ST(42133), 3.0)]
+         ("Suno", "jingles", ST(41307), 4.0), ("CapCut", "the edit", ST(41274), 5.0), ("Meta Ads Manager", "the launch", ST(50771), 3.0)]
 INTRO = beats[4]
 starts = [INTRO + 0] + [beats[4 + 2 * (i + 1)] for i in range(len(TOOLS))]
 OUTRO = starts[-1]; CARD = beats[4 + 2 * len(TOOLS) + 8]; DUR = CARD + 3.6
