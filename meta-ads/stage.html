@@ -1,0 +1,10 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Ad stage</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>html,body{margin:0;background:#000;overflow:hidden}canvas{display:block}</style>
+</head><body><canvas id="c"></canvas>
+<script>
+  const ad = new URLSearchParams(location.search).get("ad");
+  document.write(`<script src="build/${ad}/tl.js" onerror="0"><\/script><script src="build/${ad}/assets.js" onerror="0"><\/script><script src="core.js"><\/script><script src="ads/${ad}.js"><\/script>`);
+</script>
+</body></html>
