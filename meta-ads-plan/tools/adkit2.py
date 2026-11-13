@@ -439,9 +439,9 @@ class Caps:
             f = F(self.cfg["font"], max(8, int(self.cfg["size"] * sc))); s = self.txt(w); ww = text_w(d, s, f)
             if ww > self.W - 120: f = F(self.cfg["font"], int(f.size * (self.W - 120) / ww)); ww = text_w(d, s, f)
             xx = (self.W - ww) / 2; yy = y + (self.cfg["size"] - f.size) * 0.5
-            col = self.accent if w["hl"] else WHITE
-            draw(sd, (xx, yy + 10), s, f, (0, 0, 0, 255))
-            draw(d, (xx, yy), s, f, col + (int(255 * min(1, p * 2)),), stroke_width=3, stroke_fill=(0, 0, 0, 160))
+            col = self.accent if w["hl"] else WHITE; al = min(1.0, p * 5)
+            draw(sd, (xx, yy + 10), s, f, (0, 0, 0, int(255 * al)))
+            draw(d, (xx, yy), s, f, col + (int(255 * al),), stroke_width=3, stroke_fill=(0, 0, 0, int(160 * al)))
 
     def _r_serif(self, t, k, L, ch, c0, d, sd, img):
         f = self.f

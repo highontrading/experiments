@@ -16,7 +16,7 @@ def static_post(dur):
 
 segs, _ = seq(0, [
     (T_STATIC, C(ST(24448), 2.0, 0.5), "dip"), (T_AB - T_STATIC, static_post),
-    (T_MODEL - T_AB, C(S["V09"], 9.5, 0.5), "flash"), (T_AUR - T_MODEL, C(S["V07"], 1.0, 0.5)), (T_CLIENTS - T_AUR, C(S["V03"], 5.0, 0.5)),
+    (T_MODEL - T_AB, C(S["V11"], 3.8, 0.45), "flash"), (T_AUR - T_MODEL, C(S["V07"], 1.0, 0.5)), (T_CLIENTS - T_AUR, C(S["V03"], 5.0, 0.5)),
     (T_SEEKHO - T_CLIENTS, grid([(S["V13"], 3.0, 0.5), (S["V12"], 2.0, 0.5), (S["V02"], 3.0, 0.5), (S["V11"], 4.0, 0.45)], stagger=0.1), "flash"),
     (CARD - T_SEEKHO, phone_scroll([(22600, 24200)], ST(24448), 2.0, cy=0.40), "whip"),
 ])
