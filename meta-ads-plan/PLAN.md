@@ -18,10 +18,11 @@ Numbers marked **[your data]** come from your account. **[est]** marks an estima
    - One ad produced 60 of Vibe Editing's 80 purchases. Cost per purchase then rose from about ₹740 to ₹1,380 within three weeks as it fatigued **[your data]**.
    - Competitors launch 20–50 variants at a time and replace them every 3–7 days **[Ad Library]**.
    - At 100 sales a day you need about **10–15 new concepts every week**.
-3. **The money math for 100 sales a day at ₹1,999:**
-   - Expect a cost per purchase of about ₹850–1,000, so **about ₹90k–1L a day in ad spend** (plus 18% GST).
-   - That brings in about ₹2L a day in sales and roughly ₹50–60k a day in profit before the AOV boosts in §3.
-   - Your biggest campaign so far averaged about ₹6–7k a day, so this is roughly a **15× scale-up**. Plan on **6–8 weeks**, stepping up only when the numbers hold.
+3. **The money math for 100 sales a day at your ₹2,999 price:**
+   - Each sale nets about ₹2,480 after GST and fees, so you break even at a **cost per purchase of about ₹2,100**. That's plenty of room.
+   - Conversion will be a little lower than Vibe Editing's (₹1,999). Expect a cost per purchase of about **₹1,100–1,400**, so **about ₹1.1–1.4L a day in ad spend** (plus 18% GST).
+   - That brings in about **₹3L a day in sales** and roughly **₹85k–1.15L a day in profit** before the AOV boosts in §3. You make more per sale than at ₹1,999, but volume is harder to buy.
+   - Your biggest campaign so far averaged about ₹6–7k a day, so this is roughly an **18–20× scale-up**. Plan on **6–8 weeks**, stepping up only when the numbers hold.
 4. **Own the position nobody holds.**
    - India's AI-course market is flooded with ₹0–₹299 "learn AI tools" workshops (Be10x ₹9, Outskill ₹0, AI-influencer courses at ₹199–₹299).
    - **Nobody sells "shoot-quality ads without a shoot" as a course. Nobody sells taste and art direction. Nobody shows Indian festive campaigns, and nobody offers Hindi voiceovers and jingles.** Lead with the output: every ad should *be* an amazing AI ad.
@@ -37,10 +38,10 @@ Numbers marked **[your data]** come from your account. **[est]** marks an estima
 
 | # | Decision | My recommendation | Why |
 |---|---|---|---|
-| D1 | **INR price** (I could only see $29 from a US connection) | **₹1,999** as the main offer, with a real "launch price" deadline, then rise to ₹2,999 | ₹1,999 is your proven converting price (Vibe Editing). Your UGC Lab at ₹2,999 had 0 sales on about ₹6k of tests. ₹999 makes 100 a day easier but halves the margin (see §3). |
-| D2 | **Order bump + upsell** | Bump: "Ad Prompt Vault + 100 Hooks + Brand Kit templates", **₹299**. Upsell after checkout: **The UGC Lab at ₹999** (one click, this session only) | Add-on take rates of 25–35% and upsell rates of 8–15% are typical **[research]**. That lifts AOV about 15–20% **[est]**. |
+| D1 | **INR price** | ✅ **Decided: ₹2,999.** Keep the struck-through reference price only if it's real, and give the launch offer a real end date | It's the highest-margin option (break-even cost per purchase ≈ ₹2,100). Watch for one risk: your UGC Lab at ₹2,999 had 0 sales on about ₹6k of tests (too small to conclude), so the page and the proof have to justify ₹2,999. See the price guardrail in §3. |
+| D2 | **Order bump + upsell** | Bump: "Ad Prompt Vault + 100 Hooks + Brand Kit templates", **₹299**. Upsell after checkout: **The UGC Lab at ₹1,499** (50% off, one click, this session only) | Add-on take rates of 25–35% and upsell rates of 8–15% are typical **[research]**. That lifts AOV about 10–12% **[est]**. |
 | D3 | **A face for the brand** | The Ideabro founder or creative director on camera in 30–40% of ads | Talking-head and "I run an AI ad studio" story ads build trust that a faceless page can't. Your Vibe Editing winner was demo-led, so mix both. |
-| D4 | **Refund policy** | A simple 7-day refund, stated in ads and on the page | It lowers risk at ₹1,999. Indian buyers are wary of upsell-heavy workshop funnels **[research]**. |
+| D4 | **Refund policy + EMI** | A simple 7-day refund, plus UPI Pay Later / cardless EMI ("₹2,999 or 3 × ₹1,000") if your gateway supports it, stated in ads and on the page | It lowers risk and the price objection at ₹2,999. Indian buyers are wary of upsell-heavy workshop funnels **[research]**. |
 | D5 | **A cheap front-end funnel (India)** | Test it in week 3: a ₹99–₹199 live "AI Product Shoot in 90 Minutes" workshop that sells the course on the call | This is how India's biggest players buy cheap volume. You've already run ₹99 webinars (CTR 6.5%) and RPP workshops **[your data]**. |
 | D6 | **USD / Tier-1 markets** | A separate campaign at $29 from week 3, capped at 10–15% of budget | US e-learning median cost per purchase is about $27 **[research]**, so it's break-even at best. Treat it as upside. |
 
@@ -79,29 +80,34 @@ Numbers marked **[your data]** come from your account. **[est]** marks an estima
 3. **D2C founders who make their own ads** (agencies target them; no course does).
 4. **Indian festive and wedding-season campaigns:** Diwali sets, sarees, Indian skin tones, Hindi jingles.
 5. **The full campaign workflow** (still → video → UGC → sound → Meta ads), against single-skill ₹199 courses.
-6. **No-webinar trust:** "No live pitch. No upsell call. 41 lessons, lifetime, ₹1,999."
+6. **No-webinar trust:** "No live pitch. No upsell call. 41 lessons, lifetime, ₹2,999."
 
 ---
 
 ## 3. Unit economics: what 100 sales a day really takes
 
 Assumptions [est]:
-- ₹1,999 includes GST.
-- Net per sale ≈ ₹1,999 ÷ 1.18 ≈ ₹1,694, less about 2.5% gateway fees ≈ **₹1,650**.
+- ₹2,999 includes GST.
+- Net per sale ≈ ₹2,999 ÷ 1.18 ≈ ₹2,541, less about 2.5% gateway fees ≈ **₹2,480**.
 - Meta adds 18% GST to ad spend.
+- At ₹2,999, landing-page-view → purchase is likely about 1.7–2.0%, against 2.5% for Vibe Editing at ₹1,999 [est]. With the same ~₹21 per landing-page view, that gives a cost per purchase of about ₹1,050–1,250, so plan on **₹1,100–1,400**.
 
-| | ₹1,999 main offer | ₹999 main offer |
+| | **₹2,999 (your price)** | ₹1,999 (for reference: Vibe Editing) |
 |---|---|---|
-| Net revenue per sale | ₹1,650 | ₹825 |
-| **Break-even cost per purchase** (as Ads Manager shows it) | **≈ ₹1,400** | **≈ ₹700** |
-| Expected cost per purchase at scale | ₹850–1,000 (your Vibe Editing range) | ₹450–650 [est] |
-| Daily ad spend for 100 sales | ₹85k–1L (+GST) | ₹45–65k (+GST) |
-| Daily profit at 100 sales (course only) | **≈ ₹45–65k** | ≈ ₹10–30k |
-| With bump (₹299 × 25%) + upsell (₹999 × 10%) | +≈ ₹150 per order → **≈ ₹60–80k** | +≈ ₹150 per order → ≈ ₹25–45k |
+| Net revenue per sale | **₹2,480** | ₹1,650 |
+| **Break-even cost per purchase** (as Ads Manager shows it) | **≈ ₹2,100** | ≈ ₹1,400 |
+| Expected cost per purchase at scale | **₹1,100–1,400** [est] | ₹850–1,000 [your data] |
+| Daily ad spend for 100 sales | **₹1.1–1.4L** (+GST) | ₹85k–1L (+GST) |
+| Daily profit at 100 sales (course only) | **≈ ₹85k–1.15L** | ≈ ₹45–65k |
+| With bump (₹299 × 25%) + upsell (₹1,499 × 8%) | +≈ ₹170 per order → **≈ ₹1–1.3L** | +≈ ₹150 per order |
 
-**Conclusion:** stay at ₹1,999 and lift AOV with a bump, an upsell and a bundle. Get cheap volume from a separate ₹99–₹199 workshop front end (D5) rather than by cutting the main price.
+**Conclusion:** ₹2,999 is the better-margin choice. At 100 sales a day you make about twice the profit of ₹1,999, with much more room before losing money. The trade-off is that each sale costs more to buy, so the page, the proof and the creative must justify the price. Get cheap volume from a separate ₹99–₹199 workshop front end (D5), not by discounting the main price.
 
-**Bundle idea:** "Ideabro Creator Ads Stack" = AI & Advertising + The UGC Lab + Vibe Editing for **₹3,999** (instead of ₹6,997). Offer it on the checkout page as an upgrade and in retargeting.
+**Price guardrail:** after about 2,000 landing-page views, check the landing-page-view → purchase rate.
+- **1.5% or higher:** stay at ₹2,999 and scale.
+- **Below 1.2%:** fix the page and proof first. If it's still low, test a time-boxed "early-bird ₹2,499 for the first 500 students", then return to ₹2,999.
+
+**Bundle idea:** "Ideabro Creator Ads Stack" = AI & Advertising + The UGC Lab + Vibe Editing for **₹4,999** (instead of ₹7,997). Offer it on the checkout page as an upgrade and in retargeting.
 
 ### Targets for every ad (built from your data)
 | Metric | Kill below | Healthy | Winner |
@@ -111,7 +117,7 @@ Assumptions [est]:
 | Outbound CTR | < 1.0% | 1.5–2.5% | > 3% |
 | Cost per landing-page view | > ₹35 | ₹18–25 | < ₹16 |
 | Landing-page view → checkout | < 4% | 6–8% | > 9% |
-| **Cost per purchase** | **> ₹1,400** (break-even) | ₹850–1,100 | **< ₹750** |
+| **Cost per purchase** | **> ₹2,100** (break-even) | ₹1,100–1,500 | **< ₹1,000** |
 
 ---
 
@@ -132,11 +138,11 @@ Assumptions [est]:
   - Hindi support
   - The refund policy
   - "Is this a live webinar?" ("No: instant, self-paced")
-- [ ] **A sticky mobile CTA bar** ("₹1,999 · Enroll"). About 90% of the traffic is Instagram on mobile.
+- [ ] **A sticky mobile CTA bar** ("₹2,999 · Enroll"). About 90% of the traffic is Instagram on mobile.
 - [ ] **Speed:** under 2.5 seconds on 4G, and lazy-load the gallery videos.
 - [ ] **Checkout:**
   - UPI first, a single page, and the ₹299 order bump checkbox
-  - Then the one-click UGC Lab upsell (₹999)
+  - Then the one-click UGC Lab upsell (₹1,499)
   - Then the thank-you page with a WhatsApp community join link and the course login
 
 ### 4.2 Tracking
@@ -156,7 +162,7 @@ Assumptions [est]:
 - **Exclusions:** AI & Advertising purchasers, so you don't pay to show them sales ads.
 
 ### 4.4 A day-0 launch to your own list (cheap first sales that teach the pixel)
-- Email and WhatsApp everyone from 4.3 about an alumni price of ₹1,499 for 72 hours.
+- Email and WhatsApp everyone from 4.3 about an alumni price of ₹1,999 for 72 hours.
 - Expect your first **50–200 sales at almost zero ad cost**. That gives Meta purchase signal before cold traffic starts.
 
 ---
@@ -186,9 +192,9 @@ Meta's retrieval system ("Andromeda") groups visually similar ads together. **Ch
 ```
 
 **Rules:**
-- **Kill:** turn an ad off at 1.5× break-even spend (≈ ₹2,000) with no checkout started, or at 2× target cost per purchase (≈ ₹1,800) with no purchase. Judge after 48 hours, not 6.
-- **Graduate:** 3+ purchases at ≤ ₹1,000 and a hold rate ≥ 6% → duplicate the post ID into campaign 1.
-- **Scale:** raise budgets 20–30% every 48 hours while 3-day cost per purchase stays ≤ ₹1,000. If it rises above ₹1,200 for 3 days, step back 20% and add new creatives. **Don't edit live winners.**
+- **Kill:** turn an ad off at about ₹2,500 spend with no checkout started, or at about ₹3,000 spend (≈ 2× target cost per purchase) with no purchase. Judge after 48 hours, not 6.
+- **Graduate:** 3+ purchases at ≤ ₹1,400 and a hold rate ≥ 6% → duplicate the post ID into campaign 1.
+- **Scale:** raise budgets 20–30% every 48 hours while 3-day cost per purchase stays ≤ ₹1,400. If it rises above ₹1,700 for 3 days, step back 20% and add new creatives. **Don't edit live winners.**
 - **Fatigue:** 7-day frequency above 2.5–3 on cold traffic, or hook rate down 25% from launch, means it's time to make a new version of that concept: new first 3 seconds, same body.
 
 ---
@@ -198,12 +204,12 @@ Meta's retrieval system ("Andromeda") groups visually similar ads together. **Ch
 | Phase | Days | Daily spend | Expected cost per purchase | Sales per day | Goal |
 |---|---|---|---|---|---|
 | 0 · Prep + list launch | 1–4 | ₹0–2k | — | 15–50 (list) | Page, tracking, 15 concepts ready, alumni launch |
-| 1 · Find winners | 5–14 | ₹12–20k | ₹900–1,300 | 12–20 | Test 15–20 concepts; find 2–3 that hit < ₹1,000 |
-| 2 · First scale | 15–28 | ₹25–45k | ₹850–1,100 | 25–45 | Grow campaign 1; launch the ₹99–199 workshop test and the T1 campaign |
-| 3 · Volume | 29–45 | ₹50–75k | ₹850–1,050 | 50–80 | 10–15 new concepts a week, affiliates live, partnership ads |
-| 4 · 100/day | 46–60 | ₹85k–1L | ₹850–1,000 | **90–120** | Hold blended cost per purchase ≤ ₹1,000 with organic + affiliates + workshop |
+| 1 · Find winners | 5–14 | ₹15–25k | ₹1,200–1,700 | 10–18 | Test 15–20 concepts; find 2–3 that hit < ₹1,400 |
+| 2 · First scale | 15–28 | ₹30–55k | ₹1,100–1,450 | 22–42 | Grow campaign 1; launch the ₹99–199 workshop test and the T1 campaign |
+| 3 · Volume | 29–45 | ₹60–95k | ₹1,100–1,400 | 45–75 | 10–15 new concepts a week, affiliates live, partnership ads |
+| 4 · 100/day | 46–60 | ₹1.1–1.4L | ₹1,100–1,400 | **85–110** | Hold blended cost per purchase ≤ ₹1,400 with organic + affiliates + workshop |
 
-Cumulative ad spend over 60 days: about **₹25–30 lakh** (+GST). Expected sales: about 3,000–4,000. Treat these as plans, not promises: the real lever is how fast you find and refresh winning creatives.
+Cumulative ad spend over 60 days: about **₹35–42 lakh** (+GST). Expected sales: about 2,800–3,600, worth about ₹84 lakh–1.08 crore in sales. Treat these as plans, not promises: the real lever is how fast you find and refresh winning creatives.
 
 ---
 
@@ -241,7 +247,7 @@ Each concept lists the hook in the first 3 seconds, the beats, the copy and how 
 - **Hook (0–2s):** An ugly phone photo of a ghee jar on a kitchen counter snaps into a cinematic golden-hour packshot. On-screen text: *"This shoot cost ₹0."*
 - **Beats:** 5 more scenes from the same photo (temple, family dinner, Diwali, splash, model holding it) → the same product as a video ad → end card.
 - **VO:** "No studio. No photographer. No model. One product photo and the right direction. That's the AI & Advertising course."
-- **CTA:** "11 modules · ₹1,999 · Lifetime."
+- **CTA:** "11 modules · ₹2,999 · Lifetime."
 - **Make it:** Nano Banana / Gemini for the stills, Kling/Veo image-to-video, a beat-synced edit.
 
 **C2 · "Every frame here is AI" (A2, video 20s, a showreel)**
@@ -261,7 +267,7 @@ Each concept lists the hook in the first 3 seconds, the beats, the copy and how 
 
 **C5 · "Old way vs AI way" (A7, static 4:5 and carousel)**
 - Two columns. **Old way:** Studio ₹40k · Model ₹25k/day · Crew · Edit · 3 weeks. **AI way:** One product photo · One laptop · Same day.
-- Footer: "Learn the AI way: 41 lessons, ₹1,999 once."
+- Footer: "Learn the AI way: 41 lessons, ₹2,999 once."
 - Present studio costs as typical market rates, not promises. Market sources put brand payments to studios at ₹5–10k+ per hero image.
 
 **C6 · "Diwali campaign in one evening" (A6, video 25s; seasonal, also works as wedding season)**
@@ -320,7 +326,7 @@ Each concept lists the hook in the first 3 seconds, the beats, the copy and how 
 - **Text:** "From brief to live ad, same night."
 
 **C18 · "Price stack" (static, retargeting and cold)**
-- **Text:** "11 modules · 41 lessons · prompt library · campaign templates · capstone · lifetime updates. **₹1,999 once.** Less than one product shoot."
+- **Text:** "11 modules · 41 lessons · prompt library · campaign templates · capstone · lifetime updates. **₹2,999 once.** Less than one day of a model's fee."
 - Add the struck-through reference price and the real deadline.
 
 **C19 · "FAQ objection killer" (retargeting video, 30s)**
@@ -334,7 +340,7 @@ Each concept lists the hook in the first 3 seconds, the beats, the copy and how 
 | Days since visit | Message | Concepts |
 |---|---|---|
 | 0–3 | Proof + objections | C19, C20, C3 |
-| 4–7 | Value + bundle | C18, the "Creator Ads Stack" ₹3,999 bundle |
+| 4–7 | Value + bundle | C18, the "Creator Ads Stack" ₹4,999 bundle, EMI option |
 | 8–14 | Deadline (only if real) | "Launch price ends Sunday" + C2 |
 
 ### 7.5 Copy bank
@@ -361,12 +367,12 @@ Each concept lists the hook in the first 3 seconds, the beats, the copy and how 
 20. Stop booking shoots. Start directing them.
 
 **Primary text (pair with the concepts):**
-- *A1:* "Product shoots, model shoots, UGC, campaign films and Meta ads, made with AI and directed by you. AI & Advertising is the complete workflow, from brief to live campaign. 11 modules · 41 lessons · lifetime access · ₹1,999 once."
+- *A1:* "Product shoots, model shoots, UGC, campaign films and Meta ads, made with AI and directed by you. AI & Advertising is the complete workflow, from brief to live campaign. 11 modules · 41 lessons · lifetime access · ₹2,999 once."
 - *A3:* "Feeds are full of AI ads that all look the same. The tools are easy; taste is the skill. Learn the art direction, product accuracy and brand consistency that make AI ads look shot, not generated."
 - *A5:* "Brands need fresh ads every week, and most can't afford a shoot every time. Learn to make shoot-quality photos, videos and UGC with AI, build a portfolio campaign, and learn how to price and pitch AI ad services."
 - *A6:* "Indian skin tones. Sarees and sherwanis. Diwali sets. Hindi voiceovers and jingles. An AI advertising course that's actually made for Indian brands."
 
-**Headlines (≤ 40 characters):** Shoot-quality ads, no shoot · Learn AI Advertising · ₹1,999 · Every format, one course · Make ads like this · 41 lessons. Lifetime. ₹1,999.
+**Headlines (≤ 40 characters):** Shoot-quality ads, no shoot · Learn AI Advertising · ₹2,999 · Every format, one course · Make ads like this · 41 lessons. Lifetime. ₹2,999 · Cheaper than one shoot.
 
 ### 7.6 Production with Claude: a weekly assembly line
 - **Mon:** Claude writes 10 briefs: angle, hook, beats and VO, drawn from §7.2–7.5 plus last week's winners.
@@ -392,9 +398,9 @@ Each concept lists the hook in the first 3 seconds, the beats, the copy and how 
 ## 9. Thirty-day action calendar
 | Week | Do |
 |---|---|
-| **Week 0 (Days 1–4)** | Confirm the INR price, refund policy, bump and upsell (D1–D4). Make the page fixes in §4.1 and the tracking fixes in §4.2. Make the first 15 concepts: C1–C12, C18, C19, plus a trailer cutdown. Launch to the alumni and buyer list at ₹1,499 for 72 hours. |
+| **Week 0 (Days 1–4)** | Price is set at ₹2,999. Confirm the refund policy, EMI, bump and upsell (D2–D4). Make the page fixes in §4.1 and the tracking fixes in §4.2. Make the first 15 concepts: C1–C12, C18, C19, plus a trailer cutdown. Launch to the alumni and buyer list at ₹1,999 for 72 hours. |
 | **Week 1** | Launch campaign 1 (Advantage+, ₹8–10k/day, 8 concepts) and campaign 2 (ABO, 4 concepts × 3 hooks, ₹8k/day). Check the metrics every 48 hours. Start daily organic Reels. |
-| **Week 2** | Kill losers and graduate winners. Launch 6 new concepts, including iterations on winners. Start campaign 3 (retargeting) once there are 2,000+ landing-page visitors. Scale to about ₹20k/day if cost per purchase is ≤ ₹1,000. |
+| **Week 2** | Kill losers and graduate winners. Launch 6 new concepts, including iterations on winners. Start campaign 3 (retargeting) once there are 2,000+ landing-page visitors. Scale to about ₹25k/day if cost per purchase is ≤ ₹1,400. |
 | **Week 3** | Launch the ₹99–199 workshop funnel test and the T1 campaign. Recruit 10 affiliates. Make 8 new concepts, including Hindi versions of the top 2. Scale to ₹30–40k/day. |
 | **Week 4** | Make 10 new concepts. Launch the bundle offer in retargeting. Audit landing-page conversion (target landing-page view → purchase ≥ 3%). Plan the month-2 push to ₹60–100k/day. |
 
