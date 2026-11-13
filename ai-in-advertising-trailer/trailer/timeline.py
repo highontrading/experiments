@@ -4,6 +4,7 @@ import json, os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 B = os.path.join(ROOT, "build")
+GEN = os.path.join(ROOT, "generated")  # committed copies of the ElevenLabs VO / music / SFX
 A = os.path.join(ROOT, "assets")
 FPS, W, H = 25, 1920, 1080
 PY0, PH = 107, 866              # 2.21:1 letterbox picture area (rows 107..972)
@@ -20,8 +21,13 @@ def F(t):
 VO_START = {"l1": 2.52, "l2": 13.56, "l3": 15.84, "l4": 19.74, "l5": 27.48, "l6": 39.48}
 
 
+def gen_path(kind, name):
+    p = os.path.join(B, kind, name)
+    return p if os.path.exists(p) else os.path.join(GEN, kind, name)
+
+
 def vo_words(key):
-    d = json.load(open(os.path.join(B, "vo", key + ".json")))
+    d = json.load(open(gen_path("vo", key + ".json")))
     a = d["alignment"]; out = []; cur = ""; s = e = None
     for c, a0, a1 in zip(a["characters"], a["character_start_times_seconds"], a["character_end_times_seconds"]):
         if c.isalnum() or c == "'":
@@ -108,6 +114,7 @@ TILES = [
 # ---------------------------------------------------------------- sound map
 MUSIC = [  # (start, end, file, offset_in_file, gain_db, fade_in, fade_out)
     (0.00, 11.04, "score_a.mp3", 0.00, 0.0, 0.0, 0.04),
+    (2.20, 11.04, "bed_a.mp3", 17.0, -8.0, 0.8, 0.06),   # sustained drone under line 1
     (11.04, 14.40, "drums_a.mp3", 0.031, 0.0, 0.0, 0.25),
     (14.40, 18.72, "bed_a.mp3", 3.00, -1.0, 0.25, 0.0),
     (19.68, 21.60, "bed_a.mp3", 8.00, -3.0, 0.40, 0.02),

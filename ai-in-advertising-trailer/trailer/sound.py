@@ -34,7 +34,7 @@ def fades(x, fin, fout):
 music = np.zeros((N, 2), np.float32)
 cache = {}
 for (s, e, f, off, g, fin, fout) in MUSIC:
-    if f not in cache: cache[f] = load(os.path.join(B, "music", f))
+    if f not in cache: cache[f] = load(gen_path("music", f))
     src = cache[f]
     if off is None: off = 0.999  # first kick of drums_b
     a = int(off * SR); seg = src[a:a + int((e - s) * SR)].copy()
@@ -43,7 +43,7 @@ for (s, e, f, off, g, fin, fout) in MUSIC:
 # VO + ducking envelope
 vo = np.zeros((N, 2), np.float32); env = np.zeros(N, np.float32)
 for k, t in VO_START.items():
-    x = load(os.path.join(B, "vo", k + ".mp3"))
+    x = load(gen_path("vo", k + ".mp3"))
     x = x / (np.abs(x).max() + 1e-9) * db(-2.0)
     place(vo, x, t); i = int(t * SR); env[i:i + len(x)] = 1.0
 # smooth ducking (attack 60 ms, release 300 ms)
@@ -54,7 +54,7 @@ music *= (1 - dk * (1 - db(-11)))[:, None]
 
 sfx = np.zeros((N, 2), np.float32)
 for t, name, g in SFX:
-    x = load(os.path.join(B, "sfx", name + ".mp3"))
+    x = load(gen_path("sfx", name + ".mp3"))
     if name == "riser": t = t - len(x) / SR  # risers end on their time
     place(sfx, x, t, db(g))
 # the hard digital silence (18.72 - 19.68): nothing but the tail of the whoosh
