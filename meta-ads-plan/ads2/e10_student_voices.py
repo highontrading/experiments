@@ -17,7 +17,7 @@ CARD = HOOK + 3 * QD; DUR = CARD + 3.8
 thumbs = thumbs_from([(S["V12"], 2.0, 0.5), (S["V13"], 3.0, 0.5), (S["V07"], 1.0, 0.5)], 400, 520)
 segs.append(end_seg(CARD, DUR - CARD, lambda k: end_cream(W, H, k, thumbs, headline=("Join the creative", "school for AI ads."), hl="AI & Advertising.")))
 words, chunks, spans = script_words(items, hl=["completely", "setting", "missing."])
-caps = Caps(W, H, words, chunks, "subtitle", y=930, spans=spans, maxw=900, size=50)
+caps = Caps(W, H, words, chunks, "subtitle", y=890, spans=spans, maxw=900, size=50, show_punct=True)
 
 
 def name_ov(frame, t):
@@ -27,12 +27,12 @@ def name_ov(frame, t):
         t0 = HOOK + i * QD
         if t0 <= t < t0 + QD:
             k = (t - t0) / 0.4
-            frame = over(frame, text_block(W, H, ["“"], 640, "InstrumentSerif-Regular", 260, LIME, anim=k, shadow=False))
+            frame = over(frame, text_block(W, H, ["“"], 600, "InstrumentSerif-Regular", 260, LIME, anim=k, shadow=False))
             chip = Image.new("RGBA", (W, 120), (0, 0, 0, 0)); d = ImageDraw.Draw(chip); f1 = F("Inter", 38, 700); f2 = F("JetBrainsMono", 26, 600)
             ini = "".join(p[0] for p in n.split()); x = (W - 480) // 2
             d.ellipse([x, 18, x + 76, 94], fill=PINK + (255,)); d.text((x + 38 - d.textlength(ini, font=F("Inter", 30, 800)) / 2, 38), ini, font=F("Inter", 30, 800), fill=INK + (255,))
             d.text((x + 96, 20), n, font=f1, fill=WHITE + (255,)); d.text((x + 96, 66), r.upper(), font=f2, fill=(200, 200, 200, 255))
-            frame = over(frame, chip, (0, 1150 + int(20 * (1 - ease(k)))))
+            frame = over(frame, chip, (0, 1175 + int(20 * (1 - ease(k)))))
     return frame
 
 
