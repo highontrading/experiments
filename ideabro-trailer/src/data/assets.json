@@ -1,0 +1,306 @@
+{
+ "strobe": [
+  "studio/img/i01.jpg",
+  "studio/img/i03.jpg",
+  "studio/img/i05.jpg",
+  "studio/img/i06.jpg",
+  "studio/img/i08.jpg",
+  "studio/img/i09.jpg",
+  "studio/img/i10.jpg",
+  "studio/img/i12.jpg",
+  "studio/img/i13.jpg",
+  "studio/img/i15.jpg",
+  "studio/img/i16.jpg",
+  "studio/img/i17.jpg",
+  "studio/img/i19.jpg",
+  "studio/img/i21.jpg",
+  "studio/img/i22.jpg",
+  "studio/img/i23.jpg",
+  "studio/img/i24.jpg",
+  "studio/img/i25.jpg",
+  "studio/img/i26.jpg",
+  "studio/img/i27.jpg",
+  "studio/img/i28.jpg",
+  "studio/img/i29.jpg",
+  "studio/img/i30.jpg",
+  "studio/img/i31.jpg",
+  "studio/img/i33.jpg",
+  "studio/img/i34.jpg",
+  "studio/img/i35.jpg",
+  "studio/img/i36.jpg",
+  "studio/img/i37.jpg",
+  "studio/img/i38.jpg",
+  "studio/img/i39.jpg"
+ ],
+ "old": [
+  "studio/img/i10.jpg",
+  "studio/img/i15.jpg",
+  "studio/img/i18.jpg",
+  "studio/img/i24.jpg",
+  "studio/img/i25.jpg",
+  "studio/img/i27.jpg",
+  "studio/img/i08.jpg",
+  "studio/img/i02.jpg",
+  "studio/img/i16.jpg"
+ ],
+ "eras": {
+  "print": {
+   "src": "studio/img/i09.jpg",
+   "video": false,
+   "aspect": 0.75
+  },
+  "television": {
+   "src": "studio/img/i36.jpg",
+   "video": false,
+   "aspect": 0.75
+  }
+ },
+ "feed": [
+  "studio/img/i37.jpg",
+  "studio/img/i27.jpg",
+  "studio/img/i25.jpg",
+  "studio/img/i39.jpg",
+  "studio/img/i02.jpg",
+  "studio/img/i16.jpg",
+  "studio/img/i20.jpg",
+  "studio/img/i28.jpg",
+  "studio/img/i33.jpg",
+  "studio/img/i24.jpg"
+ ],
+ "studioTiles": [
+  {
+   "src": "studio/tile_donut.mp4",
+   "video": true,
+   "slot": 1
+  },
+  {
+   "src": "studio/img/i37.jpg",
+   "video": false,
+   "slot": 2
+  },
+  {
+   "src": "studio/img/i27.jpg",
+   "video": false,
+   "slot": 3
+  },
+  {
+   "src": "studio/tile_jar.mp4",
+   "video": true,
+   "slot": 4
+  },
+  {
+   "src": "studio/tile_outfit.mp4",
+   "video": true,
+   "slot": 0
+  },
+  {
+   "src": "studio/img/i02.jpg",
+   "video": false,
+   "slot": 5
+  },
+  {
+   "src": "studio/img/i47.jpg",
+   "video": false,
+   "slot": 6
+  },
+  {
+   "src": "studio/img/i24.jpg",
+   "video": false,
+   "slot": 7
+  },
+  {
+   "src": "studio/img/i08.jpg",
+   "video": false,
+   "slot": 8
+  },
+  {
+   "src": "studio/img/i15.jpg",
+   "video": false,
+   "slot": 9
+  },
+  {
+   "src": "studio/tile_gloss.mp4",
+   "video": true,
+   "slot": 1
+  },
+  {
+   "src": "studio/img/i39.jpg",
+   "video": false,
+   "slot": 4
+  },
+  {
+   "src": "studio/tile_fashion.mp4",
+   "video": true,
+   "slot": 0
+  },
+  {
+   "src": "studio/img/i25.jpg",
+   "video": false,
+   "slot": 6
+  }
+ ],
+ "studioSlotsH": [
+  [
+   0.5,
+   0.5,
+   0.16,
+   0.36
+  ],
+  [
+   0.34,
+   0.36,
+   0.15,
+   0.32
+  ],
+  [
+   0.66,
+   0.38,
+   0.17,
+   0.3
+  ],
+  [
+   0.36,
+   0.68,
+   0.17,
+   0.32
+  ],
+  [
+   0.64,
+   0.67,
+   0.15,
+   0.34
+  ],
+  [
+   0.21,
+   0.52,
+   0.13,
+   0.34
+  ],
+  [
+   0.8,
+   0.52,
+   0.13,
+   0.36
+  ],
+  [
+   0.5,
+   0.22,
+   0.14,
+   0.26
+  ],
+  [
+   0.5,
+   0.8,
+   0.15,
+   0.28
+  ],
+  [
+   0.88,
+   0.27,
+   0.1,
+   0.28
+  ]
+ ],
+ "studioSlotsV": [
+  [
+   0.5,
+   0.5,
+   0.4,
+   0.24
+  ],
+  [
+   0.27,
+   0.33,
+   0.38,
+   0.2
+  ],
+  [
+   0.73,
+   0.35,
+   0.38,
+   0.22
+  ],
+  [
+   0.28,
+   0.68,
+   0.4,
+   0.21
+  ],
+  [
+   0.72,
+   0.66,
+   0.38,
+   0.22
+  ],
+  [
+   0.5,
+   0.19,
+   0.34,
+   0.16
+  ],
+  [
+   0.5,
+   0.82,
+   0.36,
+   0.17
+  ],
+  [
+   0.18,
+   0.5,
+   0.28,
+   0.18
+  ],
+  [
+   0.84,
+   0.5,
+   0.28,
+   0.19
+  ],
+  [
+   0.75,
+   0.15,
+   0.26,
+   0.14
+  ]
+ ],
+ "proof": {
+  "product": {
+   "src": "studio/product.mp4",
+   "aspect": 0.5625
+  },
+  "model": {
+   "src": "studio/model.mp4",
+   "aspect": 0.5645161290322581
+  },
+  "film": {
+   "src": "studio/film.mp4",
+   "aspect": 1.7791666666666666
+  },
+  "ugc": {
+   "src": "studio/ugc.mp4",
+   "aspect": 1.7777777777777777
+  },
+  "course": {
+   "src": "studio/course.mp4",
+   "aspect": 1.7777777777777777
+  },
+  "capstone": {
+   "src": "studio/capstone.mp4",
+   "aspect": 0.5625
+  },
+  "taste": {
+   "src": "studio/taste.mp4",
+   "aspect": 0.75
+  },
+  "meta": {
+   "images": [
+    "studio/img/i45.jpg",
+    "studio/img/i46.jpg",
+    "studio/img/i47.jpg",
+    "studio/img/i48.jpg",
+    "studio/img/i49.jpg"
+   ],
+   "aspect": 1.5
+  }
+ }
+}

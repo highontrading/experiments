@@ -1,0 +1,4 @@
+social 198
+proof 1035
+meta 1155
+lt 1230

@@ -1,0 +1,11 @@
+{"composition_plan":{
+ "positive_global_styles":["dark cinematic documentary score","sustained sub-bass drone around 55 Hz","tense ambient synth pads","slow evolving melodic motif","instrumental","modern trailer sound design","no drums kit"],
+ "negative_global_styles":["vocals","singing","upbeat pop","EDM drop","acoustic guitar","happy"],
+ "sections":[
+  {"section_name":"Opening pulse","positive_local_styles":["deep sub drone fades in fast","bright glassy plucks ticking","ominous"],"negative_local_styles":["silence"],"duration_ms":7000,"lines":[]},
+  {"section_name":"Tension build","positive_local_styles":["drone thickens","low string swells","slow cinematic tension rising"],"negative_local_styles":["drums"],"duration_ms":16000,"lines":[]},
+  {"section_name":"Gap","positive_local_styles":["heavier sub bass","dark pulsing synth","rising intensity"],"negative_local_styles":["drums"],"duration_ms":9000,"lines":[]},
+  {"section_name":"Proof","positive_local_styles":["sub bass drops out","lighter hopeful pulsing synth arpeggio","soft piano notes","open and airy"],"negative_local_styles":["heavy bass"],"duration_ms":15500,"lines":[]},
+  {"section_name":"Ultimatum","positive_local_styles":["sub drone returns huge","epic dark swell","building to a peak"],"negative_local_styles":["fade out"],"duration_ms":5500,"lines":[]}
+ ]},
+ "model_id":"music_v1"}

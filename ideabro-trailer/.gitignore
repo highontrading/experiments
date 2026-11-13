@@ -1,0 +1,14 @@
+node_modules/
+out/
+assets/
+public/studio/
+public/pd/
+audio/
+work/stills/
+work/peek/
+work/*.log
+work/pdcand/
+work/pdtools/
+work/music_headers.txt
+work/fonts.css
+work/browser_path.txt
