@@ -36,18 +36,18 @@ def shot(kind, a, dur):
     return K.shot_grid(W, H, a, dur)
 
 
+CAPS = K.Captions(W, H, K.vo_words(os.path.join(R, "build", "vo", "ad2.json"), 0.15), [[0, 1], [2, 3], [4, 5], [6, 7], [8, 9], [10, 11], [12], [13], [14], [15, 16], [17, 18], [19, 20, 21], [22, 23], [24, 25]], y=1330)
+
+
 def frames():
     cache = {}
     for t0, t1, kind, a in SHOTS:
         fr = shot(kind, a, t1 - t0); n = int(round((t1 - t0) * K.FPS))
         for i in range(n):
             t = t0 + i / K.FPS; f = fr[min(i, len(fr) - 1)]
-            if kind == "full": f = K.scrim(f, top=0.18, bottom=0.25, strength=0.35)
-            for k, (b0, b1, lines, y) in enumerate(TEXT):
-                if b0 <= t < b1:
-                    an = min(1.0, (t - b0) / 0.18); key = (k, round(an, 2))
-                    if key not in cache: cache[key] = K.text_layer(W, H, lines, y, an)
-                    f = K.over(f, cache[key])
+            f = K.scrim(f, bottom=0.42, strength=0.42)
+            L = CAPS.layer(t)
+            if L is not None: f = K.over(f, L)
             yield f
     th = [K.decode(S["V03"], 1.0, 0.05, 460, 620)[0], K.decode(D("O_IC1N.mp4"), 1.0, 0.05, 460, 620, 0.42)[0],
           K.decode(S["V02"], 0.3, 0.05, 460, 620, 0.42)[0]]

@@ -131,7 +131,7 @@ This is one campaign with one budget and 4 ads, built from videos you already ha
 | `AIA_OLDNEW_IMG_v1` | `AIA_OLDNEW_IMG_v1_4x5.jpg` (Feed) and `AIA_OLDNEW_IMG_v1_9x16.jpg` (Stories/Reels) | static | — |
 
 - **Audio:** mixed to about −14 LUFS. The voiceovers are ElevenLabs (trailer narrator for Ad 1, a creator-style voice for Ad 2), and the music is the score from the launch trailer.
-- **Captions:** the on-screen text follows the voiceover word for word, so the ads work with the sound off.
+- **Captions (Ads 1–2):** white kinetic captions in Inter ExtraBold, timed word by word from the ElevenLabs voiceover. Each word pops in as it's spoken and the active word sits on a white pill. They're placed in the lower third (Reels-safe), clear of the products and faces.
 - **Brand-safe:** no real third-party logos. Only fictional or AI brands appear (Total Repair, Glossy Hydra, Kenetik, ava, Osmosis, Lumos).
 
 **Sources:**

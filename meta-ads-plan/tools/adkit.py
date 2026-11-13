@@ -263,3 +263,77 @@ def mix_audio(out_wav, dur, music=None, vo=None, sfx=(), music_gain=-6, vo_gain=
 def mux(video, audio, out):
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", video, "-i", audio, "-map", "0:v", "-map", "1:a", "-c:v", "copy",
                     "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-shortest", out], check=True)
+
+
+# ------------------------------------------------------------------ kinetic captions (white theme)
+@functools.lru_cache(None)
+def cap_font(px):
+    f = ImageFont.truetype(os.path.join(FONTS, "Inter.ttf"), px)
+    try: f.set_variation_by_axes([32, 800])
+    except Exception: pass
+    return f
+
+
+def vo_words(alignment_json, offset=0.0):
+    a = json.load(open(alignment_json)); out = []; cur = ""; s = e = None
+    for c, a0, a1 in zip(a["characters"], a["character_start_times_seconds"], a["character_end_times_seconds"]):
+        if c.isalnum() or c == "'":
+            if s is None: s = a0
+            cur += c; e = a1
+        elif cur: out.append((cur, s + offset, e + offset)); cur = ""; s = None
+    if cur: out.append((cur, s + offset, e + offset))
+    return out
+
+
+class Captions:
+    """Word-by-word kinetic captions. chunks: list of lists of word indices shown together.
+    Words appear as spoken (pop-in), the active word sits on a white pill in black, the rest are white."""
+
+    def __init__(self, W, H, words, chunks, y=1330, size=104, hold=0.45, maxw=960):
+        self.W, self.H, self.words, self.chunks, self.y, self.size, self.hold, self.maxw = W, H, words, chunks, y, size, hold, maxw
+        self.f = cap_font(size); d = ImageDraw.Draw(Image.new("L", (8, 8)))
+        self.space = max(d.textlength(" ", font=self.f), size * 0.42); self.layouts = []
+        for ch in chunks:      # lay out each chunk on 1–2 centred lines
+            ws = [(i, words[i][0], d.textlength(words[i][0], font=self.f)) for i in ch]
+            lines, cur, cw = [], [], 0
+            for i, w, tw in ws:
+                if cur and cw + self.space + tw > maxw: lines.append(cur); cur, cw = [], 0
+                cur.append((i, w, tw)); cw += (self.space if len(cur) > 1 else 0) + tw
+            lines.append(cur)
+            pos = {}; lh = int(size * 1.18)
+            for li, ln in enumerate(lines):
+                tot = sum(tw for _, _, tw in ln) + self.space * (len(ln) - 1); x = (W - tot) / 2
+                for i, w, tw in ln: pos[i] = (x, y + li * lh, tw); x += tw + self.space
+            self.layouts.append(pos)
+
+    def chunk_at(self, t):
+        for k, ch in enumerate(self.chunks):
+            start = self.words[ch[0]][1] - 0.04
+            nxt = self.words[self.chunks[k + 1][0]][1] - 0.04 if k + 1 < len(self.chunks) else 1e9
+            end = min(nxt, self.words[ch[-1]][2] + self.hold)
+            if start <= t < end: return k
+        return None
+
+    def layer(self, t):
+        img = Image.new("RGBA", (self.W, self.H), (0, 0, 0, 0)); k = self.chunk_at(t)
+        if k is None: return None
+        shadow = Image.new("RGBA", (self.W, self.H), (0, 0, 0, 0)); sd = ImageDraw.Draw(shadow); d = ImageDraw.Draw(img)
+        for i in self.chunks[k]:
+            w, s, e = self.words[i]
+            if t < s - 0.04: continue
+            x, y, tw = self.layouts[k][i]
+            age = t - (s - 0.04); p = min(1.0, age / 0.14)
+            sc = 1.0 + 0.14 * (1 - p) ** 2 - 0.03 * math.sin(p * math.pi)       # pop-in with a little overshoot
+            fs = max(8, int(self.size * sc)); f = cap_font(fs)
+            wtw = d.textlength(w, font=f); cx = x + tw / 2; xx = cx - wtw / 2; yy = y + (self.size - fs) * 0.55 - 8 * (1 - p)
+            active = s - 0.04 <= t < e + 0.06
+            if active:
+                pad = 14; asc, desc = f.getmetrics()
+                d.rounded_rectangle([xx - pad, yy + fs * 0.08, xx + wtw + pad, yy + asc + desc * 0.55], radius=int(fs * 0.22), fill=(255, 255, 255, 255))
+                d.text((xx, yy), w, font=f, fill=(15, 15, 15, 255))
+            else:
+                sd.text((xx, yy + 4), w, font=f, fill=(0, 0, 0, 200))
+                d.text((xx, yy), w, font=f, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0, 110))
+        a = np.asarray(shadow).copy(); a[..., 3] = cv2.GaussianBlur(a[..., 3], (0, 0), 7)
+        base = Image.fromarray(a); base.alpha_composite(img)
+        return base

@@ -44,18 +44,18 @@ def thumbs():
     return out
 
 
+CAPS = K.Captions(W, H, K.vo_words(os.path.join(R, "build", "vo", "ad1.json"), 0.15), [[0, 1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11, 12], [13, 14], [15, 16, 17], [18, 19, 20]], y=1330)
+
+
 def frames():
     cache = {}
     for (t0, t1, p) in shots:
         fr = K.shot_full(W, H, p["src"], p["t"], t1 - t0, p["fx"], z=p.get("z", (1.0, 1.06)))
         n = int(round((t1 - t0) * K.FPS))
         for i in range(n):
-            t = t0 + i / K.FPS; f = K.scrim(fr[min(i, len(fr) - 1)], top=0.18, bottom=0.25, mid=(0.38, 0.16), strength=0.30)
-            for k, (a, b, lines, y) in enumerate(TEXT):
-                if a <= t < b:
-                    an = min(1.0, (t - a) / 0.18); key = (k, round(an, 2))
-                    if key not in cache: cache[key] = K.text_layer(W, H, lines, y, an)
-                    f = K.over(f, cache[key])
+            t = t0 + i / K.FPS; f = K.scrim(fr[min(i, len(fr) - 1)], bottom=0.42, strength=0.42)
+            L = CAPS.layer(t)
+            if L is not None: f = K.over(f, L)
             yield f
     th = thumbs()
     for i in range(int(round(CARD_D * K.FPS))):
