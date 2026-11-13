@@ -16,7 +16,7 @@ segs, _ = seq(0, [
     (CARD - T_SIRF, C(S["V13"], 6.0, 0.5, z=(1.1, 1.2)), "flash"),
 ])
 thumbs = thumbs_from([(S["V13"], 3.0, 0.5), (S["V12"], 2.0, 0.5), (S["V11"], 4.0, 0.45)], 400, 540)
-segs.append(end_seg(CARD, DUR - CARD, lambda k: end_yellow(W, H, k, thumbs, headline=("Shoot nahi,", "skill chahiye."), sub="Lifetime access · 41 lessons · Hinglish-friendly", cta="Abhi enroll karo")))
+segs.append(end_seg(CARD, DUR - CARD, lambda k: end_yellow(W, H, k, thumbs, headline=("Shoot nahi,", "skill chahiye."), cta="Abhi enroll karo")))
 caps = Caps(W, H, words, style="yellow_text", y=1300)
 
 
