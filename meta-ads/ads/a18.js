@@ -34,7 +34,7 @@ window.AD = {
       const kk = Math.min(5, Math.floor((t - T_MON) / B)); cover(seq(names[kk], t, T_MON + kk * B), 0, 0, W, H, 1.08 - 0.04 * ((t - T_MON) % B) / B);
       shade(H * 0.65, H, 0.65);
       txt("ALL MADE WITH AI · NO CAMERA, NO CREW", CX, H * 0.78, { size: 30 * u, fam: F.mono, weight: 700, color: "#fff" });
-      txt(["CAR CHASE", "OCEAN", "JUNGLE", "ANCIENT CITY", "WILDLIFE", "SNOW"][kk], CX, H * 0.73, { size: 70 * u, fam: F.anton, weight: 400, color: C.lime });
+      txt(["CAR CHASE", "OCEAN", "DEEP FOREST", "ANCIENT CITY", "WILDLIFE", "SNOW"][kk], CX, H * 0.73, { size: 70 * u, fam: F.anton, weight: 400, color: C.lime });
     }
     grain(t, 0.07);
   },

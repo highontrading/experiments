@@ -3,7 +3,7 @@
 // Captions: TikTok-style pop, white with black stroke, pink active word.
 const L = window.TL.lines, Wd = (l, w) => L[l].words[w].s;
 const T_L1 = Wd(1, 0), T_L2 = Wd(2, 0), T_L3 = Wd(3, 0), T_END = L[3].v1 + 0.5;
-const CLIPS = [[0, "kitchen"], [Wd(0, 4), "sandwich"], [Wd(0, 6), "gym"], [T_L1, "beach"], [Wd(1, 4), "garden"], [T_L2, "kitchen"], [Wd(2, 6), "sandwich"], [T_L3, "gym"]];
+const CLIPS = [[0, "kitchen"], [Wd(0, 4), "sandwich"], [Wd(0, 6), "gym"], [T_L1, "beach"], [Wd(1, 4), "garden"], [T_L2, "kitchen"], [Wd(2, 6), "sandwich"], [T_L3, "beach"]];
 window.AD = {
   w: 1080, h: 1920, dur: T_END + 3.6, slug: "ai-ugc-creators-dont-exist",
   seqs: ["kitchen", "sandwich", "gym", "beach", "garden"],
