@@ -1,0 +1,13 @@
+{"composition_plan":{
+ "positive_global_styles":["cinematic hybrid trailer","aggressive phonk trap","144 bpm","heavy 808 bass","punchy distorted kick","dark synth stabs","Indian percussion accents dhol and tabla","instrumental","modern advertising energy"],
+ "negative_global_styles":["vocals","singing","lyrics","lo-fi","slow tempo","acoustic guitar"],
+ "sections":[
+  {"section_name":"Intro tension","positive_local_styles":["dark minimal pulse","ticking clock hi-hat","low drone","vintage vinyl crackle","suspense","sparse","last 3 seconds rapid snare roll riser and filter sweep up"],"negative_local_styles":["full drums","drop"],"duration_ms":12000,"lines":[]},
+  {"section_name":"Drop","positive_local_styles":["massive drop on first beat","hard 808","distorted bass","aggressive synth stabs","dhol hits","driving 144 bpm groove","high energy"],"negative_local_styles":["ambient","quiet"],"duration_ms":13333,"lines":[]},
+  {"section_name":"Drive","positive_local_styles":["adds cowbell phonk melody","brass stabs","tabla rolls","even more energy"],"negative_local_styles":["quiet"],"duration_ms":13333,"lines":[]},
+  {"section_name":"Peak","positive_local_styles":["full energy peak","epic choir pads","huge drums","risers between phrases"],"negative_local_styles":["quiet"],"duration_ms":13333,"lines":[]},
+  {"section_name":"Build","positive_local_styles":["double time snare roll accelerating","pitch rising synth","tension build","ends with massive cinematic impact"],"negative_local_styles":["breakdown"],"duration_ms":6667,"lines":[]},
+  {"section_name":"Breakdown","positive_local_styles":["sudden drop to emotional ambient","warm piano","soft pads","no drums","hopeful inspiring","spacious reverb"],"negative_local_styles":["drums","bass","aggressive"],"duration_ms":13000,"lines":[]},
+  {"section_name":"Outro","positive_local_styles":["deep cinematic sub boom","long decaying tail","silence at end"],"negative_local_styles":["drums","melody"],"duration_ms":5000,"lines":[]}
+ ]},
+ "model_id":"music_v1"}
