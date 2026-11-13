@@ -10,11 +10,11 @@ CARD = words[-1]["e"] + 0.5; DUR = CARD + 3.6
 fest = lambda make, t_b=2.0, amt=0.7: screen_blend(make, ST(38507), t_b, amt)
 segs, _ = seq(0, [
     (T_WED, C(ST(41731), 2.0, 0.5, z=(1.0, 1.1)), "dip"), (T_NEW - T_WED, C(ST(33805), 4.0, 0.5)), (T_EVERY - T_NEW, C(ST(41301), 3.0, 0.5)),
-    (T_PUT - T_EVERY, fest(C(S["V13"], 1.5, 0.5)), "flash"), (T_ON - T_PUT, fest(C(S["V08"], 0.4, 0.5), 5.0, 0.8)),
-    (T_IN - T_ON, fest(C(S["V12"], 2.0, 0.5), 3.0, 0.55)), (T_WITHOUT - T_IN, fest(C(S["V09"], 4.6, 0.5), 6.0, 0.6)),
-    (T_LEARN - T_WITHOUT, fest(C(S["V11"], 3.5, 0.45), 1.0, 0.5)),
+    (T_PUT - T_EVERY, fest(C(S["V13"], 1.5, 0.5), 2.0, 0.45), "flash"), (T_ON - T_PUT, fest(C(S["V08"], 5.4, 0.5), 5.0, 0.7)),
+    (T_IN - T_ON, fest(C(S["V12"], 2.0, 0.5), 3.0, 0.6)), (T_WITHOUT - T_IN, fest(C(S["V10"], 5.0, 0.5), 6.0, 0.55)),
+    (T_LEARN - T_WITHOUT, fest(C(S["V11"], 3.5, 0.45), 1.0, 0.4)),
     (T_AND - T_LEARN, phone_scroll([(6140, 6900)], ST(38507), 4.0, cy=0.40), "whip"),
-    (CARD - T_AND, fest(C(S["V10"], 6.0, 0.5), 7.0, 0.6), "flash"),
+    (CARD - T_AND, fest(C(S["V09"], 9.5, 0.5), 7.0, 0.5), "flash"),
 ])
 thumbs = thumbs_from([(S["V13"], 3.0, 0.5), (S["V08"], 1.0, 0.5), (S["V11"], 4.0, 0.45)], 400, 540)
 segs.append(end_seg(CARD, DUR - CARD, lambda k: end_yellow(W, H, k, thumbs, headline=("This season's", "ads, made", "by you."))))

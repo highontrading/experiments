@@ -127,7 +127,7 @@ def screen_blend(make_a, src_b, t_b, amt=0.75, W=1080, H=1920, warm=0.08):
     def make(dur):
         ga = make_a(dur); gb = A2.clip(src_b, t_b, dur, W, H, z=(1.1, 1.0))
         for a, b in zip(ga, gb):
-            a = a.astype(np.float32) / 255; b = (b.astype(np.float32) / 255) * amt
+            a = (a.astype(np.float32) / 255) ** 1.25 * 0.8; b = ((b.astype(np.float32) / 255) ** 1.6) * amt   # darken base, keep only bright bokeh
             o = 1 - (1 - a) * (1 - b); o[..., 0] *= 1 + warm; o[..., 2] *= 1 - warm
             yield np.clip(o * 255, 0, 255).astype(np.uint8)
     return make
