@@ -46,7 +46,7 @@ export const A17: React.FC = () => {
         </div>
         <Win a={LINE} b={END}>
           <AbsoluteFill style={{background: '#0b0b0b', alignItems: 'center', justifyContent: 'center', opacity: clamp((t - LINE) / 0.15)}}>
-            <div style={{fontFamily: F.bebas, fontSize: 170, color: '#FFE14D', textAlign: 'center', lineHeight: 0.92, ...popIn(t, LINE + 0.05, 0.3)}}>Shoot-quality ads,<br /><span style={{color: '#fff'}}>without the shoot.</span></div>
+            <div style={{fontFamily: F.bebas, fontSize: 140, color: '#FFE14D', textAlign: 'center', lineHeight: 0.95, ...popIn(t, LINE + 0.05, 0.3)}}>Shoot-quality ads,<br /><span style={{color: '#fff'}}>without the shoot.</span></div>
           </AbsoluteFill>
         </Win>
       </Win>
