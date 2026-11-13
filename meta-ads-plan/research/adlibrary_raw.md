@@ -98,3 +98,137 @@ Funnel: FREE live workshop (3 hrs) → high-ticket programme (inferred from Outs
 - Tyler Tometich | USD | "Viral VFX Bundle: 91% Off + Bonuses" | 1163336996056689 ; "🌟Create MILLION VIEW Videos with your PHONE!" | 1459187862225637
 - Educly AI App | USD | "Start Your AI Journey Today" | 1439137971706485
 - Aimble (1443835858809755) | USD | "Take the first step into AI" (multi-language, since ~2026-10-26) | 1302481875338531
+
+## S11. "AI video ads" — US (est. 8,060; ~60% drama-app spam)
+- AI Video Academy (976145405587192) | USD | 2026-11-13 | "Create Professional AI Ads" | 4039210956386385
+- AI VIDS LAB (1383834521487721) | EUR | 2026-11-13 | "Learn to Make Ads Like This" | 4630550173855469, 2205633817043717
+- Space Ads Agency (372482713261310, AI video ad agency, PLN) | headline set: "AI video ads. Your product. New worlds." / "Sell the feeling. Show the product." / "Give products a character arc" / "Different worlds. Still product-led." / "One concept. Formats that fit." / "From product to a testable ad" / "Your product in an animated world" | 3809297259218009, 1184325607280529
+- Zeely: AI Marketing Agent (1151257098081475) | USD | "Your Best Black Friday Ads. Unlock 70%" | 2246021822977073
+- Vosu AI | USD | "Plans start at $1/month. Cancel anytime." | 1367260778670660
+- Adbuddy - AI Marketer | USD | "Try it today 🙌" | 1133574272985217
+- Sharif Mohsin (127988160393564) | USD | "FREE AI Dropshipping System" | 996232316877515
+- Growth in Alignment | USD | "Scale by Subtraction™ [Free + Live - NOV. 17th]" (free live webinar format) | 1453184413593244
+- Manus AI | USD | "Create and refine videos with ease." | 1720538289412907
+
+## S12. "AI workshop" — IN (est. 6,955)
+Be10x runs ≥5 pages in parallel: RealBe10x (118387377891652), TheBe10x.in (114496488283040), Be10x (117886597972692), Be10XSkills (920918137770473), Be10x.co (213843238482401):
+- TheBe10x.in | "Learn AI at Just ₹9" | 1165784902639992, 1144371804623079
+- Be10x | "Skill Up at ₹9" | 4067199653416976 ; "Learn AI Tools, Boost Productivity" | 1725640409132048
+- Be10XSkills / Be10x.co | "Supercharge Your Career with AI" | 1709720687190021, 1488644759794013
+Others:
+- Claraverse | "AI Influencer Live Workshop - Rs 199" | 1097611063270255
+- SMAI (1247171965142960) | "register now" (20+ variants) | 1456888006570646
+- Shikkhar Suri New (966973059835492) | "Register for Live Workshop" | 1446516070389384
+- apurv_sngh (110009680816524) | "Limited Seats!" | 1419641923484069
+- Social Seller Academy (111563005253507) | "Book Fast | Limited Seats" | 2868599510192029
+- Qubcabs Ai Digital Academy | "AI Workshop, Learner Edition" | 29460757120222289
+- CJ Business with AI | "Every enquiry answered in seconds" / "Every quotation followed up on time" | 2357753198414205
+- walkineducate_malad | landing = api.whatsapp.com (click-to-WhatsApp) | 1479063260843936
+
+## S13. page_ids = AI Video Academy + AI VIDS LAB (7 active total)
+- AI Video Academy: "Create Professional AI Ads" (2026-11-13) 4039210956386385; "AI Video Academy" (2026-11-12) 1813087753263846; "Create Amazing Content With AI" (2026-11-12) 960330956877938
+- AI VIDS LAB: 4× "Learn to Make Ads Like This" (2026-11-13) 974308652003040, 4630550173855469, 2205633817043717, 2238669050023327
+→ Both are small/new (≤4 ads, all <2 days old). Same niche as Ideabro ("learn to make AI ads") — still low competition on Meta.
+
+## S14. page_ids = Learn AI with Ritika + Deepak SIsodia (26 active)
+- Learn AI with Ritika: ~20 ads, ONE headline "Turn AI Skills Into Income"; oldest 2026-11-03 (10+ days; 17 variants launched same minute on 3 Nov = creative test, survivors still live) | 1592681535965810, 1438407686024040, 2255259568377304
+- Deepak SIsodia (Hinglish design educator): "AI Hai Tu. Graphic Designer Nahi." / "Graphic Design Tools Aate Hain, Par Design Sense Missing Hai?" / "Graphic Design Ideas Nahi Aa Rahe? Process Seekho." / "Future-Proof Skill: Design Thinking" / "9 Design Courses for Just ₹969" (all 2026-11-09) | 1129816819817751, 1145680934587595, 1820313425961330, 1630098558596088
+
+## S15. page_ids = Simone Ferretti (443268645869191) — 112 active, AED account, global
+- "🚨 SALE 75% OFF" | oldest 2026-10-30 | 2065254377470999, 28519954591015946
+- "🚨 CHRISTMAS 75% OFF" | 2026-10-31 → re-started 13 Nov | 1419642563482574, 1890753918961370
+- "Built my setup for $200. Went viral." | 2026-11-01 | 1000128039808695, 39767115909570620
+- "Learn How To Make AI Content In 2 Days." | 25+ variants 2026-11-11 and 2026-11-13 | 1409870684244578, 1169118145690109
+- "Master AI Content Creation Now." | 2026-11-13 | 1105851052222915
+- "🚨 BLACK-FRIDAY 75% OFF" / "Upgrade My Home Studio ✅" | 2026-11-13 | 4141551122815466, 1905604983781663
+→ Permanent-discount framing (75% off, rebranded per season) + speed promise ("in 2 days").
+
+## S16. "AI filmmaking course" — US (est. 266)
+- Content Creator.com (103977514809228) | USD | 2026-11-12 | "💚 Master AI Video Editing & Filmmaking In Hours, NOT Weeks (Black Friday Sale)" / "(Cyber Monday Sale)" — 50+ variants launched within 1 hour on 12 Nov | 2216834115567737, 1686304619711784, 1113409531473918
+- Marcus Levin (1135898492932797) | USD | "Learn Claude Step by Step" | 29348853548044242
+
+## S17. "AI UGC ads" — US (est. 1,943)
+- Victogrvphy (105671602074427) | USD | 2026-11-12 | "Video ads without the production shoot" / "Fresh video ads for your med spa" | 1143612668059779, 893413787126186
+- AIVideo.com (305229502672606) | USD | 2026-11-12 | "Founders: don't clone yourself with AI" / "Founders: the ad format that scales" | 1681697689994462, 1130388149709153
+- 0x ROAS (1131525280040255) | USD | "AI ADS SYSTEM for 9-fig brands" | 1110599198516030
+- TryMako | EUR | "Create winning creatives consistently" | 2178921186311880
+- Ku Creatives | IDR | "Your AI-Powered Ad Creative Team." | 1142506538677794
+- Unflop | ILS | "Your Next UGC Script Should Beat Your Best" | 2175558199995093
+- Ninjas AI Automations | JPY | "Unlimited AI video. No credits." / "Unlimited Seedance 2.0 & 2.5" | 1771128440632383
+- Getyn | USD | "Create Videos, Content & Ads with AI 🚀" | 1884912269339236
+- AI VIDS LAB, Simone Ferretti, AI Avatar Ads (as above)
+
+## S18. "AI content creation course" — IN (est. 1,054)
+- Digitalvalut Media (1251904841339404) | "Instant Access AI Influencer Course" / "Start Learning in Minutes" | 1112436828211532, 1184687090791323
+- MS Digital (1246063315251586) | "AI Influencer Master Course ₹299" | 2236848823560807, 1663817192073911
+- InstaGizmos (659368463917640) | "Create Your Own AI Influencer – Just ₹199!" / "Create Your Own AI Influencer From Your Phone" | 1146677714987892, 1852877589242211
+- Digital Shakti (1148557108339032) | "🔥 9 Days AI Mini Course – Just ₹499!" | 4452832891649158
+- Nextless Academy (108078602098378) | "🚀 Become an AI Creative Expert in Just 2 Months!" / "🎯 2 Months Mein AI Image & Video Creation Seekho!" / "📞 Enquire Now For Nextless AI Creative Mastery Program" | 4294165164214352, 1076186648792220, 1798433574774451
+- Matchframe Editing School | "Become A Certified AI Powered Video Editor" | 1570832084800093
+- Satyam AI (569370659597970) | "Claude AI Mastery – Full Course" | 1140624028463205
+- GS Ai Academy | "AI Mastery 2.0 Course" | 3622103294616677
+- The Growth Plus | "Learn AI Beyond Basic Prompts" | 1639204467455841
+- DigiMark | "Diwali Dhamaka Offer! Learn Graphics Design & Social Media Marketing with AI – Join for Just ₹2,999!" | 1498322602189490
+- Ankur Warikoo (107594063255738) | "Get ALL WebVeda Courses for the Price of One" | 1149749040849123 ; WebVeda.com | "Growth for Less Than ₹5.5/Day? 🤯" | 1843744993532332
+- AI Business School | "Learn USA Affiliate Marketing @199/- Only." | 1115167854655356
+- Infozub Digital Academy | "22 Professional Courses in One Bundle | ... 07 Days Refund Policy | Life Time Course Update" | 1492261869431712
+- Loopive | "Claude AI മലയാളത്തിൽ പഠിക്കാം" (learn Claude in Malayalam) | 1344577671013934
+
+## S19. page_ids = Digitalvalut, MS Digital, InstaGizmos, Digital Shakti, Nextless (13 active total)
+All small (1–4 ads each), all started 2026-11-09 → 13. MS Digital's ₹299 ad was created 27 Oct but only delivering since 9 Nov.
+
+## S20. "Higgsfield" — US (est. 318)
+- Blake Ridder Teaches Filmmaking (105181061646262) | USD | "Hybrid AI Filmmaking | $79/month" | 1139706915452833
+- Brother Ben X Ads (110294658338219) | USD | "Learn How To Do This Yourself" | 4519680708293483
+- G3N ERA (1409130542275107) | USD | "How to make AI images" | 1133083219686771
+- Arild (114891678177487) | USD | "Build Your AI Model Today!" / "Join the Skool now and launch your AI model!" | 2688776664905881, 2197559021158501
+- VentureAligned | USD | "Start your AI influencer with Higgsfield." | 1468533031877732
+- OpenCharts | USD | "More studio for less than Higgsfield Plus" | 1080961111646757
+- Vibe.co | EUR | "Made with AI. Ready for TV." | 1676362260607604
+- Adspo | AUD | "Claude can't watch your competitor's ads" | 1502328085084842
+- foreplay.co | CAD | "Give your AI your entire ad stack" | 1114247174849185
+- Naive AI | USD | "AI Videos on Autopilot" | 1848158146304714
+- Sarah Williams | USD | "25+ Business and AI Tools for $29.95 a Month" | 29145067938521378
+
+## S21. "AI photoshoot" — IN (est. 292)
+- MastiLearn (373589079167523) | INR | "Post Daily Without a Photoshoot" | 1612273650665189
+- Aivx Studio (1020971637770941) | INR | "CAD to Photoshoot in Minutes." / "WhatsApp for a free sample" (jewellery AI-shoot service, click-to-WhatsApp) | 28991977987130483, 1132140993123394
+- Fame Sutra | INR | "💕 प्री-वेडिंग फोटो बनाएं AI से" | 1898139101168575
+- Vosu AI | "Your Product Isn't Boring. Your Creative Is." | 1433848668381854
+- Starvia - AI Product (1150949441431069) | USD | (no headline, 10+ ads) | 1046129201862001
+- Jhalak AI (Tamil/Telugu consumer AI photo app) | 989881994189324
+
+## S22. page_ids = Tyler Tometich (102655155235928) — 1,470 active (!)
+Only two headlines in the newest 50: "🌟Create MILLION VIEW Videos with your PHONE!" and "Viral VFX Bundle: 91% Off + Bonuses". Ads seen from 2026-10-31 (id 1429081052160686) still live. Massive volume = scaled DTC info-product (VFX/AI video presets) with extreme creative churn.
+
+## S23. "AI ads course" — GB + AE (est. 1,514; mostly drama spam)
+- Creative Strategist Breakthrough (1369281022941561) | USD | "7 modules and 6 bonuses for $29" (same $29 price point as Ideabro) | 1787225645894384
+- Stan vd Avoird | EUR | "Run ads without becoming a marketer" | 1490105576377188
+- Rafi Shaik - Meta Ads | CAD | "🚀 Build a Buyers List for Just $9" | 1469691175126012
+- The SAFEGUARDED Woman | USD | "Get the Training! $27" | 2333510074067047
+- Filip The Creator | USD | "Learn More About Faceless Theme Pages" (15+ variants) | 2091593181490922
+- Steven Cravotta | USD | "Build Your App in 4 Steps (Free Training)" | 1483189113730050
+
+## S24. "AI agency clients" — US (est. 3,780)
+- Marketixa (1351695108016968) | USD | "What Agencies Charge $5K/Mo To Run. Yours For $27" | 1681672826802112
+- Evolved Agents Mastermind | CAD | "Build an AI Agency in 90 Days" | 1908744760255831
+- Kai Bax - ScaleClients.io | AUD | "Pay In Full After This AI Gets Clients" | 2358272894933888
+- Aretech | USD | "Add $200k-$2m/Year In Profit With AI" | 1138435201928198
+- Jordan Lee (302225802970242) | GBP | "Free AI Business Workshop" / "Free AI Business Masterclass" | 3445656518951832
+- Brook Hiddink | USD | "This FREE Training at 8 PM EST Might Piss Off Some "Gurus"" / "🚨 Final Notice - No More Excuses" / "Unlock Exclusive Access: FREE Live Event" | 1181986088021424, 1792585155354649
+- Otto AI | USD | "Made for marketing agencies." | 1491032366259471
+
+## S25. "D2C brand AI ads" — IN (est. 613)
+- CINQA (1049037804970856) | INR | "100+ AI UGC creatives built for D2C brands scaling on Meta." | 1793973311825654
+- Aipreneur.ai (211819585354973) | INR | "🎁 Get 3 Videos Absolutely FREE!" | 1153364320883532
+- Digistick Services | INR | "Courier Your Products. We Create the Content." / "Product Shoots & Reels | Noida Studio" | 3513612912146221, 2178575659418050
+- Zapzoomanimation | INR | "Complete Ad Film Production & Celebrity Endorsement" | 1133071869627358
+- Growwkey (1441576629041025) | INR | "Your Next Income Skill Starts at ₹199 🚀" | 1106597115536141
+- AiSensy | INR | "Run Meta ads with AI: ₹1,500 credits for ₹500" | 3578279545667188
+- Perfomity D2C | INR | "₹2L → ₹16L/Month In 6 Months" | 1881534659537472
+- Clickmize | INR | "Scale Your Home Décor Brand From ₹0 → ₹10 Lakh/Month In Just 3 Months." | 2453794971695230
+- Digi.aman | INR | "Same Ad Budget. Revenue Doubled." | 1457056399729822
+(= D2C founders are being targeted heavily by agencies/services, but almost nobody targets them with a *learn-to-do-it-yourself* AI ads course.)
+
+---
+Total searches: 25 (19 keyword, 6 page_id). All snapshot links: https://www.facebook.com/ads/library/?id=<id>
