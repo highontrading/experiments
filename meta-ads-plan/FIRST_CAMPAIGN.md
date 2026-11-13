@@ -119,3 +119,27 @@ This is one campaign with one budget and 4 ads, built from videos you already ha
 - [ ] All 4 ads are 9:16 (Ads 1–2) or 4:5 (Ads 3–4), with captions burned in. Most people watch muted.
 - [ ] Ad names follow `AIA_<concept>_<format>_v1`
 - [ ] Ads open on the strongest visual in the very first frame, never on a logo
+
+---
+
+## Final ad files (in `meta-ads-plan/out/`)
+| Ad name in Ads Manager | File | Format | Length |
+|---|---|---|---|
+| `AIA_SHOWREEL_VID_v1` | `AIA_SHOWREEL_VID_v1_9x16.mp4` | 9:16 · 1080×1920 · with voiceover | 17 s |
+| `AIA_AIUGC_VID_v1` | `AIA_AIUGC_VID_v1_9x16.mp4` | 9:16 · 1080×1920 · with voiceover | 19 s |
+| `AIA_TRAILER_VID_v1` | `AIA_TRAILER_VID_v1_4x5.mp4` | 4:5 · 1080×1350 | 59 s |
+| `AIA_OLDNEW_IMG_v1` | `AIA_OLDNEW_IMG_v1_4x5.jpg` (Feed) and `AIA_OLDNEW_IMG_v1_9x16.jpg` (Stories/Reels) | static | — |
+
+- **Audio:** mixed to about −14 LUFS. The voiceovers are ElevenLabs (trailer narrator for Ad 1, a creator-style voice for Ad 2), and the music is the score from the launch trailer.
+- **Captions:** the on-screen text follows the voiceover word for word, so the ads work with the sound off.
+- **Brand-safe:** no real third-party logos. Only fictional or AI brands appear (Total Repair, Glossy Hydra, Kenetik, ava, Osmosis, Lumos).
+
+**Sources:**
+- Studio films from the course page
+- Raw AI clips from the Drive folders ("final edits for meta ads", "old", "new – 17thaug", "new uploads")
+- One Mixkit stock clip, a product-photographer studio, used for "the old way"
+- The launch trailer
+
+**To rebuild:** run `python3 ads/ad1_showreel.py` (likewise `ad2_ugc.py`, `ad3_trailer.py`, `ad4_static.py`). Source clips go in `assets/`. Text, timings and shots are lists at the top of each script.
+
+**Upload tip:** in Ads Manager, upload Ad 4's 4:5 image and add the 9:16 image as the Stories/Reels placement version of the same ad.

@@ -1,2 +1,7 @@
 *.png
 assets/studio/*.mp4
+assets/drive/
+assets/stock/
+assets/*.jpg
+build/
+__pycache__/
