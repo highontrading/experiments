@@ -60,7 +60,7 @@ put(fade(load(f'{AU}/vo/L4.mp3'), 0.005, 0.15), 1449.6 / 24, 1.0)
 put(load(f'{AU}/sfx/glitch.mp3'), 1690 / 24, 0.9)
 put(load(f'{AU}/sfx/impact.mp3'), 1701 / 24, 0.9)
 mput(fade(load(f'{AU}/music/main.mp3', 73.36, 76.72), 0.01, 0.3), 1701 / 24, 0.55)
-put(fade(load(f'{AU}/vo/L5.mp3'), 0.005, 0.15), 71.3, 1.0)
+put(fade(load(f'{AU}/vo/L5c.mp3'), 0.005, 0.15), 71.3, 1.0)
 
 # ducking of music under VO
 duck = gain_env([(0, 1), (0.2, 0.55), (7.0, 0.55), (7.25, 1), (60.2, 1), (60.5, 0.6), (70.3, 0.6), (70.6, 1),

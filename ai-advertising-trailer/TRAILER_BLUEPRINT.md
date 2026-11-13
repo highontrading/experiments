@@ -1,8 +1,24 @@
-# AI & Advertising: Hinglish trailer v1, blueprint
+# AI in Advertising: Hinglish trailer, blueprint (v2)
 
 The trailer follows the "Industrial 47" structure beat for beat, adapted to "the old ad shoot vs the AI way".
 
-**Specs:** 1920×1080, 24 fps, 76.5 s, 144 BPM. One beat is exactly 10 frames, and every montage cut is 20 frames.
+**Specs:** two deliverables from one cut list, both 24 fps, 76.5 s, 144 BPM, mixed to -14 LUFS:
+- **YouTube:** 1920×1080
+- **Instagram Reels:** 1080×1920
+
+One beat is exactly 10 frames. The montage cuts every 20 frames, with 10-frame cuts closing each chapter.
+
+## v2 changes
+- The montage now has about 80 distinct shots (it had about 55, many of them stills). Sources:
+  - 30+ films from the Ideabro Drive folder (raw, text-free versions only)
+  - the attached fashion reel
+  - the website films
+- Every chapter ends on 4 one-beat cuts for pace, and no source repeats inside a chapter.
+- The Drive `final/` versions are not used because they have burned-in captions.
+- Clips that resemble existing IP are not used: a Batmobile-style car, a Lara Croft-style character and Jungle Book-style animation.
+- The end card is a clean, high-contrast Inter Black layout: **AI IN ADVERTISING** / *Shoot-quality ads, without the shoot.* / IDEABRO STUDIO · ENROLL NOW.
+- Closing VO: **"AI in Advertising… ab shoot, optional hai."**
+- In 9:16, vertical sources play full-frame. Horizontal sources are cropped to the subject, or fitted over a blurred copy of themselves for wide action. Subtitles sit inside the Reels safe area.
 
 | Time | Section | Picture | Sound / VO (Hinglish) | On-screen text |
 |---|---|---|---|---|
@@ -12,18 +28,20 @@ The trailer follows the "Industrial 47" structure beat for beat, adapted to "the
 | 9.50–10.63 | Pixelate → **1 s black** | — | Sub swell | — |
 | 10.63–12.08 | **Punchline** | AI creator (Laneige UGC film) looking into the lens | **"Shoot? Kaun sa shoot?"** | "SHOOT? KAUN SA SHOOT?" |
 | **12.08** | **DROP** | — | 144 BPM hybrid trailer/phonk track with dhol and tabla accents | — |
-| 12.08–55.4 | **Montage, 7 chapters × 8 cuts** | Product → Model & fashion → UGC → CGI → Campaign films → Meta ads → lead-in. Includes a recorded *AI Ad Studio* prompt-to-image screen capture and a scroll capture of the course site. | Music only | Chapter labels for 2.5 s each: PRODUCT SHOOT — BINA STUDIO / MODEL SHOOT — BINA MODEL / UGC ADS — BINA CREATOR / CGI ADS — BINA 3D TEAM / CAMPAIGN FILMS — BINA CREW / META ADS — 20 VARIATIONS, EK DIN MEIN / 11 MODULES · 41 LESSONS |
+| 12.08–55.4 | **Montage, 7 chapters, about 70 cuts** | Product → Model & fashion → UGC → CGI → Campaign films → Meta ads → lead-in. Includes a recorded *AI Ad Studio* prompt-to-image screen capture and a scroll capture of the course site. | Music only | Chapter labels for 2.5 s each: PRODUCT SHOOT — BINA STUDIO / MODEL SHOOT — BINA MODEL / UGC ADS — BINA CREATOR / CGI ADS — BINA 3D TEAM / CAMPAIGN FILMS — BINA CREW / META ADS — 20 VARIATIONS, EK DIN MEIN / 11 MODULES · 41 LESSONS |
 | 37.1–37.9 | Burst | 5 × 4-frame impact shots | — | — |
 | 55.4–58.75 | Double-time build | 8 × 10-frame cuts | Riser | — |
-| 58.75–59.88 | Hero hit + glitch melt | Exploding-car CGI | Impact | — |
-| 59.88–70.42 | **Breakdown** | 3 long slow-motion holds (fashion film, night-drive film, Total Repair film) | Piano and pads. Narrator: **"Generate button toh aaj sabke paas hai. Lekin AI se aisa ad banana, jo shoot kiya hua lage… wohi hai asli skill."** | Subtitles |
+| 58.75–59.88 | Hero hit + glitch melt | Dragon fire | Impact | — |
+| 59.88–70.42 | **Breakdown** | 3 long slow-motion holds (girl at an aquarium porthole, animated kid with a star jar, cheetah at sunset) | Piano and pads. Narrator: **"Generate button toh aaj sabke paas hai. Lekin AI se aisa ad banana, jo shoot kiya hua lage… wohi hai asli skill."** | Subtitles |
 | 70.42–70.88 | Glitch logo reveal | Stripes → pixelated card in noise box → sharpen | Glitch | — |
-| 70.88–76.5 | **End card** | IB mark / **AI & ADVERTISING** / SHOOT-QUALITY ADS, WITHOUT THE SHOOT. / IDEABRO STUDIO · ENROLL NOW | Impact and sub tail. VO: **"AI and Advertising. Ab shoot… optional hai."** | — |
+| 70.88–76.5 | **End card** | IB mark / **AI IN ADVERTISING** / Shoot-quality ads, without the shoot. / IDEABRO STUDIO · ENROLL NOW | Impact and sub tail. VO: **"AI in Advertising… ab shoot, optional hai."** | — |
 
 A persistent **IDEABRO STUDIO** stencil watermark sits top-right at 72% opacity (the reference's "INDUSTRIAL 47" bug).
 
 ## Asset sources
 - **Ideabro site** (community.ideabrostudio.com/courses/ai-and-advertising): 15 AI ad films and 45 campaign stills.
+- **Ideabro Google Drive:** 55 films downloaded and screened, about 35 used.
+- **Attached reel:** the Ideabro fashion montage.
 - **Archive:** Prelinger Archives, public domain:
   - *The Story of Television* (1956)
   - *Behind the Lens* (1940)
