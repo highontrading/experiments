@@ -84,8 +84,10 @@ card([(VO['L06']['words'][i]['w'], wt('L06', i)) for i in range(3, 9)], 'rise', 
 # Old playbook, over collage
 single('L07', [[0], [1], [2, 3, 4], [5], [6], [7], [8], [9], [10]], 'over', wt('L08', 0))
 # Others (dot behind) then white world
-card([('Others', wt('L08', 0))], 'dot', T['iris'][0] + 4 / FPS)
-single('L08', [[1], [2], [3], [4, 5, 6]], 'fade', T['tools'][1])
+card([('Others', wt('L08', 0))], 'dot', wt('L08', 1))
+card([('wake', wt('L08', 1))], 'dot', T['iris'][1])
+card([('wake', wt('L08', 1) - 1)], 'fade', wt('L08', 2))
+single('L08', [[2], [3], [4, 5, 6]], 'fade', T['tools'][1])
 card([('And', wt('L08', 7)), ('ship.', wt('L08', 8))], 'fade', wt('L09', 0) - 0.15)
 card([('No', wt('L09', 0)), ('studio.', wt('L09', 1))], 'fade', wt('L09', 2) - 0.03)
 card([('No', wt('L09', 2)), ('crew.', wt('L09', 3))], 'fade', T['studioCollage'][0])
