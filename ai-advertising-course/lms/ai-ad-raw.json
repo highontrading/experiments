@@ -1,0 +1,1434 @@
+{
+  "id": "ai-ad",
+  "cover": "https://xfyshcjptayuemcwxnpr.supabase.co/storage/v1/object/public/uploads/1789887361818-f1e89305-a05b-4d7a-9b0b-7577d60710fe.png",
+  "short": "Shoot-quality ads without the shoot. Made with AI, directed by you.",
+  "title": "AI & ADVERTISING",
+  "joined": 100,
+  "status": {
+    "text": "All new",
+    "style": "lime"
+  },
+  "modules": [
+    {
+      "n": 1,
+      "id": "ai-in-advertising",
+      "type": "lessons",
+      "cover": "",
+      "items": [
+        {
+          "id": "where-ai-fits",
+          "doc": [
+            {
+              "p": "Use\nStudent Kit: START-HERE\n\nDo this now\nWrite down your brand and the one product you'll use for the whole course."
+            }
+          ],
+          "idx": "1.1",
+          "desc": "An ad goes through 6 steps: Brief → Concept → Visuals → Motion → Edit → Launch. AI makes visuals, motion and edits fast. You bring the idea and the direction.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Where AI fits in every type of ad",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Student Kit: START-HERE",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "ai-ad-stack",
+          "doc": [
+            {
+              "p": "Use\nStudent Kit: START-HERE (Main tools)\n\nDo this now\nList the tool you'll use for each step, and which ones you already have."
+            }
+          ],
+          "idx": "1.2",
+          "desc": "The stack: Flow for video and images, ChatGPT for images, Claude/ChatGPT/Gemini for thinking, ElevenLabs for voice, Suno for music, Claude for editing, Meta Ads Manager to launch.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Your AI ad stack and what it costs",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Student Kit: START-HERE (Main tools)",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "tool-setup",
+          "doc": [
+            {
+              "p": "Use\nStudent Kit: START-HERE (How to attach a skill)\n\nDo this now\nSign in to Google Flow and ChatGPT, make your project folder, and take your 5 product photos."
+            }
+          ],
+          "idx": "1.3",
+          "desc": "Start on free plans and pay only when you hit a limit. Set up one project folder and use the file naming from day 1.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Setting up your tools the cheap way",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Student Kit: START-HERE (How to attach a skill)",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "rules-rights-disclosure",
+          "doc": [
+            {
+              "p": "Use\nAd Strategist skill (policy check)\n\nDo this now\nRun the policy check in the Ad Strategist skill and write down one claim you must never make for your product."
+            }
+          ],
+          "idx": "1.4",
+          "desc": "The rules: use AI tools on a plan that allows commercial use. No celebrity faces, no competitor logos, no fake results. Check Meta's AI labels and the ASCI guidelines on launch day.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Rules, rights and AI disclosure on Meta",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Strategist skill (policy check)",
+              "title": "Course Resources"
+            }
+          ]
+        }
+      ],
+      "title": "AI in advertising: the new playbook",
+      "banner": "<strong>Start here:</strong> open <strong>Course Resources</strong> and download the Student Kit. Every lesson tells you which skill and workflow to use.",
+      "description": "AI doesn't replace taste. It replaces the shoot."
+    },
+    {
+      "n": 2,
+      "id": "briefs-strategy-big-idea",
+      "type": "lessons",
+      "cover": "",
+      "items": [
+        {
+          "id": "reading-a-brief",
+          "doc": [
+            {
+              "p": "Use\nAd Strategist (brief) · Workflow 01, steps 1–2\n\nDo this now\nTurn your brand's goal into a one-page creative brief."
+            }
+          ],
+          "idx": "2.1",
+          "desc": "A brief has 5 things: goal, audience, one message, must-haves, how we measure. Turn a messy WhatsApp message into a one-page brief.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Reading a brief like an agency",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Strategist (brief) · Workflow 01, steps 1–2",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "audience-angle-positioning",
+          "doc": [
+            {
+              "p": "Use\nAd Strategist (big idea) · Workflow 01, step 3\n\nDo this now\nGet 3 big ideas for your product and pick one."
+            }
+          ],
+          "idx": "2.2",
+          "desc": "Let AI read customer reviews and competitor ads (Meta Ad Library). Pick one angle: pain, desire, proof or festive.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Audience, angle and positioning with AI",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Strategist (big idea) · Workflow 01, step 3",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "scroll-stopping-hooks",
+          "doc": [
+            {
+              "p": "Use\nAd Strategist (hooks) · Workflow 01, step 4\n\nDo this now\nWrite 30 hooks and keep your best 5."
+            }
+          ],
+          "idx": "2.3",
+          "desc": "The hook is the first 2 seconds. Types: visual shock, question, bold claim, pattern break, offer. Write 30 and keep 5.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Hooks that stop the scroll",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Strategist (hooks) · Workflow 01, step 4",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "scripts-and-storyboards",
+          "doc": [
+            {
+              "p": "Use\nAd Strategist (script & storyboard) · Workflow 01, steps 4–6\n\nDo this now\nWrite a 15s script and a 6-frame storyboard, then build your Brand Bible."
+            }
+          ],
+          "idx": "2.4",
+          "desc": "A 15s script goes hook → problem → product → proof → CTA. The storyboard has 6 frames, and each frame becomes an image prompt.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Writing scripts and storyboards",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Strategist (script & storyboard) · Workflow 01, steps 4–6",
+              "title": "Course Resources"
+            }
+          ]
+        }
+      ],
+      "title": "Briefs, strategy and the big idea",
+      "banner": "<strong>Use in this module:</strong> Ad Strategist skill · Workflow 01. Find them in Course Resources.",
+      "description": "A good AI ad starts with a good idea, not a good prompt."
+    },
+    {
+      "n": 3,
+      "id": "ai-product-photography",
+      "type": "lessons",
+      "cover": "",
+      "items": [
+        {
+          "id": "studio-packshots",
+          "doc": [
+            {
+              "p": "Use\nAd Image Director (product shots) · Workflow 02, steps 1–3\n\nDo this now\nMake 4 packshots of your product from one phone photo."
+            }
+          ],
+          "idx": "3.1",
+          "desc": "Packshots: a good reference photo is taken in daylight on a plain background with the label sharp. Attach the photo and use lighting words (softbox, rim light, gradient background).",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Studio packshots from one photo",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Image Director (product shots) · Workflow 02, steps 1–3",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "lifestyle-scenes",
+          "doc": [
+            {
+              "p": "Use\nAd Image Director (product shots) · Workflow 02, step 5\n\nDo this now\nMake 4 lifestyle images that fit your brand."
+            }
+          ],
+          "idx": "3.2",
+          "desc": "Lifestyle: put the product in scenes that fit the brand (vanity, Diwali, beach). Props tell the story.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Lifestyle scenes and backgrounds",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Image Director (product shots) · Workflow 02, step 5",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "label-logo-accuracy",
+          "doc": [
+            {
+              "p": "Use\nAd Image Director (accuracy check) · Workflow 02, step 4\n\nDo this now\nCheck your best image with the accuracy check and fix anything wrong."
+            }
+          ],
+          "idx": "3.3",
+          "desc": "Accuracy: zoom into the label every time. Fix it with one change per round in edit mode, regenerate, or paste the real label on in editing. Every image gets a verdict: SHIP, FIX or REGENERATE.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Keeping labels, logos and shape accurate",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Image Director (accuracy check) · Workflow 02, step 4",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "ecommerce-listing-images",
+          "doc": [
+            {
+              "p": "Use\nAd Image Director (e-commerce set) · Workflow 02, step 5\n\nDo this now\nMake a 4-image e-commerce set: white background, infographic, scale shot, lifestyle."
+            }
+          ],
+          "idx": "3.4",
+          "desc": "E-commerce set: white-background main image, infographic, scale shot, lifestyle shot.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "E-commerce listing images",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Image Director (e-commerce set) · Workflow 02, step 5",
+              "title": "Course Resources"
+            }
+          ]
+        }
+      ],
+      "title": "AI product photography",
+      "banner": "<strong>Use in this module:</strong> Ad Image Director skill · Workflow 02. Find them in Course Resources.",
+      "description": "One phone photo can become a full studio shoot, as long as the label stays real."
+    },
+    {
+      "n": 4,
+      "id": "models-styling-sets",
+      "type": "lessons",
+      "cover": "",
+      "items": [
+        {
+          "id": "consistent-ai-models",
+          "doc": [
+            {
+              "p": "Use\nAd Image Director (consistent model) · Workflow 02, step 6\n\nDo this now\nMake a character sheet for your brand model."
+            }
+          ],
+          "idx": "4.1",
+          "desc": "Consistent model: make a character sheet (front, side, full body, expressions) and attach it every time.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Creating consistent AI models",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Image Director (consistent model) · Workflow 02, step 6",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "digital-styling",
+          "doc": [
+            {
+              "p": "Use\nAd Image Director (styling) · Workflow 02, step 6\n\nDo this now\nStyle your model in 2 outfits with the garments' real colours."
+            }
+          ],
+          "idx": "4.2",
+          "desc": "Styling: describe fabric, colour and fit exactly. Keep the garment's real colours.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Digital styling: fabric, colour and fit",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Image Director (styling) · Workflow 02, step 6",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "indian-skin-outfits-settings",
+          "doc": [
+            {
+              "p": "Use\nAd Image Director (styling)\n\nDo this now\nMake one image with a correctly named outfit and a real setting from your market."
+            }
+          ],
+          "idx": "4.3",
+          "desc": "Indian skin tones and outfits: don't let AI lighten skin. Name the real outfit (Banarasi saree, Chikankari kurta) and a real setting.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Indian skin tones, outfits and settings",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Image Director (styling)",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "sets-and-locations",
+          "doc": [
+            {
+              "p": "Use\nAd Image Director (sets & locations)\n\nDo this now\nDesign one set and show it from 3 angles with the same light."
+            }
+          ],
+          "idx": "4.4",
+          "desc": "Sets: mood board → one set → the same light in every shot.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Designing any set or location",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Image Director (sets & locations)",
+              "title": "Course Resources"
+            }
+          ]
+        }
+      ],
+      "title": "Models, styling and virtual sets",
+      "banner": "<strong>Use in this module:</strong> Ad Image Director skill · Workflow 02. Find them in Course Resources.",
+      "description": "Same face, same look, every shot. That's what makes it a brand."
+    },
+    {
+      "n": 5,
+      "id": "video-ads-campaign-films",
+      "type": "lessons",
+      "cover": "",
+      "items": [
+        {
+          "id": "image-to-video-camera-moves",
+          "doc": [
+            {
+              "p": "Use\nAd Video Director (still → video) · Workflow 03, steps 1–4\n\nDo this now\nTurn your hero image into 3 clips with 3 different camera moves."
+            }
+          ],
+          "idx": "5.1",
+          "desc": "Image to video: use your approved still as the start frame in Flow. Camera words: push-in, orbit, dolly, tilt. Make 2–3 takes and pick the best.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Image-to-video and camera moves",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Video Director (still → video) · Workflow 03, steps 1–4",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "multi-shot-stories",
+          "doc": [
+            {
+              "p": "Use\nAd Video Director (multi-shot film) · Workflow 03, steps 1–4\n\nDo this now\nMake a 4-shot, 15s film from your storyboard."
+            }
+          ],
+          "idx": "5.2",
+          "desc": "Multi-shot film: shot list → one keyframe per shot → one clip per shot. Keep the light, colour and wardrobe the same throughout.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Multi-shot stories that hold together",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Video Director (multi-shot film) · Workflow 03, steps 1–4",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "vfx-cgi-shots",
+          "doc": [
+            {
+              "p": "Use\nAd Video Director (CGI & recipes)\n\nDo this now\nMake one CGI shot of your product."
+            }
+          ],
+          "idx": "5.3",
+          "desc": "CGI without a 3D team: giant product in a city, splash explosions, impossible scale.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "VFX and CGI shots without a 3D team",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Video Director (CGI & recipes)",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "food-fashion-tech-recipes",
+          "doc": [
+            {
+              "p": "Use\nAd Video Director (CGI & recipes)\n\nDo this now\nMake one recipe clip for your category: food, fashion or tech."
+            }
+          ],
+          "idx": "5.4",
+          "desc": "Recipes: food pour, fabric movement, tech reveal.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Food, fashion and tech video recipes",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Video Director (CGI & recipes)",
+              "title": "Course Resources"
+            }
+          ]
+        }
+      ],
+      "title": "AI video ads and campaign films",
+      "banner": "<strong>Use in this module:</strong> Ad Video Director skill · Workflow 03. Find them in Course Resources.",
+      "description": "Turn stills into ads that move. Each shot gets one move and one job."
+    },
+    {
+      "n": 6,
+      "id": "sound-voice-music",
+      "type": "lessons",
+      "cover": "",
+      "items": [
+        {
+          "id": "voiceovers-dubbing",
+          "doc": [
+            {
+              "p": "Use\nAd Video Director (voice, music & SFX) · Workflow 03, step 5\n\nDo this now\nMake a voiceover for your 15s script, in two languages if you can."
+            }
+          ],
+          "idx": "6.1",
+          "desc": "Voiceover: write for the ear in short lines. In ElevenLabs, pick a voice and direct the pace and emotion. Hindi in Devanagari script is pronounced better.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Voiceovers and dubbing in Hindi and English",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Video Director (voice, music & SFX) · Workflow 03, step 5",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "music-and-jingles",
+          "doc": [
+            {
+              "p": "Use\nAd Video Director (voice, music & SFX) · Workflow 03, step 5\n\nDo this now\nMake a jingle and a 5-second sonic logo."
+            }
+          ],
+          "idx": "6.2",
+          "desc": "Jingle: a Suno brief needs genre, tempo, mood and the brand name in the hook. Also make a 5-second sonic logo.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "AI music and brand jingles",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Video Director (voice, music & SFX) · Workflow 03, step 5",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "dialogue-lip-sync",
+          "doc": [
+            {
+              "p": "Use\nAd Video Director (voice, music & SFX)\n\nDo this now\nMake one short talking shot with clean lip-sync."
+            }
+          ],
+          "idx": "6.3",
+          "desc": "Dialogue and lip-sync: use Flow's built-in audio for short lines, keep the lines short, and check the mouths.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Directing dialogue and lip-sync",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Video Director (voice, music & SFX)",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "sound-design",
+          "doc": [
+            {
+              "p": "Use\nAd Video Director (voice, music & SFX) · Workflow 03, step 5\n\nDo this now\nAdd sound effects to your 15s ad. Compare it silent and with full sound."
+            }
+          ],
+          "idx": "6.4",
+          "desc": "Sound design: whoosh, pour, click, ASMR. Play the same ad silent, then with full sound.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Sound design that sells",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Video Director (voice, music & SFX) · Workflow 03, step 5",
+              "title": "Course Resources"
+            }
+          ]
+        }
+      ],
+      "title": "Sound, voice and music",
+      "banner": "<strong>Use in this module:</strong> Ad Video Director skill · Workflow 03. Find them in Course Resources.",
+      "description": "Sound is half the ad. People feel it before they see it."
+    },
+    {
+      "n": 7,
+      "id": "ugc-brand-ambassadors",
+      "type": "lessons",
+      "cover": "",
+      "items": [
+        {
+          "id": "ai-creators",
+          "doc": [
+            {
+              "p": "Use\nAd Video Director (AI UGC & ambassador) · Workflow 03, step 6\n\nDo this now\nCreate your AI creator: look, personality and voice."
+            }
+          ],
+          "idx": "7.1",
+          "desc": "AI creator: handheld camera, a real room, natural light, imperfect speech. Use one consistent creator.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "AI creators that feel real",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Video Director (AI UGC & ambassador) · Workflow 03, step 6",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "reviews-unboxings",
+          "doc": [
+            {
+              "p": "Use\nAd Video Director (AI UGC & ambassador) · Workflow 03, step 6\n\nDo this now\nMake a 20s UGC review or unboxing ad."
+            }
+          ],
+          "idx": "7.2",
+          "desc": "Reviews, unboxings, testimonials: hook → first look → use → result → CTA. Write Hinglish scripts.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Reviews, unboxings and testimonials",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Video Director (AI UGC & ambassador) · Workflow 03, step 6",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "brand-ambassador",
+          "doc": [
+            {
+              "p": "Use\nAd Video Director (AI UGC & ambassador)\n\nDo this now\nFinish your ambassador bible so the same person appears in every campaign."
+            }
+          ],
+          "idx": "7.3",
+          "desc": "Brand face: an ambassador bible (look, personality, voice, wardrobe), so it's the same person every month.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Building a recurring AI brand face",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Video Director (AI UGC & ambassador)",
+              "title": "Course Resources"
+            }
+          ]
+        }
+      ],
+      "title": "AI UGC and brand ambassadors",
+      "banner": "<strong>Use in this module:</strong> Ad Video Director skill · Workflow 03. Find them in Course Resources.",
+      "description": "UGC works because it feels real. Make it feel real, and stay honest."
+    },
+    {
+      "n": 8,
+      "id": "meta-ads-testing",
+      "type": "lessons",
+      "cover": "",
+      "items": [
+        {
+          "id": "every-ratio",
+          "doc": [
+            {
+              "p": "Use\nAd Image Director (statics in every ratio) · Workflow 02, step 7\n\nDo this now\nMake one concept in 9:16, 4:5 and 1:1, with text inside the safe zones."
+            }
+          ],
+          "idx": "8.1",
+          "desc": "Ratios: 9:16, 4:5, 1:1. Keep text out of the top and bottom safe zones.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Every ratio from one concept",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Image Director (statics in every ratio) · Workflow 02, step 7",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "ten-variations",
+          "doc": [
+            {
+              "p": "Use\nAd Image Director (10 variations) · Workflow 02, step 7\n\nDo this now\nPlan and make 10 variations, named with the naming rule."
+            }
+          ],
+          "idx": "8.2",
+          "desc": "10 variations: change one thing at a time (hook, visual, offer or format).",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "10 variations from one idea",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Image Director (10 variations) · Workflow 02, step 7",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "advantage-plus-creative",
+          "doc": [
+            {
+              "p": "Use\nAd Strategist (launch & test plan) · Workflow 04, step 6\n\nDo this now\nSet up your campaign in Ads Manager. Don't publish until you're ready to spend."
+            }
+          ],
+          "idx": "8.3",
+          "desc": "Advantage+ creative: choose which automatic changes to allow, and protect the brand look.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Advantage+ creative tools",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Strategist (launch & test plan) · Workflow 04, step 6",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "reading-results",
+          "doc": [
+            {
+              "p": "Use\nAd Strategist (read results) · Workflow 04, step 7\n\nDo this now\nPaste your results (or the sample) into the Ad Strategist and plan round 2."
+            }
+          ],
+          "idx": "8.4",
+          "desc": "Results: hook rate, hold rate, CTR, CPA/ROAS. Keep the winners, kill the losers, remix the winners.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Reading results and iterating",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Strategist (read results) · Workflow 04, step 7",
+              "title": "Course Resources"
+            }
+          ]
+        }
+      ],
+      "title": "Meta ads: statics, variations and testing",
+      "banner": "<strong>Use in this module:</strong> Ad Image Director skill · Ad Strategist skill · Workflow 02 · Workflow 04. Find them in Course Resources.",
+      "description": "Meta rewards fresh creative. Make one idea into many ads and let the data choose."
+    },
+    {
+      "n": 9,
+      "id": "editing-end-cards-brand-kits",
+      "type": "lessons",
+      "cover": "",
+      "items": [
+        {
+          "id": "vibe-editing-ads",
+          "doc": [
+            {
+              "p": "Use\nVibe Editor · Workflow 04, steps 1–3\n\nDo this now\nVibe-edit your 15s or 30s ad with the Vibe Editor skill."
+            }
+          ],
+          "idx": "9.1",
+          "desc": "The 5 steps are Dump → Vibe → Beat → Layer → Sound. A vibe prompt has 5 parts: platform + length + energy + look + goal.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Editing ads that hold attention",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Vibe Editor · Workflow 04, steps 1–3",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "captions-type-colour",
+          "doc": [
+            {
+              "p": "Use\nVibe Editor (captions) · Workflow 04, step 4\n\nDo this now\nAdd captions and one colour look to your ad."
+            }
+          ],
+          "idx": "9.2",
+          "desc": "Big, readable captions (Hindi too) and one colour look for the whole ad.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Captions, type and colour",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Vibe Editor (captions) · Workflow 04, step 4",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "end-cards",
+          "doc": [
+            {
+              "p": "Use\nVibe Editor (end cards) · Workflow 04, steps 4–5\n\nDo this now\nAdd a 3-second end card with your logo, CTA and offer, then export 3 ratios."
+            }
+          ],
+          "idx": "9.3",
+          "desc": "End card: logo + one CTA + the offer, for 2–3 seconds.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Logo, text and CTA end cards",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Vibe Editor (end cards) · Workflow 04, steps 4–5",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "brand-kit",
+          "doc": [
+            {
+              "p": "Use\nAd Strategist (Brand Bible) + Vibe Editor (brand kit block)\n\nDo this now\nFinish your Brand Bible: fonts, colours, look, logo and sonic logo."
+            }
+          ],
+          "idx": "9.4",
+          "desc": "Brand kit: save the colours, fonts, look, logo and sonic logo in the Brand Bible, so every edit matches.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Building a reusable brand kit",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Strategist (Brand Bible) + Vibe Editor (brand kit block)",
+              "title": "Course Resources"
+            }
+          ]
+        }
+      ],
+      "title": "Editing, end cards and brand kits",
+      "banner": "<strong>Use in this module:</strong> Vibe Editor skill · Ad Strategist skill · Workflow 04. Find them in Course Resources.",
+      "description": "You don't need a timeline. Describe the edit and direct it."
+    },
+    {
+      "n": 10,
+      "id": "hybrid-ads",
+      "type": "lessons",
+      "cover": "",
+      "items": [
+        {
+          "id": "shoot-or-generate",
+          "doc": [
+            {
+              "p": "Use\nAd Video Director (hybrid) · Workflow 03, step 6\n\nDo this now\nList your shots: which you'll film and which you'll generate."
+            }
+          ],
+          "idx": "10.1",
+          "desc": "Shoot real hands, food texture and real people. Generate scale, locations and CGI.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "When to shoot and when to generate",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Video Director (hybrid) · Workflow 03, step 6",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "blending-real-and-ai",
+          "doc": [
+            {
+              "p": "Use\nAd Video Director (hybrid) · Workflow 03, step 6\n\nDo this now\nMake one hybrid clip that blends real footage and AI."
+            }
+          ],
+          "idx": "10.2",
+          "desc": "Blending: match the light direction, colour and grain. Replace the background or extend the shot.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Blending real footage with AI scenes",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Video Director (hybrid) · Workflow 03, step 6",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "phone-shoot-upgrade",
+          "doc": [
+            {
+              "p": "Use\nAd Video Director (hybrid) · Workflow 03, step 6\n\nDo this now\nShoot 5 minutes on your phone and upgrade it into an ad."
+            }
+          ],
+          "idx": "10.3",
+          "desc": "Phone upgrade: a 5-minute phone shoot turned into a premium ad.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Upgrading a phone shoot with AI",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Video Director (hybrid) · Workflow 03, step 6",
+              "title": "Course Resources"
+            }
+          ]
+        }
+      ],
+      "title": "Hybrid ads: real shoot + AI",
+      "banner": "<strong>Use in this module:</strong> Ad Video Director skill · Workflow 03. Find them in Course Resources.",
+      "description": "The best ads mix real and AI. Shoot what must be real and generate the rest."
+    },
+    {
+      "n": 11,
+      "id": "capstone-campaign",
+      "type": "lessons",
+      "cover": "",
+      "items": [
+        {
+          "id": "brief-to-launch",
+          "doc": [
+            {
+              "p": "Use\nAll 4 skills · Workflows 01 → 04 · Capstone brief\n\nDo this now\nRun Workflows 01 → 04 for your brand and finish your campaign (see the capstone brief)."
+            }
+          ],
+          "idx": "11.1",
+          "desc": "Run Workflows 01 → 04 for the Kesar Diwali campaign, at speed.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Brief to launch: one complete campaign",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: All 4 skills · Workflows 01 → 04 · Capstone brief",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "portfolio-case-study",
+          "doc": [
+            {
+              "p": "Use\nAd Strategist (case study)\n\nDo this now\nWrite your case study and publish it (Behance, Notion or Instagram)."
+            }
+          ],
+          "idx": "11.2",
+          "desc": "Case study: problem → idea → process → work → results. Post it on Behance, Notion or Instagram.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Turning it into a portfolio case study",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Strategist (case study)",
+              "title": "Course Resources"
+            }
+          ]
+        },
+        {
+          "id": "pricing-and-pitching",
+          "doc": [
+            {
+              "p": "Use\nAd Strategist (pricing & pitch)\n\nDo this now\nMake your rate card and send one pitch with a free sample ad."
+            }
+          ],
+          "idx": "11.3",
+          "desc": "Pricing and pitch: sell packages, not hours (starter statics, monthly creative, campaign film). Pitch with a free sample ad.",
+          "kind": "video",
+          "tags": [],
+          "type": "lesson",
+          "title": "Pricing and pitching AI ad services",
+          "video": {
+            "src": "",
+            "type": "mp4"
+          },
+          "duration": "",
+          "comingSoon": true,
+          "resources": [
+            {
+              "ext": true,
+              "href": "https://app.ideabro.space/course?c=ai-ad&v=resources",
+              "text": "Skill and workflow for this lesson: Ad Strategist (pricing & pitch)",
+              "title": "Course Resources"
+            }
+          ]
+        }
+      ],
+      "title": "Capstone: your full campaign",
+      "banner": "<strong>Use in this module:</strong> Ad Strategist skill · Ad Image Director skill · Ad Video Director skill · Vibe Editor skill · Workflow 01 · Workflow 02 · Workflow 03 · Workflow 04. Find them in Course Resources.",
+      "description": "Put it all together: one brand, one campaign, start to finish. Then sell it."
+    }
+  ],
+  "resources": {
+    "tools": [
+      {
+        "tag": "Download and Use",
+        "href": "",
+        "text": "All 4 workflows and 4 skills as easy pages, with copy buttons.",
+        "title": "Student Kit: start here (HTML)"
+      },
+      {
+        "tag": "Download and Use",
+        "href": "",
+        "text": "Brief, big idea, hooks, script, storyboard.",
+        "title": "Workflow 01: Plan the Ad (HTML)"
+      },
+      {
+        "tag": "Download and Use",
+        "href": "",
+        "text": "Packshots, lifestyle, models, statics.",
+        "title": "Workflow 02: Photo → Campaign Images (HTML)"
+      },
+      {
+        "tag": "Download and Use",
+        "href": "",
+        "text": "Flow clips, voice, music, UGC, hybrid.",
+        "title": "Workflow 03: Images → Video Ad (HTML)"
+      },
+      {
+        "tag": "Download and Use",
+        "href": "",
+        "text": "Vibe edit, captions, end card, Meta launch.",
+        "title": "Workflow 04: Edit & Launch (HTML)"
+      }
+    ],
+    "agents": [
+      {
+        "tag": "Skill",
+        "href": "",
+        "text": "Start here. Brief, big idea, hooks, script, storyboard, Brand Bible, launch plan, results.",
+        "title": "Ad Strategist (The Planner)"
+      },
+      {
+        "tag": "Skill",
+        "href": "",
+        "text": "Packshots, lifestyle, models, sets, accuracy check, statics in every ratio.",
+        "title": "Ad Image Director (The Photographer)"
+      },
+      {
+        "tag": "Skill",
+        "href": "",
+        "text": "Google Flow video prompts, films, CGI, UGC, voice, music, hybrid.",
+        "title": "Ad Video Director (The Film Director)"
+      },
+      {
+        "tag": "Skill",
+        "href": "",
+        "text": "Edit by describing it: cuts, captions, end card, every ratio.",
+        "title": "Vibe Editor (The Editor)"
+      }
+    ],
+    "library": [
+      {
+        "tag": "Download",
+        "href": "",
+        "text": "Every skill, workflow and template in one download.",
+        "title": "Student Kit (all files, zip)"
+      },
+      {
+        "tag": "",
+        "href": "",
+        "text": "",
+        "title": "Templates: Brand Bible, Creative Brief, Capstone Brief"
+      },
+      {
+        "tag": "",
+        "href": "",
+        "text": "Ready-made image prompts by ad format.",
+        "title": "Image prompt recipes"
+      },
+      {
+        "tag": "",
+        "href": "",
+        "text": "Google Flow, ElevenLabs and Suno prompts.",
+        "title": "Video & audio prompt recipes"
+      }
+    ],
+    "examples": [
+      "studio-packshots",
+      "lifestyle-scenes",
+      "ecommerce-listing-images",
+      "consistent-ai-models",
+      "vfx-cgi-shots",
+      "food-fashion-tech-recipes",
+      "reviews-unboxings",
+      "phone-shoot-upgrade"
+    ],
+    "platforms": [
+      {
+        "tag": "",
+        "href": "https://labs.google/fx/tools/flow",
+        "text": "Video with Google Omni Flash 1.2, images with Nano Banana 1.1.",
+        "title": "Google Flow"
+      },
+      {
+        "tag": "",
+        "href": "https://chatgpt.com",
+        "text": "Images with GPT Image 2.6. Works with all 4 skills.",
+        "title": "ChatGPT"
+      },
+      {
+        "tag": "",
+        "href": "https://claude.ai",
+        "text": "Best home for the skills, and for vibe editing.",
+        "title": "Claude"
+      },
+      {
+        "tag": "",
+        "href": "https://gemini.google.com",
+        "text": "Works with all 4 skills. Images with Nano Banana 1.1.",
+        "title": "Gemini"
+      },
+      {
+        "tag": "",
+        "href": "https://elevenlabs.io",
+        "text": "Voiceovers and dubbing in Hindi and English.",
+        "title": "ElevenLabs"
+      },
+      {
+        "tag": "",
+        "href": "https://suno.com",
+        "text": "Music beds, jingles and sonic logos.",
+        "title": "Suno"
+      },
+      {
+        "tag": "",
+        "href": "https://www.capcut.com",
+        "text": "Manual editing, if you don't vibe-edit.",
+        "title": "CapCut"
+      },
+      {
+        "tag": "",
+        "href": "https://adsmanager.facebook.com",
+        "text": "Launch and test your ads.",
+        "title": "Meta Ads Manager"
+      }
+    ]
+  },
+  "description": "Learn to make product shoots, model shoots, video ads, UGC and Meta ads with AI, from the first brief to a launched campaign. 11 modules and 41 lessons, 4 skills you attach to Claude, ChatGPT or Gemini that write your prompts for you, and 4 step-by-step workflows. You finish with a full campaign for your portfolio, and you learn how to price and pitch AI ad services.",
+  "joinedNames": [
+    "Aarav",
+    "Meera"
+  ],
+  "resourcesCount": 21
+}
