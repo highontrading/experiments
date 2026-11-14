@@ -246,3 +246,29 @@ cd meta-ads-plan/ads2 && python3 e01_shoot_quote.py      # or any eNN_/hNN_ scri
 ```
 - **Toolkit:** `tools/adkit2.py` (caption engine, end cards, phone scroll, prompt UI).
 - **Voiceovers:** `tools/vo_batch.py`. Every script, voice and model is listed at the top of the file. It uses `ELEVENLABS_API_KEY` and falls back to `ELEVENLABS_API_KEY_2` when the first key's credits run out.
+
+---
+
+## Test campaign (created 2026-11-14, published **PAUSED**)
+**Campaign:** `AIA | TEST | Creative batch 2 | 4 angles | ABO` (id 120252229807490004)
+- Sales objective, budget set per ad set at **₹750/day × 4 = ₹3,000/day**
+- India, broad, Advantage+ audience and placements
+- Optimises for Purchase on the "ideabro webinar" pixel; 7-day click / 1-day view
+- AI disclosure not ticked, as you asked; Advantage+ creative enhancements off
+- Tracking: `utm_campaign=aia_test_b2`, with `utm_content` = ad name and `utm_term` = ad set name
+
+| Ad set | Ads |
+|---|---|
+| A · Skip the shoot (120252229808960004) | A1 SHOOTQUOTE_VID · A2 HI_SHOOTBUDGET_VID · A3 HI_KHARCHA_IMG |
+| B · Show the AI magic (120252229808980004) | B1 PROMPT2AD_VID · B2 POV_VID · B3 HI_SHOWREEL_VID |
+| C · Skill & career (120252229809070004) | C1 DIRECTION_VID · C2 FREELANCE_VID · C3 HI_DESIGNER_VID |
+| D · What you get (120252229809090004) | D1 ONEPHOTO_VID · D2 HI_UGC_VID · D3 VALUESTACK_IMG |
+
+**Video covers:** each video uses a hook frame from `out2/thumbs/` as its cover image.
+
+**Static ads:** the 4:5 image serves Feed; the 9:16 image serves Stories, Reels and WhatsApp Status.
+
+**Decision rules:**
+- **Days 1–3:** don't touch anything.
+- **Day 4:** cut any ad that has spent ₹1,500+ with link CTR under 0.8%, has a cost per landing-page view over ₹60, or has spent ₹2,500 with no checkouts started.
+- **Day 7:** an ad is a winner with 2+ sales at ₹1,400 or less each. Move winners into the launch campaign.
