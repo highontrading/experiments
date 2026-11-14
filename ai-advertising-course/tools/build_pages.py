@@ -5,6 +5,7 @@
 
 Reads  student-kit/workflows/*.md and student-kit/skills/*/SKILL.md
 Writes student-kit/pages/index.html, workflow-01..04.html, skill-<name>.html
+       and LECTURE-NOTES.html (instructor page, from LECTURE-NOTES.md)
 
 Each page is one self-contained HTML file (inline CSS + JS) so students can open it
 offline. Visual language follows the provided editorial design system: white canvas,
@@ -481,10 +482,10 @@ JS = r"""
   var steps=[].slice.call(document.querySelectorAll('.step'));
   function renderSteps(){
     var n=steps.filter(function(s){return state.steps[s.id]}).length;
-    document.querySelectorAll('[data-progress-text]').forEach(function(e){e.textContent=n+' of '+steps.length+' steps done'});
+    var unit=document.body.getAttribute('data-unit')||'steps done';document.querySelectorAll('[data-progress-text]').forEach(function(e){e.textContent=n+' of '+steps.length+' '+unit});
     document.querySelectorAll('[data-progress-bar]').forEach(function(e){e.style.width=(steps.length?n/steps.length*100:0)+'%'});
     steps.forEach(function(s){var d=!!state.steps[s.id];s.classList.toggle('is-done',d);
-      var b=s.querySelector('[data-step-toggle]');if(b){b.setAttribute('aria-pressed',d?'true':'false');b.textContent=d?'Done ✓':'Mark step as done'}
+      var b=s.querySelector('[data-step-toggle]');if(b){b.setAttribute('aria-pressed',d?'true':'false');b.textContent=d?(b.getAttribute('data-on')||'Done ✓'):(b.getAttribute('data-off')||'Mark step as done')}
       var r=document.querySelector('.rail a[href="#'+s.id+'"]');if(r){r.classList.toggle('is-done',d)}});
   }
   document.querySelectorAll('[data-step-toggle]').forEach(function(b){b.addEventListener('click',function(){
@@ -840,6 +841,269 @@ def build_index(wfs, sks):
     return page("home", "AI & Advertising: Student Kit",
                 "4 skills and 4 workflows that take you from a brief to a live ad.", body, current="home")
 
+# --------------------------------------------------------------------------- lecture notes page
+
+LEVELS = [
+    (1, 4, "Level 1", "The image", "#aa2d00"),
+    (5, 7, "Level 2", "Motion & sound", "#0a2e0e"),
+    (8, 11, "Level 3", "The agency standard", "#181d26"),
+]
+
+NOTES_CSS = r"""
+.levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2);margin-top:var(--s6)}
+.levels a{border-radius:var(--r-md);padding:var(--s4);background:var(--c);color:#fff;min-height:92px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none}
+.levels b{font-weight:500;font-size:16px}.levels span{font-size:13px;opacity:.85}
+.markers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s4);margin-top:var(--s6)}
+.marker{border-top:1px solid rgba(255,255,255,.3);padding-top:var(--s4)}
+.marker b{display:block;font:500 24px/1.2 var(--mono);letter-spacing:.5px;margin-bottom:var(--s2)}
+.marker span{font-size:15px;line-height:1.5;opacity:.88}
+.level-head{display:flex;align-items:center;gap:var(--s3);margin:var(--s6) 0 var(--s2)}
+.level-head:first-child{margin-top:0}
+.level-head i{width:12px;height:12px;border-radius:var(--r-xs);background:var(--c)}
+.level-head span{font:500 14px/1.35 var(--font);letter-spacing:.16px;color:var(--muted)}
+.teach{margin-top:var(--s5);background:var(--soft);border-radius:var(--r-md);padding:var(--s5)}
+.step.is-done .teach{background:var(--canvas)}
+.teach .k,.box .k{display:block;font:500 13px/1.3 var(--font);letter-spacing:.16px;color:var(--muted);margin-bottom:6px}
+.teach p{margin:0;font-size:22px;line-height:1.4;color:var(--ink)}
+.points{list-style:none;margin:var(--s5) 0 0;padding:0;display:grid;gap:0}
+.points li{display:flex;gap:var(--s4);align-items:flex-start;padding:var(--s3) 0;border-bottom:1px solid var(--hairline);font-size:16px;line-height:1.55;color:var(--body)}
+.points li:last-child{border-bottom:0}
+.lesson{flex:none;font:500 13px/1 var(--font);padding:6px 9px;border-radius:var(--r-sm);background:var(--c);color:var(--o);margin-top:2px;min-width:44px;text-align:center}
+.boxes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3);margin-top:var(--s5)}
+.box{border-radius:var(--r-md);padding:var(--s4);font-size:15px;line-height:1.5;color:var(--ink)}
+.box.show{background:#fde3d1}.box.care{background:var(--cream)}.box.give{background:#dcefe6}.box.assign{background:#fbefc0;grid-column:1/-1}
+.mod-foot{margin-top:var(--s5);display:flex;justify-content:space-between;gap:var(--s3);flex-wrap:wrap}
+.skillrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s4)}
+.focus{border:0;padding:0;margin:0;width:100vw;max-width:100vw;height:100vh;max-height:100vh;background:var(--canvas);color:var(--body)}
+.focus::backdrop{background:rgba(24,29,38,.6)}
+.focus-bar{position:sticky;top:0;background:var(--canvas);border-bottom:1px solid var(--hairline);z-index:2}
+.focus-bar .wrap{height:72px;display:flex;align-items:center;gap:var(--s4)}
+.focus-title{flex:1;min-width:0}
+.focus-title small{display:block;font:500 13px/1.3 var(--font);color:var(--muted);letter-spacing:.16px}
+.focus-title b{display:block;font-weight:400;font-size:20px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.focus-body{padding:var(--s6) 0 var(--section)}
+.focus-body .wrap{max-width:1100px}
+.focus-body .teach p{font-size:36px;line-height:1.25}
+.focus-body .points li{font-size:22px;line-height:1.5;padding:var(--s4) 0}
+.focus-body .lesson{font-size:16px;padding:8px 10px;min-width:56px}
+.focus-body .box{font-size:19px;padding:var(--s5)}
+.focus-hint{font-size:13px;color:var(--muted)}
+@media (max-width:1024px){.markers,.skillrow{grid-template-columns:repeat(2,minmax(0,1fr))}.boxes{grid-template-columns:1fr}}
+@media (max-width:767px){.levels{grid-template-columns:1fr}.markers,.skillrow{grid-template-columns:1fr}.teach p{font-size:19px}
+ .focus-body .teach p{font-size:26px}.focus-body .points li{font-size:18px}.focus-body .box{font-size:16px}.focus-hint{display:none}.focus-bar .btn-small{padding:8px 10px}}
+"""
+
+NOTES_JS = r"""
+(function(){
+  var dlg=document.getElementById('focus');if(!dlg)return;
+  var mods=[].slice.call(document.querySelectorAll('.step'));var cur=0;
+  var body=dlg.querySelector('.focus-body .wrap');var t=dlg.querySelector('[data-focus-title]');var k=dlg.querySelector('[data-focus-kicker]');
+  function show(i){cur=(i+mods.length)%mods.length;var m=mods[cur];
+    body.innerHTML=m.querySelector('.mod-body').innerHTML;
+    dlg.style.setProperty('--c',m.style.getPropertyValue('--c'));dlg.style.setProperty('--o',m.style.getPropertyValue('--o'));
+    t.textContent=m.querySelector('h3').textContent;k.textContent=m.querySelector('.step-kicker').textContent;
+    dlg.querySelector('.focus-body').scrollTop=0;dlg.scrollTop=0}
+  function open(i){show(i);if(dlg.showModal){if(!dlg.open)dlg.showModal()}else{dlg.setAttribute('open','')}}
+  document.querySelectorAll('[data-focus]').forEach(function(b){b.addEventListener('click',function(){open(+b.getAttribute('data-focus'))})});
+  dlg.querySelector('[data-prev]').addEventListener('click',function(){show(cur-1)});
+  dlg.querySelector('[data-next]').addEventListener('click',function(){show(cur+1)});
+  dlg.querySelector('[data-close]').addEventListener('click',function(){dlg.close?dlg.close():dlg.removeAttribute('open')});
+  dlg.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();show(cur+1)}if(e.key==='ArrowLeft'){e.preventDefault();show(cur-1)}});
+})();
+"""
+
+
+def parse_notes():
+    t = (ROOT / "LECTURE-NOTES.md").read_text(encoding="utf-8")
+    notes = {}
+    notes["demo"] = re.search(r"\*\*Demo product in every lecture:\*\*\s*(.+)", t).group(1).strip()
+    notes["tools"] = re.search(r"\*\*Tools:\*\*\s*(.+)", t).group(1).strip()
+
+    def section(title):
+        m = re.search(r"## " + re.escape(title) + r"[^\n]*\n(.*?)(?=\n## |\n---|\Z)", t, re.S)
+        return m.group(1) if m else ""
+
+    notes["before"] = [l[2:].strip() for l in section("Before you record").splitlines() if l.startswith("- ")]
+    rows = [l for l in section("Say these on camera").splitlines() if l.startswith("|")][2:]
+    notes["markers"] = [[c.strip() for c in r.strip("|").split("|")] for r in rows]
+    mods = []
+    for chunk in re.split(r"\n## Module ", t)[1:]:
+        lines = chunk.strip().splitlines()
+        hm = re.match(r"(\d+)\s*·\s*(.+)", lines[0])
+        mod = dict(n=int(hm.group(1)), title=hm.group(2).strip(), points=[], extra={})
+        for l in lines[1:]:
+            l = l.strip()
+            mm = re.match(r"\*\*~?(\d+)\s*min\s*·\s*(Lessons?\s*[^*]+)\*\*", l)
+            if mm:
+                mod["mins"], mod["lessons"] = int(mm.group(1)), mm.group(2).strip()
+                continue
+            pm = re.match(r"- \*\*(\d+\.\d+)\*\*\s*(.+)", l)
+            if pm:
+                mod["points"].append((pm.group(1), pm.group(2)))
+                continue
+            fm = re.match(r"\*\*(Teach|Show|Take care|Give|Assignment):\*\*\s*(.+)", l)
+            if fm:
+                mod["extra"][fm.group(1)] = fm.group(2).strip()
+        mods.append(mod)
+    notes["modules"] = mods
+    return notes
+
+
+def level_of(n):
+    for lo, hi, name, sub, color in LEVELS:
+        if lo <= n <= hi:
+            return name, sub, color
+    return "", "", "#181d26"
+
+
+def build_notes(skills):
+    nt = parse_notes()
+    mods = nt["modules"]
+    total_min = sum(m.get("mins", 0) for m in mods)
+    lessons = sum(len(m["points"]) for m in mods)
+    hours = f"≈ {round(total_min / 60)} h ({total_min} min)"
+
+    levels_html = "".join(
+        f'<a href="#m{lo}" style="--c:{c}"><b>{name}: {sub}</b><span>Modules {lo}–{hi}</span></a>'
+        for lo, hi, name, sub, c in LEVELS)
+    markers = "".join(
+        f'<div class="marker"><b>{html.escape(say.replace("**", "").strip(chr(34)))}</b><span>{inline(when)}</span></div>'
+        for say, when in nt["markers"])
+    before = "".join(
+        f'<label class="check-item"><input type="checkbox" id="prep-{i}"><span>{inline(x)}</span></label>'
+        for i, x in enumerate(nt["before"], 1))
+    rail, cards, last_level = [], [], None
+    for i, m in enumerate(mods):
+        lname, lsub, lcolor = level_of(m["n"])
+        if lname != last_level:
+            cards.append(f'<div class="level-head" style="--c:{lcolor}"><i></i><span>{lname} · {lsub}</span></div>')
+            last_level = lname
+        ex = m["extra"]
+        points = "".join(
+            f'<li><span class="lesson">{num}</span><span>{inline(txt)}</span></li>' for num, txt in m["points"])
+        boxes = "".join(
+            f'<div class="box {cls}"><span class="k">{label}</span>{inline(ex[key])}</div>'
+            for key, label, cls in [("Show", "Show on screen", "show"), ("Take care", "Take care", "care"),
+                                    ("Give", "Give students", "give"), ("Assignment", "Assignment", "assign")]
+            if key in ex)
+        kicker = f'Module {m["n"]} · ~{m.get("mins", "?")} min · {html.escape(m.get("lessons", ""))}'
+        cards.append(f"""
+<article class="step" id="m{m['n']}" style="--c:{lcolor};--o:#ffffff" aria-labelledby="m{m['n']}-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">{m['n']}</span>
+    <div><div class="step-kicker">{kicker}</div><h3 class="title-lg" id="m{m['n']}-t">{html.escape(m['title'])}</h3></div></div>
+  <div class="mod-body">
+    <div class="teach"><span class="k">Teach</span><p>{inline(ex.get('Teach', ''))}</p></div>
+    <ul class="points">{points}</ul>
+    <div class="boxes">{boxes}</div>
+  </div>
+  <div class="mod-foot">
+    <button class="btn btn-secondary btn-small" type="button" data-focus="{i}">Recording view</button>
+    <button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false" data-off="Mark as recorded" data-on="Recorded ✓">Mark as recorded</button>
+  </div>
+</article>""")
+        rail.append(f'<li><a href="#m{m["n"]}"><span class="dot">{m["n"]}</span><span>{html.escape(m["title"])}</span></a></li>')
+
+    skill_cards = "".join(
+        f'<a class="card" href="student-kit/pages/skill-{n}.html"><span class="k">{html.escape(sk["nickname"])}</span>'
+        f'<h3>{html.escape(sk["display"])}</h3><p>Workflow {" + ".join(sk["workflows"])} · Modules {sk["modules"]}</p>'
+        f'<span class="go">Open student page →</span></a>'
+        for n, sk in skills.items())
+
+    body = f"""
+<section class="hero"><div class="wrap">
+  <div class="eyebrow">For the instructor · Recording day</div>
+  <h1 class="display-xl">Lecture notes</h1>
+  <p class="lede">One lecture per module. For each one: what to teach, the key points, what to show, what to take care of, and what to give students.</p>
+  <div class="btn-row"><button class="btn btn-primary" type="button" data-focus="0">Open recording view</button><a class="btn btn-secondary" href="#modules">See all modules</a></div>
+  <dl class="meta">
+    <div><dt>Lectures</dt><dd>{len(mods)} (one per module)</dd></div>
+    <div><dt>Lessons</dt><dd>{lessons}</dd></div>
+    <div><dt>Raw recording</dt><dd>{hours}</dd></div>
+    <div><dt>Demo product</dt><dd>{inline(nt['demo'])}</dd></div>
+  </dl>
+  <div class="levels">{levels_html}</div>
+  <p style="margin-top:var(--s5);font-size:14px;color:var(--muted)"><b style="font-weight:500;color:var(--ink)">Tools:</b> {inline(nt['tools'])}</p>
+</div></section>
+
+<section class="band-tight"><div class="wrap"><div class="sig" style="--c:#aa2d00;--o:#ffffff">
+  <div class="eyebrow" style="color:inherit;opacity:.8">So Claude can cut your video into lessons</div>
+  <h2 class="display-md">Say these on camera</h2>
+  <p class="muted" style="margin-top:12px">Pause for 2 seconds before and after each one.</p>
+  <div class="markers">{markers}</div>
+</div></div></section>
+
+<section class="band" aria-labelledby="prep-t"><div class="wrap">
+  <div class="band-head"><div><div class="eyebrow">Once, before Module 1</div><h2 class="display-md" id="prep-t">Before you record</h2></div></div>
+  <div class="checklist">{before}</div>
+  <div class="check-status" data-check-text aria-live="polite"></div>
+</div></section>
+
+<section class="band band-cream" id="modules" aria-labelledby="mods-t" style="background:var(--soft)"><div class="wrap">
+  <div class="band-head"><div><div class="eyebrow">{len(mods)} lectures · record in order</div><h2 class="display-md" id="mods-t">Module by module</h2>
+  <p>Open <strong>Recording view</strong> on a second screen or tablet while you record: big text, one module at a time, arrow keys to move.</p></div></div>
+  <div class="mobile-progress" style="background:var(--soft)"><div class="progress"><div class="progress-track"><div class="progress-bar" data-progress-bar></div></div><div class="progress-text" data-progress-text>0 of {len(mods)} lectures recorded</div></div></div>
+  <div class="steps-layout">
+    <aside class="rail" aria-label="Modules">
+      <div class="progress"><div class="progress-track"><div class="progress-bar" data-progress-bar></div></div><div class="progress-text" data-progress-text>0 of {len(mods)} lectures recorded</div></div>
+      <ol>{''.join(rail)}</ol>
+      <button class="reset" type="button" data-reset>Reset my progress</button>
+    </aside>
+    <div class="step-list">{''.join(cards)}</div>
+  </div>
+</div></section>
+
+<section class="band" aria-labelledby="kit-t"><div class="wrap">
+  <div class="band-head"><div><div class="eyebrow">What you keep pointing to</div><h2 class="display-md" id="kit-t">The 4 skills</h2>
+  <p>Each has a student page with a matching workflow.</p></div></div>
+  <div class="skillrow">{skill_cards}</div>
+</div></section>
+
+<section class="band-tight"><div class="wrap"><div class="cta">
+  <div><h2 class="display-md">After recording</h2><p>Name the files <code>L01_raw.mp4</code> … <code>L11_raw.mp4</code>, put them in a Google Drive folder and send Claude the folder name. They get cut into the {lessons} lessons using your markers.</p></div>
+</div></div></section>
+
+<dialog class="focus" id="focus" aria-label="Recording view">
+  <div class="focus-bar"><div class="wrap">
+    <div class="focus-title"><small data-focus-kicker></small><b data-focus-title></b></div>
+    <span class="focus-hint">← → to move · Esc to close</span>
+    <button class="btn btn-secondary btn-small" type="button" data-prev aria-label="Previous module">← Prev</button>
+    <button class="btn btn-primary btn-small" type="button" data-next aria-label="Next module">Next →</button>
+    <button class="btn btn-secondary btn-small" type="button" data-close aria-label="Close recording view">Close</button>
+  </div></div>
+  <div class="focus-body"><div class="wrap"></div></div>
+</dialog>
+"""
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture Notes</title>
+<meta name="description" content="Short teaching notes for the 11 AI &amp; Advertising lectures.">
+{FONTS}
+<style>{CSS}{NOTES_CSS}</style>
+</head>
+<body data-page="lecture-notes" data-unit="lectures recorded" style="--c:#181d26;--o:#ffffff">
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="#main"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Lecture Notes</a>
+  <nav class="nav-links" aria-label="Levels"><a href="#m1">Level 1</a><a href="#m5">Level 2</a><a href="#m8">Level 3</a><a href="student-kit/pages/index.html">Student pages</a></nav>
+  <button class="btn btn-primary" type="button" data-focus="0">Recording view</button>
+</div></header>
+<main id="main">
+{body}
+</main>
+<footer class="foot"><div class="wrap">
+  <span>AI &amp; Advertising · Lecture Notes · Ideabro Studio</span>
+  <nav aria-label="Footer"><a href="LECTURE-NOTES.md">LECTURE-NOTES.md</a><a href="student-kit/pages/index.html">Student pages</a><a href="README.md">README</a></nav>
+</div></footer>
+<script>{JS}</script>
+<script>{NOTES_JS}</script>
+</body>
+</html>
+"""
+
+
 # --------------------------------------------------------------------------- main
 
 def main():
@@ -853,6 +1117,8 @@ def main():
     for sk in sks:
         (OUT / f"skill-{sk['name']}.html").write_text(build_skill(sk), encoding="utf-8")
     (OUT / "index.html").write_text(build_index(wfs, sks), encoding="utf-8")
+    (ROOT / "LECTURE-NOTES.html").write_text(build_notes(SKILLS), encoding="utf-8")
+    print("LECTURE-NOTES.html written")
     for wf in wfs:
         print(f"workflow-{wf['num']}: {len(wf['steps'])} steps, {len(wf['need'])} needs, "
               f"{len(wf['done'])} checks, {len(wf['mistakes'])} mistakes, "

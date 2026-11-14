@@ -381,10 +381,10 @@ a.card:active{opacity:.92}
   var steps=[].slice.call(document.querySelectorAll('.step'));
   function renderSteps(){
     var n=steps.filter(function(s){return state.steps[s.id]}).length;
-    document.querySelectorAll('[data-progress-text]').forEach(function(e){e.textContent=n+' of '+steps.length+' steps done'});
+    var unit=document.body.getAttribute('data-unit')||'steps done';document.querySelectorAll('[data-progress-text]').forEach(function(e){e.textContent=n+' of '+steps.length+' '+unit});
     document.querySelectorAll('[data-progress-bar]').forEach(function(e){e.style.width=(steps.length?n/steps.length*100:0)+'%'});
     steps.forEach(function(s){var d=!!state.steps[s.id];s.classList.toggle('is-done',d);
-      var b=s.querySelector('[data-step-toggle]');if(b){b.setAttribute('aria-pressed',d?'true':'false');b.textContent=d?'Done ✓':'Mark step as done'}
+      var b=s.querySelector('[data-step-toggle]');if(b){b.setAttribute('aria-pressed',d?'true':'false');b.textContent=d?(b.getAttribute('data-on')||'Done ✓'):(b.getAttribute('data-off')||'Mark step as done')}
       var r=document.querySelector('.rail a[href="#'+s.id+'"]');if(r){r.classList.toggle('is-done',d)}});
   }
   document.querySelectorAll('[data-step-toggle]').forEach(function(b){b.addEventListener('click',function(){

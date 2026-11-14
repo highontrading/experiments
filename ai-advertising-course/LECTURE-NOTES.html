@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture Notes</title>
+<meta name="description" content="Short teaching notes for the 11 AI &amp; Advertising lectures.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#181d26;--ink-active:#0d1218;--body:#333840;--muted:#41454d;--hairline:#dddddd;--border-strong:#9297a0;
+  --canvas:#ffffff;--soft:#f8fafc;--strong:#e0e2e6;--dark:#181d26;
+  --coral:#aa2d00;--forest:#0a2e0e;--cream:#f5e9d4;--peach:#fcab79;--mint:#a8d8c4;--yellow:#f4d35e;--mustard:#d9a441;
+  --link:#1b61c9;--info-border:#458fff;--success:#006400;
+  --r-xs:2px;--r-sm:6px;--r-md:10px;--r-lg:12px;--r-full:9999px;
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--section:96px;
+  --font:"Inter","Haas",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--canvas);color:var(--body);font:400 16px/1.5 var(--font);font-optical-sizing:auto;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{color:var(--ink);font-weight:400;margin:0;letter-spacing:0}
+p{margin:0}
+a{color:var(--link);text-decoration:none}
+a:active{color:#1a3866}
+code{font-family:var(--mono);font-size:.88em;background:var(--soft);border:1px solid var(--hairline);border-radius:var(--r-sm);padding:1px 6px;color:var(--ink);overflow-wrap:anywhere}
+:focus-visible{outline:2px solid var(--info-border);outline-offset:2px}
+.wrap{max-width:1280px;margin:0 auto;padding:0 var(--s7)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:8px 12px;border-radius:var(--r-sm);z-index:50}
+.skip:focus{left:8px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;height:64px;background:var(--canvas);border-bottom:1px solid var(--hairline)}
+.nav .wrap{height:100%;display:flex;align-items:center;gap:var(--s6)}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:500;font-size:16px;white-space:nowrap}
+.brand-mark{width:24px;height:24px;border-radius:var(--r-sm);display:grid;grid-template-columns:1fr 1fr;gap:2px;overflow:hidden}
+.brand-mark i:nth-child(1){background:var(--coral)}.brand-mark i:nth-child(2){background:var(--forest)}
+.brand-mark i:nth-child(3){background:var(--ink)}.brand-mark i:nth-child(4){background:var(--mustard)}
+.nav-links{display:flex;gap:var(--s5);font-size:14px;flex:1;min-width:0}
+.nav-links a{color:var(--ink);white-space:nowrap}
+.nav-links a[aria-current=page]{box-shadow:inset 0 -2px 0 var(--ink);padding-bottom:4px}
+.nav .btn{padding:10px 16px;font-size:14px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:500 16px/1.4 var(--font);padding:16px 24px;border-radius:var(--r-lg);border:1px solid transparent;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn-primary{background:var(--ink);color:#fff;box-shadow:0 1px 2px rgba(24,29,38,.12),0 2px 8px rgba(27,97,201,.10)}
+.btn-primary:active{background:var(--ink-active);color:#fff}
+.btn-secondary{background:var(--canvas);color:var(--ink);border-color:var(--hairline)}
+.btn-secondary:active{background:var(--soft);color:var(--ink)}
+.btn-small{padding:8px 14px;font-size:14px;border-radius:var(--r-sm)}
+.btn-row{display:flex;flex-wrap:wrap;gap:var(--s3)}
+
+/* typography roles */
+.eyebrow{font:500 14px/1.35 var(--font);letter-spacing:.16px;color:var(--muted);margin-bottom:var(--s4)}
+.display-xl{font-size:48px;line-height:1.1;font-weight:500}
+.display-lg{font-size:40px;line-height:1.2}
+.display-md{font-size:32px;line-height:1.2}
+.title-lg{font-size:24px;line-height:1.35;letter-spacing:.12px}
+.title-md{font-size:20px;line-height:1.5}
+.lede{font-size:20px;line-height:1.5;color:var(--body);max-width:720px;margin-top:var(--s5)}
+
+/* bands */
+.hero{padding:var(--section) 0 var(--s7)}
+.band{padding:var(--section) 0}
+.band-tight{padding:var(--s7) 0}
+.band-cream{background:var(--cream)}
+.band-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s5);margin-bottom:var(--s6);flex-wrap:wrap}
+.band-head p{max-width:560px;margin-top:var(--s3)}
+
+/* meta row */
+.meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);margin-top:var(--s7)}
+.meta div{padding:var(--s5) var(--s5) var(--s5) 0}
+.meta div+div{padding-left:var(--s5);border-left:1px solid var(--hairline)}
+.meta dt{font:500 14px/1.35 var(--font);color:var(--muted);letter-spacing:.16px}
+.meta dd{margin:6px 0 0;font:500 16px/1.4 var(--font);color:var(--ink)}
+.hero .btn-row{margin-top:var(--s6)}
+
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--s2);margin-top:var(--s6)}
+.pipe-stage{border-radius:var(--r-md);padding:var(--s4);background:var(--soft);border:1px solid var(--hairline);min-height:92px;display:flex;flex-direction:column;justify-content:space-between;color:var(--muted)}
+.pipe-stage b{font-weight:500;font-size:16px;color:var(--ink)}
+.pipe-stage span{font-size:13px}
+.pipe-stage.on{background:var(--c);border-color:var(--c);color:var(--o)}
+.pipe-stage.on b{color:var(--o)}
+a.pipe-stage{text-decoration:none}
+
+/* signature card */
+.sig{background:var(--c);color:var(--o);border-radius:var(--r-lg);padding:var(--s7)}
+.sig h2,.sig h3{color:var(--o)}
+.sig .muted{opacity:.82}
+.sig-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s7);align-items:start}
+.need-list{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
+.need-list li{display:flex;gap:var(--s3);align-items:flex-start;font-size:18px;line-height:1.4;padding:var(--s4) 0;border-bottom:1px solid color-mix(in srgb,var(--o) 22%,transparent)}
+.need-list li:last-child{border-bottom:0}
+.need-list .n{flex:none;width:28px;height:28px;border-radius:var(--r-full);border:1px solid color-mix(in srgb,var(--o) 45%,transparent);display:grid;place-items:center;font-size:13px;font-weight:500}
+.sig code{background:color-mix(in srgb,var(--o) 12%,transparent);border-color:color-mix(in srgb,var(--o) 25%,transparent);color:var(--o)}
+
+/* steps */
+.steps-layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:var(--s7);align-items:start}
+.rail{position:sticky;top:96px}
+.rail ol{list-style:none;margin:var(--s5) 0 0;padding:0;display:grid;gap:2px}
+.rail a{display:flex;gap:var(--s3);align-items:center;padding:10px 12px;border-radius:var(--r-md);color:var(--body);font-size:14px;line-height:1.3}
+.rail a.is-active{background:var(--soft);color:var(--ink)}
+.rail .dot{flex:none;width:26px;height:26px;border-radius:var(--r-full);border:1px solid var(--hairline);display:grid;place-items:center;font-size:12px;font-weight:500;color:var(--ink);background:var(--canvas)}
+.rail a.is-done .dot{background:var(--ink);border-color:var(--ink);color:#fff}
+.progress{display:grid;gap:var(--s2)}
+.progress-track{height:6px;border-radius:var(--r-full);background:var(--strong);overflow:hidden}
+.progress-bar{height:100%;width:0;background:var(--ink);border-radius:var(--r-full);transition:width .3s ease}
+.progress-text{font:500 14px/1.35 var(--font);color:var(--muted)}
+.rail .reset{margin-top:var(--s5);background:none;border:0;padding:0;font:400 14px var(--font);color:var(--link);cursor:pointer}
+.mobile-progress{display:none}
+.step-list{display:grid;gap:var(--s5)}
+.step{border:1px solid var(--hairline);border-radius:var(--r-lg);padding:var(--s6);background:var(--canvas);scroll-margin-top:88px}
+.step.is-done{background:var(--soft)}
+.step-head{display:flex;gap:var(--s4);align-items:flex-start}
+.step-num{flex:none;width:44px;height:44px;border-radius:var(--r-full);background:var(--c);color:var(--o);display:grid;place-items:center;font-weight:500;font-size:16px}
+.step.is-done .step-num{background:var(--ink);color:#fff}
+.step-kicker{font:500 14px/1.35 var(--font);color:var(--muted);letter-spacing:.16px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);margin:var(--s5) 0}
+.fact{background:var(--soft);border-radius:var(--r-md);padding:var(--s4)}
+.step.is-done .fact{background:var(--canvas)}
+.fact dt{font:500 13px/1.3 var(--font);color:var(--muted);letter-spacing:.16px}
+.fact dd{margin:4px 0 0;color:var(--ink);font-size:15px;line-height:1.4}
+.step p{margin-top:var(--s4);font-size:16px;line-height:1.55}
+.typebox{margin-top:var(--s5);border-radius:var(--r-md);background:var(--dark);color:#fff;overflow:hidden}
+.typebox-head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px 10px 20px;border-bottom:1px solid rgba(255,255,255,.12)}
+.typebox-head span{font:500 13px/1.3 var(--font);letter-spacing:.16px;color:rgba(255,255,255,.75)}
+.typebox pre{margin:0;padding:20px;font:400 14px/1.65 var(--mono);white-space:pre-wrap;word-break:break-word;color:#fff}
+.copy{background:var(--canvas);color:var(--ink);border:1px solid var(--hairline);border-radius:var(--r-sm);font:500 13px/1 var(--font);padding:9px 14px;cursor:pointer;min-height:34px}
+.copy:active{background:var(--soft)}
+.copy.is-copied{background:var(--success);border-color:var(--success);color:#fff}
+.checknote{margin-top:var(--s5);background:var(--cream);border-radius:var(--r-md);padding:var(--s4) var(--s5);display:flex;gap:var(--s3);align-items:flex-start;color:var(--ink);font-size:15px;line-height:1.5}
+.checknote b{font-weight:500;flex:none}
+.step-foot{margin-top:var(--s5);display:flex;justify-content:flex-end}
+.step-toggle[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* checklist */
+.checklist{display:grid;gap:var(--s3);max-width:860px}
+.check-item{display:flex;gap:var(--s4);align-items:flex-start;background:var(--canvas);border-radius:var(--r-md);padding:var(--s4) var(--s5);cursor:pointer;color:var(--ink);font-size:17px;line-height:1.45}
+.check-item input{appearance:none;-webkit-appearance:none;flex:none;width:24px;height:24px;margin:1px 0 0;border:1.5px solid var(--border-strong);border-radius:var(--r-sm);background:var(--canvas);display:grid;place-items:center;cursor:pointer}
+.check-item input:checked{background:var(--ink);border-color:var(--ink)}
+.check-item input:checked::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg)}
+.check-item:has(input:checked) span{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--border-strong)}
+.check-status{margin-top:var(--s5);font:500 14px/1.35 var(--font);color:var(--muted)}
+
+/* dark card list */
+.mistakes{list-style:none;margin:var(--s6) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s5)}
+.mistakes li{border-top:1px solid rgba(255,255,255,.22);padding-top:var(--s4);font-size:16px;line-height:1.5}
+.mistakes .x{display:block;font:500 13px/1 var(--font);letter-spacing:.16px;opacity:.7;margin-bottom:var(--s3)}
+
+/* cta band */
+.cta{background:var(--strong);border-radius:var(--r-lg);padding:var(--s7);display:flex;justify-content:space-between;align-items:center;gap:var(--s5);flex-wrap:wrap}
+.cta p{margin-top:var(--s2)}
+
+/* grids & cards */
+.grid{display:grid;gap:var(--s5)}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.uneven{align-items:start}
+.card{border-radius:var(--r-md);padding:var(--s5);background:var(--canvas);border:1px solid var(--hairline);color:var(--ink);display:flex;flex-direction:column;gap:var(--s3)}
+.card.fill{border-color:transparent;background:var(--bg)}
+.card .k{font:500 13px/1.3 var(--font);letter-spacing:.16px;color:var(--muted)}
+.card.fill .k{color:rgba(24,29,38,.7)}
+.card h3{font-size:20px;line-height:1.35}
+.card p{font-size:15px;line-height:1.5;color:var(--body)}
+.card.fill p{color:var(--ink)}
+.card .go{margin-top:auto;padding-top:var(--s3);font-weight:500;font-size:15px;color:var(--ink)}
+a.card{text-decoration:none}
+a.card:active{opacity:.92}
+.bignum{font-size:48px;line-height:1;font-weight:400;color:var(--ink)}
+.chip{display:inline-block;font:500 13px/1.2 var(--font);padding:5px 10px;border-radius:var(--r-sm);background:rgba(255,255,255,.6);color:var(--ink);border:1px solid rgba(24,29,38,.12)}
+.mini-progress{font:500 13px/1.3 var(--font);color:rgba(24,29,38,.72)}
+.h-180{min-height:180px}.h-220{min-height:220px}.h-260{min-height:260px}.h-300{min-height:300px}
+
+/* asks (copyable rows on signature card) */
+.asks{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.asks li{display:flex;gap:var(--s4);align-items:center;justify-content:space-between;padding:var(--s4) 0;border-bottom:1px solid color-mix(in srgb,var(--o) 22%,transparent)}
+.asks li:last-child{border-bottom:0}
+.asks q{font-size:18px;line-height:1.45;quotes:"\201C" "\201D"}
+
+/* tabs */
+.tabs{display:grid;grid-template-columns:240px minmax(0,1fr);background:var(--canvas);border-radius:var(--r-lg);overflow:hidden}
+.tablist{display:flex;flex-direction:column;padding:var(--s4);gap:2px;border-right:1px solid var(--hairline);background:var(--soft)}
+.tab{all:unset;cursor:pointer;padding:12px 16px;border-radius:var(--r-md);font:400 18px/1.4 var(--font);color:var(--muted)}
+.tab[aria-selected=true]{background:var(--canvas);color:var(--ink);box-shadow:0 0 0 1px var(--hairline)}
+.tab:focus-visible{outline:2px solid var(--info-border)}
+.tabpanel{padding:var(--s6)}
+.tabpanel ol{margin:0;padding-left:22px;display:grid;gap:var(--s3);font-size:16px;line-height:1.55;color:var(--ink)}
+.after-attach{margin-top:var(--s5)}
+
+/* logo strip */
+.strip{display:flex;flex-wrap:wrap;gap:var(--s3) var(--s6);color:var(--muted);font-size:15px;padding:var(--s6) 0;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);margin-top:var(--s7)}
+.strip b{font-weight:500;color:var(--ink);margin-right:var(--s3)}
+
+/* how it works */
+.how{list-style:none;margin:var(--s6) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s5);counter-reset:how}
+.how li{counter-increment:how;border-top:1px solid color-mix(in srgb,var(--o) 30%,transparent);padding-top:var(--s4)}
+.how li::before{content:counter(how,decimal-leading-zero);display:block;font-size:32px;line-height:1.2;margin-bottom:var(--s3)}
+.how b{display:block;font-weight:500;font-size:17px;margin-bottom:6px}
+.how span{font-size:15px;line-height:1.5;opacity:.85}
+
+/* footer */
+.foot{padding:var(--s7) 0 var(--s6);margin-top:var(--section);border-top:1px solid var(--hairline);font-size:14px;color:var(--muted)}
+.foot .wrap{display:flex;justify-content:space-between;gap:var(--s5);flex-wrap:wrap}
+.foot nav{display:flex;flex-wrap:wrap;gap:var(--s5)}
+.foot a{color:var(--muted)}
+
+@media (max-width:1024px){
+  .grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .how{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sig-grid{grid-template-columns:1fr;gap:var(--s5)}
+  .mistakes{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .steps-layout{grid-template-columns:1fr}
+  .rail{display:none}
+  .mobile-progress{display:block;position:sticky;top:64px;z-index:10;background:var(--canvas);padding:var(--s3) 0;border-bottom:1px solid var(--hairline);margin-bottom:var(--s5)}
+  .nav-links{display:none}
+  .tabs{grid-template-columns:1fr}
+  .tablist{display:grid;grid-template-columns:1fr 1fr;border-right:0;border-bottom:1px solid var(--hairline)}
+  .tab{font-size:16px;white-space:nowrap}
+}
+@media (max-width:767px){
+  .wrap{padding:0 16px}
+  .hero{padding:var(--s7) 0 var(--s6)}
+  .band{padding:64px 0}
+  .display-xl{font-size:36px}
+  .display-lg{font-size:32px}
+  .display-md{font-size:26px}
+  .lede{font-size:18px}
+  .meta{grid-template-columns:1fr 1fr}
+  .meta div,.meta div+div{padding:var(--s4) var(--s3) var(--s4) 0;border-left:0}
+  .meta div:nth-child(even){padding-left:var(--s4);border-left:1px solid var(--hairline)}
+  .meta div:nth-child(n+3){border-top:1px solid var(--hairline)}
+  .pipe{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .sig,.cta{padding:var(--s5)}
+  .step{padding:var(--s5) var(--s4)}
+  .facts{grid-template-columns:1fr}
+  .grid-2,.grid-3,.grid-4,.how{grid-template-columns:1fr}
+  .h-180,.h-220,.h-260,.h-300{min-height:0}
+  .asks li{flex-direction:column;align-items:flex-start}
+  .asks q{font-size:16px}
+  .btn-row .btn{flex:1 1 auto}
+  .nav .btn{display:none}
+  .tabpanel{padding:var(--s5)}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.progress-bar{transition:none}}
+
+.levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2);margin-top:var(--s6)}
+.levels a{border-radius:var(--r-md);padding:var(--s4);background:var(--c);color:#fff;min-height:92px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none}
+.levels b{font-weight:500;font-size:16px}.levels span{font-size:13px;opacity:.85}
+.markers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s4);margin-top:var(--s6)}
+.marker{border-top:1px solid rgba(255,255,255,.3);padding-top:var(--s4)}
+.marker b{display:block;font:500 24px/1.2 var(--mono);letter-spacing:.5px;margin-bottom:var(--s2)}
+.marker span{font-size:15px;line-height:1.5;opacity:.88}
+.level-head{display:flex;align-items:center;gap:var(--s3);margin:var(--s6) 0 var(--s2)}
+.level-head:first-child{margin-top:0}
+.level-head i{width:12px;height:12px;border-radius:var(--r-xs);background:var(--c)}
+.level-head span{font:500 14px/1.35 var(--font);letter-spacing:.16px;color:var(--muted)}
+.teach{margin-top:var(--s5);background:var(--soft);border-radius:var(--r-md);padding:var(--s5)}
+.step.is-done .teach{background:var(--canvas)}
+.teach .k,.box .k{display:block;font:500 13px/1.3 var(--font);letter-spacing:.16px;color:var(--muted);margin-bottom:6px}
+.teach p{margin:0;font-size:22px;line-height:1.4;color:var(--ink)}
+.points{list-style:none;margin:var(--s5) 0 0;padding:0;display:grid;gap:0}
+.points li{display:flex;gap:var(--s4);align-items:flex-start;padding:var(--s3) 0;border-bottom:1px solid var(--hairline);font-size:16px;line-height:1.55;color:var(--body)}
+.points li:last-child{border-bottom:0}
+.lesson{flex:none;font:500 13px/1 var(--font);padding:6px 9px;border-radius:var(--r-sm);background:var(--c);color:var(--o);margin-top:2px;min-width:44px;text-align:center}
+.boxes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3);margin-top:var(--s5)}
+.box{border-radius:var(--r-md);padding:var(--s4);font-size:15px;line-height:1.5;color:var(--ink)}
+.box.show{background:#fde3d1}.box.care{background:var(--cream)}.box.give{background:#dcefe6}.box.assign{background:#fbefc0;grid-column:1/-1}
+.mod-foot{margin-top:var(--s5);display:flex;justify-content:space-between;gap:var(--s3);flex-wrap:wrap}
+.skillrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s4)}
+.focus{border:0;padding:0;margin:0;width:100vw;max-width:100vw;height:100vh;max-height:100vh;background:var(--canvas);color:var(--body)}
+.focus::backdrop{background:rgba(24,29,38,.6)}
+.focus-bar{position:sticky;top:0;background:var(--canvas);border-bottom:1px solid var(--hairline);z-index:2}
+.focus-bar .wrap{height:72px;display:flex;align-items:center;gap:var(--s4)}
+.focus-title{flex:1;min-width:0}
+.focus-title small{display:block;font:500 13px/1.3 var(--font);color:var(--muted);letter-spacing:.16px}
+.focus-title b{display:block;font-weight:400;font-size:20px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.focus-body{padding:var(--s6) 0 var(--section)}
+.focus-body .wrap{max-width:1100px}
+.focus-body .teach p{font-size:36px;line-height:1.25}
+.focus-body .points li{font-size:22px;line-height:1.5;padding:var(--s4) 0}
+.focus-body .lesson{font-size:16px;padding:8px 10px;min-width:56px}
+.focus-body .box{font-size:19px;padding:var(--s5)}
+.focus-hint{font-size:13px;color:var(--muted)}
+@media (max-width:1024px){.markers,.skillrow{grid-template-columns:repeat(2,minmax(0,1fr))}.boxes{grid-template-columns:1fr}}
+@media (max-width:767px){.levels{grid-template-columns:1fr}.markers,.skillrow{grid-template-columns:1fr}.teach p{font-size:19px}
+ .focus-body .teach p{font-size:26px}.focus-body .points li{font-size:18px}.focus-body .box{font-size:16px}.focus-hint{display:none}.focus-bar .btn-small{padding:8px 10px}}
+</style>
+</head>
+<body data-page="lecture-notes" data-unit="lectures recorded" style="--c:#181d26;--o:#ffffff">
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="#main"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Lecture Notes</a>
+  <nav class="nav-links" aria-label="Levels"><a href="#m1">Level 1</a><a href="#m5">Level 2</a><a href="#m8">Level 3</a><a href="student-kit/pages/index.html">Student pages</a></nav>
+  <button class="btn btn-primary" type="button" data-focus="0">Recording view</button>
+</div></header>
+<main id="main">
+
+<section class="hero"><div class="wrap">
+  <div class="eyebrow">For the instructor · Recording day</div>
+  <h1 class="display-xl">Lecture notes</h1>
+  <p class="lede">One lecture per module. For each one: what to teach, the key points, what to show, what to take care of, and what to give students.</p>
+  <div class="btn-row"><button class="btn btn-primary" type="button" data-focus="0">Open recording view</button><a class="btn btn-secondary" href="#modules">See all modules</a></div>
+  <dl class="meta">
+    <div><dt>Lectures</dt><dd>11 (one per module)</dd></div>
+    <div><dt>Lessons</dt><dd>41</dd></div>
+    <div><dt>Raw recording</dt><dd>≈ 8 h (505 min)</dd></div>
+    <div><dt>Demo product</dt><dd>Kesar &amp; Co. Saffron Glow Serum (or any real product on your desk).</dd></div>
+  </dl>
+  <div class="levels"><a href="#m1" style="--c:#aa2d00"><b>Level 1: The image</b><span>Modules 1–4</span></a><a href="#m5" style="--c:#0a2e0e"><b>Level 2: Motion & sound</b><span>Modules 5–7</span></a><a href="#m8" style="--c:#181d26"><b>Level 3: The agency standard</b><span>Modules 8–11</span></a></div>
+  <p style="margin-top:var(--s5);font-size:14px;color:var(--muted)"><b style="font-weight:500;color:var(--ink)">Tools:</b> Google Flow (video: Google Omni Flash 1.2, images: Nano Banana 1.1) and ChatGPT (images: GPT Image 2.6).</p>
+</div></section>
+
+<section class="band-tight"><div class="wrap"><div class="sig" style="--c:#aa2d00;--o:#ffffff">
+  <div class="eyebrow" style="color:inherit;opacity:.8">So Claude can cut your video into lessons</div>
+  <h2 class="display-md">Say these on camera</h2>
+  <p class="muted" style="margin-top:12px">Pause for 2 seconds before and after each one.</p>
+  <div class="markers"><div class="marker"><b>LESSON 3.2</b><span>At the start of each lesson</span></div><div class="marker"><b>RETAKE</b><span>After a mistake. Pause, then repeat the sentence.</span></div><div class="marker"><b>B-ROLL</b><span>Where a finished image or clip should fill the screen</span></div><div class="marker"><b>END LECTURE</b><span>At the end</span></div></div>
+</div></div></section>
+
+<section class="band" aria-labelledby="prep-t"><div class="wrap">
+  <div class="band-head"><div><div class="eyebrow">Once, before Module 1</div><h2 class="display-md" id="prep-t">Before you record</h2></div></div>
+  <div class="checklist"><label class="check-item"><input type="checkbox" id="prep-1"><span>5 phone photos of the product (front, 2 sides, back, top) on a plain background in daylight.</span></label><label class="check-item"><input type="checkbox" id="prep-2"><span>Flow, ChatGPT, Claude, Gemini, ElevenLabs, Suno and Meta Ads Manager signed in.</span></label><label class="check-item"><input type="checkbox" id="prep-3"><span>Pre-generate the slow video clips. Start one render live, then show the one you made earlier.</span></label><label class="check-item"><input type="checkbox" id="prep-4"><span>Record <strong>in order</strong>, because each lecture uses outputs from the one before.</span></label></div>
+  <div class="check-status" data-check-text aria-live="polite"></div>
+</div></section>
+
+<section class="band band-cream" id="modules" aria-labelledby="mods-t" style="background:var(--soft)"><div class="wrap">
+  <div class="band-head"><div><div class="eyebrow">11 lectures · record in order</div><h2 class="display-md" id="mods-t">Module by module</h2>
+  <p>Open <strong>Recording view</strong> on a second screen or tablet while you record: big text, one module at a time, arrow keys to move.</p></div></div>
+  <div class="mobile-progress" style="background:var(--soft)"><div class="progress"><div class="progress-track"><div class="progress-bar" data-progress-bar></div></div><div class="progress-text" data-progress-text>0 of 11 lectures recorded</div></div></div>
+  <div class="steps-layout">
+    <aside class="rail" aria-label="Modules">
+      <div class="progress"><div class="progress-track"><div class="progress-bar" data-progress-bar></div></div><div class="progress-text" data-progress-text>0 of 11 lectures recorded</div></div>
+      <ol><li><a href="#m1"><span class="dot">1</span><span>AI in advertising: the new playbook</span></a></li><li><a href="#m2"><span class="dot">2</span><span>Briefs, strategy and the big idea</span></a></li><li><a href="#m3"><span class="dot">3</span><span>AI product photography</span></a></li><li><a href="#m4"><span class="dot">4</span><span>Models, styling and virtual sets</span></a></li><li><a href="#m5"><span class="dot">5</span><span>AI video ads and campaign films</span></a></li><li><a href="#m6"><span class="dot">6</span><span>Sound, voice and music</span></a></li><li><a href="#m7"><span class="dot">7</span><span>AI UGC and brand ambassadors</span></a></li><li><a href="#m8"><span class="dot">8</span><span>Meta ads: statics, variations and testing</span></a></li><li><a href="#m9"><span class="dot">9</span><span>Editing, end cards and brand kits (vibe editing)</span></a></li><li><a href="#m10"><span class="dot">10</span><span>Hybrid ads: real shoot + AI</span></a></li><li><a href="#m11"><span class="dot">11</span><span>Capstone: your full campaign</span></a></li></ol>
+      <button class="reset" type="button" data-reset>Reset my progress</button>
+    </aside>
+    <div class="step-list"><div class="level-head" style="--c:#aa2d00"><i></i><span>Level 1 · The image</span></div>
+<article class="step" id="m1" style="--c:#aa2d00;--o:#ffffff" aria-labelledby="m1-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">1</span>
+    <div><div class="step-kicker">Module 1 · ~30 min · Lessons 1.1–1.4</div><h3 class="title-lg" id="m1-t">AI in advertising: the new playbook</h3></div></div>
+  <div class="mod-body">
+    <div class="teach"><span class="k">Teach</span><p>AI doesn't replace taste. It replaces the shoot.</p></div>
+    <ul class="points"><li><span class="lesson">1.1</span><span>An ad goes through 6 steps: Brief → Concept → Visuals → Motion → Edit → Launch. AI makes visuals, motion and edits fast. You bring the idea and the direction.</span></li><li><span class="lesson">1.2</span><span>The stack: Flow for video and images, ChatGPT for images, Claude/ChatGPT/Gemini for thinking, ElevenLabs for voice, Suno for music, Claude for editing, Meta Ads Manager to launch.</span></li><li><span class="lesson">1.3</span><span>Start on free plans and pay only when you hit a limit. Set up one project folder and use the file naming from day 1.</span></li><li><span class="lesson">1.4</span><span>The rules: use AI tools on a plan that allows commercial use. No celebrity faces, no competitor logos, no fake results. Check Meta's AI labels and the ASCI guidelines on launch day.</span></li></ul>
+    <div class="boxes"><div class="box show"><span class="k">Show on screen</span>a quick tour of Flow and ChatGPT. Attach one skill in Claude, ChatGPT and Gemini (30 seconds each).</div><div class="box care"><span class="k">Take care</span>teach ideas, not menus (menus change). Don't quote tool prices; say "check the plan page".</div><div class="box give"><span class="k">Give students</span><code>START-HERE</code>, all 4 skills.</div><div class="box assign"><span class="k">Assignment</span>pick your brand and take 5 product photos.</div></div>
+  </div>
+  <div class="mod-foot">
+    <button class="btn btn-secondary btn-small" type="button" data-focus="0">Recording view</button>
+    <button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false" data-off="Mark as recorded" data-on="Recorded ✓">Mark as recorded</button>
+  </div>
+</article>
+<article class="step" id="m2" style="--c:#aa2d00;--o:#ffffff" aria-labelledby="m2-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">2</span>
+    <div><div class="step-kicker">Module 2 · ~45 min · Lessons 2.1–2.4</div><h3 class="title-lg" id="m2-t">Briefs, strategy and the big idea</h3></div></div>
+  <div class="mod-body">
+    <div class="teach"><span class="k">Teach</span><p>A good AI ad starts with a good idea, not a good prompt.</p></div>
+    <ul class="points"><li><span class="lesson">2.1</span><span>A brief has 5 things: goal, audience, one message, must-haves, how we measure. Turn a messy WhatsApp message into a one-page brief.</span></li><li><span class="lesson">2.2</span><span>Let AI read customer reviews and competitor ads (Meta Ad Library). Pick one angle: pain, desire, proof or festive.</span></li><li><span class="lesson">2.3</span><span>The hook is the first 2 seconds. Types: visual shock, question, bold claim, pattern break, offer. Write 30 and keep 5.</span></li><li><span class="lesson">2.4</span><span>A 15s script goes hook → problem → product → proof → CTA. The storyboard has 6 frames, and each frame becomes an image prompt.</span></li></ul>
+    <div class="boxes"><div class="box show"><span class="k">Show on screen</span><code>ad-strategist</code> taking a messy brief → clean brief → 30 hooks → 15s script → storyboard. Then fill in the Brand Bible.</div><div class="box care"><span class="k">Take care</span>don't accept AI's first idea; ask it to make the idea "less generic". One message per ad.</div><div class="box give"><span class="k">Give students</span><code>ad-strategist</code>, Workflow 01, <code>creative-brief</code>, <code>brand-bible</code>.</div></div>
+  </div>
+  <div class="mod-foot">
+    <button class="btn btn-secondary btn-small" type="button" data-focus="1">Recording view</button>
+    <button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false" data-off="Mark as recorded" data-on="Recorded ✓">Mark as recorded</button>
+  </div>
+</article>
+<article class="step" id="m3" style="--c:#aa2d00;--o:#ffffff" aria-labelledby="m3-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">3</span>
+    <div><div class="step-kicker">Module 3 · ~50 min · Lessons 3.1–3.4</div><h3 class="title-lg" id="m3-t">AI product photography</h3></div></div>
+  <div class="mod-body">
+    <div class="teach"><span class="k">Teach</span><p>One phone photo can become a full studio shoot, as long as the label stays real.</p></div>
+    <ul class="points"><li><span class="lesson">3.1</span><span>Packshots: a good reference photo is taken in daylight on a plain background with the label sharp. Attach the photo and use lighting words (softbox, rim light, gradient background).</span></li><li><span class="lesson">3.2</span><span>Lifestyle: put the product in scenes that fit the brand (vanity, Diwali, beach). Props tell the story.</span></li><li><span class="lesson">3.3</span><span>Accuracy: zoom into the label every time. Fix it with one change per round in edit mode, regenerate, or paste the real label on in editing. Every image gets a verdict: SHIP, FIX or REGENERATE.</span></li><li><span class="lesson">3.4</span><span>E-commerce set: white-background main image, infographic, scale shot, lifestyle shot.</span></li></ul>
+    <div class="boxes"><div class="box show"><span class="k">Show on screen</span>Kesar photo → 4 packshots → 2 lifestyle shots → fix a warped label live → e-com set. Run Nano Banana 1.1 and GPT Image 2.6 side by side.</div><div class="box care"><span class="k">Take care</span>always attach the real photo. Zoom into the label on camera; that's the lesson.</div><div class="box give"><span class="k">Give students</span><code>ad-image-director</code>, Workflow 02.</div></div>
+  </div>
+  <div class="mod-foot">
+    <button class="btn btn-secondary btn-small" type="button" data-focus="2">Recording view</button>
+    <button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false" data-off="Mark as recorded" data-on="Recorded ✓">Mark as recorded</button>
+  </div>
+</article>
+<article class="step" id="m4" style="--c:#aa2d00;--o:#ffffff" aria-labelledby="m4-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">4</span>
+    <div><div class="step-kicker">Module 4 · ~45 min · Lessons 4.1–4.4</div><h3 class="title-lg" id="m4-t">Models, styling and virtual sets</h3></div></div>
+  <div class="mod-body">
+    <div class="teach"><span class="k">Teach</span><p>Same face, same look, every shot. That's what makes it a brand.</p></div>
+    <ul class="points"><li><span class="lesson">4.1</span><span>Consistent model: make a character sheet (front, side, full body, expressions) and attach it every time.</span></li><li><span class="lesson">4.2</span><span>Styling: describe fabric, colour and fit exactly. Keep the garment's real colours.</span></li><li><span class="lesson">4.3</span><span>Indian skin tones and outfits: don't let AI lighten skin. Name the real outfit (Banarasi saree, Chikankari kurta) and a real setting.</span></li><li><span class="lesson">4.4</span><span>Sets: mood board → one set → the same light in every shot.</span></li></ul>
+    <div class="boxes"><div class="box show"><span class="k">Show on screen</span>the Kesar brand model sheet, a Loom Street lookbook (3 looks), and one set from 3 angles.</div><div class="box care"><span class="k">Take care</span>no real people's faces. Check hands, jewellery and skin tone in every shot.</div><div class="box give"><span class="k">Give students</span><code>ad-image-director</code>, Workflow 02.</div></div>
+  </div>
+  <div class="mod-foot">
+    <button class="btn btn-secondary btn-small" type="button" data-focus="3">Recording view</button>
+    <button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false" data-off="Mark as recorded" data-on="Recorded ✓">Mark as recorded</button>
+  </div>
+</article><div class="level-head" style="--c:#0a2e0e"><i></i><span>Level 2 · Motion & sound</span></div>
+<article class="step" id="m5" style="--c:#0a2e0e;--o:#ffffff" aria-labelledby="m5-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">5</span>
+    <div><div class="step-kicker">Module 5 · ~60 min · Lessons 5.1–5.4</div><h3 class="title-lg" id="m5-t">AI video ads and campaign films</h3></div></div>
+  <div class="mod-body">
+    <div class="teach"><span class="k">Teach</span><p>Turn stills into ads that move. Each shot gets one move and one job.</p></div>
+    <ul class="points"><li><span class="lesson">5.1</span><span>Image to video: use your approved still as the start frame in Flow. Camera words: push-in, orbit, dolly, tilt. Make 2–3 takes and pick the best.</span></li><li><span class="lesson">5.2</span><span>Multi-shot film: shot list → one keyframe per shot → one clip per shot. Keep the light, colour and wardrobe the same throughout.</span></li><li><span class="lesson">5.3</span><span>CGI without a 3D team: giant product in a city, splash explosions, impossible scale.</span></li><li><span class="lesson">5.4</span><span>Recipes: food pour, fabric movement, tech reveal.</span></li></ul>
+    <div class="boxes"><div class="box show"><span class="k">Show on screen</span>Kesar hero still → 3 clips (push-in, orbit, reveal) with Google Omni Flash 1.2. Then a 4-shot 15s film and a giant serum bottle on the Mumbai skyline.</div><div class="box care"><span class="k">Take care</span>never wait on a render on camera. Always start product shots from the approved still, because text-to-video breaks labels. Keep clips 4–8s.</div><div class="box give"><span class="k">Give students</span><code>ad-video-director</code>, Workflow 03.</div></div>
+  </div>
+  <div class="mod-foot">
+    <button class="btn btn-secondary btn-small" type="button" data-focus="4">Recording view</button>
+    <button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false" data-off="Mark as recorded" data-on="Recorded ✓">Mark as recorded</button>
+  </div>
+</article>
+<article class="step" id="m6" style="--c:#0a2e0e;--o:#ffffff" aria-labelledby="m6-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">6</span>
+    <div><div class="step-kicker">Module 6 · ~45 min · Lessons 6.1–6.4</div><h3 class="title-lg" id="m6-t">Sound, voice and music</h3></div></div>
+  <div class="mod-body">
+    <div class="teach"><span class="k">Teach</span><p>Sound is half the ad. People feel it before they see it.</p></div>
+    <ul class="points"><li><span class="lesson">6.1</span><span>Voiceover: write for the ear in short lines. In ElevenLabs, pick a voice and direct the pace and emotion. Hindi in Devanagari script is pronounced better.</span></li><li><span class="lesson">6.2</span><span>Jingle: a Suno brief needs genre, tempo, mood and the brand name in the hook. Also make a 5-second sonic logo.</span></li><li><span class="lesson">6.3</span><span>Dialogue and lip-sync: use Flow's built-in audio for short lines, keep the lines short, and check the mouths.</span></li><li><span class="lesson">6.4</span><span>Sound design: whoosh, pour, click, ASMR. Play the same ad silent, then with full sound.</span></li></ul>
+    <div class="boxes"><div class="box show"><span class="k">Show on screen</span>Kesar voiceover in Hindi and English, a Diwali jingle, and the same 15s ad 3 ways (silent / music only / full sound).</div><div class="box care"><span class="k">Take care</span>keep the voice clear above the music. Check music rights on your plan.</div><div class="box give"><span class="k">Give students</span><code>ad-video-director</code>, Workflow 03.</div></div>
+  </div>
+  <div class="mod-foot">
+    <button class="btn btn-secondary btn-small" type="button" data-focus="5">Recording view</button>
+    <button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false" data-off="Mark as recorded" data-on="Recorded ✓">Mark as recorded</button>
+  </div>
+</article>
+<article class="step" id="m7" style="--c:#0a2e0e;--o:#ffffff" aria-labelledby="m7-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">7</span>
+    <div><div class="step-kicker">Module 7 · ~40 min · Lessons 7.1–7.3</div><h3 class="title-lg" id="m7-t">AI UGC and brand ambassadors</h3></div></div>
+  <div class="mod-body">
+    <div class="teach"><span class="k">Teach</span><p>UGC works because it feels real. Make it feel real, and stay honest.</p></div>
+    <ul class="points"><li><span class="lesson">7.1</span><span>AI creator: handheld camera, a real room, natural light, imperfect speech. Use one consistent creator.</span></li><li><span class="lesson">7.2</span><span>Reviews, unboxings, testimonials: hook → first look → use → result → CTA. Write Hinglish scripts.</span></li><li><span class="lesson">7.3</span><span>Brand face: an ambassador bible (look, personality, voice, wardrobe), so it's the same person every month.</span></li></ul>
+    <div class="boxes"><div class="box show"><span class="k">Show on screen</span>create "Riya", the Kesar creator, then a 20s review and an unboxing.</div><div class="box care"><span class="k">Take care</span>never present an AI person as a real customer, and never fake before/after results. Mention The UGC Lab for going deeper.</div><div class="box give"><span class="k">Give students</span><code>ad-video-director</code>, Workflow 03.</div></div>
+  </div>
+  <div class="mod-foot">
+    <button class="btn btn-secondary btn-small" type="button" data-focus="6">Recording view</button>
+    <button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false" data-off="Mark as recorded" data-on="Recorded ✓">Mark as recorded</button>
+  </div>
+</article><div class="level-head" style="--c:#181d26"><i></i><span>Level 3 · The agency standard</span></div>
+<article class="step" id="m8" style="--c:#181d26;--o:#ffffff" aria-labelledby="m8-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">8</span>
+    <div><div class="step-kicker">Module 8 · ~50 min · Lessons 8.1–8.4</div><h3 class="title-lg" id="m8-t">Meta ads: statics, variations and testing</h3></div></div>
+  <div class="mod-body">
+    <div class="teach"><span class="k">Teach</span><p>Meta rewards fresh creative. Make one idea into many ads and let the data choose.</p></div>
+    <ul class="points"><li><span class="lesson">8.1</span><span>Ratios: 9:16, 4:5, 1:1. Keep text out of the top and bottom safe zones.</span></li><li><span class="lesson">8.2</span><span>10 variations: change one thing at a time (hook, visual, offer or format).</span></li><li><span class="lesson">8.3</span><span>Advantage+ creative: choose which automatic changes to allow, and protect the brand look.</span></li><li><span class="lesson">8.4</span><span>Results: hook rate, hold rate, CTR, CPA/ROAS. Keep the winners, kill the losers, remix the winners.</span></li></ul>
+    <div class="boxes"><div class="box show"><span class="k">Show on screen</span>one Kesar concept → 4 ratios → 10 variations → set up in Ads Manager (no spend). Paste a results table into <code>ad-strategist</code> and get the next round.</div><div class="box care"><span class="k">Take care</span>don't launch real spend on camera. Name files properly. Test one change at a time.</div><div class="box give"><span class="k">Give students</span><code>ad-image-director</code>, <code>ad-strategist</code>, Workflow 04.</div></div>
+  </div>
+  <div class="mod-foot">
+    <button class="btn btn-secondary btn-small" type="button" data-focus="7">Recording view</button>
+    <button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false" data-off="Mark as recorded" data-on="Recorded ✓">Mark as recorded</button>
+  </div>
+</article>
+<article class="step" id="m9" style="--c:#181d26;--o:#ffffff" aria-labelledby="m9-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">9</span>
+    <div><div class="step-kicker">Module 9 · ~55 min · Lessons 9.1–9.4</div><h3 class="title-lg" id="m9-t">Editing, end cards and brand kits (vibe editing)</h3></div></div>
+  <div class="mod-body">
+    <div class="teach"><span class="k">Teach</span><p>You don't need a timeline. Describe the edit and direct it.</p></div>
+    <ul class="points"><li><span class="lesson">9.1</span><span>The 5 steps are Dump → Vibe → Beat → Layer → Sound. A vibe prompt has 5 parts: platform + length + energy + look + goal.</span></li><li><span class="lesson">9.2</span><span>Big, readable captions (Hindi too) and one colour look for the whole ad.</span></li><li><span class="lesson">9.3</span><span>End card: logo + one CTA + the offer, for 2–3 seconds.</span></li><li><span class="lesson">9.4</span><span>Brand kit: save the colours, fonts, look, logo and sonic logo in the Brand Bible, so every edit matches.</span></li></ul>
+    <div class="boxes"><div class="box show"><span class="k">Show on screen</span>in Claude with <code>vibe-editor</code>, drop in the Kesar clips and type: <em>"30s Reel, high energy, warm saffron look, bold captions, end on the product."</em> Show the edit plan, give 3 director notes, add captions and an end card, then export 9:16, 4:5 and 1:1. Then show it in ChatGPT, and in Gemini (which gives a CapCut plan).</div><div class="box care"><span class="k">Take care</span>test ffmpeg before you record. Give at most 3 notes per round. Show the edit plan before it renders, so students see the AI think like an editor.</div><div class="box give"><span class="k">Give students</span><code>vibe-editor</code>, Workflow 04, <code>brand-bible</code>.</div></div>
+  </div>
+  <div class="mod-foot">
+    <button class="btn btn-secondary btn-small" type="button" data-focus="8">Recording view</button>
+    <button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false" data-off="Mark as recorded" data-on="Recorded ✓">Mark as recorded</button>
+  </div>
+</article>
+<article class="step" id="m10" style="--c:#181d26;--o:#ffffff" aria-labelledby="m10-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">10</span>
+    <div><div class="step-kicker">Module 10 · ~35 min · Lessons 10.1–10.3</div><h3 class="title-lg" id="m10-t">Hybrid ads: real shoot + AI</h3></div></div>
+  <div class="mod-body">
+    <div class="teach"><span class="k">Teach</span><p>The best ads mix real and AI. Shoot what must be real and generate the rest.</p></div>
+    <ul class="points"><li><span class="lesson">10.1</span><span>Shoot real hands, food texture and real people. Generate scale, locations and CGI.</span></li><li><span class="lesson">10.2</span><span>Blending: match the light direction, colour and grain. Replace the background or extend the shot.</span></li><li><span class="lesson">10.3</span><span>Phone upgrade: a 5-minute phone shoot turned into a premium ad.</span></li></ul>
+    <div class="boxes"><div class="box show"><span class="k">Show on screen</span>a phone clip of Kesar in a hand → AI background and extension → blended 10s ad, with a before/after.</div><div class="box care"><span class="k">Take care</span>match the light; that's what gives it away. Keep the real product real.</div><div class="box give"><span class="k">Give students</span><code>ad-video-director</code>, Workflow 03.</div></div>
+  </div>
+  <div class="mod-foot">
+    <button class="btn btn-secondary btn-small" type="button" data-focus="9">Recording view</button>
+    <button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false" data-off="Mark as recorded" data-on="Recorded ✓">Mark as recorded</button>
+  </div>
+</article>
+<article class="step" id="m11" style="--c:#181d26;--o:#ffffff" aria-labelledby="m11-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">11</span>
+    <div><div class="step-kicker">Module 11 · ~50 min · Lessons 11.1–11.3</div><h3 class="title-lg" id="m11-t">Capstone: your full campaign</h3></div></div>
+  <div class="mod-body">
+    <div class="teach"><span class="k">Teach</span><p>Put it all together: one brand, one campaign, start to finish. Then sell it.</p></div>
+    <ul class="points"><li><span class="lesson">11.1</span><span>Run Workflows 01 → 04 for the Kesar Diwali campaign, at speed.</span></li><li><span class="lesson">11.2</span><span>Case study: problem → idea → process → work → results. Post it on Behance, Notion or Instagram.</span></li><li><span class="lesson">11.3</span><span>Pricing and pitch: sell packages, not hours (starter statics, monthly creative, campaign film). Pitch with a free sample ad.</span></li></ul>
+    <div class="boxes"><div class="box show"><span class="k">Show on screen</span>the full Kesar Diwali folder, the final ads, the case study and a rate card.</div><div class="box care"><span class="k">Take care</span>prices are examples; tell students to adjust them for their market. Show the capstone rubric.</div><div class="box give"><span class="k">Give students</span>all 4 skills, Workflows 01–04, <code>capstone-brief</code>.</div></div>
+  </div>
+  <div class="mod-foot">
+    <button class="btn btn-secondary btn-small" type="button" data-focus="10">Recording view</button>
+    <button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false" data-off="Mark as recorded" data-on="Recorded ✓">Mark as recorded</button>
+  </div>
+</article></div>
+  </div>
+</div></section>
+
+<section class="band" aria-labelledby="kit-t"><div class="wrap">
+  <div class="band-head"><div><div class="eyebrow">What you keep pointing to</div><h2 class="display-md" id="kit-t">The 4 skills</h2>
+  <p>Each has a student page with a matching workflow.</p></div></div>
+  <div class="skillrow"><a class="card" href="student-kit/pages/skill-ad-strategist.html"><span class="k">The Planner</span><h3>Ad Strategist</h3><p>Workflow 01 + 04 · Modules 1, 2, 8, 11</p><span class="go">Open student page →</span></a><a class="card" href="student-kit/pages/skill-ad-image-director.html"><span class="k">The Photographer</span><h3>Ad Image Director</h3><p>Workflow 02 · Modules 3, 4, 8</p><span class="go">Open student page →</span></a><a class="card" href="student-kit/pages/skill-ad-video-director.html"><span class="k">The Film Director</span><h3>Ad Video Director</h3><p>Workflow 03 · Modules 5, 6, 7, 10</p><span class="go">Open student page →</span></a><a class="card" href="student-kit/pages/skill-vibe-editor.html"><span class="k">The Editor</span><h3>Vibe Editor</h3><p>Workflow 04 · Modules 8, 9</p><span class="go">Open student page →</span></a></div>
+</div></section>
+
+<section class="band-tight"><div class="wrap"><div class="cta">
+  <div><h2 class="display-md">After recording</h2><p>Name the files <code>L01_raw.mp4</code> … <code>L11_raw.mp4</code>, put them in a Google Drive folder and send Claude the folder name. They get cut into the 41 lessons using your markers.</p></div>
+</div></div></section>
+
+<dialog class="focus" id="focus" aria-label="Recording view">
+  <div class="focus-bar"><div class="wrap">
+    <div class="focus-title"><small data-focus-kicker></small><b data-focus-title></b></div>
+    <span class="focus-hint">← → to move · Esc to close</span>
+    <button class="btn btn-secondary btn-small" type="button" data-prev aria-label="Previous module">← Prev</button>
+    <button class="btn btn-primary btn-small" type="button" data-next aria-label="Next module">Next →</button>
+    <button class="btn btn-secondary btn-small" type="button" data-close aria-label="Close recording view">Close</button>
+  </div></div>
+  <div class="focus-body"><div class="wrap"></div></div>
+</dialog>
+
+</main>
+<footer class="foot"><div class="wrap">
+  <span>AI &amp; Advertising · Lecture Notes · Ideabro Studio</span>
+  <nav aria-label="Footer"><a href="LECTURE-NOTES.md">LECTURE-NOTES.md</a><a href="student-kit/pages/index.html">Student pages</a><a href="README.md">README</a></nav>
+</div></footer>
+<script>
+(function(){
+  var page=document.body.getAttribute('data-page');var KEY='aiad:'+page;var state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){state={}}
+  state.steps=state.steps||{};state.checks=state.checks||{};
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+
+  function fallbackCopy(t,cb){var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.top='-1000px';document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta);cb()}
+  document.querySelectorAll('[data-copy]').forEach(function(btn){btn.addEventListener('click',function(){
+    var el=document.getElementById(btn.getAttribute('data-copy'));var text=el?el.innerText:'';
+    var label=btn.textContent;var done=function(){btn.textContent='Copied';btn.classList.add('is-copied');setTimeout(function(){btn.textContent=label;btn.classList.remove('is-copied')},1600)};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(done,function(){fallbackCopy(text,done)})}else{fallbackCopy(text,done)}
+  })});
+
+  var steps=[].slice.call(document.querySelectorAll('.step'));
+  function renderSteps(){
+    var n=steps.filter(function(s){return state.steps[s.id]}).length;
+    var unit=document.body.getAttribute('data-unit')||'steps done';document.querySelectorAll('[data-progress-text]').forEach(function(e){e.textContent=n+' of '+steps.length+' '+unit});
+    document.querySelectorAll('[data-progress-bar]').forEach(function(e){e.style.width=(steps.length?n/steps.length*100:0)+'%'});
+    steps.forEach(function(s){var d=!!state.steps[s.id];s.classList.toggle('is-done',d);
+      var b=s.querySelector('[data-step-toggle]');if(b){b.setAttribute('aria-pressed',d?'true':'false');b.textContent=d?(b.getAttribute('data-on')||'Done ✓'):(b.getAttribute('data-off')||'Mark step as done')}
+      var r=document.querySelector('.rail a[href="#'+s.id+'"]');if(r){r.classList.toggle('is-done',d)}});
+  }
+  document.querySelectorAll('[data-step-toggle]').forEach(function(b){b.addEventListener('click',function(){
+    var s=b.closest('.step');var id=s.id;state.steps[id]=!state.steps[id];save();renderSteps();
+    if(state.steps[id]){var i=steps.indexOf(s);var next=steps[i+1]||document.getElementById('done');if(next){next.scrollIntoView({block:'start'})}}
+  })});
+
+  var checks=[].slice.call(document.querySelectorAll('.check-item input'));
+  function renderChecks(){var n=checks.filter(function(c){return c.checked}).length;
+    document.querySelectorAll('[data-check-text]').forEach(function(e){e.textContent=(checks.length&&n===checks.length)?'All done. You’re ready for the next workflow.':n+' of '+checks.length+' checked'})}
+  checks.forEach(function(c){c.checked=!!state.checks[c.id];c.addEventListener('change',function(){state.checks[c.id]=c.checked;save();renderChecks()})});
+
+  document.querySelectorAll('[data-reset]').forEach(function(b){b.addEventListener('click',function(){state={steps:{},checks:{}};save();checks.forEach(function(c){c.checked=false});renderSteps();renderChecks()})});
+
+  if('IntersectionObserver' in window&&steps.length){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){document.querySelectorAll('.rail a').forEach(function(a){a.classList.toggle('is-active',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-25% 0px -65% 0px'});steps.forEach(function(s){io.observe(s)})}
+
+  document.querySelectorAll('[role=tablist]').forEach(function(list){var tabs=[].slice.call(list.querySelectorAll('[role=tab]'));
+    function select(i){tabs.forEach(function(t,j){t.setAttribute('aria-selected',i===j?'true':'false');t.tabIndex=i===j?0:-1;var p=document.getElementById(t.getAttribute('aria-controls'));if(p){p.hidden=i!==j}})}
+    tabs.forEach(function(t,i){t.addEventListener('click',function(){select(i)});t.addEventListener('keydown',function(e){var k=e.key,j=-1;if(k==='ArrowDown'||k==='ArrowRight'){j=(i+1)%tabs.length}if(k==='ArrowUp'||k==='ArrowLeft'){j=(i-1+tabs.length)%tabs.length}if(j>-1){e.preventDefault();select(j);tabs[j].focus()}})})});
+
+  document.querySelectorAll('[data-wf-progress]').forEach(function(el){var st={};try{st=JSON.parse(localStorage.getItem('aiad:'+el.getAttribute('data-wf-progress'))||'{}')||{}}catch(e){}
+    var total=+el.getAttribute('data-total');var n=Object.keys(st.steps||{}).filter(function(k){return st.steps[k]}).length;el.textContent=n?(n+' of '+total+' steps done'):total+' steps'});
+
+  renderSteps();renderChecks();
+})();
+</script>
+<script>
+(function(){
+  var dlg=document.getElementById('focus');if(!dlg)return;
+  var mods=[].slice.call(document.querySelectorAll('.step'));var cur=0;
+  var body=dlg.querySelector('.focus-body .wrap');var t=dlg.querySelector('[data-focus-title]');var k=dlg.querySelector('[data-focus-kicker]');
+  function show(i){cur=(i+mods.length)%mods.length;var m=mods[cur];
+    body.innerHTML=m.querySelector('.mod-body').innerHTML;
+    dlg.style.setProperty('--c',m.style.getPropertyValue('--c'));dlg.style.setProperty('--o',m.style.getPropertyValue('--o'));
+    t.textContent=m.querySelector('h3').textContent;k.textContent=m.querySelector('.step-kicker').textContent;
+    dlg.querySelector('.focus-body').scrollTop=0;dlg.scrollTop=0}
+  function open(i){show(i);if(dlg.showModal){if(!dlg.open)dlg.showModal()}else{dlg.setAttribute('open','')}}
+  document.querySelectorAll('[data-focus]').forEach(function(b){b.addEventListener('click',function(){open(+b.getAttribute('data-focus'))})});
+  dlg.querySelector('[data-prev]').addEventListener('click',function(){show(cur-1)});
+  dlg.querySelector('[data-next]').addEventListener('click',function(){show(cur+1)});
+  dlg.querySelector('[data-close]').addEventListener('click',function(){dlg.close?dlg.close():dlg.removeAttribute('open')});
+  dlg.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();show(cur+1)}if(e.key==='ArrowLeft'){e.preventDefault();show(cur-1)}});
+})();
+</script>
+</body>
+</html>
