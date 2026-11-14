@@ -66,55 +66,84 @@ Ratios: 9:16 (1080x1920) Reels/Stories, 4:5 (1080x1350) feed, 1:1 (1080x1080), 1
 Export: H.264, yuv420p, 30 fps, AAC 48 kHz, -14 LUFS, `+faststart`.
 File naming: `BRAND_CAMPAIGN_CONCEPT_HOOK_FORMAT_RATIO_v01` e.g. `KESAR_DIWALI_GLOW_H03_UGC_9x16_v01`.
 
-## Folder layout
+## Folder layout (SIMPLIFIED VERSION — this is the current one)
 
 ```
 ai-advertising-course/
-  README.md                 # overview + today's roadmap (instructor)
-  RECORDING-DAY-PLAN.md     # schedule, setup, recording rules for editing (instructor)
-  CONVENTIONS.md            # this file
-  lectures/                 # instructor talking points, one per module
-    L01-ai-in-advertising.md
-    L02-briefs-strategy-big-idea.md
-    L03-ai-product-photography.md
-    L04-models-styling-sets.md
-    L05-video-ads-campaign-films.md
-    L06-sound-voice-music.md
-    L07-ugc-brand-ambassadors.md
-    L08-meta-ads-variations-testing.md
-    L09-editing-endcards-brand-kits.md
-    L10-hybrid-ads.md
-    L11-capstone-campaign.md
-  student-kit/              # everything students download
-    00-START-HERE.md
-    HOW-TO-USE-SKILLS.md
-    skills/<skill-name>/SKILL.md   (+ optional reference .md files in the same folder)
-    templates/*.md
-    workflows/W01-…md … W10-…md
-    prompt-library/*.md
+  README.md            # one-page overview
+  LECTURE-NOTES.md     # short teaching notes, half a page per module (instructor)
+  CONVENTIONS.md       # this file
+  student-kit/
+    START-HERE.md      # one short page for students
+    skills/            # 4 main skills
+      ad-strategist/SKILL.md        (+ one reference file)
+      ad-image-director/SKILL.md    (+ recipes.md)
+      ad-video-director/SKILL.md    (+ recipes.md)
+      vibe-editor/SKILL.md          (+ ffmpeg-recipes.md, scripts/)
+    workflows/         # 4 main workflows (will become interactive HTML pages)
+      01-plan-the-ad.md
+      02-photo-to-campaign-images.md
+      03-images-to-video-ad.md
+      04-edit-and-launch.md
+    templates/         # brand-bible.md, creative-brief.md, capstone-brief.md
+  archive/             # the old detailed version (17 skills, 10 workflows, long lecture plans). Source material only.
 ```
 
-## Skills (exact folder names, owner module)
+## The 4 main skills
 
-| Skill folder | Module | Purpose |
-|---|---|---|
-| `campaign-director` | all / 11 | Master skill: runs Brief → Launch, calls the other skills' methods. "If you attach only one skill, attach this." |
-| `ad-policy-check` | 1 | Meta ad policy, AI disclosure, ASCI (India), claim honesty, likeness/rights. |
-| `brief-and-strategy` | 2 | Decode a brief, audience/angle/positioning, big idea. |
-| `hook-and-script-writer` | 2 | Hooks, 15s/30s scripts, storyboards with frame image prompts. |
-| `brand-bible-builder` | 2 / 9 | Interview → Brand Bible (palette, look, light, model, voice, sound, rules). |
-| `product-shot-director` | 3 | Packshots, lifestyle, e-commerce sets: image prompts for Nano Banana 1.1 / GPT Image 2.6. |
-| `product-accuracy-checker` | 3 | Compare generated image vs real product; SHIP / FIX / REGENERATE + fixes. |
-| `model-and-set-director` | 4 | Consistent AI models (character sheet), styling, Indian skin tones/outfits, sets. |
-| `video-ad-director` | 5 | Flow prompts: image-to-video, camera moves, multi-shot films, CGI, food/fashion/tech recipes. |
-| `sound-director` | 6 | VO scripts + ElevenLabs direction (Hindi/English/Hinglish), Suno jingle briefs, SFX, lip-sync. |
-| `ugc-ad-director` | 7 | AI creators, reviews/unboxing/GRWM/try-on, recurring brand face. |
-| `meta-ad-variations` | 8 | Every ratio from one concept, 10 variations, Advantage+ settings, naming. |
-| `ad-performance-analyst` | 8 | Read Ads Manager export → diagnosis → next round. |
-| `vibe-editor` | 9 (used from 5 on) | Edit videos by instruction using ffmpeg: cuts, beat sync, reframe, speed, grade, music, SFX, export. Includes `ffmpeg-recipes.md`. |
-| `vibe-captions-and-endcards` | 9 | Captions (transcribe → SRT → styled burn-in), text overlays, logo/CTA end cards, brand-kit look. |
-| `hybrid-ad-director` | 10 | Shoot vs generate, blending real + AI, upgrading a phone shoot. |
-| `case-study-and-pitch` | 11 | Portfolio case study, packages, pricing, proposal, pitch. |
+| Skill | Nickname | Covers modules | Does |
+|---|---|---|---|
+| `ad-strategist` | The Planner | 1, 2, 8 (testing), 11 | Brief → audience & angle → big idea → hooks → 15s/30s scripts → storyboard → brand bible → policy & AI-disclosure check → Meta launch & test plan → read results → next round → case study & pricing. |
+| `ad-image-director` | The Photographer | 3, 4, 8 (statics) | Product packshots, lifestyle, e-com sets, product-accuracy check (SHIP / FIX / REGENERATE), consistent AI models, styling, Indian skin tones/outfits, sets, statics in every Meta ratio, 10 variations. Writes prompts for Nano Banana 1.1 / GPT Image 2.6. |
+| `ad-video-director` | The Film Director | 5, 6, 7, 10 | Google Flow (Google Omni Flash 1.2) prompts: still → video, camera moves, multi-shot films, CGI, food/fashion/tech recipes, AI UGC creators & reviews, brand ambassador, voiceover / jingle / SFX prompts (ElevenLabs, Suno, Hindi/English/Hinglish), hybrid real shoot + AI. |
+| `vibe-editor` | The Editor | 9 (used from 5 on) | Edit by instruction with ffmpeg (5-step: Dump → Vibe → Beat → Layer → Sound + director pass), captions incl. Hindi, text overlays, logo/CTA end cards, every ratio, Meta export. Modes A (terminal) / B (in-chat code) / C (CapCut plan). |
+
+## The 4 main workflows (Brief → Concept → Visuals → Motion → Edit → Launch)
+
+| Workflow | Skill | Modules | Ends with |
+|---|---|---|---|
+| `01-plan-the-ad` | ad-strategist | 1, 2 | Creative brief + big idea + 5 hooks + script + storyboard + brand bible |
+| `02-photo-to-campaign-images` | ad-image-director | 3, 4, 8 | Packshots, lifestyle, model shots, statics in all ratios, 10 variations |
+| `03-images-to-video-ad` | ad-video-director | 5, 6, 7, 10 | Video clips + voiceover + music + SFX (+ UGC version) |
+| `04-edit-and-launch` | vibe-editor + ad-strategist | 8, 9 | Edited 15s/30s ads with captions & end card in 3 ratios, launched, results read, next round planned |
+
+Capstone (Module 11) = run workflows 01 → 04 for one brand.
+
+## Workflow file format (simple, and easy to turn into an interactive HTML page later)
+
+```markdown
+# Workflow 0N: <Name>
+> <One sentence: what you have at the end.>
+
+| Time | Skill to attach | Tools | Modules |
+|---|---|---|---|
+
+## You need
+- 3–5 short bullets
+
+## Steps
+### Step 1 · <Short verb phrase>
+**Tool:** … · **You get:** …
+1–3 short lines on what to do.
+**Type this:**
+```text
+<exact message to type to the skill / tool>
+```
+**Check:** one line.
+
+(5–7 steps in total, never more)
+
+## Done when
+- [ ] 4–6 checks
+
+## Common mistakes
+- 3 bullets
+```
+
+Simplicity rules (the instructor asked for this): short sentences, no jargon, one idea per line,
+students must understand each step in 10 seconds. A skill's top section must be readable by a
+student: "In one line", "What you can ask it" (5–8 example requests). Detailed instructions for
+the AI go below that.
 
 ## SKILL.md format (universal: Claude, ChatGPT, Gemini, any agent)
 
@@ -147,22 +176,6 @@ Writing style for ALL files:
   "for X, use the `<other>` skill".
 - No emojis except ✅ ⚠️ ❌ in check tables.
 
-## Lecture plan format (lectures/Lxx-*.md)
+## Lecture notes
 
-```markdown
-# Lecture NN: <Module title>
-Target raw length · Lessons covered · Level
-## Before you hit record   (what to have open/ready: tabs, files, pre-generated assets, product)
-## Cold open (30–60s)      (exact hook line to say)
-## Lesson N.1: <title>  →  say "LESSON N.1" on camera to start the segment
-   - Goal (1 line)
-   - Talking points (bullets, in the order to say them; key lines in **bold** quotes)
-   - Live demo (numbered steps with the exact prompts / skill to use)
-   - Show on screen (what to display)
-   - Common mistakes to call out (3)
-   - Student gets (files from student-kit)
-   - Assignment (1 line)
-## ... next lessons
-## Wrap-up (what to say at the end + tease next lecture)
-## Edit notes for Claude   (b-roll/inserts, on-screen text, where to zoom)
-```
+The instructor uses `LECTURE-NOTES.md` (short: what to teach, key points, what to show, take care, give students). The old long lecture plans are in `archive/lectures-detailed/` for reference only.

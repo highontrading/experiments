@@ -2,7 +2,7 @@
 
 **How to fill:** Fill one brief for every campaign before you open any AI tool. Keep it to one page.
 If a client sent you a messy WhatsApp message or email, paste it into Claude, ChatGPT or Gemini with
-the `brief-and-strategy` skill attached and ask it to fill this template. Then read it and fix it yourself.
+the `ad-strategist` skill attached and ask it to fill this template. Then read it and fix it yourself.
 Any box you cannot fill is a question to ask the client.
 
 ---

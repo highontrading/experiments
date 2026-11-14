@@ -4,7 +4,7 @@
 made up), from brief to launch-ready ads. Use the brand you picked in Lecture 1. If you did each module's
 assignment, about 70% of this is already done.
 
-Follow `workflows/W10-brief-to-launch.md`. Attach the `campaign-director` skill to run the whole flow.
+Follow workflows 01 → 04 in order, with the 4 skills.
 
 ---
 
@@ -13,17 +13,17 @@ Follow `workflows/W10-brief-to-launch.md`. Attach the `campaign-director` skill 
 |---|---|---|---|
 | 1 | Creative brief | 1 page | `templates/creative-brief.md` |
 | 2 | Brand kit / Brand Bible | final version with LOOK BLOCK | `templates/brand-bible.md` |
-| 3 | Big idea + 5 hooks + script + 6-frame storyboard | 15s or 30s | `templates/script-storyboard.md` |
-| 4 | 6 statics | in 3 ratios: 4:5, 1:1, 9:16 | `W01`, `W03` |
-| 5 | 1 x 30s video ad | 9:16 | `W04`, `W05` |
-| 6 | 1 x 15s video ad (cut-down) | 9:16 + 4:5 | `W05`, `vibe-editor` skill |
-| 7 | 1 UGC-style ad | 9:16, 15–30s | `W06` |
-| 8 | Voiceover + music / jingle | in the videos | `W07` |
-| 9 | Captions + end cards | on every video | `vibe-captions-and-endcards` skill |
-| 10 | 10 Meta variations | named with the naming rule | `W08`, `templates/variation-matrix.md` |
-| 11 | Launch + test plan | campaign structure, budget, win rule | `templates/campaign-plan.md`, `templates/test-log.md` |
-| 12 | Policy check | completed checklist | `templates/policy-checklist.md` |
-| 13 | Case study | published link or PDF | `templates/case-study.md` |
+| 3 | Big idea + 5 hooks + script + 6-frame storyboard | 15s or 30s | Workflow 01, `ad-strategist` skill |
+| 4 | 6 statics | in 3 ratios: 4:5, 1:1, 9:16 | Workflow 02 |
+| 5 | 1 x 30s video ad | 9:16 | Workflow 03 |
+| 6 | 1 x 15s video ad (cut-down) | 9:16 + 4:5 | Workflow 04, `vibe-editor` skill |
+| 7 | 1 UGC-style ad | 9:16, 15–30s | Workflow 03 (UGC) |
+| 8 | Voiceover + music / jingle | in the videos | Workflow 03 (sound) |
+| 9 | Captions + end cards | on every video | `vibe-editor` skill |
+| 10 | 10 Meta variations | named with the naming rule | Workflow 02 (variations), `ad-image-director` skill |
+| 11 | Launch + test plan | campaign structure, budget, win rule | Workflow 04, `ad-strategist` skill (launch & test plan) |
+| 12 | Policy check | completed checklist | `ad-strategist` skill (policy check) |
+| 13 | Case study | published link or PDF | `ad-strategist` skill (case study) |
 
 ## How to submit
 Post in the Capstone thread: case-study link + a folder link with all files, named with

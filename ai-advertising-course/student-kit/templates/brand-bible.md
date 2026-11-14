@@ -2,7 +2,7 @@
 
 **How to fill:** This one document keeps every image, video and sound in your campaign looking like the
 same brand. Fill it in Lecture 2. Make it final in Lecture 9. Attach it to every AI chat (with any skill)
-so the AI copies your look every time. The `brand-bible-builder` skill can interview you and fill this.
+so the AI copies your look every time. The `ad-strategist` skill can interview you and fill this.
 
 Copy the **LOOK BLOCK** at the bottom into the end of every image and video prompt.
 
