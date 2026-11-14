@@ -5,6 +5,7 @@
 | `LECTURE-NOTES.html` | **You** | The lecture notes as an interactive page: tick off each lecture, and use **Recording view** (big text, arrow keys) while you record |
 | `LECTURE-NOTES.md` | **You** | The same notes as plain text (edit this one, then rebuild) |
 | `LMS-SETUP.html` | **You** | What to type into each field of your LMS admin (Details, 11 modules, 41 lessons, resources), with copy buttons |
+| `AGENT-PROMPT.md` | **Your agent** | One prompt for Claude desktop (Claude in Chrome) to fill the whole LMS admin for you |
 | `lms/course-content.json` | **You / Claude** | The same content as data, for turning into your admin's Raw JSON |
 | `student-kit/` | **Students** | 4 skills, 4 workflows, 3 templates, and `pages/`: interactive HTML (open `pages/index.html`) |
 | `dist/` | **Upload** | `student-kit.zip`, plus one zip per skill for Claude |
@@ -36,5 +37,6 @@ Edit the markdown in `student-kit/`, then run:
 ```bash
 python3 tools/build_pages.py   # rebuilds the HTML pages + LECTURE-NOTES.html
 python3 tools/build_lms.py     # rebuilds LMS-SETUP.html (set KIT_URL in tools/lms_content.py first)
+python3 tools/build_agent_prompt.py   # rebuilds AGENT-PROMPT.md from the same data
 ./make_zips.sh                 # rebuilds the zips
 ```
