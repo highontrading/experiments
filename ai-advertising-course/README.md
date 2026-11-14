@@ -59,6 +59,8 @@ ai-advertising-course/
 ├── README.md                ← you are here (roadmap)
 ├── RECORDING-DAY-PLAN.md    ← today's schedule, setup, on-camera markers, handoff to Claude
 ├── CONVENTIONS.md           ← names, models, formulas, specs (for maintaining the course)
+├── make_zips.sh             ← rebuilds dist/ after you edit anything in student-kit/
+├── dist/                    ← READY TO UPLOAD: student-kit.zip + skills/<name>.zip (one per skill, for Claude)
 ├── lectures/                ← YOUR talking points: L01 … L11
 └── student-kit/             ← what students download
     ├── 00-START-HERE.md
