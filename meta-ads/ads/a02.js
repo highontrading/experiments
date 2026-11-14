@@ -45,7 +45,7 @@ window.AD = {
       font(30 * u, 700, F.inter); const al = wrap(ai, W - colL - colR - 120 * u); const hp2 = oC(prog(t, st + 0.8, st + 1.1));
       al.forEach((ln, k) => { const lw = tw(ln); g.fillStyle = C.lime; g.fillRect(colR - 8 * u, y + 24 * u + k * 40 * u, (lw + 16 * u) * hp2, 40 * u); txt(ln, colR, y + 44 * u + k * 40 * u, { size: 30 * u, weight: 700, color: C.ink, align: "left" }); });
       // thumbnail of real AI work
-      const tp = oB(clamp((t - st - 0.85) / 0.3)); if (tp > 0) { const s = 96 * u * tp; g.save(); g.translate(W - colL - 50 * u, y + 62 * u); g.rotate(0.05 * (i % 2 ? 1 : -1));
+      const tp = oB(clamp((t - st - 0.85) / 0.3)); if (tp > 0) { const s = 118 * u * tp; g.save(); g.translate(W - colL - 50 * u, y + 62 * u); g.rotate(0.05 * (i % 2 ? 1 : -1));
         g.fillStyle = C.lav; g.fillRect(-s / 2 + 5 * u, -s / 2 + 5 * u, s, s); g.beginPath(); g.rect(-s / 2, -s / 2, s, s); g.save(); g.clip(); cover(IM[im], -s / 2, -s / 2, s, s); g.restore(); g.strokeStyle = C.ink; g.lineWidth = 2.5 * u; g.strokeRect(-s / 2, -s / 2, s, s); g.restore(); }
       g.restore();
     });

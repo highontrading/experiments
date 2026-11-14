@@ -14,8 +14,8 @@ window.AD = {
   render(t) {
     if (t >= T_END) { endCard(t, T_END, { bg: C.cream, grid: C.grid, fg: C.ink, strike: "#8a8a8a", sub: "Join them · by Ideabro Studio" }); grain(t, 0.04); return; }
     const k = clamp(Math.floor((t - Q0) / QS), 0, Qs.length - 1), [q, name, role, ini, im] = Qs[k], t0 = Q0 + k * QS;
-    bg("#1a1410"); g.save(); g.globalAlpha = 0.5; cover(IM[im], 0, 0, W, H, 1.08 + 0.05 * prog(t, t0, t0 + QS)); g.restore();
-    const gr = g.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, "rgba(26,20,16,0.55)"); gr.addColorStop(1, "rgba(26,20,16,0.92)"); g.fillStyle = gr; g.fillRect(0, 0, W, H);
+    bg("#1a1410"); g.save(); g.globalAlpha = 0.9; cover(IM[im], 0, 0, W, H, 1.08 + 0.05 * prog(t, t0, t0 + QS)); g.restore();
+    const gr = g.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, "rgba(26,20,16,0.15)"); gr.addColorStop(0.35, "rgba(26,20,16,0.55)"); gr.addColorStop(1, "rgba(26,20,16,0.93)"); g.fillStyle = gr; g.fillRect(0, 0, W, H);
     // fade between quotes
     const fin = oC(prog(t, t0, t0 + 0.5)), fout = k < Qs.length - 1 ? 1 - prog(t, t0 + QS - 0.35, t0 + QS) : 1 - prog(t, T_END - 0.3, T_END);
     g.save(); g.globalAlpha = fin * fout;

@@ -55,8 +55,7 @@ window.AD = {
     g.restore();
     this.monitor(t);
     // big title line for the two hook lines, subtitles for the rest
-    if (t < CUTS[0][0]) { const ch = voChunk(t, 4, 0.4); capBlock(t, ch, 1640 * u, { size: 110 * u, fam: F.anton, hiWord: "direct", hi: C.yellow }); }
-    else capSubtitle(t, voChunk(t, 6, 0.4), 1630 * u, { size: 58 * u });
+    capSubtitle(t, voChunk(t, 6, 0.4), 1630 * u, { size: 60 * u });
     grain(t, 0.08);
   },
 };

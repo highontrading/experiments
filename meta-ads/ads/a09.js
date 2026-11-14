@@ -54,7 +54,7 @@ window.AD = {
       g.restore();
     }
     if (t >= T_STACK + 0.5) txt("YOUR AI AD STACK", CX, 300 * u, { size: 34 * u, fam: F.mono, weight: 700, color: C.ink, alpha: oC(prog(t, T_STACK + 0.5, T_STACK + 0.9)) });
-    capHighlight(t, voChunk(t, 3, 0.5), H * 0.74, { size: 64 * u });
+    capHighlight(t, voChunk(t, 3, 0.5), H * 0.74, { size: 64 * u, cols: [C.lime] });
     grain(t, 0.04);
   },
 };

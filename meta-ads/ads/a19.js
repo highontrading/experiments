@@ -34,8 +34,8 @@ window.AD = {
       const x = lerp(x0, fx, fan), y = lerp(820 * u, fy, fan), r = lerp(r0, fa, fan), s = lerp(1, 0.62, fan);
       this.card(c, x, y, w, h, r, s, t);
     });
-    if (t >= T_PRICE) { const p = oB(clamp((t - T_PRICE - 0.5) / 0.35)); g.save(); g.translate(CX, 330 * u); g.scale(p, p); g.fillStyle = C.ink; rr(-260 * u, -70 * u, 520 * u, 140 * u, 70 * u); g.fill();
-      txt("$29  ·  was $99", 0, 4 * u, { size: 56 * u, weight: 800, color: C.lime }); g.restore(); }
+    if (t >= T_PRICE) { const p = oB(clamp((t - T_PRICE - 0.5) / 0.35)); g.save(); g.translate(CX, 330 * u); g.scale(p, p); g.fillStyle = C.ink; rr(-330 * u, -70 * u, 660 * u, 140 * u, 70 * u); g.fill();
+      txt("11 modules  ·  41 lessons", 0, 4 * u, { size: 50 * u, weight: 800, color: C.lime }); g.restore(); }
     capClean(t, voChunk(t, 4, 0.5), t < T_FAN ? 1520 * u : 1600 * u, { size: 76 * u, fam: F.grot, weight: 700, color: C.ink });
     grain(t, 0.04);
   },

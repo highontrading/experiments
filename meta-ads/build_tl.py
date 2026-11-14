@@ -8,7 +8,10 @@ from vo_spec import ADS
 START = {"a01": 0.35, "a03": 0.30, "a05": 0.6, "a06": 0.5, "a09": 0.3, "a10": 0.5, "a11": 0.4, "a12": 0.25, "a18": 0.3, "a19": 0.3}
 GAP = {"a01": [0.25, 0.35, 0.5, 0.5], "a03": [0.5, 0.35, 0.5, 0.6], "a05": [0.4, 0.7, 0.4, 0.5], "a06": [0.25, 0.6, 0.5, 0.5],
        "a09": [0.3, 0.45, 0.2], "a10": [0.35, 0.35, 0.35], "a11": [0.2, 0.45, 0.35], "a12": [0.3, 0.3, 0.35], "a18": [0.35, 0.15],
-       "a19": [0.2, 0.3, 0.4]}
+       "a19": [0.2, 0.3, 0.4],
+       "b03": [0.5, 0.6, 0.6, 0.6, 0.6], "b05": [0.5, 1.4, 1.4, 1.4, 1.2], "b06": [0.5, 0.6, 0.5], "b08": [0.4, 0.5, 0.4, 0.3],
+       "b09": [0.25, 0.4, 0.35, 0.35], "b10": [0.4, 0.4, 0.4, 0.4], "b11": [0.5, 0.9, 0.9, 0.6], "b13": [0.4, 0.7, 0.7, 0.7, 0.7],
+       "b17": [0.5, 0.7, 0.7, 0.7, 0.6], "b18": [0.5, 0.4, 0.5, 0.4], "b20": [0.5, 0.5, 0.6, 0.5]}
 
 def line_words(d, at):
     chars, s, e = d["chars"], d["s"], d["e"]
@@ -30,12 +33,12 @@ def line_words(d, at):
 
 for ad, spec in ADS.items():
     if len(sys.argv) > 1 and ad not in sys.argv[1:]: continue
-    t = START[ad]; lines = []
+    t = START.get(ad, 0.35); lines = []; gaps = GAP.get(ad) or [0.3] * 9
     for i in range(len(spec["lines"])):
         d = json.load(open(f"build/vo/{ad}_{i}.json"))
         words, v0, v1 = line_words(d, t)
         lines.append({"i": i, "at": round(t, 3), "v0": round(v0, 3), "v1": round(v1, 3), "cap": d["cap"], "words": words})
-        if i < len(spec["lines"]) - 1: t = v1 + GAP[ad][i] - (v0 - t) * 0 - 0.0
+        if i < len(spec["lines"]) - 1: t = v1 + gaps[i] - (v0 - t) * 0 - 0.0
         t = round(t, 3)
     os.makedirs(f"build/{ad}", exist_ok=True)
     tl = {"ad": ad, "lines": lines, "vo_end": lines[-1]["v1"]}

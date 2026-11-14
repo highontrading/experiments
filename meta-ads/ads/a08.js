@@ -1,9 +1,9 @@
 // A08 · "Departures" (English, 9:16, no VO). An airport split-flap board lists the 11 modules as flights,
-// then flips to "NOW BOARDING: AI & ADVERTISING $29". Captions: split-flap characters, amber on black.
+// then flips to "NOW BOARDING: AI & ADVERTISING · FARE ₹2,999". Captions: split-flap characters, amber on black.
 const MODS = [["AI01", "NEW AD PLAYBOOK", "L1"], ["AI02", "BRIEF + BIG IDEA", "L1"], ["AI03", "PRODUCT SHOTS", "L1"], ["AI04", "MODELS + SETS", "L1"],
   ["AI05", "VIDEO ADS + FILMS", "L2"], ["AI06", "VOICE + MUSIC", "L2"], ["AI07", "AI UGC CREATORS", "L2"], ["AI08", "META ADS TESTING", "L3"],
   ["AI09", "EDIT + END CARDS", "L3"], ["AI10", "HYBRID SHOOT + AI", "L3"], ["AI11", "CAPSTONE CAMPAIGN", "L3"]];
-const CH = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+&$.·-";
+const CH = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+&$.·-,₹";
 const T_BOARD = 0.8, T_FINAL = 9.4, T_END = 12.6;
 window.AD = {
   w: 1080, h: 1920, dur: T_END + 3.6, slug: "departures-board",
@@ -24,7 +24,7 @@ window.AD = {
     for (let i = 0; i < n; i++) this.cell(x + i * (cw + 4 * u), y, cw, chh, str[i], t, t0 + i * 0.025, seed * 31 + i);
   },
   render(t) {
-    if (t >= T_END) { endCard(t, T_END, { bg: "#0b0b0b", fg: "#fff", button: { fill: C.yellow }, cta: "Board now  →" }); grain(t, 0.06); return; }
+    if (t >= T_END) { endCard(t, T_END, { bg: "#0b0b0b", fg: "#fff", button: { fill: C.yellow }, cta: "Board now  →", price: true, accent: C.yellow }); grain(t, 0.06); return; }
     bg("#0b0b0b");
     const hp = oC(prog(t, 0, 0.5));
     txt("✈  DEPARTURES", 60 * u, 200 * u, { size: 74 * u, weight: 400, fam: F.bebas, color: "#fff", align: "left", alpha: hp, ls: 4 });
@@ -46,7 +46,7 @@ window.AD = {
     } else {
       txt("NOW BOARDING", CX, 520 * u, { size: 44 * u, fam: F.mono, weight: 700, color: C.lime, alpha: (FR(t) % 30 < 20) ? 1 : 0.4 });
       this.row("AI & ADVERTISING", 90 * u, 640 * u, 16, t, T_FINAL, 300, 52 * u, 92 * u);
-      this.row("FARE $29  WAS $99", 90 * u, 790 * u, 16, t, T_FINAL + 0.5, 400, 52 * u, 92 * u);
+      this.row("FARE: ₹2,999", 90 * u, 790 * u, 16, t, T_FINAL + 0.5, 400, 52 * u, 92 * u);
       this.row("GATE: ENROLL NOW", 90 * u, 940 * u, 16, t, T_FINAL + 1.0, 500, 52 * u, 92 * u);
       txt("One ticket. Every module. Lifetime access.", CX, 1180 * u, { size: 40 * u, weight: 600, color: "#fff", alpha: oC(prog(t, T_FINAL + 1.8, T_FINAL + 2.3)) });
     }

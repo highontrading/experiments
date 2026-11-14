@@ -4,6 +4,8 @@ V = {  # ElevenLabs voices in the account
     "neeraj": "H9oourY5nVeVuzarh4D5", "rahul": "K0JkRcnnqtJOP749opMo", "jeet": "WfBTMYP9caYrcT3CNdFn",
     "anika": "RABOvaPec1ymXz02oDQi", "steven": "VMCgCMbBs53ElBxVD4VB", "don": "JJCR1UICgHnHljtvu5uF",
     "reyaansh": "YWaBwjubozVSPD1RgnRa", "jessica": "cgSgspJ2msm6clMCkdW9",
+    "charlie": "IKne3meq5aSn9XLyUdCD", "liam": "TX3LPaxmHKxFdv7VOQHJ", "sarah": "EXAVITQu4vr4xnSDxMaL", "brian": "nPczCjzI2devNBz1zQrb",
+    "tina": "KrfvGW2D1x6nS5QnRj2q", "lily": "pFZP5JQG7iQjIQuC4Bku",
 }
 ADS = {
   "a01": {"voice": "neeraj", "lang": "hi", "lines": [
@@ -11,7 +13,7 @@ ADS = {
     ("Studio. Photographer. Models. Stylist.", "Studio. Photographer. Models. Stylist."),
     ("Aur total? Lakhon mein.", "और total? लाखों में।"),
     ("Ab wahi shoot, ek product photo se.", "अब वही shoot, एक product photo से।"),
-    ("AI & Advertising seekho. Sirf $29.", "AI and Advertising सीखो। सिर्फ़ twenty-nine dollars."),
+    ("AI & Advertising seekho. Sirf ₹2,999.", "AI and Advertising सीखो। सिर्फ़ दो हज़ार नौ सौ निन्यानवे रुपये।"),
   ]},
   "a03": {"voice": "steven", "lang": "en", "lines": [
     ("This is one product photo.", "This is one product photo."),
@@ -47,8 +49,8 @@ ADS = {
     ("Bas ek product photo, aur sahi direction.", "बस एक product photo, और सही direction."),
   ]},
   "a11": {"voice": "reyaansh", "lang": "en", "lines": [
-    ("Ninety-nine dollars.", "Ninety-nine dollars."),
-    ("Now twenty-nine.", "Now twenty-nine."),
+    ("One course.", "One course."),
+    ("One price.", "One price."),
     ("Eleven modules. Forty-one lessons.", "Eleven modules. Forty-one lessons."),
     ("Lifetime access. One payment.", "Lifetime access. One payment."),
   ]},
@@ -67,6 +69,88 @@ ADS = {
     ("Founders. Marketers. Designers.", "Founders. Marketers. Designers."),
     ("Freelancers. Creators. Students.", "Freelancers. Creators. Students."),
     ("If you need ads, this is for you.", "If you need ads, this is for you."),
-    ("AI & Advertising. Twenty-nine dollars.", "AI and Advertising. Twenty-nine dollars."),
+    ("AI & Advertising by Ideabro Studio.", "AI and Advertising, by Ideabro Studio."),
+  ]},
+
+  # ---------------- round 2 (B ads) ----------------
+  "b03": {"voice": "charlie", "lang": "en", "lines": [
+    ("Four words that make AI shots look expensive.", "Four words that make AI shots look expensive."),
+    ("One. Haze.", "One. Haze."),
+    ("Two. Backlight.", "Two. Backlight."),
+    ("Three. Golden hour.", "Three. Golden hour."),
+    ("Four. Eighty-five millimetre.", "Four. Eighty-five millimetre."),
+    ("We teach the whole language of light.", "We teach the whole language of light."),
+  ]},
+  "b05": {"voice": "steven", "lang": "en", "lines": [
+    ("Name the camera, and AI shoots like it.", "Name the camera, and AI shoots like it."),
+    ("Action camera.", "Action camera."),
+    ("Phone selfie.", "Phone selfie."),
+    ("Drone.", "Drone."),
+    ("Thirty-five millimetre film.", "Thirty-five millimetre film."),
+    ("One prompt word changes everything.", "One prompt word changes everything."),
+  ]},
+  "b06": {"voice": "reyaansh", "lang": "en", "lines": [
+    ("How much does an ad like this cost?", "How much does an ad like this cost?"),
+    ("A studio day? A crew? A model?", "A studio day? A crew? A model?"),
+    ("This one needed none of them.", "This one needed none of them."),
+    ("Learn to make it for ₹2,999.", "Learn to make it for two thousand, nine hundred and ninety-nine rupees."),
+  ]},
+  "b08": {"voice": "rahul", "lang": "hi", "lines": [
+    ("Pehle: budget zyada, output kam.", "पहले: budget ज़्यादा, output कम।"),
+    ("Ab: budget kam, output zyada.", "अब: budget कम, output ज़्यादा।"),
+    ("Ek product photo. Pachaas creatives.", "एक product photo. पचास creatives."),
+    ("Yeh scale AI se aata hai.", "यह scale AI से आता है।"),
+    ("Aur yeh skill hum sikhate hain.", "और यह skill हम सिखाते हैं।"),
+  ]},
+  "b09": {"voice": "tina", "lang": "hi", "lines": [
+    ("Aapka brand local hai.", "आपका brand local है।"),
+    ("Par ad national brand jaisa kyun nahi?", "पर ad national brand जैसा क्यों नहीं?"),
+    ("Wahi product. Premium lighting. Premium sets.", "वही product. Premium lighting. Premium sets."),
+    ("Bina bade agency budget ke.", "बिना बड़े agency budget के।"),
+    ("Seekhiye AI & Advertising mein.", "सीखिए AI and Advertising में।"),
+  ]},
+  "b10": {"voice": "jeet", "lang": "hi", "lines": [
+    ("₹2,999 mein kya milta hai?", "दो हज़ार नौ सौ निन्यानवे रुपये में क्या मिलता है?"),
+    ("Gyarah modules. Iktalees lessons.", "ग्यारह modules. इकतालीस lessons."),
+    ("Prompt library. Ready templates.", "Prompt library. Ready templates."),
+    ("Ek real capstone campaign.", "एक real capstone campaign."),
+    ("Aur lifetime access.", "और lifetime access."),
+  ]},
+  "b11": {"voice": "neeraj", "lang": "hi", "lines": [
+    ("AI ads mein teen galtiyan jo sab karte hain.", "AI ads में तीन गलतियाँ जो सब करते हैं।"),
+    ("Ek. Plastic jaisi skin.", "एक। Plastic जैसी skin."),
+    ("Do. Har frame mein product badal jaata hai.", "दो। हर frame में product बदल जाता है।"),
+    ("Teen. Har ad ka same look.", "तीन। हर ad का same look."),
+    ("Yeh course teeno theek karna sikhata hai.", "यह course तीनों ठीक करना सिखाता है।"),
+  ]},
+  "b13": {"voice": "jessica", "lang": "en", "lines": [
+    ("A day as an AI ad director.", "A day as an AI ad director."),
+    ("Nine. Read the brief.", "Nine. Read the brief."),
+    ("Eleven. Build the mood board.", "Eleven. Build the mood board."),
+    ("One. Product shots, no studio.", "One. Product shots, no studio."),
+    ("Four. Cut the video ad.", "Four. Cut the video ad."),
+    ("Six. Client says yes.", "Six. Client says yes."),
+  ]},
+  "b17": {"voice": "liam", "lang": "en", "lines": [
+    ("Five AI ads you can make this weekend.", "Five AI ads you can make this weekend."),
+    ("A hero product shot.", "A hero product shot."),
+    ("A model lookbook.", "A model lookbook."),
+    ("A UGC video.", "A U G C video."),
+    ("A cinematic car spot.", "A cinematic car spot."),
+    ("And a full campaign, from one photo.", "And a full campaign, from one photo."),
+  ]},
+  "b18": {"voice": "sarah", "lang": "en", "lines": [
+    ("AI can't do hands, right?", "AI can't do hands, right?"),
+    ("Count them.", "Count them."),
+    ("Rings. Nails. Knuckles. Light.", "Rings. Nails. Knuckles. Light."),
+    ("That was last year.", "That was last year."),
+    ("Learn the way it's done now.", "Learn the way it's done now."),
+  ]},
+  "b20": {"voice": "brian", "lang": "en", "lines": [
+    ("This is for the ones who direct.", "This is for the ones who direct."),
+    ("Who see the frame before it exists.", "Who see the frame before it exists."),
+    ("Who know light, and story, and taste.", "Who know light, and story, and taste."),
+    ("The tools finally caught up.", "The tools finally caught up."),
+    ("Now it's your turn.", "Now it's your turn."),
   ]},
 }

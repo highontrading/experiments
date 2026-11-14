@@ -8,6 +8,7 @@ const IM = {}, SEQ = {};
 const TLV = window.TL || { lines: [] };
 
 // palette (from the course page)
+const PRICE = "₹2,999";
 const C = { ink: "#141414", cream: "#F1EFE6", grid: "#E3E0D6", lime: "#D8F5A2", pink: "#F6B8EA", lav: "#CDBCFF", sky: "#BFE1FB",
   yellow: "#FFD43B", sub: "#FFE14D", gold: "#E9B949", white: "#ffffff" };
 const F = { inter: "Inter", serif: "'Instrument Serif'", mono: "'JetBrains Mono'", archivo: "'Archivo Black'", anton: "Anton",
@@ -145,6 +146,21 @@ function capPop(t, words, y, o = {}) {
     });
   });
 }
+// Style: premium pill. White words on one dark rounded pill (same look over dark or light scenes), active word in accent.
+function capPill(t, words, y, o = {}) {
+  if (!words) return; const size = o.size || 62 * u, fam = o.fam || F.inter, wt = o.weight || 800, maxW = W * 0.8;
+  font(size, wt, fam); const sp = size * 0.26, padX = size * 0.6, padY = size * 0.42;
+  const rows = [[]]; let rw = 0;
+  words.forEach((w) => { const ww = tw(w.w); if (rw + ww > maxW && rows[rows.length - 1].length) { rows.push([]); rw = 0; } rows[rows.length - 1].push({ ...w, ww }); rw += ww + sp; });
+  const lh = size * 1.22, widest = Math.max(...rows.map((r) => r.reduce((a, b) => a + b.ww, 0) + sp * (r.length - 1)));
+  const bw = widest + padX * 2, bh = rows.length * lh + padY * 2 - (lh - size), p0 = oC(clamp((t - words[0].s + 0.05) / 0.18));
+  g.save(); g.globalAlpha = p0; g.fillStyle = o.bg || "rgba(16,16,16,0.86)"; rr(CX - bw / 2, y - bh / 2, bw, bh, Math.min(bh / 2, 40 * u)); g.fill(); g.restore();
+  rows.forEach((row, ri) => {
+    const total = row.reduce((a, b) => a + b.ww, 0) + sp * (row.length - 1); let x = CX - total / 2;
+    const yy = y - (rows.length - 1) * lh / 2 + ri * lh;
+    row.forEach((w) => { if (t >= w.s - 0.03) { const active = t < w.e + 0.05; txt(w.w, x + w.ww / 2, yy + 2 * u, { size, weight: wt, fam, color: active ? (o.hi || C.lime) : (o.color || "#fff"), alpha: oC(clamp((t - w.s + 0.03) / 0.12)) }); } x += w.ww + sp; });
+  });
+}
 // Style: highlighter boxes behind each word (site look). Box wipes in on the word.
 function capHighlight(t, words, y, o = {}) {
   if (!words) return; const size = o.size || 72 * u, fam = o.fam || F.inter, wt = o.weight || 800, maxW = W * 0.84;
@@ -218,6 +234,36 @@ function typeText(t, s, x, y, t0, cps, o = {}) {
 }
 function wrapChars(s, maxW) { const out = []; for (const para of s.split("\n")) { const l = wrap(para, maxW); out.push(...(l.length ? l : [""])); } return out; }
 
+
+// ---------- round-2 helpers ----------
+// timed list [[t0, t1, ...], ...] -> {e, a (fade alpha), p (intro progress 0..1), k (index)}
+function tcap(t, list, fin = 0.3, fout = 0.25) {
+  for (let k = 0; k < list.length; k++) { const e = list[k]; if (t >= e[0] && t < e[1]) return { e, k, p: clamp((t - e[0]) / fin), a: Math.min(oC(clamp((t - e[0]) / fin)), clamp((e[1] - t) / fout)) }; }
+  return { e: null, k: -1, p: 0, a: 0 };
+}
+function cutIdx(t, starts) { let k = 0; for (let i = 0; i < starts.length; i++) if (t >= starts[i]) k = i; return k; }
+// ken-burns cover
+function kb(src, t, t0, dur, z0 = 1.04, z1 = 1.12, ax = 0.5, ay = 0.5, x = 0, y = 0, w = W, h = H) { cover(src, x, y, w, h, lerp(z0, z1, prog(t, t0, t0 + dur)), ax, ay); }
+function flash(t, tc, d = 0.16, col = "255,255,255", a = 0.85) { const k = 1 - Math.abs(t - tc) / d; if (k > 0) { g.fillStyle = `rgba(${col},${k * a})`; g.fillRect(0, 0, W, H); } }
+// multi-line caption block (static text), centered at y; o: size, fam, weight, style, color, lh, maxW, shadow, ls, rise
+function capText(text, y, a, p, o = {}) {
+  if (a <= 0) return; const size = o.size || 72 * u, fam = o.fam || F.inter, wt = o.weight ?? 700;
+  font(size, wt, fam, o.style || ""); if (o.ls) g.letterSpacing = `${o.ls}px`; const lines = text.split("\n").flatMap((l) => wrap(l, o.maxW || W * 0.84)); g.letterSpacing = "0px";
+  const lh = size * (o.lh || 1.15);
+  lines.forEach((ln, i) => { const q = o.stagger ? oC(clamp(p * (1 + lines.length * 0.4) - i * 0.4)) : oC(p);
+    txt(ln, o.x ?? CX, y + (i - (lines.length - 1) / 2) * lh + (1 - q) * (o.rise ?? 0.25) * size, { size, weight: wt, fam, style: o.style || "", color: o.color || "#fff", alpha: a * q, shadow: o.shadow ?? 0, shadowColor: o.shadowColor, ls: o.ls, align: o.align, stroke: o.stroke, strokeW: o.strokeW }); });
+}
+// circular magnifier: draws src (cover-fit to x,y,w,h) zoomed `z` around (fx,fy) fractions into a circle at (cx,cy) radius r
+function loupe(src, x, y, w, h, fx, fy, cx, cy, r, z, o = {}) {
+  if (!src || !src.width) return; const s = Math.max(w / src.width, h / src.height) * (o.base || 1), iw = src.width * s, ih = src.height * s, ix = x + (w - iw) / 2, iy = y + (h - ih) / 2;
+  const px = ix + fx * iw, py = iy + fy * ih;
+  g.save(); g.beginPath(); g.arc(cx, cy, r, 0, 7); g.clip(); g.drawImage(src, cx - (px - ix) * z, cy - (py - iy) * z, iw * z, ih * z); g.restore();
+  g.save(); g.strokeStyle = o.ring || "#fff"; g.lineWidth = (o.lw || 6) * u; g.shadowColor = "rgba(0,0,0,0.5)"; g.shadowBlur = 24 * u; g.beginPath(); g.arc(cx, cy, r, 0, 7); g.stroke(); g.restore();
+  return { px, py };
+}
+// draw a frame of a seq or an image
+function SRC(name, t, t0) { return SEQ[name] ? seq(name, t, t0) : IM[name]; }
+
 // ---------- end card ----------
 // theme: {bg, fg, accent, titleFam, titleStyle, button:{fill,color,shadow,border}, grid, sub}
 function endCard(t, t0, th = {}) {
@@ -229,16 +275,15 @@ function endCard(t, t0, th = {}) {
   const titleSize = (th.titleSize || (P ? 118 : 104)) * u;
   txt(th.title || "AI & Advertising", CX, CY - (P ? 0.04 : 0.07) * H + (1 - p(0.12)) * 24 * u, { size: titleSize, weight: th.titleWeight ?? 400, fam: th.titleFam || F.serif, style: th.titleStyle || "", color: fg, alpha: p(0.12) });
   txt(th.sub || "by Ideabro Studio", CX, CY + (P ? 0.015 : 0.02) * H, { size: 32 * u, weight: 400, fam: F.mono, color: th.subColor || fg, alpha: p(0.25) * 0.85 });
-  // price line
+  // offer line: price only when the ad asks for it (th.price === true), otherwise the course facts
   const py = CY + (P ? 0.075 : 0.11) * H, pa = p(0.4);
   if (pa > 0) {
-    font(54 * u, 800, F.inter); const a = "$99", b = "  $29", c = "  · lifetime access"; const wa = tw(a), wb = tw(b);
-    font(34 * u, 500, F.inter); const wc = tw(c); const x0 = CX - (wa + wb + wc) / 2;
     g.save(); g.globalAlpha = pa;
-    txt(a, x0 + wa / 2, py, { size: 54 * u, weight: 800, color: th.strike || "rgba(160,160,160,1)" });
-    g.strokeStyle = th.accent || "#ff5a5a"; g.lineWidth = 5 * u; g.beginPath(); g.moveTo(x0 - 4 * u, py + 2 * u); g.lineTo(x0 + wa * prog(t, t0 + 0.55, t0 + 0.75) + 4 * u, py - 2 * u); g.stroke();
-    txt(b, x0 + wa + wb / 2, py, { size: 54 * u, weight: 800, color: fg });
-    txt(c, x0 + wa + wb + wc / 2, py + 4 * u, { size: 34 * u, weight: 500, color: fg, alpha: 0.8 });
+    if (th.price) {
+      font(60 * u, 800, F.inter); const a = PRICE, c = "  · one-time · lifetime access"; const wa = tw(a); font(32 * u, 500, F.inter); const wc = tw(c); const x0 = CX - (wa + wc) / 2;
+      txt(a, x0 + wa / 2, py, { size: 60 * u, weight: 800, color: th.accent || fg });
+      txt(c, x0 + wa + wc / 2, py + 6 * u, { size: 32 * u, weight: 500, color: fg, alpha: 0.8 });
+    } else txt(th.facts || "11 modules  ·  41 lessons  ·  lifetime access", CX, py, { size: 34 * u, weight: 600, color: fg, alpha: 0.85 });
     g.restore();
   }
   const bp = clamp((t - t0 - 0.65) / 0.35);

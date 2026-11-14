@@ -1,5 +1,5 @@
 // A20 · "Select your level" (English, 9:16, no VO). Retro game UI: the course's three levels and the capstone boss,
-// power-ups, "1 CREDIT = $29", PRESS START. Captions: pixel font (Press Start 2P), CRT scanlines.
+// power-ups, "1 CREDIT = ₹2,999", PRESS START. Captions: pixel font (Press Start 2P), CRT scanlines.
 const LV = [["LEVEL 1", "THE IMAGE", "Strategy, product shots, models, sets", "4 STAGES", "#7CFC9A"], ["LEVEL 2", "MOTION & SOUND", "Video ads, films, voice, music, UGC", "3 STAGES", "#79c0ff"],
   ["LEVEL 3", "AGENCY STANDARD", "Meta ads, finishing, hybrid shoots", "4 STAGES", "#ffbd2e"], ["BOSS", "CAPSTONE CAMPAIGN", "Brief to launch. Your portfolio piece.", "FINAL", "#ff6b6b"]];
 const T0 = 1.6, LS = 1.3, T_PU = T0 + LV.length * LS + 0.3, T_START = T_PU + 2.2, T_END = T_START + 1.8;
@@ -34,7 +34,7 @@ window.AD = {
         g.fillStyle = ["#7CFC9A", "#79c0ff", "#ff6b6b"][i]; g.fillRect(-140 * u, -40 * u, 280 * u, 80 * u); txt(s, 0, 2 * u, { size: fitSize(s, 250 * u, 18 * u, 400, F.pixel), fam: F.pixel, weight: 400, color: "#0b0d2a" }); g.restore(); });
       g.globalAlpha = 1;
     }
-    if (t >= T_START) { txt("1 CREDIT = $29", CX, 1640 * u, { size: 40 * u, fam: F.pixel, weight: 400, color: "#7CFC9A" });
+    if (t >= T_START) { txt("1 CREDIT = ₹2,999", CX, 1640 * u, { size: 40 * u, fam: F.pixel, weight: 400, color: "#7CFC9A" });
       if (FR(t) % 20 < 13) txt("PRESS START", CX, 1730 * u, { size: 34 * u, fam: F.pixel, weight: 400, color: "#fff" }); }
     this.crt();
   },

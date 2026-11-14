@@ -1,5 +1,5 @@
 // A11 · "The price tag" (English VO Reyaansh, 4:5 feed). A luxury boutique price tag swings on its string:
-// $99 is struck, $29 stamped, the tag flips to show what's inside. Captions: large Instrument Serif.
+// one course, one price (₹2,999) stamped "ONE-TIME", the tag flips to show what's inside. Captions: large Instrument Serif.
 const L = window.TL.lines, Wd = (l, w) => L[l].words[w].s;
 const T_29 = Wd(1, 0), T_FLIP = Wd(2, 0), T_LIFE = Wd(3, 0), T_END = L[3].v1 + 0.6;
 const GOLD = "#E8C77A";
@@ -9,7 +9,7 @@ window.AD = {
   music: { file: "build/music/640.mp3", offset: 2, gain: -9, duck: -7, fadeOut: 0.8 },
   sfx: [["tick", 0.3, -12], ["pencil", T_29 - 0.05, -6], ["stamp", T_29 + 0.25, -4], ["pageflip", T_FLIP - 0.1, -6], ["stamp", T_LIFE + 0.1, -6], ["register", Wd(3, 2), -10], ["whoosh", T_END - 0.1, -12]],
   render(t) {
-    if (t >= T_END) { endCard(t, T_END, { bg: "#0c0b09", fg: GOLD, logo: "white", subColor: "#e9e2d0", strike: "#776", accent: "#c0392b", button: { fill: GOLD, shadow: "#6b5a2e" } }); grain(t, 0.06); return; }
+    if (t >= T_END) { endCard(t, T_END, { bg: "#0c0b09", fg: GOLD, logo: "white", subColor: "#e9e2d0", strike: "#776", accent: "#c0392b", button: { fill: GOLD, shadow: "#6b5a2e" }, price: true }); grain(t, 0.06); return; }
     bg("#0c0b09"); g.save(); g.globalAlpha = 0.35; g.filter = "blur(14px) saturate(0.6)"; cover(IM.bgimg, -40, -40, W + 80, H + 80, 1.1 + 0.03 * t); g.restore(); vignette(0.8);
     // string
     const ax = CX, ay = -20 * u, swing = 0.12 * Math.exp(-t * 0.35) * Math.sin(t * 2.6) + (t > T_29 ? 0.05 * Math.exp(-(t - T_29) * 2) * Math.sin((t - T_29) * 14) : 0);
@@ -28,10 +28,10 @@ window.AD = {
       txt("IDEABRO STUDIO", 0, 170 * u, { size: 24 * u, fam: F.mono, weight: 700, color: "#6b5a2e", ls: 3 });
       txt("AI & Advertising", 0, 250 * u, { size: 58 * u, fam: F.serif, weight: 400, color: C.ink });
       txt("the complete course", 0, 300 * u, { size: 26 * u, fam: F.serif, style: "italic", weight: 400, color: "#555" });
-      txt("$99", 0, 450 * u, { size: 150 * u, fam: F.play, weight: 700, color: t > T_29 ? "#9a9a9a" : C.ink });
-      if (t > T_29) { const sp = prog(t, T_29 - 0.05, T_29 + 0.15); g.strokeStyle = "#c0392b"; g.lineWidth = 9 * u; g.beginPath(); g.moveTo(-150 * u, 470 * u); g.lineTo(-150 * u + 300 * u * sp, 420 * u); g.stroke();
-        const p = oB(clamp((t - T_29 - 0.25) / 0.25)); g.save(); g.translate(40 * u, 600 * u); g.rotate(-0.12); g.scale(p, p);
-        g.strokeStyle = "#c0392b"; g.lineWidth = 7 * u; rr(-170 * u, -75 * u, 340 * u, 150 * u, 14 * u); g.stroke(); txt("$29", 0, 6 * u, { size: 110 * u, fam: F.play, weight: 700, color: "#c0392b" }); g.restore(); }
+      txt("₹2,999", 0, 450 * u, { size: 130 * u, fam: F.play, weight: 700, color: C.ink, alpha: oC(prog(t, T_29 - 0.3, T_29 + 0.1)) });
+      if (t > T_29) {
+        const p = oB(clamp((t - T_29 - 0.25) / 0.25)); g.save(); g.translate(30 * u, 610 * u); g.rotate(-0.12); g.scale(p, p);
+        g.strokeStyle = "#c0392b"; g.lineWidth = 7 * u; rr(-190 * u, -50 * u, 380 * u, 100 * u, 14 * u); g.stroke(); txt("ONE-TIME", 0, 4 * u, { size: 52 * u, fam: F.mono, weight: 700, color: "#c0392b" }); g.restore(); }
     } else {
       g.scale(1, 1); txt("WHAT'S INSIDE", 0, 180 * u, { size: 26 * u, fam: F.mono, weight: 700, color: "#6b5a2e", ls: 3 });
       ["11 modules", "41 lessons", "Prompt library", "Brief + storyboard templates", "Capstone campaign", "Pricing & pitching AI ads"].forEach((s, i) => {

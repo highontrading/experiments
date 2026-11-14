@@ -19,6 +19,14 @@ SFX = {
  "shimmer": (1.5, "festive golden sparkle shimmer, bells, magical"),
  "riser": (2.5, "short cinematic tension riser into impact"),
  "boom": (1.5, "deep cinematic boom impact"),
+ "clock": (4.0, "fast ticking stopwatch, crisp mechanical ticks, steady"),
+ "vhs": (1.5, "VHS tape inserted into VCR and rewinding, mechanical whirr"),
+ "ding": (0.8, "bright game show correct answer ding"),
+ "beep": (0.5, "digital camcorder record start beep"),
+ "boxopen": (1.0, "cardboard box flaps opening quickly"),
+ "sub": (1.5, "deep sub bass drop hit, cinematic"),
+ "send": (0.5, "messaging app message sent swoosh, soft"),
+ "focus": (0.6, "camera lens autofocus servo whirr and beep"),
 }
 only = sys.argv[1:]
 for n, (d, txt) in SFX.items():
@@ -27,5 +35,5 @@ for n, (d, txt) in SFX.items():
     req = urllib.request.Request("https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
         data=json.dumps({"text": txt, "duration_seconds": d, "prompt_influence": 0.6, "model_id": "eleven_text_to_sound_v3"}).encode(),
         headers={"xi-api-key": os.environ["ELEVENLABS_API_KEY"], "Content-Type": "application/json"})
-    try: open(f"build/sfx/{n}.mp3", "wb").write(urllib.request.urlopen(req, timeout=120).read()); print("ok", n)
+    try: data = urllib.request.urlopen(req, timeout=120).read(); open(f"build/sfx/{n}.mp3", "wb").write(data); print("ok", n)
     except urllib.error.HTTPError as e: print("FAIL", n, e.code, e.read()[:200])

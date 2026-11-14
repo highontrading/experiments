@@ -23,7 +23,7 @@ window.AD = {
     // barcode + price
     const bp = p(2.6); if (bp > 0) { g.save(); g.globalAlpha = bp; g.fillStyle = "#fff"; g.fillRect(W - 250 * u, H - 210 * u, 180 * u, 120 * u);
       g.fillStyle = C.ink; for (let k = 0; k < 34; k++) { const bw = (1 + Math.floor(rnd(k) * 3)) * u * 1.6; g.fillRect(W - 236 * u + k * 4.6 * u, H - 196 * u, bw, 72 * u); }
-      txt("$29", W - 160 * u, H - 108 * u, { size: 22 * u, fam: F.mono, color: C.ink }); g.restore(); }
+      txt("₹2,999", W - 160 * u, H - 108 * u, { size: 22 * u, fam: F.mono, color: C.ink }); g.restore(); }
   },
   spread(t, t0, left, right, head, sub) {
     bg("#f5f2ea"); const p = (d) => oC(clamp((t - t0 - d) / 0.45));

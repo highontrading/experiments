@@ -1,7 +1,8 @@
 """Poster grid of all ads (frame at ~35% of each) -> out/_all_ads_overview.jpg"""
-import glob, subprocess, os
+import glob, subprocess, os, sys
+pre = sys.argv[1] if len(sys.argv) > 1 else "a"; outp = "out/_all_ads_overview.jpg" if pre == "a" else f"out/_round2_{pre}_ads_overview.jpg"
 from PIL import Image, ImageDraw, ImageFont
-fs = sorted(glob.glob("out/a*.mp4")); tiles = []
+fs = sorted(glob.glob(f"out/{pre}*.mp4")); tiles = []
 for f in fs:
     d = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f]))
     p = f"build/qa/poster_{os.path.basename(f)[:3]}.jpg"
@@ -13,4 +14,4 @@ try: fnt = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.
 except Exception: fnt = None
 for i, (n, im) in enumerate(tiles):
     x, y = (i % cols) * W, (i // cols) * H; sheet.paste(im, (x, y + (640 - im.height) // 2)); d.text((x + 8, y + 648), n[:40], fill="#ddd", font=fnt)
-sheet.save("out/_all_ads_overview.jpg", quality=85); print(len(tiles))
+sheet.save(outp, quality=85); print(len(tiles))

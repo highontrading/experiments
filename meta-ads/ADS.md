@@ -2,7 +2,9 @@
 
 Twenty standalone video ads for **AI & Advertising by Ideabro Studio** (landing page: community.ideabrostudio.com/courses/ai-and-advertising).
 Every ad has its own visual world and caption system, and they share the same offer and end card:
-the IB mark, "AI & Advertising", $99 struck to $29, lifetime access and an "Enroll now" button.
+the IB mark, "AI & Advertising", an offer line and an "Enroll now" button. The offer line shows **₹2,999 · one-time · lifetime access** on the ads that sell on price (A01, A08, A11) and "11 modules · 41 lessons · lifetime access" everywhere else.
+
+**Round 2 update:** pricing is now ₹2,999 (INR, one-time) and appears only where it helps: in-scene in A01, A04, A08, A11, A16 and A20. The other ads leave price out. Captions were tightened so each ad runs one caption look from start to finish.
 
 - 14 vertical **9:16** ads (Reels, Stories) and 6 **4:5** ads (Feed).
 - **5 in Hinglish** (A01, A05, A09, A10, A13). The rest are in English.
@@ -16,17 +18,17 @@ Lessons from the competitor teardown (Piyush Glitch), applied here:
 
 | # | File | Format | Lang | Theme | Captions | Audio |
 |---|---|---|---|---|---|---|
-| A01 | a01_shoot-ka-bill_hinglish.mp4 | 9:16 | Hinglish | Thermal receipt of a traditional shoot, torn off, then a $29 receipt | Kinetic pop, yellow active word | VO Neeraj · trap |
+| A01 | a01_shoot-ka-bill_hinglish.mp4 | 9:16 | Hinglish | Thermal receipt of a traditional shoot, torn off, then a ₹2,999 receipt | Dark pill, white words, lime active word | VO Neeraj · trap |
 | A02 | a02_old-way-vs-ai-way.mp4 | 4:5 | EN | Editorial ledger on the cream grid: strike-throughs and lime highlights | Serif headline + mono table | Corporate · pencil SFX |
 | A03 | a03_one-photo-whole-campaign.mp4 | 9:16 | EN | Swiss grid: 1 photo becomes 20 ads, categories light up | Giant block caps (Anton), lime key word | VO Steven · trailer score |
 | A04 | a04_the-ai-issue-magazine.mp4 | 4:5 | EN | Luxury fashion magazine, "THE AI ISSUE", page flips | Editorial serif cover lines | Fashion funk · page flips |
 | A05 | a05_raat-ka-brief_hinglish.mp4 | 9:16 | Hinglish | 11 PM client message, clock runs to 7 AM, ad goes live | Clean white word fade | VO Rahul · lo-fi |
-| A06 | a06_anyone-can-generate-few-can-direct.mp4 | 9:16 | EN | Director's monitor, clapper slate, AI cinema footage | Yellow cinema subtitles | VO Don (trailer) · epic drums |
+| A06 | a06_anyone-can-generate-few-can-direct.mp4 | 9:16 | EN | Director's monitor, clapper slate, AI cinema footage | Yellow cinema subtitles (throughout) | VO Don (trailer) · epic drums |
 | A07 | a07_taste-is-the-skill.mp4 | 9:16 | EN | Feed of same-looking AI ads, then one stops the scroll | White story stickers, lime highlight | Tech house · swipes |
 | A08 | a08_departures-board.mp4 | 9:16 | EN | Airport split-flap board: modules as flights | Split-flap amber characters | Deep house · flap clatter |
-| A09 | a09_ai-ad-stack_hinglish.mp4 | 9:16 | Hinglish | 12 tool tiles, tools wired to ad outputs, "free tier" stack | Lime/pink highlighter boxes | VO Jeet · trap-electro |
+| A09 | a09_ai-ad-stack_hinglish.mp4 | 9:16 | Hinglish | 12 tool tiles, tools wired to ad outputs, "free tier" stack | Lime highlighter boxes | VO Jeet · trap-electro |
 | A10 | a10_diwali-campaign_hinglish.mp4 | 4:5 | Hinglish | Maroon + gold Diwali world, diyas, marigolds, gold frames | Gold Playfair with glow | VO Anika · sitar |
-| A11 | a11_price-tag-luxury.mp4 | 4:5 | EN | Swinging boutique price tag, $99 → $29, flips to "what's inside" | Large serif | VO Reyaansh · smooth jazz |
+| A11 | a11_price-tag-luxury.mp4 | 4:5 | EN | Swinging boutique price tag, ₹2,999 tag + ONE-TIME stamp, flips to "what's inside" | Large serif | VO Reyaansh · smooth jazz |
 | A12 | a12_ai-ugc-creators-dont-exist.mp4 | 9:16 | EN | Phone camera UI over AI UGC creators, "AI-GENERATED" chips | TikTok pop, pink active word | VO Jessica · pop |
 | A13 | a13_pov-30-variations_hinglish.mp4 | 9:16 | Hinglish | POV meme: "Monday tak 30 variations" → 30/30 grid | Meme top-bar | Comic funk (no VO) |
 | A14 | a14_every-ratio-one-concept.mp4 | 4:5 | EN | One creative morphs 1:1 → 4:5 → 9:16 → 16:9 → 1.91:1, then 10 variations | Mono pill labels + serif | House |
@@ -44,14 +46,14 @@ Lessons from the competitor teardown (Piyush Glitch), applied here:
 CTA button for all: **Learn More** (or **Sign Up**). Link: community.ideabrostudio.com/courses/ai-and-advertising
 
 ### A01 · Shoot ka bill (Hinglish)
-- **Primary text:** Ek product shoot = studio, photographer, models, stylist… aur bill lakhon mein. Ab wahi shoot ek product photo se, AI ke saath. AI & Advertising seekho: product shoots, video ads aur Meta ads. Sirf $29, lifetime access.
-- **Headline:** Shoot ka bill? Ab sirf $29.
+- **Primary text:** Ek product shoot = studio, photographer, models, stylist… aur bill lakhon mein. Ab wahi shoot ek product photo se, AI ke saath. AI & Advertising seekho: product shoots, video ads aur Meta ads. Sirf ₹2,999, lifetime access.
+- **Headline:** Shoot ka bill? Ab sirf ₹2,999.
 - **Description:** 11 modules · 41 lessons · lifetime access
 
 ### A02 · The old way vs the AI way
 - **Primary text:** Studio, photographer, stylist, casting, crew, edit suite. Or: one product photo and the right direction. AI & Advertising teaches you the whole AI ad workflow, from brief to launched campaign.
 - **Headline:** The shoot is optional now.
-- **Description:** $29 launch price (was $99)
+- **Description:** 11 modules · 41 lessons · lifetime access
 
 ### A03 · One photo → a whole campaign
 - **Primary text:** One product photo in. Studio shots, lifestyle, models and motion out. Learn to turn a single photo into a full campaign with AI, and keep the label, logo and shape accurate.
@@ -61,12 +63,12 @@ CTA button for all: **Learn More** (or **Sign Up**). Link: community.ideabrostud
 ### A04 · THE AI ISSUE
 - **Primary text:** Shot by no one. Every frame in this issue was made with AI and directed by people who learned the craft. Product shoots, model shoots, lookbooks and campaign films, all in one course.
 - **Headline:** The AI Issue: learn to make it.
-- **Description:** AI & Advertising · $29 · lifetime
+- **Description:** AI & Advertising · ₹2,999 · lifetime
 
 ### A05 · Raat ka brief (Hinglish)
 - **Primary text:** Raat 11 baje client: "Kal subah tak naya ad chahiye." Brief, concept, visuals, motion, edit. Ek raat mein, bina shoot ke. AI & Advertising mein seekho brief se launch tak ka poora workflow.
 - **Headline:** Raat ko brief. Subah ad live.
-- **Description:** $29 · self-paced · lifetime access
+- **Description:** Self-paced · lifetime access
 
 ### A06 · Anyone can press generate
 - **Primary text:** Feeds are full of AI ads that all look the same. The tools are easy. Direction is the skill: light, colour, composition, product accuracy and brand consistency. Learn to make AI ads that look shot, not generated.
@@ -76,70 +78,70 @@ CTA button for all: **Learn More** (or **Sign Up**). Link: community.ideabrostud
 ### A07 · Taste is the skill
 - **Primary text:** Same prompt, same look, same scroll-past. The ads that stop the scroll are directed. This course teaches the art direction that makes AI ads look expensive.
 - **Headline:** Taste is the skill.
-- **Description:** $29 launch price · lifetime access
+- **Description:** Art direction for AI ads · lifetime access
 
 ### A08 · Departures
 - **Primary text:** 11 modules. 41 lessons. Three levels: the image, motion & sound, the agency standard. Then a capstone campaign for your portfolio. One ticket, lifetime access.
 - **Headline:** Now boarding: AI & Advertising
-- **Description:** Fare $29 (was $99)
+- **Description:** Fare ₹2,999 · one-time
 
 ### A09 · AI ad stack (Hinglish)
 - **Primary text:** ChatGPT, Claude, Gemini, Nano Banana, Midjourney, Veo, Kling, Runway, ElevenLabs, Suno, CapCut, Meta Ads Manager. Tools sabke paas hain. Par kaunsa tool kab, kis ad ke liye? Yeh course poora stack sikhata hai, free aur sasta wala tareeka bhi.
 - **Headline:** 12 tools. Ek clear stack.
-- **Description:** AI & Advertising · $29
+- **Description:** Free and low-cost tools included
 
 ### A10 · Diwali campaign (Hinglish)
 - **Primary text:** Diwali campaign aur budget tight? Diyas, marigold, festive sets, apne product ke saath. Na studio, na set designer. Bas ek product photo aur sahi direction. Festive ads banana seekho AI & Advertising mein.
 - **Headline:** Festive ads, bina festive budget ke.
-- **Description:** $29 · lifetime access
+- **Description:** Festive ads · lifetime access
 
 ### A11 · The price tag
-- **Primary text:** $99. Now $29. 11 modules, 41 lessons, a prompt library, brief and storyboard templates, a capstone campaign, and how to price and pitch AI ad services. One payment, lifetime access.
-- **Headline:** $29. Everything inside.
-- **Description:** Launch price · 70% off
+- **Primary text:** One course. One price: ₹2,999. 11 modules, 41 lessons, a prompt library, brief and storyboard templates, a capstone campaign, and how to price and pitch AI ad services. One payment, lifetime access.
+- **Headline:** ₹2,999. Everything inside.
+- **Description:** One-time payment · lifetime access
 
 ### A12 · AI UGC: none of them exist
 - **Primary text:** No casting. No shipping product. No reshoots. AI UGC creators that feel native to the feed: reviews, unboxings, try-ons and GRWMs. Learn exactly how in AI & Advertising.
 - **Headline:** UGC ads, no creators needed.
-- **Description:** $29 · lifetime access
+- **Description:** AI UGC · lifetime access
 
 ### A13 · POV: 30 variations (Hinglish)
 - **Primary text:** POV: client bolta hai "Monday tak 30 ad variations chahiye." Purana tareeka: 3 shoots, 2 hafte. AI & Advertising ke baad: 30 variations, ek din mein, bina shoot ke. Meta ads ke liye variations banana seekho.
 - **Headline:** 30 variations. Ek din.
-- **Description:** $29 · lifetime access
+- **Description:** ₹2,999 · lifetime access
 
 ### A14 · Every ratio from one concept
 - **Primary text:** One concept, every placement: 1:1, 4:5, 9:16, 16:9, 1.91:1. Then 10 variations from one idea, ready to test on Meta. Module 08 covers statics, variations, Advantage+ creative and reading results.
 - **Headline:** One concept. Every ratio.
-- **Description:** AI & Advertising · $29
+- **Description:** Statics, variations, Advantage+
 
 ### A15 · The prompt is the shoot
 - **Primary text:** Subject. Light. Lens. Mood. Write the prompt like a director and the frame comes back ready. AI & Advertising teaches the language of art direction for AI product shoots, model shoots and video ads.
 - **Headline:** The prompt is the shoot.
-- **Description:** $29 launch price
+- **Description:** Prompting like a director
 
 ### A16 · Notes app checklist
-- **Primary text:** Things my brand doesn't need anymore: studio booking, model casting, a 3-week shoot, a reshoot budget, waiting on the edit. Things it needs: AI & Advertising, $29.
+- **Primary text:** Things my brand doesn't need anymore: studio booking, model casting, a 3-week shoot, a reshoot budget, waiting on the edit. Things it needs: AI & Advertising, ₹2,999.
 - **Headline:** Cross the shoot off your list.
 - **Description:** Lifetime access · self-paced
 
 ### A17 · Student voices
 - **Primary text:** "IdeaBro didn't just teach me tools. It rewired how I think about ideas." — Aryan Sinha, Brand Designer. Learn taste, AI tools and creative strategy in one course.
 - **Headline:** From our students.
-- **Description:** AI & Advertising · $29
+- **Description:** AI & Advertising by Ideabro Studio
 
 ### A18 · The shoot is optional now
 - **Primary text:** Shoot-quality ads. Without the shoot. Car chases, oceans, jungles, wildlife: every frame in this ad was made with AI. Learn to direct it.
 - **Headline:** The shoot is optional now.
-- **Description:** $29 · lifetime access
+- **Description:** Made with AI · lifetime access
 
 ### A19 · Who it's for
 - **Primary text:** D2C founders, marketers, designers, freelancers, creators, students. If you need ads, this is for you. Make product shoots, video ads and Meta ads with AI.
 - **Headline:** If you need ads, it's for you.
-- **Description:** $29 (was $99) · lifetime
+- **Description:** 11 modules · 41 lessons · lifetime
 
 ### A20 · Select your level
-- **Primary text:** Level 1: the image. Level 2: motion & sound. Level 3: the agency standard. Boss level: your capstone campaign. Power-ups: prompt library, templates, lifetime updates. 1 credit = $29.
+- **Primary text:** Level 1: the image. Level 2: motion & sound. Level 3: the agency standard. Boss level: your capstone campaign. Power-ups: prompt library, templates, lifetime updates. 1 credit = ₹2,999.
 - **Headline:** Press start on AI advertising.
 - **Description:** 11 modules · 41 lessons
 
@@ -148,7 +150,7 @@ CTA button for all: **Learn More** (or **Sign Up**). Link: community.ideabrostud
 ## Notes for launch
 
 - **Name:** the ads say "AI & Advertising", matching the course page title. If you want "AI in Advertising" everywhere instead, it's one word in `core.js` (end card) plus a few lines of copy.
-- **Price claims:** "$99 → $29, 70% off launch price" is taken from the page. If the launch offer ends, update the end card in `core.js` and every ad changes together.
+- **Price:** ₹2,999 one-time, set once as `PRICE` in `core.js`. The end card shows it only when an ad passes `price: true`. We don't show a strike-through "was" price because no INR list price was confirmed.
 - **A01 receipt amounts** are labelled "*typical estimate". They're illustrative, not a quote.
 - **A12** shows a mock feed post with a fictional creator handle labelled "AI-generated creator". For Meta's AI disclosure, consider ticking the "AI-generated" label on the ad.
 - **Sources:**

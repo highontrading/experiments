@@ -49,13 +49,13 @@ window.AD = {
       for (let k = 0; k < 6; k++) {
         const y = 140 * u + k * postH - off; if (y > H || y + postH < 0) continue;
         if (k < 5) this.post(px, y, pw, IM[same[k][0]], { filter: same[k][2], tag: same[k][1], z: 1.2 + k * 0.05, ax: 0.3 + k * 0.1, av: "#cfc6b8" });
-        else this.post(px, y, pw, null, { name: "your.brand", av: C.lime, cap: "Directed with AI. Not just generated.", draw: (x, yy, w, h) => cover(seq("hero", t, 2.2), x, yy, w, h, 1.05) });
+        else this.post(px, y, pw, null, { name: "your.brand", av: C.lime, cap: "Directed with AI. Not just generated.", draw: (x, yy, w, h) => cover(seq("hero", t, 0.4), x, yy, w, h, 1.05) });
       }
       // "SAME PROMPT" stamps on the beige ads
       if (t < T_STOP - 0.3) { const k = Math.floor(t / 0.45) % 3; txt("SAME PROMPT", CX + (k - 1) * 220 * u, H * 0.52 + k * 120 * u, { size: 40 * u, fam: F.mono, weight: 700, color: "rgba(200,40,40,0.75)" }); }
     } else if (t < T_EX) {   // hero fills the screen
       const p = oC(prog(t, T_ZOOM, T_ZOOM + 0.5)); const x = lerp(px, 0, p), w = lerp(pw, W, p), y0 = lerp(140 * u + 110 * u, 0, p), h = lerp(pw * 1.25, H, p);
-      cover(seq("hero", t, 2.2), x, y0, w, h, 1.05); shade(0, H * 0.35, 0.45, true);
+      cover(seq("hero", t, 0.4), x, y0, w, h, 1.05); shade(0, H * 0.35, 0.45, true);
     } else {   // three more vivid examples, quick cuts
       const ims = ["e1", "e2", "e3", "e4"]; const k = Math.min(3, Math.floor((t - T_EX) / 0.8)); cover(IM[ims[k]], 0, 0, W, H, 1.05 + 0.04 * ((t - T_EX) % 0.8)); shade(0, H * 0.35, 0.4, true);
       if (t >= T_LEARN) { g.fillStyle = `rgba(0,0,0,${0.55 * prog(t, T_LEARN, T_LEARN + 0.3)})`; g.fillRect(0, 0, W, H); }

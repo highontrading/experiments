@@ -1,5 +1,5 @@
 // A01 · "Shoot ka bill" (Hinglish VO, 9:16). A thermal receipt prints the cost of a traditional shoot,
-// tears off, and a tiny $29 receipt prints instead. Captions: kinetic pop, yellow active word.
+// tears off, and a ₹2,999 course receipt prints instead. Captions: premium dark pill, lime active word.
 const L = window.TL.lines, Wd = (l, w) => L[l].words[w].s;
 const ITEMS = [  // [label, amount, appear time]
   ["STUDIO RENTAL x2 DAYS", "45,000", Wd(1, 0)], ["PHOTOGRAPHER + ASSIST", "60,000", Wd(1, 1)], ["MODELS x3", "90,000", Wd(1, 2)],
@@ -16,8 +16,8 @@ window.AD = {
   sfx: [["receipt", 0.25, -8], ...ITEMS.map((it) => ["tick", it[2], -14]), ["register", T_TOTAL, -8], ["tear", T_TEAR - 0.05, -4],
         ["whoosh", T_TEAR + 0.1, -10], ["pop", Wd(3, 3), -10], ["receipt", T_NEW, -10], ["stamp", L[4].words[5].s, -4], ["whoosh", T_END - 0.1, -12]],
   render(t) {
-    if (t < T_END) this.scene(t); else endCard(t, T_END, { bg: C.cream, grid: C.grid, fg: C.ink, accent: "#d33", strike: "#8a8a8a", cta: "Enroll now  →" });
-    capPop(t, voChunk(t, 3, 0.5), H * 0.73, { size: 84 * u });
+    if (t < T_END) this.scene(t); else endCard(t, T_END, { bg: C.cream, grid: C.grid, fg: C.ink, accent: "#d33", strike: "#8a8a8a", cta: "Enroll now  →", price: true, accent: "#1b7f3a" });
+    capPill(t, voChunk(t, 3, 0.5), H * 0.74, { size: 66 * u });
     grain(t, 0.06);
   },
   receipt(x, y, w, lines, total, opts = {}) {   // draws a thermal receipt (paper) of given visible height
@@ -39,7 +39,7 @@ window.AD = {
   scene(t) {
     if (t < T_TEAR + 0.6) {
       bg("#0d0d0d");
-      const im = seq("studio", t, 0, { loop: false }); g.save(); g.filter = `blur(${6 * u}px) brightness(0.45)`; cover(im, -20, -20, W + 40, H + 40, 1.05); g.restore();
+      const im = seq("studio", t, 0, { loop: false }); g.save(); g.filter = `blur(${1.5 * u}px) brightness(0.62)`; cover(im, -20, -20, W + 40, H + 40, 1.05); g.restore();
       // receipt prints downward, then tears and falls
       const rw = 900 * u, rx = CX - rw / 2; const shown = ITEMS.filter((i) => t >= i[2]).length;
       let rh = 300 * u + shown * 66 * u + (t >= T_TOTAL ? 230 * u : 0); rh = Math.min(rh, 300 * u + prog(t, 0.25, 1.4) * 1400 * u);
@@ -62,11 +62,11 @@ window.AD = {
       const im = IM.shoe, w = 420 * u * (t >= T_NEW ? 1 - 0.3 * oC(prog(t, T_NEW, T_NEW + 0.4)) : 1), h = w * im.height / im.width, yy = H * 0.42 - (t >= T_NEW ? oC(prog(t, T_NEW, T_NEW + 0.4)) * 260 * u : 0);
       g.save(); g.globalAlpha = a; g.fillStyle = C.lav; g.fillRect(CX - w / 2 + 10 * u, yy - h / 2 + 10 * u, w, h); g.drawImage(im, CX - w / 2, yy - h / 2, w, h); g.strokeStyle = C.ink; g.lineWidth = 3 * u; g.strokeRect(CX - w / 2, yy - h / 2, w, h);
       txt("1 PRODUCT PHOTO", CX, yy - h / 2 - 34 * u, { size: 28 * u, fam: F.mono, color: C.ink }); g.restore();
-      if (t >= T_NEW) {   // the $29 receipt
+      if (t >= T_NEW) {   // the ₹2,999 receipt
         const rw = 760 * u, rh = Math.min(640 * u, 140 * u + prog(t, T_NEW, T_NEW + 0.9) * 700 * u);
-        g.save(); g.translate(0, H * 0.36); this.receipt(CX - rw / 2, 0, rw, [["AI & ADVERTISING", "COURSE"], ["11 MODULES · 41 LESSONS", ""], ["LIFETIME ACCESS", ""]], ["TOTAL", "$29", "#1b7f3a", "launch price · was $99"], { h: rh, t, title: "IDEABRO STUDIO", sub: "ONE-TIME · NO SHOOT NEEDED" }); g.restore();
+        g.save(); g.translate(0, H * 0.36); this.receipt(CX - rw / 2, 0, rw, [["AI & ADVERTISING", "COURSE"], ["11 MODULES · 41 LESSONS", ""], ["LIFETIME ACCESS", ""]], ["TOTAL", "₹2,999", "#1b7f3a", "one-time · lifetime access"], { h: rh, t, title: "IDEABRO STUDIO", sub: "ONE-TIME · NO SHOOT NEEDED" }); g.restore();
         const ts = L[4].words[5].s; if (t > ts) { const p = oB(clamp((t - ts) / 0.25)); g.save(); g.translate(CX + 210 * u, H * 0.36 + 560 * u); g.rotate(-0.2); g.scale(p, p);
-          g.strokeStyle = "#1b7f3a"; g.lineWidth = 6 * u; rr(-150 * u, -46 * u, 300 * u, 92 * u, 10 * u); g.stroke(); txt("SIRF $29", 0, 4 * u, { size: 44 * u, fam: F.mono, weight: 700, color: "#1b7f3a" }); g.restore(); }
+          g.strokeStyle = "#1b7f3a"; g.lineWidth = 6 * u; rr(-190 * u, -46 * u, 380 * u, 92 * u, 10 * u); g.stroke(); txt("SIRF ₹2,999", 0, 4 * u, { size: 44 * u, fam: F.mono, weight: 700, color: "#1b7f3a" }); g.restore(); }
       }
     }
   },

@@ -8,7 +8,7 @@ window.AD = {
   music: { file: "build/music/763.mp3", offset: 0, gain: -9, fadeOut: 0.8 },
   sfx: [["pencil", 0.6, -10], ...ITEMS.map((_, i) => ["pencil", I0 + i * IS + 0.25, -8]), ["typewriter", T_NEED, -18], ["pencil", T_TICK, -4], ["pop", T_POL, -10], ["pop", T_POL + 0.25, -10], ["pop", T_POL + 0.5, -10], ["whoosh", T_END - 0.1, -12]],
   render(t) {
-    if (t >= T_END) { endCard(t, T_END, { bg: "#fff6c8", fg: C.ink, strike: "#9a8f60", titleFam: F.hand, titleWeight: 700, titleSize: 130, cta: "Get it for $29  →" }); grain(t, 0.04); return; }
+    if (t >= T_END) { endCard(t, T_END, { bg: "#fff6c8", fg: C.ink, strike: "#9a8f60", titleFam: F.hand, titleWeight: 700, titleSize: 130, cta: "Enroll now  →" }); grain(t, 0.04); return; }
     bg("#fff6c8");
     // lines + margin
     g.strokeStyle = "rgba(90,140,200,0.35)"; g.lineWidth = 2 * u; for (let y = 300 * u; y < H; y += 100 * u) { g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); }
@@ -30,7 +30,7 @@ window.AD = {
       const y = 300 * u + 8 * 100 * u - 28 * u, p = oC(prog(t, T_NEED, T_NEED + 0.3));
       txt("Things it needs:", 160 * u, y, { size: 70 * u, weight: 700, fam: F.hand, color: C.ink, align: "left", alpha: p });
       g.globalAlpha = p; g.strokeStyle = C.ink; g.lineWidth = 3.5 * u; rr(160 * u, y + 100 * u - 26 * u, 50 * u, 50 * u, 10 * u); g.stroke(); g.globalAlpha = 1;
-      const s = "AI & Advertising — $29"; const n = clamp(Math.floor((t - T_NEED - 0.3) * 22), 0, s.length);
+      const s = "AI & Advertising — ₹2,999"; const n = clamp(Math.floor((t - T_NEED - 0.3) * 22), 0, s.length);
       font(70 * u, 700, F.hand); const w = tw(s.slice(0, n));
       g.fillStyle = "rgba(216,245,162,0.9)"; g.fillRect(236 * u, y + 100 * u - 40 * u, w + 10 * u, 76 * u);
       txt(s.slice(0, n), 240 * u, y + 100 * u, { size: 70 * u, weight: 700, fam: F.hand, color: C.ink, align: "left" });

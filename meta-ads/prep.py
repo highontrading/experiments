@@ -7,7 +7,7 @@ def src_path(s):
         vid = s.split(":")[1]; p = f"build/stock/mk_{vid}.mp4"
         if not os.path.exists(p):
             for q in ("1080", "720"):
-                try: open(p, "wb").write(urllib.request.urlopen(urllib.request.Request(f"https://assets.mixkit.co/videos/{vid}/{vid}-{q}.mp4", headers=UA), timeout=120).read()); break
+                try: data = urllib.request.urlopen(urllib.request.Request(f"https://assets.mixkit.co/videos/{vid}/{vid}-{q}.mp4", headers=UA), timeout=120).read(); open(p, "wb").write(data); break
                 except Exception: pass
         return p
     return s
