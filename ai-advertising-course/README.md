@@ -3,7 +3,7 @@
 | File | For | What it is |
 |---|---|---|
 | `LECTURE-NOTES.md` | **You** | Short teaching notes: half a page per module (teach, key points, show, take care, give) |
-| `student-kit/` | **Students** | 4 skills, 4 workflows, 3 templates |
+| `student-kit/` | **Students** | 4 skills, 4 workflows, 3 templates, and `pages/`: interactive HTML (open `pages/index.html`) |
 | `dist/` | **Upload** | `student-kit.zip`, plus one zip per skill for Claude |
 | `archive/` | Reference | The old detailed version (17 skills, long lecture plans). Not for students. |
 
@@ -27,5 +27,10 @@
 Name the files `L01_raw.mp4` … `L11_raw.mp4`, put them in a Google Drive folder and send the
 folder name. Claude cuts them into the 41 lessons using your "LESSON x.y" markers.
 
-## Rebuild the zips
-After you edit anything in `student-kit/`, run `./make_zips.sh`.
+## Rebuild after edits
+Edit the markdown in `student-kit/`, then run:
+
+```bash
+python3 tools/build_pages.py   # rebuilds the HTML pages
+./make_zips.sh                 # rebuilds the zips
+```

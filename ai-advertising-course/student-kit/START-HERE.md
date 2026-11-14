@@ -1,5 +1,8 @@
 # Start Here
 
+> **Easiest way in:** open `pages/index.html` in your browser. It has every workflow step by step,
+> with copy buttons and a progress tracker.
+
 You get **4 skills** and **4 workflows**. Together they take you from a brief to a live ad.
 
 **Skill** = a file you attach to Claude, ChatGPT or Gemini. It turns the AI into a specialist

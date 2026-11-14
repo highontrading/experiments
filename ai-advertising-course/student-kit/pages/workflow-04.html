@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workflow 04: Edit and Launch</title>
+<meta name="description" content="You end with finished 15s and 30s ads, with captions and an end card in 3 ratios, live on Meta, and a plan for the next round.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#181d26;--ink-active:#0d1218;--body:#333840;--muted:#41454d;--hairline:#dddddd;--border-strong:#9297a0;
+  --canvas:#ffffff;--soft:#f8fafc;--strong:#e0e2e6;--dark:#181d26;
+  --coral:#aa2d00;--forest:#0a2e0e;--cream:#f5e9d4;--peach:#fcab79;--mint:#a8d8c4;--yellow:#f4d35e;--mustard:#d9a441;
+  --link:#1b61c9;--info-border:#458fff;--success:#006400;
+  --r-xs:2px;--r-sm:6px;--r-md:10px;--r-lg:12px;--r-full:9999px;
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--section:96px;
+  --font:"Inter","Haas",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--canvas);color:var(--body);font:400 16px/1.5 var(--font);font-optical-sizing:auto;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{color:var(--ink);font-weight:400;margin:0;letter-spacing:0}
+p{margin:0}
+a{color:var(--link);text-decoration:none}
+a:active{color:#1a3866}
+code{font-family:var(--mono);font-size:.88em;background:var(--soft);border:1px solid var(--hairline);border-radius:var(--r-sm);padding:1px 6px;color:var(--ink);overflow-wrap:anywhere}
+:focus-visible{outline:2px solid var(--info-border);outline-offset:2px}
+.wrap{max-width:1280px;margin:0 auto;padding:0 var(--s7)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:8px 12px;border-radius:var(--r-sm);z-index:50}
+.skip:focus{left:8px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;height:64px;background:var(--canvas);border-bottom:1px solid var(--hairline)}
+.nav .wrap{height:100%;display:flex;align-items:center;gap:var(--s6)}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:500;font-size:16px;white-space:nowrap}
+.brand-mark{width:24px;height:24px;border-radius:var(--r-sm);display:grid;grid-template-columns:1fr 1fr;gap:2px;overflow:hidden}
+.brand-mark i:nth-child(1){background:var(--coral)}.brand-mark i:nth-child(2){background:var(--forest)}
+.brand-mark i:nth-child(3){background:var(--ink)}.brand-mark i:nth-child(4){background:var(--mustard)}
+.nav-links{display:flex;gap:var(--s5);font-size:14px;flex:1;min-width:0}
+.nav-links a{color:var(--ink);white-space:nowrap}
+.nav-links a[aria-current=page]{box-shadow:inset 0 -2px 0 var(--ink);padding-bottom:4px}
+.nav .btn{padding:10px 16px;font-size:14px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:500 16px/1.4 var(--font);padding:16px 24px;border-radius:var(--r-lg);border:1px solid transparent;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn-primary{background:var(--ink);color:#fff;box-shadow:0 1px 2px rgba(24,29,38,.12),0 2px 8px rgba(27,97,201,.10)}
+.btn-primary:active{background:var(--ink-active);color:#fff}
+.btn-secondary{background:var(--canvas);color:var(--ink);border-color:var(--hairline)}
+.btn-secondary:active{background:var(--soft);color:var(--ink)}
+.btn-small{padding:8px 14px;font-size:14px;border-radius:var(--r-sm)}
+.btn-row{display:flex;flex-wrap:wrap;gap:var(--s3)}
+
+/* typography roles */
+.eyebrow{font:500 14px/1.35 var(--font);letter-spacing:.16px;color:var(--muted);margin-bottom:var(--s4)}
+.display-xl{font-size:48px;line-height:1.1;font-weight:500}
+.display-lg{font-size:40px;line-height:1.2}
+.display-md{font-size:32px;line-height:1.2}
+.title-lg{font-size:24px;line-height:1.35;letter-spacing:.12px}
+.title-md{font-size:20px;line-height:1.5}
+.lede{font-size:20px;line-height:1.5;color:var(--body);max-width:720px;margin-top:var(--s5)}
+
+/* bands */
+.hero{padding:var(--section) 0 var(--s7)}
+.band{padding:var(--section) 0}
+.band-tight{padding:var(--s7) 0}
+.band-cream{background:var(--cream)}
+.band-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s5);margin-bottom:var(--s6);flex-wrap:wrap}
+.band-head p{max-width:560px;margin-top:var(--s3)}
+
+/* meta row */
+.meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);margin-top:var(--s7)}
+.meta div{padding:var(--s5) var(--s5) var(--s5) 0}
+.meta div+div{padding-left:var(--s5);border-left:1px solid var(--hairline)}
+.meta dt{font:500 14px/1.35 var(--font);color:var(--muted);letter-spacing:.16px}
+.meta dd{margin:6px 0 0;font:500 16px/1.4 var(--font);color:var(--ink)}
+.hero .btn-row{margin-top:var(--s6)}
+
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--s2);margin-top:var(--s6)}
+.pipe-stage{border-radius:var(--r-md);padding:var(--s4);background:var(--soft);border:1px solid var(--hairline);min-height:92px;display:flex;flex-direction:column;justify-content:space-between;color:var(--muted)}
+.pipe-stage b{font-weight:500;font-size:16px;color:var(--ink)}
+.pipe-stage span{font-size:13px}
+.pipe-stage.on{background:var(--c);border-color:var(--c);color:var(--o)}
+.pipe-stage.on b{color:var(--o)}
+a.pipe-stage{text-decoration:none}
+
+/* signature card */
+.sig{background:var(--c);color:var(--o);border-radius:var(--r-lg);padding:var(--s7)}
+.sig h2,.sig h3{color:var(--o)}
+.sig .muted{opacity:.82}
+.sig-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s7);align-items:start}
+.need-list{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
+.need-list li{display:flex;gap:var(--s3);align-items:flex-start;font-size:18px;line-height:1.4;padding:var(--s4) 0;border-bottom:1px solid color-mix(in srgb,var(--o) 22%,transparent)}
+.need-list li:last-child{border-bottom:0}
+.need-list .n{flex:none;width:28px;height:28px;border-radius:var(--r-full);border:1px solid color-mix(in srgb,var(--o) 45%,transparent);display:grid;place-items:center;font-size:13px;font-weight:500}
+.sig code{background:color-mix(in srgb,var(--o) 12%,transparent);border-color:color-mix(in srgb,var(--o) 25%,transparent);color:var(--o)}
+
+/* steps */
+.steps-layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:var(--s7);align-items:start}
+.rail{position:sticky;top:96px}
+.rail ol{list-style:none;margin:var(--s5) 0 0;padding:0;display:grid;gap:2px}
+.rail a{display:flex;gap:var(--s3);align-items:center;padding:10px 12px;border-radius:var(--r-md);color:var(--body);font-size:14px;line-height:1.3}
+.rail a.is-active{background:var(--soft);color:var(--ink)}
+.rail .dot{flex:none;width:26px;height:26px;border-radius:var(--r-full);border:1px solid var(--hairline);display:grid;place-items:center;font-size:12px;font-weight:500;color:var(--ink);background:var(--canvas)}
+.rail a.is-done .dot{background:var(--ink);border-color:var(--ink);color:#fff}
+.progress{display:grid;gap:var(--s2)}
+.progress-track{height:6px;border-radius:var(--r-full);background:var(--strong);overflow:hidden}
+.progress-bar{height:100%;width:0;background:var(--ink);border-radius:var(--r-full);transition:width .3s ease}
+.progress-text{font:500 14px/1.35 var(--font);color:var(--muted)}
+.rail .reset{margin-top:var(--s5);background:none;border:0;padding:0;font:400 14px var(--font);color:var(--link);cursor:pointer}
+.mobile-progress{display:none}
+.step-list{display:grid;gap:var(--s5)}
+.step{border:1px solid var(--hairline);border-radius:var(--r-lg);padding:var(--s6);background:var(--canvas);scroll-margin-top:88px}
+.step.is-done{background:var(--soft)}
+.step-head{display:flex;gap:var(--s4);align-items:flex-start}
+.step-num{flex:none;width:44px;height:44px;border-radius:var(--r-full);background:var(--c);color:var(--o);display:grid;place-items:center;font-weight:500;font-size:16px}
+.step.is-done .step-num{background:var(--ink);color:#fff}
+.step-kicker{font:500 14px/1.35 var(--font);color:var(--muted);letter-spacing:.16px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);margin:var(--s5) 0}
+.fact{background:var(--soft);border-radius:var(--r-md);padding:var(--s4)}
+.step.is-done .fact{background:var(--canvas)}
+.fact dt{font:500 13px/1.3 var(--font);color:var(--muted);letter-spacing:.16px}
+.fact dd{margin:4px 0 0;color:var(--ink);font-size:15px;line-height:1.4}
+.step p{margin-top:var(--s4);font-size:16px;line-height:1.55}
+.typebox{margin-top:var(--s5);border-radius:var(--r-md);background:var(--dark);color:#fff;overflow:hidden}
+.typebox-head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px 10px 20px;border-bottom:1px solid rgba(255,255,255,.12)}
+.typebox-head span{font:500 13px/1.3 var(--font);letter-spacing:.16px;color:rgba(255,255,255,.75)}
+.typebox pre{margin:0;padding:20px;font:400 14px/1.65 var(--mono);white-space:pre-wrap;word-break:break-word;color:#fff}
+.copy{background:var(--canvas);color:var(--ink);border:1px solid var(--hairline);border-radius:var(--r-sm);font:500 13px/1 var(--font);padding:9px 14px;cursor:pointer;min-height:34px}
+.copy:active{background:var(--soft)}
+.copy.is-copied{background:var(--success);border-color:var(--success);color:#fff}
+.checknote{margin-top:var(--s5);background:var(--cream);border-radius:var(--r-md);padding:var(--s4) var(--s5);display:flex;gap:var(--s3);align-items:flex-start;color:var(--ink);font-size:15px;line-height:1.5}
+.checknote b{font-weight:500;flex:none}
+.step-foot{margin-top:var(--s5);display:flex;justify-content:flex-end}
+.step-toggle[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* checklist */
+.checklist{display:grid;gap:var(--s3);max-width:860px}
+.check-item{display:flex;gap:var(--s4);align-items:flex-start;background:var(--canvas);border-radius:var(--r-md);padding:var(--s4) var(--s5);cursor:pointer;color:var(--ink);font-size:17px;line-height:1.45}
+.check-item input{appearance:none;-webkit-appearance:none;flex:none;width:24px;height:24px;margin:1px 0 0;border:1.5px solid var(--border-strong);border-radius:var(--r-sm);background:var(--canvas);display:grid;place-items:center;cursor:pointer}
+.check-item input:checked{background:var(--ink);border-color:var(--ink)}
+.check-item input:checked::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg)}
+.check-item:has(input:checked) span{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--border-strong)}
+.check-status{margin-top:var(--s5);font:500 14px/1.35 var(--font);color:var(--muted)}
+
+/* dark card list */
+.mistakes{list-style:none;margin:var(--s6) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s5)}
+.mistakes li{border-top:1px solid rgba(255,255,255,.22);padding-top:var(--s4);font-size:16px;line-height:1.5}
+.mistakes .x{display:block;font:500 13px/1 var(--font);letter-spacing:.16px;opacity:.7;margin-bottom:var(--s3)}
+
+/* cta band */
+.cta{background:var(--strong);border-radius:var(--r-lg);padding:var(--s7);display:flex;justify-content:space-between;align-items:center;gap:var(--s5);flex-wrap:wrap}
+.cta p{margin-top:var(--s2)}
+
+/* grids & cards */
+.grid{display:grid;gap:var(--s5)}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.uneven{align-items:start}
+.card{border-radius:var(--r-md);padding:var(--s5);background:var(--canvas);border:1px solid var(--hairline);color:var(--ink);display:flex;flex-direction:column;gap:var(--s3)}
+.card.fill{border-color:transparent;background:var(--bg)}
+.card .k{font:500 13px/1.3 var(--font);letter-spacing:.16px;color:var(--muted)}
+.card.fill .k{color:rgba(24,29,38,.7)}
+.card h3{font-size:20px;line-height:1.35}
+.card p{font-size:15px;line-height:1.5;color:var(--body)}
+.card.fill p{color:var(--ink)}
+.card .go{margin-top:auto;padding-top:var(--s3);font-weight:500;font-size:15px;color:var(--ink)}
+a.card{text-decoration:none}
+a.card:active{opacity:.92}
+.bignum{font-size:48px;line-height:1;font-weight:400;color:var(--ink)}
+.chip{display:inline-block;font:500 13px/1.2 var(--font);padding:5px 10px;border-radius:var(--r-sm);background:rgba(255,255,255,.6);color:var(--ink);border:1px solid rgba(24,29,38,.12)}
+.mini-progress{font:500 13px/1.3 var(--font);color:rgba(24,29,38,.72)}
+.h-180{min-height:180px}.h-220{min-height:220px}.h-260{min-height:260px}.h-300{min-height:300px}
+
+/* asks (copyable rows on signature card) */
+.asks{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.asks li{display:flex;gap:var(--s4);align-items:center;justify-content:space-between;padding:var(--s4) 0;border-bottom:1px solid color-mix(in srgb,var(--o) 22%,transparent)}
+.asks li:last-child{border-bottom:0}
+.asks q{font-size:18px;line-height:1.45;quotes:"\201C" "\201D"}
+
+/* tabs */
+.tabs{display:grid;grid-template-columns:240px minmax(0,1fr);background:var(--canvas);border-radius:var(--r-lg);overflow:hidden}
+.tablist{display:flex;flex-direction:column;padding:var(--s4);gap:2px;border-right:1px solid var(--hairline);background:var(--soft)}
+.tab{all:unset;cursor:pointer;padding:12px 16px;border-radius:var(--r-md);font:400 18px/1.4 var(--font);color:var(--muted)}
+.tab[aria-selected=true]{background:var(--canvas);color:var(--ink);box-shadow:0 0 0 1px var(--hairline)}
+.tab:focus-visible{outline:2px solid var(--info-border)}
+.tabpanel{padding:var(--s6)}
+.tabpanel ol{margin:0;padding-left:22px;display:grid;gap:var(--s3);font-size:16px;line-height:1.55;color:var(--ink)}
+.after-attach{margin-top:var(--s5)}
+
+/* logo strip */
+.strip{display:flex;flex-wrap:wrap;gap:var(--s3) var(--s6);color:var(--muted);font-size:15px;padding:var(--s6) 0;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);margin-top:var(--s7)}
+.strip b{font-weight:500;color:var(--ink);margin-right:var(--s3)}
+
+/* how it works */
+.how{list-style:none;margin:var(--s6) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s5);counter-reset:how}
+.how li{counter-increment:how;border-top:1px solid color-mix(in srgb,var(--o) 30%,transparent);padding-top:var(--s4)}
+.how li::before{content:counter(how,decimal-leading-zero);display:block;font-size:32px;line-height:1.2;margin-bottom:var(--s3)}
+.how b{display:block;font-weight:500;font-size:17px;margin-bottom:6px}
+.how span{font-size:15px;line-height:1.5;opacity:.85}
+
+/* footer */
+.foot{padding:var(--s7) 0 var(--s6);margin-top:var(--section);border-top:1px solid var(--hairline);font-size:14px;color:var(--muted)}
+.foot .wrap{display:flex;justify-content:space-between;gap:var(--s5);flex-wrap:wrap}
+.foot nav{display:flex;flex-wrap:wrap;gap:var(--s5)}
+.foot a{color:var(--muted)}
+
+@media (max-width:1024px){
+  .grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .how{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sig-grid{grid-template-columns:1fr;gap:var(--s5)}
+  .mistakes{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .steps-layout{grid-template-columns:1fr}
+  .rail{display:none}
+  .mobile-progress{display:block;position:sticky;top:64px;z-index:10;background:var(--canvas);padding:var(--s3) 0;border-bottom:1px solid var(--hairline);margin-bottom:var(--s5)}
+  .nav-links{display:none}
+  .tabs{grid-template-columns:1fr}
+  .tablist{display:grid;grid-template-columns:1fr 1fr;border-right:0;border-bottom:1px solid var(--hairline)}
+  .tab{font-size:16px;white-space:nowrap}
+}
+@media (max-width:767px){
+  .wrap{padding:0 16px}
+  .hero{padding:var(--s7) 0 var(--s6)}
+  .band{padding:64px 0}
+  .display-xl{font-size:36px}
+  .display-lg{font-size:32px}
+  .display-md{font-size:26px}
+  .lede{font-size:18px}
+  .meta{grid-template-columns:1fr 1fr}
+  .meta div,.meta div+div{padding:var(--s4) var(--s3) var(--s4) 0;border-left:0}
+  .meta div:nth-child(even){padding-left:var(--s4);border-left:1px solid var(--hairline)}
+  .meta div:nth-child(n+3){border-top:1px solid var(--hairline)}
+  .pipe{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .sig,.cta{padding:var(--s5)}
+  .step{padding:var(--s5) var(--s4)}
+  .facts{grid-template-columns:1fr}
+  .grid-2,.grid-3,.grid-4,.how{grid-template-columns:1fr}
+  .h-180,.h-220,.h-260,.h-300{min-height:0}
+  .asks li{flex-direction:column;align-items:flex-start}
+  .asks q{font-size:16px}
+  .btn-row .btn{flex:1 1 auto}
+  .nav .btn{display:none}
+  .tabpanel{padding:var(--s5)}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.progress-bar{transition:none}}
+</style>
+</head>
+<body data-page="workflow-04" style="--c:#d9a441;--o:#181d26">
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>AI &amp; Advertising</a>
+  <nav class="nav-links" aria-label="Workflows"><a href="index.html">Home</a><a href="workflow-01.html">01 Plan the ad</a><a href="workflow-02.html">02 Photo → campaign images</a><a href="workflow-03.html">03 Images → video ad</a><a href="workflow-04.html" aria-current=page>04 Edit &amp; launch</a></nav>
+  <a class="btn btn-primary" href="workflow-01.html">Start Workflow 01</a>
+</div></header>
+<main id="main">
+
+<section class="hero"><div class="wrap">
+  <div class="eyebrow">Workflow 04 of 04</div>
+  <h1 class="display-lg">Edit and Launch</h1>
+  <p class="lede">You end with finished 15s and 30s ads, with captions and an end card in 3 ratios, live on Meta, and a plan for the next round.</p>
+  <div class="btn-row"><a class="btn btn-primary" href="#step-1">Start step 1</a><a class="btn btn-secondary" href="skill-vibe-editor.html">Skill: The Editor</a><a class="btn btn-secondary" href="skill-ad-strategist.html">Skill: The Planner</a></div>
+  <dl class="meta"><div><dt>Time</dt><dd>2–3 hours (plus 3–7 days of ads running)</dd></div><div><dt>Skill to attach</dt><dd><code>vibe-editor</code>, then <code>ad-strategist</code></dd></div><div><dt>Tools</dt><dd>Claude (or ChatGPT / Gemini), ffmpeg or CapCut, Meta Ads Manager</dd></div><div><dt>Modules</dt><dd>8, 9</dd></div></dl>
+  <div class="pipe" role="list" aria-label="The 6 steps of every ad, and which workflow covers each"><a role="listitem" class="pipe-stage" href="workflow-01.html" style="--c:#aa2d00;--o:#ffffff"><b>Brief</b><span>Workflow 01</span></a><a role="listitem" class="pipe-stage" href="workflow-01.html" style="--c:#aa2d00;--o:#ffffff"><b>Concept</b><span>Workflow 01</span></a><a role="listitem" class="pipe-stage" href="workflow-02.html" style="--c:#0a2e0e;--o:#ffffff"><b>Visuals</b><span>Workflow 02</span></a><a role="listitem" class="pipe-stage" href="workflow-03.html" style="--c:#181d26;--o:#ffffff"><b>Motion</b><span>Workflow 03</span></a><a role="listitem" class="pipe-stage on" href="workflow-04.html" style="--c:#d9a441;--o:#181d26"><b>Edit</b><span>Workflow 04</span></a><a role="listitem" class="pipe-stage on" href="workflow-04.html" style="--c:#d9a441;--o:#181d26"><b>Launch</b><span>Workflow 04</span></a></div>
+</div></section>
+
+<section class="band-tight"><div class="wrap"><div class="sig">
+  <div class="sig-grid">
+    <div><div class="eyebrow" style="color:inherit;opacity:.8">Before you start</div><h2 class="display-md">You need</h2>
+    <p class="muted" style="margin-top:12px">Get these ready. Then follow the 7 steps in order.</p></div>
+    <ul class="need-list"><li><span class="n">1</span><span>Your video clips from Workflow 03 (plus voice-over, music, logo PNG)</span></li><li><span class="n">2</span><span>Your <code>brand-bible.md</code> (colours, fonts, CTA)</span></li><li><span class="n">3</span><span>ffmpeg installed for full auto editing (or CapCut as a backup)</span></li><li><span class="n">4</span><span>A Meta ad account with a small test budget</span></li></ul>
+  </div>
+</div></div></section>
+
+<section class="band" aria-labelledby="steps-t"><div class="wrap">
+  <div class="band-head"><div><div class="eyebrow">7 steps</div><h2 class="display-md" id="steps-t">Do it step by step</h2>
+  <p>Copy each <strong>Type this</strong> box into the chat with the skill attached. Tick each step when it’s done. Your progress is saved in this browser.</p></div></div>
+  <div class="mobile-progress"><div class="progress"><div class="progress-track"><div class="progress-bar" data-progress-bar></div></div><div class="progress-text" data-progress-text>0 of 7 steps done</div></div></div>
+  <div class="steps-layout">
+    <aside class="rail" aria-label="Steps">
+      <div class="progress"><div class="progress-track"><div class="progress-bar" data-progress-bar></div></div><div class="progress-text" data-progress-text>0 of 7 steps done</div></div>
+      <ol><li><a href="#step-1"><span class="dot">1</span><span>Dump everything in one folder</span></a></li><li><a href="#step-2"><span class="dot">2</span><span>Type the vibe</span></a></li><li><a href="#step-3"><span class="dot">3</span><span>Give director notes</span></a></li><li><a href="#step-4"><span class="dot">4</span><span>Add captions and an end card</span></a></li><li><a href="#step-5"><span class="dot">5</span><span>Export 3 ratios</span></a></li><li><a href="#step-6"><span class="dot">6</span><span>Launch on Meta</span></a></li><li><a href="#step-7"><span class="dot">7</span><span>Read results and plan the next round</span></a></li></ol>
+      <button class="reset" type="button" data-reset>Reset my progress</button>
+    </aside>
+    <div class="step-list">
+<article class="step" id="step-1" aria-labelledby="step-1-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">1</span>
+    <div><div class="step-kicker">Step 1 of 7</div><h3 class="title-lg" id="step-1-t">Dump everything in one folder</h3></div></div>
+  <dl class="facts"><div class="fact"><dt>Tool</dt><dd>your computer</dd></div><div class="fact"><dt>You get</dt><dd>one folder the AI can read</dd></div></dl>
+  <p>Put all clips, the music, the voice-over and the logo in <code>05_edit/</code>. Don't trim and don't sort.</p><div class="typebox"><div class="typebox-head"><span>Type this</span><button class="copy" type="button" data-copy="type-1-1">Copy</button></div><pre id="type-1-1">Look at every file in 05_edit/. Give me a table: length, ratio, audio yes/no, best moment in each clip.</pre></div><div class="checknote"><b>Check</b><span>every clip is listed, and any bad clip (warped label, frozen start) is flagged.</span></div>
+  <div class="step-foot"><button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false">Mark step as done</button></div>
+</article>
+<article class="step" id="step-2" aria-labelledby="step-2-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">2</span>
+    <div><div class="step-kicker">Step 2 of 7</div><h3 class="title-lg" id="step-2-t">Type the vibe</h3></div></div>
+  <dl class="facts"><div class="fact"><dt>Tool</dt><dd>Claude + <code>vibe-editor</code></dd></div><div class="fact"><dt>You get</dt><dd>an edit plan, then version 1 of the ad</dd></div></dl>
+  <p>Use the formula: platform + length + energy + look + goal.</p><div class="typebox"><div class="typebox-head"><span>Type this</span><button class="copy" type="button" data-copy="type-2-1">Copy</button></div><pre id="type-2-1">30s Reel, high energy, warm saffron look, cut on every 2nd beat, hook = serum drop on skin in the first second, end on the bottle. Show me the edit plan first.</pre></div><div class="checknote"><b>Check</b><span>the plan has a hook in the first 1–2 seconds and the product is shown at least 3 times.</span></div>
+  <div class="step-foot"><button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false">Mark step as done</button></div>
+</article>
+<article class="step" id="step-3" aria-labelledby="step-3-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">3</span>
+    <div><div class="step-kicker">Step 3 of 7</div><h3 class="title-lg" id="step-3-t">Give director notes</h3></div></div>
+  <dl class="facts"><div class="fact"><dt>Tool</dt><dd>Claude + <code>vibe-editor</code></dd></div><div class="fact"><dt>You get</dt><dd>version 2 (and 3)</dd></div></dl>
+  <p>Watch it on your phone. Give 3 notes at most per round.</p><div class="typebox"><div class="typebox-head"><span>Type this</span><button class="copy" type="button" data-copy="type-3-1">Copy</button></div><pre id="type-3-1">Director notes v01: 1) start on the drop, not the bottle, 2) less orange, 3) make a 15s cutdown too.</pre></div><div class="checknote"><b>Check</b><span>each note is fixed, and nothing else changed.</span></div>
+  <div class="step-foot"><button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false">Mark step as done</button></div>
+</article>
+<article class="step" id="step-4" aria-labelledby="step-4-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">4</span>
+    <div><div class="step-kicker">Step 4 of 7</div><h3 class="title-lg" id="step-4-t">Add captions and an end card</h3></div></div>
+  <dl class="facts"><div class="fact"><dt>Tool</dt><dd>Claude + <code>vibe-editor</code></dd></div><div class="fact"><dt>You get</dt><dd>captioned ad with a branded ending</dd></div></dl>
+  <div class="typebox"><div class="typebox-head"><span>Type this</span><button class="copy" type="button" data-copy="type-4-1">Copy</button></div><pre id="type-4-1">Add captions from my voice-over: 3 words at a time, white with outline, current word in saffron #E8862A. Add a 3s end card: cream background, logo, &quot;Shop now · kesarandco.in&quot;. Show me the captions to proofread first.</pre></div><div class="checknote"><b>Check</b><span>brand name and price spelled right; captions stay out of the top 14% and bottom 20%.</span></div>
+  <div class="step-foot"><button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false">Mark step as done</button></div>
+</article>
+<article class="step" id="step-5" aria-labelledby="step-5-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">5</span>
+    <div><div class="step-kicker">Step 5 of 7</div><h3 class="title-lg" id="step-5-t">Export 3 ratios</h3></div></div>
+  <dl class="facts"><div class="fact"><dt>Tool</dt><dd>Claude + <code>vibe-editor</code></dd></div><div class="fact"><dt>You get</dt><dd>files ready for Meta</dd></div></dl>
+  <div class="typebox"><div class="typebox-head"><span>Type this</span><button class="copy" type="button" data-copy="type-5-1">Copy</button></div><pre id="type-5-1">Export 9:16, 4:5 and 1:1 of the 30s and 15s ads for Meta. Keep the label in frame. Name them KESAR_DIWALI_GLOW_H01_FILM_&lt;ratio&gt;_v03.</pre></div><div class="checknote"><b>Check</b><span>6 files, each plays from the start, sound about -14 LUFS.</span></div>
+  <div class="step-foot"><button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false">Mark step as done</button></div>
+</article>
+<article class="step" id="step-6" aria-labelledby="step-6-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">6</span>
+    <div><div class="step-kicker">Step 6 of 7</div><h3 class="title-lg" id="step-6-t">Launch on Meta</h3></div></div>
+  <dl class="facts"><div class="fact"><dt>Tool</dt><dd>Claude + <code>ad-strategist</code>, then Meta Ads Manager</dd></div><div class="fact"><dt>You get</dt><dd>a live test</dd></div></dl>
+  <div class="typebox"><div class="typebox-head"><span>Type this</span><button class="copy" type="button" data-copy="type-6-1">Copy</button></div><pre id="type-6-1">Make a launch and test plan for these 6 ads: campaign setup, budget for a 5-day test, what to compare, AI disclosure check, and the upload checklist.</pre></div><div class="checknote"><b>Check</b><span>policy and AI-disclosure checks are done before you hit publish.</span></div>
+  <div class="step-foot"><button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false">Mark step as done</button></div>
+</article>
+<article class="step" id="step-7" aria-labelledby="step-7-t">
+  <div class="step-head"><span class="step-num" aria-hidden="true">7</span>
+    <div><div class="step-kicker">Step 7 of 7</div><h3 class="title-lg" id="step-7-t">Read results and plan the next round</h3></div></div>
+  <dl class="facts"><div class="fact"><dt>Tool</dt><dd>Meta Ads Manager export + <code>ad-strategist</code></dd></div><div class="fact"><dt>You get</dt><dd>keep / kill / scale list + new ad ideas</dd></div></dl>
+  <p>After 3–7 days, export the results as a CSV.</p><div class="typebox"><div class="typebox-head"><span>Type this</span><button class="copy" type="button" data-copy="type-7-1">Copy</button></div><pre id="type-7-1">Here are my results (CSV attached). Tell me which ads to keep, kill or scale, why, and give me 5 new variations for round 2.</pre></div><div class="checknote"><b>Check</b><span>every decision points to a number (hook rate, CTR, cost per result).</span></div>
+  <div class="step-foot"><button class="btn btn-secondary btn-small step-toggle" type="button" data-step-toggle aria-pressed="false">Mark step as done</button></div>
+</article></div>
+  </div>
+</div></section>
+
+<section class="band band-cream" id="done" aria-labelledby="done-t"><div class="wrap">
+  <div class="band-head"><div><div class="eyebrow">Finish line</div><h2 class="display-md" id="done-t">Done when</h2>
+  <p>Tick every box before you move on.</p></div></div>
+  <div class="checklist"><label class="check-item"><input type="checkbox" id="done-1"><span>The edit plan was approved before rendering</span></label><label class="check-item"><input type="checkbox" id="done-2"><span>30s and 15s ads exported in 9:16, 4:5 and 1:1</span></label><label class="check-item"><input type="checkbox" id="done-3"><span>Captions proofread, end card added, label readable in every product shot</span></label><label class="check-item"><input type="checkbox" id="done-4"><span>Ads are live with a clear test plan</span></label><label class="check-item"><input type="checkbox" id="done-5"><span>Round 2 ideas are based on real results</span></label></div>
+  <div class="check-status" data-check-text aria-live="polite"></div>
+</div></section>
+
+<section class="band-tight" style="padding-top:var(--section)"><div class="wrap">
+  <div class="sig" style="--c:#181d26;--o:#ffffff">
+    <div class="eyebrow" style="color:inherit;opacity:.75">Avoid these</div>
+    <h2 class="display-md">Common mistakes</h2>
+    <ul class="mistakes"><li><span class="x">Mistake 1</span>Giving 10 notes at once. Give 3 per round, or the edit gets worse.</li><li><span class="x">Mistake 2</span>Starting with a logo or a slow fade. The first second must show the product, a face or the offer.</li><li><span class="x">Mistake 3</span>Judging ads after one day. Wait for enough spend before deciding.</li></ul>
+  </div>
+</div></section>
+
+<section class="band-tight"><div class="wrap"><div class="cta"><div><h2 class="display-md">That’s the full loop.</h2><p>Brief to live ad. For your capstone, run Workflows 01 → 04 for one brand.</p></div><div class="btn-row"><a class="btn btn-primary" href="workflow-01.html">Back to Workflow 01</a><a class="btn btn-secondary" href="index.html">Home</a></div></div></div></section>
+
+</main>
+<footer class="foot"><div class="wrap">
+  <span>AI &amp; Advertising · Student Kit · Ideabro Studio</span>
+  <nav aria-label="Footer">
+    <a href="index.html">Home</a><a href="index.html#workflows">Workflows</a><a href="index.html#skills">Skills</a><a href="../START-HERE.md">START-HERE.md</a>
+  </nav>
+</div></footer>
+<script>
+(function(){
+  var page=document.body.getAttribute('data-page');var KEY='aiad:'+page;var state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){state={}}
+  state.steps=state.steps||{};state.checks=state.checks||{};
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+
+  function fallbackCopy(t,cb){var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.top='-1000px';document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta);cb()}
+  document.querySelectorAll('[data-copy]').forEach(function(btn){btn.addEventListener('click',function(){
+    var el=document.getElementById(btn.getAttribute('data-copy'));var text=el?el.innerText:'';
+    var label=btn.textContent;var done=function(){btn.textContent='Copied';btn.classList.add('is-copied');setTimeout(function(){btn.textContent=label;btn.classList.remove('is-copied')},1600)};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(done,function(){fallbackCopy(text,done)})}else{fallbackCopy(text,done)}
+  })});
+
+  var steps=[].slice.call(document.querySelectorAll('.step'));
+  function renderSteps(){
+    var n=steps.filter(function(s){return state.steps[s.id]}).length;
+    document.querySelectorAll('[data-progress-text]').forEach(function(e){e.textContent=n+' of '+steps.length+' steps done'});
+    document.querySelectorAll('[data-progress-bar]').forEach(function(e){e.style.width=(steps.length?n/steps.length*100:0)+'%'});
+    steps.forEach(function(s){var d=!!state.steps[s.id];s.classList.toggle('is-done',d);
+      var b=s.querySelector('[data-step-toggle]');if(b){b.setAttribute('aria-pressed',d?'true':'false');b.textContent=d?'Done ✓':'Mark step as done'}
+      var r=document.querySelector('.rail a[href="#'+s.id+'"]');if(r){r.classList.toggle('is-done',d)}});
+  }
+  document.querySelectorAll('[data-step-toggle]').forEach(function(b){b.addEventListener('click',function(){
+    var s=b.closest('.step');var id=s.id;state.steps[id]=!state.steps[id];save();renderSteps();
+    if(state.steps[id]){var i=steps.indexOf(s);var next=steps[i+1]||document.getElementById('done');if(next){next.scrollIntoView({block:'start'})}}
+  })});
+
+  var checks=[].slice.call(document.querySelectorAll('.check-item input'));
+  function renderChecks(){var n=checks.filter(function(c){return c.checked}).length;
+    document.querySelectorAll('[data-check-text]').forEach(function(e){e.textContent=(checks.length&&n===checks.length)?'All done. You’re ready for the next workflow.':n+' of '+checks.length+' checked'})}
+  checks.forEach(function(c){c.checked=!!state.checks[c.id];c.addEventListener('change',function(){state.checks[c.id]=c.checked;save();renderChecks()})});
+
+  document.querySelectorAll('[data-reset]').forEach(function(b){b.addEventListener('click',function(){state={steps:{},checks:{}};save();checks.forEach(function(c){c.checked=false});renderSteps();renderChecks()})});
+
+  if('IntersectionObserver' in window&&steps.length){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){document.querySelectorAll('.rail a').forEach(function(a){a.classList.toggle('is-active',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-25% 0px -65% 0px'});steps.forEach(function(s){io.observe(s)})}
+
+  document.querySelectorAll('[role=tablist]').forEach(function(list){var tabs=[].slice.call(list.querySelectorAll('[role=tab]'));
+    function select(i){tabs.forEach(function(t,j){t.setAttribute('aria-selected',i===j?'true':'false');t.tabIndex=i===j?0:-1;var p=document.getElementById(t.getAttribute('aria-controls'));if(p){p.hidden=i!==j}})}
+    tabs.forEach(function(t,i){t.addEventListener('click',function(){select(i)});t.addEventListener('keydown',function(e){var k=e.key,j=-1;if(k==='ArrowDown'||k==='ArrowRight'){j=(i+1)%tabs.length}if(k==='ArrowUp'||k==='ArrowLeft'){j=(i-1+tabs.length)%tabs.length}if(j>-1){e.preventDefault();select(j);tabs[j].focus()}})})});
+
+  document.querySelectorAll('[data-wf-progress]').forEach(function(el){var st={};try{st=JSON.parse(localStorage.getItem('aiad:'+el.getAttribute('data-wf-progress'))||'{}')||{}}catch(e){}
+    var total=+el.getAttribute('data-total');var n=Object.keys(st.steps||{}).filter(function(k){return st.steps[k]}).length;el.textContent=n?(n+' of '+total+' steps done'):total+' steps'});
+
+  renderSteps();renderChecks();
+})();
+</script>
+</body>
+</html>
