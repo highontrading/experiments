@@ -12,7 +12,8 @@ const PRICE = "₹2,999";
 const C = { ink: "#141414", cream: "#F1EFE6", grid: "#E3E0D6", lime: "#D8F5A2", pink: "#F6B8EA", lav: "#CDBCFF", sky: "#BFE1FB",
   yellow: "#FFD43B", sub: "#FFE14D", gold: "#E9B949", white: "#ffffff" };
 const F = { inter: "Inter", serif: "'Instrument Serif'", mono: "'JetBrains Mono'", archivo: "'Archivo Black'", anton: "Anton",
-  bebas: "'Bebas Neue'", pixel: "'Press Start 2P'", hand: "Caveat", grot: "'Space Grotesk'", play: "'Playfair Display'" };
+  bebas: "'Bebas Neue'", pixel: "'Press Start 2P'", hand: "Caveat", grot: "'Space Grotesk'", play: "'Playfair Display'",
+  cinzel: "Cinzel", comic: "Bangers", marker: "'Permanent Marker'", yatra: "'Yatra One'", corm: "'Cormorant Garamond'" };
 
 // ---------- math ----------
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
@@ -305,7 +306,7 @@ async function boot() {
   }
   await document.fonts.ready;
   await Promise.all([`900 40px Inter`, `800 40px Inter`, `700 40px Inter`, `600 40px Inter`, `500 40px Inter`, `500 40px 'Space Grotesk'`, `800 40px 'Space Grotesk'`, `600 40px Caveat`, `400 40px 'Instrument Serif'`, `italic 400 40px 'Instrument Serif'`, `400 40px 'JetBrains Mono'`, `700 40px 'JetBrains Mono'`,
-    `400 40px 'Archivo Black'`, `400 40px Anton`, `400 40px 'Bebas Neue'`, `400 40px 'Press Start 2P'`, `700 40px Caveat`, `700 40px 'Space Grotesk'`, `700 40px 'Playfair Display'`, `italic 600 40px 'Playfair Display'`].map((f) => document.fonts.load(f)));
+    `400 40px 'Archivo Black'`, `400 40px Anton`, `400 40px 'Bebas Neue'`, `400 40px 'Press Start 2P'`, `700 40px Caveat`, `700 40px 'Space Grotesk'`, `700 40px 'Playfair Display'`, `italic 600 40px 'Playfair Display'`, `700 40px Cinzel`, `400 40px Bangers`, `400 40px 'Permanent Marker'`, `400 40px 'Yatra One'`, `italic 500 40px 'Cormorant Garamond'`].map((f) => document.fonts.load(f)));
   await Promise.all(jobs);
   if (A.init) A.init();
   return true;

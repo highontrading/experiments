@@ -27,6 +27,22 @@ SFX = {
  "sub": (1.5, "deep sub bass drop hit, cinematic"),
  "send": (0.5, "messaging app message sent swoosh, soft"),
  "focus": (0.6, "camera lens autofocus servo whirr and beep"),
+ "braam": (3.0, "massive cinematic trailer braam horn hit, deep brass, long tail"),
+ "gavel": (0.8, "wooden judge gavel strike, two hits, courtroom"),
+ "newssting": (2.0, "TV breaking news sting, dramatic synth whoosh and hit"),
+ "sizzle": (2.0, "food sizzling in a hot pan, crisp"),
+ "cheer": (3.0, "huge cricket stadium crowd cheering and roaring"),
+ "bat": (0.6, "cricket bat hitting leather ball, sharp crack"),
+ "heartbeat": (3.0, "slow ominous heartbeat, deep thumps"),
+ "bowl": (4.0, "tibetan singing bowl struck once, long soft ring"),
+ "flick": (0.5, "playing card flicked quickly across a table, swipe"),
+ "match": (1.2, "happy sparkly notification chime, romantic match"),
+ "marker": (1.5, "whiteboard marker writing quickly, squeaky"),
+ "applause": (3.0, "polite audience applause in a keynote hall"),
+ "searchtype": (2.0, "soft modern keyboard typing, a few quick words"),
+ "bell": (1.5, "temple bell ring, bright brass, auspicious"),
+ "thunder": (2.5, "distant rolling thunder, dark"),
+ "rewind": (1.0, "tape rewind squeal, quick"),
 }
 only = sys.argv[1:]
 for n, (d, txt) in SFX.items():
