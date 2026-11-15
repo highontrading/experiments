@@ -84,6 +84,13 @@ GLOSSARY = [
     (r"\bfour is to five\b", "4:5"),
     (r"\broofsi-?\s+", ""),
     (r"\bone is to one\b", "1:1"),
+    (r"\b[Nn]ine is to (sixteen|16)\b", "9:16"),
+    (r"\b[Tt]hree is to four\b", "3:4"),
+    (r"\b[Ff]our is to five\b", "4:5"),
+    (r"\b[Oo]ne is to one\b", "1:1"),
+    (r"\bNanobana\b", "Nano Banana"),
+    (r"\bRia\b", "Riya"),
+    (r"\bGPT image\b", "GPT Image"),
 ]
 
 # Media that already has its own on-screen text: no captions from us here.
@@ -96,3 +103,51 @@ VO_SEQS = [
 VO_RANGE = {"vid2": (4860.0, 5049.5)}
 # While the vertical ad fills the middle of the screen, put commentary captions on the left.
 SIDE_CAPTION = {"vid2": [(4865.0, 4995.0)]}
+
+# ---------------------------------------------------------------- recording 3: Aroma Magic sunscreen
+PROTECT["vid3"] = [(2469.0, 2502.0), (2539.0, 2550.5), (2588.0, 2596.5), (2834.8, 2860.5), (2880.0, 2892.0),
+                   (3180.0, 3204.5), (3242.0, 3257.5), (3391.0, 3402.0)]
+VO_SEQS += [
+    "goa trip pe sabse badi galti sunscreen bhool jana ye hai aroma magic sunblock spf 30 pa uva aur uvb dono se protection all natural mineral line aur finish ekdam matte dhoop mein nikalne se pehle face neck sab pe aur swimming ke baad reapply always bag mein dalo chalo goa",
+    "goa trip pe sabse badi galti sunscreen bhool jana yeh hai aroma magic sunblock spf 30 pa uva aur uvb dono se protection all natural mineral line aur finish ekdam matte",
+]
+VO_RANGE["vid3"] = (2834.0, 3270.0)
+BLUR = [("vid3", 2110.0, 2121.5, 770, 592, 380, 60),   # ElevenLabs 'API Key' dialog field
+        ("vid3", 2120.0, 2129.0, 780, 78, 720, 44)]    # .env line with the pasted key
+
+V3 = [
+    dict(id="3.2", title="Static ads from a real product photo", slug="static-ads-from-a-real-photo",
+         blocks=[("vid3", 1.2, 59.8), ("vid3", 151.5, 259.9), ("vid3", 307.0, 685.0)],
+         cuts=[("vid3", 371.5, 380.0, "wrong brand name ('Blossom Kosher')")]),
+    dict(id="3.3", title="Hero shot and the full static set in Flow", slug="hero-shot-and-static-set",
+         blocks=[("vid3", 686.0, 1040.7)], cuts=[]),
+    dict(id="8.1", title="Static ads in the style of Pinterest references", slug="static-ads-pinterest-style",
+         blocks=[("vid3", 1052.2, 1624.1)],
+         cuts=[("vid3", 1053.4, 1054.32, "'sorry, s-- uh'"),
+               ("vid3", 1064.3, 1078.9, "mistyped searches ('sunglasses... I think I'm missing something')"),
+               ("vid3", 1193.4, 1198.9, "'I think it's not good sunscreen' (about the real brand)"),
+               ("vid3", 1363.7, 1402.45, "regenerating the old photos by mistake")]),
+    dict(id="7.1", title="UGC ad: idea, references and caption style", slug="ugc-idea-and-references",
+         blocks=[("vid3", 1629.3, 1921.9)], cuts=[]),
+    dict(id="6.3", title="Connect ElevenLabs to Claude: automatic voice, music and SFX", slug="elevenlabs-api-in-claude",
+         blocks=[("vid3", 1921.9, 2193.0)],
+         cuts=[("vid3", 1995.3, 2030.6, "fumbling between parts ('let me take this part. No.')")]),
+    dict(id="7.2", title="UGC clips in Google Flow with Claude-made audio", slug="ugc-clips-and-audio",
+         blocks=[("vid3", 2193.0, 2600.4)],
+         cuts=[("vid3", 2278.75, 2361.7, "'I think I logged out' + 80s wait"),
+               ("vid3", 2461.3, 2469.6, "'Oh.'")]),
+    dict(id="9.4", title="Vibe edit with a reference style: voice swap, captions, final UGC ad", slug="vibe-edit-ugc-ad",
+         blocks=[("vid3", 2600.4, 3113.9)], cuts=[]),
+    dict(id="9.5", title="Every aspect ratio and fixing a mispronounced word", slug="ratios-and-fixes",
+         blocks=[("vid3", 3113.9, 3451.4)],
+         cuts=[("vid3", 3292.1, 3297.2, "'I will update the main chapter here and in the 13th module'"),
+               ("vid3", 3308.9, 3311.45, "'we'll share this output as well in the...'"),
+               ("vid3", 3401.8, 3405.35, "'I will attach the files and yeah, this was the lecture on like...'")]),
+    # pieces used only in the Module 13 full lecture
+    dict(id="13.0", title="Case study intro", slug="case-study-intro", full_only=True,
+         blocks=[("vid3", 1.2, 259.9)], cuts=[]),
+    dict(id="13.1", title="Static ads from a real product photo", slug="static-ads-from-a-real-photo-full", full_only=True,
+         blocks=[("vid3", 307.0, 685.0)],
+         cuts=[("vid3", 371.5, 380.0, "wrong brand name ('Blossom Kosher')")]),
+]
+LESSONS += V3

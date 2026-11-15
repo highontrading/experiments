@@ -1,5 +1,5 @@
 import json,sys
-W={v:[w for w in json.load(open(f'audio/{v}.json'))['words'] if w['type']!='spacing'] for v in ('vid1','vid2')}
+W={v:[w for w in json.load(open(f'audio/{v}.json'))['words'] if w['type']!='spacing'] for v in ('vid1','vid2','vid3')}
 def mmss(t): return f"{int(t//60)}:{t%60:05.2f}"
 for spec in sys.argv[1:]:
     v,a,b=spec.split(':',2) if spec.count(':')==2 else (None,None,None)

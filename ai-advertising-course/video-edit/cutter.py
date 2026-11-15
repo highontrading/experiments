@@ -8,7 +8,7 @@ manual cuts, click-free audio, white captions, 1080p30 H.264 export.
 import json, re, subprocess, sys, wave
 from pathlib import Path
 import numpy as np
-from lessons import LESSONS, PROTECT, GLOSSARY, NO_CAPTION, VO_SEQS, VO_RANGE, SIDE_CAPTION
+from lessons import LESSONS, PROTECT, GLOSSARY, NO_CAPTION, VO_SEQS, VO_RANGE, SIDE_CAPTION, BLUR
 
 HERE = Path(__file__).resolve().parent
 RAW = HERE / "raw"; WORK = HERE / "work"; OUT = HERE / "out"
@@ -322,7 +322,15 @@ def render(L):
         args += ["-ss", f"{blk['a']:.3f}", "-t", f"{blk['b'] - blk['a'] + 0.2:.3f}", "-i", str(RAW / f"{blk['src']}.mov")]
         expr = "+".join(f"gte(t,{s - blk['a'] - 0.004:.3f})*lt(t,{e - blk['a'] - 0.004:.3f})" for s, e in blk["keep"])
         (WORK / f"{tag}_sel{i}.txt").write_text(expr)
-        fc.append(f"[{i}:v]fps={FPS},select='{expr}',setpts=N/({FPS}*TB)[v{i}]")
+        src_lbl = f"[{i}:v]"
+        for j, (bs, t0, t1, x, y, w, h) in enumerate(b for b in BLUR if b[0] == blk["src"] and b[2] > blk["a"] and b[1] < blk["b"]):
+            r0, r1 = max(0, t0 - blk["a"]), t1 - blk["a"]
+            fc.append(f"{src_lbl}split=2[m{i}_{j}][c{i}_{j}]")
+            fc.append(f"[c{i}_{j}]crop={w}:{h}:{x}:{y},scale={max(2, w // 24)}:{max(2, h // 24)},"
+                      f"scale={w}:{h}:flags=neighbor,boxblur=6:2[p{i}_{j}]")
+            fc.append(f"[m{i}_{j}][p{i}_{j}]overlay={x}:{y}:enable='between(t,{r0:.3f},{r1:.3f})'[o{i}_{j}]")
+            src_lbl = f"[o{i}_{j}]"
+        fc.append(f"{src_lbl}fps={FPS},select='{expr}',setpts=N/({FPS}*TB)[v{i}]")
     n = len(blocks)
     args += ["-i", str(wav)]
     fc.append("".join(f"[v{i}]" for i in range(n)) + (f"concat=n={n}:v=1:a=0[vc]" if n > 1 else "null[vc]"))
