@@ -1,7 +1,7 @@
 # Meta ads: AI & Advertising (Ideabro Studio)
 
 There are 60 ads: round 1 (`ads/a01–a20.js`), round 2 (`ads/b01–b20.js`) and round 3 (`ads/c01–c20.js`). Each is a single file, drawn on one canvas by the shared engine in `core.js` and rendered with headless Chromium.
-`ADS.md`, `ADS2.md` and `ADS3.md` (rounds 1–3) have the theme, caption style and ready-to-paste Meta copy for every ad. `out/` has the MP4s plus an overview sheet per round (`_all_ads_overview.jpg`, `_round2_b_ads_overview.jpg`, `_round2_c_ads_overview.jpg`).
+`ADS.md`, `ADS2.md` and `ADS3.md` (rounds 1–3) have the theme, caption style and ready-to-paste Meta copy for every ad. `out/` has the MP4s plus an overview sheet per round (`_all_ads_overview.jpg`, `_round2_b_ads_overview.jpg`, `_round3_c_ads_overview.jpg`).
 
 | File | Role |
 | --- | --- |

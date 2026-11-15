@@ -13,7 +13,7 @@ window.AD = {
   render(t) {
     if (t >= T_END) { endCard(t, T_END, { bg: NAVY, fg: "#fff", button: { fill: Y, shadow: "#fff" }, cta: "Aap bhi khelo  →" }); grain(t, 0.03); return; }
     bg(NAVY);
-    let k = -1; BALLS.forEach((b, i) => { if (t >= L[b[0]].at - 0.1) k = i; });
+    let k = 0; BALLS.forEach((b, i) => { if (t >= L[b[0]].at - 0.1) k = i; });
     let runs = 0; BALLS.forEach((b) => { if (t >= Wd(b[0], 3)) runs = b[3]; }); if (t >= T_100 + 0.6) runs = 100;
     if (t < T_100) {
       const [li, src, call, , lab] = BALLS[k], t0 = L[li].at - 0.1, hit = Wd(li, 2) - 0.1;
