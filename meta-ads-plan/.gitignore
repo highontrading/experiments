@@ -8,3 +8,5 @@ __pycache__/
 out2/_*
 build/logs/
 assets/brand/home.html
+assets/trailers3/*.mp4
+out3/_*
