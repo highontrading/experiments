@@ -1,6 +1,7 @@
 """Video frame sequences per ad: name -> (source, in-point s, duration s, max width px).
 Sources: build/drive/* (Ideabro Drive folder, AI-made footage), mixkit:<id> (Mixkit Free License)."""
 D = "build/drive/"
+V = "build/drive2/v_"
 SEQS = {
   "a01": {"studio": ("mixkit:50639", 1.0, 9.0, 1080)},
   "a03": {"m1": (D + "f1_influencer_vlog.mp4", 2.0, 3.0, 640), "m2": (D + "f2_NaKN.mp4", 3.0, 3.0, 640),
@@ -61,4 +62,31 @@ SEQS = {
           "sunset": (D + "f2_5zq.mp4", 7.0, 4.0, 1080), "earth": (D + "f1_BAkaZ.mp4", 0.0, 4.0, 1080)},
   "c05": {"studio": ("mixkit:50639", 1.0, 2.0, 1080), "crew": ("mixkit:44069", 1.0, 2.0, 1080), "product": ("mixkit:44119", 1.0, 2.0, 1080), "laptop": ("mixkit:17450", 0.5, 2.0, 1080)},
   "c11": {"desk": ("mixkit:44073", 1.0, 0.1, 1080)},
+  # ---------------- trailers ----------------
+  "t01": {"earth": (D + "f1_BAkaZ.mp4", 0.0, 2.8, 1280), "tube": (V + "130rvH.mp4", 1.5, 2.6, 720), "bill": (V + "1vdvfn.mp4", 5.0, 2.8, 720),
+          "glasses": (V + "1xlHnF.mp4", 0.5, 2.6, 720), "giant": (V + "1ydv_Z.mp4", 0.9, 2.6, 720), "legs": (V + "1Kwoch.mp4", 0.0, 1.75, 720),
+          "plane": (V + "1x-XoC.mp4", 0.5, 2.6, 720), "phone": (V + "1Gw7B7.mp4", 0.5, 2.6, 720), "float": (V + "14E5un.mp4", 9.6, 2.6, 720),
+          "sky": (V + "18GEeW.mp4", 0.4, 2.6, 720), "surf": (V + "1w_Txn.mp4", 0.85, 2.2, 720), "bags": (V + "1PxD-E.mp4", 2.6, 2.6, 720),
+          "island": (V + "1szmPp.mp4", 0.3, 4.5, 720)},
+  "t02": {"selfie": (V + "1BsdYT.mp4", 0.2, 2.9, 720), "serum": (V + "1Wa5Te.mp4", 0.6, 2.4, 720), "ootd": (V + "1aFsDp.mp4", 2.25, 2.4, 720),
+          "skate": (V + "1BaEv4.mp4", 1.0, 2.4, 720), "floor": (V + "1dqz_U.mp4", 0.4, 2.4, 720), "grwm": (V + "1IGLwN.mp4", 8.7, 1.0, 720),
+          "unbox": (V + "1szmPp.mp4", 10.1, 2.4, 720), "bridge": (V + "1YB5F_.mp4", 3.8, 1.65, 720), "skin": (V + "1UopOJ.mp4", 3.9, 1.7, 720),
+          "walk": (V + "1I-0BN.mp4", 1.7, 2.4, 720), "fit": (V + "17Ag_X.mp4", 0.4, 3.0, 720)},
+  "t03": {"drop": (V + "1T1uNB.mp4", 0.1, 3.0, 720), "lime": (V + "1slEr9.mp4", 4.9, 2.6, 720), "falls": (V + "1CGl_J.mp4", 2.8, 2.6, 720),
+          "green": (V + "13dcAK.mp4", 0.8, 2.6, 720), "pull": (V + "1YB5F_.mp4", 5.5, 1.1, 720), "dropper": (V + "1UopOJ.mp4", 1.3, 1.6, 720),
+          "belt": (V + "1x-XoC.mp4", 7.6, 2.6, 720), "bus": (V + "12JUja.mp4", 5.0, 2.6, 720), "beach": (V + "1w_Txn.mp4", 5.8, 2.6, 720),
+          "snow": (V + "1HzLk7.mp4", 14.6, 2.6, 720), "latte": (V + "1PMhya.mp4", 4.8, 2.0, 720)},
+  "t04": {"soho": (V + "1QBHTD.mp4", 12.8, 2.6, 720), "box": (V + "1NKFhu.mp4", 10.6, 2.6, 720), "office": (V + "1ACHGA.mp4", 0.2, 2.6, 720),
+          "car": (V + "1BB6W5.mp4", 3.0, 2.6, 720), "sky2": (V + "1YB5F_.mp4", 10.8, 1.9, 720), "city": (V + "1Kwoch.mp4", 6.7, 2.4, 720),
+          "golden": (D + "f1_F3kR.mp4", 10.2, 2.6, 1280), "beach": (D + "f1_IC1N.mp4", 5.2, 2.6, 1280), "train": (V + "17Ag_X.mp4", 3.0, 4.0, 720)},
+  "t05": {"crew": ("mixkit:44069", 1.0, 3.0, 1080), "storm": (D + "f2_utOs.mp4", 1.0, 2.4, 1080), "zep": (D + "f2_FCHv.mp4", 0.2, 2.4, 1080),
+          "leopard": (D + "f1_EmM3.mp4", 3.0, 2.4, 1280), "tree": (D + "f1_9E0I.mp4", 4.4, 2.4, 1280), "sea": (D + "f2_8R2a.mp4", 0.2, 2.4, 1080),
+          "car": (D + "f1_7bYb.mp4", 0.2, 2.0, 1280), "pond": (D + "f1_uoJa.mp4", 4.6, 2.4, 1080), "sky": (V + "18GEeW.mp4", 3.0, 2.4, 720),
+          "earth": (D + "f1_BAkaZ.mp4", 0.0, 3.0, 1280), "sunset": (D + "f2_5zq.mp4", 7.0, 2.4, 1080), "desert": (D + "f1_IC1N.mp4", 7.3, 2.4, 1280),
+          "moto": (D + "f1_pY4a.mp4", 5.0, 2.4, 1280), "window": (D + "f1_uoJa.mp4", 14.3, 2.4, 1080)},
 }
+# Meta ads cut from the trailers reuse the trailer clip specs
+for _m, _t, _ks in [("m01", "t01", ["tube", "giant", "plane", "phone", "surf", "island"]), ("m02", "t02", ["selfie", "serum", "ootd", "skin", "walk", "fit"]),
+                    ("m03", "t03", ["drop", "lime", "falls", "belt", "beach", "latte"]), ("m04", "t04", ["soho", "office", "car", "sky2", "golden", "train"]),
+                    ("m05", "t05", ["storm", "window", "leopard", "tree", "sunset", "earth"])]:
+    SEQS[_m] = {k: SEQS[_t][k] for k in _ks}

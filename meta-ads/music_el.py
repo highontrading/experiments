@@ -27,6 +27,11 @@ T = {
  "kitchen": (35000, "Jazzy cooking show music, upright bass, brushed drums, playful piano, warm and fun, 115 BPM, instrumental"),
  "search": (35000, "Curious minimal electronic, plucky synths, soft beat, light and modern, 105 BPM, instrumental"),
  "swipe": (35000, "Flirty funky pop, slap bass, finger snaps, playful brass, 112 BPM, instrumental"),
+ "tr_future": (48000, "Futuristic cinematic electronic trailer, pulsing analog bass, shimmering arpeggios, tension build for 10 seconds then a confident groove drop, sleek and premium, big final hit, 110 BPM, instrumental"),
+ "tr_ugc": (40000, "Trendy upbeat social media pop beat, bouncy bass, finger snaps and claps, playful and catchy, Gen Z energy, 118 BPM, instrumental"),
+ "tr_product": (45000, "Luxury minimal electronic for a premium product commercial, deep sub bass, crisp percussive hits, glassy textures, sleek and expensive, 100 BPM, instrumental"),
+ "tr_fashion": (45000, "Moody fashion film soundtrack, dark R&B trip-hop beat, warm Rhodes, vinyl texture, confident runway swagger, 88 BPM, instrumental"),
+ "tr_film": (50000, "Epic emotional film trailer, solo piano intro, swelling strings, deep braams, huge cinematic drums, triumphant climax, then silence and one final hit, instrumental"),
 }
 os.makedirs("build/music_el", exist_ok=True)
 def gen(item):

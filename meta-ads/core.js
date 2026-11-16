@@ -12,7 +12,7 @@ const PRICE = "₹2,999";
 const C = { ink: "#141414", cream: "#F1EFE6", grid: "#E3E0D6", lime: "#D8F5A2", pink: "#F6B8EA", lav: "#CDBCFF", sky: "#BFE1FB",
   yellow: "#FFD43B", sub: "#FFE14D", gold: "#E9B949", white: "#ffffff" };
 const F = { inter: "Inter", serif: "'Instrument Serif'", mono: "'JetBrains Mono'", archivo: "'Archivo Black'", anton: "Anton",
-  bebas: "'Bebas Neue'", pixel: "'Press Start 2P'", hand: "Caveat", grot: "'Space Grotesk'", play: "'Playfair Display'",
+  bebas: "'Bebas Neue'", pixel: "'Press Start 2P'", hand: "Caveat", grot: "'Space Grotesk'", pop: "Poppins", dms: "'DM Serif Display'", fraun: "Fraunces", syne: "Syne", play: "'Playfair Display'",
   cinzel: "Cinzel", comic: "Bangers", marker: "'Permanent Marker'", yatra: "'Yatra One'", corm: "'Cormorant Garamond'" };
 
 // ---------- math ----------
@@ -265,6 +265,100 @@ function loupe(src, x, y, w, h, fx, fy, cx, cy, r, z, o = {}) {
 // draw a frame of a seq or an image
 function SRC(name, t, t0) { return SEQ[name] ? seq(name, t, t0) : IM[name]; }
 
+
+// ---------- trailer kit (round 4) ----------
+// Editorial caption segments: [text, style, sizeMul, color]. Styles mix a bold geometric sans with italic serif,
+// like a magazine cover line ("Who am I trying to *impress?*").
+const ED = { B: [800, "Poppins", ""], b: [600, "Poppins", ""], S: [400, "'DM Serif Display'", "italic"], s: [400, "'DM Serif Display'", ""],
+  R: [600, "Fraunces", "italic"], M: [700, "'JetBrains Mono'", ""], H: [700, "Caveat", ""], Y: [800, "Syne", ""] };
+const CREAM = "#F6EBC4";
+function edCap(t, t0, t1, rows, o = {}) {
+  if (t < t0 - 0.05 || t > t1 + 0.05) return null;
+  const base = o.size || 90 * u, x = o.x ?? 80 * u, align = o.align || "left", gap = o.gap ?? 0.18, out = clamp((t1 - t) / 0.25);
+  const meas = rows.map((r) => r.map(([s, k, m]) => { const [w, f, st] = ED[k]; const sz = base * (m || 1); font(sz, w, f, st); return { w: tw(s) + (o.ls ? o.ls * s.length : 0), sz }; }));
+  let y = o.y; const boxes = [];
+  rows.forEach((r, ri) => { const lh = Math.max(...meas[ri].map((m) => m.sz)) * (o.lh || 1.02); y += ri ? lh : lh * 0.5;
+    const sp = base * 0.22, tot = meas[ri].reduce((a, m) => a + m.w, 0) + sp * (r.length - 1); let xx = align === "left" ? x : align === "right" ? x - tot : x - tot / 2;
+    r.forEach(([s, k, m, col], si) => { const [w, f, st] = ED[k], sz = meas[ri][si].sz, idx = ri * 3 + si, p = oC(clamp((t - t0 - idx * 0.07) / 0.45));
+      g.save(); g.beginPath(); g.rect(xx - 20 * u, y - sz * 0.95, meas[ri][si].w + 40 * u, sz * 1.5); g.clip();
+      txt(s, xx, y + (1 - p) * sz * 0.9 - (1 - out) * 20 * u, { size: sz, weight: w, fam: f, style: st, color: col || (k === "S" || k === "s" || k === "R" ? "#fff" : k === "M" ? "#fff" : CREAM), align: "left", alpha: out, shadow: o.shadow ?? 26, shadowColor: o.shadowColor || "rgba(0,0,0,0.45)", ls: o.ls });
+      g.restore(); boxes.push({ x: xx, y, w: meas[ri][si].w, sz }); xx += meas[ri][si].w + sp; });
+    y += Math.max(...meas[ri].map((m) => m.sz)) * 0.5 * (o.lh || 1.02) * 0; });
+  return boxes;
+}
+// hand-drawn arrow from (x1,y1) to (x2,y2), drawn progressively (p 0..1)
+function handArrow(x1, y1, x2, y2, p, col = CREAM, bend = 0.3, lw = 6) {
+  if (p <= 0) return; const mx = (x1 + x2) / 2 + (y2 - y1) * bend, my = (y1 + y2) / 2 - (x2 - x1) * bend;
+  g.save(); g.strokeStyle = col; g.lineWidth = lw * u; g.lineCap = "round"; g.shadowColor = "rgba(0,0,0,0.4)"; g.shadowBlur = 10 * u;
+  const N = 40, n = Math.floor(N * clamp(p * 1.25)); g.beginPath();
+  for (let i = 0; i <= n; i++) { const k = i / N, x = (1 - k) * (1 - k) * x1 + 2 * (1 - k) * k * mx + k * k * x2, y = (1 - k) * (1 - k) * y1 + 2 * (1 - k) * k * my + k * k * y2; i ? g.lineTo(x, y) : g.moveTo(x, y); } g.stroke();
+  if (p > 0.8) { const a = Math.atan2(y2 - my, x2 - mx), L = 26 * u * clamp((p - 0.8) / 0.2); g.beginPath(); g.moveTo(x2, y2); g.lineTo(x2 - L * Math.cos(a - 0.5), y2 - L * Math.sin(a - 0.5)); g.moveTo(x2, y2); g.lineTo(x2 - L * Math.cos(a + 0.5), y2 - L * Math.sin(a + 0.5)); g.stroke(); }
+  g.restore();
+}
+// shot list player: list [{s, d, ax, ay, z0, z1}], cut on the given times; returns {k, t0, sh}
+function shotAt(t, list, T0 = 0) { let a = T0; for (let k = 0; k < list.length; k++) { if (t < a + list[k].d || k === list.length - 1) return { k, t0: a, sh: list[k] }; a += list[k].d; } }
+function drawShot(t, list, T0 = 0, o = {}) {
+  const { k, t0, sh } = shotAt(t, list, T0), im = seq(sh.s, t, t0); const lt = t - t0, punch = 1 + (o.punch ?? 0.05) * (1 - oC(clamp(lt / 0.35)));
+  const z = lerp(sh.z0 ?? 1.0, sh.z1 ?? 1.06, clamp(lt / sh.d)) * punch;
+  if (o.wide) { const fw = W, fh = W * 9 / 16, fy = o.fy ?? (CY - fh / 2); g.save(); g.beginPath(); g.rect(0, fy, fw, fh); g.clip(); cover(im, 0, fy, fw, fh, z, sh.ax ?? 0.5, sh.ay ?? 0.5); g.restore(); }
+  else cover(im, 0, 0, W, H, z, sh.ax ?? 0.5, sh.ay ?? 0.5);
+  if (lt < 0.07 && k > 0 && o.flash !== false) { g.fillStyle = `rgba(255,255,255,${0.35 * (1 - lt / 0.07)})`; g.fillRect(0, 0, W, H); }
+  return { k, t0, sh };
+}
+function filmGrade(t, a = 0.06) { vignette(0.45); grain(t, a); }
+// premium CTA button with tap animation; returns nothing
+function joinButton(t, t0, x, y, label = "Join now", o = {}) {
+  const p = oB(clamp((t - t0) / 0.4)); if (p <= 0) return; const tap = t0 + (o.tapAt ?? 1.0), tp = clamp((t - tap) / 0.25), press = tp > 0 && tp < 1 ? 0.94 : 1;
+  const w = (o.w || 620) * u, h = (o.h || 140) * u; g.save(); g.translate(x, y); g.scale(p * press, p * press);
+  const pulse = 1 + 0.03 * Math.sin((t - t0) * 6); g.scale(pulse, pulse);
+  g.shadowColor = o.glow || "rgba(216,245,162,0.6)"; g.shadowBlur = 50 * u; g.fillStyle = o.fill || C.lime; rr(-w / 2, -h / 2, w, h, h / 2); g.fill(); g.shadowBlur = 0;
+  txt(label + "  →", 0, 4 * u, { size: (o.size || 56) * u, weight: 800, fam: F.pop, color: o.color || C.ink }); g.restore();
+  // ripple + pointer
+  if (t >= tap) { const rp = clamp((t - tap) / 0.6); g.save(); g.strokeStyle = `rgba(255,255,255,${0.7 * (1 - rp)})`; g.lineWidth = 4 * u; g.beginPath(); g.arc(x + 120 * u, y + 20 * u, rp * 140 * u, 0, 7); g.stroke(); g.restore(); }
+  const hx = lerp(x + 360 * u, x + 120 * u, oC(clamp((t - t0 - 0.4) / 0.5))), hy = lerp(y + 260 * u, y + 30 * u, oC(clamp((t - t0 - 0.4) / 0.5)));
+  if (t >= t0 + 0.4) { g.save(); g.translate(hx, hy); g.rotate(-0.35); g.scale(tp > 0 && tp < 1 ? 0.9 : 1, tp > 0 && tp < 1 ? 0.9 : 1); g.fillStyle = "#fff"; g.strokeStyle = "#111"; g.lineWidth = 4 * u;
+    g.beginPath(); g.moveTo(0, 0); g.lineTo(0, 70 * u); g.lineTo(18 * u, 54 * u); g.lineTo(32 * u, 84 * u); g.lineTo(44 * u, 78 * u); g.lineTo(30 * u, 48 * u); g.lineTo(54 * u, 48 * u); g.closePath(); g.fill(); g.stroke(); g.restore(); }
+}
+
+
+// ---------- Meta ad cutdown from a trailer ----------
+// cfg: {hook:{s, rows, y, arrow?}, shots:[{s, d, rows, y, ax, ay}], cta:{s, rows, price, label, bullets}, tag}
+function metaCut(cfg) {
+  const H0 = cfg.hookD || 2.4, shots = [{ s: cfg.hook.s, d: H0, rows: cfg.hook.rows, y: cfg.hook.y, ax: cfg.hook.ax, ay: cfg.hook.ay, hook: true, arrow: cfg.hook.arrow }, ...cfg.shots];
+  shots.forEach((s) => { s.z0 = s.z0 ?? 1.0; s.z1 = s.z1 ?? 1.07; });
+  const T_CTA = shots.reduce((a, s) => a + s.d, 0), T_END = T_CTA + (cfg.ctaD || 4.6);
+  return {
+    w: 1080, h: 1920, dur: T_END + 3.4, slug: cfg.slug, seqs: [...new Set([...shots.map((s) => s.s), cfg.cta.s])],
+    music: cfg.music, sfx: [...(cfg.sfx || []), ["whoosh", T_CTA - 0.15, -12], ["pop", T_CTA + 1.2, -10], ["ding", T_CTA + 2.3, -10], ["whoosh", T_END - 0.1, -12]],
+    render(t) {
+      if (t >= T_END) { endCard(t, T_END, { bg: "#0b0b0b", fg: "#fff", price: cfg.cta.price, accent: CREAM, titleFam: F.dms, titleStyle: "italic", cta: "Join now  →", sub: "The future of advertising · by Ideabro Studio" }); grain(t, 0.05); return; }
+      bg("#000");
+      if (t < T_CTA) {
+        const { k, t0, sh } = drawShot(t, shots, 0, { punch: sh0(k0(t)) }); shade(0, H * 0.3, 0.5, true); shade(H * 0.6, H, 0.62);
+        edCap(t, t0 + (sh.hook ? 0.15 : 0.08), t0 + sh.d - 0.05, sh.rows, { y: (sh.y || 1380) * u, x: 80 * u, size: (sh.hook ? 112 : 100) * u });
+        if (sh.arrow) { const a = sh.arrow, p = clamp((t - t0 - 0.8) / 0.5); handArrow(a[0] * u, a[1] * u, a[2] * u, a[3] * u, p, CREAM, 0.3);
+          if (p > 0.5) txt(a[4], a[0] * u - 120 * u, a[1] * u - 50 * u, { size: 66 * u, fam: F.hand, weight: 700, color: CREAM, align: "left", alpha: clamp((p - 0.5) * 3), shadow: 12 }); }
+        // persistent top strip: the course, not just the clip
+        g.fillStyle = "rgba(0,0,0,0.45)"; rr(70 * u, 196 * u, 330 * u, 58 * u, 29 * u); g.fill(); txt(cfg.tag || "AI IN ADVERTISING", 235 * u, 226 * u, { size: 22 * u, fam: F.mono, weight: 700, color: CREAM, ls: 2 });
+        txt("MADE WITH AI", W - 80 * u, 226 * u, { size: 22 * u, fam: F.mono, weight: 700, color: "#fff", align: "right", alpha: 0.85, ls: 3, shadow: 8 });
+        // progress bar toward the CTA
+        g.fillStyle = "rgba(255,255,255,0.25)"; g.fillRect(80 * u, 290 * u, W - 160 * u, 5 * u); g.fillStyle = CREAM; g.fillRect(80 * u, 290 * u, (W - 160 * u) * clamp(t / T_CTA), 5 * u);
+      } else {
+        const p = oC(prog(t, T_CTA, T_CTA + 0.5)); g.save(); g.filter = `blur(${10 * p}px) brightness(${1 - 0.55 * p})`; cover(seq(cfg.cta.s, t, T_CTA - 1), 0, 0, W, H, 1.1 + 0.05 * prog(t, T_CTA, T_END)); g.restore();
+        edCap(t, T_CTA + 0.1, T_END, cfg.cta.rows, { y: 470 * u, x: 80 * u, size: 118 * u });
+        (cfg.cta.bullets || []).forEach((b, i) => { const q = oC(prog(t, T_CTA + 0.6 + i * 0.15, T_CTA + 0.9 + i * 0.15)), y = (840 + i * 84) * u;
+          g.save(); g.globalAlpha = q; g.fillStyle = "rgba(255,255,255,0.12)"; rr(80 * u, y - 34 * u, W - 160 * u, 68 * u, 34 * u); g.fill(); g.fillStyle = CREAM; g.beginPath(); g.arc(122 * u, y, 12 * u, 0, 7); g.fill();
+          txt(b, 156 * u, y + 2 * u, { size: 36 * u, weight: 600, fam: F.pop, color: "#fff", align: "left" }); g.restore(); });
+        if (cfg.cta.price) txt(`${PRICE} · one-time · lifetime access`, CX, 1240 * u, { size: 40 * u, weight: 600, fam: F.pop, color: CREAM, alpha: oC(prog(t, T_CTA + 1.0, T_CTA + 1.4)) });
+        joinButton(t, T_CTA + 1.2, CX, 1400 * u, cfg.cta.label || "Join now", { fill: CREAM, glow: "rgba(246,235,196,0.55)" });
+        txt("community.ideabrostudio.com", CX, 1560 * u, { size: 28 * u, fam: F.mono, color: "#fff", alpha: 0.75 * oC(prog(t, T_CTA + 1.6, T_CTA + 2.0)) });
+      }
+      filmGrade(t, 0.05);
+    },
+  };
+}
+function k0() { return 0; } function sh0() { return 0.05; }
+
 // ---------- end card ----------
 // theme: {bg, fg, accent, titleFam, titleStyle, button:{fill,color,shadow,border}, grid, sub}
 function endCard(t, t0, th = {}) {
@@ -306,7 +400,7 @@ async function boot() {
   }
   await document.fonts.ready;
   await Promise.all([`900 40px Inter`, `800 40px Inter`, `700 40px Inter`, `600 40px Inter`, `500 40px Inter`, `500 40px 'Space Grotesk'`, `800 40px 'Space Grotesk'`, `600 40px Caveat`, `400 40px 'Instrument Serif'`, `italic 400 40px 'Instrument Serif'`, `400 40px 'JetBrains Mono'`, `700 40px 'JetBrains Mono'`,
-    `400 40px 'Archivo Black'`, `400 40px Anton`, `400 40px 'Bebas Neue'`, `400 40px 'Press Start 2P'`, `700 40px Caveat`, `700 40px 'Space Grotesk'`, `700 40px 'Playfair Display'`, `italic 600 40px 'Playfair Display'`, `700 40px Cinzel`, `400 40px Bangers`, `400 40px 'Permanent Marker'`, `400 40px 'Yatra One'`, `italic 500 40px 'Cormorant Garamond'`].map((f) => document.fonts.load(f)));
+    `400 40px 'Archivo Black'`, `400 40px Anton`, `400 40px 'Bebas Neue'`, `400 40px 'Press Start 2P'`, `700 40px Caveat`, `700 40px 'Space Grotesk'`, `700 40px 'Playfair Display'`, `italic 600 40px 'Playfair Display'`, `700 40px Cinzel`, `400 40px Bangers`, `400 40px 'Permanent Marker'`, `400 40px 'Yatra One'`, `italic 500 40px 'Cormorant Garamond'`, `600 40px Poppins`, `800 40px Poppins`, `400 40px 'DM Serif Display'`, `italic 400 40px 'DM Serif Display'`, `italic 600 40px Fraunces`, `800 40px Syne`].map((f) => document.fonts.load(f)));
   await Promise.all(jobs);
   if (A.init) A.init();
   return true;

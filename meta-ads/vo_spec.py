@@ -237,4 +237,21 @@ ADS = {
     ("Just you, an idea, and AI.", "Just you... an idea... and AI."),
     ("Now open your eyes, and start creating.", "Now open your eyes... and start creating."),
   ]},
+
+  # ---------------- trailers ----------------
+  "t01": {"voice": "brian", "lang": "en", "lines": [
+    ("Advertising just changed.", "Advertising just changed."),
+    ("Billboards that bend physics.", "Billboards that bend physics."),
+    ("Campaigns without a single shoot.", "Campaigns, without a single shoot."),
+    ("Whole worlds, built from words.", "Whole worlds... built from words."),
+    ("This is the future of advertising.", "This is the future of advertising."),
+    ("And you can learn to make it.", "And you can learn to make it."),
+  ]},
+  "t05": {"voice": "don", "lang": "en", "lines": [
+    ("Every film used to need a crew.", "Every film used to need a crew."),
+    ("A set. A budget. A year.", "A set. A budget. A year."),
+    ("Now, it needs a vision.", "Now... it needs a vision."),
+    ("None of this was filmed.", "None of this was filmed."),
+    ("It was directed.", "It was directed."),
+  ]},
 }
