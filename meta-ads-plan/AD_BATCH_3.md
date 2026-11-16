@@ -88,3 +88,17 @@ Added to the launch CBO **AIA | SALES | IN | ADV+ | launch** (campaign 120252219
 | AIA_TRAILER_DIRECT_VID_v1 | 120252251230670004 | 4118010471835936 | 1495706252470277 | PAUSED (in review) |
 | AIA_TRAILER_SIDE_VID_v1 | 120252251233840004 | 1609177183703564 | 2101104050524849 | PAUSED (in review) |
 | AIA_TRAILER_HI_SHOOT_VID_v1 | 120252251236400004 | 1394696352519122 | 2639525746460180 | PAUSED (in review) |
+
+## Also published as ad set E in the ABO test (paused)
+Campaign **AIA | TEST | Creative batch 2 | 4 angles | ABO** (120252229807490004). New ad set **E · Trailers (shoot vs direct) | IN broad | Purchase** (120252254482130004):
+- **Settings:** ₹750/day, the same as A–D: Purchase pixel, highest volume, IN broad with Advantage+ Audience, Advantage+ placements, 7-day click / 1-day view.
+- **Status:** the ad set is **PAUSED**, with its three ads switched on inside it. Turning on the ad set starts all three.
+- **Tracking:** `utm_campaign=aia_test_b2&utm_content={{ad.name}}&utm_term={{adset.name}}`
+
+These use shorter copy than the CBO versions:
+
+| Ad | Ad ID | Headline | Description | Primary text |
+|---|---|---|---|---|
+| AIA_TRAILER_DIRECT_VID_v1 | 120252254488110004 | Shoot it, or direct it? | Shoot-quality ads, without the shoot | Some brands still book a studio, a crew and a 3-week shoot. / Others turn one product photo into a full campaign with AI. / Learn to be the one who directs. / AI & Advertising · 11 modules · ₹2,999 |
+| AIA_TRAILER_SIDE_VID_v1 | 120252254490160004 | Which side are you on? | Tools are easy. Taste is the skill. | Anyone can press generate. / Few can make AI ads that look like a real shoot. / Learn product shoots, model shoots, UGC and Meta ads with AI, from brief to live campaign. / AI & Advertising · 41 lessons · ₹2,999 |
+| AIA_TRAILER_HI_SHOOT_VID_v1 | 120252254509330004 | Ab shoot optional hai | Bina shoot ke, shoot-quality ads | Ek ad shoot = studio + crew + model + 3 hafte. / Ab chahiye sirf AI aur sahi skill. / Product shoots, model shoots, UGC aur campaign films: sab AI se banana seekho. / AI & Advertising · 11 modules · ₹2,999 |
