@@ -22,7 +22,7 @@ Trailers 2 and 3 tell their story in small kinetic text that becomes unreadable 
 All three ads:
 - **Format:** 1080×1350 (4:5), 30 fps, audio normalised to −14 LUFS.
 - **Link:** https://community.ideabrostudio.com/courses/ai-and-advertising
-- **URL parameters:** `utm_source=meta&utm_medium=paid&utm_campaign=aia_trailers3&utm_content={{ad.name}}`
+- **URL parameters:** `utm_source=meta&utm_medium=paid&utm_campaign=aia_launch&utm_content={{ad.name}}`
 - **CTA button:** Learn more (the same as the winner).
 
 The code is in `ads3/trailer_ads.py`; run `python3 ads3/trailer_ads.py` to re-render.
@@ -75,3 +75,16 @@ The code is in `ads3/trailer_ads.py`; run `python3 ads3/trailer_ads.py` to re-re
 - **When to judge:** after about ₹3,000 of spend each (about 2× the current CPA). Keep any ad that gets a purchase, or 3 or more checkouts, at or below the winner's cost per checkout.
 - **Placements:** the 4:5 file covers Feed. For Reels and Stories, Meta can use the original 9:16 trailers from the same Drive folder as the 9:16 asset in a placement-customised ad.
 - **AI label:** as you asked for this account, I didn't tick Meta's AI-generated label.
+
+## Published to Meta (paused)
+Added to the launch CBO **AIA | SALES | IN | ADV+ | launch** (campaign 120252219130830004), ad set **AIA | IN | broad A+A | Purchase** (120252219131050004), next to the winner AIA_TRAILER_VID_v1.
+- All three were published with status **PAUSED**: they spend nothing until you switch them on.
+- The winner was left as it was.
+- Same Page, Instagram account, link, CTA and `utm_campaign=aia_launch` as the winner; `utm_content` is the ad name.
+- The AI-generated label is not set.
+
+| Ad | Ad ID | Creative ID | Video ID | Status |
+|---|---|---|---|---|
+| AIA_TRAILER_DIRECT_VID_v1 | 120252251230670004 | 4118010471835936 | 1495706252470277 | PAUSED (in review) |
+| AIA_TRAILER_SIDE_VID_v1 | 120252251233840004 | 1609177183703564 | 2101104050524849 | PAUSED (in review) |
+| AIA_TRAILER_HI_SHOOT_VID_v1 | 120252251236400004 | 1394696352519122 | 2639525746460180 | PAUSED (in review) |
