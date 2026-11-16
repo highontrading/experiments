@@ -32,6 +32,16 @@ T = {
  "tr_product": (45000, "Luxury minimal electronic for a premium product commercial, deep sub bass, crisp percussive hits, glassy textures, sleek and expensive, 100 BPM, instrumental"),
  "tr_fashion": (45000, "Moody fashion film soundtrack, dark R&B trip-hop beat, warm Rhodes, vinyl texture, confident runway swagger, 88 BPM, instrumental"),
  "tr_film": (50000, "Epic emotional film trailer, solo piano intro, swelling strings, deep braams, huge cinematic drums, triumphant climax, then silence and one final hit, instrumental"),
+ "r01": (52000, "Dark luxury hip hop trailer beat, heavy 808 sub, crisp snare hits, eerie piano motif, tension stops before each drop, huge impact hits on downbeats, premium and confident, 90 BPM, instrumental"),
+ "r02": (52000, "Documentary storytelling trailer, ticking clock pulse, cello and piano, building drums, a big cinematic hit and silence at the turning point, then triumphant uplifting drums to the end, instrumental"),
+ "r03": (50000, "Gritty lo-fi boom bap beat with punchy drums, vinyl crackle, retro synth stabs, chip-tune accents, swaggering and energetic, hard hits on transitions, 94 BPM, instrumental"),
+ "r04": (52000, "Dark futuristic tech trailer, pulsing synth bass, glitchy percussion, sweeping risers, cinematic impacts, a heavy bass drop at 12 seconds, driving to the end, 120 BPM, instrumental"),
+ "r05": (50000, "High energy hype trap beat for a creator video, punchy 808s, snappy claps, rising tension builds, big drops with hits, fast pacing, 145 BPM, instrumental"),
+ "r06": (50000, "Motivational cinematic hip hop, warm vintage soul sample feel, hard knocking drums, string stabs, building to a powerful climax with impacts, 88 BPM, instrumental"),
+ "r07": (55000, "Epic cinematic trailer, quiet mysterious piano intro, deep braams and hits, accelerating percussion, massive orchestral climax, final hit, instrumental"),
+ "r08": (48000, "Aggressive drift phonk, distorted 808, cowbell melody, relentless fast energy, hard hits, 150 BPM, instrumental"),
+ "r09": (48000, "Bright energetic electronic brand anthem, punchy house drums, big synth chords, risers into euphoric drops, claps, 124 BPM, instrumental"),
+ "r10": (50000, "Sleek minimal futuristic electronic, deep sub bass, glassy plucks, crisp hits, smooth builds and drops, premium fintech launch energy, 115 BPM, instrumental"),
 }
 os.makedirs("build/music_el", exist_ok=True)
 def gen(item):

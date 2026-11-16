@@ -43,6 +43,18 @@ SFX = {
  "bell": (1.5, "temple bell ring, bright brass, auspicious"),
  "thunder": (2.5, "distant rolling thunder, dark"),
  "rewind": (1.0, "tape rewind squeal, quick"),
+ "hit_punch": (1.2, "punchy cinematic trailer hit, tight sub thump and snap, modern"),
+ "hit_big": (2.5, "huge cinematic impact hit with deep sub boom and metallic tail"),
+ "swoosh_fast": (0.5, "fast sharp air swoosh transition"),
+ "riser_short": (2.0, "short tense synth riser ending abruptly"),
+ "rev_swell": (1.5, "reverse cymbal swell into a hit"),
+ "tape_stop": (1.0, "tape stop slowdown effect on music"),
+ "ui_click": (0.5, "clean modern UI click"),
+ "paper_slide": (0.8, "paper sliding fast across a table"),
+ "glitch_hit": (0.8, "digital glitch stutter hit"),
+ "bass_drop": (2.0, "deep 808 bass drop boom"),
+ "camera_flash": (0.8, "camera flash pop and shutter"),
+ "typing_fast": (1.5, "fast keyboard typing burst"),
 }
 only = sys.argv[1:]
 for n, (d, txt) in SFX.items():

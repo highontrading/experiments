@@ -13,9 +13,11 @@ def place(bus, y, at, gain=0.0, fi=0.0, fo=0.01):
     i = int(at * SR); j = min(N, i + n)
     if j > i: bus[:, i:j] += y[:, :j - i]
 vo, mus, sfx = (np.zeros((2, N)) for _ in range(3))
-if os.path.exists(f"build/{ad}/tl.json"):
-    for l in json.load(open(f"build/{ad}/tl.json"))["lines"]:
-        place(vo, load(f"build/vo/{ad}_{l['i']}.mp3"), l["at"], gain=0.0, fo=0.04)
+va = A.get("voAd") or ad; vu = A.get("voUntil")
+if os.path.exists(f"build/{va}/tl.json"):
+    for l in json.load(open(f"build/{va}/tl.json"))["lines"]:
+        if vu is not None and l["at"] >= vu - 0.2: continue
+        place(vo, load(f"build/vo/{va}_{l['i']}.mp3"), l["at"], gain=l.get("gain", 0.0), fo=0.04)
 m = A.get("music")
 if m:
     at = m.get("at", 0); end = m.get("end", DUR); y = load(m["file"], off=m.get("offset", 0), dur=end - at)

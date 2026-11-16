@@ -12,7 +12,7 @@ const PRICE = "₹2,999";
 const C = { ink: "#141414", cream: "#F1EFE6", grid: "#E3E0D6", lime: "#D8F5A2", pink: "#F6B8EA", lav: "#CDBCFF", sky: "#BFE1FB",
   yellow: "#FFD43B", sub: "#FFE14D", gold: "#E9B949", white: "#ffffff" };
 const F = { inter: "Inter", serif: "'Instrument Serif'", mono: "'JetBrains Mono'", archivo: "'Archivo Black'", anton: "Anton",
-  bebas: "'Bebas Neue'", pixel: "'Press Start 2P'", hand: "Caveat", grot: "'Space Grotesk'", pop: "Poppins", dms: "'DM Serif Display'", fraun: "Fraunces", syne: "Syne", play: "'Playfair Display'",
+  bebas: "'Bebas Neue'", pixel: "'Press Start 2P'", hand: "Caveat", grot: "'Space Grotesk'", pop: "Poppins", dms: "'DM Serif Display'", fraun: "Fraunces", syne: "Syne", vibes: "'Great Vibes'", pixs: "'Pixelify Sans'", kanit: "Kanit", tight: "'Inter Tight'", play: "'Playfair Display'",
   cinzel: "Cinzel", comic: "Bangers", marker: "'Permanent Marker'", yatra: "'Yatra One'", corm: "'Cormorant Garamond'" };
 
 // ---------- math ----------
@@ -64,7 +64,12 @@ function txt(s, x, y, o = {}) {
   if (o.shadow) { g.shadowColor = o.shadowColor || "rgba(0,0,0,0.6)"; g.shadowBlur = o.shadow * u; g.shadowOffsetY = (o.shadowY || 0) * u; }
   if (o.stroke) { g.lineJoin = "round"; g.strokeStyle = o.stroke; g.lineWidth = o.strokeW || 8 * u; g.strokeText(s, x, y); }
   g.fillStyle = o.color || "#fff"; g.fillText(s, x, y);
-  const w = g.measureText(s).width; g.restore(); return w;
+  const w = g.measureText(s).width;
+  if (window.__QA && g.globalAlpha > 0.35 && s.trim()) { const m = g.getTransform(), al = g.textAlign, sz = o.size || 60 * u;
+    let x0 = al === "center" ? x - w / 2 : al === "right" ? x - w : x; const y0 = y - sz * 0.42, y1 = y + sz * 0.42;
+    const p0 = m.transformPoint(new DOMPoint(x0, y0)), p1 = m.transformPoint(new DOMPoint(x0 + w, y1));
+    window.__BOXES.push({ s, x0: Math.min(p0.x, p1.x), y0: Math.min(p0.y, p1.y), x1: Math.max(p0.x, p1.x), y1: Math.max(p0.y, p1.y) }); }
+  g.restore(); return w;
 }
 function fitSize(s, maxW, size, weight, fam) { font(size, weight, fam); const w = tw(s); return w > maxW ? size * maxW / w : size; }
 function wrap(text, maxW) {
@@ -359,6 +364,60 @@ function metaCut(cfg) {
 }
 function k0() { return 0; } function sh0() { return 0.05; }
 
+
+// ---------- round-5 kit ----------
+function vcard(src, x, y, w, h, o = {}) {   // video/image card with optional radius, border, shadow, filter, rotation
+  g.save(); g.translate(x + w / 2, y + h / 2); if (o.rot) g.rotate(o.rot); if (o.s) g.scale(o.s, o.s);
+  if (o.shadow !== false) { g.shadowColor = o.shadowColor || "rgba(0,0,0,0.35)"; g.shadowBlur = (o.shadow || 40) * u; g.shadowOffsetY = 14 * u; }
+  if (o.border) { g.fillStyle = o.border; rr(-w / 2 - o.bw, -h / 2 - o.bw, w + 2 * o.bw, h + 2 * o.bw, (o.r || 0) + o.bw); g.fill(); }
+  else { g.fillStyle = "#000"; rr(-w / 2, -h / 2, w, h, o.r || 0); g.fill(); }
+  g.shadowColor = "transparent"; g.shadowBlur = 0; g.shadowOffsetY = 0;
+  rr(-w / 2, -h / 2, w, h, o.r || 0); g.clip(); if (o.filter) g.filter = o.filter; cover(src, -w / 2, -h / 2, w, h, o.z || 1.04, o.ax ?? 0.5, o.ay ?? 0.5); g.filter = "none";
+  g.restore();
+}
+function tex(name, a = 1) { const im = IM[name]; if (!im) return; g.save(); g.globalAlpha = a; g.drawImage(im, 0, 0, W, H); g.restore(); }
+function barcode(x, y, w, h, seed = 1, col = "#111") { let xx = x; g.fillStyle = col; while (xx < x + w) { const bw = (1 + Math.floor(rnd(xx * 0.37 + seed) * 4)) * u; g.fillRect(xx, y, bw, h); xx += bw + (1 + Math.floor(rnd(xx + seed * 3) * 3)) * u; } }
+function blurWord(s, x, y, size, t, t0, o = {}) {   // motion-blurred word punch-in (r05/r10 style)
+  const p = clamp((t - t0) / (o.dur || 0.28)); if (p <= 0) return; const e = oX(p), bl = (1 - e) * 26;
+  g.save(); g.filter = bl > 0.5 ? `blur(${bl * u}px)` : "none"; const sc = lerp(o.from || 1.6, 1, e);
+  g.translate(x, y); g.scale(sc, sc); txt(s, 0, 0, { size, weight: o.weight || 800, fam: o.fam || F.tight, style: o.style || "", color: o.color || "#fff", alpha: clamp(p * 2.5) * (o.alpha ?? 1), align: o.align || "center", ls: o.ls }); g.restore();
+}
+function phoneMock(src, cx, cy, w, t, o = {}) {   // phone with screen recording
+  const h = w * 2.05, r = w * 0.14; g.save(); g.translate(cx, cy); if (o.rot) g.rotate(o.rot);
+  g.shadowColor = "rgba(0,0,0,0.5)"; g.shadowBlur = 60 * u; g.shadowOffsetY = 30 * u; g.fillStyle = "#111"; rr(-w / 2, -h / 2, w, h, r); g.fill(); g.shadowBlur = 0; g.shadowOffsetY = 0;
+  g.strokeStyle = "#3a3a3a"; g.lineWidth = 4 * u; rr(-w / 2 + 3 * u, -h / 2 + 3 * u, w - 6 * u, h - 6 * u, r - 3 * u); g.stroke();
+  const m = w * 0.045; g.save(); rr(-w / 2 + m, -h / 2 + m, w - 2 * m, h - 2 * m, r - m); g.clip();
+  const sw = w - 2 * m, sh = h - 2 * m; if (src && src.width) { const sc = sw / src.width; const vis = Math.min(src.height, (o.crop || 0.86) * src.height); g.drawImage(src, 0, 0, src.width, vis, -sw / 2, -sh / 2, sw, Math.max(sh, vis * sc)); }
+  g.restore(); g.fillStyle = "#111"; rr(-w * 0.16, -h / 2 + m + 10 * u, w * 0.32, 26 * u, 13 * u); g.fill(); g.restore();
+}
+// Meta variant: trailer up to `cut`, then a CTA screen in the trailer's theme, then the end card.
+function metaWrap(A, m) {
+  const cut = m.cut, T_CTA = cut, T_END = cut + (m.ctaD || 5.2), base = A.render.bind(A);
+  const off = document.createElement("canvas"); let frozen = false;
+  return Object.assign({}, A, { dur: T_END + 3.4, slug: A.slug + "_meta", voUntil: cut, voAd: AD_ID.replace(/m$/, ""),
+    music: Object.assign({}, A.music, { fadeOut: 1.0 }),
+    sfx: (A.sfx || []).filter((s) => s[1] < cut - 0.05).concat([["swoosh_fast", cut - 0.1, -8], ["hit_punch", cut, -8], ["ui_click", cut + 2.15, -6], ["ding", cut + 2.2, -12], ["hit_punch", T_END, -10]]),
+    render(t) {
+      if (t < T_CTA) return base(t);
+      if (t >= T_END) { endCard(t, T_END, Object.assign({ cta: "Join now  →", price: true }, m.end || {})); grain(t, 0.04); return; }
+      if (!frozen) { off.width = W; off.height = H; base(cut - 0.04); off.getContext("2d").drawImage(cv, 0, 0); frozen = true; }
+      g.setTransform(1, 0, 0, 1, 0, 0); const p = oC(prog(t, T_CTA, T_CTA + 0.45)); g.save(); g.filter = `blur(${14 * p * u}px)`; g.drawImage(off, 0, 0); g.restore();
+      g.fillStyle = m.scrim || `rgba(0,0,0,${0.62 * p})`; g.globalAlpha = p; g.fillRect(0, 0, W, H); g.globalAlpha = 1;
+      if (m.ctaDraw) m.ctaDraw(t, T_CTA); else {
+        txt(m.kicker || "THE FUTURE OF ADVERTISING", CX, 470 * u, { size: 30 * u, fam: F.mono, weight: 700, color: m.accent || CREAM, ls: 6, alpha: oC(prog(t, T_CTA + 0.15, T_CTA + 0.5)) });
+        blurWord(m.h1 || "AI in", CX, 600 * u, 120 * u, t, T_CTA + 0.25, { fam: m.f1 || F.dms, weight: 400, style: m.s1 ?? "italic" });
+        blurWord(m.h2 || "Advertising.", CX, 730 * u, 128 * u, t, T_CTA + 0.45, { fam: m.f2 || F.pop, weight: 800, color: m.accent || CREAM });
+        (m.bullets || ["AI product shoots & CGI ads", "AI UGC creators & AI films", "Meta ads that convert"]).forEach((b, i) => { const q = oC(prog(t, T_CTA + 0.8 + i * 0.12, T_CTA + 1.1 + i * 0.12)), y = (900 + i * 80) * u;
+          g.save(); g.globalAlpha = q; g.fillStyle = "rgba(255,255,255,0.12)"; rr(150 * u, y - 32 * u, W - 300 * u, 64 * u, 32 * u); g.fill(); g.restore();
+          txt("✓  " + b, CX, y + 2 * u, { size: 34 * u, weight: 600, fam: F.pop, color: "#fff", alpha: q }); });
+        txt(`${PRICE} · one-time · lifetime access`, CX, 1210 * u, { size: 38 * u, weight: 600, fam: F.pop, color: "#fff", alpha: 0.9 * oC(prog(t, T_CTA + 1.3, T_CTA + 1.6)) });
+        joinButton(t, T_CTA + 1.4, CX, 1360 * u, "Join now", { fill: m.btn || C.lime, glow: m.glow || "rgba(216,245,162,0.55)", tapAt: 0.75 });
+        txt("community.ideabrostudio.com", CX, 1510 * u, { size: 28 * u, fam: F.mono, color: "#fff", alpha: 0.75 * oC(prog(t, T_CTA + 1.8, T_CTA + 2.2)) });
+      }
+      grain(t, 0.04);
+    } });
+}
+
 // ---------- end card ----------
 // theme: {bg, fg, accent, titleFam, titleStyle, button:{fill,color,shadow,border}, grid, sub}
 function endCard(t, t0, th = {}) {
@@ -391,7 +450,7 @@ async function boot() {
   const A = window.AD; W = A.w; H = A.h; u = W / 1080; CX = W / 2; CY = H / 2;
   cv = document.getElementById("c"); cv.width = W; cv.height = H; g = cv.getContext("2d");
   makeGrain();
-  const jobs = [load("logo_white", "assets/img/ib_logo_white.png"), load("logo_ink", "assets/img/ib_logo_ink.png")];
+  const jobs = [load("logo_white", "assets/img/ib_logo_white.png"), load("logo_ink", "assets/img/ib_logo_ink.png"), load("paperW", "assets/tex/paper_white.jpg"), load("paperB", "assets/tex/paper_beige.jpg"), load("grunge", "assets/tex/grunge_green.jpg"), load("wood", "assets/tex/wood.jpg")];
   for (const [n, p] of Object.entries(A.images || {})) jobs.push(load(n, p));
   for (const n of A.seqs || []) {
     const m = (window.ASSETS && ASSETS.seqs[n]); if (!m) { console.error("no seq " + n); continue; }
@@ -400,13 +459,15 @@ async function boot() {
   }
   await document.fonts.ready;
   await Promise.all([`900 40px Inter`, `800 40px Inter`, `700 40px Inter`, `600 40px Inter`, `500 40px Inter`, `500 40px 'Space Grotesk'`, `800 40px 'Space Grotesk'`, `600 40px Caveat`, `400 40px 'Instrument Serif'`, `italic 400 40px 'Instrument Serif'`, `400 40px 'JetBrains Mono'`, `700 40px 'JetBrains Mono'`,
-    `400 40px 'Archivo Black'`, `400 40px Anton`, `400 40px 'Bebas Neue'`, `400 40px 'Press Start 2P'`, `700 40px Caveat`, `700 40px 'Space Grotesk'`, `700 40px 'Playfair Display'`, `italic 600 40px 'Playfair Display'`, `700 40px Cinzel`, `400 40px Bangers`, `400 40px 'Permanent Marker'`, `400 40px 'Yatra One'`, `italic 500 40px 'Cormorant Garamond'`, `600 40px Poppins`, `800 40px Poppins`, `400 40px 'DM Serif Display'`, `italic 400 40px 'DM Serif Display'`, `italic 600 40px Fraunces`, `800 40px Syne`].map((f) => document.fonts.load(f)));
+    `400 40px 'Archivo Black'`, `400 40px Anton`, `400 40px 'Bebas Neue'`, `400 40px 'Press Start 2P'`, `700 40px Caveat`, `700 40px 'Space Grotesk'`, `700 40px 'Playfair Display'`, `italic 600 40px 'Playfair Display'`, `700 40px Cinzel`, `400 40px Bangers`, `400 40px 'Permanent Marker'`, `400 40px 'Yatra One'`, `italic 500 40px 'Cormorant Garamond'`, `600 40px Poppins`, `800 40px Poppins`, `400 40px 'DM Serif Display'`, `italic 400 40px 'DM Serif Display'`, `italic 600 40px Fraunces`, `800 40px Syne`, `400 40px 'Great Vibes'`, `700 40px 'Pixelify Sans'`, `800 40px Kanit`, `500 40px Kanit`, `800 40px 'Inter Tight'`, `500 40px 'Inter Tight'`].map((f) => document.fonts.load(f)));
   await Promise.all(jobs);
   if (A.init) A.init();
   return true;
 }
 window.stageReady = new Promise((res) => window.addEventListener("load", () => boot().then(res)));
+window.__BOXES = [];
 window.renderAt = function (t) {
+  window.__BOXES = [];
   g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.globalCompositeOperation = "source-over"; g.filter = "none"; g.shadowBlur = 0; g.letterSpacing = "0px";
   window.AD.render(t);
 };
