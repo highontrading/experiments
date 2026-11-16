@@ -1,6 +1,6 @@
 """Poster grid of all ads (frame at ~35% of each) -> out/_all_ads_overview.jpg"""
 import glob, subprocess, os, sys
-pre = sys.argv[1] if len(sys.argv) > 1 else "a"; outp = "out/_all_ads_overview.jpg" if pre == "a" else f"out/_round{ {'b': 2, 'c': 3}.get(pre, 2) }_{pre}_ads_overview.jpg"
+pre = sys.argv[1] if len(sys.argv) > 1 else "a"; outp = "out/_all_ads_overview.jpg" if pre == "a" else f"out/_round{ {'b': 2, 'c': 3, 'r': 5}.get(pre, 2) }_{pre}_ads_overview.jpg"
 from PIL import Image, ImageDraw, ImageFont
 fs = sorted(glob.glob(f"out/{pre}*.mp4")); tiles = []
 for f in fs:
