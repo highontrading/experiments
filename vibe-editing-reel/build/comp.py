@@ -34,9 +34,12 @@ wm = Image.new('RGBA', (W, H), (0, 0, 0, 0)); ImageDraw.Draw(wm).text((W / 2, 14
 bg = Image.alpha_composite(bg.convert('RGBA'), wm).convert('RGB'); d = ImageDraw.Draw(bg)
 # CTA pill (inside the safe zone)
 cta_y = Y0 + PH + 16; pw = 640
-d.rounded_rectangle((W / 2 - pw / 2, cta_y, W / 2 + pw / 2, cta_y + 76), 38, fill=(242, 194, 48))
-d.text((W / 2, cta_y + 38), 'Learn the workflow  →', font=font('Inter-ExtraBold', 40), fill=(20, 12, 6), anchor='mm')
-assert cta_y + 76 <= SAFE_B, cta_y + 76
+assert cta_y + 76 * 1.04 <= SAFE_B, cta_y + 76
+# CTA as its own layer so it can pulse gently (drawn 2x for crisp scaling)
+cta = Image.new('RGBA', (pw * 2 + 40, 76 * 2 + 40), (0, 0, 0, 0)); cd = ImageDraw.Draw(cta)
+cd.rounded_rectangle((20, 20, 20 + pw * 2, 20 + 152), 76, fill=(242, 194, 48, 255))
+cd.text((20 + pw, 20 + 76), 'Learn the workflow  →', font=font('Inter-ExtraBold', 80), fill=(20, 12, 6), anchor='mm')
+cta.save(f'{wd}/comp_cta.png'); CTA_CY = cta_y + 38
 bg.save(f'{wd}/comp_bg.png')
 # labels drawn on top of the videos
 lab = Image.new('RGBA', (W, H), (0, 0, 0, 0)); ld = ImageDraw.Draw(lab)
@@ -48,9 +51,11 @@ lab.save(f'{wd}/comp_labels.png')
 m = Image.new('L', (PW, PH), 0); ImageDraw.Draw(m).rounded_rectangle((0, 0, PW - 1, PH - 1), 30, fill=255); m.save(f'{wd}/comp_mask.png')
 fc = (f"[1:v]scale={PW}:{PH},setsar=1,format=rgba[r0];[4:v]format=gray[m];[m]split[m1][m2];"
       f"[2:v]scale={PW}:{PH}:flags=lanczos,setsar=1,format=rgba[e0];[r0][m1]alphamerge[r];[e0][m2]alphamerge[e];"
-      f"[0:v][r]overlay={X0}:{Y0}[a];[a][e]overlay={X0 + PW + GAP}:{Y0}[b];[b][3:v]overlay=0:0,format=yuv420p[v]")
+      f"[0:v][r]overlay={X0}:{Y0}[a];[a][e]overlay={X0 + PW + GAP}:{Y0}[b];[b][3:v]overlay=0:0[c];"
+      f"[5:v]scale=w='trunc(({pw + 20})*(1+0.035*pow(sin(PI*t/1.4),8))/2)*2':h=-2:eval=frame:flags=lanczos[p];"
+      f"[c][p]overlay=x='(W-w)/2':y='{CTA_CY}-h/2':eval=frame,format=yuv420p[v]")
 subprocess.run(['ffmpeg', '-v', 'error', '-y', '-loop', '1', '-framerate', '30', '-i', f'{wd}/comp_bg.png', '-i', raw, '-i', edit,
-                '-loop', '1', '-framerate', '30', '-i', f'{wd}/comp_labels.png', '-loop', '1', '-framerate', '30', '-i', f'{wd}/comp_mask.png',
+                '-loop', '1', '-framerate', '30', '-i', f'{wd}/comp_labels.png', '-loop', '1', '-framerate', '30', '-i', f'{wd}/comp_mask.png', '-loop', '1', '-framerate', '30', '-i', f'{wd}/comp_cta.png',
                 '-filter_complex', fc, '-map', '[v]', '-map', '2:a', '-shortest', '-r', '30', '-c:v', 'libx264', '-preset', 'slow', '-crf', '18',
                 '-profile:v', 'high', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', out], check=True)
 print('wrote', out)

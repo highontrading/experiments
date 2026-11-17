@@ -332,8 +332,8 @@ async function posterBehind(t, tb) {
   ribbon([[80, -60], [-60, 420], [120, 820], [520, 760], [820, 700], [1000, 520], [1180, 640]], p1, 46);
   const e1 = enter(t, tb, .14), e2 = enter(t, wt(7), .14);
   T('behind', 300, 600, Object.assign({ size: 92, font: 'PF7', fill: '#16110d', sh: false }, e1));
-  T('me.', 850, 900, Object.assign({ size: 330, font: 'PF9', fill: '#16110d', sh: false }, e2));
   subjectLayer(c, pim, [255, 255, 255], 0, 'none'); silhouette('#0d0b0a', 1, .22);
+  T('me.', 820, 1010, Object.assign({ size: 300, font: 'PF9', fill: '#16110d', sh: true, shc: 'rgba(241,238,232,.9)', shb: 18, shy: 0 }, e2));
   ribbon([[1180, 1260], [800, 1140], [400, 1420], [-90, 1330]], eo(inv(tb + .2, tb + .52, t)), 52);
   grain(.1);
 }
@@ -341,10 +341,10 @@ async function posterBehind(t, tb) {
 SCENES.any = async (t, fr, fg) => {
   const hit = wt(12);
   let shake = t > hit ? Math.exp(-(t - hit) * 9) * 22 : 0; const r = rng(Math.floor(t * 60));
-  const c = camFace(1.2, 900, fr, .9, 0, 120); c.sx += (r() - .5) * shake; c.sy += (r() - .5) * shake;
+  const c = camFace(1.2, 1010, fr, .9, 0, 120); c.sx += (r() - .5) * shake; c.sy += (r() - .5) * shake;
   const hd = headOn(c, fr);
   room('wall', c);
-  const tx = 540, ty = Math.max(330, hd.top + 10);
+  const tx = 540, ty = Math.max(330, hd.top - 40);
   cracks(tx, ty - 60, eo(inv(hit, hit + .12, t)));
   // ANY OF IT (behind subject, slammed into the wall)
   if (t >= hit - .02) {
@@ -356,17 +356,17 @@ SCENES.any = async (t, fr, fg) => {
   debris(tx, ty - 40, t - hit);
   // lead-in line (front)
   const ex = hit - .05;
-  wline(t, [{ s: 'and', t0: 2.80, o: SM(0, 60) }, { s: 'I', t0: wt(9), o: SM(0, 60) }, { s: "didn't", t0: wt(10), o: SM(0, 60) }], 540, hd.y + hd.w * 1.55, 'center', .28, ex, 'blur', [0, 1]);
-  wline(t, [{ s: 'animate', t0: wt(11), o: { size: 150, font: 'PF7' } }], 540, hd.y + hd.w * 2.35, 'center', .28, ex, 'blur', [0, 1]);
+  wline(t, [{ s: 'and', t0: 2.80, o: SM(0, 60) }, { s: 'I', t0: wt(9), o: SM(0, 60) }, { s: "didn't", t0: wt(10), o: SM(0, 60) }], 540, Math.min(hd.y + hd.w * 2.35, 1400) - 150, 'center', .28, ex, 'blur', [0, 1]);
+  wline(t, [{ s: 'animate', t0: wt(11), o: { size: 150, font: 'PF7' } }], 540, Math.min(hd.y + hd.w * 2.35, 1400), 'center', .28, ex, 'blur', [0, 1]);
   vignette(); grain(); flash('#fff', .5 * (1 - inv(hit, hit + .1, t)) * (t >= hit ? 1 : 0));
 };
 // ---------------------------------------------------------------- 3. VIBE EDITING
 SCENES.vibe = async (t, fr, fg) => {
   const t0 = 4.503; const z = 1.0 + .05 * inv(t0, 7.6, t) + (t > 5.664 ? .08 : 0);
-  const c = camFace(z, 960, fr, .5); const hd = headOn(c, fr);
+  const c = camFace(z, 1060, fr, .5); const hd = headOn(c, fr);
   room('living', c);
   // VIBE / EDITING stacked behind the head
-  const vx = 540, top = hd.top - 330, wJ = 820;
+  const vx = 540, wJ = 640, top = hd.top - 28 - (wJ / mw('VIBE', 100, 'AN', 6) * 100) * .82 - (wJ / mw('EDITING', 100, 'AN', 4) * 100) * .92;
   const exitV = wt(20) - .05, qv = leave(t, exitV, .16);
   const l1 = 'VIBE', l2 = 'EDITING';
   const s1 = wJ / mw(l1, 100, 'AN', 6) * 100, s2 = wJ / mw(l2, 100, 'AN', 4) * 100;
@@ -375,7 +375,7 @@ SCENES.vibe = async (t, fr, fg) => {
     T(s, vx, y - qv * 220, { size: sz, font: 'AN', ls, alpha: e.alpha * (1 - qv), blur: e.blur + qv * 18, scale: e.scale, sys: 1 - qv * .8, shb: 30, shc: 'rgba(0,0,0,.45)' });
   }
   const sub = subjectLayer(c, fg); drawSubjectShadow(); drawSub();
-  const cy = hd.y + hd.w * 2.2;
+  const cy = Math.min(hd.y + hd.w * 2.2, 1270);
   wline(t, [{ s: 'so', t0: wt(15), o: SM(0, 60) }, { s: 'this', t0: wt(16), o: SM(0, 60) }, { s: 'is', t0: wt(17), o: SM(0, 60) }], 540, cy - 120, 'center', .28, exitV);
   // no keyframes: timeline with diamonds that shatter
   if (t > wt(20) && t < wt(22) + .1) {
@@ -407,7 +407,7 @@ SCENES.glow = async (t, fr, fg) => {
     a = enter(t, g0, .1).alpha * fl * (1 - inv(8.76, 8.821, t));
   }
   room('living', c, { dx: -60 });
-  const ty = hd.y + hd.w * 2.0;
+  const ty = Math.min(hd.y + hd.w * 2.0, 1330);
   if (roomTint) { tintRoom(roomTint, .55 * a); glowAt(540, ty - 50, 700, roomTint.replace('rgb', 'rgba').replace(')', ',A)'), .55 * a); }
   const tint = roomTint ? roomTint.match(/\d+/g).map(Number).map(v => lerp(255, v, .55 * a)) : [255, 214, 172];
   subjectLayer(c, fg, tint, .55); drawSubjectShadow(); drawSub();
@@ -423,7 +423,7 @@ SCENES.bold = async (t, fr, fg) => {
   const hd = headOn(c, fr);
   room('living', c, { dx: 140 });
   // stacked justified caps behind the head (right side)
-  const wJ = 440, qx = leave(t, 10.18, .14), bx = Math.min(hd.x + hd.w * 1.3, W - 70 - wJ / 2), top = hd.top - 260;
+  const lft = hd.x + hd.w * .62 + 24, wJ = Math.min(440, W - 70 - lft), qx = leave(t, 10.18, .14), bx = lft + wJ / 2, top = hd.top - 260;
   const lines = [['BIG', wt(33)], ['AND', wt(34)], ['BOLD', wt(35)]]; let y = top;
   for (const [s, t1] of lines) {
     const sz = wJ / mw(s, 100, 'AN', 3) * 100; y += sz * .86;
@@ -433,7 +433,7 @@ SCENES.bold = async (t, fr, fg) => {
   subjectLayer(c, fg); drawSubjectShadow(); drawSub();
   wline(t, [{ s: 'make', t0: wt(31), o: SM(0, 58) }, { s: 'it', t0: wt(32), o: SM(0, 58) }], Math.max(190, hd.x - hd.w * .9), hd.top - 40, 'center', .28, 10.18);
   // soft and elegant (front), dissolves to dust
-  const cy = hd.y + hd.w * 2.1, dz = inv(11.78, 12.02, t);
+  const cy = Math.min(hd.y + hd.w * 2.1, 1270), dz = inv(11.78, 12.02, t);
   const drawSoft = (ctx) => {
     const save = X; window.__X = ctx;
   };
@@ -473,7 +473,7 @@ SCENES.claude = async (t, fr, fg) => {
   // code card (front-left)
   if (t >= wt(42) - .05 && t < 14.45) {
     const p = eo(inv(wt(42) - .05, wt(42) + .2, t)), q = leave(t, 14.32, .12);
-    const x0 = 60, y0 = hd.y + hd.w * 1.35, cw = 610, ch = 300;
+    const x0 = 60, y0 = Math.min(hd.y + hd.w * 1.35, 1120), cw = 610, ch = 300;
     X.save(); X.globalAlpha = p * (1 - q); X.translate(0, (1 - p) * 40);
     X.fillStyle = 'rgba(18,11,7,.78)'; X.strokeStyle = 'rgba(255,214,170,.35)'; X.lineWidth = 2;
     X.beginPath(); X.roundRect(x0, y0, cw, ch, 22); X.fill(); X.stroke();
@@ -519,7 +519,7 @@ SCENES.claude = async (t, fr, fg) => {
   room('study', c);
   const words = [{ s: 'even', t0: wt(52) }, { s: 'the', t0: wt(53) }, { s: 'words', t0: wt(54) }, { s: 'behind', t0: wt(55) }, { s: 'my', t0: wt(56) }];
   orbit(t, words, hd, 'back', 1.5, wt(57) - .05);
-  if (t >= wt(57)) { const e = enter(t, wt(57), .16); T('head.', hd.x, hd.top + hd.w * .2, Object.assign({ size: 250, font: 'PF9' }, e)); }
+  if (t >= wt(57)) { const e = enter(t, wt(57), .16); T('head.', hd.x, hd.top - hd.w * .02, Object.assign({ size: 250, font: 'PF9' }, e)); }
   subjectLayer(c, fg); drawSubjectShadow(); drawSub();
   orbit(t, words, hd, 'front', 1.5, wt(57) - .05);
   vignette(); grain();
@@ -667,7 +667,7 @@ SCENES.mask = async (t, fr, fg) => {
 // ---------------------------------------------------------------- 11. THIS ROOM isn't real
 SCENES.room = async (t, fr, fg, i) => {
   const t0 = 28.485, roomW = wt(93), fl = roomW + .1, wire = wt(94), spot = 30.72, reveal = 30.84;
-  const z = 1.5 + .06 * inv(t0, 31.1, t); const c = camFace(z, 760, fr, 1); const hd = headOn(c, fr);
+  const z = 1.5 + .06 * inv(t0, 31.1, t); const c = camFace(z, 840, fr, 1); const hd = headOn(c, fr);
   if (t >= reveal || (t >= fl && t < fl + 2 / 30)) { // the real room (raw footage, same framing)
     const raw = await img(`${ASSET}/raw/${pad(fr.src)}.jpg`); const k = K0 * c.z;
     X.save(); if (t < reveal) X.filter = 'brightness(1.35) saturate(.5) hue-rotate(-10deg)'; X.drawImage(raw, c.sx - c.fx * k, c.sy - c.fy * k, 720 * k, 1280 * k); X.restore();
@@ -686,7 +686,7 @@ SCENES.room = async (t, fr, fg, i) => {
   // ROOM outline, then recedes into depth
   if (t >= roomW) {
     const e = enter(t, roomW, .14), rq = eio(inv(wire, wire + .35, t));
-    T('ROOM', 540, hd.top + 40 - rq * 260, { size: 380, font: 'AN', ls: 8, fill: null, stroke: '#fff', lw: 5, alpha: e.alpha * (1 - rq * .85), blur: e.blur, scale: e.scale * (1 - rq * .62), shb: 20, shc: 'rgba(255,255,255,.35)', shy: 0 });
+    T('ROOM', 540, hd.top - 20 - rq * 200, { size: 300, font: 'AN', ls: 8, fill: null, stroke: '#fff', lw: 5, alpha: e.alpha * (1 - rq * .85), blur: e.blur, scale: e.scale * (1 - rq * .62), shb: 20, shc: 'rgba(255,255,255,.35)', shy: 0 });
   }
   subjectLayer(c, fg, [255, 214, 172], .5); drawSubjectShadow(); drawSub();
   wline(t, [{ s: 'oh,', t0: t0, o: SM(0, 64) }, { s: 'and', t0: wt(91), o: SM(0, 64) }, { s: 'this', t0: wt(92), o: SM(0, 64) }], 540, hd.y + hd.w * .95, 'center', .28, wire - .08);
@@ -701,7 +701,7 @@ SCENES.cta = async (t, fr, fg) => {
   room('study', c);
   // VIBE in gold behind the head
   if (t >= wt(108) - .05) {
-    const letters = 'VIBE', sz = 330; let x = 540 - mw(letters, sz, 'AN', 4) / 2; const y = hd.top + 120;
+    const letters = 'VIBE', sz = 300; let x = 540 - mw(letters, sz, 'AN', 4) / 2; const y = hd.top - 28;
     for (let k = 0; k < 4; k++) { const cw = mw(letters[k], sz, 'AN', 4); const st = wt(108) - .05 + k * .07; const p = cl((t - st) / .4); if (p > 0) gold(letters[k], x + cw / 2, y - (1 - bounce(p)) * 420, sz, cl(p * 3), (t - st) * .55 + k * .12); x += cw; }
   }
   subjectLayer(c, fg); drawSubjectShadow(); drawSub();
@@ -710,14 +710,14 @@ SCENES.cta = async (t, fr, fg) => {
   wline(t, [{ s: 'workflow', t0: wt(101), o: { size: 190, font: 'PF9' } }], 540, hd.top - 150, 'center', .2, ex);
   wline(t, [{ s: 'inside', t0: wt(102), o: SM(0, 58) }, { s: 'my', t0: wt(103), o: SM(0, 58) }, { s: 'academy.', t0: wt(104), o: { size: 120, font: 'PF7' } }], 540, hd.y + hd.w * 1.55, 'center', .25, ex);
   if (t >= c2) {
-    wline(t, [{ s: 'so', t0: c2, o: SM(0, 52) }, { s: 'just', t0: wt(106), o: SM(0, 52) }], 540, hd.top - 355, 'center');
+    wline(t, [{ s: 'so', t0: c2, o: SM(0, 52) }, { s: 'just', t0: wt(106), o: SM(0, 52) }], 540, hd.top - 425, 'center');
     // "comment" on an arc, letter by letter
     const word = 'comment', sz = 96, R = 900; const tot = mw(word, sz, 'IX'); let a0 = -tot / 2 / R;
-    for (let k = 0; k < word.length; k++) { const cw = mw(word[k], sz, 'IX'); const a = a0 + cw / 2 / R; const st = wt(107) + k * .03; if (t >= st) { const e = enter(t, st, .12); const x = 540 + Math.sin(a) * R, y = hd.top - 240 + R - Math.cos(a) * R; T(word[k], x, y, Object.assign({ size: sz, font: 'IX', rot: a }, e)); } a0 += cw / R; }
+    for (let k = 0; k < word.length; k++) { const cw = mw(word[k], sz, 'IX'); const a = a0 + cw / 2 / R; const st = wt(107) + k * .03; if (t >= st) { const e = enter(t, st, .12); const x = 540 + Math.sin(a) * R, y = hd.top - 318 + R - Math.cos(a) * R; T(word[k], x, y, Object.assign({ size: sz, font: 'IX', rot: a }, e)); } a0 += cw / R; }
     handArrow([[870, hd.top + 10], [1010, hd.top + 90], [1050, 1180], [1010, 1330]], eo(inv(wt(108) + .2, wt(108) + .65, t)));
     igRail(inv(wt(108) + .2, wt(108) + .5, t), 1);
-    wline(t, [{ s: 'and', t0: wt(109), o: SM(0, 54) }, { s: 'I', t0: wt(110), o: SM(0, 54) }, { s: 'will', t0: wt(111), o: SM(0, 54) }, { s: 'send', t0: wt(112), o: SM(0, 54) }, { s: 'you', t0: wt(113), o: SM(0, 54) }], 540, hd.y + hd.w * 1.45, 'center');
-    wline(t, [{ s: 'the', t0: wt(114), o: { size: 96, font: 'PF5' } }, { s: 'details.', t0: wt(115), o: { size: 160, font: 'PF9' } }], 540, hd.y + hd.w * 1.45 + 160, 'center', .2);
+    wline(t, [{ s: 'and', t0: wt(109), o: SM(0, 54) }, { s: 'I', t0: wt(110), o: SM(0, 54) }, { s: 'will', t0: wt(111), o: SM(0, 54) }, { s: 'send', t0: wt(112), o: SM(0, 54) }, { s: 'you', t0: wt(113), o: SM(0, 54) }], 540, Math.min(hd.y + hd.w * 1.45 + 160, 1430) - 150, 'center');
+    wline(t, [{ s: 'the', t0: wt(114), o: { size: 96, font: 'PF5' } }, { s: 'details.', t0: wt(115), o: { size: 160, font: 'PF9' } }], 540, Math.min(hd.y + hd.w * 1.45 + 160, 1430), 'center', .2);
   }
   vignette(); grain();
   flash('#fff', .9 * (1 - eo(inv(t0, t0 + .15, t))));
