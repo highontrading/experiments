@@ -139,7 +139,7 @@ CAT.update({
  "horse_town": (D+"f2_aJ7I.mp4", 7.6, 2.6, 1280), "pottery": (D+"f2_aJ7I.mp4", 12.4, 2.4, 1280), "volcano": (D+"f2_aJ7I.mp4", 18.0, 2.0, 1280), "cowboy": (D+"f1_yigB.mp4", 12.3, 2.6, 1280),
  "desert_night": (D+"f1_yigB.mp4", 0.2, 2.6, 1280), "cat": (D+"f2_0tAe.mp4", 3.0, 2.6, 1280), "videostore": (D+"f2_qU9O.mp4", 5.2, 2.6, 1280), "arcade": (D+"f2_qU9O.mp4", 10.2, 2.6, 1280),
  "room90": (D+"f2_qU9O.mp4", 0.3, 2.4, 1280), "unbox_girl": (D+"f1_Jc3V.mp4", 0.2, 1.8, 720), "mirror_fit": (D+"f1_Jc3V.mp4", 13.2, 1.8, 720), "drive_pov": (D+"f1_ValG.mp4", 9.5, 2.6, 1280),
- "city_dusk": (D+"f1_ValG.mp4", 24.4, 2.5, 1280), "highway": (D+"f1_ValG.mp4", 27.0, 2.6, 1280), "diya": ("mixkit:3438", 2.0, 3.0, 1080), "diya_hands": ("mixkit:41731", 1.0, 3.0, 1080),
+ "city_dusk": (D+"f1_ValG.mp4", 25.6, 1.8, 1280), "highway": (D+"f1_ValG.mp4", 27.0, 2.6, 1280), "diya": ("mixkit:3438", 2.0, 3.0, 1080), "diya_hands": ("mixkit:41731", 1.0, 3.0, 1080),
  "festive_woman": ("mixkit:50776", 1.0, 3.0, 1080), "flame": ("mixkit:3438", 6.0, 3.0, 1080), "site3": (SR, 6.5, 3.0, 1080), "carwin2": (V+"1BB6W5.mp4", 6.0, 2.6, 720),
  "bike_pov": (D+"f2_O_xN.mp4", 7.6, 2.2, 1280), "skate2": (V+"1BaEv4.mp4", 6.0, 2.4, 720), "garden2": (D+"f1_UA1z.mp4", 8.0, 2.4, 1080),
 })
