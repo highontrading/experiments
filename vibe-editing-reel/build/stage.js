@@ -111,7 +111,7 @@ function room(name, c, o = {}) {
   const z = base * (1 + (c.z - 1) * .38);
   const w = im.width * z, h = im.height * z;
   const x = (W - w) / 2 - (c.fx - 360) * .25 * c.z + (o.dx || 0) - (c.sx - 540) * .3, y = (H - h) / 2 - (c.fy - 640) * .12 * c.z + (o.dy || 0);
-  X.save(); X.filter = `blur(${(o.blur ?? (1.2 + (c.z - 1) * 4)).toFixed(1)}px) brightness(${o.bright ?? .92}) saturate(${o.sat ?? 1.05})`;
+  X.save(); X.filter = `blur(${(o.blur ?? (1.2 + (c.z - 1) * 4)).toFixed(1)}px) brightness(${o.bright ?? 1.12}) saturate(${o.sat ?? 1.08}) contrast(1.04)`;
   X.drawImage(im, x, y, w, h); X.restore();
 }
 function tintRoom(col, a, mode = 'multiply') { X.save(); X.globalCompositeOperation = mode; X.globalAlpha = a; X.fillStyle = col; X.fillRect(0, 0, W, H); X.restore(); }
@@ -126,7 +126,7 @@ function whip(amount, dir = 1) { // directional motion blur of the composed fram
   const n = 9; for (let i = 0; i < n; i++) { X.globalAlpha = 1 / (i + 1) * 1.6; X.drawImage(TMP2, dir * (i - n / 2) * amount * 26, 0); }
   X.restore(); X.save(); X.globalAlpha = .35; X.drawImage(TMP2, 0, 0); X.restore();
 }
-function vblur(amount) { if (amount < 0.01) return; snapshot(); X.save(); const n = 7; for (let i = 0; i < n; i++) { X.globalAlpha = 1 / (i + 1); X.drawImage(TMP2, 0, (i - n / 2) * amount * 18); } X.restore(); }
+function vblur(amount) { if (amount < 0.01) return; snapshot(); X.save(); const n = 5; for (let i = 0; i < n; i++) { X.globalAlpha = 1 / (i + 1); X.drawImage(TMP2, 0, (i - n / 2) * amount * 4); } X.restore(); }
 function bracket(x, y, s, col, lw = 5, plus = false, a = 1) {
   X.save(); X.globalAlpha = a; X.strokeStyle = col; X.lineWidth = lw; X.lineCap = 'square'; const h = s / 2, L = s * .22;
   for (const [sx, sy] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) { X.beginPath(); X.moveTo(x + sx * h, y + sy * (h - L)); X.lineTo(x + sx * h, y + sy * h); X.lineTo(x + sx * (h - L), y + sy * h); X.stroke(); }
@@ -311,11 +311,11 @@ SCENES.hook = async (t, fr, fg) => {
   const words = [{ s: 'these', t0: wt(2) }, { s: 'captions', t0: wt(3) }, { s: 'are', t0: wt(4) }, { s: 'moving', t0: wt(5) }];
   orbit(t, words, hd, 'back');
   // "look closely," top-left, later sinks behind the head
-  const lk = since(t, 1.55);
-  const lx = lerp(hd.x - hd.w * 1.15, hd.x - hd.w * .25, eio(cl(lk / .7))), ly = lerp(hd.top - 70, hd.top + hd.w * .9, eio(cl(lk / .7)));
+  const lk = since(t, 1.0);
+  const lx = lerp(hd.x - hd.w * 1.15, hd.x - hd.w * .3, eio(cl(lk / .55))), ly = lerp(hd.top - 70, hd.top + hd.w * .95, eio(cl(lk / .55)));
   const le = enter(t, 0, .2);
-  T('look', lx - 10, ly - 78, { size: 62, font: 'IB', alpha: le.alpha * (1 - inv(.55, .8, lk)), blur: le.blur, scale: le.scale });
-  T('closely,', lx, ly, { size: 118, font: 'PF7', alpha: Math.min(enter(t, wt(1)).alpha, 1 - inv(.55, .8, lk)), blur: enter(t, wt(1)).blur, scale: enter(t, wt(1)).scale * (1 - .25 * cl(lk / .7)) });
+  T('look', lx - 10, ly - 78, { size: 62, font: 'IB', alpha: le.alpha * (1 - inv(.35, .55, lk)), blur: le.blur, scale: le.scale });
+  T('closely,', lx, ly, { size: 118, font: 'PF7', alpha: Math.min(enter(t, wt(1)).alpha, 1 - inv(.4, .6, lk)), blur: enter(t, wt(1)).blur, scale: enter(t, wt(1)).scale * (1 - .25 * cl(lk / .7)) });
   // subject with materialise intro
   if (t < 2 / 30) { /* empty room */ }
   else if (t < 5 / 30) { drawSubjectShadow(); silhouette('#fffaf2', 1); X.save(); X.globalAlpha = .9; X.filter = 'blur(30px)'; X.drawImage(TMP, 0, 0); X.restore(); }
@@ -423,7 +423,7 @@ SCENES.bold = async (t, fr, fg) => {
   const hd = headOn(c, fr);
   room('living', c, { dx: 140 });
   // stacked justified caps behind the head (right side)
-  const qx = leave(t, 10.18, .14), bx = hd.x + hd.w * 1.35, top = hd.top - 260, wJ = 470;
+  const wJ = 440, qx = leave(t, 10.18, .14), bx = Math.min(hd.x + hd.w * 1.3, W - 70 - wJ / 2), top = hd.top - 260;
   const lines = [['BIG', wt(33)], ['AND', wt(34)], ['BOLD', wt(35)]]; let y = top;
   for (const [s, t1] of lines) {
     const sz = wJ / mw(s, 100, 'AN', 3) * 100; y += sz * .86;
@@ -486,8 +486,8 @@ SCENES.claude = async (t, fr, fg) => {
     wline(t, [{ s: 'writes', t0: wt(42), o: SM(0, 54) }, { s: 'the', t0: wt(43), o: SM(0, 54) }, { s: 'code', t0: wt(44), o: { size: 64, font: 'JB', fill: '#f2c230' } }], x0 + cw / 2, y0 - 34, 'center', .28, 14.32);
   }
   // that builds the edit,
-  wline(t, [{ s: 'that', t0: wt(45), o: SM(0, 54) }, { s: 'builds', t0: wt(46), o: SM(0, 54) }], 540, hd.top - 220, 'center', .28, 14.4);
-  wline(t, [{ s: 'the', t0: wt(47), o: { size: 90, font: 'PF5' } }, { s: 'edit,', t0: wt(48), o: { size: 150, font: 'PF9' } }], 540, hd.top - 70, 'center', .2, 14.4);
+  wline(t, [{ s: 'that', t0: wt(45), o: SM(0, 54) }, { s: 'builds', t0: wt(46), o: SM(0, 54) }], 540, hd.top - 220, 'center', .28, wt(49) - .1, 'blur', [0, -1]);
+  wline(t, [{ s: 'the', t0: wt(47), o: { size: 90, font: 'PF5' } }, { s: 'edit,', t0: wt(48), o: { size: 150, font: 'PF9' } }], 540, hd.top - 70, 'center', .2, wt(49) - .1, 'blur', [0, -1]);
   // CUTS, (hard on, flash)  motions, (slides with trails)  captions, (type-spec overlay)
   const yC = hd.top - 120;
   if (t >= wt(49) && t < wt(50)) { T('CUTS,', 540, yC, { size: 230, font: 'AN', ls: 6, rot: -.04, shb: 30 }); }
@@ -689,7 +689,7 @@ SCENES.room = async (t, fr, fg, i) => {
     T('ROOM', 540, hd.top + 40 - rq * 260, { size: 380, font: 'AN', ls: 8, fill: null, stroke: '#fff', lw: 5, alpha: e.alpha * (1 - rq * .85), blur: e.blur, scale: e.scale * (1 - rq * .62), shb: 20, shc: 'rgba(255,255,255,.35)', shy: 0 });
   }
   subjectLayer(c, fg, [255, 214, 172], .5); drawSubjectShadow(); drawSub();
-  wline(t, [{ s: 'oh,', t0: t0, o: SM(0, 60) }, { s: 'and', t0: wt(91), o: SM(0, 60) }, { s: 'this', t0: wt(92), o: SM(0, 60) }], 540, hd.top - 300, 'center', .28, wire - .02);
+  wline(t, [{ s: 'oh,', t0: t0, o: SM(0, 64) }, { s: 'and', t0: wt(91), o: SM(0, 64) }, { s: 'this', t0: wt(92), o: SM(0, 64) }], 540, hd.y + hd.w * .95, 'center', .28, wire - .08);
   wline(t, [{ s: 'it', t0: wt(94), o: SM(0, 60) }, { s: "isn't", t0: wt(95), o: SM(0, 60) }], 540, hd.y + hd.w * .95, 'center', .28, spot);
   wline(t, [{ s: 'real', t0: wt(96), o: { size: 170, font: 'PF9' } }, { s: 'either.', t0: wt(97), o: { size: 130, font: 'PF7' } }], 540, hd.y + hd.w * 1.5, 'center', .2, spot);
   vignette(.65); grain();

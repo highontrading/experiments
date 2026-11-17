@@ -67,9 +67,11 @@ cs = np.c_[np.convolve(np.pad(c[:, 0], 15, mode='edge'), ker, 'valid'), np.convo
 textPath = dict(face=fc, pts=[[round(x, 1), round(y, 1)] for x, y in resample(cs, 6)])
 profile = sorted(int(n[:5]) for n in os.listdir(f'{md}/fg') if 3060 <= int(n[:5]) <= 3390)
 rooms = {}
-for name in ['curtain', 'wall', 'living', 'study', 'lounge']:
-    fs = sorted(f for f in os.listdir(rooms_dir) if f.startswith(name + '_'))
-    if fs: rooms[name] = 'file://' + os.path.abspath(f'{rooms_dir}/{fs[0]}')
+PICK = {'curtain': 'curtain_11', 'wall': 'wall_23', 'living': 'living_11', 'study': 'study_23', 'lounge': 'lounge_11'}
+for name, f in PICK.items():
+    fp = f'{rooms_dir}/{f}.png'
+    if not os.path.exists(fp): fp = f'{rooms_dir}/{sorted(x for x in os.listdir(rooms_dir) if x.startswith(name + "_"))[0]}'
+    rooms[name] = 'file://' + os.path.abspath(fp)
 json.dump(dict(asset='file://' + os.path.abspath(md), fps=fps, frames=frames, words=e['words'], cuts=e['cut_points'],
                contours=contours, textPath=textPath, profile=profile, rooms=rooms), open(out, 'w'))
 print('frames', N, 'contours', len(contours), 'path pts', len(textPath['pts']), 'profile', len(profile), 'rooms', list(rooms))
