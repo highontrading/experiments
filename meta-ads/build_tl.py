@@ -39,7 +39,7 @@ def line_words(d, at):
 
 for ad, spec in ADS.items():
     if len(sys.argv) > 1 and ad not in sys.argv[1:]: continue
-    t = START.get(ad, 0.35); lines = []; gaps = GAP.get(ad) or [0.3] * 9
+    t = START.get(ad, 1.0 if ad.startswith('s') else 0.35); lines = []; gaps = GAP.get(ad) or ([0.6] * 12 if ad.startswith('s') else [0.3] * 9)
     for i in range(len(spec["lines"])):
         d = json.load(open(f"build/vo/{ad}_{i}.json"))
         words, v0, v1 = line_words(d, t)

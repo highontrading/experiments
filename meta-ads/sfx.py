@@ -55,6 +55,16 @@ SFX = {
  "bass_drop": (2.0, "deep 808 bass drop boom"),
  "camera_flash": (0.8, "camera flash pop and shutter"),
  "typing_fast": (1.5, "fast keyboard typing burst"),
+ "soft_whoosh": (1.2, "very soft airy whoosh, smooth and gentle, ASMR"),
+ "silk_swish": (1.0, "silk fabric swish, soft and smooth"),
+ "glass_chime": (2.0, "delicate soft glass chime, single note, gentle shimmer"),
+ "bubble_pop": (0.6, "tiny soft bubble pop, ASMR"),
+ "water_drop": (0.8, "single soft water droplet, close and clean"),
+ "paper_soft": (1.0, "soft paper sliding, gentle ASMR"),
+ "soft_click": (0.5, "soft muted tap, satisfying ASMR click"),
+ "air_swell": (2.0, "soft airy riser swell, smooth and calm"),
+ "soft_shimmer": (2.0, "soft magical shimmer, gentle sparkles"),
+ "soft_thud": (0.8, "soft deep felt thud, muffled and satisfying"),
 }
 only = sys.argv[1:]
 for n, (d, txt) in SFX.items():

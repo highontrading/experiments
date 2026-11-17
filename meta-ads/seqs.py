@@ -108,7 +108,7 @@ CAT = {
  "train": (V+"17Ag_X.mp4", 0.4, 3.0, 720), "office": (V+"1ACHGA.mp4", 0.2, 2.6, 720), "carwin": (V+"1BB6W5.mp4", 3.0, 2.6, 720), "carwin_run": (V+"1BB6W5.mp4", 10.9, 1.2, 720),
  "skate": (V+"1BaEv4.mp4", 1.0, 2.4, 720), "floor": (V+"1dqz_U.mp4", 0.4, 2.4, 720), "can_drop": (V+"1T1uNB.mp4", 0.1, 2.6, 720), "can_spin": (V+"1T1uNB.mp4", 8.1, 2.4, 720),
  "berry": (V+"13dcAK.mp4", 0.8, 2.6, 720), "city_girl": (V+"1YB5F_.mp4", 0.0, 1.7, 720), "bridge": (V+"1YB5F_.mp4", 3.8, 1.6, 720), "pull": (V+"1YB5F_.mp4", 5.5, 0.7, 720),
- "skyline": (V+"1YB5F_.mp4", 10.8, 1.9, 720), "epica_clock": (V+"12JUja.mp4", 0.0, 1.5, 720), "epica_bus": (V+"12JUja.mp4", 5.0, 2.4, 720), "epica_frames": (V+"12JUja.mp4", 12.1, 2.4, 720),
+ "skyline": (V+"1YB5F_.mp4", 12.2, 1.7, 720), "epica_clock": (V+"12JUja.mp4", 0.0, 1.5, 720), "epica_bus": (V+"12JUja.mp4", 5.0, 2.4, 720), "epica_frames": (V+"12JUja.mp4", 12.1, 2.4, 720),
  "drop": (V+"1UopOJ.mp4", 1.3, 1.6, 720), "faces": (V+"1UopOJ.mp4", 3.9, 1.7, 720), "smile": (V+"1UopOJ.mp4", 10.8, 1.6, 720), "giant_legs": (V+"1Kwoch.mp4", 0.0, 1.75, 720),
  "giant_city": (V+"1Kwoch.mp4", 1.85, 1.9, 720), "surf": (V+"1w_Txn.mp4", 0.85, 2.2, 720), "beachcan": (V+"1w_Txn.mp4", 5.8, 2.4, 720), "tennis": (V+"1H8NnI.mp4", 1.5, 1.9, 720),
  "grwm_glasses": (V+"1IGLwN.mp4", 11.8, 1.0, 720), "grwm_tea": (V+"1IGLwN.mp4", 3.0, 0.8, 720), "bottles": (V+"1-HSrV.mp4", 0.5, 2.4, 720),
@@ -133,3 +133,35 @@ use("r07", ["crew", "nk_pink", "glasses", "smile", "ugc_hands", "ny_bag", "sky_p
 use("r08", ["ny_close", "luna_lime", "berry", "bottles", "can_spin", "nk_box", "glasses", "ugc_glow", "belt", "moto", "london", "giant_girl", "ny2", "falls", "beach", "giant_city", "phone_store", "surf", "faces"])
 use("r09", ["surf", "falls", "ny_strut", "studio", "carwin_run", "can_drop", "sky_girl", "clouds", "boots", "fly_blue", "smile", "nk_heels", "city_girl", "tennis"])
 use("r10", ["sunset", "prodshoot", "backlit", "cafe", "giant_city", "beachcan", "desert", "pull", "island", "nyc", "garden", "moto", "sea", "skate"])
+CAT.update({
+ "dinner": (D+"f2_AXNq.mp4", 0.3, 2.6, 1280), "dinner_glass": (D+"f2_AXNq.mp4", 5.2, 2.2, 1280), "tv_room": (D+"f2_O_xN.mp4", 0.3, 2.4, 1280), "bike": (D+"f2_O_xN.mp4", 5.6, 2.4, 1280),
+ "garden_light": (D+"f2_O_xN.mp4", 10.4, 2.2, 1280), "cinema": (D+"f2_O_xN.mp4", 15.6, 2.6, 1280), "pompeii": (D+"f2_aJ7I.mp4", 15.4, 2.6, 1280), "market_old": (D+"f2_aJ7I.mp4", 2.6, 2.6, 1280),
+ "horse_town": (D+"f2_aJ7I.mp4", 7.6, 2.6, 1280), "pottery": (D+"f2_aJ7I.mp4", 12.4, 2.4, 1280), "volcano": (D+"f2_aJ7I.mp4", 18.0, 2.0, 1280), "cowboy": (D+"f1_yigB.mp4", 12.3, 2.6, 1280),
+ "desert_night": (D+"f1_yigB.mp4", 0.2, 2.6, 1280), "cat": (D+"f2_0tAe.mp4", 3.0, 2.6, 1280), "videostore": (D+"f2_qU9O.mp4", 5.2, 2.6, 1280), "arcade": (D+"f2_qU9O.mp4", 10.2, 2.6, 1280),
+ "room90": (D+"f2_qU9O.mp4", 0.3, 2.4, 1280), "unbox_girl": (D+"f1_Jc3V.mp4", 0.2, 1.8, 720), "mirror_fit": (D+"f1_Jc3V.mp4", 13.2, 1.8, 720), "drive_pov": (D+"f1_ValG.mp4", 9.5, 2.6, 1280),
+ "city_dusk": (D+"f1_ValG.mp4", 24.4, 2.5, 1280), "highway": (D+"f1_ValG.mp4", 27.0, 2.6, 1280), "diya": ("mixkit:3438", 2.0, 3.0, 1080), "diya_hands": ("mixkit:41731", 1.0, 3.0, 1080),
+ "festive_woman": ("mixkit:50776", 1.0, 3.0, 1080), "flame": ("mixkit:3438", 6.0, 3.0, 1080), "site3": (SR, 6.5, 3.0, 1080), "carwin2": (V+"1BB6W5.mp4", 6.0, 2.6, 720),
+ "bike_pov": (D+"f2_O_xN.mp4", 7.6, 2.2, 1280), "skate2": (V+"1BaEv4.mp4", 6.0, 2.4, 720), "garden2": (D+"f1_UA1z.mp4", 8.0, 2.4, 1080),
+})
+
+# ---------------- ASMR series ----------------
+use("s01", ["can_drop", "luna", "pull", "berry", "bottles", "can_spin", "luna_lime", "beachcan", "surf"])
+use("s02", ["drop", "faces", "ugc_glow", "falls", "smile", "ugc2_face", "belt", "ugc_hair"])
+use("s03", ["ny_walk", "ny_bag", "ny_glasses", "ny_strut", "ny_cross", "ny_car", "ny_close", "ny2", "ny2_close"])
+use("s04", ["ugc_hi", "grwm_tea", "grwm_glasses", "unbox_girl", "ugc_hands", "ugc2_talk", "ugc_drink", "mirror_fit", "vlog"])
+use("s05", ["storm", "cheetah", "tree", "leopard", "zep", "sea", "pond", "aquarium", "sunset"])
+use("s06", ["times", "london", "giant_legs", "giant_city", "giant_girl", "glasses", "boots", "phone_store", "plane"])
+use("s07", [])
+use("s08", ["site", "luna", "nk_box", "moto", "ugc2_talk", "desk"])
+use("s09", ["golden", "beach", "desert", "cafe", "backlit", "garden", "sunset", "skyline"])
+use("s10", ["island", "sky_girl", "sky_phone", "fly", "fly_blue", "suitcase", "clouds", "cat", "giant_girl"])
+use("s11", ["nk_box", "nk_walk", "nk_pink", "nk_heels", "office", "ootd_flat", "ootd_paper", "train", "floor"])
+use("s12", ["car", "carwin", "carwin_run", "drive_pov", "highway", "moto", "bike", "skate", "skate2", "city_dusk"])
+use("s13", ["desert_night", "dinner", "dinner_glass", "videostore", "room90", "arcade", "cinema", "cowboy", "tv_room"])
+use("s14", ["pompeii", "market_old", "horse_town", "pottery", "sunset", "cowboy", "zep", "earth"])
+use("s15", ["nyc", "skyline", "city_girl", "bridge", "ny_cross", "city_dusk", "giant_city", "cafe", "highway"])
+use("s16", ["can_spin", "beachcan", "surf", "luna_lime", "belt", "suitcase", "berry", "phone_store"])
+use("s17", ["luna_lime", "berry", "garden_light", "ugc_drink", "dinner_glass", "grwm_tea", "can_drop", "bottles", "garden2"])
+use("s18", ["diya", "diya_hands", "festive_woman", "flame"])
+use("s19", ["laptop", "stress", "desk", "edit", "can_drop", "ugc_hi", "ny_strut", "site3"])
+use("s20", ["earth", "island", "fly", "giant_girl", "cheetah", "times", "surf", "ny_strut"])

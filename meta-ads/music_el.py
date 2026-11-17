@@ -42,6 +42,16 @@ T = {
  "r08": (48000, "Aggressive drift phonk, distorted 808, cowbell melody, relentless fast energy, hard hits, 150 BPM, instrumental"),
  "r09": (48000, "Bright energetic electronic brand anthem, punchy house drums, big synth chords, risers into euphoric drops, claps, 124 BPM, instrumental"),
  "r10": (50000, "Sleek minimal futuristic electronic, deep sub bass, glassy plucks, crisp hits, smooth builds and drops, premium fintech launch energy, 115 BPM, instrumental"),
+ "a_silk": (42000, "Soft premium ambient for a luxury ad, warm evolving pads, gentle sub pulse, delicate glass bells, very smooth and calm, ASMR mood, 80 BPM, instrumental"),
+ "a_glass": (42000, "Minimal glassy electronic, soft plucked synths, airy textures, smooth gentle beat, elegant and clean, 96 BPM, instrumental"),
+ "a_velvet": (42000, "Silky lo-fi soul, soft Rhodes chords, brushed drums, warm bass, smooth and intimate, 82 BPM, instrumental"),
+ "a_air": (42000, "Airy cinematic piano with soft strings, slow and tender, smooth swells, premium emotional, instrumental"),
+ "a_satin": (42000, "Smooth minimal deep house, soft kick, round bass, silky chords, refined and calm, 112 BPM, instrumental"),
+ "a_mist": (42000, "Ambient cinematic swells, soft drones, gentle pulses, dreamy and spacious, slowly building warm climax, instrumental"),
+ "a_warm": (42000, "Warm soft acoustic guitar and light percussion, golden hour feeling, smooth and relaxed, 90 BPM, instrumental"),
+ "a_lux": (42000, "Luxury minimal electronic, soft sub bass, velvet pads, gentle shimmering arpeggio, sleek and smooth, 100 BPM, instrumental"),
+ "a_dream": (42000, "Dreamy synthwave ambient, soft arpeggios, warm analog pads, slow and smooth, nostalgic and calm, 88 BPM, instrumental"),
+ "a_sitar": (42000, "Soft festive Indian ambient, gentle sitar, soft tabla, warm pads, smooth and elegant Diwali mood, 84 BPM, instrumental"),
 }
 os.makedirs("build/music_el", exist_ok=True)
 def gen(item):
