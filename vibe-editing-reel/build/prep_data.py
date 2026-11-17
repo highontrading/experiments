@@ -48,7 +48,9 @@ t0, t1 = 23.675, 27.15
 contours = {}
 for i in range(int(t0 * fps), min(N, int(t1 * fps) + 1)):
     c = body_contour(alpha(src[i]))
-    c = c[c[:, 1] < 1270]                       # drop the frame-bottom edge
+    keep = c[:, 1] < 1265                        # drop the frame-bottom edge, keep it an open path
+    c = c[keep]; jumps = np.hypot(*np.diff(c, axis=0).T); j = int(np.argmax(jumps))
+    if jumps[j] > 30: c = np.roll(c, -(j + 1), axis=0)
     c = resample(c, 9)
     contours[i] = [[round(x, 1), round(y, 1)] for x, y in c]
 # text path: dilated outline, from the left hip up over the head and down to the right hip

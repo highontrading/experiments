@@ -152,8 +152,13 @@ function neon(str, x, y, size, font, col, a = 1, core = '#fff') {
   for (const [b, al] of [[60, .9], [28, 1], [10, 1]]) T(str, x, y, { size, font, fill: col, alpha: a * al, sh: true, shc: col, shb: b, shy: 0 });
   T(str, x, y, { size, font, fill: core, alpha: a, sh: true, shc: col, shb: 6, shy: 0 });
 }
+const GC = mk(), GX = GC.getContext('2d');
 function gold(str, x, y, size, a, shine) {
-  if (a <= 0) return; X.save(); X.globalAlpha = a; X.font = `${size}px AN`; X.textAlign = 'center'; X.letterSpacing = '4px';
+  if (a <= 0) return; const MX = X; GX.setTransform(1, 0, 0, 1, 0, 0); GX.clearRect(0, 0, W, H);
+  goldDraw(GX, str, x, y, size, shine); MX.save(); MX.globalAlpha = a; MX.drawImage(GC, 0, 0); MX.restore();
+}
+function goldDraw(X, str, x, y, size, shine) {
+  X.save(); X.font = `${size}px AN`; X.textAlign = 'center'; X.letterSpacing = '4px';
   for (let i = 10; i > 0; i--) { X.fillStyle = i === 10 ? 'rgba(0,0,0,.5)' : '#5b3a09'; if (i === 10) { X.shadowColor = 'rgba(0,0,0,.55)'; X.shadowBlur = 30; X.shadowOffsetY = 14; } X.fillText(str, x + i * .6, y + i * 1.2); X.shadowColor = 'transparent'; }
   const g = X.createLinearGradient(0, y - size * .8, 0, y + size * .05);
   g.addColorStop(0, '#fff6c9'); g.addColorStop(.28, '#f6cf5a'); g.addColorStop(.5, '#a8700f'); g.addColorStop(.62, '#f9d977'); g.addColorStop(1, '#8a5a0b');
@@ -162,8 +167,8 @@ function gold(str, x, y, size, a, shine) {
   // moving shine
   X.globalCompositeOperation = 'source-atop';
   const sw = X.measureText(str).width, sxp = x - sw / 2 - 200 + (shine % 1) * (sw + 400);
-  const sg = X.createLinearGradient(sxp - 90, 0, sxp + 90, 0); sg.addColorStop(0, 'rgba(255,255,255,0)'); sg.addColorStop(.5, 'rgba(255,255,240,.85)'); sg.addColorStop(1, 'rgba(255,255,255,0)');
-  X.fillStyle = sg; X.fillRect(sxp - 100, y - size, 200, size * 1.2);
+  const sg = X.createLinearGradient(sxp - 50, 0, sxp + 50, 0); sg.addColorStop(0, 'rgba(255,255,255,0)'); sg.addColorStop(.5, 'rgba(255,255,240,.45)'); sg.addColorStop(1, 'rgba(255,255,255,0)');
+  X.fillStyle = sg; X.fillRect(sxp - 60, y - size, 120, size * 1.2);
   X.restore();
 }
 function particlesFromText(drawFn, seed, step = 3) { // sample a text bitmap into particles (cached)
@@ -230,17 +235,21 @@ function spark(x, y, r, rot, a, col = '#D97757') { // 10-ray rounded starburst
   X.restore();
 }
 // ---------- orbit (words circling the head, sinking behind it) ----------
-function orbit(t, words, hd, layer, life = 1.75) {
-  const R = hd.w * 1.85, r = hd.w * .38, cx = hd.x, cy = hd.top + hd.w * .12;
+function orbit(t, words, hd, layer, life = 1.75, kill = 99) {
+  const R = Math.min(hd.w * 1.45, 400), r = hd.w * .34, cx = hd.x, cy = hd.top + hd.w * .1;
+  const SPD = 125 * Math.PI / 180, TH0 = 32 * Math.PI / 180, END = 200 * Math.PI / 180;
+  let prevA = -1e9, prevW = 0;
   for (const w of words) {
-    if (t < w.t0) continue; const u = (t - w.t0) / life; if (u > 1) continue;
-    const th = (-18 + eio(cl(u)) * 205) * Math.PI / 180;
+    const size = w.size || 66, ww = mw(w.s, size, w.font || 'IB');
+    const a = Math.max(SPD * w.t0, prevA + (prevW + ww) / 2 / R + 26 / R); prevA = a; prevW = ww;
+    if (t < w.t0) continue;
+    const th = TH0 + SPD * t - a; if (th > END + .3) continue;
     let x = cx + R * Math.cos(th), y = cy - r * Math.sin(th);
     if (th > 2.9) { const k = th - 2.9; y += k * hd.w * 2.6; x += k * hd.w * 1.1; }
     const back = Math.sin(th) > -.15 || th > 2.9;
     if ((layer === 'back') !== back) continue;
-    const e = enter(t, w.t0, .16); const fade = 1 - inv(.82, 1, u);
-    T(w.s, x, y, Object.assign({ size: w.size || 56, font: w.font || 'IB' }, { alpha: e.alpha * fade, blur: e.blur, scale: (1 - .18 * Math.max(0, Math.sin(th))) * e.scale }));
+    const e = enter(t, w.t0, .16); const fade = (1 - inv(END - .1, END + .3, th)) * (1 - inv(kill, kill + .15, t));
+    T(w.s, x, y, Object.assign({ size, font: w.font || 'IB' }, { alpha: e.alpha * fade, blur: e.blur, scale: (1 - .2 * Math.max(0, Math.sin(th))) * e.scale }));
   }
 }
 // ---------- path text ----------
@@ -317,13 +326,13 @@ SCENES.hook = async (t, fr, fg) => {
 let PROFILE_C = null;
 async function posterBehind(t, tb) {
   const n = PROFILE.length; const k = Math.min(n - 1, Math.floor((t - tb) * 30) + 20); const pim = await img(`${ASSET}/fg/${pad(PROFILE[k])}.webp`);
-  const c = { z: 1.06, fx: 360, fy: 640, sx: 560, sy: 1000 };
+  const c = { z: .9, fx: 360, fy: 640, sx: 470, sy: 1120 };
   X.fillStyle = '#F1EEE8'; X.fillRect(0, 0, W, H);
   const p1 = eo(inv(tb, tb + .4, t));
   ribbon([[80, -60], [-60, 420], [120, 820], [520, 760], [820, 700], [1000, 520], [1180, 640]], p1, 46);
   const e1 = enter(t, tb, .14), e2 = enter(t, wt(7), .14);
-  T('behind', 330, 520, Object.assign({ size: 92, font: 'PF7', fill: '#16110d', sh: false }, e1));
-  T('me.', 640, 800, Object.assign({ size: 330, font: 'PF9', fill: '#16110d', sh: false }, e2));
+  T('behind', 300, 600, Object.assign({ size: 92, font: 'PF7', fill: '#16110d', sh: false }, e1));
+  T('me.', 850, 900, Object.assign({ size: 330, font: 'PF9', fill: '#16110d', sh: false }, e2));
   subjectLayer(c, pim, [255, 255, 255], 0, 'none'); silhouette('#0d0b0a', 1, .22);
   ribbon([[1180, 1260], [800, 1140], [400, 1420], [-90, 1330]], eo(inv(tb + .2, tb + .52, t)), 52);
   grain(.1);
@@ -472,7 +481,7 @@ SCENES.claude = async (t, fr, fg) => {
     X.font = '25px JM'; X.textAlign = 'left';
     const lines = [['> vibe', '#D97757', ' "warm, cinematic, premium"'], ['cut', '#9fd1ff', '.silences(0.14s)'], ['captions', '#9fd1ff', '.style(perPhrase)'], ['camera', '#9fd1ff', '.push("slow")'], ['render', '#f2c230', '()  ✓']];
     let tt = wt(42) + .05;
-    lines.forEach(([a, colA, b], k) => { const full = a + b; const s = typeOn(full, t, tt, 60); tt += full.length / 60 + .05; X.fillStyle = colA; X.fillText(s.slice(0, a.length), x0 + 30, y0 + 82 + k * 44); X.fillStyle = '#f1e6da'; X.fillText(s.slice(a.length), x0 + 30 + X.measureText(a).width, y0 + 82 + k * 44); if (s.length && s.length < full.length) { X.fillStyle = '#f1e6da'; X.fillRect(x0 + 32 + X.measureText(s).width, y0 + 62 + k * 44, 13, 26); } });
+    lines.forEach(([a, colA, b], k) => { const full = a + b; const s = typeOn(full, t, tt, 120); tt += full.length / 120 + .03; X.fillStyle = colA; X.fillText(s.slice(0, a.length), x0 + 30, y0 + 82 + k * 44); X.fillStyle = '#f1e6da'; X.fillText(s.slice(a.length), x0 + 30 + X.measureText(a).width, y0 + 82 + k * 44); if (s.length && s.length < full.length) { X.fillStyle = '#f1e6da'; X.fillRect(x0 + 32 + X.measureText(s).width, y0 + 62 + k * 44, 13, 26); } });
     X.restore();
     wline(t, [{ s: 'writes', t0: wt(42), o: SM(0, 54) }, { s: 'the', t0: wt(43), o: SM(0, 54) }, { s: 'code', t0: wt(44), o: { size: 64, font: 'JB', fill: '#f2c230' } }], x0 + cw / 2, y0 - 34, 'center', .28, 14.32);
   }
@@ -509,10 +518,10 @@ SCENES.claude = async (t, fr, fg) => {
   const z = 1.1 + .22 * eio(inv(wt(52) - .1, 17.6, t)); const c = camFace(z, 930, fr, .8, -30); const hd = headOn(c, fr);
   room('study', c);
   const words = [{ s: 'even', t0: wt(52) }, { s: 'the', t0: wt(53) }, { s: 'words', t0: wt(54) }, { s: 'behind', t0: wt(55) }, { s: 'my', t0: wt(56) }];
-  orbit(t, words, hd, 'back', 1.5);
+  orbit(t, words, hd, 'back', 1.5, wt(57) - .05);
   if (t >= wt(57)) { const e = enter(t, wt(57), .16); T('head.', hd.x, hd.top + hd.w * .2, Object.assign({ size: 250, font: 'PF9' }, e)); }
   subjectLayer(c, fg); drawSubjectShadow(); drawSub();
-  orbit(t, words, hd, 'front', 1.5);
+  orbit(t, words, hd, 'front', 1.5, wt(57) - .05);
   vignette(); grain();
 };
 // ---------------------------------------------------------------- 7. TRACKS MY FACE (+ poster interlude)
@@ -527,18 +536,19 @@ function hud(c, fr, hd, a = 1, col = '#F2C230', snapT = 0, t = 0) {
 }
 SCENES.track = async (t, fr, fg, i) => {
   const t0 = 17.685, pA = 18.27, pB = 18.87, cut = 18.939;
-  const c = camFace(t < cut ? 1.32 : 1.18, t < cut ? 800 : 860, fr, 1, t < cut ? 0 : 40); const hd = headOn(c, fr);
+  let c = camFace(t < cut ? 1.32 : 1.18, t < cut ? 800 : 860, fr, 1, t < cut ? 0 : 40); let hd = headOn(c, fr);
   if (t >= pA && t < cut) { // poster interlude
+    c = camFace(1.0, 1000, fr, 1); hd = headOn(c, fr);
     subjectLayer(c, fg, [255, 255, 255], 0, 'none');
     const navy = t < pA + 2 / 30 || t >= pB;
     X.fillStyle = navy ? '#0F1A2E' : '#F1EEE8'; X.fillRect(0, 0, W, H);
     if (!navy) { ribbon([[-80, 640], [300, 380], [800, 260], [1180, 420]], eo(inv(pA, pA + .35, t)), 40); }
     else { ribbon([[-80, 640], [300, 380], [800, 260], [1180, 420]], 1, 40, ['#3b5a8a', '#8fb3e8', '#dbe8ff']); }
     const ink = navy ? '#f4f6fb' : '#16110d';
-    const typed = typeOn('tracks my', t, pA + .02, 26); T(typed, 150, hd.top - 230, { size: 92, font: 'PF7', fill: ink, align: 'left', sh: false });
-    if (!navy && typed.length < 9 && Math.floor(t * 8) % 2 === 0) { X.fillStyle = ink; X.fillRect(150 + mw(typed, 92, 'PF7') + 8, hd.top - 300, 34, 84); }
+    const typed = typeOn('tracks my', t, pA + .02, 26); T(typed, 150, 400, { size: 92, font: 'PF7', fill: ink, align: 'left', sh: false });
+    if (!navy && typed.length < 9 && Math.floor(t * 8) % 2 === 0) { X.fillStyle = ink; X.fillRect(150 + mw(typed, 92, 'PF7') + 8, 330, 34, 84); }
     // FACE revealed by a gold highlighter block
-    const fx = 150, fy = hd.top - 70, fs = 230; const letters = 'FACE'; let x = fx; const f0 = Math.max(wt(61), pA + .2);
+    const fx = 150, fy = 640, fs = 230; const letters = 'FACE'; let x = fx; const f0 = Math.max(wt(61), pA + .2);
     for (let k = 0; k < 4; k++) {
       const cw = mw(letters[k], fs, 'AN', 0) + 26; const st = f0 + k * .06;
       if (t >= st) T(letters[k], x, fy, { size: fs, font: 'AN', fill: ink, align: 'left', sh: false });
@@ -559,8 +569,8 @@ SCENES.track = async (t, fr, fg, i) => {
     hud(c, fr, hd, 1, '#F2C230', 1);
     const fnum = String(i + 1).padStart(4, '0');
     const e = enter(t, cut, .14), q = leave(t, 19.7, .08);
-    T('FRAME', hd.x - hd.w * 1.2, hd.y - hd.w * 1.05, { size: 54, font: 'JB', fill: '#F2C230', align: 'left', alpha: e.alpha * (1 - q), blur: e.blur });
-    T(fnum, hd.x - hd.w * 1.2, hd.y - hd.w * .75 + 40, { size: 190, font: 'JB', fill: '#F2C230', align: 'left', alpha: e.alpha * (1 - q), blur: e.blur, ls: -6 });
+    T('FRAME', 120, hd.top - 210, { size: 44, font: 'JB', fill: '#F2C230', align: 'left', alpha: e.alpha * (1 - q), blur: e.blur });
+    T(fnum, 112, hd.top - 40, { size: 170, font: 'JB', fill: '#F2C230', align: 'left', alpha: e.alpha * (1 - q), blur: e.blur, ls: -6 });
     wline(t, [{ s: 'every', t0: cut, o: SM(0, 58) }, { s: 'frame,', t0: Math.max(cut + .05, wt(63)), o: { size: 100, font: 'PF7' } }], hd.x, hd.y + hd.w * 1.45, 'center', .25, 19.7);
   }
   vignette(); grain();
@@ -691,7 +701,7 @@ SCENES.cta = async (t, fr, fg) => {
   room('study', c);
   // VIBE in gold behind the head
   if (t >= wt(108) - .05) {
-    const letters = 'VIBE', sz = 330; let x = 540 - mw(letters, sz, 'AN', 4) / 2; const y = hd.top + 70;
+    const letters = 'VIBE', sz = 330; let x = 540 - mw(letters, sz, 'AN', 4) / 2; const y = hd.top + 120;
     for (let k = 0; k < 4; k++) { const cw = mw(letters[k], sz, 'AN', 4); const st = wt(108) - .05 + k * .07; const p = cl((t - st) / .4); if (p > 0) gold(letters[k], x + cw / 2, y - (1 - bounce(p)) * 420, sz, cl(p * 3), (t - st) * .55 + k * .12); x += cw; }
   }
   subjectLayer(c, fg); drawSubjectShadow(); drawSub();
@@ -700,10 +710,10 @@ SCENES.cta = async (t, fr, fg) => {
   wline(t, [{ s: 'workflow', t0: wt(101), o: { size: 190, font: 'PF9' } }], 540, hd.top - 150, 'center', .2, ex);
   wline(t, [{ s: 'inside', t0: wt(102), o: SM(0, 58) }, { s: 'my', t0: wt(103), o: SM(0, 58) }, { s: 'academy.', t0: wt(104), o: { size: 120, font: 'PF7' } }], 540, hd.y + hd.w * 1.55, 'center', .25, ex);
   if (t >= c2) {
-    wline(t, [{ s: 'so', t0: c2, o: SM(0, 52) }, { s: 'just', t0: wt(106), o: SM(0, 52) }], 540, hd.top - 360, 'center');
+    wline(t, [{ s: 'so', t0: c2, o: SM(0, 52) }, { s: 'just', t0: wt(106), o: SM(0, 52) }], 540, hd.top - 355, 'center');
     // "comment" on an arc, letter by letter
     const word = 'comment', sz = 96, R = 900; const tot = mw(word, sz, 'IX'); let a0 = -tot / 2 / R;
-    for (let k = 0; k < word.length; k++) { const cw = mw(word[k], sz, 'IX'); const a = a0 + cw / 2 / R; const st = wt(107) + k * .03; if (t >= st) { const e = enter(t, st, .12); const x = 540 + Math.sin(a) * R, y = hd.top - 210 + R - Math.cos(a) * R; T(word[k], x, y, Object.assign({ size: sz, font: 'IX', rot: a }, e)); } a0 += cw / R; }
+    for (let k = 0; k < word.length; k++) { const cw = mw(word[k], sz, 'IX'); const a = a0 + cw / 2 / R; const st = wt(107) + k * .03; if (t >= st) { const e = enter(t, st, .12); const x = 540 + Math.sin(a) * R, y = hd.top - 240 + R - Math.cos(a) * R; T(word[k], x, y, Object.assign({ size: sz, font: 'IX', rot: a }, e)); } a0 += cw / R; }
     handArrow([[870, hd.top + 10], [1010, hd.top + 90], [1050, 1180], [1010, 1330]], eo(inv(wt(108) + .2, wt(108) + .65, t)));
     igRail(inv(wt(108) + .2, wt(108) + .5, t), 1);
     wline(t, [{ s: 'and', t0: wt(109), o: SM(0, 54) }, { s: 'I', t0: wt(110), o: SM(0, 54) }, { s: 'will', t0: wt(111), o: SM(0, 54) }, { s: 'send', t0: wt(112), o: SM(0, 54) }, { s: 'you', t0: wt(113), o: SM(0, 54) }], 540, hd.y + hd.w * 1.45, 'center');
