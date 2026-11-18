@@ -52,7 +52,7 @@ const LOOK_ID = 'passthrough';
 const LOOK = LOOKS[LOOK_ID];
 const FINISH = { shutter: null, weave: 0, tone: null };
 const FPS = 24;
-const DURATION = 60;
+const DURATION = 62;
 const BPM = 80;                             // bar = 3 s
 const BEAT0 = 0;
 const beat = (n) => BEAT0 + n * 60 / BPM, bar = (n) => beat(4 * n);
@@ -64,7 +64,7 @@ const PALETTE = { bg: '#07080a', ink: '#f4f2ee', accent: '#ffae5c', dim: '#2a282
 const TYPE = {
   lang: 'en',
   roles: {
-    display: { family: 'Instrument Serif', pkg: 'instrument-serif', version: '5.3.0', cap: 0.72, weights: [400], styles: ['normal'] },
+    display: null,
     text: { family: 'Familjen Grotesk', pkg: 'familjen-grotesk', version: '5.3.0', cap: 0.65, variable: 'wght', varVersion: '5.3.0', axes: { wght: [400, 700] } },
     mono: null,
   },
@@ -94,7 +94,7 @@ const SCENES = [
   { chapter: 'C1', from: 0, to: CUES.back, draw: carousel, action: 'the belt carries bags past screens playing adverts to an empty hall; the camera rides it into the flaps', amb: { kind: 'room', gain: 0.02 } },
   { chapter: 'C2', from: CUES.back, to: CUES.out, draw: carousel, action: 'a wall of screens writes adverts; a robot arm tags a bag', amb: { kind: 'room', gain: 0.02 } },
   { chapter: 'C3', from: CUES.out, to: CUES.desk, draw: carousel, action: 'phones on the bags wake, watch the adverts and buy; boxes pour onto the belt', amb: { kind: 'room', gain: 0.02 } },
-  { chapter: 'C4', from: CUES.desk, to: CUES.end, draw: carousel, action: 'the empty help desk; the page goes unanswered', amb: { kind: 'room', gain: 0.02 } },
+  { chapter: 'C4', from: CUES.desk, to: CUES.end, draw: carousel, action: 'the PA pages the passenger; nobody comes; the desk monitor wakes and shows an advert to the empty chair', amb: { kind: 'room', gain: 0.02 } },
 ];
 
 const SFX = [

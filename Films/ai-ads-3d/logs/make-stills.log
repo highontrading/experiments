@@ -1,16 +1,15 @@
-# make.py stills · 2026-11-18 18:53:16
+# make.py stills · 2026-11-18 19:24:14
 
 $ node /home/user/experiments/Films/ai-ads-3d/tools/capture.mjs --url film.html --probe --params w=1920&h=1080
 [capture] renderer: canvas2d
-[capture] page: 1920x1080, 1440 frames @ 24 fps
-[capture] meta: {"title":"Carousel","bounds":[0,22,35.8,52,60],"vo":7,"palette":{"bg":"#07080a","ink":"#f4f2ee","accent":"#ffae5c","dim":"#2a2826"},"lookPalette":{"bg":"#07080a","ink":"#f4f2ee","accent":"#ffae5c","dim":"#2a2826"},"families":["Instrument Serif","Familjen Grotesk"],"sfx":[[20.85,"whoosh",0.7],[35.45,"whoosh",0.7]]}
+[capture] page: 1920x1080, 1488 frames @ 24 fps
+[capture] meta: {"title":"Carousel","bounds":[0,22,35.8,52,62],"vo":7,"palette":{"bg":"#07080a","ink":"#f4f2ee","accent":"#ffae5c","dim":"#2a2826"},"lookPalette":{"bg":"#07080a","ink":"#f4f2ee","accent":"#ffae5c","dim":"#2a2826"},"families":["Familjen Grotesk"],"sfx":[[20.85,"whoosh",0.7],[35.45,"whoosh",0.7]]}
 
-$ node /home/user/experiments/Films/ai-ads-3d/tools/capture.mjs --url film.html --out /home/user/experiments/Films/ai-ads-3d/review/stills-3 --frames 744,996,1212,1416 --format jpeg --quality 0.9 --params w=960&h=540
+$ node /home/user/experiments/Films/ai-ads-3d/tools/capture.mjs --url film.html --out /home/user/experiments/Films/ai-ads-3d/review/stills-5 --frames 850,864,874 --format jpeg --quality 0.9 --params w=960&h=540
 [capture] renderer: canvas2d
-[capture] page: 960x540, 1440 frames @ 24 fps
-[capture] 0/4 frames (0 skipped) - 0.0 fps
-[capture] 3/4 frames (0 skipped) - 0.3 fps
-[capture] done: 4 rendered, 0 skipped, 12.3 s total, 0.33 fps, 1 worker(s)
-[capture] frames: /home/user/experiments/Films/ai-ads-3d/review/stills-3/%06d.jpg
+[capture] page: 960x540, 1488 frames @ 24 fps
+[capture] 0/3 frames (0 skipped) - 0.0 fps
+[capture] done: 3 rendered, 0 skipped, 11.4 s total, 0.26 fps, 1 worker(s)
+[capture] frames: /home/user/experiments/Films/ai-ads-3d/review/stills-5/%06d.jpg
 
-$ ffmpeg -hide_banner -nostdin -loglevel error -y -f concat -safe 0 -i /home/user/experiments/Films/ai-ads-3d/review/stills-3/frames.txt -vf scale=508:-2,pad=512:ih+4:2:2:black,tile=2x2 -frames:v 1 -update 1 -q:v 4 /home/user/experiments/Films/ai-ads-3d/review/stills-3.jpg
+$ ffmpeg -hide_banner -nostdin -loglevel error -y -f concat -safe 0 -i /home/user/experiments/Films/ai-ads-3d/review/stills-5/frames.txt -vf scale=508:-2,pad=512:ih+4:2:2:black,tile=2x2 -frames:v 1 -update 1 -q:v 4 /home/user/experiments/Films/ai-ads-3d/review/stills-5.jpg

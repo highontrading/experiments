@@ -8,7 +8,7 @@ Read this first in a new session, after loading the cinecode skill (Claude Code:
 - **Idea:** "cant u make something high quality 3d thing" → "A new idea in 3D" → CAROUSEL (user picked from 3): 3 a.m., an empty airport; adverts written for absent passengers play to an empty hall; phones left on the bags watch them and buy; a machine wrote the advert, a machine read it. (spark s3, overlap SHARES with prediction 3 changed: nobody is in the room, the twist is machines buying)
 - **Medium:** 3D realistic, in code (three.js, lit materials) (user)
 - **Curiosity:** Q1 (0 s) why is a baggage belt playing adverts at 3 a.m.? → for passengers who are not there (14 s) · Q2 then who watches? → their phones (34-40 s) · paid at 46 s (a machine wrote it, a machine read it) and the page at 52 s that nobody answers
-- **Format:** 60 s, 16:9, 1920x1080, 24 fps · **Loop:** no · **Delivered to:** YouTube / LinkedIn / X
+- **Format:** 62 s, 16:9, 1920x1080, 24 fps · **Loop:** no · **Delivered to:** YouTube / LinkedIn / X
 - **Look · mood:** night terminal, cinematic realistic · empty, cool, wry
 - **Director card:** 
   - **Code fit:** three.js r186 on the kit's chain (tone mapping, AA, bloom, grain, vignette), rendered in software WebGL (SwiftShader; about 1.1 s a frame at 1080p). Everything is objects, light and space: the carousel (stainless rim, overlapping steel slats, rubber skirt, sloped island), suitcases (rounded shells, handles, wheels, zip lines, paper tags), phones (glass screens with live adverts), delivery boxes (kraft board, tape), seats, columns, screens, signage. No people: their absence is the subject. Floor: a planar mirror under a terrazzo layer (the screens reflect in it). What would look cheap: bare primitives and even light; route: bevelled geometry, a real key from ceiling spots with soft shadows, an environment map for steel, emissive screens that bloom.
@@ -33,6 +33,7 @@ Read this first in a new session, after loading the cinecode skill (Claude Code:
 - **Chapters (internal, over 60 s only):** <C1 0:00-0:20 · → C2 via … > · **Motifs:** <what travels and how it transforms>
 - **Beats:** <t0 beat · subject action · camera line · transition (one line each, or "see below")>
 - **Key moments:** 0 s the belt in motion (rattle) · 21 s through the flaps (slap) · 40 s ORDER PLACED (buzz) · 46 s the thesis · 52 s the page, then the bell nobody rings · **Thesis line:** "A machine wrote the advert. A machine read it." · **Ending:** the empty desk
+- **Named, kept:** NARRATION LATE (the chime at 1.55 s opens the first announcement at 3.0 s; the first seconds are the belt) · colour: the terminal is near monochrome on purpose; colour lives only in the adverts (the screens, the wall in the back hall, the phones) · palette: the film's own (terrazzo, fluorescent, sodium, kraft), not the look family's · VIEW note: the camera is a real three.js camera
 - **On-screen names:** none (signage in the world only)
 - **Sound design:** <ambience per scene · SFX cues · ROOM · arrangement (sections × parts) · lead timbre>
 - **Last output:** <renders/draft-vN.mp4 (half size, no finishing) or renders/film-v1.mp4 (final, after the user's OK)> · checks: hook <PASS> · action <flags> · sceneloud <flags> · listening note sent <yes>

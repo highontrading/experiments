@@ -307,7 +307,12 @@ export async function makeWorld({ W, H, font, look }) {
   const lampPole = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.42), std('#222', 0.4, 0.6)); lampPole.position.set(0.6, 1.3, -0.1); desk.add(lampPole);
   const shade = new THREE.Mesh(new THREE.ConeGeometry(0.12, 0.14, 24, 1, true), std('#2b2b2b', 0.5, 0.4, { side: THREE.DoubleSide })); shade.position.set(0.6, 1.52, -0.1); desk.add(shade);
   const bulb = new THREE.Mesh(new THREE.SphereGeometry(0.035, 12, 8), new THREE.MeshBasicMaterial({ color: new THREE.Color(5, 3.6, 2) })); bulb.position.set(0.6, 1.46, -0.1); desk.add(bulb);
-  const deskLight = new THREE.PointLight('#ffb46a', 6, 5, 1.6); deskLight.position.set(0.6, 1.4, -0.1); deskLight.castShadow = true; deskLight.shadow.mapSize.set(512, 512); desk.add(deskLight);
+  const deskLight = new THREE.PointLight('#ffb46a', 6, 5, 1.6); deskLight.position.set(0.6, 1.4, -0.1); desk.add(deskLight);
+  const mon = new THREE.Group(); mon.position.set(-0.05, 1.1, -0.15); mon.rotation.y = 0.35; desk.add(mon);
+  const monBody = new THREE.Mesh(new RoundedBoxGeometry(0.5, 0.32, 0.03, 2, 0.01), std('#141516', 0.4, 0.5)); monBody.position.y = 0.26; mon.add(monBody);
+  const monStand = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.12, 0.05), std('#141516', 0.4, 0.5)); monStand.position.y = 0.06; mon.add(monStand);
+  const monScr = new THREE.Mesh(new THREE.PlaneGeometry(0.46, 0.28), new THREE.MeshBasicMaterial({ map: phoneOff })); monScr.position.set(0, 0.26, 0.016); mon.add(monScr);
+  T.monitor = { mat: monScr.material, ad: cellTex(atlas, 4), off: phoneOff };
   const chairSeat = new THREE.Mesh(new RoundedBoxGeometry(0.46, 0.07, 0.44, 2, 0.02), seatMat); chairSeat.position.set(0.1, 0.5, -0.75); desk.add(chairSeat);
   const chairBack = new THREE.Mesh(new RoundedBoxGeometry(0.46, 0.5, 0.06, 2, 0.02), seatMat); chairBack.position.set(0.1, 0.8, -0.98); desk.add(chairBack);
   const deskSign = new THREE.Mesh(new THREE.PlaneGeometry(1.4, 0.32), glow(sign([{ s: 'BAGGAGE SERVICES', px: 52, y: 64, ink: '#ffffff' }], 512, 128, { bg: '#1b2a3a' }), 1.0));
@@ -338,7 +343,7 @@ export async function makeWorld({ W, H, font, look }) {
     [44, [-4.5, 1.05, 0.7], [-1.8, 0.5, 2.1], 38],
     [50, [-1.8, 4.6, 8.2], [0.2, 0.5, -0.6], 36],
     [55, [6.3, 1.5, 4.2], [8.0, 1.12, 2.2], 32],
-    [60, [6.95, 1.36, 3.3], [7.95, 1.12, 2.05], 30],
+    [62, [6.95, 1.36, 3.3], [7.95, 1.18, 2.05], 30],
   ];
   const cr = (p0, p1, p2, p3, u) => { const u2 = u * u, u3 = u2 * u; return 0.5 * ((2 * p1) + (-p0 + p2) * u + (2 * p0 - 5 * p1 + 4 * p2 - p3) * u2 + (-p0 + 3 * p1 - 3 * p2 + p3) * u3); };
   function shot(t) {
@@ -383,10 +388,10 @@ export async function makeWorld({ W, H, font, look }) {
     for (const w of T.wall) { const i = (Math.floor(t / 0.2 + w.k * 0.37) * 5 + w.k) % 8; w.tex.offset.set((i % 4) * 0.25, 0.5 - Math.floor(i / 4) * 0.5); }
     // flaps swing as the camera (21-23.5 s, 34.2-37 s) or a box passes
     for (const [k, f] of T.flaps.entries()) {
-      const camHit = Math.max(0, 1 - Math.abs(camera.position.z + 7.7) / 0.5) * Math.max(0, 1 - Math.abs(camera.position.x - f.position.x) / 0.9);
+      const camHit = smooth(clamp(1 - Math.abs(camera.position.z + 7.7) / 1.3)) * Math.max(0, 1 - Math.abs(camera.position.x - f.position.x) / 1.2);
       let boxHit = 0; for (const bx of T.boxes) { const a = t - bx.t0; if (a > 0 && a < 0.5) boxHit = Math.max(boxHit, (1 - Math.abs(a - 0.2) / 0.3) * Math.max(0, 1 - Math.abs(bx.lane * 0.6 - f.position.x) / 0.3)); }
-      const dir = camera.position.z > -7.7 ? -1 : 1;
-      f.rotation.x = dir * 1.25 * camHit + 0.7 * Math.max(0, boxHit) + 0.04 * Math.sin(t * 3 + k);
+      const dir = t < 30 ? 1 : -1;
+      f.rotation.x = dir * 1.4 * camHit + 0.7 * Math.max(0, boxHit) + 0.04 * Math.sin(t * 3 + k);
     }
     // the arm tags the bag passing under it (26-31 s)
     const A = T.arm, k1 = ease(t, 26.2, 27.2), k2 = ease(t, 27.6, 28.3), k3 = ease(t, 28.8, 29.8);
@@ -396,6 +401,9 @@ export async function makeWorld({ W, H, font, look }) {
     A.tagHeld.visible = t < 28.3;
     const bz = -10.2 - (t - 22) * 0.45; T.backBag.position.set(0, 0.57, Math.max(-16.5, bz)); T.backBag.rotation.set(0, Math.PI / 2, 0);
     T.backBag2.position.set(0, 0.57, -9.0 + Math.min(0, -(t - 30) * 0.9)); T.backBag2.rotation.set(0, Math.PI / 2, 0);
+    // the desk monitor wakes at 56.4 s: an advert for nobody, to an empty chair
+    const mm = t < 56.4 ? T.monitor.off : T.monitor.ad; if (T.monitor.mat.map !== mm) { T.monitor.mat.map = mm; T.monitor.mat.needsUpdate = true; }
+    if (t >= 56.4) { const i = (4 + Math.floor((t - 56.4) / 1.5)) % 8; T.monitor.ad.offset.set((i % 4) * 0.25, 0.5 - Math.floor(i / 4) * 0.5); }
     // the desk lamp breathes a little
     deskLight.intensity = 6 * (1 + 0.03 * Math.sin(t * 9));
   }
