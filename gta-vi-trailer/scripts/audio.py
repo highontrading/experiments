@@ -64,43 +64,10 @@ def camclick():
     L = int(0.05 * SR); t = np.arange(L) / SR
     return hp(rng.normal(0, 1, L), 2000) * np.exp(-t / 0.004)
 
-# intro: whooshes into whip cuts, soft hits on alternating beats
-for tc in [0.952, 1.881, 2.821, 3.762, 5.166]:
-    w = whoosh(0.32); add(tc - 0.30, w, 0.22, pan=rng.uniform(-0.5, 0.5))
-for tc in [1.44, 2.38, 3.309, 4.249, 5.166, 6.107]:          # text slams
-    add(tc, impact(0.8, 140, 55, 0.5), 0.28)
-for tc in [2.821, 4.69, 6.107]:
-    for k in range(3): add(tc + k * 0.033, glitchblip(), 0.12)
-add(0.0, reverb(whoosh(0.9, rev=True), 1.5, 0.5), 0.18)
-# build: riser + strobe clicks, then silence-suck before drop
-add(5.10, riser(1.86), 0.30)
-for k in range(6): add(6.571 + k * 2 / 30, camclick(), 0.25)
-for k in range(6): add(6.571 + k * 2 / 30, glitchblip(0.05), 0.1)
-add(6.90, whoosh(0.13, rev=True) * -1, 0.25)
-# drop + big hits
-add(7.024, impact(2.0, 130, 30, 1.4), 0.62)
-for tc, g in [(10.298, 0.42), (11.238, 0.5)]:
-    add(tc, impact(1.4, 120, 35, 1.0), g)
-for tc in [7.488, 7.953, 8.893, 9.358, 9.834, 10.53, 10.995, 11.471, 11.935]:
-    add(tc - 0.1, whoosh(0.12), 0.12, pan=rng.uniform(-0.7, 0.7))
-for tc in [8.417, 9.601, 11.703, 12.411]:
-    for k in range(3): add(tc + k * 0.033, glitchblip(), 0.10)
-add(12.30, riser(0.34), 0.18)
-# logo slam + long tail
-add(12.643, impact(2.6, 150, 28, 2.2), 0.75)
-add(13.108, impact(1.2, 110, 40, 0.8), 0.32)
-for k in range(5): add(14.15 + k * 0.034, glitchblip(), 0.12)
-add(14.30, impact(1.0, 90, 30, 0.9), 0.25)
-
-# v2 extras: spin swishes, stutter clicks, shockwave sub drops
-for tc in [2.38, 4.249, 7.721, 9.601, 11.935]:
-    add(tc - 0.05, whoosh(0.2, rev=True), 0.16, pan=rng.uniform(-0.6, 0.6))
-for tc in [6.107, 12.167]:
-    for k in range(5): add(tc + k * 0.1, camclick(), 0.2); add(tc + k * 0.1, glitchblip(0.04), 0.07)
-for tc in [8.893]:
-    add(tc, impact(1.0, 100, 30, 0.8), 0.35)
-for tc in [8.661, 12.411]:
-    for k in range(6): add(tc + k * 0.035, glitchblip(0.03), 0.06)
+# only the essentials: build-up riser, drop impact, logo reveal impact + tail
+add(5.10, riser(1.86), 0.26)
+add(7.024, impact(2.0, 130, 30, 1.4), 0.55)
+add(12.643, impact(2.6, 150, 28, 2.2), 0.70)
 out = mix + sfx
 out = np.tanh(out * 1.05) * 0.97
 fade = int(0.4 * SR); out[-fade:] *= np.linspace(1, 0, fade)[:, None]

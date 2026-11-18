@@ -1,8 +1,12 @@
-"""GTA VI fan hype trailer renderer (v2 - extra crazy).
+"""GTA VI fan hype trailer renderer (v3 - clearer footage, 3D chrome graffiti logo reveal).
 usage: python render2.py WORKDIR OUT.mp4 [scale]
 WORKDIR must contain src.mp4 (source footage)."""
 import numpy as np, cv2, subprocess, sys, math
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from logo3d import build_logo, build_bg
+LOGO_FONT = os.environ.get("LOGO_FONT", os.path.join(os.path.dirname(os.path.abspath(__file__)), "fonts", "MetalMania-Regular.ttf"))
 
 WORK, OUT = sys.argv[1], sys.argv[2]
 SCALE = float(sys.argv[3]) if len(sys.argv) > 3 else 1.0
@@ -28,13 +32,13 @@ seg(0.952, 1.440, 8.30, z0=1.18, z1=1.06, fx=("whip",))
 seg(1.440, 1.881, 11.70, speed=1.2, fx=("slices",))
 seg(1.881, 2.380, 19.00, z0=1.20, z1=1.08, fx=("whip",))
 seg(2.380, 2.821, 28.00, speed=1.3, fx=("spin",))
-seg(2.821, 3.309, 35.20, speed=2.2, ease="ramp", fx=("whip", "glitch_in", "speedlines"))
-seg(3.309, 3.762, 38.60, z0=1.05, z1=1.22, fx=("slices", "mirror"))
+seg(2.821, 3.309, 35.20, speed=2.2, ease="ramp", fx=("whip", "glitch_in"))
+seg(3.309, 3.762, 38.60, z0=1.05, z1=1.22, fx=("slices",))
 seg(3.762, 4.249, 46.00, speed=2.0, fx=("whip",))
 seg(4.249, 4.690, 50.00, z0=1.25, z1=1.08, fx=("spin",))
 seg(4.690, 5.166, 63.30, fx=("glitch_in",))
 seg(5.166, 5.631, 74.95, speed=1.4, fx=("whip", "lag"))
-seg(5.631, 6.107, 83.30, speed=1.5, z0=1.05, z1=1.25, fx=("trail", "quad"))
+seg(5.631, 6.107, 83.30, speed=1.5, z0=1.05, z1=1.25, fx=("trail",))
 seg(6.107, 6.571, 85.20, z0=1.10, z1=1.35, fx=("glitch_in", "stutter"))
 st = 6.571
 for s in [104.2, 118.3, 101.0, 75.2, 128.3, 140.4]:
@@ -43,29 +47,29 @@ for s in [104.2, 118.3, 101.0, 75.2, 128.3, 140.4]:
 segs.append(dict(t0=st, t1=DROP, black=True, fx=set()))
 
 drop = [
-    (7.024, 7.488, 118.00, dict(span=0.78, ease="ramp", z0=1.30, z1=1.05, fx=("zoomblur", "speedlines"))),
+    (7.024, 7.488, 118.00, dict(span=0.78, ease="ramp", z0=1.30, z1=1.05, fx=("zoomblur",))),
     (7.488, 7.721, 140.20, dict(speed=1.5, fx=("whip",))),
     (7.721, 7.953, 142.00, dict(fx=("spin",))),
-    (7.953, 8.185, 147.40, dict(speed=1.5, fx=("whip", "mirror"))),
+    (7.953, 8.185, 147.40, dict(speed=1.5, fx=("whip",))),
     (8.185, 8.417, 148.30, dict(speed=1.5, fx=("slices",))),
     (8.417, 8.661, 121.00, dict(speed=1.5, fx=("glitch_in", "lag"))),
-    (8.661, 8.893, 101.00, dict(fx=("quad", "lag", "huecycle"))),
-    (8.893, 9.125, 138.30, dict(fx=("whip", "speedlines"))),
+    (8.661, 8.893, 101.00, dict(fx=("lag",))),
+    (8.893, 9.125, 138.30, dict(fx=("whip",))),
     (9.125, 9.358, None, dict(tri=[140.6, 142.4, 147.6])),
     (9.358, 9.601, 125.90, dict(fx=("whip",))),
     (9.601, 9.834, 106.15, dict(fx=("glitch_in", "spin"))),
     (9.834, 10.066, 144.60, dict(speed=1.5, fx=("whip", "lag"))),
     (10.066, 10.298, 149.50, dict(speed=0.5, z0=1.05, z1=1.15, fx=("trail",))),
     (10.298, 10.530, 111.40, dict(z0=1.30, z1=1.10, fx=("zoomblur", "speedlines"))),
-    (10.530, 10.762, 112.80, dict(fx=("whip", "mirror", "lag"))),
+    (10.530, 10.762, 112.80, dict(fx=("whip", "lag"))),
     (10.762, 10.995, 115.00, dict(fx=("slices",))),
     (10.995, 11.238, 118.90, dict(fx=("whip",))),
     (11.238, 11.471, 119.70, dict(speed=1.6, z0=1.35, z1=1.08, fx=("zoomblur", "speedlines"))),
-    (11.471, 11.703, 94.40, dict(fx=("quad", "whip"))),
+    (11.471, 11.703, 94.40, dict(fx=("whip",))),
     (11.703, 11.935, 139.20, dict(speed=1.5, fx=("glitch_in",))),
     (11.935, 12.167, 108.00, dict(fx=("spin",))),
     (12.167, 12.411, 103.20, dict(z0=1.08, z1=1.25, fx=("stutter",))),
-    (12.411, LOGO, 128.00, dict(speed=2.0, fx=("glitch_in", "strobewhite", "huecycle", "lag"))),
+    (12.411, LOGO, 128.00, dict(speed=2.0, fx=("glitch_in", "huecycle"))),
 ]
 for t0, t1, s, kw in drop:
     if "tri" in kw:
@@ -85,15 +89,15 @@ punch = [(t, 0.6) for t in beats_intro] + [(t, 1.1) for t in kicks] + [(t, 0.5) 
 shake = [(t, 0.3) for t in beats_intro[2:]] + [(t, 0.9) for t in kicks] + [(t, s) for t, s in big.items()]
 rgb = [(t, 0.4) for t in beats_intro] + [(t, 0.7) for t in halfs] + [(t, s) for t, s in big.items()]
 bulge = [(t, 0.5) for t in beats_intro[2:]] + [(t, 1.0) for t in kicks]
-shocks = [7.024, 8.893, 10.298, 11.238, 12.643, 13.108]
-lines_ev = [(t, s) for t, s in big.items()]
-flash = [(t, 0.35, (1, 1, 1)) for t in beats_intro[2::2]] + \
-        [(t, min(1.0, s), (1, 1, 1)) for t, s in big.items()] + \
-        [(t, 0.5, (0.6, 0.35, 1.0)) for t in [7.721, 8.661, 9.601, 10.53, 11.471]] + \
-        [(t, 0.5, (0.3, 0.6, 1.0)) for t in [8.185, 9.125, 10.066, 10.995, 11.935]]
+shocks = [7.024, 11.238, 12.643]
+lines_ev = [(7.024, 0.8), (11.238, 0.6)]
+flash = [(t, 0.15, (1, 1, 1)) for t in beats_intro[2::2]] + \
+        [(t, min(0.5, s * 0.4), (1, 1, 1)) for t, s in big.items()] + \
+        [(t, 0.18, (0.6, 0.35, 1.0)) for t in [7.721, 8.661, 9.601, 10.53, 11.471]] + \
+        [(t, 0.18, (0.3, 0.6, 1.0)) for t in [8.185, 9.125, 10.066, 10.995, 11.935]]
 fr = lambda t: int(round(t * FPS))
-invert_frames = {fr(t) for t in [7.488, 8.893, 9.834, 11.703, 3.309]} | {fr(10.298) + 1, fr(12.643) + 2}
-duo_frames = {fr(t) + 1 for t in [7.721, 8.417, 9.601, 10.53, 11.471, 11.935, 2.38, 4.249]}
+invert_frames = set()
+duo_frames = set()
 
 def env(t, evs, tau):
     v = 0.0
@@ -119,8 +123,6 @@ texts = [
     (4.249, 4.690, "ZERO MERCY", 200, "slam"),
     (5.166, 5.631, "ALL GAS", 230, "slam"),
     (6.107, 6.571, "GET READY", 240, "slam"),
-    (10.298, 10.298 + 5 / FPS, "GTA", 420, "flash"),
-    (11.238, 11.238 + 5 / FPS, "VI", 640, "flash"),
 ]
 
 # ---------------------------------------------------------------- assets
@@ -207,8 +209,8 @@ for t0, t1, s, size, kind in texts:
         TXT[s] = text_rgba(s, size * SCALE, glow=(255, 40, 200))
     else:
         TXT[s] = text_rgba(s, size * SCALE, glow=(255, 40, 150))
-LOGO_A = logo_rgba(SCALE)
-TAG = text_rgba("COMING SOON", 60 * SCALE, glow=(255, 120, 40), tracking=0.45, font=FONT2)
+LOGO3 = build_logo(SCALE, font=LOGO_FONT)
+BGL = build_bg(W, H)
 
 def comp(frame, rgb, a, cx, cy, scale=1.0, alpha=1.0, add=False):
     if scale != 1.0:
@@ -281,8 +283,10 @@ sc = np.clip(x + 0.35 * (0.5 - 0.5 * np.cos(np.pi * x) - x) * 2, 0, 1)
 LUT = (np.stack([np.clip(sc * 0.95 + 0.07 * (1 - x) ** 2, 0, 1), sc, np.clip(sc * 1.04 + 0.03 * x, 0, 1)], -1) * 255
        ).astype(np.uint8).reshape(256, 1, 3)
 
-def grade(img8, sat=1.4, hue=0):
+GAMMA = np.clip(((np.arange(256) / 255.0) ** 0.85) * 255 * 1.04, 0, 255).astype(np.uint8)
+def grade(img8, sat=1.3, hue=0):
     img8 = cv2.LUT(img8, LUT)
+    img8 = cv2.LUT(img8, GAMMA)
     hsv = cv2.cvtColor(img8, cv2.COLOR_BGR2HSV)
     if hue:
         hsv[..., 0] = ((hsv[..., 0].astype(np.int32) + int(hue)) % 180).astype(np.uint8)
@@ -481,8 +485,8 @@ for n in range(NF):
     zoom = (sg.get("z0", 1.1) + (sg.get("z1", 1.1) - sg.get("z0", 1.1)) * ease(u, "out")) * (1 + 0.2 * min(pz, 1.6))
     if "stutter" in fx:
         zoom *= 1 + 0.07 * int(age / 0.1)
-    dx = rng.normal(0, 1) * sh * 34 * SCALE
-    dy = rng.normal(0, 1) * sh * 26 * SCALE
+    dx = rng.normal(0, 1) * sh * 22 * SCALE
+    dy = rng.normal(0, 1) * sh * 16 * SCALE
     rot = rng.normal(0, 1) * sh * 1.5
     if "spin" in fx:
         rot += spin_sign * 28 * max(0, 1 - age / 0.17) ** 3
@@ -498,52 +502,45 @@ for n in range(NF):
         if "slices" in fx and age < 4 / FPS:
             img = slices(img, age / (4 / FPS))
         # fisheye + shockwaves
-        kb = 0.22 * min(env(t, bulge, 0.07), 1.5)
+        kb = 0.12 * min(env(t, bulge, 0.07), 1.5)
         sw = [(0.05 + (t - ts) * 3.2, 0.07 * (1 - (t - ts) / 0.45)) for ts in shocks if 0 <= t - ts < 0.45]
         if kb > 0.01 or sw:
             img = distort(img, kb, sw)
         if whip > 0:
-            img = motion_blur_h(img, whip * 160 * SCALE)
+            img = motion_blur_h(img, whip * 100 * SCALE)
         nxt = seg_at(sg["t1"] + 1e-4)
         if "whip" in nxt["fx"] and sg["t1"] - t < 2.5 / FPS:
-            img = motion_blur_h(img, 100 * SCALE)
-        zb = max(0, 1 - age / 0.2) if "zoomblur" in fx else 0
+            img = motion_blur_h(img, 50 * SCALE)
+        zb = max(0, 1 - age / 0.12) if "zoomblur" in fx else 0
         if LOGO <= t < LOGO + 0.15:
             zb = 1 - (t - LOGO) / 0.15
         if zb > 0.05:
-            img = zoom_blur(img, zb * 2.8)
+            img = zoom_blur(img, zb * 1.8)
         hue = (n * 11) % 180 if "huecycle" in fx else 0
         img = grade(img, hue=hue)
     f = img.astype(np.float32) / 255
     if "fadein" in fx:
         f *= min(1, t / 0.25)
     if "logo" in fx:
-        f = cv2.GaussianBlur(f, (0, 0), 6 * SCALE) * 0.42 + f * 0.12
+        f = BGL.astype(np.float32).copy()
     # --- echo trails
     if "lag" in fx and trail is not None and trail.shape == f.shape:
-        f = np.maximum(f, trail * 0.82)
+        f = np.maximum(f, trail * 0.6)
     elif "trail" in fx and trail is not None:
-        f = f * 0.55 + trail * 0.45
+        f = f * 0.72 + trail * 0.28
     trail = f.copy()
     # --- light leaks
     for te, s in leak_events:
         d = t - te
         if 0 <= d < 0.45:
-            a = s * (1 - d / 0.45) ** 1.5 * 0.85
+            a = s * (1 - d / 0.45) ** 1.5 * 0.4
             off = int((d / 0.45) * W * 0.9 + te * 100) % W
             f = 1 - (1 - f) * (1 - leak[:, off:off + W] * a)
     # --- speed lines
     lv = env(t, lines_ev, 0.12) + (0.8 * max(0, 1 - age / 0.25) if "speedlines" in fx else 0)
     if lv > 0.03:
         L = rotated_crop(SPEEDL, rng.uniform(0, 360))
-        f = 1 - (1 - f) * (1 - L[..., None] * min(1, lv) * 0.85)
-    # --- god rays on logo
-    if t >= LOGO:
-        la = t - LOGO
-        R = rotated_crop(RAYS, la * 14, W / 2, H * 0.46)
-        pulse = 0.55 + 0.25 * math.sin(la * 7) + 0.6 * math.exp(-la / 0.15) + 0.4 * env(t, [(13.108, 1)], 0.1)
-        col = np.array([0.55, 0.35, 1.0])
-        f = 1 - (1 - f) * (1 - R[..., None] * col * min(1, pulse))
+        f = 1 - (1 - f) * (1 - L[..., None] * min(1, lv) * 0.35)
     # --- texts
     for t0, t1, s, size, kind in texts:
         if t0 <= t < t1:
@@ -555,38 +552,48 @@ for n in range(NF):
                 sc_ = 1 + 0.9 * math.exp(-ta / 0.035)
                 al = min(1, ta / 0.02 + 0.3) * (1 if (t1 - t) > 2 / FPS else 0.5)
                 for k in (3, 2, 1):  # expanding outline echoes
-                    comp(f, ergb, ea, W / 2, H / 2, sc_ * (1 + 0.12 * k + ta * 0.9 * k), 0.55 / k, add=True)
+                    comp(f, ergb, ea, W / 2, H / 2, sc_ * (1 + 0.12 * k + ta * 0.9 * k), 0.3 / k, add=True)
                 comp(f, rgb_, a_, W / 2 + rng.normal(0, 1) * 7 * SCALE, H / 2, sc_ * (1 + 0.08 * ta), al)
             else:
                 for k in (2, 1):
                     comp(f, ergb, ea, W / 2, H / 2, 1.0 + 0.4 * ta + 0.2 * k, 0.6 / k, add=True)
                 comp(f, rgb_, a_, W / 2, H / 2, 1.0 + 0.4 * ta, 1.0)
-    # --- logo
+    # --- logo reveal (3D chrome graffiti GTA VI)
     if t >= LOGO:
         la = t - LOGO
-        sc_ = 3.2 - 2.2 * (la / 0.12) ** 0.6 if la < 0.12 else 1.0 + 0.03 * math.sin(la * 4) + 0.045 * la
+        if la < 0.16:
+            q = la / 0.16
+            sc_ = 1.5 - 0.5 * (1 - (1 - q) ** 3)
+        else:
+            sc_ = 1.0 + 0.03 * (la - 0.16)
         if t >= 13.108:
-            sc_ *= 1 + 0.08 * math.exp(-(t - 13.108) / 0.07)
-        jit = env(t, shake, 0.09) * 12 * SCALE
-        lr, lal, ler, lea = LOGO_A
-        cx, cy = W / 2 + rng.normal(0, 1) * jit, H * 0.46 + rng.normal(0, 1) * jit
-        for hit in (LOGO, 13.108):   # ghost echoes flying out on hits
-            d = t - hit
-            if 0 <= d < 0.5:
-                for k in (1, 2, 3):
-                    comp(f, ler, lea, cx, cy, sc_ * 0.9 * (1 + d * 1.4 * k), 0.8 * (1 - d / 0.5) / k, add=True)
-        comp(f, lr, lal, cx, cy, sc_ * 0.9, min(1, la / 0.04))
-        if t >= 13.30:
-            comp(f, TAG[0], TAG[1], W / 2, H * 0.80, 1 + 0.02 * (t - 13.3), min(1, (t - 13.30) / 0.25))
+            sc_ *= 1 + 0.05 * math.exp(-(t - 13.108) / 0.08)
+        jit = env(t, shake, 0.09) * 6 * SCALE
+        lr, lal, lface = LOGO3
+        cx, cy = W / 2 + rng.normal(0, 1) * jit, H / 2 + rng.normal(0, 1) * jit
+        # glow pulse behind (breathing) + on the hits
+        pulse = 0.06 + 0.04 * math.sin(la * 5) + 0.35 * math.exp(-la / 0.15) + 0.2 * env(t, [(13.108, 1)], 0.1)
+        comp(f, lr, lal, cx, cy, sc_ * 1.03, pulse, add=True)
+        for k in (1, 2):   # two ghost copies flying out on the reveal hit
+            if la < 0.4:
+                comp(f, lr, lal, cx, cy, sc_ * (1 + la * 1.2 * k), 0.35 * (1 - la / 0.4) / k, add=True)
+        comp(f, lr, lal, cx, cy, sc_, min(1, la / 0.03))
+        # chrome sheen sweep across the letters
+        for s0 in (13.25, 14.1):
+            sp = (t - s0) / 0.45
+            if 0 <= sp <= 1:
+                hh, ww = lface.shape
+                gy, gx = np.mgrid[0:hh, 0:ww].astype(np.float32)
+                pos = (gx / ww + (gy / hh) * 0.35) - (sp * 1.6 - 0.3)
+                band = np.exp(-(pos / 0.03) ** 2) * lface
+                comp(f, np.repeat(band[..., None], 3, 2) * 0.55, band, cx, cy, sc_, 1.0, add=True)
     # --- particles
     if n == fr(DROP):
-        spawn(int(420 * max(SCALE, 0.5)), burst=True)
+        spawn(int(220 * max(SCALE, 0.5)), burst=True)
     if n == fr(LOGO):
-        spawn(int(300 * max(SCALE, 0.5)), burst=True)
-    if n == fr(11.238):
-        spawn(int(200 * max(SCALE, 0.5)), burst=True)
-    if t >= LOGO and t < 14.6:
-        spawn(6)
+        spawn(int(160 * max(SCALE, 0.5)), burst=True)
+    if t >= LOGO and t < 14.6 and n % 2 == 0:
+        spawn(2)
     pl = particles_layer(1 / FPS)
     if pl is not None:
         f = 1 - (1 - np.clip(f, 0, 1)) * (1 - np.clip(pl, 0, 1))
@@ -596,13 +603,11 @@ for n in range(NF):
     gl = 0
     if "glitch_in" in fx and age < 3 / FPS: gl = 1.0
     if "strobe" in fx: gl = 0.7
-    if LOGO <= t < LOGO + 0.1: gl = 1.0
-    if 14.15 <= t < 14.32 or 13.108 <= t < 13.108 + 2 / FPS: gl = 1.2
-    if n % 15 == 7 and DROP < t < LOGO: gl = max(gl, 0.4)     # random micro-glitches
+    if LOGO <= t < LOGO + 2 / FPS: gl = 0.8
     if gl:
         out8 = glitch(out8, gl)
     rs = env(t, rgb, 0.09)
-    px = (3 + 30 * min(rs, 1.8)) * SCALE + gl * 24 * SCALE
+    px = (1.5 + 13 * min(rs, 1.8)) * SCALE + gl * 14 * SCALE
     out8 = rgb_split(out8, px, vertical=rng.normal(0, 1) * rs * 5 * SCALE)
     f = out8.astype(np.float32) / 255
     if gl:
@@ -616,12 +621,11 @@ for n in range(NF):
     fl = flash_env(t)
     if fl.max() > 0.01:
         f = f + (1 - f) * np.clip(fl, 0, 1)
-    f = f * VIG + GRAIN[n % 8][..., None] * 0.03
+    f = f * (0.5 + 0.5 * VIG) + GRAIN[n % 8][..., None] * 0.014
     # --- letterbox
-    if t < 6.571: bar = 0.125
-    elif t < DROP: bar = 0.125 + 0.13 * ((t - 6.571) / (DROP - 6.571)) ** 2
-    elif t < DROP + 3 / FPS: bar = 0.255 * (1 - (t - DROP) / (3 / FPS))
-    elif t >= LOGO: bar = 0.10 * min(1, (t - LOGO) / 0.3)
+    if t < 6.571: bar = 0.08
+    elif t < DROP: bar = 0.08 + 0.10 * ((t - 6.571) / (DROP - 6.571)) ** 2
+    elif t < DROP + 3 / FPS: bar = 0.18 * (1 - (t - DROP) / (3 / FPS))
     else: bar = 0
     bh = int(H * bar / 2)
     if bh > 0:
