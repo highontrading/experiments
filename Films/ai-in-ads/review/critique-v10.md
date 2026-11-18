@@ -1,0 +1,13 @@
+# Critique: draft-v10
+
+1. 61.0–62.5 s · When the lamp dies, a round glow stays only in the middle of the window. Only the centre "아리랑" stays readable. The first "아리랑" and "아라리요" sink into the dark with the paper, and the woman goes too. The last picture is meant to be "the refrain stays lit", but it reads as the refrain dimming with everything else (strip 58 s, last 9 frames; sheet tiles 61 and 62). Fix: drive the refrain banner's text and border from their own light, not from the lamp falloff. Keep all three words at at least 80% of their 60 s brightness through the fade, and widen or drop the halo so it covers the whole banner.
+
+2. 18.95–19.05 s · The swap from the robed singer to the next singer is a two-frame whip. The whole window smears, and the melody board and refrain banner ghost sideways, then snap back in place. At full speed it reads as a dropped-frame glitch, not a move (strip 18.8 s at 24 fps, frames 4–5; sheet tile 19). Fix: stretch the whip to at least 8 frames (0.33 s) with motion along one direction. Or cut straight between singers, since the board and banner stay put anyway.
+
+3. 13–27 s and 45–60 s · On a phone the refrain is too small to read. The Hangul on the banner is about 4–5% of frame height, roughly 9 px on a 360 px-wide phone. The "Arirang / Korean folk song" lower third at 14–16 s is smaller still. The refrain is the subject of the film, so it has to be readable at a glance (sheet tiles 13–23 and 46–60; it only gets big at 25–27). Fix: scale the banner text by 1.5x in both scenes, to about 7% of frame height. Scale the lower third by 1.4x.
+
+Verdict: FIX
+Red items:
+- 61.0–62.5 s: the refrain fades with the lamp, so the final image does not show "the refrain stays lit"
+Polish: At 57.9–58.2 s the lowering stamp drags across the right end of the refrain banner's frame. Keep it 10 px clear, or hold it fully in front. At 4.8–5.2 s flying cards blot out letters of "versions of one advert". Keep them below the label for that half second. At 45–53 s the woman stands nearly still for 8 s. A small breath or a turn of her head, or the steam rising more, would keep that stretch alive. At 12.6–13.5 s the red-dress singer is half cut off by the right edge before she walks in. That works if it is meant as an entrance; otherwise start her fully off-frame.
+Evidence: sheet.jpg (1 s tiles, 0–62 s). Strips at 4.5 s, 12.3 s, 18.5 s, 18.8 s (24 fps), 35.5 s, 53 s and 58 s. report.txt: cuts at 7.5/12.5/27.5/45.0 s, all landing before their narration lines; no black, frozen, duplicate or pop frames; no repeated compositions; I -13.8 LUFS, peak -2.5 dBFS, LRA 7.5 LU; no silences; no scene flagged for sound or action.

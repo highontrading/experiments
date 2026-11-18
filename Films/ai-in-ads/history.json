@@ -1,0 +1,134 @@
+{
+ "deals": [
+  {
+   "category": "spark",
+   "seed": "2026-11-18:ai-in-ads#1",
+   "dealt": [
+    "s1",
+    "s2",
+    "s3"
+   ],
+   "redeal_reason": null,
+   "pick": "s2",
+   "reason": "Arirang: 3,600 variations of one song over 600 years, every one keeping the refrain; maps exactly onto AI generating thousands of ad variants. Overlap check CLEAR.",
+   "at": "2026-11-18T14:02",
+   "texts": {
+    "s1": "seed: Brocaded velvet cushion cover with crescents · place: a chess club · form: a storyboard come alive · medium: linocut · engine: a rivalry that ends in a duet · tone: melancholy sweet",
+    "s2": "seed: Arirang · place: an ant colony · form: an instruction manual · medium: shadow puppets · colour: candlelit amber · engine: a rule that breaks once",
+    "s3": "seed: Wachau · place: a Mardin stone rooftop · form: a list of ten · medium: low-res CRT · engine: a repair · colour: cyanotype blue"
+   },
+   "seeds": {
+    "s1": {
+     "name": "Brocaded velvet cushion cover with crescents",
+     "fact": "Velvet, Turkey, Istanbul or Bursa, 1525–75, velvet, brocaded: silk, gilt- and silver-metal thread, and cotton. A vertical crease down the center of the textile shows that in the past it was folded for an extended time.",
+     "link": "https://clevelandart.org/art/2009.282",
+     "pool": "museum"
+    },
+    "s2": {
+     "name": "Arirang",
+     "fact": "\"Arirang\" is a Korean folk song. There are about 3,600 variations of 60 different versions of the song, all of which include a refrain similar to \"arirang, arirang, arariyo\". It is estimated that the song is more than 600 years old.",
+     "link": "https://en.wikipedia.org/wiki/Arirang",
+     "pool": "custom"
+    },
+    "s3": {
+     "name": "Wachau",
+     "fact": "The Wachau is an Austrian valley formed by the Danube River. It is one of the most prominent tourist destinations of Lower Austria, located between the towns of Melk and Krems that attracts epicureans for its high-quality wines.",
+     "link": "https://en.wikipedia.org/wiki/Wachau",
+     "pool": "place"
+    }
+   }
+  },
+  {
+   "category": "type",
+   "seed": "2026-11-18:ai-in-ads#1",
+   "dealt": [
+    "folk-horror",
+    "didone-gala",
+    "cormorant-elegy"
+   ],
+   "weights": {
+    "folk-horror": 2.5,
+    "didone-gala": 2.5,
+    "cormorant-elegy": 2.5
+   },
+   "look_families": [],
+   "filters": {
+    "purpose": "cinematic",
+    "look": null,
+    "mood": "quiet, carved, old craft, lamplit, literary",
+    "latin_only": false
+   },
+   "redeal_reason": null,
+   "pick": "cormorant-elegy",
+   "reason": "a fragile garalde for carved titles on a lamplit paper screen; a sturdy grotesque for the one label",
+   "at": "2026-11-18T14:05"
+  }
+ ],
+ "taste": [
+  {
+   "at": "2026-11-18T14:05:31",
+   "project": "ai-in-ads",
+   "kind": "pairing",
+   "id": "folk-horror",
+   "verdict": "pass",
+   "families": [
+    "Grenze Gotisch",
+    "Cormorant"
+   ],
+   "tags": [
+    "dark",
+    "display",
+    "dramatic",
+    "elegant",
+    "folk",
+    "garalde",
+    "occult",
+    "serif"
+   ],
+   "reason": "a fragile garalde for carved titles on a lamplit paper screen; a sturdy grotesque for the one label"
+  },
+  {
+   "at": "2026-11-18T14:05:31",
+   "project": "ai-in-ads",
+   "kind": "pairing",
+   "id": "didone-gala",
+   "verdict": "pass",
+   "families": [
+    "Bodoni Moda",
+    "Schibsted Grotesk"
+   ],
+   "tags": [
+    "didone",
+    "elegant",
+    "grotesque",
+    "high-contrast",
+    "luxurious",
+    "news",
+    "sans",
+    "serif"
+   ],
+   "reason": "a fragile garalde for carved titles on a lamplit paper screen; a sturdy grotesque for the one label"
+  },
+  {
+   "at": "2026-11-18T14:05:31",
+   "project": "ai-in-ads",
+   "kind": "pairing",
+   "id": "cormorant-elegy",
+   "verdict": "like",
+   "families": [
+    "Cormorant",
+    "Mona Sans"
+   ],
+   "tags": [
+    "elegant",
+    "garalde",
+    "grotesque",
+    "romantic",
+    "sans",
+    "serif",
+    "variable-width"
+   ],
+   "reason": "a fragile garalde for carved titles on a lamplit paper screen; a sturdy grotesque for the one label"
+  }
+ ]
+}

@@ -1,0 +1,14 @@
+# make.py stills · 2026-11-18 15:34:18
+
+$ node /home/user/experiments/Films/ai-in-ads/tools/capture.mjs --url film.html --probe --params w=1920&h=1080
+[capture] renderer: canvas2d
+[capture] page: 1920x1080, 1500 frames @ 24 fps
+[capture] meta: {"title":"Refrain","bounds":[0,7.5,12.5,27.5,37.5,45,52.5,62.5],"vo":10,"palette":{"bg":"#f2e2bf","paper":"#f2e2bf","lamp":"#f0a848","hot":"#ffe6b0","ink":"#2b1a12","wood":"#4a2e1c","hide":"#8a5f3c","dye":"#c2452d","gold":"#f3c35a","glow":"#e9f0ea","dawn":"#c9cdc4","accent":"#f3c35a","dim":"#4a2e1c"},"lookPalette":{"bg":"#1c120c","ink":"#2b1a12","accent":"#f3c35a","dim":"#4a2e1c"},"families":["Cormorant","Mona Sans","Noto Serif KR Arirang"],"sfx":[[6.3,"riser",1.2],[7.5,"hit",null],[27.2,"whoosh",0.6]]}
+
+$ node /home/user/experiments/Films/ai-in-ads/tools/capture.mjs --url film.html --out /home/user/experiments/Films/ai-in-ads/review/stills-19 --frames 348,1212,1258,1277,1308 --format jpeg --quality 0.9 --params w=960&h=540
+[capture] renderer: canvas2d
+[capture] page: 960x540, 1500 frames @ 24 fps
+[capture] done: 5 rendered, 0 skipped, 1.6 s total, 3.17 fps, 1 worker(s)
+[capture] frames: /home/user/experiments/Films/ai-in-ads/review/stills-19/%06d.jpg
+
+$ ffmpeg -hide_banner -nostdin -loglevel error -y -f concat -safe 0 -i /home/user/experiments/Films/ai-in-ads/review/stills-19/frames.txt -vf scale=508:-2,pad=512:ih+4:2:2:black,tile=2x3 -frames:v 1 -update 1 -q:v 4 /home/user/experiments/Films/ai-in-ads/review/stills-19.jpg

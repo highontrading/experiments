@@ -1,0 +1,2 @@
+file '/home/user/experiments/Films/ai-in-ads/review/stills-17/001495.jpg'
+duration 1

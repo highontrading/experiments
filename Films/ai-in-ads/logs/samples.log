@@ -1,0 +1,5 @@
+zither: 16 takes -> audio/samples/zither/ (labels an octave low: corrected by measuring)
+cellos: 13 takes -> audio/samples/cellos/ (labels an octave low: corrected by measuring)
+clavi: 16 takes -> audio/samples/clavi/ (labels an octave low: corrected by measuring)
+frame-drum: 6 takes -> audio/samples/frame-drum/
+index: audio/samples/index.json · INSTRUMENTS = ["cellos", "clavi", "frame-drum", "zither"] in film.html

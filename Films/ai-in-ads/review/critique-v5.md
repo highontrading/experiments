@@ -1,0 +1,12 @@
+# Critique: draft-v5
+
+1. **13.0-27.5 s, the window's thick centre mullion covers part of the refrain, the line the whole film is about.** It hides a different syllable as the camera pans: at 14 s "아리랑 아리랑 [아]리요", at 20 s "아리랑 아[리]랑 아라리요", at 26 s "아리[랑] 아리랑 아라리요". This happens while the narration says "Nobody changed the refrain" (20.6 s), so on screen the refrain does look changed. **Fix:** put the refrain plate (and the verse-dot plate above it) in front of the lattice, or move it clear of the mullion so all three words stay whole on every frame. At 26 s that means shifting it about 120 px to the right of the bar.
+2. **14-24 s, a second refrain plate and verse plate are cut by the frame edge.** At 14 and 20 s they hang off the right edge, and at 22-24 s off the left. Only "아리랑" shows, and it reads like a stray duplicate. A man's head is also half off the left edge at 26-27 s. **Fix:** space the plates so that no plate is partly in frame (move each about 200 px further out, or remove the extras), and keep the singer at least 40 px inside the left edge.
+3. **45-62.5 s, the ending refrain is hard to read and the last 5 s add nothing.** The pale-gold Hangul on the amber plate has low contrast, and a lattice bar runs through almost every word at 56 and 59 s. The "REFRAIN" label at 60-62 s has a bar through the first R and E, and on the sheet it reads "I.EFRAIN". After the arm pulls back (about 58 s) the picture holds still until the end. **Fix:** darken the plate or brighten the type to at least 4.5:1 contrast. Move the label down about 15 px into a clear lattice cell. Either end about 2.5 s earlier or give the last beat one action, such as the singer's refrain glowing while the machine's arm stays out.
+
+Verdict: FIX
+Red items:
+- 13-27.5 s: the window mullion hides a syllable of 아리랑 아리랑 아라리요, so the refrain looks changed just as the narration says nobody changed it
+- 14-24 s: extra refrain and verse plates are cut off at the frame edges
+Polish: The 1-4 s caption "versions of one advert" is small for a phone; it could be about 1.3x bigger. In the 12.5-27.5 s scene (QC flags it as camera-led) the singers could each make one small gesture. The mix is good as it is: -13.8 LUFS, -2.5 dBFS peak, no unscripted silences, no scene flagged.
+Evidence: sheet.jpg (1 s tiles, 0-62 s), strip-53s.jpg, full frames at 3, 14, 20, 26, 37, 56, 59 and 61.5 s, and report.txt (4 cuts at 7.5/12.5/27.5/45.0 s; scene #3 flagged camera-led; I -13.8 LUFS, peak -2.5 dBFS, LRA 7.7; no black, freeze, pop or repeat).

@@ -1,0 +1,70 @@
+{
+ "query": "room tone night",
+ "type": "sound",
+ "results": [
+  {
+   "source": "openverse",
+   "id": "105c5294-3bcd-428b-bd35-c63263c02748",
+   "title": "Room tone night street dog barking far.wav",
+   "creator": "LiquidGravitySound",
+   "licence": "cc-by",
+   "page": "https://freesound.org/people/LiquidGravitySound/sounds/456721",
+   "file": "https://cdn.freesound.org/previews/456/456721_5738084-hq.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+   "attribution": "\"Room tone night street dog barking far.wav\" by LiquidGravitySound is licensed under CC BY 3.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/3.0/.",
+   "provider": "freesound",
+   "duration": 119.3,
+   "n": 1
+  },
+  {
+   "source": "openverse",
+   "id": "aede317b-4096-4620-bcd4-e7c98d22fb64",
+   "title": "Interior bedroom apartment night room tone roomtone.wav",
+   "creator": "franciscopcoutinho",
+   "licence": "cc0",
+   "page": "https://freesound.org/people/franciscopcoutinho/sounds/466123",
+   "file": "https://cdn.freesound.org/previews/466/466123_5547533-hq.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "attribution": "\"Interior bedroom apartment night room tone roomtone.wav\" by franciscopcoutinho is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+   "provider": "freesound",
+   "duration": 180.4,
+   "n": 2
+  },
+  {
+   "source": "openverse",
+   "id": "decbf6f4-98fc-44a6-8702-bec7adc05b27",
+   "title": "Ambience INT night room tone (lisbon).flac",
+   "creator": "corkob",
+   "licence": "cc0",
+   "page": "https://freesound.org/people/corkob/sounds/392670",
+   "file": "https://cdn.freesound.org/previews/392/392670_4043130-hq.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "attribution": "\"Ambience INT night room tone (lisbon).flac\" by corkob is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+   "provider": "freesound",
+   "duration": 59.2,
+   "n": 3
+  },
+  {
+   "source": "openverse",
+   "id": "465d5270-073f-4ac6-9a87-80515dd92e2c",
+   "title": "room tone small trailer bedroom night quiet with distant highway traffic.flac",
+   "creator": "kyles",
+   "licence": "cc0",
+   "page": "https://freesound.org/people/kyles/sounds/451181",
+   "file": "https://cdn.freesound.org/previews/451/451181_612689-hq.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "attribution": "\"room tone small trailer bedroom night quiet with distant highway traffic.flac\" by kyles is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+   "provider": "freesound",
+   "duration": 205.1,
+   "n": 4
+  }
+ ]
+}

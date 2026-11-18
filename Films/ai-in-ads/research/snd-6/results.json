@@ -1,0 +1,83 @@
+{
+ "query": "city night ambience",
+ "type": "sound",
+ "results": [
+  {
+   "source": "wikimedia",
+   "id": "24004664",
+   "title": "American police siren i.ogg",
+   "creator": "lezer",
+   "licence": "pd",
+   "page": "https://commons.wikimedia.org/wiki/File:American_police_siren_i.ogg",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/a/ae/American_police_siren_i.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_name": "Public domain",
+   "n": 1
+  },
+  {
+   "source": "openverse",
+   "id": "48258ed7-bad3-4771-b88e-f64c8531b22e",
+   "title": "CITY NIGHT AMBIENCE, GUNSHOTS, FIREWORKS",
+   "creator": "SynthySpencer",
+   "licence": "cc-by",
+   "page": "https://freesound.org/people/SynthySpencer/sounds/552368",
+   "file": "https://cdn.freesound.org/previews/552/552368_5395835-hq.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+   "attribution": "\"CITY NIGHT AMBIENCE, GUNSHOTS, FIREWORKS\" by SynthySpencer is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.",
+   "provider": "freesound",
+   "duration": 410.7,
+   "n": 2
+  },
+  {
+   "source": "openverse",
+   "id": "b3b9cd63-ff3b-43c3-8930-d31bfc52ea49",
+   "title": "Lonely City Night Ambience",
+   "creator": "rlb1198",
+   "licence": "cc0",
+   "page": "https://freesound.org/people/rlb1198/sounds/494367",
+   "file": "https://cdn.freesound.org/previews/494/494367_10668246-hq.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "attribution": "\"Lonely City Night Ambience\" by rlb1198 is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+   "provider": "freesound",
+   "duration": 20.4,
+   "n": 3
+  },
+  {
+   "source": "openverse",
+   "id": "1197aa4b-508c-4962-8eb6-343fd96f4c5a",
+   "title": "Night city atmosphere",
+   "creator": "Soundkrampf",
+   "licence": "cc0",
+   "page": "https://freesound.org/people/Soundkrampf/sounds/237329",
+   "file": "https://cdn.freesound.org/previews/237/237329_3435865-hq.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "attribution": "\"Night city atmosphere\" by Soundkrampf is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+   "provider": "freesound",
+   "duration": 67.7,
+   "n": 4
+  },
+  {
+   "source": "openverse",
+   "id": "4636d964-7961-4110-9596-e3005a169153",
+   "title": "Crickets in the night",
+   "creator": "caquet",
+   "licence": "cc-by",
+   "page": "https://freesound.org/people/caquet/sounds/221164",
+   "file": "https://cdn.freesound.org/previews/221/221164_1645319-hq.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+   "attribution": "\"Crickets in the night\" by caquet is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.",
+   "provider": "freesound",
+   "duration": 91.9,
+   "n": 5
+  }
+ ]
+}

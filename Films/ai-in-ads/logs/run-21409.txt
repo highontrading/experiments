@@ -1,0 +1,12 @@
+final v1: Refrain.mp4 · 62.5 s · 1920x1080 · -13.8 LUFS, peak -1.8 dBFS · 8.5 min
+hook PASS · action 0 flags · sound 0 flags
+look: review/qc-film-v1/sheet-small.jpg (a frame every 4 s) · poster: review/qc-film-v1/thumb-film-v1-43.75s-768.jpg
+files: renders/film-v1.mp4 · report: review/qc-film-v1/report.txt · log: logs/make-final.log
+CREDITS (Refrain-credits.txt): the delivery message carries them right under the film's path, headed IN CAPITALS in the user's language (Türkçe: "PAYLAŞIRKEN BU KÜNYE VİDEONUN AÇIKLAMASINA GİRMELİ"), the lines below in a code block the user copies as they are, never only the file's name: the video's description (YouTube) or the post's caption (Instagram, TikTok, X); nothing goes on the picture; one plain line why: the CC BY and CC BY-SA licences ask for it, and it answers a copyright claim.
+none required
+none
+for X: Refrain-x.mp4 (the poster on frame 0, their cover)
+viewer: review/critique-v13.md read, no red items
+taste: colours AI designs overuse: warm cream (a reason on the director card, or change it)
+MUSIC WITHOUT A BEAT: pulse 1.4x under a card that says standard; a groove from the card's genre (grid() steps, a bass on the roots), or a Music line that names a calm genre and why
+NARRATION LATE: the first line starts at 5.3 s; in a film this long it starts within 2 s

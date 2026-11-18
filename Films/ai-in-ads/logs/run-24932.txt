@@ -1,0 +1,8 @@
+draft v4: Refrain-draft.mp4 · 62.5 s · 960x540 · -13.8 LUFS, peak -2.5 dBFS · 2.5 min
+hook PASS · action 1 flag: #3 00:12.50-00:27.50 residual 3.96 total 25.04 CHECK: camera-led, the subject barely acts · sound 0 flags
+look: review/qc-draft-v4/sheet-small.jpg (a frame every 4 s) · poster: review/qc-draft-v4/thumb-draft-v4-43.75s-768.jpg
+files: renders/draft-v4.mp4 · report: review/qc-draft-v4/report.txt · log: logs/make-draft.log
+SHOW THIS DRAFT NOW: the film /home/user/experiments/Films/ai-in-ads/Refrain-draft.mp4 and its poster /home/user/experiments/Films/ai-in-ads/review/qc-draft-v4/thumb-draft-v4-43.75s-768.jpg (Claude Code: SendUserFile with display 'render', they open in the side panel; elsewhere their paths and the page /home/user/experiments/Films/ai-in-ads/review/qc-draft-v4/thumb-draft-v4-43.75s-768.html in your message); then ALWAYS the delivery question with the question tool, in the user's language: Final ★ · Notes · Jury check (jury.md, six pinpoint questions, two or three minutes); nothing more is rendered until the user's notes are in notes/. Start the independent viewer now, in the background (templates/quick/REVIEWER.md, model inherit, its report review/critique-v4.md): the final waits for its verdict
+taste: colours AI designs overuse: warm cream (a reason on the director card, or change it)
+MUSIC WITHOUT A BEAT: pulse 1.4x under a card that says standard; a groove from the card's genre (grid() steps, a bass on the roots), or a Music line that names a calm genre and why
+NARRATION LATE: the first line starts at 5.3 s; in a film this long it starts within 2 s

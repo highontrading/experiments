@@ -1,0 +1,14 @@
+file '/home/user/experiments/Films/ai-in-ads/review/stills-6/000048.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-in-ads/review/stills-6/000595.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-in-ads/review/stills-6/000653.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-in-ads/review/stills-6/000864.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-in-ads/review/stills-6/000989.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-in-ads/review/stills-6/001200.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-in-ads/review/stills-6/001332.jpg'
+duration 1

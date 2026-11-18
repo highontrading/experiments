@@ -1,0 +1,70 @@
+{
+ "query": "paper flutter",
+ "type": "sound",
+ "results": [
+  {
+   "source": "openverse",
+   "id": "05b0d855-f363-4c1c-ad4f-a2b6f994fc93",
+   "title": "Light Wing Flap",
+   "creator": "TurboFool",
+   "licence": "cc0",
+   "page": "https://freesound.org/people/TurboFool/sounds/561009",
+   "file": "https://cdn.freesound.org/previews/561/561009_9160390-hq.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "attribution": "\"Light Wing Flap\" by TurboFool is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+   "provider": "freesound",
+   "duration": 2.1,
+   "n": 1
+  },
+  {
+   "source": "openverse",
+   "id": "f883ba29-8954-4ac1-ba39-d6fed101665e",
+   "title": "Paper_Shake.aif",
+   "creator": "kbnevel",
+   "licence": "cc0",
+   "page": "https://freesound.org/people/kbnevel/sounds/119847",
+   "file": "https://cdn.freesound.org/previews/119/119847_1990690-hq.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "attribution": "\"Paper_Shake.aif\" by kbnevel is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+   "provider": "freesound",
+   "duration": 16.1,
+   "n": 2
+  },
+  {
+   "source": "openverse",
+   "id": "683b13c2-13e9-4099-a01e-1e4078ec3e89",
+   "title": "Insect wings",
+   "creator": "onehugeeye",
+   "licence": "cc0",
+   "page": "https://freesound.org/people/onehugeeye/sounds/511326",
+   "file": "https://cdn.freesound.org/previews/511/511326_562829-hq.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "attribution": "\"Insect wings\" by onehugeeye is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+   "provider": "freesound",
+   "duration": 17.0,
+   "n": 3
+  },
+  {
+   "source": "openverse",
+   "id": "7424ae78-4c7a-4a9d-99b4-f1e720d6c53a",
+   "title": "Fluttering Chinese Fan 02",
+   "creator": "leonelmail",
+   "licence": "cc0",
+   "page": "https://freesound.org/people/leonelmail/sounds/508673",
+   "file": "https://cdn.freesound.org/previews/508/508673_4437257-hq.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "attribution": "\"Fluttering Chinese Fan 02\" by leonelmail is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+   "provider": "freesound",
+   "duration": 12.2,
+   "n": 4
+  }
+ ]
+}

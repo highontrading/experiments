@@ -1,0 +1,38 @@
+{
+ "query": "paste paper poster",
+ "type": "sound",
+ "results": [
+  {
+   "source": "openverse",
+   "id": "8deef26f-b83d-4f4b-b73e-aa3d813d19d8",
+   "title": "Inleiding CVG - Philippe Herreweghe - Bach HOHE MESSE IN B (audio)",
+   "creator": "deSingel",
+   "licence": "cc-by",
+   "page": "https://commons.wikimedia.org/w/index.php?curid=88226225",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Inleiding_CVG_-_Philippe_Herreweghe_-_Bach_HOHE_MESSE_IN_B_%28audio%29.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+   "attribution": "\"Inleiding CVG - Philippe Herreweghe - Bach HOHE MESSE IN B (audio)\" by deSingel is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.",
+   "provider": "wikimedia_audio",
+   "duration": 1301.4,
+   "n": 1
+  },
+  {
+   "source": "openverse",
+   "id": "b9581d07-8a23-4bb7-b942-645575783e2e",
+   "title": "Inleiding Koor en Orkest CV Gent - Bach, Hohe Messe (audio)",
+   "creator": "deSingel",
+   "licence": "cc-by",
+   "page": "https://commons.wikimedia.org/w/index.php?curid=94123800",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Inleiding_Koor_en_Orkest_CV_Gent_-_Bach%2C_Hohe_Messe_%28audio%29.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+   "attribution": "\"Inleiding Koor en Orkest CV Gent - Bach, Hohe Messe (audio)\" by deSingel is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.",
+   "provider": "wikimedia_audio",
+   "duration": 1651.4,
+   "n": 2
+  }
+ ]
+}

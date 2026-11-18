@@ -1,0 +1,8 @@
+draft v12: renders/draft-v12.mp4 (not delivered) · 62.5 s · 960x540 · -13.8 LUFS, peak -2.5 dBFS · 2.6 min
+hook PASS · action 0 flags · sound 0 flags · SOUND BURIED: the effects sit 7 dB under the music at their own moments (median of 29 hits): planned, not heard. Raise them (gain_db toward 0 on sfx and foley) or duck the music around the hits, then draft again (sound.md §5)
+look: review/qc-draft-v12/sheet-small.jpg (a frame every 4 s) · poster: review/qc-draft-v12/thumb-draft-v12-43.75s-768.jpg
+files: renders/draft-v12.mp4 · report: review/qc-draft-v12/report.txt · log: logs/make-draft.log
+NOT DELIVERED (sound buried): Refrain-draft.mp4 still holds the last passing render; this one is renders/draft-v12.mp4; one fix pass on the flagged windows (an action in each still one, a new picture for each repeat, scene lengths that vary), then make.py draft again: that one is shown, with what remains
+taste: colours AI designs overuse: warm cream (a reason on the director card, or change it)
+MUSIC WITHOUT A BEAT: pulse 1.4x under a card that says standard; a groove from the card's genre (grid() steps, a bass on the roots), or a Music line that names a calm genre and why
+NARRATION LATE: the first line starts at 5.3 s; in a film this long it starts within 2 s

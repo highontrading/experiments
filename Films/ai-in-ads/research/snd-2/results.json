@@ -1,0 +1,70 @@
+{
+ "query": "match strike",
+ "type": "sound",
+ "results": [
+  {
+   "source": "openverse",
+   "id": "a94b95a7-fce6-49af-afcc-84c29a60a46e",
+   "title": "Match - Strike and Light 02.wav",
+   "creator": "JarredGibb",
+   "licence": "cc0",
+   "page": "https://freesound.org/people/JarredGibb/sounds/248236",
+   "file": "https://cdn.freesound.org/previews/248/248236_4056007-hq.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "attribution": "\"Match - Strike and Light 02.wav\" by JarredGibb is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+   "provider": "freesound",
+   "duration": 6.1,
+   "n": 1
+  },
+  {
+   "source": "openverse",
+   "id": "9b71fb19-057c-4b1b-b5ce-654f84d0467c",
+   "title": "Match strike, light up cigarette, exhale.wav",
+   "creator": "AldebaranCW",
+   "licence": "cc0",
+   "page": "https://freesound.org/people/AldebaranCW/sounds/453082",
+   "file": "https://cdn.freesound.org/previews/453/453082_1978923-hq.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "attribution": "\"Match strike, light up cigarette, exhale.wav\" by AldebaranCW is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+   "provider": "freesound",
+   "duration": 11.0,
+   "n": 2
+  },
+  {
+   "source": "openverse",
+   "id": "23ef3b78-29e2-453f-b7d6-0f54829596bb",
+   "title": "match strike 01.wav",
+   "creator": "tim.kahn",
+   "licence": "cc-by",
+   "page": "https://freesound.org/people/tim.kahn/sounds/193300",
+   "file": "https://cdn.freesound.org/previews/193/193300_7037-hq.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+   "attribution": "\"match strike 01.wav\" by tim.kahn is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.",
+   "provider": "freesound",
+   "duration": 5.2,
+   "n": 3
+  },
+  {
+   "source": "openverse",
+   "id": "2d068587-53f7-466c-986e-d794b7e70062",
+   "title": "light fire in wood stove with match strike paper burn crackle metal door close.f",
+   "creator": "kyles",
+   "licence": "cc0",
+   "page": "https://freesound.org/people/kyles/sounds/453472",
+   "file": "https://cdn.freesound.org/previews/453/453472_612689-hq.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "attribution": "\"light fire in wood stove with match strike paper burn crackle metal door close.flac\" by kyles is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+   "provider": "freesound",
+   "duration": 45.4,
+   "n": 4
+  }
+ ]
+}

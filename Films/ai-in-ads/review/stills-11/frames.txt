@@ -1,0 +1,8 @@
+file '/home/user/experiments/Films/ai-in-ads/review/stills-11/000324.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-in-ads/review/stills-11/000422.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-in-ads/review/stills-11/000499.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-in-ads/review/stills-11/000576.jpg'
+duration 1

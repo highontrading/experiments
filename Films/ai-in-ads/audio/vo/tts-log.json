@@ -1,0 +1,122 @@
+[
+ {
+  "id": "VO1",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm, close, warm",
+  "chars": 34,
+  "seconds": 2.48,
+  "file": "audio/vo/VO1.wav"
+ },
+ {
+  "id": "VO2",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm, close, warm",
+  "chars": 46,
+  "seconds": 2.82,
+  "file": "audio/vo/VO2.wav"
+ },
+ {
+  "id": "VO3",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm, close, warm",
+  "chars": 18,
+  "seconds": 2.74,
+  "file": "audio/vo/VO3.wav"
+ },
+ {
+  "id": "VO4",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm, close, warm",
+  "chars": 31,
+  "seconds": 2.48,
+  "file": "audio/vo/VO4.wav"
+ },
+ {
+  "id": "VO5",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm, close, warm",
+  "chars": 27,
+  "seconds": 2.48,
+  "file": "audio/vo/VO5.wav"
+ },
+ {
+  "id": "VO6",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm, close, warm",
+  "chars": 47,
+  "seconds": 3.84,
+  "file": "audio/vo/VO6.wav"
+ },
+ {
+  "id": "VO7",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm, close, warm",
+  "chars": 36,
+  "seconds": 2.82,
+  "file": "audio/vo/VO7.wav"
+ },
+ {
+  "id": "VO8",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm, close, warm",
+  "chars": 49,
+  "seconds": 3.29,
+  "file": "audio/vo/VO8.wav"
+ },
+ {
+  "id": "VO9",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm, close, warm",
+  "chars": 43,
+  "seconds": 3.14,
+  "file": "audio/vo/VO9.wav"
+ },
+ {
+  "id": "VO10",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm, close, warm",
+  "chars": 34,
+  "seconds": 2.25,
+  "file": "audio/vo/VO10.wav"
+ },
+ {
+  "id": "VO2",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm, close, warm",
+  "chars": 51,
+  "seconds": 3.37,
+  "file": "audio/vo/VO2.wav"
+ },
+ {
+  "id": "VO8",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm, close, warm",
+  "chars": 40,
+  "seconds": 2.82,
+  "file": "audio/vo/VO8.wav"
+ }
+]

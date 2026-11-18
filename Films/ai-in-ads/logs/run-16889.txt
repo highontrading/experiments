@@ -1,0 +1,10 @@
+draft v1: renders/draft-v1.mp4 (not delivered) · 62.5 s · 960x540 · -13.8 LUFS, peak -2.6 dBFS · 2.3 min
+hook PASS · action 1 flag: #3 00:12.50-00:27.50 residual 3.80 total 23.26 CHECK: camera-led, the subject barely acts · sound 0 flags · TEXT: LOW CONTRAST 0.0 s: "0": 100 % of its letters' edges are within 2:1 of their surround · LOW CONTRAST 0.5 s: "1": 100 % of its letters' edges are within 2:1 of their surround · LOW CONTRAST 1.0-1.5 s: "2": 100 % of its letters' edges are within 2:1 of their surround (+12 more in logs/make-draft.log): letters of two lines never touch and every line stands clear of what is behind it (more space between the lines, a scrim, an outline or another colour); an intended one (a scatter) is named in STATE.md, MUSIC NOT CHOSEN: the film has music and STATE.md's Music line does not carry the user's pick. Ask where the music comes from (★ a real open-licence recording, 2-3 candidates played to pick by ear · their own track · code · none) and write what they chose, e.g. `Music: recording, audio/music/x.mp3 (user)`
+look: review/qc-draft-v1/sheet-small.jpg (a frame every 4 s) · poster: review/qc-draft-v1/thumb-draft-v1-43.75s-768.jpg
+files: renders/draft-v1.mp4 · report: review/qc-draft-v1/report.txt · log: logs/make-draft.log
+NOT DELIVERED (the music was never chosen, text): no draft has been delivered yet; this one is renders/draft-v1.mp4; one fix pass on the flagged windows (an action in each still one, a new picture for each repeat, scene lengths that vary), then make.py draft again: that one is shown, with what remains
+first draft: the silent test: from the sheet alone, one sentence on what the film is about; a miss is the first known item (engine.md §4)
+taste: colours AI designs overuse: warm cream (a reason on the director card, or change it)
+MUSIC WITHOUT A BEAT: pulse 1.8x under a card that says standard; a groove from the card's genre (grid() steps, a bass on the roots), or a Music line that names a calm genre and why
+NARRATION LATE: the first line starts at 4.7 s; in a film this long it starts within 2 s
+qc: text: cap height 27 px < 40 px for phone viewing at 1920x1080

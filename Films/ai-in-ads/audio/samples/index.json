@@ -1,0 +1,361 @@
+{
+ "zither": [
+  {
+   "file": "zither/B1_f_1.flac",
+   "midi": 47,
+   "rms": 0.00784,
+   "peak": 0.14099,
+   "label_midi": 35
+  },
+  {
+   "file": "zither/Cs2_f_1.flac",
+   "midi": 49,
+   "rms": 0.01429,
+   "peak": 0.14096,
+   "label_midi": 37
+  },
+  {
+   "file": "zither/Ds2_f_1.flac",
+   "midi": 51,
+   "rms": 0.01091,
+   "peak": 0.14127,
+   "label_midi": 39
+  },
+  {
+   "file": "zither/Fs2_f_1.flac",
+   "midi": 54,
+   "rms": 0.01337,
+   "peak": 0.14124,
+   "label_midi": 42
+  },
+  {
+   "file": "zither/Gs2_f_1.flac",
+   "midi": 56,
+   "rms": 0.00791,
+   "peak": 0.14127,
+   "label_midi": 44
+  },
+  {
+   "file": "zither/B2_f_1.flac",
+   "midi": 59,
+   "rms": 0.01954,
+   "peak": 0.14108,
+   "label_midi": 47
+  },
+  {
+   "file": "zither/Cs3_f_1.flac",
+   "midi": 61,
+   "rms": 0.01505,
+   "peak": 0.14111,
+   "label_midi": 49
+  },
+  {
+   "file": "zither/Ds3_f_1.flac",
+   "midi": 63,
+   "rms": 0.01224,
+   "peak": 0.14127,
+   "label_midi": 51
+  },
+  {
+   "file": "zither/Fs3_f_1.flac",
+   "midi": 66,
+   "rms": 0.01228,
+   "peak": 0.14099,
+   "label_midi": 54
+  },
+  {
+   "file": "zither/Gs3_f_1.flac",
+   "midi": 68,
+   "rms": 0.01173,
+   "peak": 0.14081,
+   "label_midi": 56
+  },
+  {
+   "file": "zither/B3_f_1.flac",
+   "midi": 71,
+   "rms": 0.01086,
+   "peak": 0.14108,
+   "label_midi": 59
+  },
+  {
+   "file": "zither/Cs4_f_1.flac",
+   "midi": 73,
+   "rms": 0.01417,
+   "peak": 0.14117,
+   "label_midi": 61
+  },
+  {
+   "file": "zither/Ds4_f_1.flac",
+   "midi": 75,
+   "rms": 0.00925,
+   "peak": 0.14127,
+   "label_midi": 63
+  },
+  {
+   "file": "zither/Fs4_f_1.flac",
+   "midi": 78,
+   "rms": 0.00858,
+   "peak": 0.14127,
+   "label_midi": 66
+  },
+  {
+   "file": "zither/Gs4_f_1.flac",
+   "midi": 80,
+   "rms": 0.00948,
+   "peak": 0.14127,
+   "label_midi": 68
+  },
+  {
+   "file": "zither/B4_f_1.flac",
+   "midi": 83,
+   "rms": 0.00635,
+   "peak": 0.14127,
+   "label_midi": 71
+  }
+ ],
+ "cellos": [
+  {
+   "file": "cellos/susvib_C1_v1_1.flac",
+   "midi": 36,
+   "rms": 0.01769,
+   "peak": 0.07138,
+   "label_midi": 24
+  },
+  {
+   "file": "cellos/susvib_E1_v1_1.flac",
+   "midi": 40,
+   "rms": 0.01049,
+   "peak": 0.04019,
+   "label_midi": 28
+  },
+  {
+   "file": "cellos/susvib_G1_v1_1.flac",
+   "midi": 43,
+   "rms": 0.03105,
+   "peak": 0.08978,
+   "label_midi": 31
+  },
+  {
+   "file": "cellos/susvib_B1_v1_1.flac",
+   "midi": 47,
+   "rms": 0.03192,
+   "peak": 0.0929,
+   "label_midi": 35
+  },
+  {
+   "file": "cellos/susvib_D2_v1_1.flac",
+   "midi": 50,
+   "rms": 0.01675,
+   "peak": 0.06683,
+   "label_midi": 38
+  },
+  {
+   "file": "cellos/susvib_F2_v1_1.flac",
+   "midi": 53,
+   "rms": 0.01368,
+   "peak": 0.04956,
+   "label_midi": 41
+  },
+  {
+   "file": "cellos/susvib_A2_v1_1.flac",
+   "midi": 57,
+   "rms": 0.01758,
+   "peak": 0.0535,
+   "label_midi": 45
+  },
+  {
+   "file": "cellos/susvib_C3_v1_1.flac",
+   "midi": 60,
+   "rms": 0.01654,
+   "peak": 0.05835,
+   "label_midi": 48
+  },
+  {
+   "file": "cellos/susvib_E3_v1_1.flac",
+   "midi": 64,
+   "rms": 0.01722,
+   "peak": 0.06274,
+   "label_midi": 52
+  },
+  {
+   "file": "cellos/susvib_G3_v1_1.flac",
+   "midi": 67,
+   "rms": 0.01593,
+   "peak": 0.05405,
+   "label_midi": 55
+  },
+  {
+   "file": "cellos/susvib_B3_v1_1.flac",
+   "midi": 71,
+   "rms": 0.01004,
+   "peak": 0.03754,
+   "label_midi": 59
+  },
+  {
+   "file": "cellos/susvib_D4_v1_1.flac",
+   "midi": 74,
+   "rms": 0.00839,
+   "peak": 0.03375,
+   "label_midi": 62
+  },
+  {
+   "file": "cellos/susvib_F4_v1_1.flac",
+   "midi": 77,
+   "rms": 0.01054,
+   "peak": 0.04224,
+   "label_midi": 65
+  }
+ ],
+ "clavi": [
+  {
+   "file": "clavi/Clavisynth_Gs0_vl2.flac",
+   "midi": 32,
+   "rms": 0.02805,
+   "peak": 0.09787,
+   "label_midi": 20
+  },
+  {
+   "file": "clavi/Clavisynth_C1_vl2.flac",
+   "midi": 36,
+   "rms": 0.02631,
+   "peak": 0.09616,
+   "label_midi": 24
+  },
+  {
+   "file": "clavi/Clavisynth_E1_vl2.flac",
+   "midi": 40,
+   "rms": 0.02329,
+   "peak": 0.09436,
+   "label_midi": 28
+  },
+  {
+   "file": "clavi/Clavisynth_Gs1_vl2.flac",
+   "midi": 44,
+   "rms": 0.02205,
+   "peak": 0.09439,
+   "label_midi": 32
+  },
+  {
+   "file": "clavi/Clavisynth_C2_vl2.flac",
+   "midi": 48,
+   "rms": 0.01832,
+   "peak": 0.08649,
+   "label_midi": 36
+  },
+  {
+   "file": "clavi/Clavisynth_E2_vl2.flac",
+   "midi": 52,
+   "rms": 0.0156,
+   "peak": 0.08603,
+   "label_midi": 40
+  },
+  {
+   "file": "clavi/Clavisynth_Gs2_vl2.flac",
+   "midi": 56,
+   "rms": 0.01459,
+   "peak": 0.08575,
+   "label_midi": 44
+  },
+  {
+   "file": "clavi/Clavisynth_C3_vl2.flac",
+   "midi": 60,
+   "rms": 0.01307,
+   "peak": 0.08569,
+   "label_midi": 48
+  },
+  {
+   "file": "clavi/Clavisynth_E3_vl2.flac",
+   "midi": 64,
+   "rms": 0.01102,
+   "peak": 0.08368,
+   "label_midi": 52
+  },
+  {
+   "file": "clavi/Clavisynth_Gs3_vl2.flac",
+   "midi": 68,
+   "rms": 0.00944,
+   "peak": 0.07611,
+   "label_midi": 56
+  },
+  {
+   "file": "clavi/Clavisynth_C4_vl2.flac",
+   "midi": 72,
+   "rms": 0.01284,
+   "peak": 0.9166,
+   "label_midi": 60
+  },
+  {
+   "file": "clavi/Clavisynth_E4_vl2.flac",
+   "midi": 76,
+   "rms": 0.01266,
+   "peak": 0.9166,
+   "label_midi": 64
+  },
+  {
+   "file": "clavi/Clavisynth_Gs4_vl2.flac",
+   "midi": 80,
+   "rms": 0.01289,
+   "peak": 0.9166,
+   "label_midi": 68
+  },
+  {
+   "file": "clavi/Clavisynth_C5_vl2.flac",
+   "midi": 84,
+   "rms": 0.01386,
+   "peak": 0.9166,
+   "label_midi": 72
+  },
+  {
+   "file": "clavi/Clavisynth_E5_vl2.flac",
+   "midi": 88,
+   "rms": 0.01489,
+   "peak": 0.9166,
+   "label_midi": 76
+  },
+  {
+   "file": "clavi/Clavisynth_Gs5_vl2.flac",
+   "midi": 92,
+   "rms": 0.01662,
+   "peak": 0.9166,
+   "label_midi": 80
+  }
+ ],
+ "frame-drum": [
+  {
+   "file": "frame-drum/HDrumL_Hand_rr1_Sum.flac",
+   "midi": null,
+   "rms": 0.0001,
+   "peak": 0.0014
+  },
+  {
+   "file": "frame-drum/HDrumL_HitMuted_v2_rr1_Sum.flac",
+   "midi": null,
+   "rms": 0.00204,
+   "peak": 0.02484
+  },
+  {
+   "file": "frame-drum/HDrumS_HitMuted_v2_rr1_Sum.flac",
+   "midi": null,
+   "rms": 0.00046,
+   "peak": 0.00604
+  },
+  {
+   "file": "frame-drum/HDrumS_Hit_v2_rr1_Sum.flac",
+   "midi": null,
+   "rms": 0.00138,
+   "peak": 0.00891
+  },
+  {
+   "file": "frame-drum/HDrumL_Hit_v3_rr1_Sum.flac",
+   "midi": null,
+   "rms": 0.02201,
+   "peak": 0.18518
+  },
+  {
+   "file": "frame-drum/HDrumS_Hit_v3_rr1_Sum.flac",
+   "midi": null,
+   "rms": 0.00456,
+   "peak": 0.08447
+  }
+ ]
+}

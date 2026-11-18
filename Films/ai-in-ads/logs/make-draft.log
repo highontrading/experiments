@@ -1,0 +1,167 @@
+# make.py draft · 2026-11-18 15:37:26
+
+$ node /home/user/experiments/Films/ai-in-ads/tools/capture.mjs --url film.html --probe --params w=1920&h=1080
+[capture] renderer: canvas2d
+[capture] page: 1920x1080, 1500 frames @ 24 fps
+[capture] meta: {"title":"Refrain","bounds":[0,7.5,12.5,27.5,37.5,45,52.5,62.5],"vo":10,"palette":{"bg":"#f2e2bf","paper":"#f2e2bf","lamp":"#f0a848","hot":"#ffe6b0","ink":"#2b1a12","wood":"#4a2e1c","hide":"#8a5f3c","dye":"#c2452d","gold":"#f3c35a","glow":"#e9f0ea","dawn":"#c9cdc4","accent":"#f3c35a","dim":"#4a2e1c"},"lookPalette":{"bg":"#1c120c","ink":"#2b1a12","accent":"#f3c35a","dim":"#4a2e1c"},"families":["Cormorant","Mona Sans","Noto Serif KR Arirang"],"sfx":[[6.3,"riser",1.2],[7.5,"hit",null],[27.2,"whoosh",0.6]]}
+
+$ node /home/user/experiments/Films/ai-in-ads/tools/capture.mjs --url film.html --video /home/user/experiments/Films/ai-in-ads/renders/draft-picture-v13.mp4 --audio /home/user/experiments/Films/ai-in-ads/audio/film.wav --workers 2 --format jpeg --quality 0.85 --maxrate 4M --params w=960&h=540&shutter=0&weave=0&tone=0 --status /home/user/experiments/Films/ai-in-ads/renders/draft.status.json
+[capture] renderer: canvas2d
+[capture] page: 960x540, 1500 frames @ 24 fps
+[capture] audio: /home/user/experiments/Films/ai-in-ads/audio/film.wav (62.500 s, 48000 Hz, 2 ch, 32-bit float, peak -7.0 dBFS, 10.4 s)
+[capture] 95/1500 frames (0 skipped) - 5.6 fps
+[capture] 166/1500 frames (0 skipped) - 7.6 fps
+[capture] 267/1500 frames (0 skipped) - 9.9 fps
+[capture] 390/1500 frames (0 skipped) - 12.2 fps
+[capture] 519/1500 frames (0 skipped) - 14.1 fps
+[capture] 627/1500 frames (0 skipped) - 15.0 fps
+[capture] 740/1500 frames (0 skipped) - 15.8 fps
+[capture] 833/1500 frames (0 skipped) - 16.1 fps
+[capture] 932/1500 frames (0 skipped) - 16.4 fps
+[capture] 1041/1500 frames (0 skipped) - 16.8 fps
+[capture] 1147/1500 frames (0 skipped) - 17.1 fps
+[capture] 1236/1500 frames (0 skipped) - 17.2 fps
+[capture] 1342/1500 frames (0 skipped) - 17.5 fps
+[capture] 1464/1500 frames (0 skipped) - 17.9 fps
+[capture] done: 1500 rendered, 0 skipped, 84.9 s total, 17.68 fps, 2 worker(s)
+[capture] video: /home/user/experiments/Films/ai-in-ads/renders/draft-picture-v13.mp4 (1500 frames @ 24 fps, no audio yet)
+
+$ /usr/local/bin/python3 /home/user/experiments/Films/ai-in-ads/tools/mix.py /home/user/experiments/Films/ai-in-ads/logs/mix-draft-v13.json
+ #      at    gain  bus       file
+ 0    0.00     0.0  music     audio/film.wav
+ 1    5.30     0.0  dialogue  audio/vo-t/VO1.wav
+ 2    9.00     0.0  dialogue  audio/vo-t/VO2.wav
+ 3   13.00     0.0  dialogue  audio/vo-t/VO3.wav
+ 4   17.60     0.0  dialogue  audio/vo-t/VO4.wav
+ 5   20.60     0.0  dialogue  audio/vo-t/VO5.wav
+ 6   28.20     0.0  dialogue  audio/vo-t/VO6.wav
+ 7   32.80     0.0  dialogue  audio/vo-t/VO7.wav
+ 8   38.30     0.0  dialogue  audio/vo-t/VO8.wav
+ 9   46.40     0.0  dialogue  audio/vo-t/VO9.wav
+10   53.00     0.0  dialogue  audio/vo-t/VO10.wav
+11    0.00   -14.0  ambience  assets/sound/room.wav
+12   27.50   -12.0  ambience  assets/sound/city.wav
+13   37.10   -11.0  ambience  assets/sound/dawn.wav
+14   45.00   -14.0  ambience  assets/sound/room.wav
+15    0.00    -6.5  sfx       assets/sound/gears.wav
+16    0.12    -4.5  sfx       assets/sound/stamp.wav
+17    0.95    -4.5  sfx       assets/sound/stamp.wav
+18    1.79    -4.5  sfx       assets/sound/stamp.wav
+19    3.00    -9.0  foley     assets/sound/flutter.wav
+20    7.50    -1.0  foley     assets/sound/flutter.wav
+21    8.00    -1.0  foley     assets/sound/lamp.wav
+22   11.60    -9.0  foley     assets/sound/creak.wav
+23   36.40    -3.0  sfx       assets/sound/stamp2.wav
+24   37.10    -1.0  foley     assets/sound/paste.wav
+25   40.00    -4.0  foley     assets/sound/paste.wav
+26   40.83    -4.5  foley     assets/sound/paste.wav
+27   41.67    -5.0  foley     assets/sound/paste.wav
+28   42.50    -5.5  foley     assets/sound/paste.wav
+29   43.33    -6.0  foley     assets/sound/paste.wav
+30   44.17    -6.5  foley     assets/sound/paste.wav
+31   52.50    -4.0  sfx       assets/sound/gears.wav
+32   53.60    -3.0  sfx       assets/sound/gears.wav
+33   58.90    -9.0  sfx       assets/sound/stamp2.wav
+34    5.00    -0.5  sfx       assets/sound/stamp.wav
+35    6.95    -4.0  sfx       assets/sound/gears.wav
+36    7.15    -3.0  foley     assets/sound/flutter.wav
+37   45.15    -6.0  foley     assets/sound/rodtap.wav
+38   59.80    -9.0  foley     assets/sound/lamp.wav
+39   14.17    -8.0  foley     assets/sound/rodtap.wav
+40   15.83    -8.0  foley     assets/sound/rodtap.wav
+41   17.50    -8.0  foley     assets/sound/rodtap.wav
+42   19.17    -8.0  foley     assets/sound/rodtap.wav
+43   49.20   -15.0  sfx       assets/sound/gears.wav
+mix: audio/mix-draft-v13.wav (62.50 s, 44 layers, peak limited to -2 dBFS); next: master_audio.py
+
+$ /usr/local/bin/python3 /home/user/experiments/Films/ai-in-ads/tools/master_audio.py /home/user/experiments/Films/ai-in-ads/audio/mix-draft-v13.wav /home/user/experiments/Films/ai-in-ads/renders/draft-v13.mp4 --video /home/user/experiments/Films/ai-in-ads/renders/draft-picture-v13.mp4 --limit
+pass 1: I=-22.19 LUFS  TP=-3.32 dBTP  LRA=6.10 LU  thresh=-32.84
+limit: +8.19 dB then a lookahead limiter at -3.5 dBFS -> I=-14.73 LUFS  TP=-3.50 dBTP  LRA=5.90 LU
+pass 2: normalization_type=linear  output I=-13.82  TP=-2.77  LRA=5.90
+re-measured from /home/user/experiments/Films/ai-in-ads/renders/draft-v13.mp4: I=-13.8 LUFS  LRA=7.6 LU  true peak=-2.2 dBFS
+OK
+
+$ /usr/local/bin/python3 /home/user/experiments/Films/ai-in-ads/tools/qc.py all /home/user/experiments/Films/ai-in-ads/renders/draft-v13.mp4 0,7.5,12.5,27.5,37.5,45,52.5,62.5
+== info: /home/user/experiments/Films/ai-in-ads/renders/draft-v13.mp4
+duration=62.500000
+size=21635415
+bit_rate=2769333
+codec_name=h264
+profile=High
+width=960
+height=540
+pix_fmt=yuv420p
+color_range=tv
+color_space=bt709
+color_transfer=bt709
+color_primaries=bt709
+r_frame_rate=24/1
+frames=1500
+audio_codec_name=aac
+audio_sample_rate=48000
+audio_channels=2
+audio_bit_rate=291157
+== hook (first 2 s must move from frame 1; min mean 0.5, motion >= 0.02 in every 2 frames):
+  steps=47 mean=4.88 min=1.936 first_step=5.959
+  PASS
+  (also look at the strip: qc.py strip <video> 0 2 12, so grain or flicker is not mistaken for motion)
+== sheet: /home/user/experiments/Films/ai-in-ads/review/qc-draft-v13/sheet.jpg (index: /home/user/experiments/Films/ai-in-ads/review/qc-draft-v13/sheet-index.txt, one tile every 4s)
+== black intervals (>= 0.1 s, 98% of pixels dark):
+none
+== frozen intervals (>= 1.5 s):
+none
+(grain hides freezes from this detector; also check strips and duplicates)
+== exact duplicate consecutive frames:
+frames: 1500, duplicates: 0
+== one-frame pops (a frame unlike both neighbours, 48 px grey): 0
+== repeated compositions (the same picture again, 6 s or more later; 32 px grey): 0 repeats, 0 s of 62
+== brightness (4 samples/s):
+samples: 250, mean L*: 27.5, min: 2.0, max: 46.9, very dark (L*<12): 2.8%
+== hard cuts (scene score > 0.3):
+cuts: 4
+  00:07.500
+  00:12.500
+  00:27.500
+  00:45.000
+== action per scene (camera move removed; flag when the median residual < 1.0 or < 30% of the total; 4 samples/s):
+     #1 00:00.00-00:07.50  residual  6.80  total  7.15  ok
+     #2 00:07.50-00:12.50  residual 16.15  total 17.53  ok
+     #3 00:12.50-00:27.50  residual  2.82  total  3.28  ok
+     #4 00:27.50-00:37.50  residual  6.31  total  7.30  ok
+     #5 00:37.50-00:45.00  residual  3.63  total  3.63  ok
+     #6 00:45.00-00:52.50  residual  1.98  total  2.04  ok
+     #7 00:52.50-01:02.50  residual  2.01  total  2.01  ok
+  0 scene(s) flagged
+== loudness (EBU R128, true peak):
+      I:         -13.8 LUFS
+      Threshold: -24.4 LUFS
+      LRA:         7.6 LU
+      Threshold: -34.3 LUFS
+      Peak:       -2.2 dBFS
+== silences (< -50 dB, >= 0.5 s):
+  none
+targets for web: I = -14 LUFS (+/-1), true peak <= -1 dBTP; every silence must be scripted
+== sound per scene (median -13.7 LUFS, harsh-band median -14.6 dB; flag > 3.0 LU or > 3.0 dB above):
+     #1 00:00.00-00:07.50   -11.3 LUFS  harsh -11.9 dB  ok
+     #2 00:07.50-00:12.50   -12.5 LUFS  harsh -14.6 dB  ok
+     #3 00:12.50-00:27.50   -13.7 LUFS  harsh -13.9 dB  ok
+     #4 00:27.50-00:37.50   -12.8 LUFS  harsh -12.8 dB  ok
+     #5 00:37.50-00:45.00   -16.2 LUFS  harsh -15.3 dB  ok
+     #6 00:45.00-00:52.50   -14.1 LUFS  harsh -15.9 dB  ok
+     #7 00:52.50-01:02.50   -15.0 LUFS  harsh -14.8 dB  ok
+  0 scene(s) flagged
+== spectrogram: /home/user/experiments/Films/ai-in-ads/review/qc-draft-v13/spectrogram.png (look for persistent horizontal lines = pitched layers)
+== report: /home/user/experiments/Films/ai-in-ads/review/qc-draft-v13/report.txt
+
+$ ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 /home/user/experiments/Films/ai-in-ads/review/qc-draft-v13/sheet.jpg
+1948x556
+
+$ ffmpeg -hide_banner -nostdin -loglevel error -y -i /home/user/experiments/Films/ai-in-ads/review/qc-draft-v13/sheet.jpg -vf scale=1024:-2 -q:v 4 -update 1 /home/user/experiments/Films/ai-in-ads/review/qc-draft-v13/sheet-small.jpg
+
+$ /usr/local/bin/python3 /home/user/experiments/Films/ai-in-ads/tools/qc.py thumb /home/user/experiments/Films/ai-in-ads/renders/draft-v13.mp4 768 43.75
+== thumb: /home/user/experiments/Films/ai-in-ads/review/qc-draft-v13/thumb-draft-v13-43.75s-768.jpg (768x432)
+
+$ node /home/user/experiments/Films/ai-in-ads/tools/capture.mjs --url film.html --text-check 0.5 --params w=960&h=540&shutter=0&weave=0&tone=0&textcheck=1
+[capture] renderer: canvas2d
+[capture] page: 960x540, 1500 frames @ 24 fps
+[capture] text check: no overlapping lines, no line lost in its ground

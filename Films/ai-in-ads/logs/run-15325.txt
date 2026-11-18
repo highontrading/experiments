@@ -1,0 +1,5 @@
+FAILED: capture.mjs (exit 1)
+Error: page error: Error: type check: ink on bg contrast 1.10:1 (needs 4.5:1 for text, 3:1 for large display)
+    at file:///home/user/experiments/Films/ai-in-ads/film.html?capture=1&w=1920&h=1080:2173:31
+    at Object.eval (file:///home/user/experiments/Films/ai-in-ads/tools/capture.mjs:479:37)
+log: logs/make-stills.log

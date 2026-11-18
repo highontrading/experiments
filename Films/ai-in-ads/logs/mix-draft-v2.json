@@ -1,0 +1,278 @@
+{
+ "duration": 62.5,
+ "out": "audio/mix-draft-v2.wav",
+ "layers": [
+  {
+   "file": "audio/film.wav",
+   "at": 0,
+   "gain_db": 0,
+   "bus": "music"
+  },
+  {
+   "file": "audio/vo-t/VO1.wav",
+   "at": 4.7,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO2.wav",
+   "at": 9.2,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO3.wav",
+   "at": 13.0,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO4.wav",
+   "at": 17.6,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO5.wav",
+   "at": 20.6,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO6.wav",
+   "at": 28.2,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO7.wav",
+   "at": 32.8,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO8.wav",
+   "at": 38.4,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO9.wav",
+   "at": 46.4,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO10.wav",
+   "at": 53.0,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "assets/sound/room.wav",
+   "at": 0,
+   "gain_db": -14,
+   "bus": "ambience",
+   "loop": true,
+   "length": 27.5,
+   "fade_in": 0.05,
+   "fade_out": 0.8
+  },
+  {
+   "file": "assets/sound/city.wav",
+   "at": 27.5,
+   "gain_db": -12,
+   "bus": "ambience",
+   "fade_in": 0.3,
+   "fade_out": 0.8,
+   "length": 10.4,
+   "loop": true
+  },
+  {
+   "file": "assets/sound/dawn.wav",
+   "at": 37.1,
+   "gain_db": -11,
+   "bus": "ambience",
+   "fade_in": 0.8,
+   "fade_out": 0.8
+  },
+  {
+   "file": "assets/sound/room.wav",
+   "at": 45.0,
+   "gain_db": -14,
+   "bus": "ambience",
+   "loop": true,
+   "length": 17.5,
+   "fade_in": 0.6,
+   "fade_out": 1.5
+  },
+  {
+   "file": "assets/sound/gears.wav",
+   "at": 0.0,
+   "gain_db": -10,
+   "bus": "sfx",
+   "pan": 0.4
+  },
+  {
+   "file": "assets/sound/stamp.wav",
+   "at": 0.12,
+   "gain_db": -6,
+   "bus": "sfx",
+   "pan": 0.2
+  },
+  {
+   "file": "assets/sound/stamp.wav",
+   "at": 0.953,
+   "gain_db": -6,
+   "bus": "sfx",
+   "pan": 0.2
+  },
+  {
+   "file": "assets/sound/stamp.wav",
+   "at": 1.787,
+   "gain_db": -6,
+   "bus": "sfx",
+   "pan": 0.2
+  },
+  {
+   "file": "assets/sound/flutter.wav",
+   "at": 3.0,
+   "gain_db": -14,
+   "bus": "foley",
+   "pan": -0.3
+  },
+  {
+   "file": "assets/sound/stamp.wav",
+   "at": 7.36,
+   "gain_db": -4,
+   "bus": "sfx",
+   "pan": 0.1
+  },
+  {
+   "file": "assets/sound/flutter.wav",
+   "at": 7.5,
+   "gain_db": -6,
+   "bus": "foley",
+   "pan": 0
+  },
+  {
+   "file": "assets/sound/lamp.wav",
+   "at": 8.0,
+   "gain_db": -6,
+   "bus": "foley",
+   "pan": 0.15
+  },
+  {
+   "file": "assets/sound/creak.wav",
+   "at": 11.6,
+   "gain_db": -14,
+   "bus": "foley",
+   "pan": -0.4
+  },
+  {
+   "file": "assets/sound/rodtap.wav",
+   "at": 13.4,
+   "gain_db": -12,
+   "bus": "foley",
+   "pan": -0.2
+  },
+  {
+   "file": "assets/sound/rodtap.wav",
+   "at": 16.2,
+   "gain_db": -12,
+   "bus": "foley",
+   "pan": 0.1
+  },
+  {
+   "file": "assets/sound/rodtap.wav",
+   "at": 18.9,
+   "gain_db": -12,
+   "bus": "foley",
+   "pan": 0.2
+  },
+  {
+   "file": "assets/sound/stamp2.wav",
+   "at": 36.4,
+   "gain_db": -8,
+   "bus": "sfx",
+   "pan": 0
+  },
+  {
+   "file": "assets/sound/paste.wav",
+   "at": 37.9,
+   "gain_db": -6,
+   "bus": "foley",
+   "pan": 0
+  },
+  {
+   "file": "assets/sound/paste.wav",
+   "at": 40.0,
+   "gain_db": -9.0,
+   "bus": "foley",
+   "pan": 0.2
+  },
+  {
+   "file": "assets/sound/paste.wav",
+   "at": 40.833,
+   "gain_db": -9.5,
+   "bus": "foley",
+   "pan": -0.2
+  },
+  {
+   "file": "assets/sound/paste.wav",
+   "at": 41.667,
+   "gain_db": -10.0,
+   "bus": "foley",
+   "pan": 0.2
+  },
+  {
+   "file": "assets/sound/paste.wav",
+   "at": 42.5,
+   "gain_db": -10.5,
+   "bus": "foley",
+   "pan": -0.2
+  },
+  {
+   "file": "assets/sound/paste.wav",
+   "at": 43.333,
+   "gain_db": -11.0,
+   "bus": "foley",
+   "pan": 0.2
+  },
+  {
+   "file": "assets/sound/paste.wav",
+   "at": 44.167,
+   "gain_db": -11.5,
+   "bus": "foley",
+   "pan": -0.2
+  },
+  {
+   "file": "assets/sound/gears.wav",
+   "at": 52.5,
+   "gain_db": -9,
+   "bus": "sfx",
+   "pan": 0.5
+  },
+  {
+   "file": "assets/sound/gears.wav",
+   "at": 53.6,
+   "gain_db": -8,
+   "bus": "sfx",
+   "pan": 0.35
+  },
+  {
+   "file": "assets/sound/rodtap.wav",
+   "at": 58.0,
+   "gain_db": -10,
+   "bus": "foley",
+   "pan": 0
+  },
+  {
+   "file": "assets/sound/stamp2.wav",
+   "at": 58.95,
+   "gain_db": -14,
+   "bus": "sfx",
+   "pan": 0.4
+  }
+ ]
+}
