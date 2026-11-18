@@ -379,7 +379,7 @@ AD.ad4 = () => {
   B.push(paper(wt(62) - .1, (ctx, t) => {
     paperBG(ctx); heading(ctx, t, [htok('the', 62), htok('difference', 63), htok('is', 64)], [etok('what', 65), etok('I', 66), etok('taught', 67), etok('it.', 68)]); darkCard(ctx, 90, 600, 900, 820);
     const L = ['# vibe-editing.skill', 'captions: designed per phrase', 'camera: eased, motivated', 'grade: low-key, matched light', 'sound: minimal, ducked', 'never: templates'];
-    let tt = wt(63); L.forEach((l, k) => { const n = Math.floor(cl((t - tt) * 40, 0, l.length)), s = l.slice(0, n); tt += l.length / 40 + .05;
+    let tt = wt(62) + .15; L.forEach((l, k) => { const n = Math.floor(cl((t - tt) * 120, 0, l.length)), s = l.slice(0, n); tt += l.length / 120 + .03;
       const w = T(ctx, s, 150, 700 + k * 100, { size: 36, font: 'JM', align: 'left', fill: k === 0 ? EMBER : CREAM, shadow: false }); if (n > 0 && n < l.length) { ctx.fillStyle = GOLD; ctx.fillRect(154 + w, 672, 14, 34 + k * 0); } });
   }, 'push'));
   B.push(prem(wt(69) - .1, (f, t) => cam(f, lerp(1.05, 1.09, inv(wt(69), D.speech, t)), 860), null, (ctx, c, t) => {
