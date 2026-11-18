@@ -1,4 +1,4 @@
-"""GTA VI fan hype trailer renderer (v3 - clearer footage, 3D chrome graffiti logo reveal).
+"""GTA VI fan hype trailer renderer (v4 - chrome graffiti text slams, official end-card reveal).
 usage: python render2.py WORKDIR OUT.mp4 [scale]
 WORKDIR must contain src.mp4 (source footage)."""
 import numpy as np, cv2, subprocess, sys, math
@@ -69,14 +69,16 @@ drop = [
     (11.703, 11.935, 139.20, dict(speed=1.5, fx=("glitch_in",))),
     (11.935, 12.167, 108.00, dict(fx=("spin",))),
     (12.167, 12.411, 103.20, dict(z0=1.08, z1=1.25, fx=("stutter",))),
-    (12.411, LOGO, 128.00, dict(speed=2.0, fx=("glitch_in", "huecycle"))),
+    (12.411, 12.543, 128.00, dict(speed=2.0, fx=("glitch_in", "huecycle"))),
 ]
+segs_black_before_card = (12.543, LOGO)
 for t0, t1, s, kw in drop:
     if "tri" in kw:
         segs.append(dict(t0=t0, t1=t1, tri=kw["tri"], span=t1 - t0, ease="lin", z0=1.1, z1=1.2, fx={"slices"}, src=None))
     else:
         seg(t0, t1, s, **kw)
-seg(LOGO, TOTAL, 153.00, speed=0.45, z0=1.10, z1=1.28, fx=("logo", "lag"))
+segs.append(dict(t0=12.543, t1=LOGO, black=True, fx=set()))
+seg(LOGO, TOTAL, 153.00, speed=0.45, z0=1.0, z1=1.06, fx=("logo",))
 
 # ---------------------------------------------------------------- events
 beats_intro = [0.035, 0.499, 0.952, 1.44, 1.881, 2.38, 2.821, 3.309, 3.762, 4.249, 4.69, 5.166, 5.631, 6.107, 6.571]
@@ -117,12 +119,12 @@ def flash_env(t):
 
 texts = [
     (0.20, 0.952, "WELCOME TO LEONIDA", 64, "subtle"),
-    (1.440, 1.881, "NO RULES", 210, "slam"),
-    (2.380, 2.821, "NO LIMITS", 210, "slam"),
-    (3.309, 3.762, "ONE STATE", 210, "slam"),
-    (4.249, 4.690, "ZERO MERCY", 200, "slam"),
-    (5.166, 5.631, "ALL GAS", 230, "slam"),
-    (6.107, 6.571, "GET READY", 240, "slam"),
+    (1.440, 1.881, "NO RULES", 190, "slam"),
+    (2.380, 2.821, "NO LIMITS", 180, "slam"),
+    (3.309, 3.762, "ONE STATE", 180, "slam"),
+    (4.249, 4.690, "ZERO MERCY", 165, "slam"),
+    (5.166, 5.631, "ALL GAS", 200, "slam"),
+    (6.107, 6.571, "GET READY", 180, "slam"),
 ]
 
 # ---------------------------------------------------------------- assets
@@ -207,10 +209,12 @@ for t0, t1, s, size, kind in texts:
         TXT[s] = text_rgba(s, size * SCALE, glow=(255, 150, 60), tracking=0.35, font=FONT2)
     elif kind == "flash":
         TXT[s] = text_rgba(s, size * SCALE, glow=(255, 40, 200))
+    elif kind == "slam":
+        r_, a_, _ = build_logo(SCALE, text=s, font=LOGO_FONT, size=size)
+        TXT[s] = (r_, a_, r_ * 0.6, a_)
     else:
         TXT[s] = text_rgba(s, size * SCALE, glow=(255, 40, 150))
-LOGO3 = build_logo(SCALE, font=LOGO_FONT)
-BGL = build_bg(W, H)
+CARD8 = cv2.resize(cv2.imread(f"{WORK}/endcard_1080.png"), (W, H), interpolation=cv2.INTER_AREA)
 
 def comp(frame, rgb, a, cx, cy, scale=1.0, alpha=1.0, add=False):
     if scale != 1.0:
@@ -246,7 +250,7 @@ for _ in range(7):
     leak += np.exp(-(((gx - cx) ** 2 + (gy - cy) ** 2) / (2 * rad ** 2)))[..., None].astype(np.float32) * col
 leak = np.clip(leak, 0, 1)
 del gx, gy
-leak_events = [(0.952, 0.8), (2.821, 0.8), (4.69, 0.8), (6.107, 0.9), (7.024, 1.0), (9.125, 0.7), (10.298, 0.8), (11.238, 0.9), (12.643, 1.0)]
+leak_events = [(0.952, 0.8), (2.821, 0.8), (4.69, 0.8), (6.107, 0.9), (7.024, 1.0), (9.125, 0.7), (10.298, 0.8), (11.238, 0.9), (12.643, 0.6)]
 # speed-line overlay (radial streaks, clear centre)
 D = int(math.hypot(W, H)) + 4
 sl = np.zeros((D, D), np.float32)
@@ -477,6 +481,8 @@ for n in range(NF):
         img, u = np.zeros((H, W, 3), np.uint8), 0
     elif sg.get("tri"):
         img, u = tri_frame(sg, t), (t - sg["t0"]) / (sg["t1"] - sg["t0"])
+    elif "logo" in fx:
+        img, u = CARD8, (t - sg["t0"]) / (sg["t1"] - sg["t0"])
     else:
         img, u = get_src_frame(sg, t)
     # --- camera
@@ -485,6 +491,8 @@ for n in range(NF):
     zoom = (sg.get("z0", 1.1) + (sg.get("z1", 1.1) - sg.get("z0", 1.1)) * ease(u, "out")) * (1 + 0.2 * min(pz, 1.6))
     if "stutter" in fx:
         zoom *= 1 + 0.07 * int(age / 0.1)
+    if "logo" in fx:   # reveal: punch in from 1.18 and settle; keep the whole card in frame afterwards
+        zoom = (1.0 + 0.04 * ease(u, "out")) * (1 + 0.04 * min(pz, 1.6)) * (1 + 0.18 * (1 - min(1, age / 0.28)) ** 3)
     dx = rng.normal(0, 1) * sh * 22 * SCALE
     dy = rng.normal(0, 1) * sh * 16 * SCALE
     rot = rng.normal(0, 1) * sh * 1.5
@@ -517,12 +525,11 @@ for n in range(NF):
         if zb > 0.05:
             img = zoom_blur(img, zb * 1.8)
         hue = (n * 11) % 180 if "huecycle" in fx else 0
-        img = grade(img, hue=hue)
+        if "logo" not in fx:
+            img = grade(img, hue=hue)
     f = img.astype(np.float32) / 255
     if "fadein" in fx:
         f *= min(1, t / 0.25)
-    if "logo" in fx:
-        f = BGL.astype(np.float32).copy()
     # --- echo trails
     if "lag" in fx and trail is not None and trail.shape == f.shape:
         f = np.maximum(f, trail * 0.6)
@@ -549,51 +556,26 @@ for n in range(NF):
             if kind == "subtle":
                 comp(f, rgb_, a_, W / 2, H * 0.80, 1 + 0.06 * ta, min(1, ta / 0.2) * min(1, (t1 - t) / 0.1))
             elif kind == "slam":
-                sc_ = 1 + 0.9 * math.exp(-ta / 0.035)
+                sc_ = 1 + 0.7 * math.exp(-ta / 0.035)
                 al = min(1, ta / 0.02 + 0.3) * (1 if (t1 - t) > 2 / FPS else 0.5)
                 for k in (3, 2, 1):  # expanding outline echoes
-                    comp(f, ergb, ea, W / 2, H / 2, sc_ * (1 + 0.12 * k + ta * 0.9 * k), 0.3 / k, add=True)
+                    comp(f, ergb, ea, W / 2, H / 2, sc_ * (1 + 0.10 * k + ta * 0.8 * k), 0.22 / k, add=True)
                 comp(f, rgb_, a_, W / 2 + rng.normal(0, 1) * 7 * SCALE, H / 2, sc_ * (1 + 0.08 * ta), al)
             else:
                 for k in (2, 1):
                     comp(f, ergb, ea, W / 2, H / 2, 1.0 + 0.4 * ta + 0.2 * k, 0.6 / k, add=True)
                 comp(f, rgb_, a_, W / 2, H / 2, 1.0 + 0.4 * ta, 1.0)
-    # --- logo reveal (3D chrome graffiti GTA VI)
+    # --- end card: soft light sweep across the card after the reveal
     if t >= LOGO:
-        la = t - LOGO
-        if la < 0.16:
-            q = la / 0.16
-            sc_ = 1.5 - 0.5 * (1 - (1 - q) ** 3)
-        else:
-            sc_ = 1.0 + 0.03 * (la - 0.16)
-        if t >= 13.108:
-            sc_ *= 1 + 0.05 * math.exp(-(t - 13.108) / 0.08)
-        jit = env(t, shake, 0.09) * 6 * SCALE
-        lr, lal, lface = LOGO3
-        cx, cy = W / 2 + rng.normal(0, 1) * jit, H / 2 + rng.normal(0, 1) * jit
-        # glow pulse behind (breathing) + on the hits
-        pulse = 0.06 + 0.04 * math.sin(la * 5) + 0.35 * math.exp(-la / 0.15) + 0.2 * env(t, [(13.108, 1)], 0.1)
-        comp(f, lr, lal, cx, cy, sc_ * 1.03, pulse, add=True)
-        for k in (1, 2):   # two ghost copies flying out on the reveal hit
-            if la < 0.4:
-                comp(f, lr, lal, cx, cy, sc_ * (1 + la * 1.2 * k), 0.35 * (1 - la / 0.4) / k, add=True)
-        comp(f, lr, lal, cx, cy, sc_, min(1, la / 0.03))
-        # chrome sheen sweep across the letters
-        for s0 in (13.25, 14.1):
-            sp = (t - s0) / 0.45
+        for s0 in (13.2, 14.05):
+            sp = (t - s0) / 0.55
             if 0 <= sp <= 1:
-                hh, ww = lface.shape
-                gy, gx = np.mgrid[0:hh, 0:ww].astype(np.float32)
-                pos = (gx / ww + (gy / hh) * 0.35) - (sp * 1.6 - 0.3)
-                band = np.exp(-(pos / 0.03) ** 2) * lface
-                comp(f, np.repeat(band[..., None], 3, 2) * 0.55, band, cx, cy, sc_, 1.0, add=True)
+                pos = (xx / W + (yy / H) * 0.35) - (sp * 1.7 - 0.35)
+                band = np.exp(-(pos / 0.04) ** 2)[..., None]
+                f = 1 - (1 - f) * (1 - band * 0.35)
     # --- particles
     if n == fr(DROP):
         spawn(int(220 * max(SCALE, 0.5)), burst=True)
-    if n == fr(LOGO):
-        spawn(int(160 * max(SCALE, 0.5)), burst=True)
-    if t >= LOGO and t < 14.6 and n % 2 == 0:
-        spawn(2)
     pl = particles_layer(1 / FPS)
     if pl is not None:
         f = 1 - (1 - np.clip(f, 0, 1)) * (1 - np.clip(pl, 0, 1))
@@ -621,7 +603,7 @@ for n in range(NF):
     fl = flash_env(t)
     if fl.max() > 0.01:
         f = f + (1 - f) * np.clip(fl, 0, 1)
-    f = f * (0.5 + 0.5 * VIG) + GRAIN[n % 8][..., None] * 0.014
+    f = f * (0.5 + 0.5 * VIG) + GRAIN[n % 8][..., None] * 0.014 if t < LOGO else f * (0.85 + 0.15 * VIG) + GRAIN[n % 8][..., None] * 0.008
     # --- letterbox
     if t < 6.571: bar = 0.08
     elif t < DROP: bar = 0.08 + 0.10 * ((t - 6.571) / (DROP - 6.571)) ** 2

@@ -63,8 +63,9 @@ def build_logo(scale=1.0, text="GTA VI", font="MetalMania-Regular.ttf", size=470
     ss = 2  # supersample
     m = _mask(text, font, size * scale, -0.06, ss)
     m = _warp(m)
-    depth = int(34 * scale * ss)
-    pad = depth + int(120 * scale * ss)
+    kk = scale * size / 470.0
+    depth = int(34 * kk * ss)
+    pad = depth + int(120 * kk * ss)
     m = cv2.copyMakeBorder(m, pad, pad, pad, pad, cv2.BORDER_CONSTANT, value=0)
     H, W = m.shape
     yy = np.linspace(0, 1, H, dtype=np.float32)[:, None]
@@ -84,11 +85,11 @@ def build_logo(scale=1.0, text="GTA VI", font="MetalMania-Regular.ttf", size=470
         ext = np.clip(ext + new, 0, 1)
     # dark edge between face and extrusion
     face = m
-    rim = np.clip(cv2.dilate(m, np.ones((int(5 * scale * ss) | 1,) * 2, np.uint8)) - m, 0, 1)
+    rim = np.clip(cv2.dilate(m, np.ones((int(5 * kk * ss) | 1,) * 2, np.uint8)) - m, 0, 1)
     # ---- bevel height field from distance transform
     mb = (m > 0.5).astype(np.uint8)
     dist = cv2.distanceTransform(mb, cv2.DIST_L2, 5).astype(np.float32)
-    bw = 16 * scale * ss
+    bw = 16 * kk * ss
     hgt = np.clip(dist / bw, 0, 1)
     hgt = np.sin(hgt * math.pi / 2)
     hgt = cv2.GaussianBlur(hgt, (0, 0), 1.5 * ss)
@@ -122,8 +123,8 @@ def build_logo(scale=1.0, text="GTA VI", font="MetalMania-Regular.ttf", size=470
     face_col = np.clip(face_col, 0, 1.2)
     # ---- glow
     allm = np.maximum(ext, m)
-    g1 = cv2.GaussianBlur(allm, (0, 0), 22 * scale * ss)
-    g2 = cv2.GaussianBlur(allm, (0, 0), 70 * scale * ss)
+    g1 = cv2.GaussianBlur(allm, (0, 0), 22 * kk * ss)
+    g2 = cv2.GaussianBlur(allm, (0, 0), 70 * kk * ss)
     glow_rgb = g1[..., None] * np.array([1.0, 0.25, 0.75]) * 0.9 + g2[..., None] * np.array([1.0, 0.2, 0.55]) * 0.8
     glow_a = np.clip(g1 * 0.9 + g2 * 0.7, 0, 1)
     rgb = glow_rgb.copy()
