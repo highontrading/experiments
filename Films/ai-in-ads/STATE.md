@@ -2,7 +2,7 @@
 
 Read this first in a new session, after loading the cinecode skill (Claude Code: the Skill tool, never a plain read of SKILL.md), then `python3 /root/.claude/skills/cinecode/scripts/init_film.py . --update-tools` silently (the kit's newest tools). Kit: /root/.claude/skills/cinecode · Method: `/root/.claude/skills/cinecode/references/quick-mode.md`
 
-- **Phase:** 6 Final render (Pace: through; the user handed every choice to the agent; drafts v2-v13 reviewed by the independent viewer, v13 APPROVE)
+- **Phase:** delivered (Refrain.mp4, final v1, 1920x1080, -13.8 LUFS; draft v13 APPROVE by the independent viewer)
 - **Format source:** none
 - **Purpose:** cinematic (`/root/.claude/skills/cinecode/references/purpose-cinematic.md`)
 - **Idea:** "Make a film on AI in advertising ... give me the best you can, like make a film out of it" (user) → REFRAIN: a machine writes one advert 3,600 ways before lunch; people needed 600 years to sing one Korean folk song, Arirang, that many ways, and every singer kept the refrain. AI is a verse machine; what people keep is the refrain. (spark s2, overlap CLEAR; user delegated the pick)
@@ -50,7 +50,7 @@ Read this first in a new session, after loading the cinecode skill (Claude Code:
 - **Open notes:** notes/round-1..8 all applied; polish left from critique-v13 (caption placement, refrain size on a phone)
 - **Revision round:** 1 of 2 (the independent viewer's notes; the user gave none)
 - **Re-plans:** <none · date: what changed, stills approved>
-- **Next action:** deliver Refrain.mp4 with its credits; ask the user for notes
+- **Next action:** wait for the user's notes on the final (a creative note goes back to a draft); then offer to clean intermediates and to save the format
 
 ## Log
 | Date | What | File |
