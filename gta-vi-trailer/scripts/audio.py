@@ -92,6 +92,15 @@ add(13.108, impact(1.2, 110, 40, 0.8), 0.32)
 for k in range(5): add(14.15 + k * 0.034, glitchblip(), 0.12)
 add(14.30, impact(1.0, 90, 30, 0.9), 0.25)
 
+# v2 extras: spin swishes, stutter clicks, shockwave sub drops
+for tc in [2.38, 4.249, 7.721, 9.601, 11.935]:
+    add(tc - 0.05, whoosh(0.2, rev=True), 0.16, pan=rng.uniform(-0.6, 0.6))
+for tc in [6.107, 12.167]:
+    for k in range(5): add(tc + k * 0.1, camclick(), 0.2); add(tc + k * 0.1, glitchblip(0.04), 0.07)
+for tc in [8.893]:
+    add(tc, impact(1.0, 100, 30, 0.8), 0.35)
+for tc in [8.661, 12.411]:
+    for k in range(6): add(tc + k * 0.035, glitchblip(0.03), 0.06)
 out = mix + sfx
 out = np.tanh(out * 1.05) * 0.97
 fade = int(0.4 * SR); out[-fade:] *= np.linspace(1, 0, fade)[:, None]
