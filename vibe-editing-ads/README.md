@@ -1,6 +1,8 @@
 # Vibe Editing: Meta ads
 
 Three premium-edited ads for **Vibe Editing**, cut from the raw selfie takes (IMG_2508 / 2511 / 2512).
+The footage is always the **full, uncropped 16:9 frame** on a card inside the vertical ad; nothing
+zooms or crops into the shot, only the card itself moves.
 The edit is the pitch: the first half is styled as the "typical AI edit" the script mocks
 (flat grade, yellow Montserrat captions, emoji pops, an "AI EDIT DETECTED" scan). On "but see my edit"
 it glitches, flashes and flips into the premium look: warm cinematic grade, serif + grotesk kinetic
@@ -39,7 +41,9 @@ title, the card and the CTA. H.264 High, 30 fps, AAC 256k, −14 LUFS.
 | Music bed (ElevenLabs Music) on a bar grid, downbeat on the reveal; SFX (ElevenLabs) | `tools/mix.py` |
 | Encode 9:16 + 4:5 | `tools/encode.sh` |
 
-Theme: near-black backdrop that warms into an ember/amber glow at the reveal, film grain, Inter Tight +
-Instrument Serif Italic, amber `#FFB15C` → ember `#FF7A2F`, a floating rounded card. Fonts are OFL.
+Theme: near-black backdrop that warms into an ember glow at the reveal, film grain, white + red `#FF3D2E`,
+Inter Tight + Instrument Serif Italic + Archivo Expanded, a floating rounded 16:9 card. Captions change
+placement: under the card, over the person, behind the person (outline ghost), sideways, one big red word.
+Fonts are OFL.
 
 `./make.sh` rebuilds everything once the raw clips are tone-mapped into `/home/user/work`.

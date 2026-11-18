@@ -23,6 +23,14 @@ ROMAN = {
 #   stack  - small lead-in line over a big line; opts.split = first word of the big line
 #   hero   - opts.hero word goes huge BEHIND the head (depth matte), the line sits in front
 #   none   - no caption (a motion graphic carries the words)
+# Caption groups: (first_word, last_word, layout, opts)
+#   basic  - "typical AI edit": yellow Montserrat on the video (before the turn)
+#   below  - big editorial type under the video card; opts.split = first word of the big line
+#   over   - kinetic line on the video, over the person
+#   behind - opts.hero word huge BEHIND the person (depth matte), rest of the line over the video
+#   side   - opts.hero word set sideways (rotated) beside the head, behind the person
+#   top    - one big word over the person (opts.hero), rest small above it
+#   opts.em = words in the serif italic accent; opts.red = accent in red (else white)
 SPEC = {
 "2508": dict(
     turn=dict(glitch=49, reveal_seg_word=61),
@@ -34,17 +42,17 @@ SPEC = {
         (27, 29, "basic", {"emoji": "🔊"}),
         (30, 32, "basic", {"emoji": "✨"}),
         (38, 41, "basic", {}), (42, 45, "basic", {}), (46, 48, "basic", {"emoji": "🤖"}),
-        (49, 52, "stack", {"split": 51, "em": [52]}),
-        (61, 63, "line", {"em": [63]}),
-        (64, 68, "line", {}),
-        (69, 73, "hero", {"hero": 70, "em": [70]}),
-        (74, 78, "line", {"em": [78]}),
-        (79, 81, "stack", {"split": 81, "em": [81]}),
-        (82, 88, "stack", {"split": 87, "em": [88]}),
-        (89, 94, "line", {}),
-        (95, 97, "line", {"em": [96]}),
-        (98, 101, "stack", {"split": 100, "em": [100, 101]}),
-        (102, 107, "line", {"em": [107]}),
+        (49, 52, "below", {"split": 51, "em": [52], "red": True}),
+        (61, 63, "over", {"em": [63]}),
+        (64, 68, "below", {"split": 68, "em": [68]}),
+        (69, 73, "behind", {"hero": 70}),
+        (74, 78, "below", {"split": 76, "em": [78], "red": True}),
+        (79, 81, "side", {"hero": 81, "red": True}),
+        (82, 88, "below", {"split": 87, "em": [88], "red": True}),
+        (89, 94, "below", {"split": 94}),
+        (95, 97, "below", {"split": 95, "em": [96]}),
+        (98, 101, "top", {"hero": 100, "hero2": 101, "red": True}),
+        (102, 107, "over", {"em": [107], "red": True}),
     ],
     mg=[
         ("scan", 38, 48, {}),
@@ -52,8 +60,7 @@ SPEC = {
         ("workflow", 86, 97, {}),
         ("cta", 98, None, {}),
     ],
-    punch=[63, 70, 81, 88, 100],
-    title_line2="Can you tell?",
+    punch=[],
 ),
 "2511": dict(
     turn=dict(glitch=38, reveal=40),
@@ -64,32 +71,31 @@ SPEC = {
         (21, 23, "basic", {"emoji": "✨"}),
         (24, 26, "basic", {"emoji": "🔊"}),
         (27, 30, "basic", {}), (31, 34, "basic", {}), (35, 37, "basic", {"emoji": "🤖"}),
-        (38, 42, "stack", {"split": 41, "em": [42]}),
-        (44, 50, "line", {"em": [47], "small": True}),
-        (51, 55, "hero", {"hero": 53, "em": [53]}),
-        (56, 58, "hero", {"hero": 56, "em": [56], "keep_hero": True}),
-        (59, 62, "line", {}),
-        (63, 65, "line", {"em": [65]}),
-        (66, 71, "stack", {"split": 70, "em": [71]}),
-        (72, 77, "line", {}),
-        (86, 91, "line", {}),
-        (92, 94, "line", {"em": [93]}),
-        (95, 98, "line", {"em": [98]}),
-        (99, 101, "stack", {"split": 101, "em": [101]}),
-        (102, 106, "stack", {"split": 105, "em": [105, 106]}),
+        (38, 42, "below", {"split": 41, "em": [42], "red": True}),
+        (44, 50, "below", {"split": 47, "em": [47]}),
+        (51, 55, "behind", {"hero": 53}),
+        (56, 58, "behind", {"hero": 56, "keep_hero": True}),
+        (59, 62, "over", {}),
+        (63, 65, "top", {"hero": 65, "red": True}),
+        (66, 71, "below", {"split": 70, "em": [71], "red": True}),
+        (72, 77, "below", {"split": 73, "em": [73]}),
+        (86, 91, "over", {}),
+        (92, 94, "side", {"hero": 93, "red": True}),
+        (95, 98, "below", {"split": 97, "em": [98]}),
+        (99, 101, "top", {"hero": 101, "red": True}),
+        (102, 106, "below", {"split": 105, "em": [105, 106], "red": True}),
     ],
     mg=[
         ("scan", 27, 37, {}),
         ("orbit", 45, 50, {"tail": 0.1, "words": ["captions", "motion", "sound", "grade", "vibe", "story"]}),
         ("rings", 53, 55, {}),
         ("wave", 56, 58, {}),
-        ("chips", 63, 65, {"items": ["✦  Made with Claude"]}),
+        ("chips", 59, 62, {"items": ["✦  Made with Claude"]}),
         ("workflow", 70, 77, {}),
         ("comment", 99, 101, {}),
         ("cta", 102, None, {}),
     ],
-    punch=[42, 53, 65, 71, 93, 101],
-    title_line2="Can you tell?",
+    punch=[],
 ),
 "2512": dict(
     turn=dict(glitch=45, reveal=45),
@@ -100,17 +106,17 @@ SPEC = {
         (21, 23, "basic", {"emoji": "🔊"}),
         (24, 26, "basic", {"emoji": "✨"}),
         (35, 37, "basic", {}), (38, 40, "basic", {}), (41, 44, "basic", {"emoji": "🤖"}),
-        (45, 48, "stack", {"split": 48, "em": [48]}),
-        (50, 56, "stack", {"split": 51, "em": [51], "rest_small": True}),
-        (57, 64, "stack", {"split": 58, "em": [58, 59], "rest_small": True}),
-        (65, 69, "hero", {"hero": 68, "em": [68]}),
-        (71, 77, "stack", {"split": 75, "em": [77]}),
-        (78, 84, "stack", {"split": 83, "em": [84]}),
-        (85, 91, "line", {"em": [86]}),
-        (92, 99, "line", {"em": [99]}),
-        (100, 104, "line", {"em": [102]}),
-        (105, 107, "stack", {"split": 107, "em": [107]}),
-        (108, 112, "stack", {"split": 111, "em": [111, 112]}),
+        (45, 48, "below", {"split": 48, "em": [48], "red": True}),
+        (50, 56, "behind", {"hero": 51}),
+        (57, 64, "below", {"split": 58, "em": [58, 59], "rest_small": True}),
+        (65, 69, "side", {"hero": 68, "red": True}),
+        (71, 77, "below", {"split": 75, "em": [77], "red": True}),
+        (78, 84, "below", {"split": 83, "em": [84]}),
+        (85, 91, "below", {"split": 86, "em": [86], "rest_small": True, "red": True}),
+        (92, 99, "over", {"em": [99]}),
+        (100, 104, "behind", {"hero": 102}),
+        (105, 107, "top", {"hero": 107, "red": True}),
+        (108, 112, "below", {"split": 111, "em": [111, 112], "red": True}),
     ],
     mg=[
         ("scan", 35, 44, {}),
@@ -120,11 +126,9 @@ SPEC = {
         ("comment", 105, 107, {}),
         ("cta", 108, None, {}),
     ],
-    punch=[48, 51, 58, 68, 77, 84, 102],
-    title_line2="Can you tell?",
+    punch=[],
 ),
 }
-
 
 def disp(n, i, text):
     t = ROMAN.get(n, {}).get(i, text)
@@ -148,7 +152,7 @@ def build(n):
     speech_end = edl["duration"]
     dur = speech_end + END_CARD
     nfr = int(math.ceil(dur * FPS))
-    total_src = len(os.listdir(f"{WORK}/fr_{n}"))
+    total_src = len(os.listdir(f"{WORK}/fr2_{n}"))
 
     # ---- frame map (output frame -> 1-based source frame file) + segment index
     frames, segi = [], []
@@ -256,9 +260,9 @@ def build(n):
     add("riser", tr - 1.9, 0.55)
     add("impact", tr, 0.95); add("shimmer", tr + 0.02, 0.5); add("whoosh", tr - 0.25, 0.6)
     for c in caps:
-        if c["layout"] == "hero" and not c["opts"].get("keep_hero"):
+        if c["layout"] in ("behind", "side", "top") and not c["opts"].get("keep_hero"):
             add("whoosh_soft", c["t0"], 0.55)
-        if c["layout"] == "stack" and c["t0"] > tr + 0.5:
+        if c["layout"] == "below" and c["t0"] > tr + 0.5:
             add("whoosh_soft", c["words"][0]["t"], 0.28)
     for m in mgs:
         if m["type"] == "scan": add("scan", m["t0"] + 0.1, 0.5)
@@ -287,7 +291,7 @@ def build(n):
               frames=frames, segi=segi, head=head, neck=neck, has_mask=has_mask, turn=dict(tg=round(tg, 3), tr=round(tr, 3)),
               cams=cams, punches=punches, captions=caps, mg=mgs, sfx=sorted(sfx, key=lambda s: s["t"]),
               title_line2=spec.get("title_line2", "Can you tell?"),
-              frame_dir=f"{WORK}/fr_{n}", mask_dir=f"{WORK}/mk_{n}")
+              frame_dir=f"{WORK}/fr2_{n}", mask_dir=f"{WORK}/mk_{n}")
     os.makedirs(f"{ROOT}/build/{n}", exist_ok=True)
     json.dump(tl, open(f"{ROOT}/build/{n}/timeline.json", "w"), ensure_ascii=False)
     with open(f"{ROOT}/build/{n}/timeline.js", "w") as fh:
