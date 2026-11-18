@@ -457,7 +457,7 @@ AD.ad6 = () => {
   }, 'none'));
   B.push(Object.assign(prem(wt(7) - .1, slow(wt(7), wt(11), 1.24, 1.28, 1240), null, (ctx, c, t) => splitTop(ctx, (x, t) => {
     bubble(x, 160, 420, 'jules.mp4', 'who edits your videos?', { light: true }); line(x, t, [tok('who', 7, 66), tok('edits', 8, 66), tok('your', 9, 66)], 640); line(x, t, [gold('videos?', 10, 140)], 770);
-  }, t, 1e9)), { inT: 'slideoff' }));
+  }, t, wt(7) - .5)), { inT: 'slideoff' }));
   B.push(prem(wt(11) - .06, slow(wt(11), wt(16), 1.08, 1.12), null, (ctx, c, t) => {
     cap2(ctx, t, [tok('there', 12, 62), tok('is', 13, 62), tok('no', 14, 62)], [gold('editor.', 15, 150)]);
     const s = eo(inv(wt(15) + .25, wt(15) + .5, t)); if (s > 0) { ctx.strokeStyle = EMBER; ctx.lineWidth = 8; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(330, 1197); ctx.lineTo(330 + 420 * s, 1197); ctx.stroke(); }
@@ -484,8 +484,8 @@ AD.ad6 = () => {
   }));
   B.push(paper(wt(45) - .1, (ctx, t) => {
     paperBG(ctx); heading(ctx, t, [htok('all', 46, 72), htok('my', 47, 72), htok('prompts,', 48, 72), htok('skill', 50, 72)], [etok('&', 51), etok('workflow.', 53)]); darkCard(ctx, 90, 600, 900, 820);
-    [['prompts', 'ready to paste', 48], ['skill', 'vibe-editing.skill', 50], ['workflow', 'start to export', 53]].forEach(([s, sub, wi], k) => {
-      const a = spring(cl((t - wt(wi)) / .55)); if (a <= 0) return; const y = 660 + k * 240 + (1 - a) * 80; ctx.save(); ctx.globalAlpha = cl(a * 1.4);
+    [['prompts', 'ready to paste', 47], ['skill', 'vibe-editing.skill', 50], ['workflow', 'start to export', 53]].forEach(([s, sub, wi], k) => {
+      const a = spring(cl((t - wt(wi) + .15) / .55)); if (a <= 0) return; const y = 660 + k * 240 + (1 - a) * 80; ctx.save(); ctx.globalAlpha = cl(a * 1.4);
       rrect(ctx, 150, y, 780, 200, 30); ctx.fillStyle = '#282523'; ctx.fill(); ctx.strokeStyle = '#48423D'; ctx.lineWidth = 2; ctx.stroke();
       T(ctx, s, 200, y + 100, { size: 90, font: 'IS', align: 'left', fill: GOLD, shadow: false }); T(ctx, sub, 200, y + 160, { size: 28, font: 'JM', align: 'left', fill: MUTED, shadow: false }); ctx.restore(); });
     T(ctx, 'all inside one course', W / 2, 1380, { size: 30, font: 'JB', track: 3, fill: EMBER, shadow: false, alpha: eo(inv(wt(55), wt(55) + .3, t)) });
