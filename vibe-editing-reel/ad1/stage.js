@@ -97,6 +97,22 @@ async function normalFrame(ctx, t, fr) {
   ctx.drawImage(raw, W / 2 - 360 * k, H / 2 - cy * k + (cy - 640) * 0, 720 * k, 1280 * k);
   if (t < wt(40)) genericCaption(ctx, t, t < wt(13) ? 0 : t < wt(27) ? 13 : 27, t < wt(13) ? 12 : t < wt(27) ? 26 : 39);
 }
+// Part 1 is always shown as a labelled specimen: "everyone's AI edit", never as the creator's own frame
+const P1 = { x: 160, y: 470, w: 760, h: 1351 };
+function part1Chrome(ctx, t, a) {
+  const g = ctx.createRadialGradient(W / 2, 700, 100, W / 2, 900, 1300); g.addColorStop(0, '#1A1715'); g.addColorStop(1, '#090808');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); if (a <= 0) return;
+  ctx.save(); ctx.globalAlpha = a;
+  const e = enter(t, .02, .3); T(ctx, "everyone's AI edit", W / 2, 338, { size: 58, font: 'ID8', track: -2, alpha: e.alpha, blur: e.blur, dy: e.dy });
+  const chips = [[14, 'bouncing captions'], [19, 'auto-zoom'], [26, 'stock whoosh']]; let x = W / 2 - 430;
+  chips.forEach(([wi, lab], k) => {
+    const label = `0${k + 1}  ${lab}`, w = mw(ctx, label, 24, 'JB', 1) + 44, c = eo(inv(wt(wi), wt(wi) + .25, t));
+    if (c > 0) { ctx.save(); ctx.globalAlpha = a * c; ctx.translate(0, (1 - c) * 12); rrect(ctx, x, 384, w, 46, 23); ctx.strokeStyle = EMBER; ctx.lineWidth = 2; ctx.stroke();
+      T(ctx, label, x + 22, 416, { size: 24, font: 'JB', track: 1, align: 'left', fill: '#F3B38E', shadow: false }); ctx.restore(); }
+    x += w + 14;
+  });
+  ctx.restore();
+}
 // ---------- the premium frame ----------
 async function premiumFrame(ctx, t, f, fr, c, behind, front) {
   const pre = await img(`${D.asset}/bake/pre/${pad(fr)}.webp`);
@@ -278,20 +294,20 @@ window.renderAt = async (f) => {
   if (!S.feed) bounds();
   const t = f / FPS, fr = D.frames[f];
   X.setTransform(1, 0, 0, 1, 0, 0); X.globalAlpha = 1; X.filter = 'none'; X.globalCompositeOperation = 'source-over';
-  if (t < S.feed) { await normalFrame(X, t, fr); return true; }
+  if (t < S.feed) { await normalFrame(OX, t, fr); part1Chrome(X, t, 1); cardImg(X, OFF, P1.x, P1.y, P1.w, P1.h, 36, .5); return true; }
   if (t < S.sw) {                                       // Part 1 → feed: the video becomes a card and gets scrolled away
-    await normalFrame(OX, t, fr); X.fillStyle = '#0A0A0B'; X.fillRect(0, 0, W, H);
-    const p = eio(inv(S.feed, S.feed + .45, t)), cw = lerp(W, 560, p), ch = lerp(H, 996, p), r = lerp(0, 40, p);
+    await normalFrame(OX, t, fr); const p = eio(inv(S.feed, S.feed + .45, t)); part1Chrome(X, t, 1 - p);
+    const cw = lerp(P1.w, 560, p), ch = lerp(P1.h, 996, p), r = lerp(36, 40, p), cy0 = lerp(P1.y + P1.h / 2, 960, p);
     const fl = ei(inv(S.flick, S.flick + .32, t)), nx = spring(inv(S.flick + .05, S.flick + .6, t));
     const raw2 = await img(`${D.asset}/bake/raw/${pad(D.frames[0])}.jpg`);
     if (p > .2) {
       X.save(); X.globalAlpha = cl((p - .2) / .5) * .45; X.filter = 'brightness(.55)';
-      cardImg(X, raw2, (W - 560) / 2, 960 - ch / 2 - 996 - 40 - fl * 1600, 560, 996, 40, 0); cardImg(X, raw2, (W - 560) / 2, 960 + ch / 2 + 40 - nx * (996 + 40), 560, 996, 40, 0); X.restore();
+      cardImg(X, raw2, (W - 560) / 2, cy0 - ch / 2 - 996 - 40 - fl * 1600, 560, 996, 40, 0); cardImg(X, raw2, (W - 560) / 2, cy0 + ch / 2 + 40 - nx * (996 + 40), 560, 996, 40, 0); X.restore();
     }
-    const y = 960 - ch / 2 - fl * 1700;
+    const y = cy0 - ch / 2 - fl * 1700;
     if (fl > 0) { X.save(); for (let j = 6; j > 0; j--) { X.globalAlpha = .08; cardImg(X, OFF, (W - cw) / 2, y + j * 60 * fl, cw, ch, r, 0); } X.restore(); }
     cardImg(X, OFF, (W - cw) / 2, y, cw, ch, r, p > .1 ? .5 : 0);
-    if (nx > 0) { X.save(); X.globalAlpha = .9; cardImg(X, raw2, (W - 560) / 2, 960 + ch / 2 + 40 - nx * (996 + 40), 560, 996, 40, .5, 'brightness(.7)'); X.restore(); }
+    if (nx > 0) { X.save(); X.globalAlpha = .9; cardImg(X, raw2, (W - 560) / 2, cy0 + ch / 2 + 40 - nx * (996 + 40), 560, 996, 40, .5, 'brightness(.7)'); X.restore(); }
     return true;
   }
   if (t < S.prem + .15) {                               // THE SWITCH: before / after on paper, then push into "after"
@@ -323,22 +339,25 @@ window.renderAt = async (f) => {
   if (t < S.mg3) { await sheetOff(t, f, fr, S.pb, mgWorkflow); return true; }
   if (t < S.pc) { await sheetOver(t, f, fr, S.mg3, mgSettings); return true; }
   if (t < S.end) { await sheetOff(t, f, fr, S.pc, mgSettings); return true; }
-  // END CARD: render its own before/after content (shards render out of order)
-  { const fx = D.frames[Math.round(S.prem * FPS)]; await premiumFrame(OX2, t, f, fx, premCam(S.prem), null, null);
-    const raw = await img(`${D.asset}/bake/raw/${pad(fx)}.jpg`); TX.drawImage(raw, 0, 0, W, H); }
+  // END CARD: a live loop of the premium shot (natural eye movement, never a frozen frame)
+  { const s0 = Math.round(wt(44) * FPS), fe = Math.max(0, f - Math.round(S.end * FPS)), fx = D.frames[s0 + fe];
+    await premiumFrame(OX2, t, f, fx, cam(1.12, 860), null, null); }
   await sheetOver(t, f, D.frames[Math.min(f, D.frames.length - 1)], S.end, endCard, 1, .45);
   return true;
 };
 let ENDIMG = null;
 function endCard(ctx, t) {
-  paperBG(ctx, P.paper2);
-  const a1 = spring(cl((t - S.end - .15) / .7)), a2 = spring(cl((t - S.end - .25) / .7));
-  const tilt = (src, x, y, w, h, deg, a, filt) => { ctx.save(); ctx.globalAlpha = cl(a * 1.4); ctx.translate(x + w / 2, y + h / 2 + (1 - a) * 300); ctx.rotate(deg * Math.PI / 180 * a); cardImg(ctx, src, -w / 2, -h / 2, w, h, 30, .4, filt); ctx.restore(); };
-  tilt(TMP, 120, 650, 330, 587, 6, a1, 'grayscale(1)'); tilt(OFF2, 560, 600, 380, 676, -5, a2, 'none');
-  line(ctx, t, [tok('Vibe', null, 170, 'IS', EMBER, { t0: S.end + .1, shadow: false }), tok('Editing', null, 140, 'ID8', INK, { t0: S.end + .2, shadow: false })], 520);
-  const b = spring(cl((t - S.end - .45) / .6)), pulse = 1 + .03 * Math.pow(Math.sin(Math.PI * (t - S.end) / .9), 8);
-  ctx.save(); ctx.globalAlpha = cl(b * 1.5); ctx.translate(W / 2, 1436); ctx.scale(lerp(.6, 1, b) * pulse, lerp(.6, 1, b) * pulse);
-  ctx.shadowColor = 'rgba(242,100,30,.45)'; ctx.shadowBlur = 40; rrect(ctx, -330, -56, 660, 112, 56); ctx.fillStyle = EMBER; ctx.fill(); ctx.shadowColor = 'transparent';
-  T(ctx, 'Learn the workflow  →', 0, 17, { size: 46, font: 'ID8', track: -1, fill: INK, shadow: false }); ctx.restore();
-  T(ctx, 'tap the button below', W / 2, 1560, { size: 30, font: 'JM', fill: MUTED, shadow: false, alpha: cl((t - S.end - .6) / .3) });
+  paperBG(ctx, P.paper2); const e0 = S.end;
+  const k = eo(inv(e0 + .05, e0 + .4, t)); T(ctx, 'THE WORKFLOW', W / 2, 312, { size: 24, font: 'JB', track: 8, fill: EMBER, shadow: false, alpha: k });
+  line(ctx, t, [tok('Vibe', null, 150, 'IS', EMBER, { t0: e0 + .1, shadow: false }), tok('Editing', null, 124, 'ID8', INK, { t0: e0 + .18, shadow: false })], 420);
+  const a = spring(cl((t - e0 - .2) / .8)), cw = 340, ch = 604, cx = (W - cw) / 2, cy = 462 + (1 - a) * 260;
+  ctx.save(); ctx.globalAlpha = cl(a * 1.4); cardImg(ctx, OFF2, cx, cy, cw, ch, 32, .45); ctx.restore();
+  ctx.save(); ctx.globalAlpha = cl(a * 1.4); rrect(ctx, cx + 18, cy + 18, 104, 38, 19); ctx.fillStyle = 'rgba(17,15,14,.72)'; ctx.fill();
+  ctx.fillStyle = EMBER; ctx.beginPath(); ctx.arc(cx + 38, cy + 37, 6, 0, 7); ctx.fill();
+  T(ctx, 'after', cx + 52, cy + 45, { size: 22, font: 'ID6', align: 'left', fill: CREAM, shadow: false }); ctx.restore();
+  const b = spring(cl((t - e0 - .45) / .6)), pulse = 1 + .025 * Math.pow(Math.sin(Math.PI * (t - e0 - .4) / 1.0), 8);
+  ctx.save(); ctx.globalAlpha = cl(b * 1.5); ctx.translate(W / 2, 1140); ctx.scale(lerp(.7, 1, b) * pulse, lerp(.7, 1, b) * pulse);
+  ctx.shadowColor = 'rgba(242,100,30,.4)'; ctx.shadowBlur = 40; rrect(ctx, -320, -50, 640, 100, 50); ctx.fillStyle = EMBER; ctx.fill(); ctx.shadowColor = 'transparent';
+  T(ctx, 'Learn the workflow  →', 0, 15, { size: 42, font: 'ID8', track: -1, fill: INK, shadow: false }); ctx.restore();
+  T(ctx, 'make videos nobody can tell are AI', W / 2, 1240, { size: 26, font: 'JM', fill: '#6F665F', shadow: false, alpha: cl((t - e0 - .7) / .3) });
 }
