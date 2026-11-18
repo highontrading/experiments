@@ -39,7 +39,7 @@ def generic(im, words_, hi, y=1150, size=92):
     ws = [f.getlength(w) for f, w in zip(fs, words_)]; x = W / 2 - (sum(ws) + 26 * (len(ws) - 1)) / 2
     for i, (w, f) in enumerate(zip(words_, fs)):
         d.text((x, y), w, font=f, fill=(255, 225, 40) if i == hi else (255, 255, 255), anchor='ls', stroke_width=8, stroke_fill=(0, 0, 0)); x += ws[i] + 26
-def spec(ad, i, label, chips, cw, hi, extra=None, card_label=None):
+def spec(ad, i, label, chips, cw, hi, extra=None, card_label=None, cap_y=1150):
     """Part-1 specimen: the raw take inside a card on ink, clearly labelled as the typical output."""
     im = Image.new('RGB', (W, H), (12, 11, 10)); d = ImageDraw.Draw(im)
     g = Image.new('L', (W, H), 0); ImageDraw.Draw(g).ellipse((-200, 200, 1280, 1700), fill=60); im.paste(Image.new('RGB', (W, H), (40, 34, 30)), (0, 0), g.filter(ImageFilter.GaussianBlur(200)))
@@ -48,14 +48,14 @@ def spec(ad, i, label, chips, cw, hi, extra=None, card_label=None):
     for k, lab in enumerate(chips):
         s = f'0{k + 1}  {lab}'; w = text_w(s, font('monob', 24), 1) + 44
         d.rounded_rectangle((x, 384, x + w, 430), 23, outline=EMBER, width=2); draw_text(im, (x + 22, 416), s, font('monob', 24), (243, 179, 142), 1, anchor='ls', shadow=0); x += w + 14
-    card = raw_frame(rawp(ad, i)); generic(card, cw, hi)
+    card = raw_frame(rawp(ad, i)); generic(card, cw, hi, y=cap_y)
     if extra: extra(card)
     paste_card(im, card.resize((760, 1351)), (160, 470), 36)
     if card_label: draw_text(im, (186, 520), card_label, font('monob', 22), CREAM, 2, anchor='ls', shadow=.5)
     return im
 def paper(h1, h2, card_h=760, y=600, seed=11):
-    im = paper_bg(seed); draw_text(im, (W / 2, 400), h1, font('disp', 82), INK, -3, shadow=0)
-    if h2: draw_text(im, (W / 2, 520), h2, font('serif', 128), EMBER, 0, shadow=0)
+    im = paper_bg(seed); draw_text(im, (W / 2, 400), h1, font('disp', 82 if text_w(h1, font('disp', 82), -3) < 920 else 64), INK, -3, shadow=0)
+    if h2: draw_text(im, (W / 2, 520), h2, font('serif', 128 if text_w(h2, font('serif', 128)) < 940 else 100), EMBER, 0, shadow=0)
     if card_h: paste_card(im, Image.new('RGB', (900, card_h), CARD), (90, y), 48)
     return im, ImageDraw.Draw(im), (90, y, 990, y + card_h)
 def pill(d, im, x, y, text, fill=(40, 37, 35), ink=CREAM, size=32, outline=(72, 66, 61), f='semi', r=None):
@@ -161,7 +161,7 @@ def ad3():
     def comments(card):
         for k, (n, t) in enumerate([('user_2931', 'this is AI, right?'), ('kay.edits', 'AI edit lol'), ('mr_frames', 'looks so generic')]):
             bubble(card, 120, 1100 + k * 150, n, t, 840, light=True)
-    P.append((15, 'PART 1', 'It hurt. But they were right. The videos looked cheap at that time.', 'More comments stack up. On "cheap" the card desaturates and the background dims. An honest moment, kept restrained.', spec(a, 24, 'my first AI edit', ['auto-captions', 'auto-zoom'], ['LOOKED', 'CHEAP'], 1, extra=comments)))
+    P.append((15, 'PART 1', 'It hurt. But they were right. The videos looked cheap at that time.', 'More comments stack up. On "cheap" the card desaturates and the background dims. An honest moment, kept restrained.', spec(a, 24, 'my first AI edit', ['auto-captions', 'auto-zoom'], ['LOOKED', 'CHEAP'], 1, extra=comments, cap_y=820)))
     im, d, box = paper('I stopped', 'changing tools.', 700)
     for k, t in enumerate(['tool #1', 'tool #2', 'tool #3', 'tool #4']):
         y = box[1] + 60 + k * 150; w = pill(d, im, box[0] + 80, y, t, size=40); d.line([(box[0] + 70, y + 37), (box[0] + 90 + w, y + 37)], fill=EMBER, width=5)
@@ -277,7 +277,7 @@ def ad6():
         d.rounded_rectangle((640, 470, 960, 650), 24, fill=(40, 37, 35)); d.rounded_rectangle((670, 600, 930, 616), 8, fill=EMBER)
         draw_text(top, (800, 560), 'RENDER', font('monob', 30), CREAM, 4, shadow=0); draw_text(top, (800, 700), 'Claude builds', font('serif', 80), GOLD, 0, shadow=0)
     P.append((16, 'SPLIT · HOW', 'I talk and Claude builds the edit.', 'Top half: your voice waveform turns into an arrow that feeds a render bar filling up. "Claude" is set in type only, with no third-party logos.', split(a, 20, talk)))
-    im, d, box = paper('the same Claude', 'that makes others look cheap.', 760)
+    im, d, box = paper('the same Claude that makes', 'others look cheap.', 760)
     for k in range(2):
         x = box[0] + 60 + k * 420; c_ = (raw_frame(rawp(a, 26)) if k == 0 else prem(a, 26, 1.1, 880)).resize((360, 560)); im.paste(c_, (x, box[1] + 60), rounded(c_, 26))
         pill(d, im, x + 70, box[1] + 640, 'Claude', size=34)
