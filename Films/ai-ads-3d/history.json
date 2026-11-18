@@ -1,0 +1,133 @@
+{
+ "deals": [
+  {
+   "category": "spark",
+   "seed": "2026-11-18:ai-ads-3d#1",
+   "dealt": [
+    "s1",
+    "s2",
+    "s3"
+   ],
+   "redeal_reason": null,
+   "pick": null,
+   "reason": null,
+   "at": "2026-11-18T18:38",
+   "texts": {
+    "s1": "seed: camel racing · place: a frozen lake · form: a documentary interview · medium: cardboard · era: the moon landing year · engine: two lives that never meet, until",
+    "s2": "seed: Writing-on-Stone Provincial Park · place: a salt flat · form: a match-cut chain · medium: daguerreotype · colour: Wes Anderson pink · engine: a confession",
+    "s3": "seed: Château de Chillon · place: an airport baggage carousel · form: a screen recording · medium: LEGO-like bricks · colour: spring greens · era: the 1920s"
+   },
+   "seeds": {
+    "s1": {
+     "name": "camel racing",
+     "fact": "Camel racing is a form of racing in which jockeys riding on camels compete against each other to finish a set number of laps around a circular racetrack. It is most popular in the Middle East, the Horn of Africa, Pakistan, Mongolia and Australia.",
+     "link": "https://en.wikipedia.org/wiki/Camel_racing",
+     "pool": "custom"
+    },
+    "s2": {
+     "name": "Writing-on-Stone Provincial Park",
+     "fact": "Alberta provincial park, Canada",
+     "link": "https://en.wikipedia.org/wiki/Writing-on-Stone_Provincial_Park",
+     "pool": "place"
+    },
+    "s3": {
+     "name": "Château de Chillon",
+     "fact": "Photograph, France, c. 1870, printed c. 1900, carbon print",
+     "link": "https://clevelandart.org/art/2022.353",
+     "pool": "museum"
+    }
+   }
+  },
+  {
+   "category": "type",
+   "seed": "2026-11-18:ai-ads-3d#1",
+   "dealt": [
+    "cormorant-elegy",
+    "folk-horror",
+    "quiet-cinema"
+   ],
+   "weights": {
+    "cormorant-elegy": 2.5,
+    "folk-horror": 2.5,
+    "quiet-cinema": 0.6
+   },
+   "look_families": [],
+   "filters": {
+    "purpose": "cinematic",
+    "look": null,
+    "mood": "airport signage, functional, night, quiet, wry",
+    "latin_only": false
+   },
+   "redeal_reason": null,
+   "pick": "quiet-cinema",
+   "reason": "Familjen Grotesk reads as airport signage for the signs and adverts; Instrument Serif for the one title",
+   "at": "2026-11-18T18:43"
+  }
+ ],
+ "taste": [
+  {
+   "at": "2026-11-18T18:43:55",
+   "project": "ai-ads-3d",
+   "kind": "pairing",
+   "id": "cormorant-elegy",
+   "verdict": "pass",
+   "families": [
+    "Cormorant",
+    "Mona Sans"
+   ],
+   "tags": [
+    "elegant",
+    "garalde",
+    "grotesque",
+    "romantic",
+    "sans",
+    "serif",
+    "variable-width"
+   ],
+   "reason": "Familjen Grotesk reads as airport signage for the signs and adverts; Instrument Serif for the one title"
+  },
+  {
+   "at": "2026-11-18T18:43:55",
+   "project": "ai-ads-3d",
+   "kind": "pairing",
+   "id": "folk-horror",
+   "verdict": "pass",
+   "families": [
+    "Grenze Gotisch",
+    "Cormorant"
+   ],
+   "tags": [
+    "dark",
+    "display",
+    "dramatic",
+    "elegant",
+    "folk",
+    "garalde",
+    "occult",
+    "serif"
+   ],
+   "reason": "Familjen Grotesk reads as airport signage for the signs and adverts; Instrument Serif for the one title"
+  },
+  {
+   "at": "2026-11-18T18:43:55",
+   "project": "ai-ads-3d",
+   "kind": "pairing",
+   "id": "quiet-cinema",
+   "verdict": "like",
+   "families": [
+    "Instrument Serif",
+    "Familjen Grotesk"
+   ],
+   "tags": [
+    "condensed",
+    "elegant",
+    "grotesque",
+    "quiet",
+    "sans",
+    "serif",
+    "warm"
+   ],
+   "reason": "Familjen Grotesk reads as airport signage for the signs and adverts; Instrument Serif for the one title"
+  }
+ ]
+}

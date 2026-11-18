@@ -1,0 +1,6 @@
+FAILED: capture.mjs (exit 1)
+    at async <anonymous>:2:15
+    at Object.eval (file:///home/user/experiments/Films/ai-ads-3d/tools/capture.mjs:479:37)
+    at async exportAudio (file:///home/user/experiments/Films/ai-ads-3d/tools/capture.mjs:294:16)
+    at async file:///home/user/experiments/Films/ai-ads-3d/tools/capture.mjs:167:3
+log: logs/make-draft.log

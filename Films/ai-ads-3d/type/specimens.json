@@ -1,0 +1,139 @@
+{
+ "title": null,
+ "pairings": [
+  {
+   "id": "cormorant-elegy",
+   "why": "fragile garalde titles, sturdy grotesque captions",
+   "setup": {},
+   "card": null,
+   "roles": {
+    "display": {
+     "family": "Cormorant",
+     "pkg": "cormorant",
+     "version": "5.3.0",
+     "cap": 0.625,
+     "variable": "wght",
+     "varVersion": "5.3.0",
+     "axes": {
+      "wght": [
+       300.0,
+       700.0,
+       400.0
+      ]
+     }
+    },
+    "text": {
+     "family": "Mona Sans",
+     "pkg": "mona-sans",
+     "version": "5.3.0",
+     "cap": 0.729,
+     "variable": "standard",
+     "varVersion": "5.3.0",
+     "axes": {
+      "wdth": [
+       75.0,
+       125.0,
+       100.0
+      ],
+      "wght": [
+       200.0,
+       900.0,
+       400.0
+      ]
+     }
+    },
+    "mono": null
+   }
+  },
+  {
+   "id": "folk-horror",
+   "why": "A blackletter gothic for the title, a fragile garalde for the lines: old print, a cold room.",
+   "setup": {
+    "display": {
+     "wght": 600
+    },
+    "text": {
+     "wght": 400
+    }
+   },
+   "card": null,
+   "roles": {
+    "display": {
+     "family": "Grenze Gotisch",
+     "pkg": "grenze-gotisch",
+     "version": "5.3.0",
+     "cap": 0.603,
+     "variable": "wght",
+     "varVersion": "5.3.0",
+     "axes": {
+      "wght": [
+       100,
+       900
+      ]
+     }
+    },
+    "text": {
+     "family": "Cormorant",
+     "pkg": "cormorant",
+     "version": "5.3.0",
+     "cap": 0.625,
+     "variable": "wght",
+     "varVersion": "5.3.0",
+     "axes": {
+      "wght": [
+       300.0,
+       700.0,
+       400.0
+      ]
+     }
+    },
+    "mono": null
+   }
+  },
+  {
+   "id": "quiet-cinema",
+   "why": "A condensed sharp serif for the title, a warm grotesk with ink traps for captions; both narrow, both restrained.",
+   "setup": {
+    "display": {
+     "wght": 400,
+     "italic": true
+    },
+    "text": {
+     "wght": 500
+    }
+   },
+   "card": null,
+   "roles": {
+    "display": {
+     "family": "Instrument Serif",
+     "pkg": "instrument-serif",
+     "version": "5.3.0",
+     "cap": 0.72,
+     "weights": [
+      400
+     ],
+     "styles": [
+      "normal",
+      "italic"
+     ]
+    },
+    "text": {
+     "family": "Familjen Grotesk",
+     "pkg": "familjen-grotesk",
+     "version": "5.3.0",
+     "cap": 0.65,
+     "variable": "wght",
+     "varVersion": "5.3.0",
+     "axes": {
+      "wght": [
+       400.0,
+       700.0,
+       400.0
+      ]
+     }
+    },
+    "mono": null
+   }
+  }
+ ]
+}

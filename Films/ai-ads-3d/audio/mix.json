@@ -1,0 +1,263 @@
+{
+ "duration": 60,
+ "out": "audio/mix-v1.wav",
+ "layers": [
+  {
+   "file": "audio/score.wav",
+   "at": 0,
+   "gain_db": 0,
+   "bus": "music"
+  },
+  {
+   "file": "audio/vo-t/VO1.wav",
+   "at": 3.0,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO2.wav",
+   "at": 11.0,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO3.wav",
+   "at": 15.6,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO4.wav",
+   "at": 38.2,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO5.wav",
+   "at": 41.4,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO6.wav",
+   "at": 48.0,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO7.wav",
+   "at": 54.2,
+   "gain_db": 0,
+   "bus": "dialogue"
+  },
+  {
+   "file": "assets/sound/terminal.wav",
+   "at": 0,
+   "gain_db": -8,
+   "bus": "ambience",
+   "loop": true,
+   "length": 22.6,
+   "fade_out": 0.8
+  },
+  {
+   "file": "assets/sound/terminal.wav",
+   "at": 35.4,
+   "gain_db": -8,
+   "bus": "ambience",
+   "loop": true,
+   "length": 24.6,
+   "fade_in": 0.8,
+   "fade_out": 1.2
+  },
+  {
+   "file": "assets/sound/belt.wav",
+   "at": 0,
+   "gain_db": -9,
+   "bus": "ambience",
+   "loop": true,
+   "length": 21.8,
+   "fade_out": 0.6
+  },
+  {
+   "file": "assets/sound/belt.wav",
+   "at": 35.9,
+   "gain_db": -9,
+   "bus": "ambience",
+   "loop": true,
+   "length": 16.4,
+   "fade_in": 0.4,
+   "fade_out": 1.5
+  },
+  {
+   "file": "assets/sound/belt.wav",
+   "at": 51.0,
+   "gain_db": -19,
+   "bus": "ambience",
+   "loop": true,
+   "length": 9.0,
+   "fade_in": 1.5,
+   "fade_out": 1.5
+  },
+  {
+   "file": "assets/sound/backhall.wav",
+   "at": 21.3,
+   "gain_db": -6,
+   "bus": "ambience",
+   "loop": true,
+   "length": 15.0,
+   "fade_in": 0.4,
+   "fade_out": 0.6
+  },
+  {
+   "file": "assets/sound/bag.wav",
+   "at": 0.3,
+   "gain_db": -6,
+   "bus": "foley",
+   "pan": -0.2
+  },
+  {
+   "file": "assets/sound/flaps.wav",
+   "at": 21.05,
+   "gain_db": -1,
+   "bus": "foley"
+  },
+  {
+   "file": "assets/sound/flaps.wav",
+   "at": 35.65,
+   "gain_db": -2,
+   "bus": "foley"
+  },
+  {
+   "file": "assets/sound/servo.wav",
+   "at": 26.2,
+   "gain_db": -4,
+   "bus": "sfx",
+   "pan": 0.4
+  },
+  {
+   "file": "assets/sound/servo.wav",
+   "at": 27.6,
+   "gain_db": -4,
+   "bus": "sfx",
+   "pan": 0.4
+  },
+  {
+   "file": "assets/sound/servo.wav",
+   "at": 28.8,
+   "gain_db": -4,
+   "bus": "sfx",
+   "pan": 0.4
+  },
+  {
+   "file": "assets/sound/buzz.wav",
+   "at": 40.44,
+   "gain_db": 0,
+   "bus": "foley"
+  },
+  {
+   "file": "assets/sound/buzz.wav",
+   "at": 39.6,
+   "gain_db": -14,
+   "bus": "foley",
+   "pan": 0.5
+  },
+  {
+   "file": "assets/sound/buzz.wav",
+   "at": 40.02,
+   "gain_db": -14,
+   "bus": "foley",
+   "pan": -0.5
+  },
+  {
+   "file": "assets/sound/buzz.wav",
+   "at": 41.28,
+   "gain_db": -14,
+   "bus": "foley",
+   "pan": 0.5
+  },
+  {
+   "file": "assets/sound/buzz.wav",
+   "at": 42.12,
+   "gain_db": -14,
+   "bus": "foley",
+   "pan": 0.5
+  },
+  {
+   "file": "assets/sound/buzz.wav",
+   "at": 43.38,
+   "gain_db": -14,
+   "bus": "foley",
+   "pan": -0.5
+  },
+  {
+   "file": "assets/sound/thud.wav",
+   "at": 44.129,
+   "gain_db": -6.0,
+   "bus": "foley",
+   "pan": 0.1
+  },
+  {
+   "file": "assets/sound/thud.wav",
+   "at": 44.429,
+   "gain_db": -6.6,
+   "bus": "foley",
+   "pan": -0.1
+  },
+  {
+   "file": "assets/sound/thud.wav",
+   "at": 44.729,
+   "gain_db": -7.2,
+   "bus": "foley",
+   "pan": 0.1
+  },
+  {
+   "file": "assets/sound/thud.wav",
+   "at": 45.029,
+   "gain_db": -7.8,
+   "bus": "foley",
+   "pan": -0.1
+  },
+  {
+   "file": "assets/sound/thud.wav",
+   "at": 45.329,
+   "gain_db": -8.4,
+   "bus": "foley",
+   "pan": 0.1
+  },
+  {
+   "file": "assets/sound/thud.wav",
+   "at": 45.629,
+   "gain_db": -9.0,
+   "bus": "foley",
+   "pan": -0.1
+  },
+  {
+   "file": "assets/sound/thud.wav",
+   "at": 45.929,
+   "gain_db": -9.6,
+   "bus": "foley",
+   "pan": 0.1
+  },
+  {
+   "file": "assets/sound/thud.wav",
+   "at": 46.229,
+   "gain_db": -10.2,
+   "bus": "foley",
+   "pan": -0.1
+  },
+  {
+   "file": "assets/sound/thud.wav",
+   "at": 46.529,
+   "gain_db": -10.8,
+   "bus": "foley",
+   "pan": 0.1
+  },
+  {
+   "file": "assets/sound/thud.wav",
+   "at": 46.829,
+   "gain_db": -11.399999999999999,
+   "bus": "foley",
+   "pan": -0.1
+  }
+ ]
+}

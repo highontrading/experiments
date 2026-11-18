@@ -1,0 +1,3 @@
+vibes: 11 takes -> audio/samples/vibes/ (labels an octave low: corrected by measuring)
+fm-piano: 16 takes -> audio/samples/fm-piano/
+index: audio/samples/index.json · INSTRUMENTS = ["fm-piano", "vibes"] in film.html

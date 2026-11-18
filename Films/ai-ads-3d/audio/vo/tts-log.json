@@ -1,0 +1,72 @@
+[
+ {
+  "id": "VO1",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm",
+  "chars": 55,
+  "seconds": 3.76,
+  "file": "audio/vo/VO1.wav"
+ },
+ {
+  "id": "VO2",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm",
+  "chars": 39,
+  "seconds": 2.98,
+  "file": "audio/vo/VO2.wav"
+ },
+ {
+  "id": "VO3",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm",
+  "chars": 32,
+  "seconds": 2.48,
+  "file": "audio/vo/VO3.wav"
+ },
+ {
+  "id": "VO4",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm",
+  "chars": 17,
+  "seconds": 2.17,
+  "file": "audio/vo/VO4.wav"
+ },
+ {
+  "id": "VO5",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm",
+  "chars": 47,
+  "seconds": 5.23,
+  "file": "audio/vo/VO5.wav"
+ },
+ {
+  "id": "VO6",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm",
+  "chars": 46,
+  "seconds": 4.02,
+  "file": "audio/vo/VO6.wav"
+ },
+ {
+  "id": "VO7",
+  "engine": "elevenlabs",
+  "model": "eleven_v3",
+  "voice": "pFZP5JQG7iQjIQuC4Bku",
+  "style": "calm",
+  "chars": 60,
+  "seconds": 4.49,
+  "file": "audio/vo/VO7.wav"
+ }
+]
