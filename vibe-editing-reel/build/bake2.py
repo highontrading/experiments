@@ -11,7 +11,9 @@ src, rw, ew, edl, out = sys.argv[1:6]
 for d in ('raw', 'pre'): os.makedirs(f'{out}/{d}', exist_ok=True)
 torch.set_num_threads(int(os.environ.get("OMP_NUM_THREADS", "4"))); net = rvm_net.load(rw); sr = esrgan.load(ew)
 W, H, OW, OH = 720, 1280, 1080, 1920
-want = sorted(set(json.load(open(edl))['frames'])); last = want[-1]
+E = json.load(open(edl)); want = sorted(set(E['frames'])); last = want[-1]
+PF = float(os.environ.get('PREMIUM_FROM', '0'))                       # output seconds; earlier frames only appear small/raw
+premium = set(E['frames'][int(PF * 30):])
 done_already = {int(f[:5]) for f in os.listdir(f'{out}/pre')}
 cas = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 yy, xx = np.mgrid[0:OH, 0:OW].astype(np.float32)
@@ -28,7 +30,7 @@ def track(img):
 def head_up(img, f):
     """Lanczos 1.5x for the frame, Real-ESRGAN on the head + hair, feathered in."""
     base = np.asarray(Image.fromarray(img).resize((OW, OH), Image.LANCZOS)).astype(np.float32)
-    cx, cy, fw = f; x0 = int(max(0, cx - fw * 1.25)); x1 = int(min(W, cx + fw * 1.25)); y0 = int(max(0, cy - fw * 1.45)); y1 = int(min(H, cy + fw * 1.05))
+    cx, cy, fw = f; x0 = int(max(0, cx - fw * .9)); x1 = int(min(W, cx + fw * .9)); y0 = int(max(0, cy - fw * 1.2)); y1 = int(min(H, cy + fw * .62))
     x0 -= x0 % 4; y0 -= y0 % 4; crop = np.ascontiguousarray(img[y0:y1, x0:x1])
     cw, ch = int((x1 - x0) * 1.5), int((y1 - y0) * 1.5)
     up = esrgan.upscale(sr, crop, cw, ch).astype(np.float32)
@@ -88,6 +90,9 @@ with torch.no_grad():
         fgr, pha, rec = net(torch.from_numpy(img).permute(2, 0, 1).float().div(255)[None], *rec, downsample_ratio=0.5); prev = idx
         f = track(img); faces[idx] = [float(v) for v in f]
         if not use or idx in done_already: continue
+        if idx not in premium:
+            lz = Image.fromarray(img).resize((OW, OH), Image.LANCZOS).filter(ImageFilter.UnsharpMask(radius=1.3, percent=55, threshold=2))
+            lz.save(f'{out}/raw/{idx:05d}.jpg', quality=93); n += 1; continue
         hi = head_up(img, f)
         Image.fromarray(hi).save(f'{out}/raw/{idx:05d}.jpg', quality=93)
         af = np.clip((cv2.resize(pha[0, 0].numpy(), (OW, OH), interpolation=cv2.INTER_LANCZOS4) - .5) * 1.08 + .5, 0, 1)
