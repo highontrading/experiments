@@ -519,13 +519,330 @@ function endBelow(t) {
   X.restore();
 }
 
+// ======================================================= WHITE BOARD SCENES
+// A minimal off-white explainer plane takes over the card; the footage glides into a 16:9 PiP.
+const PAPER = "#F6F4F0", INKC = "#141414", GREYC = "#8D8882", LINEC = "rgba(20,20,20,0.12)";
+const PIP = { w: 214, h: 120, x: CW - 214 - 22, y: CH - 120 - 22 };
+const BOARDS = mgOf("board").sort((a, b) => a.t0 - b.t0);
+const BGROUPS = [];
+for (const b of BOARDS) {
+  const g = BGROUPS[BGROUPS.length - 1];
+  if (g && b.t0 - g.t1 < 0.6) { g.t1 = Math.max(g.t1, b.t1); g.items.push(b); } else BGROUPS.push({ t0: b.t0, t1: b.t1, items: [b] });
+}
+// content windows: neighbours crossfade at the middle of their overlap/gap
+for (const g of BGROUPS) g.items.forEach((b, i) => {
+  const prev = g.items[i - 1], next = g.items[i + 1];
+  b.c0 = prev ? (prev.t1 + b.t0) / 2 : g.t0; b.c1 = next ? (b.t1 + next.t0) / 2 : g.t1;
+});
+function boardAmt(t) {
+  for (const g of BGROUPS) {
+    if (t < g.t0 - 0.1 || t > g.t1 + 0.1) continue;
+    return eInOut(smooth(t, g.t0 - 0.1, g.t0 + 0.45)) * (1 - eInOut(smooth(t, g.t1 - 0.4, g.t1 + 0.1)));
+  }
+  return 0;
+}
+function boardItems(t) {   // [{b, a, lt}] content alpha + local time
+  const out = [];
+  for (const g of BGROUPS) for (const b of g.items) {
+    const a = (b.c0 === g.t0 ? 1 : smooth(t, b.c0 - 0.15, b.c0 + 0.15)) * (b.c1 === g.t1 ? 1 : 1 - smooth(t, b.c1 - 0.15, b.c1 + 0.15));
+    if (a > 0.001 && t >= b.c0 - 0.2 && t <= b.c1 + 0.2) out.push({ b, a, lt: t - b.c0 });
+  }
+  return out;
+}
+function paper(c, k) {
+  c.save(); c.globalAlpha = k;
+  c.fillStyle = PAPER; c.fillRect(0, 0, CW, CH);
+  const g = c.createRadialGradient(CW / 2, CH * 0.4, 50, CW / 2, CH * 0.4, 700);
+  g.addColorStop(0, "rgba(255,255,255,0.9)"); g.addColorStop(1, "rgba(230,226,220,0.6)");
+  c.fillStyle = g; c.fillRect(0, 0, CW, CH);
+  c.fillStyle = "rgba(20,20,20,0.075)";
+  for (let x = 14; x < CW; x += 28) for (let y = 14; y < CH; y += 28) c.fillRect(x - 0.8, y - 0.8, 1.6, 1.6);
+  c.restore();
+}
+const bIn = (lt, d, dur = 0.4) => eOut(clamp((lt - d) / dur));
+function kicker(c, text, y, a) {
+  c.save(); c.globalAlpha = a; c.textAlign = "center"; c.textBaseline = "alphabetic";
+  font(c, 700, 19, SANS); c.letterSpacing = "5px"; c.fillStyle = RED; c.fillText(text, CW / 2, y); c.restore();
+}
+function softCard(c, x, y, w, h, r = 18, fill = "#fff") {
+  c.save(); c.shadowColor = "rgba(40,30,20,0.16)"; c.shadowBlur = 30; c.shadowOffsetY = 12;
+  rr(c, x, y, w, h, r); c.fillStyle = fill; c.fill(); c.shadowColor = "transparent";
+  c.strokeStyle = LINEC; c.lineWidth = 1; c.stroke(); c.restore();
+}
+function check(c, x, y, r, p, col = RED) {
+  c.save(); c.beginPath(); c.arc(x, y, r, 0, 7); c.fillStyle = col; c.globalAlpha *= clamp(p * 2); c.fill();
+  c.strokeStyle = "#fff"; c.lineWidth = r * 0.22; c.lineCap = "round"; c.lineJoin = "round";
+  c.beginPath(); c.moveTo(x - r * 0.4, y + r * 0.02); c.lineTo(x - r * 0.1, y + r * 0.32); c.lineTo(x + r * 0.42, y - r * 0.3);
+  c.setLineDash([r * 1.6]); c.lineDashOffset = r * 1.6 * (1 - clamp(p * 1.5 - 0.3)); c.stroke(); c.restore();
+}
+function boardText(c, txt, x, y, w, size, fam, col, italic, align = "center", ls = "0px") {
+  c.save(); c.textAlign = align; c.textBaseline = "alphabetic"; font(c, w, size, fam, italic); c.letterSpacing = ls; c.fillStyle = col; c.fillText(txt, x, y); c.restore();
+}
+
+// --- compare: basic vs premium, using the live frame
+function bCompare(c, lt, a, img, d) {
+  kicker(c, "BASIC   VS   PREMIUM", 74, a * bIn(lt, 0.05));
+  const tw = 372, th = 209, y = 132, xs = [96, CW - 96 - tw];
+  const verdict = bIn(lt, d * 0.55, 0.35);
+  xs.forEach((x, i) => {
+    const p = bIn(lt, 0.15 + i * 0.18, 0.5); if (p <= 0) return;
+    c.save(); c.globalAlpha = a * p; c.translate(0, (1 - p) * 40);
+    softCard(c, x - 8, y - 8, tw + 16, th + 16, 22);
+    c.save(); rr(c, x, y, tw, th, 14); c.clip();
+    if (i === 0) c.filter = "saturate(0.4) contrast(0.9) brightness(1.05)";
+    c.drawImage(img, x, y, tw, th); c.filter = "none";
+    if (i === 0) {
+      font(c, 900, 26, BASIC); c.textAlign = "center"; c.lineJoin = "round"; c.lineWidth = 6; c.strokeStyle = "#000";
+      c.strokeText("SAME CAPTIONS", x + tw / 2, y + th - 24); c.fillStyle = YEL; c.fillText("SAME CAPTIONS", x + tw / 2, y + th - 24);
+      c.fillStyle = `rgba(246,244,240,${0.55 * verdict})`; c.fillRect(x, y, tw, th);
+    } else {
+      const gg = c.createLinearGradient(0, y + th * 0.5, 0, y + th); gg.addColorStop(0, "rgba(0,0,0,0)"); gg.addColorStop(1, "rgba(0,0,0,0.45)");
+      c.fillStyle = gg; c.fillRect(x, y, tw, th);
+      boardText(c, "premium.", x + tw / 2, y + th - 22, 400, 46, SERIF, "#fff", true);
+    }
+    c.restore();
+    if (i === 1 && verdict > 0) { c.save(); c.globalAlpha = a * verdict; rr(c, x - 8, y - 8, tw + 16, th + 16, 22); c.strokeStyle = RED; c.lineWidth = 3; c.stroke(); c.restore(); }
+    boardText(c, i === 0 ? "Typical AI edit" : "Vibe edit  ✦", x + tw / 2, y + th + 62, i === 0 ? 700 : 800, 30, SANS, i === 0 ? GREYC : INKC, false);
+    if (i === 0 && verdict > 0) { c.save(); c.strokeStyle = GREYC; c.lineWidth = 3; c.beginPath(); c.moveTo(x + tw / 2 - 110, y + th + 51); c.lineTo(x + tw / 2 - 110 + 220 * verdict, y + th + 51); c.stroke(); c.restore(); }
+    if (i === 1) check(c, x + tw - 4, y + 4, 22, verdict);
+    c.restore();
+  });
+  // arrow between the two
+  const ap = bIn(lt, 0.55, 0.5);
+  if (ap > 0) {
+    c.save(); c.globalAlpha = a; c.strokeStyle = INKC; c.lineWidth = 3; c.lineCap = "round";
+    const ax = CW / 2 - 26, ay = y + th / 2;
+    c.beginPath(); c.moveTo(ax, ay); c.lineTo(ax + 52 * ap, ay); c.stroke();
+    if (ap > 0.9) { c.beginPath(); c.moveTo(ax + 40, ay - 11); c.lineTo(ax + 52, ay); c.lineTo(ax + 40, ay + 11); c.stroke(); }
+    c.restore();
+  }
+  const fp = bIn(lt, 0.9, 0.5);
+  boardText(c, "same footage  ·  same tools  ·  different edit", CW / 2, 500, 500, 24, SANS, `rgba(20,20,20,${0.5 * a * fp})`, false);
+}
+
+// --- tools: same tools, different workflow
+function bTools(c, lt, a, d) {
+  kicker(c, "SAME TOOLS", 74, a * bIn(lt, 0.05));
+  const cols = [270, CW - 270], hi = bIn(lt, d * 0.55, 0.4);
+  ["Everyone", "Me"].forEach((h, i) => {
+    const p = bIn(lt, 0.1 + i * 0.12); if (p <= 0) return;
+    c.save(); c.globalAlpha = a * p * (i === 0 ? 1 - 0.45 * hi : 1);
+    boardText(c, h, cols[i], 140, i ? 900 : 700, 36, SANS, i ? INKC : GREYC, false, "center", "-1px");
+    // tool chip
+    const cp = bIn(lt, 0.3 + i * 0.15, 0.35), cw = 210;
+    c.save(); c.translate(cols[i], 214); const sc = lerp(0.6, 1, eBack(cp, 2)); c.scale(sc, sc); c.globalAlpha *= clamp(cp * 2);
+    softCard(c, -cw / 2, -32, cw, 64, 32); boardText(c, "✦  Claude", 0, 11, 800, 30, SANS, INKC, false); c.restore();
+    // workflow row
+    const steps = i === 0 ? ["Prompt", "Export"] : ["Cut", "Type", "Motion", "Sound", "Grade"];
+    const span = i === 0 ? 170 : 330, x0 = cols[i] - span / 2, gap = span / (steps.length - 1);
+    const wp = bIn(lt, 0.7 + i * 0.2, 0.6);
+    c.strokeStyle = i ? RED : "rgba(20,20,20,0.25)"; c.lineWidth = 3;
+    c.beginPath(); c.moveTo(x0, 336); c.lineTo(x0 + span * wp, 336); c.stroke();
+    steps.forEach((s, k) => {
+      const sp = bIn(lt, 0.75 + i * 0.2 + k * 0.1, 0.3); if (sp <= 0) return;
+      c.save(); c.globalAlpha *= sp; c.beginPath(); c.arc(x0 + k * gap, 336, i ? 13 : 11, 0, 7);
+      c.fillStyle = i ? RED : "#cfcac4"; c.fill(); c.restore();
+      c.save(); c.globalAlpha *= sp; boardText(c, s, x0 + k * gap, 376, 700, i ? 21 : 22, SANS, i ? INKC : GREYC, false); c.restore();
+    });
+    c.restore();
+  });
+  // equals sign between the chips
+  const ep = bIn(lt, 0.55, 0.3);
+  c.save(); c.globalAlpha = a * ep; c.fillStyle = INKC; c.fillRect(CW / 2 - 18, 204, 36 * ep, 5); c.fillRect(CW / 2 - 18, 220, 36 * ep, 5); c.restore();
+  boardText(c, "TOOL", CW / 2, 268, 700, 16, MONO, `rgba(20,20,20,${0.4 * a})`, false, "center", "3px");
+  boardText(c, "WORKFLOW", CW / 2, 342, 700, 16, MONO, `rgba(20,20,20,${0.4 * a})`, false, "center", "3px");
+  if (hi > 0) { c.save(); c.globalAlpha = a * hi; rr(c, cols[1] - 215, 96, 430, 312, 26); c.strokeStyle = RED; c.lineWidth = 3; c.setLineDash([1400]); c.lineDashOffset = 1400 * (1 - hi); c.stroke(); c.restore(); }
+  boardText(c, "the difference is the workflow", CW / 2 - 110, 480, 400, 34, SERIF, `rgba(20,20,20,${0.75 * a * hi})`, true);
+}
+
+// --- workflow: five-step pipeline + live mini timeline
+const WSTEPS = [["Story", "cut"], ["Kinetic", "type"], ["Motion", "design"], ["Sound", "design"], ["Colour", "grade"]];
+function bWorkflow(c, lt, a) {
+  kicker(c, "THE VIBE EDITING WORKFLOW", 70, a * bIn(lt, 0.05));
+  const tp = bIn(lt, 0.12, 0.45);
+  c.save(); c.globalAlpha = a * tp; c.translate(0, (1 - tp) * 16);
+  c.textBaseline = "alphabetic"; c.letterSpacing = "-1.5px"; font(c, 900, 50, SANS); const w1 = c.measureText("Same tools.").width;
+  c.letterSpacing = "0px"; font(c, 400, 64, SERIF, true); const w2 = c.measureText("Different workflow.").width;
+  const sx = CW / 2 - (w1 + 20 + w2) / 2;
+  boardText(c, "Same tools.", sx, 140, 900, 50, SANS, INKC, false, "left", "-1.5px");
+  boardText(c, "Different workflow.", sx + w1 + 20, 140, 400, 64, SERIF, RED, true, "left");
+  c.restore();
+  const x0 = 130, x1 = CW - 130, y = 262, n = 5, gap = (x1 - x0) / (n - 1);
+  const lp = clamp((lt - 0.35) / (0.24 * (n - 1)));
+  c.save(); c.globalAlpha = a;
+  c.strokeStyle = "rgba(20,20,20,0.12)"; c.lineWidth = 3; c.beginPath(); c.moveTo(x0, y); c.lineTo(x1, y); c.stroke();
+  c.strokeStyle = RED; c.beginPath(); c.moveTo(x0, y); c.lineTo(x0 + (x1 - x0) * lp, y); c.stroke();
+  WSTEPS.forEach(([l1, l2], i) => {
+    const x = x0 + i * gap, rp = bIn(lt, 0.3 + i * 0.24, 0.3); if (rp <= 0) return;
+    const lit = clamp((lt - 0.42 - i * 0.24) / 0.2);
+    c.save(); c.translate(x, y); const sc = lerp(0.5, 1, eBack(rp, 2)); c.scale(sc, sc);
+    c.shadowColor = lit > 0 ? "rgba(255,61,46,0.45)" : "rgba(0,0,0,0.12)"; c.shadowBlur = 22; c.shadowOffsetY = 6;
+    c.beginPath(); c.arc(0, 0, 36, 0, 7); c.fillStyle = lit > 0 ? RED : "#fff"; c.fill(); c.shadowColor = "transparent";
+    c.strokeStyle = lit > 0 ? RED : LINEC; c.lineWidth = 1.5; c.stroke();
+    if (lit > 0.4) check(c, 0, 0, 36, (lit - 0.4) / 0.6, RED);
+    else boardText(c, String(i + 1).padStart(2, "0"), 0, 8, 700, 22, MONO, INKC, false);
+    c.restore();
+    c.save(); c.globalAlpha = rp; boardText(c, l1, x, y + 78, 800, 28, SANS, INKC, false, "center", "-0.5px");
+    boardText(c, l2, x, y + 112, 400, 32, SERIF, lit > 0 ? RED : GREYC, true); c.restore();
+  });
+  // mini timeline: tracks fill as the steps light up
+  const tl = bIn(lt, 0.4, 0.4); c.globalAlpha = a * tl;
+  const tx = 120, tw2 = CW - 420, ty = 418;
+  softCard(c, tx - 20, ty - 16, tw2 + 40, 104, 16);
+  const tracks = [[RED, [0, 0.22, 0.24, 0.5, 0.52, 0.78, 0.8, 1]], [INKC, [0.05, 0.3, 0.36, 0.62, 0.7, 0.95]], ["#C9C3BC", [0, 1]]];
+  tracks.forEach(([col, cuts], r) => {
+    for (let k = 0; k < cuts.length; k += 2) {
+      const s0 = cuts[k], s1 = Math.min(cuts[k + 1], lp * 1.05); if (s1 <= s0) continue;
+      rr(c, tx + tw2 * s0, ty + r * 26, tw2 * (s1 - s0) - 3, 18, 5); c.fillStyle = col; c.globalAlpha = a * tl * (r === 2 ? 0.8 : 0.9); c.fill();
+    }
+  });
+  const ph = tx + tw2 * ((lt * 0.18) % 1); c.globalAlpha = a * tl; c.fillStyle = RED; c.fillRect(ph - 1, ty - 8, 2, 88);
+  c.beginPath(); c.moveTo(ph - 7, ty - 12); c.lineTo(ph + 7, ty - 12); c.lineTo(ph, ty - 4); c.fill();
+  c.restore();
+}
+
+// --- claude: chat UI running the edit
+function bClaude(c, lt, a) {
+  const x = 110, y = 56, w = 620, h = 440, p = bIn(lt, 0.05, 0.45);
+  c.save(); c.globalAlpha = a * p; c.translate(0, (1 - p) * 40);
+  softCard(c, x, y, w, h, 26);
+  c.fillStyle = "rgba(20,20,20,0.06)"; c.fillRect(x + 1, y + 64, w - 2, 1);
+  boardText(c, "✦", x + 34, y + 42, 800, 26, SANS, RED, false, "left");
+  boardText(c, "Claude", x + 64, y + 41, 800, 26, SANS, INKC, false, "left", "-0.5px");
+  [0, 1, 2].forEach((k) => { c.beginPath(); c.arc(x + w - 40 - k * 22, y + 33, 6, 0, 7); c.fillStyle = "#dcd7d1"; c.fill(); });
+  // user prompt
+  const prompt = "Edit this like a premium editor.";
+  const n = clamp(Math.floor((lt - 0.35) / 0.035), 0, prompt.length), typed = prompt.slice(0, n);
+  font(c, 600, 25, SANS); const bw = Math.max(60, c.measureText(prompt).width + 44);
+  const bx = x + w - 28 - bw, by = y + 92;
+  rr(c, bx, by, bw, 56, 20); c.fillStyle = INKC; c.fill();
+  boardText(c, typed + (n < prompt.length && Math.sin(lt * 20) > 0 ? "|" : ""), bx + 22, by + 36, 600, 25, SANS, "#fff", false, "left");
+  // steps
+  const steps = ["Cut the fumbles", "Kinetic captions", "Sound design", "Cinematic grade"];
+  steps.forEach((s, i) => {
+    const sp = bIn(lt, 1.55 + i * 0.32, 0.3); if (sp <= 0) return;
+    const sy = y + 184 + i * 52;
+    c.save(); c.globalAlpha *= sp; c.translate((1 - sp) * -20, 0);
+    check(c, x + 50, sy, 15, clamp((lt - 1.65 - i * 0.32) / 0.3));
+    boardText(c, s, x + 78, sy + 9, 700, 25, SANS, INKC, false, "left", "-0.3px");
+    boardText(c, "done", x + w - 40, sy + 8, 500, 22, MONO, GREYC, false, "right");
+    c.restore();
+  });
+  const pp = clamp((lt - 2.9) / 0.8);
+  if (lt > 2.8) {
+    const py = y + h - 58;
+    rr(c, x + 34, py, w - 68, 12, 6); c.fillStyle = "rgba(20,20,20,0.08)"; c.fill();
+    rr(c, x + 34, py, (w - 68) * eInOut(pp), 12, 6); c.fillStyle = RED; c.fill();
+    boardText(c, pp < 1 ? `Exporting…  ${Math.round(pp * 100)}%` : "Export ready  ✦", x + 34, py - 14, 700, 20, MONO, pp < 1 ? GREYC : RED, false, "left");
+  }
+  c.restore();
+}
+
+// --- course card: learn the workflow
+const MODS = ["Story-first cut", "Kinetic captions", "Depth & motion graphics", "Sound design", "Cinematic grade"];
+function bCourse(c, lt, a) {
+  c.save(); c.globalAlpha = a;
+  const lp = bIn(lt, 0.05, 0.45);
+  c.save(); c.globalAlpha *= lp; c.translate((1 - lp) * -30, 0);
+  boardText(c, "THE WORKFLOW", 70, 120, 700, 19, SANS, RED, false, "left", "5px");
+  boardText(c, "Learn the", 66, 196, 900, 62, SANS, INKC, false, "left", "-2.5px");
+  boardText(c, "Vibe Editing", 66, 272, 400, 84, SERIF, RED, true, "left");
+  boardText(c, "workflow.", 66, 342, 900, 62, SANS, INKC, false, "left", "-2.5px");
+  const bp = bIn(lt, 0.9, 0.4);
+  c.save(); c.globalAlpha *= bp; rr(c, 66, 392, 230, 64, 32); c.fillStyle = INKC; c.fill();
+  boardText(c, "Join now  →", 66 + 115, 433, 800, 26, SANS, "#fff", false); c.restore();
+  c.restore();
+  MODS.forEach((m, i) => {
+    const p = bIn(lt, 0.45 + i * 0.16, 0.35); if (p <= 0) return;
+    const x = 520, y = 66 + i * 70, w = 420, h = 58;
+    c.save(); c.globalAlpha *= p; c.translate((1 - p) * 40, 0);
+    softCard(c, x, y, w, h, 16);
+    boardText(c, String(i + 1).padStart(2, "0"), x + 26, y + 37, 700, 22, MONO, RED, false, "left");
+    boardText(c, m, x + 74, y + 37, 700, 25, SANS, INKC, false, "left", "-0.3px");
+    check(c, x + w - 34, y + h / 2, 14, clamp((lt - 0.7 - i * 0.16) / 0.3));
+    c.restore();
+  });
+  c.restore();
+}
+
+// --- motion: easing curve + a shape riding it
+function bMotion(c, lt, a) {
+  kicker(c, "MOTION DESIGN", 70, a * bIn(lt, 0.05));
+  boardText(c, "Every move is eased.", CW / 2, 128, 400, 46, SERIF, `rgba(20,20,20,${a * bIn(lt, 0.15)})`, true);
+  c.save(); c.globalAlpha = a;
+  // graph
+  const gx = 90, gy = 170, gw = 360, gh = 280, gp = bIn(lt, 0.2, 0.4);
+  c.globalAlpha = a * gp; softCard(c, gx - 20, gy - 20, gw + 40, gh + 60, 18);
+  c.strokeStyle = LINEC; c.lineWidth = 1;
+  for (let k = 0; k <= 4; k++) { c.beginPath(); c.moveTo(gx, gy + gh * k / 4); c.lineTo(gx + gw, gy + gh * k / 4); c.stroke(); }
+  const P = (u) => { const x1 = 0.65, x2 = 0.35; const bx = 3 * (1 - u) * (1 - u) * u * x1 + 3 * (1 - u) * u * u * x2 + u * u * u;
+    const by = 3 * (1 - u) * u * u + u * u * u * 1 - 0 + 0 * u; return [gx + bx * gw, gy + gh - (3 * (1 - u) * u * u * 1 + u * u * u - 3 * (1 - u) * u * u * 0) * gh]; };
+  const dp = clamp((lt - 0.4) / 0.9);
+  c.strokeStyle = RED; c.lineWidth = 4; c.lineCap = "round"; c.beginPath();
+  for (let k = 0; k <= 60 * dp; k++) { const [x, y] = P(k / 60); k ? c.lineTo(x, y) : c.moveTo(x, y); } c.stroke();
+  // handles
+  const hp = bIn(lt, 1.0, 0.3);
+  c.globalAlpha = a * hp; c.strokeStyle = "rgba(20,20,20,0.45)"; c.lineWidth = 1.5;
+  c.beginPath(); c.moveTo(gx, gy + gh); c.lineTo(gx + gw * 0.65, gy + gh); c.moveTo(gx + gw, gy); c.lineTo(gx + gw * 0.35, gy); c.stroke();
+  [[gx + gw * 0.65, gy + gh], [gx + gw * 0.35, gy]].forEach(([x, y]) => { c.beginPath(); c.arc(x, y, 6, 0, 7); c.fillStyle = "#fff"; c.fill(); c.stroke(); });
+  [[gx, gy + gh], [gx + gw, gy]].forEach(([x, y]) => { c.save(); c.translate(x, y); c.rotate(Math.PI / 4); c.fillStyle = INKC; c.fillRect(-7, -7, 14, 14); c.restore(); });
+  c.globalAlpha = a * gp; boardText(c, "ease-in-out", gx, gy + gh + 30, 700, 18, MONO, GREYC, false, "left", "1px");
+  // stage: shape rides the curve, morphs square -> circle, leaves a trail
+  const sx0 = 540, sx1 = 880, syy = 280, sp = bIn(lt, 0.5, 0.4);
+  c.globalAlpha = a * sp; c.strokeStyle = LINEC; c.lineWidth = 2; c.setLineDash([4, 8]); c.beginPath(); c.moveTo(sx0, syy); c.lineTo(sx1, syy); c.stroke(); c.setLineDash([]);
+  const cyc = 1.7, u = ((lt - 0.6) % cyc) / cyc, e = eInOut(clamp(u / 0.8));
+  const shape = (x, s, alpha, k) => {
+    c.save(); c.globalAlpha = a * sp * alpha; c.translate(x, syy); c.rotate(k * Math.PI / 2);
+    rr(c, -s / 2, -s / 2, s, s, lerp(10, s / 2, k)); c.fillStyle = k > 0.5 ? INKC : RED; c.fill(); c.restore();
+  };
+  for (let g = 5; g >= 1; g--) { const eg = eInOut(clamp((u - g * 0.025) / 0.8)); shape(lerp(sx0, sx1, eg), 74, 0.08 * (6 - g), eg); }
+  shape(lerp(sx0, sx1, e), 80, 1, e);
+  // keyframe timeline under the stage
+  c.globalAlpha = a * sp; c.fillStyle = "rgba(20,20,20,0.15)"; c.fillRect(sx0, 372, sx1 - sx0, 2);
+  [sx0, sx1].forEach((x) => { c.save(); c.translate(x, 373); c.rotate(Math.PI / 4); c.fillStyle = RED; c.fillRect(-7, -7, 14, 14); c.restore(); });
+  const phx = lerp(sx0, sx1, clamp(u / 0.8)); c.fillStyle = INKC; c.fillRect(phx - 1, 354, 2, 38);
+  boardText(c, "keyframes", sx0, 410, 700, 18, MONO, GREYC, false, "left", "1px");
+  c.restore();
+}
+
+function drawBoard(c, t, k, img) {
+  paper(c, k);
+  for (const { b, a, lt } of boardItems(t)) {
+    const d = b.c1 - b.c0, aa = a * clamp((k - 0.35) / 0.65);
+    if (aa <= 0) continue;
+    c.save(); c.translate(0, (1 - clamp((k - 0.3) / 0.7)) * 30);
+    const kind = b.opts.kind;
+    if (kind === "compare") bCompare(c, lt, aa, img, d);
+    else if (kind === "tools") bTools(c, lt, aa, d);
+    else if (kind === "workflow") bWorkflow(c, lt, aa);
+    else if (kind === "claude") bClaude(c, lt, aa);
+    else if (kind === "course") bCourse(c, lt, aa);
+    else if (kind === "motion") bMotion(c, lt, aa);
+    c.restore();
+  }
+}
+// the footage shrinks into a 16:9 picture-in-picture (never cropped)
+function drawPip(c, img, k, hide) {
+  const e = eInOut(k);
+  const w = lerp(CW, PIP.w, e), h = w * CH / CW, x = lerp(0, PIP.x, e), y = lerp(0, PIP.y, e);
+  const alpha = hide ? 1 - smooth(k, 0.55, 0.95) : 1;
+  if (alpha <= 0) return;
+  c.save(); c.globalAlpha = alpha;
+  c.shadowColor = `rgba(0,0,0,${0.35 * e})`; c.shadowBlur = 30 * e; c.shadowOffsetY = 10 * e;
+  rr(c, x, y, w, h, lerp(0, 16, e)); c.fillStyle = "#000"; c.fill(); c.shadowColor = "transparent";
+  c.save(); rr(c, x, y, w, h, lerp(0, 16, e)); c.clip(); c.drawImage(img, x, y, w, h); c.restore();
+  if (e > 0.05) { rr(c, x, y, w, h, lerp(0, 16, e)); c.strokeStyle = `rgba(255,255,255,${0.95 * e})`; c.lineWidth = 3; c.stroke(); }
+  c.restore();
+}
+
 // ------------------------------------------------------------------ frame
 async function renderAt(fi) {
   const t = fi / fps, src = TL.frames[fi];
   const img = await loadImg(`${TL.frame_dir}/s${pad5(src)}.jpg`);
   const hg = headGeom(fi), isAfter = t >= TR;
   const depthOn = heroSpans.some((h) => t >= h.t0 && t <= h.t1 + 0.3);
-  const needMask = isAfter && (depthOn || ["orbit", "rings", "wave"].some((k) => mgOf(k).some((m) => active(m, t))));
+  const BK = isAfter ? boardAmt(t) : 0;
+  const needMask = isAfter && BK < 0.02 && (depthOn || ["orbit", "rings", "wave"].some((k) => mgOf(k).some((m) => active(m, t))));
   let maskOK = false;
   if (needMask && TL.has_mask[fi]) {
     const mimg = await loadImg(`${TL.mask_dir}/s${pad5(src)}.png`);
@@ -559,12 +876,20 @@ async function renderAt(fi) {
   }
   mgOf("scan").forEach((m) => active(m, t) && mgScan(c, t, m, hg));
   mgOf("workflow").forEach((m) => active(m, t) && workflow(c, t, m));
+  if (BK > 0) {
+    const vid = cardC.width ? tmpC : null;
+    tmpX.clearRect(0, 0, CW, CH); tmpX.drawImage(cardC, 0, 0);          // current graded footage
+    drawBoard(c, t, BK, img);
+    const hide = boardItems(t).some(({ b, a }) => b.opts.kind === "compare" && a > 0.5);
+    drawPip(c, tmpC, BK, hide);
+  }
   const bg = c.createLinearGradient(0, CH * 0.6, 0, CH);
-  bg.addColorStop(0, "rgba(0,0,0,0)"); bg.addColorStop(1, `rgba(0,0,0,${isAfter ? 0.4 : 0.22})`);
+  bg.addColorStop(0, "rgba(0,0,0,0)"); bg.addColorStop(1, `rgba(0,0,0,${(isAfter ? 0.4 : 0.22) * (1 - BK)})`);
   c.fillStyle = bg; c.fillRect(0, CH * 0.6, CW, CH * 0.4);
   const caps = TL.captions.filter((cap) => cap.layout === "basic" ? (t >= cap.t0 && t < cap.t1 && t < TR) : (t >= cap.t0 - 0.1 && t <= cap.t1 + 0.05));
   for (const cap of caps) {
     if (cap.layout === "basic") basicCaption(c, cap, t);
+    else if (BK > 0.3) continue;                 // board up: in-card captions move under the card
     else if (cap.layout === "over" || cap.layout === "behind" || cap.layout === "side") capOver(c, cap, t);
     else if (cap.layout === "top") capTop(c, cap, t);
   }
@@ -588,7 +913,10 @@ async function renderAt(fi) {
   X.strokeStyle = `rgba(255,${lerp(255, 190, warm) | 0},${lerp(255, 170, warm) | 0},${0.12 + 0.1 * warm})`; X.lineWidth = 1.5; X.stroke();
   X.restore();
 
-  for (const cap of caps) if (cap.layout === "below") capBelow(cap, t);
+  for (const cap of caps) {
+    if (cap.layout === "below") capBelow(cap, t);
+    else if (BK > 0.3 && cap.layout !== "basic") capBelow({ ...cap, opts: { ...cap.opts, split: cap.words[0].i, em: undefined } }, t);
+  }
   endBelow(t);
   modeToggle(t); ctaPill(t); grainPass(fi);
 }

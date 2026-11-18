@@ -31,6 +31,16 @@ ROMAN = {
 #   side   - opts.hero word set sideways (rotated) beside the head, behind the person
 #   top    - one big word over the person (opts.hero), rest small above it
 #   opts.em = words in the serif italic accent; opts.red = accent in red (else white)
+# Caption groups: (first_word, last_word, layout, opts)
+#   basic  - "typical AI edit": yellow Montserrat on the video (before the turn)
+#   below  - big editorial type under the video card; opts.split = first word of the big line
+#   over   - kinetic line on the video, over the person
+#   behind - opts.hero word huge BEHIND the person (depth matte), rest of the line over the video
+#   side   - opts.hero word set sideways (rotated) beside the head, behind the person
+#   top    - one big word over the person (opts.hero), rest small above it
+#   opts.em = words in the serif italic accent; opts.red = accent in red (else white)
+# Motion graphics: ("board", a, b, {"kind": ...}) is a white explainer board; the footage glides into a
+#   16:9 picture-in-picture while it is up. Boards closer than 0.6 s merge into one continuous board.
 SPEC = {
 "2508": dict(
     turn=dict(glitch=49, reveal_seg_word=61),
@@ -45,8 +55,8 @@ SPEC = {
         (49, 52, "below", {"split": 51, "em": [52], "red": True}),
         (61, 63, "over", {"em": [63]}),
         (64, 68, "below", {"split": 68, "em": [68]}),
-        (69, 73, "behind", {"hero": 70}),
-        (74, 78, "below", {"split": 76, "em": [78], "red": True}),
+        (69, 73, "below", {"split": 70, "em": [70], "rest_small": True, "red": True}),
+        (74, 78, "behind", {"hero": 78}),
         (79, 81, "side", {"hero": 81, "red": True}),
         (82, 88, "below", {"split": 87, "em": [88], "red": True}),
         (89, 94, "below", {"split": 94}),
@@ -56,8 +66,8 @@ SPEC = {
     ],
     mg=[
         ("scan", 38, 48, {}),
-        ("chips", 79, 81, {"items": ["✦  Claude", "Same tools"]}),
-        ("workflow", 86, 97, {}),
+        ("board", 64, 73, {"kind": "compare"}),
+        ("board", 84, 97, {"kind": "workflow"}),
         ("cta", 98, None, {}),
     ],
     punch=[],
@@ -75,12 +85,12 @@ SPEC = {
         (44, 50, "below", {"split": 47, "em": [47]}),
         (51, 55, "behind", {"hero": 53}),
         (56, 58, "behind", {"hero": 56, "keep_hero": True}),
-        (59, 62, "over", {}),
-        (63, 65, "top", {"hero": 65, "red": True}),
+        (59, 62, "below", {"split": 62}),
+        (63, 65, "below", {"split": 63, "em": [65], "red": True}),
         (66, 71, "below", {"split": 70, "em": [71], "red": True}),
         (72, 77, "below", {"split": 73, "em": [73]}),
         (86, 91, "over", {}),
-        (92, 94, "side", {"hero": 93, "red": True}),
+        (92, 94, "below", {"split": 92, "em": [93], "red": True}),
         (95, 98, "below", {"split": 97, "em": [98]}),
         (99, 101, "top", {"hero": 101, "red": True}),
         (102, 106, "below", {"split": 105, "em": [105, 106], "red": True}),
@@ -90,8 +100,9 @@ SPEC = {
         ("orbit", 45, 50, {"tail": 0.1, "words": ["captions", "motion", "sound", "grade", "vibe", "story"]}),
         ("rings", 53, 55, {}),
         ("wave", 56, 58, {}),
-        ("chips", 59, 62, {"items": ["✦  Made with Claude"]}),
-        ("workflow", 70, 77, {}),
+        ("board", 59, 65, {"kind": "claude"}),
+        ("board", 68, 77, {"kind": "workflow"}),
+        ("board", 86, 98, {"kind": "course"}),
         ("comment", 99, 101, {}),
         ("cta", 102, None, {}),
     ],
@@ -120,9 +131,9 @@ SPEC = {
     ],
     mg=[
         ("scan", 35, 44, {}),
-        ("rings", 57, 64, {}),
-        ("chips", 71, 77, {"items": ["✦  Claude", "Same tools"]}),
-        ("workflow", 82, 91, {}),
+        ("board", 57, 64, {"kind": "motion"}),
+        ("board", 71, 77, {"kind": "tools"}),
+        ("board", 80, 91, {"kind": "workflow"}),
         ("comment", 105, 107, {}),
         ("cta", 108, None, {}),
     ],
@@ -266,10 +277,23 @@ def build(n):
             add("whoosh_soft", c["words"][0]["t"], 0.28)
     for m in mgs:
         if m["type"] == "scan": add("scan", m["t0"] + 0.1, 0.5)
-        if m["type"] == "workflow":
-            add("whoosh", m["t0"] - 0.1, 0.55)
-            for k in range(5): add("tick", m["t0"] + 0.35 + k * 0.22, 0.5)
-            add("whoosh_soft", m["t1"] - 0.15, 0.4)
+        if m["type"] == "board":
+            k = m["opts"]["kind"]; d = m["t1"] - m["t0"]
+            add("whoosh_soft", m["t0"] - 0.05, 0.5)
+            if k == "workflow":
+                for j in range(5): add("tick", m["t0"] + 0.45 + j * 0.24, 0.5)
+            elif k == "course":
+                for j in range(5): add("tick", m["t0"] + 0.55 + j * 0.16, 0.4)
+            elif k == "claude":
+                add("type", m["t0"] + 0.35, 0.45)
+                for j in range(4): add("tick", m["t0"] + 1.6 + j * 0.32, 0.45)
+                add("ding", m["t0"] + 3.2, 0.4)
+            elif k == "compare":
+                add("pop", m["t0"] + 0.3, 0.4); add("pop", m["t0"] + 0.5, 0.4); add("strike", m["t0"] + d * 0.6, 0.5)
+            elif k == "tools":
+                add("pop", m["t0"] + 0.35, 0.4); add("pop", m["t0"] + 0.5, 0.4); add("tick", m["t0"] + d * 0.6, 0.5)
+            elif k == "motion":
+                add("whoosh_soft", m["t0"] + 1.0, 0.3); add("whoosh_soft", m["t0"] + 2.6, 0.3)
         if m["type"] == "orbit": add("shimmer", m["t0"], 0.35)
         if m["type"] == "rings": add("whoosh_soft", m["t0"], 0.4)
         if m["type"] == "chips":
