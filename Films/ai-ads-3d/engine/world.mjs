@@ -242,7 +242,7 @@ export async function makeWorld({ W, H, font, look }) {
     const tag = new THREE.Mesh(new THREE.PlaneGeometry(0.06, 0.11), std('#efe7d2', 0.8)); tag.position.set(0.04, h * 0.5, l / 2 + 0.03); tag.rotation.x = -0.4; g.add(tag);
     const phone = new THREE.Group(); phone.position.set((R() - 0.5) * 0.1, h + 0.016, (R() - 0.5) * 0.12); phone.rotation.y = (R() - 0.5) * 0.8;
     const body = new THREE.Mesh(new RoundedBoxGeometry(0.078, 0.009, 0.16, 2, 0.004), std('#0b0c0d', 0.25, 0.6)); body.castShadow = true; phone.add(body);
-    const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.07, 0.15), new THREE.MeshBasicMaterial({ map: phoneOff })); scr.rotation.x = -Math.PI / 2; scr.position.y = 0.0052; phone.add(scr);
+    const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.07, 0.15), new THREE.MeshBasicMaterial({ map: phoneOff, color: new THREE.Color(1.6, 1.6, 1.6) })); scr.rotation.x = -Math.PI / 2; scr.position.y = 0.0052; phone.add(scr);
     g.add(phone);
     const ad = phoneAd(i % 8), bought = phoneBought(i % 8);
     phoneScreens.push({ mat: scr.material, ad, bought, wake: 37.2 + i * 0.35, buy: 39.6 + i * 0.42, light: null });
@@ -294,6 +294,8 @@ export async function makeWorld({ W, H, font, look }) {
   const grip = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.08, 0.1), jointMat); wr.add(grip);
   const tagHeld = new THREE.Mesh(new THREE.PlaneGeometry(0.07, 0.12), std('#efe7d2', 0.8)); tagHeld.position.y = 0.1; wr.add(tagHeld);
   T.arm = { yawG, sh, el, wr, tagHeld };
+  const lead = BAGS[3].g.clone(true); scene.add(lead); T.leadBag = lead;
+  const wallPool = new THREE.SpotLight('#ffd9a6', 45, 9, 0.5, 0.7, 1.4); wallPool.position.set(0.4, 5.6, -4.2); wallPool.target.position.set(0, 1.6, -7.6); scene.add(wallPool, wallPool.target);
   // a bag on the back conveyor, under the arm
   const bb = BAGS[0].g.clone(true); back.add(bb); T.backBag = bb;
   const bb2 = BAGS[5].g.clone(true); back.add(bb2); T.backBag2 = bb2;
@@ -313,6 +315,10 @@ export async function makeWorld({ W, H, font, look }) {
   const monStand = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.12, 0.05), std('#141516', 0.4, 0.5)); monStand.position.y = 0.06; mon.add(monStand);
   const monScr = new THREE.Mesh(new THREE.PlaneGeometry(0.46, 0.28), new THREE.MeshBasicMaterial({ map: phoneOff })); monScr.position.set(0, 0.26, 0.016); mon.add(monScr);
   T.monitor = { mat: monScr.material, ad: cellTex(atlas, 4), off: phoneOff };
+  const wait = new THREE.Group(); wait.position.set(-0.95, 0, 0.8); wait.rotation.y = Math.PI + 0.55; desk.add(wait);
+  const wSeat = new THREE.Mesh(new RoundedBoxGeometry(0.48, 0.08, 0.46, 2, 0.03), seatMat); wSeat.position.y = 0.46; wSeat.castShadow = true; wait.add(wSeat);
+  const wBack = new THREE.Mesh(new RoundedBoxGeometry(0.48, 0.52, 0.06, 2, 0.03), seatMat); wBack.position.set(0, 0.74, 0.21); wBack.rotation.x = -0.1; wBack.castShadow = true; wait.add(wBack);
+  for (const lx of [-0.2, 0.2]) for (const lz of [-0.18, 0.18]) { const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.44), beamMat); leg.position.set(lx, 0.22, lz); wait.add(leg); }
   const chairSeat = new THREE.Mesh(new RoundedBoxGeometry(0.46, 0.07, 0.44, 2, 0.02), seatMat); chairSeat.position.set(0.1, 0.5, -0.75); desk.add(chairSeat);
   const chairBack = new THREE.Mesh(new RoundedBoxGeometry(0.46, 0.5, 0.06, 2, 0.02), seatMat); chairBack.position.set(0.1, 0.8, -0.98); desk.add(chairBack);
   const deskSign = new THREE.Mesh(new THREE.PlaneGeometry(1.4, 0.32), glow(sign([{ s: 'BAGGAGE SERVICES', px: 52, y: 64, ink: '#ffffff' }], 512, 128, { bg: '#1b2a3a' }), 1.0));
@@ -343,7 +349,7 @@ export async function makeWorld({ W, H, font, look }) {
     [45.5, [-2.6, 2.6, 5.4], [0, 0.6, 0.2], 38],
     [50, [-1.8, 4.6, 8.2], [0.2, 0.5, -0.6], 36],
     [55, [6.3, 1.5, 4.2], [8.0, 1.12, 2.2], 32],
-    [63, [6.95, 1.36, 3.3], [7.95, 1.18, 2.05], 30],
+    [63, [6.35, 1.55, 4.05], [7.65, 0.98, 2.1], 34],
   ];
   const cr = (p0, p1, p2, p3, u) => { const u2 = u * u, u3 = u2 * u; return 0.5 * ((2 * p1) + (-p0 + p2) * u + (2 * p0 - 5 * p1 + 4 * p2 - p3) * u2 + (-p0 + 3 * p1 - 3 * p2 + p3) * u3); };
   function shot(t) {
@@ -362,9 +368,9 @@ export async function makeWorld({ W, H, font, look }) {
     const hb = T.bags[2], st2 = stadium(hb.s0 + BELT.v * t, hb.lane), wF = ease(t, 36.6, 38.0) * (1 - ease(t, 44.2, 46.0));
     if (wF > 0) {
       const nx = -Math.sin(st2.a), nz = Math.cos(st2.a), tx = Math.cos(st2.a), tz = Math.sin(st2.a);
-      const lift = ease(t, 43.4, 46.0), fp = [st2.x + nx * (0.42 + 1.2 * lift) - tx * 0.28, BELT.y + 0.5 + 1.4 * lift, st2.z + nz * (0.42 + 1.2 * lift) - tz * 0.28], fl = [st2.x, BELT.y + 0.3, st2.z];
+      const lift = ease(t, 43.4, 46.0), fp = [st2.x + nx * (0.2 + 1.4 * lift) - tx * 0.1, BELT.y + 0.5 + 1.4 * lift, st2.z + nz * (0.2 + 1.4 * lift) - tz * 0.1], fl = [st2.x, BELT.y + 0.27, st2.z];
       camera.position.set(lerp(camera.position.x, fp[0], wF), lerp(camera.position.y, fp[1], wF), lerp(camera.position.z, fp[2], wF));
-      sh0.l = sh0.l.map((v, j) => lerp(v, fl[j], wF)); sh0.fov = lerp(sh0.fov, 26, wF);
+      sh0.l = sh0.l.map((v, j) => lerp(v, fl[j], wF)); sh0.fov = lerp(sh0.fov, 22, wF);
     }
     camera.lookAt(sh0.l[0], sh0.l[1], sh0.l[2]); camera.fov = sh0.fov; camera.updateProjectionMatrix();
     // slats ride the belt
@@ -401,9 +407,11 @@ export async function makeWorld({ W, H, font, look }) {
     A.tagHeld.visible = t < 28.3;
     const bz = -10.2 - (t - 22) * 0.45; T.backBag.position.set(0, 0.57, Math.max(-16.5, bz)); T.backBag.rotation.set(0, Math.PI / 2, 0);
     T.backBag2.position.set(0, 0.57, -9.0 + Math.min(0, -(t - 30) * 0.9)); T.backBag2.rotation.set(0, Math.PI / 2, 0);
-    // the desk monitor wakes at 58.6 s: an advert for nobody, to an empty chair
-    const mm = t < 58.6 ? T.monitor.off : T.monitor.ad; if (T.monitor.mat.map !== mm) { T.monitor.mat.map = mm; T.monitor.mat.needsUpdate = true; }
-    if (t >= 58.6) { const i = (4 + Math.floor((t - 58.6) / 1.5)) % 8; T.monitor.ad.offset.set((i % 4) * 0.25, 0.5 - Math.floor(i / 4) * 0.5); }
+    // the lead bag: on the feed, going in ahead of the camera (15.5-21.6 s); gone behind the flaps after
+    const lz = -2.6 - Math.max(0, t - 15.5) * 0.9; T.leadBag.visible = t > 15 && lz > -9.2;
+    T.leadBag.position.set(0.02, 0.57, lz); T.leadBag.rotation.set(0, Math.PI / 2 + 0.05, 0);
+    // the desk monitor wakes at 57.0 s: an advert for nobody, to an empty chair
+    const mm = t < 57.0 ? T.monitor.off : T.monitor.ad; if (T.monitor.mat.map !== mm) { T.monitor.mat.map = mm; T.monitor.mat.needsUpdate = true; }
     // the desk lamp breathes a little
     deskLight.intensity = 6 * (1 + 0.03 * Math.sin(t * 9));
   }

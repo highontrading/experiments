@@ -101,7 +101,7 @@
   {
    "file": "assets/sound/backhall.wav",
    "at": 21.3,
-   "gain_db": -4,
+   "gain_db": -1,
    "bus": "ambience",
    "loop": true,
    "length": 15.0,
@@ -261,7 +261,7 @@
   },
   {
    "file": "assets/sound/buzz.wav",
-   "at": 58.6,
+   "at": 57.0,
    "gain_db": -10,
    "bus": "foley",
    "pan": 0.3
