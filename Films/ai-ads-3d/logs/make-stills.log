@@ -1,16 +1,15 @@
-# make.py stills · 2026-11-19 05:47:12
+# make.py stills · 2026-11-19 06:18:14
 
 $ node /home/user/experiments/Films/ai-ads-3d/tools/capture.mjs --url film.html --probe --params w=1920&h=1080
 [capture] renderer: canvas2d
 [capture] page: 1920x1080, 1512 frames @ 24 fps
 [capture] meta: {"title":"Carousel","bounds":[0,22,35.8,52,63],"vo":7,"palette":{"bg":"#07080a","ink":"#f4f2ee","accent":"#ffae5c","dim":"#2a2826"},"lookPalette":{"bg":"#07080a","ink":"#f4f2ee","accent":"#ffae5c","dim":"#2a2826"},"families":["Familjen Grotesk"],"sfx":[[20.85,"whoosh",0.7],[35.45,"whoosh",0.7]]}
 
-$ node /home/user/experiments/Films/ai-ads-3d/tools/capture.mjs --url film.html --out /home/user/experiments/Films/ai-ads-3d/review/stills-10 --frames 269,302,1068,1085,1488 --format jpeg --quality 0.9 --params w=960&h=540
+$ node /home/user/experiments/Films/ai-ads-3d/tools/capture.mjs --url film.html --out /home/user/experiments/Films/ai-ads-3d/review/stills-12 --frames 1037,1046,1056,1066 --format jpeg --quality 0.9 --params w=960&h=540
 [capture] renderer: canvas2d
 [capture] page: 960x540, 1512 frames @ 24 fps
-[capture] 0/5 frames (0 skipped) - 0.0 fps
-[capture] 4/5 frames (0 skipped) - 0.4 fps
-[capture] done: 5 rendered, 0 skipped, 12.1 s total, 0.41 fps, 1 worker(s)
-[capture] frames: /home/user/experiments/Films/ai-ads-3d/review/stills-10/%06d.jpg
+[capture] 0/4 frames (0 skipped) - 0.0 fps
+[capture] done: 4 rendered, 0 skipped, 9.9 s total, 0.40 fps, 1 worker(s)
+[capture] frames: /home/user/experiments/Films/ai-ads-3d/review/stills-12/%06d.jpg
 
-$ ffmpeg -hide_banner -nostdin -loglevel error -y -f concat -safe 0 -i /home/user/experiments/Films/ai-ads-3d/review/stills-10/frames.txt -vf scale=508:-2,pad=512:ih+4:2:2:black,tile=2x3 -frames:v 1 -update 1 -q:v 4 /home/user/experiments/Films/ai-ads-3d/review/stills-10.jpg
+$ ffmpeg -hide_banner -nostdin -loglevel error -y -f concat -safe 0 -i /home/user/experiments/Films/ai-ads-3d/review/stills-12/frames.txt -vf scale=508:-2,pad=512:ih+4:2:2:black,tile=2x2 -frames:v 1 -update 1 -q:v 4 /home/user/experiments/Films/ai-ads-3d/review/stills-12.jpg

@@ -232,9 +232,12 @@ export async function makeWorld({ W, H, font, look }) {
   const phoneBought = (i) => canvasTex(256, 512, (x, w, h) => { x.fillStyle = '#0c0d0f'; x.fillRect(0, 0, w, h); x.fillStyle = '#2fbf71'; x.beginPath(); x.arc(w / 2, 200, 54, 0, TAU); x.fill();
     x.strokeStyle = '#fff'; x.lineWidth = 12; x.lineCap = 'round'; x.beginPath(); x.moveTo(w / 2 - 26, 202); x.lineTo(w / 2 - 6, 222); x.lineTo(w / 2 + 28, 182); x.stroke();
     x.fillStyle = '#fff'; x.textAlign = 'center'; x.font = `700 34px ${font}`; x.fillText('ORDER', w / 2, 310); x.fillText('PLACED', w / 2, 350); x.font = `700 34px ${font}`; x.fillText('for ' + NAMES[i], w / 2, 404); });
+  const ribs = canvasTex(512, 512, (x, w, h) => { x.fillStyle = '#ffffff'; x.fillRect(0, 0, w, h);
+    for (let k = 0; k < 9; k++) { const cx = (k + 0.5) * w / 9, g = x.createLinearGradient(cx - 26, 0, cx + 26, 0); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(0.45, 'rgba(255,255,255,0.0)'); g.addColorStop(0.5, 'rgba(0,0,0,0.22)'); g.addColorStop(0.62, 'rgba(255,255,255,0.18)'); g.addColorStop(1, 'rgba(0,0,0,0)'); x.fillStyle = g; x.fillRect(cx - 26, 0, 52, h); }
+    const r = rng(21); for (let i = 0; i < 3000; i++) { x.fillStyle = `rgba(0,0,0,${r() * 0.05})`; x.fillRect(r() * w, r() * h, 2, 2); } });
   for (let i = 0; i < 12; i++) {
     const g = new THREE.Group(), w = 0.42 + R() * 0.08, l = 0.6 + R() * 0.12, h = 0.24 + R() * 0.06;
-    const shell = new THREE.Mesh(new RoundedBoxGeometry(w, h, l, 4, 0.06), std(bagCols[i], 0.38 + R() * 0.3, i % 4 === 3 ? 0.7 : 0.05));
+    const shell = new THREE.Mesh(new RoundedBoxGeometry(w, h, l, 4, 0.06), std(bagCols[i], 0.38 + R() * 0.3, i % 4 === 3 ? 0.7 : 0.05, { map: ribs }));
     shell.position.y = h / 2 + 0.01; shell.castShadow = shell.receiveShadow = true; g.add(shell);
     const zip = new THREE.Mesh(new THREE.BoxGeometry(w + 0.006, 0.012, l + 0.006), std('#0d0d0d', 0.6)); zip.position.y = h * 0.55; g.add(zip);
     const handle = new THREE.Mesh(new THREE.TorusGeometry(0.06, 0.012, 8, 16, Math.PI), std('#111', 0.5)); handle.position.set(0, h * 0.5, l / 2 + 0.005); g.add(handle);
@@ -311,9 +314,9 @@ export async function makeWorld({ W, H, font, look }) {
   const bulb = new THREE.Mesh(new THREE.SphereGeometry(0.035, 12, 8), new THREE.MeshBasicMaterial({ color: new THREE.Color(5, 3.6, 2) })); bulb.position.set(0.6, 1.46, -0.1); desk.add(bulb);
   const deskLight = new THREE.PointLight('#ffb46a', 6, 5, 1.6); deskLight.position.set(0.6, 1.4, -0.1); desk.add(deskLight);
   const mon = new THREE.Group(); mon.position.set(-0.05, 1.1, -0.15); mon.rotation.y = 0.35; desk.add(mon);
-  const monBody = new THREE.Mesh(new RoundedBoxGeometry(0.5, 0.32, 0.03, 2, 0.01), std('#141516', 0.4, 0.5)); monBody.position.y = 0.26; mon.add(monBody);
-  const monStand = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.12, 0.05), std('#141516', 0.4, 0.5)); monStand.position.y = 0.06; mon.add(monStand);
-  const monScr = new THREE.Mesh(new THREE.PlaneGeometry(0.46, 0.28), new THREE.MeshBasicMaterial({ map: phoneOff })); monScr.position.set(0, 0.26, 0.016); mon.add(monScr);
+  const monBody = new THREE.Mesh(new RoundedBoxGeometry(0.82, 0.5, 0.035, 2, 0.012), std('#141516', 0.4, 0.5)); monBody.position.y = 0.36; mon.add(monBody);
+  const monStand = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.12, 0.05), std('#141516', 0.4, 0.5)); monStand.position.y = 0.06; monStand.scale.y = 1.4; mon.add(monStand);
+  const monScr = new THREE.Mesh(new THREE.PlaneGeometry(0.78, 0.46), new THREE.MeshBasicMaterial({ map: phoneOff, color: new THREE.Color(1.3, 1.3, 1.3) })); monScr.position.set(0, 0.36, 0.019); mon.add(monScr);
   T.monitor = { mat: monScr.material, ad: cellTex(atlas, 2), off: phoneOff };
   const wait = new THREE.Group(); wait.position.set(-0.95, 0, 0.8); wait.rotation.y = Math.PI + 0.55; desk.add(wait);
   const wSeat = new THREE.Mesh(new RoundedBoxGeometry(0.48, 0.08, 0.46, 2, 0.03), seatMat); wSeat.position.y = 0.46; wSeat.castShadow = true; wait.add(wSeat);
@@ -350,8 +353,19 @@ export async function makeWorld({ W, H, font, look }) {
     [45.5, [-2.6, 2.6, 5.4], [0, 0.95, -5.0], 38],
     [50, [-1.8, 4.6, 8.2], [0.2, 0.5, -0.6], 36],
     [55, [5.6, 1.6, 4.7], [7.5, 0.9, 2.0], 36],
-    [63, [6.25, 1.45, 3.75], [7.55, 0.95, 2.05], 34],
+    [63, [6.35, 1.42, 3.65], [7.6, 1.05, 2.05], 34],
   ];
+  // the ride-along: beside bag 2, its phone in frame; from 42.6 s it rises straight up and out, looking to the flaps
+  const FOLLOW_END = 46;
+  function follow(t) {
+    const hb = BAGS[2], st = stadium(hb.s0 + BELT.v * t, hb.lane);
+    const nx = -Math.sin(st.a), nz = Math.cos(st.a), tx = Math.cos(st.a), tz = Math.sin(st.a);
+    const up = ease(t, 42.6, 44.4), out = ease(t, 43.8, 46.0), look = ease(t, 42.7, 44.3);
+    const p = [st.x + nx * (0.3 + 1.6 * out) - tx * 0.12, BELT.y + 0.52 + 1.0 * up + 0.9 * out, st.z + nz * (0.3 + 1.6 * out) - tz * 0.12];
+    const l = [lerp(st.x, 0, look), lerp(BELT.y + 0.27, 0.95, look) + 0.9 * Math.sin(Math.PI * look), lerp(st.z, -5.4, look)];
+    return { p, l, fov: lerp(25, 38, out) };
+  }
+  { const f = follow(FOLLOW_END); const k = KEYS.findIndex((k) => k[0] === 45.5); KEYS.splice(k, 1, [FOLLOW_END, f.p, f.l, f.fov]); }
   const cr = (p0, p1, p2, p3, u) => { const u2 = u * u, u3 = u2 * u; return 0.5 * ((2 * p1) + (-p0 + p2) * u + (2 * p0 - 5 * p1 + 4 * p2 - p3) * u2 + (-p0 + 3 * p1 - 3 * p2 + p3) * u3); };
   function shot(t) {
     let i = KEYS.findIndex((k, n) => n < KEYS.length - 1 && t < KEYS[n + 1][0]); if (i < 0) i = KEYS.length - 2;
@@ -366,12 +380,11 @@ export async function makeWorld({ W, H, font, look }) {
     const sh0 = shot(t);
     const hand = 0.004 * Math.sin(t * 1.3) + 0.003 * Math.sin(t * 2.7 + 1);   // a little operator on the rig
     camera.position.set(sh0.p[0] + hand, sh0.p[1] + hand * 0.6, sh0.p[2]);
-    const hb = T.bags[2], st2 = stadium(hb.s0 + BELT.v * t, hb.lane), wF = ease(t, 36.6, 38.0) * (1 - ease(t, 44.2, 46.0));
+    const wF = t < FOLLOW_END ? ease(t, 36.6, 38.0) : 0;
     if (wF > 0) {
-      const nx = -Math.sin(st2.a), nz = Math.cos(st2.a), tx = Math.cos(st2.a), tz = Math.sin(st2.a);
-      const lift = ease(t, 42.8, 45.2), fp = [st2.x + nx * (0.2 + 1.4 * lift) - tx * 0.1, BELT.y + 0.5 + 1.4 * lift, st2.z + nz * (0.2 + 1.4 * lift) - tz * 0.1], fl = [lerp(st2.x, 0, lift), lerp(BELT.y + 0.27, 0.95, lift), lerp(st2.z, -5.4, lift)];
-      camera.position.set(lerp(camera.position.x, fp[0], wF), lerp(camera.position.y, fp[1], wF), lerp(camera.position.z, fp[2], wF));
-      sh0.l = sh0.l.map((v, j) => lerp(v, fl[j], wF)); sh0.fov = lerp(sh0.fov, 22, wF);
+      const f = follow(t);
+      camera.position.set(lerp(camera.position.x, f.p[0], wF), lerp(camera.position.y, f.p[1], wF), lerp(camera.position.z, f.p[2], wF));
+      sh0.l = sh0.l.map((v, j) => lerp(v, f.l[j], wF)); sh0.fov = lerp(sh0.fov, f.fov, wF);
     }
     camera.lookAt(sh0.l[0], sh0.l[1], sh0.l[2]); camera.fov = sh0.fov; camera.updateProjectionMatrix();
     // slats ride the belt

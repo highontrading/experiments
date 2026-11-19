@@ -1,0 +1,14 @@
+file '/home/user/experiments/Films/ai-ads-3d/review/stills-11/000960.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-ads-3d/review/stills-11/001027.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-ads-3d/review/stills-11/001051.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-ads-3d/review/stills-11/001075.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-ads-3d/review/stills-11/001099.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-ads-3d/review/stills-11/001118.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-ads-3d/review/stills-11/001488.jpg'
+duration 1
