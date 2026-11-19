@@ -5,7 +5,7 @@ from PIL import Image
 import common as C
 sys.path.insert(0, os.path.join(C.HERE, '..', 'build')); import rvm_net
 f = C.find
-RANGES = [(0, C.OE(f('music.')) + 1.2),                                   # hook (words behind head) + music waveform behind
+RANGES = [(0, C.OS(f('premiere')) + .3),                                   # hook (words behind head) + music waveform behind
           (C.OE(f('magazine.')) - .4, C.OE(f('handwritten.')) + .4),     # magazine masthead + words behind head
           (C.OE(f('whiteboard.')) - .5, C.OS(f('because')) + .2),        # whiteboard cut-out
           (C.OS(f('back.')) - 1.4 - .3, C.OE(f('back.')) + 1.0),        # put me back
@@ -25,7 +25,7 @@ with torch.no_grad():
         if i in NS or i in MS or any(0 < m - i <= 8 for m in matte[:0]):
             img = np.frombuffer(b, np.uint8).reshape(H, W, 3)
             if i in NS and not os.path.exists(f'{C.FR}/{i:05d}.jpg'): Image.fromarray(img).save(f'{C.FR}/{i:05d}.jpg', quality=95)
-            if i in MS:
+            if i in MS and not os.path.exists(f'{C.ALPHA}/{i:05d}.png'):
                 if i - last > 12: rec = [None] * 4
                 _, pha, rec = net(torch.from_numpy(img.copy()).permute(2, 0, 1).float().div(255)[None], *rec, downsample_ratio=0.25)
                 Image.fromarray((pha[0, 0].numpy() * 255).round().astype(np.uint8)).save(f'{C.ALPHA}/{i:05d}.png'); last = i; done += 1

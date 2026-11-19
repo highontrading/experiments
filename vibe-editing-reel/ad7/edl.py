@@ -29,12 +29,13 @@ cur[1] += .35; keep.append(cur)
 for k in keep:
     while voiced(k[1]) and k[1] < W[-1]['e'] + .5: k[1] += .02
 segs = [(round(a_, 3), round(b_, 3)) for a_, b_ in keep]
+SPEED = float(sys.argv[4]) if len(sys.argv) > 4 else 1.0        # playback speed (voice is time-stretched with pitch kept)
 tl = []; o = 0.
-for a_, b_ in segs: tl.append((a_, b_, o)); o += b_ - a_
+for a_, b_ in segs: tl.append((a_, b_, o)); o += (b_ - a_) / SPEED
 def s2o(t):
     for a_, b_, oo in tl:
-        if a_ - .001 <= t <= b_ + .001: return oo + t - a_
-    best = min(tl, key=lambda x: min(abs(t - x[0]), abs(t - x[1]))); return best[2] + (0 if t < best[0] else best[1] - best[0])
+        if a_ - .001 <= t <= b_ + .001: return oo + (t - a_) / SPEED
+    best = min(tl, key=lambda x: min(abs(t - x[0]), abs(t - x[1]))); return best[2] + (0 if t < best[0] else (best[1] - best[0]) / SPEED)
 words = [{'w': w['w'], 's': w['s'], 'e': w['e'], 'os': round(s2o(w['s']), 3), 'oe': round(s2o(w['e']), 3)} for w in W]
 speech = o; N = int(round((speech + 2.6) * 30))      # + end card
 frames = []
@@ -42,8 +43,8 @@ for f in range(N):
     t = f / 30
     if t >= speech: t = speech - 1 / 30
     for a_, b_, oo in tl:
-        if oo <= t < oo + (b_ - a_) + 1e-6: frames.append(int(round((a_ + t - oo) * fps_src))); break
+        if oo <= t < oo + (b_ - a_) / SPEED + 1e-6: frames.append(int(round((a_ + (t - oo) * SPEED) * fps_src))); break
     else: frames.append(int(round(segs[-1][1] * fps_src)) - 1)
-json.dump({'fps': 30, 'fps_src': fps_src, 'keep': segs, 'words': words, 'speech': round(speech, 3), 'nframes': N, 'frames': frames}, open(out, 'w'))
+json.dump({'fps': 30, 'fps_src': fps_src, 'speed': SPEED, 'keep': segs, 'words': words, 'speech': round(speech, 3), 'nframes': N, 'frames': frames}, open(out, 'w'))
 print('segments', len(segs), 'speech', round(speech, 2), 'raw', round(W[-1]['e'], 2), 'frames', N)
 for w in words: print(f"{w['w']}@{w['os']:.2f}", end=' ')

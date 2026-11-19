@@ -4,10 +4,11 @@ import sys, subprocess, numpy as np
 from scipy.signal import butter, sosfilt
 from scipy.io import wavfile
 import common as C
-sd, out = sys.argv[1:3]; SR = 48000; f = C.find; OS, OE = C.OS, C.OE
+sd, out = sys.argv[1:3]; SR = 48000; OS, OE = C.OS, C.OE
+f = lambda w_, k=0, after=0.: C.find(w_, k, after / C.E.get('speed', 1.0))     # 'after' thresholds were written for the 1x cut
 N = int(C.N / 30 * SR) + SR // 10; t = np.arange(N) / SR
 k = C.E['keep']; fl = ';'.join(f"[0:a]atrim={a}:{b},asetpts=PTS-STARTPTS,afade=t=in:d=0.012,afade=t=out:st={b - a - .012:.3f}:d=0.012[a{i}]" for i, (a, b) in enumerate(k))
-fl += ';' + ''.join(f'[a{i}]' for i in range(len(k))) + f'concat=n={len(k)}:v=0:a=1,aresample={SR}[o]'
+fl += ';' + ''.join(f'[a{i}]' for i in range(len(k))) + f'concat=n={len(k)}:v=0:a=1,atempo={C.E.get("speed", 1.0)},aresample={SR}[o]'
 v = np.frombuffer(subprocess.run(['ffmpeg', '-v', 'error', '-i', C.RAW, '-filter_complex', fl, '-map', '[o]', '-ac', '1', '-f', 's16le', '-'], capture_output=True, check=True).stdout, np.int16).astype(np.float32) / 32768
 vo = np.zeros(N, np.float32); vo[:min(N, len(v))] = v[:N]
 hp = lambda x, fc: sosfilt(butter(2, fc, 'high', fs=SR, output='sos'), x, axis=0)
