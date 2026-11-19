@@ -9,9 +9,9 @@ import common as C
 from kit7 import *
 AFTER = sys.argv[1]; OUT = sys.argv[2]
 BG = (247, 247, 244)
-TITLE_Y, CTA_Y = 315, 425
-AX0, AY0, AW = 468, 575, 548; AH = int(AW * 16 / 9)          # After card
-BX0, BY0, BW = 70, 800, 352; BH = int(BW * 16 / 9)          # Before card
+TITLE_Y, CTA_Y = 300, 1585
+AW = 560; AH = int(AW * 16 / 9); AX0 = 404; AY0 = int(1000 - AH / 2)          # After card: big, centred in frame (as in the reference)
+BW = 296; BH = int(BW * 16 / 9); BX0 = AX0 - BW + 6; BY0 = int(AY0 + AH / 2 - BH / 2 + 30)   # Before card: tucked against After's left edge, centred on it
 @lru_cache(None)
 def base_bg():
     yy, xx = K._grid(); a = np.zeros((H, W, 3), np.float32) + np.array(BG, np.float32)
@@ -51,9 +51,9 @@ def cta(im, t):
 def before_frame(i_src): return Image.fromarray(C.raw_src(i_src))
 def frame(i):
     t = i / 30; im = base_bg().copy()
-    blob(im, -40, 60, 300, t, 3); blob(im, W + 30, H - 40, 330, t, 7)
+    blob(im, -40, 60, 300, t, 3); blob(im, W + 70, H + 30, 300, t, 7)
     title(im, t); cta(im, t)
-    label(im, AX0 + 40, AY0 - 46, 'After', 64, cl((t - .3) / .5)); label(im, BX0 + 30, BY0 - 40, 'Before', 48, cl((t - .2) / .5))
+    label(im, AX0 + 150, AY0 - 52, 'After', 74, cl((t - .3) / .5)); label(im, BX0 + 40, BY0 - 40, 'Before', 50, cl((t - .2) / .5))
     card(im, before_frame(C.src_index(t)), BX0, BY0, BW, BH, 30, cl((t - .05) / .55))
     card(im, Image.open(f'{AFTER}/f{min(i, C.N - 1):05d}.jpg'), AX0, AY0, AW, AH, 40, cl((t - .15) / .6))
     K.grain(im, 2, i).save(f'{OUT}/f{i:05d}.jpg', quality=93); return i
