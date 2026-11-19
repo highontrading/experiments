@@ -1,0 +1,10 @@
+file '/home/user/experiments/Films/ai-ads-3d/review/stills-10/000269.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-ads-3d/review/stills-10/000302.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-ads-3d/review/stills-10/001068.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-ads-3d/review/stills-10/001085.jpg'
+duration 1
+file '/home/user/experiments/Films/ai-ads-3d/review/stills-10/001488.jpg'
+duration 1

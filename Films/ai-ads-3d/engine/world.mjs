@@ -231,7 +231,7 @@ export async function makeWorld({ W, H, font, look }) {
     x.fillStyle = '#fff'; x.font = `700 30px ${font}`; x.fillText(NAMES[i] + ',', 18, 330); x.font = `500 18px ${font}`; x.fillText(AD_LINE[i], 18, 362); });
   const phoneBought = (i) => canvasTex(256, 512, (x, w, h) => { x.fillStyle = '#0c0d0f'; x.fillRect(0, 0, w, h); x.fillStyle = '#2fbf71'; x.beginPath(); x.arc(w / 2, 200, 54, 0, TAU); x.fill();
     x.strokeStyle = '#fff'; x.lineWidth = 12; x.lineCap = 'round'; x.beginPath(); x.moveTo(w / 2 - 26, 202); x.lineTo(w / 2 - 6, 222); x.lineTo(w / 2 + 28, 182); x.stroke();
-    x.fillStyle = '#fff'; x.textAlign = 'center'; x.font = `700 34px ${font}`; x.fillText('ORDER', w / 2, 310); x.fillText('PLACED', w / 2, 350); x.font = `500 18px ${font}`; x.fillText('for ' + NAMES[i], w / 2, 392); });
+    x.fillStyle = '#fff'; x.textAlign = 'center'; x.font = `700 34px ${font}`; x.fillText('ORDER', w / 2, 310); x.fillText('PLACED', w / 2, 350); x.font = `700 34px ${font}`; x.fillText('for ' + NAMES[i], w / 2, 404); });
   for (let i = 0; i < 12; i++) {
     const g = new THREE.Group(), w = 0.42 + R() * 0.08, l = 0.6 + R() * 0.12, h = 0.24 + R() * 0.06;
     const shell = new THREE.Mesh(new RoundedBoxGeometry(w, h, l, 4, 0.06), std(bagCols[i], 0.38 + R() * 0.3, i % 4 === 3 ? 0.7 : 0.05));
@@ -337,7 +337,8 @@ export async function makeWorld({ W, H, font, look }) {
     [0, [-3.6, 0.98, 2.62], [0.4, 0.5, 1.9], 40],
     [5, [1.2, 1.0, 2.66], [4.8, 0.6, 0.8], 40],
     [9.5, [4.9, 1.9, 2.4], [2.0, 1.7, -1.4], 38],
-    [14, [3.2, 3.3, -3.7], [-1.2, 1.9, 0.6], 36],
+    [11.2, [2.6, 2.7, 3.6], [2.1, 3.0, 0], 34],
+    [14, [4.8, 3.2, -2.6], [-1.0, 1.9, 0.4], 36],
     [18, [0.5, 1.25, -3.3], [0, 0.95, -7.7], 38],
     [21, [0, 1.0, -6.9], [0, 0.98, -9.5], 44],
     [23.5, [0.05, 1.15, -8.8], [-1.4, 1.35, -11.2], 42],
@@ -346,10 +347,10 @@ export async function makeWorld({ W, H, font, look }) {
     [34.2, [0.1, 1.1, -11.6], [0, 0.85, -7.4], 40],
     [36.6, [0, 0.98, -7.0], [0, 0.78, -3.0], 42],
     [40, [-1.4, 1.2, -2.9], [-3.6, 0.6, -1.0], 40],
-    [45.5, [-2.6, 2.6, 5.4], [0, 0.6, 0.2], 38],
+    [45.5, [-2.6, 2.6, 5.4], [0, 0.95, -5.0], 38],
     [50, [-1.8, 4.6, 8.2], [0.2, 0.5, -0.6], 36],
-    [55, [6.3, 1.5, 4.2], [8.0, 1.12, 2.2], 32],
-    [63, [6.35, 1.55, 4.05], [7.65, 0.98, 2.1], 34],
+    [55, [5.6, 1.6, 4.7], [7.5, 0.9, 2.0], 36],
+    [63, [6.25, 1.45, 3.75], [7.55, 0.95, 2.05], 34],
   ];
   const cr = (p0, p1, p2, p3, u) => { const u2 = u * u, u3 = u2 * u; return 0.5 * ((2 * p1) + (-p0 + p2) * u + (2 * p0 - 5 * p1 + 4 * p2 - p3) * u2 + (-p0 + 3 * p1 - 3 * p2 + p3) * u3); };
   function shot(t) {
@@ -368,7 +369,7 @@ export async function makeWorld({ W, H, font, look }) {
     const hb = T.bags[2], st2 = stadium(hb.s0 + BELT.v * t, hb.lane), wF = ease(t, 36.6, 38.0) * (1 - ease(t, 44.2, 46.0));
     if (wF > 0) {
       const nx = -Math.sin(st2.a), nz = Math.cos(st2.a), tx = Math.cos(st2.a), tz = Math.sin(st2.a);
-      const lift = ease(t, 42.8, 45.2), fp = [st2.x + nx * (0.2 + 1.4 * lift) - tx * 0.1, BELT.y + 0.5 + 1.4 * lift, st2.z + nz * (0.2 + 1.4 * lift) - tz * 0.1], fl = [st2.x, BELT.y + 0.27, st2.z];
+      const lift = ease(t, 42.8, 45.2), fp = [st2.x + nx * (0.2 + 1.4 * lift) - tx * 0.1, BELT.y + 0.5 + 1.4 * lift, st2.z + nz * (0.2 + 1.4 * lift) - tz * 0.1], fl = [lerp(st2.x, 0, lift), lerp(BELT.y + 0.27, 0.95, lift), lerp(st2.z, -5.4, lift)];
       camera.position.set(lerp(camera.position.x, fp[0], wF), lerp(camera.position.y, fp[1], wF), lerp(camera.position.z, fp[2], wF));
       sh0.l = sh0.l.map((v, j) => lerp(v, fl[j], wF)); sh0.fov = lerp(sh0.fov, 22, wF);
     }
