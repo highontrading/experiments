@@ -101,7 +101,7 @@
   {
    "file": "assets/sound/backhall.wav",
    "at": 21.3,
-   "gain_db": -1,
+   "gain_db": 0,
    "bus": "ambience",
    "loop": true,
    "length": 15.0,

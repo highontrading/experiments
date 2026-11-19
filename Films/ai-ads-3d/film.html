@@ -147,7 +147,7 @@ function score(ctx, out) {
   muzak(0, CUES.back - 0.3, 1);
   muzak(CUES.out + 0.4, CUES.desk, 1);
   // the back hall: a machine pulse (soft kick and ticks)
-  for (let b = Math.ceil(CUES.back / beat(1)); beat(b) < CUES.out; b++) { kick(ctx, out, beat(b), 0.4); tick(ctx, out, beat(b) + beat(0.5), 0.06); }
+  for (let b = Math.ceil(CUES.back / beat(1)); beat(b) < CUES.out; b++) { kick(ctx, out, beat(b), 0.5); tick(ctx, out, beat(b) + beat(0.5), 0.06); }
   for (const t of CHIMES) chime(ctx, pa, t, 0.32);
 }
 

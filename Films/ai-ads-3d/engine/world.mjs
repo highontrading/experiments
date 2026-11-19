@@ -314,7 +314,7 @@ export async function makeWorld({ W, H, font, look }) {
   const monBody = new THREE.Mesh(new RoundedBoxGeometry(0.5, 0.32, 0.03, 2, 0.01), std('#141516', 0.4, 0.5)); monBody.position.y = 0.26; mon.add(monBody);
   const monStand = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.12, 0.05), std('#141516', 0.4, 0.5)); monStand.position.y = 0.06; mon.add(monStand);
   const monScr = new THREE.Mesh(new THREE.PlaneGeometry(0.46, 0.28), new THREE.MeshBasicMaterial({ map: phoneOff })); monScr.position.set(0, 0.26, 0.016); mon.add(monScr);
-  T.monitor = { mat: monScr.material, ad: cellTex(atlas, 4), off: phoneOff };
+  T.monitor = { mat: monScr.material, ad: cellTex(atlas, 2), off: phoneOff };
   const wait = new THREE.Group(); wait.position.set(-0.95, 0, 0.8); wait.rotation.y = Math.PI + 0.55; desk.add(wait);
   const wSeat = new THREE.Mesh(new RoundedBoxGeometry(0.48, 0.08, 0.46, 2, 0.03), seatMat); wSeat.position.y = 0.46; wSeat.castShadow = true; wait.add(wSeat);
   const wBack = new THREE.Mesh(new RoundedBoxGeometry(0.48, 0.52, 0.06, 2, 0.03), seatMat); wBack.position.set(0, 0.74, 0.21); wBack.rotation.x = -0.1; wBack.castShadow = true; wait.add(wBack);
@@ -368,7 +368,7 @@ export async function makeWorld({ W, H, font, look }) {
     const hb = T.bags[2], st2 = stadium(hb.s0 + BELT.v * t, hb.lane), wF = ease(t, 36.6, 38.0) * (1 - ease(t, 44.2, 46.0));
     if (wF > 0) {
       const nx = -Math.sin(st2.a), nz = Math.cos(st2.a), tx = Math.cos(st2.a), tz = Math.sin(st2.a);
-      const lift = ease(t, 43.4, 46.0), fp = [st2.x + nx * (0.2 + 1.4 * lift) - tx * 0.1, BELT.y + 0.5 + 1.4 * lift, st2.z + nz * (0.2 + 1.4 * lift) - tz * 0.1], fl = [st2.x, BELT.y + 0.27, st2.z];
+      const lift = ease(t, 42.8, 45.2), fp = [st2.x + nx * (0.2 + 1.4 * lift) - tx * 0.1, BELT.y + 0.5 + 1.4 * lift, st2.z + nz * (0.2 + 1.4 * lift) - tz * 0.1], fl = [st2.x, BELT.y + 0.27, st2.z];
       camera.position.set(lerp(camera.position.x, fp[0], wF), lerp(camera.position.y, fp[1], wF), lerp(camera.position.z, fp[2], wF));
       sh0.l = sh0.l.map((v, j) => lerp(v, fl[j], wF)); sh0.fov = lerp(sh0.fov, 22, wF);
     }
