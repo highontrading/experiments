@@ -1,8 +1,8 @@
-# make.py draft · 2026-11-18 19:24:32
+# make.py draft · 2026-11-19 04:17:06
 
 $ node /home/user/experiments/Films/ai-ads-3d/tools/capture.mjs --url film.html --probe --params w=1920&h=1080
 [capture] renderer: canvas2d
-[capture] page: 1920x1080, 1488 frames @ 24 fps
-[capture] meta: {"title":"Carousel","bounds":[0,22,35.8,52,62],"vo":7,"palette":{"bg":"#07080a","ink":"#f4f2ee","accent":"#ffae5c","dim":"#2a2826"},"lookPalette":{"bg":"#07080a","ink":"#f4f2ee","accent":"#ffae5c","dim":"#2a2826"},"families":["Familjen Grotesk"],"sfx":[[20.85,"whoosh",0.7],[35.45,"whoosh",0.7]]}
+[capture] page: 1920x1080, 1512 frames @ 24 fps
+[capture] meta: {"title":"Carousel","bounds":[0,22,35.8,52,63],"vo":7,"palette":{"bg":"#07080a","ink":"#f4f2ee","accent":"#ffae5c","dim":"#2a2826"},"lookPalette":{"bg":"#07080a","ink":"#f4f2ee","accent":"#ffae5c","dim":"#2a2826"},"families":["Familjen Grotesk"],"sfx":[[20.85,"whoosh",0.7],[35.45,"whoosh",0.7]]}
 
-$ node /home/user/experiments/Films/ai-ads-3d/tools/capture.mjs --url film.html --video /home/user/experiments/Films/ai-ads-3d/renders/draft-picture-v2.mp4 --audio /home/user/experiments/Films/ai-ads-3d/audio/film.wav --workers 2 --format jpeg --quality 0.85 --maxrate 4M --params w=960&h=540&shutter=0&weave=0&tone=0 --status /home/user/experiments/Films/ai-ads-3d/renders/draft.status.json
+$ node /home/user/experiments/Films/ai-ads-3d/tools/capture.mjs --url film.html --video /home/user/experiments/Films/ai-ads-3d/renders/draft-picture-v3.mp4 --audio /home/user/experiments/Films/ai-ads-3d/audio/film.wav --workers 2 --format jpeg --quality 0.85 --maxrate 4M --params w=960&h=540&shutter=0&weave=0&tone=0 --status /home/user/experiments/Films/ai-ads-3d/renders/draft.status.json

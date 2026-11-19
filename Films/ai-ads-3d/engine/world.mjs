@@ -340,10 +340,10 @@ export async function makeWorld({ W, H, font, look }) {
     [34.2, [0.1, 1.1, -11.6], [0, 0.85, -7.4], 40],
     [36.6, [0, 0.98, -7.0], [0, 0.78, -3.0], 42],
     [40, [-1.4, 1.2, -2.9], [-3.6, 0.6, -1.0], 40],
-    [44, [-4.5, 1.05, 0.7], [-1.8, 0.5, 2.1], 38],
+    [45.5, [-2.6, 2.6, 5.4], [0, 0.6, 0.2], 38],
     [50, [-1.8, 4.6, 8.2], [0.2, 0.5, -0.6], 36],
     [55, [6.3, 1.5, 4.2], [8.0, 1.12, 2.2], 32],
-    [62, [6.95, 1.36, 3.3], [7.95, 1.18, 2.05], 30],
+    [63, [6.95, 1.36, 3.3], [7.95, 1.18, 2.05], 30],
   ];
   const cr = (p0, p1, p2, p3, u) => { const u2 = u * u, u3 = u2 * u; return 0.5 * ((2 * p1) + (-p0 + p2) * u + (2 * p0 - 5 * p1 + 4 * p2 - p3) * u2 + (-p0 + 3 * p1 - 3 * p2 + p3) * u3); };
   function shot(t) {
@@ -359,10 +359,10 @@ export async function makeWorld({ W, H, font, look }) {
     const sh0 = shot(t);
     const hand = 0.004 * Math.sin(t * 1.3) + 0.003 * Math.sin(t * 2.7 + 1);   // a little operator on the rig
     camera.position.set(sh0.p[0] + hand, sh0.p[1] + hand * 0.6, sh0.p[2]);
-    const hb = T.bags[2], st2 = stadium(hb.s0 + BELT.v * t, hb.lane), wF = ease(t, 36.6, 38.0) * (1 - ease(t, 43.6, 45.0));
+    const hb = T.bags[2], st2 = stadium(hb.s0 + BELT.v * t, hb.lane), wF = ease(t, 36.6, 38.0) * (1 - ease(t, 44.2, 46.0));
     if (wF > 0) {
       const nx = -Math.sin(st2.a), nz = Math.cos(st2.a), tx = Math.cos(st2.a), tz = Math.sin(st2.a);
-      const fp = [st2.x + nx * 0.42 - tx * 0.28, BELT.y + 0.5, st2.z + nz * 0.42 - tz * 0.28], fl = [st2.x, BELT.y + 0.3, st2.z];
+      const lift = ease(t, 43.4, 46.0), fp = [st2.x + nx * (0.42 + 1.2 * lift) - tx * 0.28, BELT.y + 0.5 + 1.4 * lift, st2.z + nz * (0.42 + 1.2 * lift) - tz * 0.28], fl = [st2.x, BELT.y + 0.3, st2.z];
       camera.position.set(lerp(camera.position.x, fp[0], wF), lerp(camera.position.y, fp[1], wF), lerp(camera.position.z, fp[2], wF));
       sh0.l = sh0.l.map((v, j) => lerp(v, fl[j], wF)); sh0.fov = lerp(sh0.fov, 26, wF);
     }
@@ -401,12 +401,13 @@ export async function makeWorld({ W, H, font, look }) {
     A.tagHeld.visible = t < 28.3;
     const bz = -10.2 - (t - 22) * 0.45; T.backBag.position.set(0, 0.57, Math.max(-16.5, bz)); T.backBag.rotation.set(0, Math.PI / 2, 0);
     T.backBag2.position.set(0, 0.57, -9.0 + Math.min(0, -(t - 30) * 0.9)); T.backBag2.rotation.set(0, Math.PI / 2, 0);
-    // the desk monitor wakes at 56.4 s: an advert for nobody, to an empty chair
-    const mm = t < 56.4 ? T.monitor.off : T.monitor.ad; if (T.monitor.mat.map !== mm) { T.monitor.mat.map = mm; T.monitor.mat.needsUpdate = true; }
-    if (t >= 56.4) { const i = (4 + Math.floor((t - 56.4) / 1.5)) % 8; T.monitor.ad.offset.set((i % 4) * 0.25, 0.5 - Math.floor(i / 4) * 0.5); }
+    // the desk monitor wakes at 58.6 s: an advert for nobody, to an empty chair
+    const mm = t < 58.6 ? T.monitor.off : T.monitor.ad; if (T.monitor.mat.map !== mm) { T.monitor.mat.map = mm; T.monitor.mat.needsUpdate = true; }
+    if (t >= 58.6) { const i = (4 + Math.floor((t - 58.6) / 1.5)) % 8; T.monitor.ad.offset.set((i % 4) * 0.25, 0.5 - Math.floor(i / 4) * 0.5); }
     // the desk lamp breathes a little
     deskLight.intensity = 6 * (1 + 0.03 * Math.sin(t * 9));
   }
+    // the refrain of the ending: the lamp, then the monitor
   const lk = buildLook({ renderer, scene, camera, look, fps: 24, seed: 7, setTime });
   return { canvas: renderer.domElement, render: (frame, t) => lk.render(frame, t), info: 'three.js r' + THREE.REVISION };
 }

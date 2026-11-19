@@ -52,7 +52,7 @@ const LOOK_ID = 'passthrough';
 const LOOK = LOOKS[LOOK_ID];
 const FINISH = { shutter: null, weave: 0, tone: null };
 const FPS = 24;
-const DURATION = 62;
+const DURATION = 63;
 const BPM = 80;                             // bar = 3 s
 const BEAT0 = 0;
 const beat = (n) => BEAT0 + n * 60 / BPM, bar = (n) => beat(4 * n);
@@ -83,7 +83,7 @@ const VO = [
   { id: 'VO4', at: 38.2, dur: 2.36 },
   { id: 'VO5', at: 41.4, dur: 5.42 },
   { id: 'VO6', at: 48.0, dur: 4.21 },
-  { id: 'VO7', at: 54.2, dur: 4.68 },
+  { id: 'VO7', at: 53.4, dur: 4.68 },
 ];
 const CHIMES = VO.filter((v) => v.id !== 'VO3' && v.id !== 'VO5').map((v) => v.at - 1.45);   // a chime opens each announcement
 const CAPTIONS = null;
@@ -147,7 +147,7 @@ function score(ctx, out) {
   muzak(0, CUES.back - 0.3, 1);
   muzak(CUES.out + 0.4, CUES.desk, 1);
   // the back hall: a machine pulse (soft kick and ticks)
-  for (let b = Math.ceil(CUES.back / beat(1)); beat(b) < CUES.out; b++) { kick(ctx, out, beat(b), 0.22); tick(ctx, out, beat(b) + beat(0.5), 0.06); }
+  for (let b = Math.ceil(CUES.back / beat(1)); beat(b) < CUES.out; b++) { kick(ctx, out, beat(b), 0.4); tick(ctx, out, beat(b) + beat(0.5), 0.06); }
   for (const t of CHIMES) chime(ctx, pa, t, 0.32);
 }
 
