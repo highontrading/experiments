@@ -1,6 +1,6 @@
 ---
 name: vibe-style
-description: Scrape an editing style (captions, hook, pacing, punch-ins, colour look, motion text, sound density) from reference videos or photos and save it as a reusable style in the workspace style library. Use when the user attaches or points to a reel, video or images and says "edit like this", "copy this style", "take inspiration from this", "match this look/captions", "save this as my style", or wants to list, view, change or mix saved styles.
+description: Deeply analyse and scrape an editing style (captions, hook, pacing, punch-ins, colour look, motion text, sound density) from reference videos or photos and save it as a reusable style in the workspace style library. Use when the user attaches or points to a reel, video or images and says "edit like this", "copy this style", "take inspiration from this", "match this look/captions", "save this as my style", or wants to list, view, change or mix saved styles.
 ---
 
 # Vibe Style: the style scraper
@@ -28,8 +28,10 @@ Any mix of videos, images or a folder works. This writes to `styles/<name>/`:
   `v1_detail1..2.jpg` (large single frames for reading type), `images.jpg` (photo refs).
 
 ## 2 · Look and decide (this is the important part)
-Read the sheets with the Read tool. Start with `detail1`, `burst1`, `hook`, `shots`; open more
-only if unsure (each image costs context, so 4–6 is plenty). Then fill every `_todo` field:
+Read the sheets with the Read tool: `detail1`, `detail2`, `burst1`–`burst3`, `hook`, `shots`.
+Quality matters here: study them properly. If one detail is unclear (the exact highlight colour,
+whether captions pop or fade), grab more frames: `ve frames <project> --at 3.2,3.3,3.4 --video
+refs/<file>` and look again. Then fill every `_todo` field:
 
 **captions**
 - `font`: pick the closest bundled font:
@@ -74,17 +76,19 @@ looks wrong. Lower `lut_strength` to 0.3–0.5 when the reference grade is extre
 
 Finally write a one-sentence `description` of the style, delete every `_todo` list, and save.
 
-## 3 · Show it
+## 3 · Show it and get approval
 ```
-ve style card <style-name>          # writes styles/<name>/style_card.html
-ve open "styles/<name>/style_card.html"
+ve style card <style-name>                     # -> styles/<name>/style_card.png
+ve open "styles/<name>/style_card.png"
 ```
-The card shows the caption and hook preview on a real frame, the palette and every value.
-Ask the user if it matches what they wanted; tweak `style.json` and re-run `style card` until
-it does.
+The card is an image: the style's captions and hook rendered on a reference frame, the palette,
+and every value. Show it, summarise what you found in 4–6 bullets (captions, pacing and
+punch-ins, motion text, colour, sound), and ask *"Does this match? Anything to change?"*
+**STOP and wait.** Tweak `style.json` and re-run `style card` until they approve.
 
 ## 4 · Apply it
-- No edit yet → `ve plan "<project>" --style <name>` (see vibe-edit).
+- No edit yet → set `"style": "<name>"` in `<project>/brief.json`; the vibe-edit steps continue
+  (captions sheet shows the reference's captions as option **R**, looks sheet shows **reference**).
 - The project already has an `edit.json` (the reference came later in the chat) →
   `ve restyle "<project>" --style <name>`. That keeps the cuts, caption text, hook, texts and sound.
 

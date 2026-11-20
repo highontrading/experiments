@@ -1,26 +1,26 @@
 # Vibe Editing workspace
 
-This folder is a **Vibe Editing** workspace. The editing skills live in `./vibe-editing/skills/`.
+This folder is a **Vibe Editing** workspace. The plugin lives in `./vibe-editing-plugin/`.
 
-For ANY video request (edit a video, cut dead space or retakes, captions, hook, sound design,
-music, colour, motion text, "edit it like this", a reference or inspiration, render, export):
-1. Read `./vibe-editing/skills/vibe-edit/SKILL.md` and follow it. (If the `vibe-edit` skill is
-   already loaded as a plugin skill, it's the same file. Use it.)
-2. For copying a style from a reference video or photos, also read
-   `./vibe-editing/skills/vibe-style/SKILL.md`.
-3. For install problems, read `./vibe-editing/skills/vibe-setup/SKILL.md`.
+For ANY video request (edit a video, captions, cutting, music, sound effects, motion graphics,
+a reference or inspiration, storyboard, render, export):
+1. Read `./vibe-editing-plugin/skills/vibe-edit/SKILL.md` and follow it **step by step**.
+   (If the `vibe-edit` skill is already loaded as a plugin skill, it's the same file.)
+2. For a reference / inspiration: also `./vibe-editing-plugin/skills/vibe-style/SKILL.md`.
+3. For install problems: `./vibe-editing-plugin/skills/vibe-setup/SKILL.md`.
 
-The engine: `python3 "./vibe-editing/skills/vibe-edit/engine/ve.py"` (Windows: `python`).
+Engine: `python3 "./vibe-editing-plugin/skills/vibe-edit/engine/ve.py"` (Windows: `python`).
 
-## How the user works here (keep it short for them)
-- They give you files in any order: in one message or across several, attached in the chat,
-  dropped loose in this folder, or as a path. Usually "the first is my video, the second is my
-  reference / inspiration". If it's unclear which is which, ask once.
-- **You** create the project folders. Never ask the user to make folders or move files:
-  `ve intake --video "<file>" --ref "<file>"` (or `--project <name> --ref "<file>"` when the
-  reference comes later). It copies files from outside this folder and moves loose files in.
-- If the reference arrives after you planned the edit: scrape it (vibe-style), then
-  `ve restyle <project> --style <name>`. That keeps the cuts, caption text, hook and sound.
-- Default to **quick mode** (see the vibe-edit skill): no questionnaire, sensible defaults,
-  straight to the edit board. Tell the user in one line which stage you're in.
-- Rendered videos go to `<project>/out/`. Tell the user the file name when done.
+## How to work with this user
+- **One step at a time, and ask before doing.** After they upload a video, ask what kind of
+  edit they want. Then reference, captions, motion graphics, music and sound effects, and colour
+  look, one step per message, showing the option images. STOP after each question and wait.
+- Never build the edit, download or generate audio, or render before they've answered.
+- The **edit board is the storyboard**: an image of numbered frames of the planned edit
+  (`ve storyboard`). Never open a browser dashboard. They approve the storyboard or ask for
+  changes by panel number; only then render, after asking.
+- You create the project folders (`ve intake`). Never ask them to make folders.
+- They may send the video and the reference together ("first is my video, second is my
+  inspiration") or in separate messages. If it's unclear which file is which, ask.
+- Show images with `ve open "<png>"` and give the path.
+- Ask before using ElevenLabs (costs their credits). Never ask them to paste an API key in chat.

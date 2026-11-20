@@ -1,16 +1,16 @@
 # edit.json reference
 
-`edit.json` is the whole edit. The board reads and writes it; the renderer reads it. All times
+`edit.json` is the whole edit. The storyboard and the renderer both read it; you write it. All times
 are **seconds in the raw (source) video**. The renderer maps them to output time after the cuts,
 so turning a cut on or off never breaks captions, text or SFX timing.
 
-Every save (board or `plan.save_edit`) bumps `version` and keeps a copy in `versions/`.
+Every save (`ve plan`, `ve restyle`, or `plan.save_edit`) bumps `version` and keeps a copy in `versions/`.
 When you edit it by hand, keep it valid JSON and don't rename fields.
 
 ```jsonc
 {
   "version": 3,                       // set automatically on save
-  "approved": false,                  // the board sets true on "Approve & render final"
+  "approved": false,                  // set true when the user approves the storyboard
   "source": "raw/clip.mp4",           // or build/source.mp4 when several clips were joined
   "style_name": "cloud-notes",
   "brief": { "platform": "reels", "pace": "tight", "addons": ["captions","hook","zoom","sound","look","motion"] },
@@ -41,7 +41,8 @@ When you edit it by hand, keep it valid JSON and don't rename fields.
       "accent_words": ["MINUTES"], "size": 110, "sfx": "pop" },          // words slam in one by one
     { "type": "title", "text": "STEP 1", "start": 18.8, "end": 20.0 },  // centred title card
     { "type": "lower_third", "text": "AVI · IDEABRO STUDIO", "subtitle": "Founder", "start": 1.5, "end": 4.0 },
-    { "type": "label", "text": "STEP 1 · ANALYZE", "start": 8.0, "end": 10.6, "y": 0.30, "x": 0.5 }
+    { "type": "label", "text": "STEP 1 · ANALYZE", "start": 8.0, "end": 10.6, "y": 0.30, "x": 0.5 },
+    { "type": "cta", "text": "JOIN NOW →", "start": 20.1, "end": 22.6, "y": 0.40 }   // button for ads
   ],                                  // optional on every item: "enabled": false, "case": "upper|as-is", "sfx": null
 
   "broll": [ { "file": "broll/laptop.mp4", "start": 8.0, "end": 10.5,
@@ -53,7 +54,8 @@ When you edit it by hand, keep it valid JSON and don't rename fields.
 
   "sound": { "enabled": true, "voice_cleanup": true,     // hum/rumble cut, light denoise, compression
              "music": { "file": "music/track.mp3", "level_db": -21, "duck": true },
-             "sfx": [ { "id": "x1", "sound": "whoosh", "t": 3.98, "offset": -0.12, "gain_db": -15 } ],
+             "sfx": [ { "id": "x1", "sound": "whoosh", "t": 3.98, "offset": -0.12, "gain_db": -15 },
+                      { "id": "x2", "sound": "sfx/deep-whoosh-1.mp3", "t": 9.0 } ],   // built-in name or a file
              "hook_sfx": "pop",
              "loudness_lufs": -14 },                    // -14 for Reels/Shorts/YouTube, -16 for lessons is fine
 
@@ -64,6 +66,7 @@ When you edit it by hand, keep it valid JSON and don't rename fields.
             "warmth": 0.0,        // -1 cool .. +1 warm
             "vignette": 0.15, "grain": 0.0, "sharpen": 0.3 },
 
+  "brief": { "platform": "meta-ad", "edit_type": "ugc-ad", "target_length": 30, "cta": "...", "motion": {...} },
   "style": { /* full copy of the style: captions, hook, motion, pacing, look, sound, reference_stats */ },
   "export": { "preset": "reels", "name": null }   // name -> out/<name>.mp4
 }
@@ -88,6 +91,7 @@ When you edit it by hand, keep it valid JSON and don't rename fields.
 | `pacing.zoom_scale` | punch-in amount, 1.08–1.25 |
 
 ## Helpers
-- `ve show <p> segments|captions|transcript|retakes|summary`: compact views, cheaper than reading JSON.
+- `ve show <p> segments|captions|transcript|retakes|summary|brief`: compact views, cheaper than reading JSON.
+- `ve storyboard <p>`: after every change, to show the user.
 - `ve versions <p>` / `ve versions <p> --restore N`.
 - To regenerate the draft from scratch: `ve plan <p> --force ...` (the old one stays in versions/).

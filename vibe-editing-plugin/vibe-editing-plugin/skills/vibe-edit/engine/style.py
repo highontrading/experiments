@@ -4,14 +4,12 @@
       -> styles/my-style/auto.json      measured numbers (pacing, colour, sound)
       -> styles/my-style/style.json     draft style (measured values filled, the rest marked TODO)
       -> styles/my-style/*.jpg          contact sheets for Claude to look at
-  ve.py style card my-style            -> styles/my-style/style_card.html
+  ve.py style card my-style            -> styles/my-style/style_card.png
   ve.py style list
 """
 from __future__ import annotations
 
-import base64
 import copy
-import html
 import json
 import re
 import shutil
@@ -234,111 +232,6 @@ def _most_saturated(pal):
         if s > bs and mx > 0.35:
             best, bs = hx, s
     return best.upper() if best else None
-
-
-# ---------------------------------------------------------------- style card
-def _font_face(key):
-    k, (file, *_rest) = font_info(key)
-    data = base64.b64encode((FONTS_DIR / file).read_bytes()).decode()
-    fmt = "opentype" if file.endswith(".otf") else "truetype"
-    return f"@font-face{{font-family:'{k}';src:url(data:font/{fmt};base64,{data}) format('{fmt}');}}"
-
-
-def card(style_dir: Path):
-    sdir = Path(style_dir)
-    s = full_style(load_json(sdir / "style.json"))
-    auto = load_json(sdir / "auto.json", {}) or {}
-    cap, hook, look, motion = s["captions"], s["hook"], s["look"], s["motion"]
-    fonts = {cap["font"], hook["font"], motion["font"]}
-    faces = "".join(_font_face(f) for f in fonts)
-    sheets = []
-    for tag, d in (auto.get("sheets") or {}).items():
-        for k, p in d.items():
-            if (sdir / p).exists() and not k.startswith("detail"):
-                sheets.append((f"{tag} · {k}", p))
-    bg = None
-    for tag, d in (auto.get("sheets") or {}).items():
-        if "detail1" in d:
-            bg = d["detail1"]
-            break
-        if "images" in d:
-            bg = d["images"]
-    pal = (s.get("reference_stats") or {}).get("palette") or []
-    words = "THIS IS YOUR CAPTION STYLE".split()
-    wpl = max(1, int(cap["words_per_line"]))
-    shown = words[:wpl]
-    k_active = min(1, len(shown) - 1)
-    scale = 360 / 1080
-
-    def cap_html():
-        out = []
-        for i, w in enumerate(shown):
-            col = cap["active_color"] if (i == k_active and cap["highlight"] != "none") else cap["color"]
-            extra = ""
-            if i == k_active and cap["highlight"] == "box":
-                extra = f"background:{cap['active_color']};color:{cap['color']};border-radius:8px;padding:0 6px;"
-                col = "#111"
-            if i == k_active and cap["highlight"] == "scale":
-                extra = "display:inline-block;transform:scale(1.12);"
-            t = w if cap["case"] != "lower" else w.lower()
-            out.append(f"<span style='color:{col};{extra}'>{html.escape(t)}</span>")
-        return " ".join(out)
-
-    stroke = cap["outline"] * scale
-    cap_css = (f"font-family:'{cap['font']}';font-size:{cap['size'] * scale:.1f}px;"
-               f"letter-spacing:{cap['letter_spacing']}px;"
-               f"-webkit-text-stroke:{stroke:.1f}px {cap['outline_color']};paint-order:stroke fill;"
-               f"text-shadow:0 {cap['shadow'] * scale:.1f}px 0 {cap['shadow_color']};"
-               f"top:{cap['position_y'] * 100:.1f}%;" +
-               (f"background:{cap['box_color']};padding:4px 10px;border-radius:6px;" if cap["box"] else ""))
-    hook_txt = "THE HOOK SITS HERE"
-    hook_css = (f"font-family:'{hook['font']}';font-size:{hook['size'] * scale:.1f}px;color:{hook['color']};"
-                f"top:{hook['position_y'] * 100:.1f}%;" +
-                (f"background:{hook['box_color']};" if hook.get("box_opacity", 0) < 1 else ""))
-    rows = lambda d: "".join(f"<tr><td>{html.escape(str(k))}</td><td>{html.escape(str(v))}</td></tr>"
-                             for k, v in d.items() if not str(k).startswith("_"))
-    todo = [f"{sec}.{f}" for sec in ("captions", "hook", "motion", "pacing") for f in s[sec].get("_todo", [])]
-    page = f"""<!doctype html><html><head><meta charset="utf-8"><title>Style card · {html.escape(s['name'])}</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<style>{faces}
-:root{{--bg:#f4f1ea;--fg:#141414;--mut:#6b6b6b;--card:#fff;--line:#e3ded3}}
-@media (prefers-color-scheme:dark){{:root{{--bg:#121212;--fg:#f2f2f2;--mut:#a0a0a0;--card:#1d1d1d;--line:#333}}}}
-body{{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif}}
-.wrap{{max-width:1100px;margin:0 auto;padding:28px 16px}}
-h1{{font-size:34px;margin:0}} .mut{{color:var(--mut)}}
-.grid{{display:grid;grid-template-columns:380px 1fr;gap:24px;margin-top:20px}}
-@media(max-width:800px){{.grid{{grid-template-columns:1fr}}}}
-.phone{{width:360px;height:640px;border-radius:28px;overflow:hidden;position:relative;background:#333 center/cover;
-  {f"background-image:url('{bg}');" if bg else ""}box-shadow:0 20px 50px rgba(0,0,0,.25)}}
-.cap,.hook{{position:absolute;left:0;right:0;text-align:center;transform:translateY(-50%);line-height:1.1;padding:0 18px;
-  {"text-transform:uppercase;" if cap["case"] == "upper" else ""}}}
-.hook span{{padding:6px 12px;border-radius:8px;{"text-transform:uppercase;" if hook["case"] == "upper" else ""}}}
-.box{{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}}
-.sw{{display:inline-block;width:46px;height:46px;border-radius:10px;margin:0 6px 6px 0;border:1px solid var(--line)}}
-table{{border-collapse:collapse;width:100%;font-size:14px}} td{{padding:4px 6px;border-bottom:1px solid var(--line)}}
-td:first-child{{color:var(--mut);width:42%}}
-.sheets img{{max-width:100%;border-radius:10px;margin:6px 0;border:1px solid var(--line)}}
-.todo{{background:#fff3cd;color:#664d03;border-radius:10px;padding:10px 14px}}
-</style></head><body><div class="wrap">
-<h1>{html.escape(s['name'])}</h1><p class="mut">{html.escape(s.get('description') or '')}</p>
-{f'<p class="todo">Still to fill in: {", ".join(todo)}</p>' if todo else ''}
-<div class="grid"><div>
- <div class="phone"><div class="hook" style="{hook_css}"><span style="background:{hook['box_color']}">{hook_txt}</span></div>
- <div class="cap" style="{cap_css}">{cap_html()}</div></div>
- <div class="box" style="margin-top:16px"><b>Palette</b><br>{''.join(f'<span class="sw" title="{p}" style="background:{p}"></span>' for p in pal)}</div>
-</div><div>
- <div class="box"><b>Captions</b> · {html.escape(cap['font'])}<table>{rows(cap)}</table></div>
- <div class="box"><b>Pacing</b><table>{rows(s['pacing'])}</table></div>
- <div class="box"><b>Look</b><table>{rows(look)}</table></div>
- <div class="box"><b>Motion</b><table>{rows(motion)}</table></div>
- <div class="box"><b>Sound</b><table>{rows(s['sound'])}</table></div>
- <div class="box"><b>Hook</b><table>{rows(hook)}</table></div>
-</div></div>
-<div class="box sheets"><b>What the scraper looked at</b>{''.join(f'<p class="mut">{html.escape(t)}</p><img src="{p}" loading="lazy">' for t, p in sheets)}</div>
-</div></body></html>"""
-    out = sdir / "style_card.html"
-    out.write_text(page, encoding="utf-8")
-    return out
 
 
 def list_styles(workspace: Path):

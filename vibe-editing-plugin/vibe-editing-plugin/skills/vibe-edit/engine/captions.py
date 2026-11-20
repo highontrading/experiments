@@ -36,7 +36,7 @@ def strip_punct(w: str) -> str:
 
 
 def normalize_line(line: dict) -> list:
-    """If the line text was edited on the board, re-time the words to the new text."""
+    """If the line text was edited, re-time the words to the new text."""
     words = line.get("words") or []
     text = (line.get("text") or "").strip()
     if not words:
@@ -90,6 +90,8 @@ class AssBuilder:
             style_line("Lower", mot["font"], 44, "#111111", "#FFFFFF", 16, 0, "#000000", border_style=3, align=1),
             style_line("Label", mot["font"], 40, "#111111", mot.get("accent", "#FFE14D"), 12, 0, "#000000",
                        border_style=3),
+            style_line("Cta", mot["font"], 58, mot.get("cta_text", "#111111"), mot.get("accent", "#FFE14D"), 26, 0,
+                       "#000000", border_style=3),
             "", "[Events]", "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text",
         ]
         return "\n".join(lines)
@@ -232,6 +234,9 @@ class AssBuilder:
                 body = esc(txt) + ("\\N{\\fs" + str(int(30 * k / ratio)) + "}" + esc(sub) if sub else "")
                 self.add(s, e, "Lower", "{\\an1\\move(" + f"{-int(600 * k)},{y},{x0},{y},0,260" + ")\\fad(0,200)}" +
                          body, layer=3)
+            elif kind == "cta":
+                self.add(s, e, "Cta", "{\\an5\\pos(" + f"{x},{y}" + ")\\fscx40\\fscy40\\t(0,160,\\fscx108\\fscy108)"
+                         "\\t(160,240,\\fscx100\\fscy100)}" + esc(txt), layer=3)
             elif kind == "label":
                 self.add(s, e, "Label", "{\\an5\\pos(" + f"{x},{y}" + ")\\fscx50\\fscy50\\t(0,120,\\fscx104\\fscy104)"
                          "\\t(120,180,\\fscx100\\fscy100)\\fad(0,120)}" + esc(txt), layer=3)

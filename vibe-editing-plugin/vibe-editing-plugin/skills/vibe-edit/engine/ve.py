@@ -1,23 +1,25 @@
 #!/usr/bin/env python3
-"""Vibe Editing engine. One command, many steps:
+"""Vibe Editing engine. One command, many steps (the vibe-edit skill says WHEN to run each):
 
-  ve.py setup                         install Python packages into ~/.vibe-editing/venv
-  ve.py doctor                        check that everything is installed
-  ve.py new <name>                    make a project folder (raw/ refs/ broll/ music/ sfx/ out/)
-  ve.py intake --video F [--ref R]    make a project from files anywhere (copies/moves them in)
-  ve.py restyle <project> --style N   apply a style to an existing edit (keeps cuts, text, sound)
-  ve.py analyze <project>             transcript, dead space, retakes, fillers  -> analysis.json
-  ve.py show <project> [what]         print summary | transcript | segments | captions | retakes
-  ve.py style extract <refs..> --name N   scrape a style from videos/photos -> styles/N/
-  ve.py style card <name>             make the style card (styles/N/style_card.html)
-  ve.py style list                    list saved styles
-  ve.py plan <project> [--style N]    build edit.json from analysis + style + brief
-  ve.py board <project>               open the edit board in the browser
-  ve.py render <project> --mode preview|final
-  ve.py frames <project> --at 1.5,4   grab frames of the raw video (for checking)
-  ve.py frames <project> --at 1,5 --video out/preview.mp4   (check a render)
-  ve.py open <file>                   open a file (style card, video) with the default app
-  ve.py versions <project> [--restore N]
+  setup / doctor                         install / check everything
+  intake --video F [--ref R]             make a project from files anywhere (copies/moves them in)
+  intake --project P --ref R             add a reference later
+  analyze <project>                      transcript, dead space, retakes, fillers  -> analysis.json
+  show <project> [what]                  summary | transcript | segments | captions | retakes | brief
+  style extract <refs..> --name N        scrape a style from videos/photos -> styles/N/
+  style card <name> · style list         style card image · saved styles
+  captions <project>                     caption style choices, rendered on the user's video (PNG)
+  motion <project>                       motion graphics choices (PNG)
+  looks <project>                        colour look choices (PNG)
+  music search|get|generate <project>    free library (Openverse), or ElevenLabs
+  sfx search|get|generate <project>      free library (Freesound via Openverse), or ElevenLabs
+  keys set elevenlabs <KEY> · keys show
+  plan <project>                         build edit.json from analysis + brief.json + style
+  restyle <project> --style N            apply a style to an existing edit (keeps cuts, text, sound)
+  storyboard <project>                   THE EDIT BOARD: numbered frames of the planned edit (PNG)
+  render <project> --mode preview|final  render (final runs the quality check)
+  frames <project> --at 1,5 [--video out/x.mp4]   grab frames to check something
+  open <file> · versions <project> [--restore N] · new <name>
 """
 from __future__ import annotations
 
@@ -66,7 +68,7 @@ def cmd_setup(_a):
         print(f"creating virtual environment at {VENV} ...")
         venv.EnvBuilder(with_pip=True).create(VENV)
     req = HERE.parent / "requirements.txt"
-    print("installing packages (faster-whisper, numpy) ... this takes a minute or two")
+    print("installing packages (faster-whisper, numpy, Pillow) ... this takes a minute or two")
     r = subprocess.run([str(VENV_PY), "-m", "pip", "install", "--upgrade", "pip", "-q"])
     r = subprocess.run([str(VENV_PY), "-m", "pip", "install", "-r", str(req), "-q"])
     if r.returncode != 0:
@@ -109,6 +111,11 @@ def cmd_doctor(_a):
         line(True, "numpy", numpy.__version__)
     except ImportError:
         line(False, "numpy", "missing", "python ve.py setup")
+    try:
+        import PIL
+        line(True, "Pillow", PIL.__version__)
+    except ImportError:
+        line(False, "Pillow", "missing", "python ve.py setup")
     try:
         import faster_whisper
         line(True, "faster-whisper", faster_whisper.__version__)
@@ -178,6 +185,9 @@ def cmd_show(a):
             z = f" zoom {s.get('zoom', 1):.2f}" if s["keep"] and s.get("zoom", 1) != 1 else ""
             print(f"{s['id']:>5} {'KEEP' if s['keep'] else 'cut '} {fmt_time(s['start'])}-{fmt_time(s['end'])} "
                   f"{s['reason']:<28}{z}  {s.get('text', '')[:70]}")
+    elif what == "brief":
+        import json as _j
+        print(_j.dumps(load_json(pj / "brief.json", {}), indent=2))
     elif what == "captions":
         for c in ed["captions"]["lines"]:
             em = [w["w"] for w in c["words"] if w.get("emph")]
@@ -185,15 +195,16 @@ def cmd_show(a):
 
 
 def cmd_style(a):
-    from common import find_workspace
-    from style import card, extract, list_styles
+    from sheets import style_card_png as card
+    from style import extract, list_styles
     ws = Path(a.workspace).resolve() if a.workspace else Path.cwd()
     if a.action == "extract":
         if not a.name:
             sys.exit("give the style a name: --name my-style")
         sdir, auto = extract(a.refs, a.name, ws)
         out = card(sdir)
-        print(f"\nStyle draft: {sdir / 'style.json'}\nLook at these contact sheets, then fill the TODO fields:")
+        print(f"\nStyle draft: {sdir / 'style.json'}\nLook at these contact sheets, then fill the TODO fields "
+              f"and run 'style card {a.name}':")
         for tag, d in auto["sheets"].items():
             for k, p in d.items():
                 print(f"  {sdir / p}")
@@ -228,9 +239,40 @@ def cmd_plan(a):
     cmd_show(argparse.Namespace(project=a.project, what="summary"))
 
 
-def cmd_board(a):
-    from board import serve
-    serve(Path(a.project), port=a.port, open_browser=not a.no_open)
+def cmd_storyboard(a):
+    from storyboard import storyboard
+    for p in storyboard(Path(a.project), panels=a.panels):
+        print(p)
+
+
+def cmd_sheet(a):
+    import sheets
+    fn = {"captions": sheets.caption_sheet, "motion": sheets.motion_sheet, "looks": sheets.look_sheet}[a.cmd]
+    print(fn(Path(a.project), platform=a.platform))
+
+
+def cmd_audio(a):
+    import audio_sources as au
+    kind = "music" if a.cmd == "music" else "sfx"
+    if a.action == "search":
+        au.search(Path(a.project), " ".join(a.args), kind=kind, cc0_only=a.cc0, min_s=a.min, max_s=a.max)
+    elif a.action == "get":
+        au.get(Path(a.project), a.args, kind=kind)
+    elif a.action == "generate":
+        if kind == "music":
+            au.generate_music(Path(a.project), " ".join(a.args), seconds=a.seconds or 30, name=a.name)
+        else:
+            au.generate_sfx(Path(a.project), " ".join(a.args), seconds=a.seconds, name=a.name)
+
+
+def cmd_keys(a):
+    import audio_sources as au
+    if a.action == "set":
+        if len(a.args) != 2:
+            sys.exit("usage: ve.py keys set elevenlabs <KEY>")
+        au.set_key(a.args[0], a.args[1])
+    else:
+        au.show_keys()
 
 
 def cmd_render(a):
@@ -254,11 +296,19 @@ def cmd_frames(a):
 
 
 def cmd_open(a):
-    import webbrowser
+    """Open a file with the computer's default app (image viewer for PNGs, player for videos)."""
     p = Path(a.path).resolve()
     if not p.exists():
         sys.exit(f"not found: {p}")
-    webbrowser.open(p.as_uri())
+    try:
+        if os.name == "nt":
+            os.startfile(str(p))  # noqa: windows only
+        elif sys.platform == "darwin":
+            subprocess.run(["open", str(p)], check=False)
+        else:
+            subprocess.run(["xdg-open", str(p)], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except Exception as e:  # headless machines: just print the path
+        print(f"(could not open automatically: {e})")
     print(p)
 
 
@@ -290,7 +340,7 @@ def main():
     p.add_argument("--force", action="store_true"); p.set_defaults(fn=cmd_analyze)
     p = sub.add_parser("show"); p.add_argument("project")
     p.add_argument("what", nargs="?", default="summary", choices=["summary", "transcript", "segments", "captions",
-                                                                 "retakes"]); p.set_defaults(fn=cmd_show)
+                                                                 "retakes", "brief"]); p.set_defaults(fn=cmd_show)
     p = sub.add_parser("style"); p.add_argument("action", choices=["extract", "card", "list"])
     p.add_argument("refs", nargs="*"); p.add_argument("--name"); p.add_argument("--workspace")
     p.set_defaults(fn=cmd_style)
@@ -300,14 +350,26 @@ def main():
     p = sub.add_parser("restyle"); p.add_argument("project"); p.add_argument("--style", required=True)
     p.set_defaults(fn=cmd_restyle)
     p = sub.add_parser("plan"); p.add_argument("project"); p.add_argument("--style", default=None)
-    p.add_argument("--platform", default="reels", choices=["reels", "shorts", "tiktok", "portrait", "square",
-                                                          "youtube", "lesson"])
+    p.add_argument("--platform", default=None, choices=["reels", "shorts", "tiktok", "meta-ad", "meta-feed",
+                                                        "portrait", "square", "youtube", "lesson"])
     p.add_argument("--pace", default=None, choices=["tight", "natural", "relaxed"])
     p.add_argument("--addons", default=None, help="comma list: captions,hook,zoom,sound,music,look,motion")
     p.add_argument("--keep-fillers", action="store_true"); p.add_argument("--keep-retakes", action="store_true")
     p.add_argument("--force", action="store_true"); p.set_defaults(fn=cmd_plan)
-    p = sub.add_parser("board"); p.add_argument("project"); p.add_argument("--port", type=int)
-    p.add_argument("--no-open", action="store_true"); p.set_defaults(fn=cmd_board)
+    p = sub.add_parser("storyboard"); p.add_argument("project"); p.add_argument("--panels", type=int)
+    p.set_defaults(fn=cmd_storyboard)
+    for name in ("captions", "motion", "looks"):
+        p = sub.add_parser(name); p.add_argument("project"); p.add_argument("--platform")
+        p.set_defaults(fn=cmd_sheet)
+    for name in ("music", "sfx"):
+        p = sub.add_parser(name); p.add_argument("action", choices=["search", "get", "generate"])
+        p.add_argument("project"); p.add_argument("args", nargs="*")
+        p.add_argument("--cc0", action="store_true", help="only licences that need no credit")
+        p.add_argument("--min", type=float); p.add_argument("--max", type=float)
+        p.add_argument("--seconds", type=float); p.add_argument("--name")
+        p.set_defaults(fn=cmd_audio)
+    p = sub.add_parser("keys"); p.add_argument("action", choices=["set", "show"]); p.add_argument("args", nargs="*")
+    p.set_defaults(fn=cmd_keys)
     p = sub.add_parser("render"); p.add_argument("project")
     p.add_argument("--mode", default="preview", choices=["preview", "final"]); p.add_argument("--name")
     p.set_defaults(fn=cmd_render)

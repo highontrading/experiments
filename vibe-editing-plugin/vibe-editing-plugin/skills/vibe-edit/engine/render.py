@@ -212,48 +212,148 @@ def render_audio(project, edit, an, info, segs, tmap, build, style):
 
 
 # ---------------------------------------------------------------- main
-def render(project: Path, mode="preview", out_name=None):
-    project = Path(project).resolve()
-    edit = load_json(project / "edit.json")
-    an = load_json(project / "analysis.json") or {}
+class Ctx:
+    """Everything the renderer and the storyboard need, prepared once."""
+
+
+def prepare(project: Path, mode="preview", build_name="render"):
+    c = Ctx()
+    c.project = project = Path(project).resolve()
+    c.edit = edit = load_json(project / "edit.json")
+    c.an = load_json(project / "analysis.json") or {}
     if not edit:
         die("edit.json not found. Run the plan step first.")
-    style = full_style(edit.get("style"))
-    src = project / edit["source"]
-    if not src.exists():
-        die(f"source video missing: {src}")
-    info = probe(src)
-    fmt = dict(edit["format"])
-    fps = float(fmt.get("fps", 30))
-    W, H = fmt["width"], fmt["height"]
-    segs = merged_segments(edit, fps)
-    if not segs:
+    c.style = style = full_style(edit.get("style"))
+    c.src = project / edit["source"]
+    if not c.src.exists():
+        die(f"source video missing: {c.src}")
+    c.info = probe(c.src)
+    c.fmt = dict(edit["format"])
+    c.fps = float(c.fmt.get("fps", 30))
+    c.W, c.H = c.fmt["width"], c.fmt["height"]
+    c.segs = merged_segments(edit, c.fps)
+    if not c.segs:
         die("every segment is cut: nothing to render")
-    tmap = TimeMap([(a, b) for a, b, _ in segs])
-    total = tmap.total
-    build = project / "build" / "render"
+    c.tmap = TimeMap([(a, b) for a, b, _ in c.segs])
+    c.total = c.tmap.total
+    c.build = build = project / "build" / build_name
     build.mkdir(parents=True, exist_ok=True)
     fdir = build / "fonts"
     fdir.mkdir(exist_ok=True)
     for f in FONTS_DIR.iterdir():
         if f.suffix.lower() in (".ttf", ".otf") and not (fdir / f.name).exists():
             shutil.copy2(f, fdir / f.name)
-    t0 = time.time()
-    log(f"{mode} render: {len(segs)} pieces, {total:.1f}s output from {info['duration']:.1f}s source")
-
-    # ---- subtitles
-    ass = AssBuilder(W, H, style)
+    ass = AssBuilder(c.W, c.H, style)
     if edit.get("captions", {}).get("enabled") and edit["captions"].get("lines"):
-        ass.captions(edit["captions"]["lines"], tmap)
+        ass.captions(edit["captions"]["lines"], c.tmap)
     hk = edit.get("hook", {})
     if hk.get("enabled") and hk.get("options"):
         ch = min(int(hk.get("chosen", 0)), len(hk["options"]) - 1)
         ass.hook(hk["options"][ch], float(hk.get("duration", 2.6)))
     if edit.get("texts"):
-        ass.texts(edit["texts"], tmap)
-    has_ass = bool(ass.events)
-    if has_ass:
+        ass.texts(edit["texts"], c.tmap)
+    c.has_ass = bool(ass.events)
+    if c.has_ass:
         ass.write(build / "captions.ass")
+    c.look = look_filters(edit.get("look", {}), build, c.an, style, mode)
+    return c
+
+
+def overlays(c):
+    """B-roll and graphics with their output start time T and duration D."""
+    out = []
+    for br in list(c.edit.get("broll", [])) + [dict(g, mode="graphic") for g in c.edit.get("graphics", [])]:
+        if not br.get("enabled", True):
+            continue
+        p = project_file(c.project, br["file"])
+        if not p.exists():
+            log(f"b-roll/graphic not found, skipping: {p}")
+            continue
+        T = c.tmap.to_out(float(br["start"]))
+        D = (c.tmap.to_out(float(br["end"]), snap="prev") - T) if br.get("end") is not None else probe(p)["duration"]
+        if D > 0.05:
+            out.append((br, p, T, D))
+    return out
+
+
+def overlay_chain(c, br, p, idx, T, D, label, still_at=None):
+    """Filter text for one overlay input. still_at = output time when rendering a single frame."""
+    W, H, fps = c.W, c.H, c.fps
+    frm = float(br.get("from", 0))
+    m = br.get("mode", "full")
+    if still_at is None:
+        pre = f"[{idx}:v]trim=start={frm:.3f}:duration={D:.3f},setpts=PTS-STARTPTS+{T:.3f}/TB,fps={fps},"
+    else:
+        pre = f"[{idx}:v]setpts=PTS-STARTPTS+{still_at:.3f}/TB,"
+    if m == "pip":
+        sc = float(br.get("scale", 0.42))
+        pw, ph = even(W * sc), even(H * (0.5 if H > W else 0.6))
+        return pre + f"scale=w={pw}:h={ph}:force_original_aspect_ratio=decrease,format=yuva420p[{label}]", \
+            f"x=W-w-{int(W * 0.05)}:y={int(H * 0.12)}"
+    if m == "graphic":
+        return pre + f"scale={W}:{H},format=yuva420p[{label}]", "x=0:y=0"
+    zoom = ""
+    if p.suffix.lower() in IMAGE_EXT and br.get("ken_burns", True):
+        zoom = (f",scale={even(W * 1.08)}:{even(H * 1.08)},crop={W}:{H}:"
+                f"x='(in_w-out_w)*min(1,max(0,(t-{T:.3f})/{max(D, 0.1):.3f}))':y=(in_h-out_h)/2")
+    return pre + f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H}{zoom},setsar=1," \
+                 f"format=yuva420p[{label}]", "x=0:y=0"
+
+
+def render_frames(project: Path, out_times, out_dir: Path, width=None, prefix="f"):
+    """Render single frames of the planned edit at the given OUTPUT times (no full render).
+    Returns a list of image paths (one per time)."""
+    c = prepare(project, mode="final", build_name="storyboard")
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    ovs = overlays(c)
+    offs = c.tmap.offsets
+    files = []
+    for n, t in enumerate(out_times):
+        t = max(0.0, min(float(t), c.total - 0.5 / c.fps))
+        i = max(k for k in range(len(c.segs)) if offs[k] <= t + 1e-9)
+        a, b, z = c.segs[i]
+        src_t = a + (t - offs[i])
+        inputs = ["-ss", f"{src_t:.3f}", "-i", str(c.src)]
+        fc = [f"[0:v]{reframe_filter(c.info, c.fmt, z, 'r')},format=yuv420p[v0]"]
+        cur = "v0"
+        if c.look:
+            fc.append(f"[{cur}]{','.join(c.look)}[vl]")
+            cur = "vl"
+        k_in = 1
+        for j, (br, p, T, D) in enumerate(ovs):
+            if not (T <= t < T + D):
+                continue
+            if p.suffix.lower() in IMAGE_EXT:
+                inputs += ["-loop", "1", "-i", str(p)]
+            else:
+                inputs += ["-ss", f"{float(br.get('from', 0)) + (t - T):.3f}", "-i", str(p)]
+            chain, pos = overlay_chain(c, br, p, k_in, T, D, f"b{j}", still_at=0.0)
+            fc.append(chain)
+            fc.append(f"[{cur}][b{j}]overlay={pos}[o{j}]")
+            cur = f"o{j}"
+            k_in += 1
+        tail = [f"setpts=PTS-STARTPTS+{t:.3f}/TB"]
+        if c.has_ass:
+            tail.append("ass=captions.ass:fontsdir=fonts")
+        if width:
+            tail.append(f"scale={even(width)}:-2")
+        fc.append(f"[{cur}]{','.join(tail)}[out]")
+        f = out_dir / f"{prefix}{n:03d}.jpg"
+        r = run(["ffmpeg", "-y", "-v", "error", *inputs, "-filter_complex", ";".join(fc), "-map", "[out]",
+                 "-frames:v", "1", "-update", "1", "-q:v", "2", str(f.resolve())], cwd=c.build, check=False)
+        if r.returncode != 0:
+            log(f"frame at {t:.2f}s failed: {r.stderr.strip().splitlines()[-1] if r.stderr else ''}")
+        files.append(f if f.exists() else None)
+    return files, c
+
+
+def render(project: Path, mode="preview", out_name=None):
+    c = prepare(project, mode)
+    project, edit, an, style, src, info, fmt = c.project, c.edit, c.an, c.style, c.src, c.info, c.fmt
+    fps, W, H, segs, tmap, total, build, has_ass = c.fps, c.W, c.H, c.segs, c.tmap, c.total, c.build, c.has_ass
+    t0 = time.time()
+    log(f"{mode} render: {len(segs)} pieces, {total:.1f}s output from {info['duration']:.1f}s source")
 
     # ---- audio
     mix, lstats, target, nsfx = render_audio(project, edit, an, info, segs, tmap, build, style)
@@ -268,45 +368,18 @@ def render(project: Path, mode="preview", out_name=None):
         vl.append(f"[v{i}]")
     fc.append("".join(vl) + f"concat=n={len(segs)}:v=1:a=0[vc]")
     cur = "vc"
-    lf = look_filters(edit.get("look", {}), build, an, style, mode)
+    lf = c.look
     if lf:
         fc.append(f"[{cur}]{','.join(lf)}[vl]")
         cur = "vl"
     n_in = 1
-    for k, br in enumerate(list(edit.get("broll", [])) + [dict(g, mode="graphic") for g in edit.get("graphics", [])]):
-        if not br.get("enabled", True):
-            continue
-        p = project_file(project, br["file"])
-        if not p.exists():
-            log(f"b-roll/graphic not found, skipping: {p}")
-            continue
-        T = tmap.to_out(float(br["start"]))
-        D = (tmap.to_out(float(br["end"]), snap="prev") - T) if br.get("end") is not None else probe(p)["duration"]
-        if D <= 0.05:
-            continue
+    for k, (br, p, T, D) in enumerate(overlays(c)):
         if p.suffix.lower() in IMAGE_EXT:
-            inputs += ["-loop", "1", "-t", f"{D + 0.1:.3f}", "-i", str(p)]
+            inputs += ["-loop", "1", "-t", f"{T + D + 0.1:.3f}", "-i", str(p)]
         else:
             inputs += ["-i", str(p)]
-        frm = float(br.get("from", 0))
-        m = br.get("mode", "full")
-        pre = f"[{n_in}:v]trim=start={frm:.3f}:duration={D:.3f},setpts=PTS-STARTPTS+{T:.3f}/TB,fps={fps},"
-        if m == "pip":
-            sc = float(br.get("scale", 0.42))
-            pw, ph = even(W * sc), even(H * (0.5 if H > W else 0.6))
-            fc.append(pre + f"scale=w={pw}:h={ph}:force_original_aspect_ratio=decrease,format=yuva420p[b{k}]")
-            pos = f"x=W-w-{int(W * 0.05)}:y={int(H * 0.12)}"
-        elif m == "graphic":
-            fc.append(pre + f"scale={W}:{H},format=yuva420p[b{k}]")
-            pos = "x=0:y=0"
-        else:
-            zoom = ""
-            if p.suffix.lower() in IMAGE_EXT and br.get("ken_burns", True):
-                zoom = (f",scale={even(W * 1.08)}:{even(H * 1.08)},crop={W}:{H}:"
-                        f"x='(in_w-out_w)*min(1,max(0,(t-{T:.3f})/{max(D, 0.1):.3f}))':y=(in_h-out_h)/2")
-            fc.append(pre + f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H}{zoom},setsar=1,"
-                            f"format=yuva420p[b{k}]")
-            pos = "x=0:y=0"
+        chain, pos = overlay_chain(c, br, p, n_in, T, D, f"b{k}")
+        fc.append(chain)
         fc.append(f"[{cur}][b{k}]overlay={pos}:enable='between(t,{T:.3f},{T + D:.3f})':eof_action=pass[o{k}]")
         cur = f"o{k}"
         n_in += 1
@@ -386,8 +459,12 @@ def qc(out: Path, edit, style, expected, target):
     vertical = edit["format"]["height"] > edit["format"]["width"]
     if edit.get("captions", {}).get("enabled") and vertical:
         y = style["captions"]["position_y"]
-        add("captions safe zone", 0.12 <= y <= 0.78,
-            f"captions centred at {y:.0%} of height (Reels/TikTok UI covers the bottom ~20%)")
+        if edit.get("brief", {}).get("platform") == "meta-ad":
+            add("captions safe zone", 0.14 <= y <= 0.65,
+                f"captions centred at {y:.0%} of height (Meta ads: keep text out of the top 14% and bottom 35%)")
+        else:
+            add("captions safe zone", 0.12 <= y <= 0.78,
+                f"captions centred at {y:.0%} of height (Reels/TikTok UI covers the bottom ~20%)")
     add("resolution", (info.get("width"), info.get("height")) == (edit["format"]["width"], edit["format"]["height"]),
         f"{info.get('width')}x{info.get('height')}")
     size_mb = out.stat().st_size / 1e6

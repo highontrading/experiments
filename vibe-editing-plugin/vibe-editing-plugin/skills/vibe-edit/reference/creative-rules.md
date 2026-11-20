@@ -53,6 +53,18 @@ They are defaults: the user's direction and the reference style always win.
 - Without: contrast 1.03–1.08, saturation 1.05–1.12, vignette 0.1–0.2, sharpen 0.3.
 - Grain only if the reference has it.
 
+## Meta ads (Instagram / Facebook)
+- The first 2 seconds decide everything: open on the strongest line or the result, with the
+  hook text on screen. Cut any warm-up ("Hi guys, so today…").
+- Captions always on (most people watch muted), large, high contrast, inside the safe zone:
+  nothing important in the top 14% or the bottom 35% of a 9:16 ad.
+- One idea per ad. 15–30 s for cold audiences, up to 60 s for warm ones.
+- Show the offer as text at least once (kinetic or label) and end on a CTA button
+  (`cta` text) in the last 2–3 s, matching the ad's CTA.
+- Music: upbeat but under the voice (−20 to −24 dB, ducked). Use licences that allow commercial
+  use; prefer no-credit ones (CC0) or the user's own / ElevenLabs tracks.
+- Offer 4:5 (feed) and 1:1 versions after the 9:16 is approved.
+
 ## Lessons (course videos)
 - `--platform lesson`: 16:9, smaller captions at the bottom, no hook, no punch-ins, natural pace.
 - Add a title card at the start of each section and lower-third labels for key terms.

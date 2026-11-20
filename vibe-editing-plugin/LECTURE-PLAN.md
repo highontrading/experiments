@@ -1,34 +1,32 @@
 # Recording plan: Vibe Editing lectures
 
-For you (the instructor), not part of the plugin. Each lecture is one raw take of you using the
-plugin on screen from a fresh folder. Send me the raw recordings and I'll edit them into lessons
-with the plugin itself (`--platform lesson`).
+For you (the instructor), not part of the plugin. Record each lecture as one raw take of you
+using the plugin from a fresh editing folder. Send me the raw recordings and I'll edit them
+into lessons with the plugin itself.
 
-**Before recording:** have 2–3 phone clips of you talking (30–90 s, with a few natural mistakes),
-1–2 reference reels whose style you like, and a couple of royalty-free music tracks. Use the same
-clips across lectures so students can follow along. Put them in the course resources as the
-"sample footage pack".
+**Prepare:** 2–3 phone clips of you talking (30–90 s, with a few natural mistakes), 1–2
+reference reels and a few screenshots you like, and one royalty-free track. Share the same
+clips with students as the "sample footage pack" so they can follow along.
 
-| # | Lecture | Show on screen | What you type to Claude |
+| # | Lecture | On screen | What you say to Claude |
 |---|---|---|---|
-| 0 | What vibe editing is | The finished reel first, then the 6 stages (GUIDE §1) | none |
-| 1 | Install | Copy the folder to `~/.claude/skills`, restart, `/plugin` | "Set up vibe editing." |
-| 2 | Workspace + first project | Make the workspace folder, open it in Claude Code | "New project called my-first-reel." |
-| 3 | The raw edit | Drop a clip in raw/, watch Stage 1–2, look at the transcript and retakes it found | "Edit my-first-reel as a reel. Cut dead space, retakes and umms." |
-| 4 | Captions | Captions styles, emphasis words, fixing a misheard word | "Add captions, 3 words per line, yellow active word." |
-| 5 | The edit board | Every tab: keep/cut on the timeline, captions, hook, versions | "Open the edit board." |
-| 6 | Hooks | 3–5 hook options, choosing, styling | "Give me 5 hooks from what I say." |
-| 7 | Style scraper (video) | refs/ reel → contact sheets → style card → apply | "Copy the style of refs/reel.mp4, save it as bold-yellow." |
-| 8 | Style scraper (photos) + your own style | Screenshots → style; mixing two styles; naming your signature style | "Make a style from these screenshots." / "Mix A's captions with B's colours." |
-| 9 | Motion | Kinetic type, lower third, labels, title card | "Make '15 minutes' slam on screen. Add my name as a lower third." |
-| 10 | Sound design | Music + ducking, SFX on zooms, ding on reveal, loudness | "Add music under my voice and sound effects." |
-| 11 | Look | Matching a reference's colours, warmth, grain, vignette | "Match the colours of bold-yellow but keep my skin natural." |
-| 12 | Formats | Same edit as 9:16, 4:5, 16:9; blurred-background fit | "Make a YouTube version of this edit." |
-| 13 | Course lessons / long videos | Editing a 10-min talk as a lesson | "Edit this as a course lesson, keep my rhythm." |
-| 14 | Render + QC + delivery | Preview vs final, reading the QC, exporting for a client | "Render the final." |
-| 15–17 | Watch me edit | Full real edits start to finish: a talking-head reel, a trailer-style edit, a product promo | (natural conversation) |
+| 0 | What vibe editing is | The finished ad first, then the 9 steps (GUIDE §2) | none |
+| 1 | Install | Unzip, put `CLAUDE.md` + `vibe-editing-plugin` in your folder, open it | "Set up vibe editing." |
+| 2 | Step 1 · Brief | Upload a clip; Claude asks platform / edit type / length / CTA | "Edit this for a Meta ad." |
+| 3 | Step 2 · References | Upload a reel; style card; approve or tweak | "This is my inspiration." |
+| 4 | Step 2 · Photos + your own style | Screenshots → style; mixing styles; your signature style | "Make a style from these screenshots." |
+| 5 | Step 3 · Captions | The caption sheet; picking and mixing | "B, but in F's font, 2 words per line." |
+| 6 | Step 4 · Motion graphics | The motion sheet; density; lower third and CTA text | "Kinetic and CTA, balanced." |
+| 7 | Step 5 · Music | Own track vs free library vs ElevenLabs; licences and credits | "Find upbeat electronic music." |
+| 8 | Step 5 · Sound effects | Built-in, Freesound, generated | "Generate a deep whoosh." |
+| 9 | Step 6 · Colour | The looks sheet; matching a reference's colours | "Warm." |
+| 10 | Step 7 · The edit plan | Cuts, target length, hooks, text moments | "Use hook 2, keep the pause." |
+| 11 | Step 8 · Storyboard | Reading panels, changing by number, versions | "#4: bigger text." |
+| 12 | Step 9 · Render + formats | Final render, QC, 4:5 and 1:1 versions | "Make a 4:5 version too." |
+| 13 | Course lessons / long videos | Editing a 10-min talk as a lesson | "Edit this as a course lesson." |
+| 14–16 | Watch me edit | Full real edits: a talking-head reel, a Meta ad, a product promo | natural conversation |
 
-Tips for recording:
-- Show the mistakes and how you fix them by asking Claude. Students learn the most from that.
-- Keep the edit board visible when you change something by chat, so students see it update.
-- Mention the honest limits (GUIDE §9) once, early. It builds trust.
+Tips:
+- Show the questions and your answers on camera. The step-by-step flow is the product.
+- Show a storyboard change round-trip ("#3: …" → new version) at least once per lecture.
+- Mention the honest limits (GUIDE §7) once, early.

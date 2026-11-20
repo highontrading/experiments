@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "vibe-editing-plugin",
+  "version": "2.0.0",
+  "description": "Vibe Editing plugin by Ideabro Studio: step-by-step AI video editing. Claude asks what you want (edit type, reference, captions, motion graphics, music and SFX, colour), shows rendered option sheets, builds the edit, shows a storyboard of numbered frames for approval, then renders. Free music/SFX library, ElevenLabs optional.",
+  "author": {
+    "name": "Ideabro Studio"
+  },
+  "homepage": "https://community.ideabrostudio.com/courses/vibe-editing",
+  "keywords": [
+    "video",
+    "editing",
+    "captions",
+    "reels",
+    "meta ads",
+    "storyboard",
+    "ffmpeg",
+    "whisper"
+  ],
+  "license": "LicenseRef-Ideabro-Student",
+  "icon": ".claude-plugin/icon.png"
+}

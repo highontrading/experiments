@@ -47,6 +47,8 @@ DEFAULT_FONT = "Poppins Black"
 
 PRESETS = {
     "reels":    {"width": 1080, "height": 1920, "fps": 30},
+    "meta-ad":  {"width": 1080, "height": 1920, "fps": 30},
+    "meta-feed": {"width": 1080, "height": 1350, "fps": 30},
     "shorts":   {"width": 1080, "height": 1920, "fps": 30},
     "tiktok":   {"width": 1080, "height": 1920, "fps": 30},
     "portrait": {"width": 1080, "height": 1350, "fps": 30},

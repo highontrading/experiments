@@ -1,4 +1,4 @@
-"""Stage 4: build the edit plan, edit.json (the single source of truth for board and render).
+"""Stage 4: build the edit plan, edit.json (the single source of truth for the storyboard and the render).
 
 All times in edit.json are SOURCE times (seconds in the raw video). The renderer maps them
 to output time after the cuts, so turning a cut on or off never breaks captions or SFX.
@@ -206,6 +206,9 @@ def default_addons(platform):
 
 def platform_style(style, platform, addons):
     """Adjust a style for the platform and the chosen add-ons (in place)."""
+    if platform == "meta-ad":  # Meta Reels/Stories ads: CTA and ad UI cover the bottom 35%, top 14%
+        style["captions"]["position_y"] = min(style["captions"]["position_y"], 0.58)
+        style["hook"]["position_y"] = max(style["hook"]["position_y"], 0.2)
     if platform == "lesson":
         style["captions"].update(size=min(style["captions"]["size"], 60), position_y=0.86, words_per_line=6,
                                  highlight="none", animation="fade", case="as-is")
@@ -264,9 +267,35 @@ def restyle(project: Path, style_name: str):
     return out
 
 
-def plan(project: Path, style_name=None, platform="reels", pace=None, addons=None, cut_fillers=True,
+def brief_addons(brief):
+    """Add-ons implied by the user's answers in brief.json."""
+    a = []
+    if brief.get("captions", {}) is not None:  # missing = default captions, null = no captions
+        a.append("captions")
+    if brief.get("hook", True):
+        a.append("hook")
+    if brief.get("zoom", brief.get("platform") not in ("lesson",)):
+        a.append("zoom")
+    sfx = (brief.get("sfx") or {}).get("source", "builtin") if brief.get("sfx") is not None else "none"
+    if sfx != "none" or brief.get("music"):
+        a.append("sound")
+    if brief.get("music"):
+        a.append("music")
+    a.append("look")
+    if (brief.get("motion") or {}).get("types"):
+        a.append("motion")
+    return a
+
+
+def plan(project: Path, style_name=None, platform=None, pace=None, addons=None, cut_fillers=True,
          keep_retakes=False, force=False):
     project = Path(project).resolve()
+    brief = load_json(project / "brief.json", {}) or {}
+    platform = platform or brief.get("platform") or "reels"
+    style_name = style_name or brief.get("style")
+    pace = pace or brief.get("pace")
+    if not addons and brief:
+        addons = brief_addons(brief)
     an = load_json(project / "analysis.json")
     if not an:
         die("analysis.json not found. Run:  ve.py analyze <project>")
@@ -280,6 +309,12 @@ def plan(project: Path, style_name=None, platform="reels", pace=None, addons=Non
         style[sec].pop("_todo", None)
     pace = pace or ("natural" if platform == "lesson" else style["pacing"].get("pace")) or "tight"
     addons = addons or default_addons(platform)
+    cap_choice = brief.get("captions") or {}
+    if cap_choice.get("preset") and cap_choice["preset"] != "R":
+        from sheets import CAPTION_PRESETS
+        if cap_choice["preset"] in CAPTION_PRESETS:
+            style["captions"].update(CAPTION_PRESETS[cap_choice["preset"]][1])
+    style["captions"].update(cap_choice.get("overrides") or {})
     platform_style(style, platform, addons)
 
     segs = build_segments(an, pace, cut_fillers, keep_retakes)
@@ -347,6 +382,31 @@ def plan(project: Path, style_name=None, platform="reels", pace=None, addons=Non
     if platform == "lesson":
         edit["look"]["vignette"] = 0.0
         edit["hook"]["enabled"] = False
+    # ---- the user's answers (brief.json)
+    if brief:
+        edit["brief"].update({k: brief[k] for k in ("edit_type", "target_length", "cta", "notes") if k in brief})
+        edit["brief"]["motion"] = brief.get("motion")
+        lk = brief.get("look")
+        if lk:
+            from sheets import LOOK_PRESETS
+            if lk == "reference":
+                edit["look"].update(lut_from_reference=True)
+            elif lk in LOOK_PRESETS:
+                edit["look"].update(LOOK_PRESETS[lk])
+        m = brief.get("music") or {}
+        if m.get("file"):
+            edit["sound"]["music"] = {"file": m["file"], "level_db": m.get("level_db", style["sound"].get(
+                "music_level_db", -21)), "duck": m.get("duck", True)}
+        sfx_src = (brief.get("sfx") or {}).get("source", "builtin") if brief.get("sfx") is not None else "none"
+        if sfx_src == "none":
+            edit["sound"]["sfx"], edit["sound"]["hook_sfx"] = [], None
+        mot = brief.get("motion") or {}
+        if brief.get("cta") and "cta" in (mot.get("types") or []):
+            last = [sg for sg in segs if sg["keep"]][-1]
+            edit["texts"].append({"id": "cta", "type": "cta", "text": brief["cta"].upper(),
+                                  "start": round(max(last["start"], last["end"] - 2.5), 3),
+                                  "end": round(last["end"], 3), "y": 0.40,  # above the captions, inside safe zones
+                                  "enabled": True})
     out = save_edit(project, edit, "first plan")
     cut = sum(s["end"] - s["start"] for s in segs if not s["keep"])
     keep = sum(s["end"] - s["start"] for s in segs if s["keep"])

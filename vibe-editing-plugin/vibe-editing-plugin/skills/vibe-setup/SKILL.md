@@ -38,12 +38,19 @@ The installers in this plugin's `install/` folder do the same thing:
 ```
 python3 "<ENGINE>" setup
 ```
-Creates `~/.vibe-editing/venv` and installs `faster-whisper` and `numpy` there (nothing is
+Creates `~/.vibe-editing/venv` and installs `faster-whisper`, `numpy` and `Pillow` there (nothing is
 installed into the system Python). Takes 1–3 minutes. It runs `doctor` at the end.
 
 ## 4 · First transcription downloads the Whisper model
 The first `ve analyze` downloads the speech model once (`small` ≈ 480 MB, `medium` ≈ 1.5 GB)
 from huggingface.co. Warn the user it takes a few minutes on the first run only.
+
+## 5 · Optional: ElevenLabs (generated music and sound effects)
+Only if the user wants to generate music/SFX. They get a key at elevenlabs.io (Profile → API
+keys) and run, in their own terminal: `python3 "<ENGINE>" keys set elevenlabs <their-key>`
+(saved in `~/.vibe-editing/keys.json`, never in the project), or set the environment variable
+`ELEVENLABS_API_KEY`. Don't ask them to paste the key into the chat. `ve keys show` checks it.
+The free music/SFX library (Openverse) needs no key.
 
 ## Common problems
 | Problem | Fix |
