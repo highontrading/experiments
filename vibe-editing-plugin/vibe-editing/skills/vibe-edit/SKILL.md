@@ -41,16 +41,39 @@ Workspace/
     out/             rendered videos
 ```
 
-Create a project with `ve new <name>` (run in the workspace), then ask the user to drop footage
-into `raw/` (or copy it there yourself if they gave you a path).
+**You create the folders, never the user.** Users give files in any order: in one message
+("first is my video, second is my inspiration") or across several messages, attached in the chat,
+dropped loose in the workspace, or as a path. Run in the workspace:
+```
+ve intake --video "<video file>" --ref "<reference video or photo>"   # both at once
+ve intake --video "<video file>"                                       # video only (ref may come later)
+ve intake --project <name> --ref "<file>"                              # add a reference later
+```
+It creates `<project>/raw refs broll music sfx out`, copies files that live outside the workspace
+and moves files left loose in it, and prints the project name, the footage and reference
+orientation and a `suggested_platform` (from the reference's shape, else the footage's). If you
+can't tell which file is the footage and which is the reference, ask once. If an attached file
+reaches you as an image only (no path on disk), ask the user to drop the video into the
+workspace folder instead. (`ve new <name>` makes an empty project.)
+
+**Reference arrives after the plan?** Scrape it (vibe-style), then
+`ve restyle <project> --style <name>`: it swaps the caption/hook/motion styling, look and
+punch-in pattern and keeps the cuts, caption text and emphasis, hook options, texts and sound.
 
 ## The workflow: 6 stages
 
 Tell the user which stage you are in with a short line ("Stage 2 · analysing your footage").
 For a lecture recording, keep that rhythm. It makes the process easy to follow on camera.
 
-### 1 · Brief
-Ask only what you can't infer (use AskUserQuestion when available, max 4 quick questions):
+### 1 · Brief (quick mode by default)
+**Quick mode** (default, and always when the user just hands you a video, plus a reference, and
+says "edit"): ask nothing. Platform = `suggested_platform` from intake (or what they said),
+pace = tight for reels / natural for lessons, all add-ons for reels, the reference's style if
+given. Say your choices in one line and go straight through stages 2–5 to the edit board.
+They can change anything there.
+
+**Guided mode** (when the user asks to go step by step, or the request is genuinely
+ambiguous): ask only what you can't infer (AskUserQuestion when available, max 4 quick questions):
 - **Platform**: reels (9:16, default) · portrait 4:5 · square · youtube 16:9 · lesson (course video 16:9)
 - **Pace**: tight (default for reels) · natural · relaxed (lessons)
 - **Add-ons**: captions, hook, zoom (punch-ins), sound (SFX + voice clean-up), music, look (colour), motion (kinetic type, titles, lower thirds)

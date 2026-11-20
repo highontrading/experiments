@@ -198,6 +198,72 @@ def build_captions(an, segs, style):
 
 
 # ---------------------------------------------------------------- main
+def default_addons(platform):
+    if platform == "lesson":
+        return ["captions", "sound", "look", "motion"]
+    return ["captions", "hook", "zoom", "sound", "look", "motion"]
+
+
+def platform_style(style, platform, addons):
+    """Adjust a style for the platform and the chosen add-ons (in place)."""
+    if platform == "lesson":
+        style["captions"].update(size=min(style["captions"]["size"], 60), position_y=0.86, words_per_line=6,
+                                 highlight="none", animation="fade", case="as-is")
+    if "zoom" not in addons:
+        style["pacing"]["punch_in"] = False
+    return style
+
+
+def regroup_lines(lines, wpl):
+    """Re-split caption lines to a new words-per-line, keeping text edits and emphasis."""
+    from captions import normalize_line
+    words = [w for ln in lines for w in normalize_line(ln)]
+    out, cur = [], []
+    for w in words:
+        if cur and (len(cur) >= wpl or w["s"] - cur[-1]["e"] > 0.35 or SENT_END.search(cur[-1]["w"])):
+            out.append(cur)
+            cur = []
+        cur.append(w)
+    if cur:
+        out.append(cur)
+    return [{"id": f"c{i + 1}", "start": ws[0]["s"], "end": ws[-1]["e"], "text": " ".join(x["w"] for x in ws),
+             "words": ws} for i, ws in enumerate(out)]
+
+
+def restyle(project: Path, style_name: str):
+    """Apply a (new) style to an existing edit.json. Keeps cuts, caption text, hook options, texts,
+    B-roll, music and SFX; replaces the look, caption/hook/motion styling and punch-in pattern."""
+    project = Path(project).resolve()
+    edit = load_json(project / "edit.json")
+    if not edit:
+        die("edit.json not found: run the plan step first")
+    sraw, sdir = resolve_style(style_name, project)
+    if not sraw:
+        die(f"style '{style_name}' not found in {project.parent / 'styles'}")
+    style = full_style(sraw)
+    for sec in ("captions", "hook", "motion", "pacing"):
+        style[sec].pop("_todo", None)
+    platform = edit.get("brief", {}).get("platform", "reels")
+    addons = edit.get("brief", {}).get("addons") or default_addons(platform)
+    platform_style(style, platform, addons)
+    old_wpl = int(edit["style"]["captions"].get("words_per_line", 3))
+    edit["style"] = style
+    edit["style_name"] = style_name
+    edit["style_dir"] = rel(sdir, project)
+    edit["look"] = dict(style["look"], enabled=edit.get("look", {}).get("enabled", "look" in addons))
+    edit["hook"]["duration"] = style["hook"].get("duration", edit["hook"].get("duration", 2.6))
+    assign_zoom(edit["segments"], style)
+    new_wpl = int(style["captions"].get("words_per_line", 3))
+    if edit.get("captions", {}).get("lines") and new_wpl != old_wpl:
+        edit["captions"]["lines"] = regroup_lines(edit["captions"]["lines"], new_wpl)
+    snd = edit.get("sound", {})
+    if snd.get("music"):
+        snd["music"]["level_db"] = style["sound"].get("music_level_db", snd["music"].get("level_db", -21))
+    out = save_edit(project, edit, f"restyled with {style_name}")
+    log(f"applied style '{style_name}' (cuts, caption text, hook, texts and sound kept)")
+    return out
+
+
 def plan(project: Path, style_name=None, platform="reels", pace=None, addons=None, cut_fillers=True,
          keep_retakes=False, force=False):
     project = Path(project).resolve()
@@ -212,14 +278,9 @@ def plan(project: Path, style_name=None, platform="reels", pace=None, addons=Non
     style = full_style(sraw)
     for sec in ("captions", "hook", "motion", "pacing"):
         style[sec].pop("_todo", None)
-    pace = pace or style["pacing"].get("pace") or "tight"
-    addons = addons or (["captions", "hook", "zoom", "sound", "look"] + (["motion"] if platform != "lesson" else []))
-    if platform == "lesson":
-        style["captions"].update(size=min(style["captions"]["size"], 60), position_y=0.86, words_per_line=6,
-                                 highlight="none", animation="fade", case="as-is")
-        style["pacing"]["punch_in"] = False if "zoom" not in addons else style["pacing"]["punch_in"]
-    if "zoom" not in addons:
-        style["pacing"]["punch_in"] = False
+    pace = pace or ("natural" if platform == "lesson" else style["pacing"].get("pace")) or "tight"
+    addons = addons or default_addons(platform)
+    platform_style(style, platform, addons)
 
     segs = build_segments(an, pace, cut_fillers, keep_retakes)
     assign_zoom(segs, style)

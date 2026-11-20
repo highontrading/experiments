@@ -83,6 +83,11 @@ The card shows the caption and hook preview on a real frame, the palette and eve
 Ask the user if it matches what they wanted; tweak `style.json` and re-run `style card` until
 it does.
 
+## 4 · Apply it
+- No edit yet → `ve plan "<project>" --style <name>` (see vibe-edit).
+- The project already has an `edit.json` (the reference came later in the chat) →
+  `ve restyle "<project>" --style <name>`. That keeps the cuts, caption text, hook, texts and sound.
+
 ## Library
 - `ve style list`: all saved styles in this workspace.
 - Use a style: `ve plan "<project>" --style <name>` (see vibe-edit).

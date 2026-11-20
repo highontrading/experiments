@@ -41,15 +41,29 @@ The pipeline (every edit goes through these 6 stages):
 Install the **Claude desktop app** (claude.ai/download) and open the **Code** tab, or install
 Claude Code in the terminal. You need a paid Claude plan (Pro or higher) for Claude Code.
 
-### 2.2 Put the plugin in your skills folder
-Copy the whole `vibe-editing` folder into:
+### 2.2 Put the plugin where Claude can find it (pick one)
+
+**Option A: inside your own editing folder (simplest).** Unzip `my-edits-starter.zip`. You get
+two things: a `CLAUDE.md` file and the `vibe-editing` folder. Put **both** inside your editing
+folder (for example `my edits`):
+
+```
+my edits/
+  CLAUDE.md          ← tells Claude "the Vibe Editing skills are here, use them for every edit"
+  vibe-editing/      ← the plugin
+```
+
+Open `my edits` in Claude Code. Claude reads `CLAUDE.md` automatically, so you never have to
+say "use the skill". Everything you do happens in this folder.
+
+**Option B: for every folder on your computer.** Copy the whole `vibe-editing` folder into:
 
 - **Mac:** `~/.claude/skills/` → so you have `~/.claude/skills/vibe-editing/`
   (in Finder: Go → Go to Folder… → type `~/.claude/skills`; create the `skills` folder if it's missing)
 - **Windows:** `C:\Users\<your name>\.claude\skills\` → `...\.claude\skills\vibe-editing\`
 
 Restart Claude Code (or type `/reload-plugins`). It loads automatically as
-**vibe-editing@skills-dir**. Check with `/plugin` → you should see `vibe-editing`.
+**vibe-editing@skills-dir** in every folder. Check with `/plugin` → you should see `vibe-editing`.
 
 > Just trying it for one session? Start Claude Code in the terminal with
 > `claude --plugin-dir /path/to/vibe-editing` (a `.zip` of the folder works too).
@@ -89,12 +103,34 @@ Claude creates this for you when you say *"New project called my-first-reel"*.
 
 ---
 
-## 4. Your first edit (follow along)
+## 4. The fast way: just give Claude your video (and a reference)
+
+In your editing folder, in one message:
+
+> **Edit this video. The first file is my video, the second is my inspiration.**
+> (attach both, or drop them into the folder and name them)
+
+Or step by step: send the video first ("edit this as a reel"), and the reference later
+("now make it look like this one"). Either way Claude:
+- creates the project folders itself (`raw/` for your video, `refs/` for the inspiration, `out/` for the result);
+- picks the format from the reference's shape (vertical reference → reel);
+- copies the style of the reference and edits your video;
+- opens the edit board for you to check and change things, then renders to `out/`.
+
+If the reference comes after the edit is already planned, Claude applies the new style and
+**keeps** your cuts, caption fixes, hook and sound.
+
+> Attaching videos in the chat: if the app doesn't accept a video file, just drop it into your
+> editing folder and say its name ("edit talk.mp4, inspiration is reel.mp4"). It works the same.
+
+---
+
+## 5. Your first edit, step by step (follow along)
 
 **Say:**
 > New project called **my-first-reel**.
 
-Drop your phone video into `my-first-reel/raw/`. Then:
+Drop your phone video into `my-first-reel/raw/` (or attach it and Claude puts it there). Then:
 
 > **Edit my-first-reel as a reel. Cut the dead space and retakes, add captions and a hook.**
 
@@ -102,10 +138,10 @@ Claude walks through the stages and tells you which one it's in:
 
 1. **Brief**: answer its quick questions (or say "use the defaults").
 2. **Analyze**: it transcribes, finds pauses, repeated takes and "umm"s, and looks at your footage.
-3. **Style**: the default style unless you gave a reference (see section 5).
+3. **Style**: the default style unless you gave a reference (see section 6).
 4. **Plan**: it drafts the cut and writes 3 hook options, fixes caption spelling, marks
    emphasis words, adds a few text moments and sound effects.
-5. **Edit board**: your browser opens (section 6). Review, change, approve.
+5. **Edit board**: your browser opens (section 7). Review, change, approve.
 6. **Render**: a fast preview first, then the final in `out/` with a quality check
    (length, loudness at -14 LUFS, peaks, black frames, captions in the safe zone).
 
@@ -119,7 +155,7 @@ Things you can say any time:
 
 ---
 
-## 5. Copy a style from a reference (the style scraper)
+## 6. Copy a style from a reference (the style scraper)
 
 Put a reel you like (and/or screenshots) in `refs/`, then:
 
@@ -150,7 +186,7 @@ logos or watermark.
 
 ---
 
-## 6. The edit board
+## 7. The edit board
 
 Opens automatically at `http://127.0.0.1:8765/`. It plays your **raw** video but skips the cut
 parts and draws the captions, hook, zoom and look on top, so you watch the edit instantly with
@@ -179,7 +215,7 @@ in the rendered preview.
 
 ---
 
-## 7. Formats and editing course lessons
+## 8. Formats and editing course lessons
 
 | Say | You get |
 |---|---|
@@ -200,7 +236,7 @@ model). For better transcripts say "use the medium model".
 
 ---
 
-## 8. Prompt cheat sheet
+## 9. Prompt cheat sheet
 
 | Goal | Say |
 |---|---|
@@ -219,7 +255,7 @@ model). For better transcripts say "use the medium model".
 
 ---
 
-## 9. What it can and can't do
+## 10. What it can and can't do
 
 **Can:** cut by transcript (dead space, pauses, retakes, fillers), word-timed captions with 5
 highlight styles, hooks, punch-ins, kinetic type, titles, lower thirds, labels, B-roll (full or
@@ -237,7 +273,7 @@ check, versions.
 
 ---
 
-## 10. Troubleshooting
+## 11. Troubleshooting
 
 | Problem | Fix |
 |---|---|

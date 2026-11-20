@@ -4,6 +4,8 @@
   ve.py setup                         install Python packages into ~/.vibe-editing/venv
   ve.py doctor                        check that everything is installed
   ve.py new <name>                    make a project folder (raw/ refs/ broll/ music/ sfx/ out/)
+  ve.py intake --video F [--ref R]    make a project from files anywhere (copies/moves them in)
+  ve.py restyle <project> --style N   apply a style to an existing edit (keeps cuts, text, sound)
   ve.py analyze <project>             transcript, dead space, retakes, fillers  -> analysis.json
   ve.py show <project> [what]         print summary | transcript | segments | captions | retakes
   ve.py style extract <refs..> --name N   scrape a style from videos/photos -> styles/N/
@@ -206,6 +208,18 @@ def cmd_style(a):
             print(f"{s['name']:<24} {s['font'] or '':<18} {s['description'] or ''}")
 
 
+def cmd_intake(a):
+    from intake import intake
+    ws = Path(a.workspace).resolve() if a.workspace else Path.cwd()
+    intake(ws, videos=a.video, refs=a.ref, name=a.name, project=a.project)
+
+
+def cmd_restyle(a):
+    from plan import restyle
+    restyle(Path(a.project), a.style)
+    cmd_show(argparse.Namespace(project=a.project, what="summary"))
+
+
 def cmd_plan(a):
     from plan import plan
     addons = [x.strip() for x in a.addons.split(",")] if a.addons else None
@@ -280,6 +294,11 @@ def main():
     p = sub.add_parser("style"); p.add_argument("action", choices=["extract", "card", "list"])
     p.add_argument("refs", nargs="*"); p.add_argument("--name"); p.add_argument("--workspace")
     p.set_defaults(fn=cmd_style)
+    p = sub.add_parser("intake"); p.add_argument("--video", action="append", default=[])
+    p.add_argument("--ref", action="append", default=[]); p.add_argument("--name"); p.add_argument("--project")
+    p.add_argument("--workspace"); p.set_defaults(fn=cmd_intake)
+    p = sub.add_parser("restyle"); p.add_argument("project"); p.add_argument("--style", required=True)
+    p.set_defaults(fn=cmd_restyle)
     p = sub.add_parser("plan"); p.add_argument("project"); p.add_argument("--style", default=None)
     p.add_argument("--platform", default="reels", choices=["reels", "shorts", "tiktok", "portrait", "square",
                                                           "youtube", "lesson"])

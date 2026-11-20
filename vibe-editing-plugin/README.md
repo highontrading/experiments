@@ -7,12 +7,14 @@ The Claude Code plugin for the Vibe Editing course by Ideabro Studio.
 | `vibe-editing/` | **The plugin.** Give students this folder (or `dist/vibe-editing.zip`) |
 | `vibe-editing/GUIDE.md` | How to install and use it (for you and for students) |
 | `LECTURE-PLAN.md` | Suggested lecture list for recording the course |
-| `dist/vibe-editing.zip` | The plugin zipped, ready to upload to the LMS |
+| `dist/my-edits-starter.zip` | **Easiest for students:** `CLAUDE.md` + `vibe-editing/`. Unzip into your editing folder and open it in Claude Code |
+| `dist/vibe-editing.zip` | The plugin alone (for `~/.claude/skills/`) |
+| `workspace-starter/CLAUDE.md` | The workspace instructions that make Claude use the plugin automatically |
 
 ## Build the zip
 
 ```bash
-cd vibe-editing-plugin && rm -f dist/vibe-editing.zip && mkdir -p dist && zip -rq dist/vibe-editing.zip vibe-editing -x '*/__pycache__/*' '*.pyc'
+cd vibe-editing-plugin && rm -rf dist && mkdir -p dist/my-edits-starter && zip -rq dist/vibe-editing.zip vibe-editing -x '*/__pycache__/*' '*.pyc' && cp -r workspace-starter/CLAUDE.md vibe-editing dist/my-edits-starter/ && (cd dist && zip -rq my-edits-starter.zip my-edits-starter -x '*/__pycache__/*' && rm -rf my-edits-starter)
 ```
 
 ## Check the plugin
