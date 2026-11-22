@@ -47,3 +47,21 @@ placement: under the card, over the person, behind the person (outline ghost), s
 Fonts are OFL.
 
 `./make.sh` rebuilds everything once the raw clips are tone-mapped into `/home/user/work`.
+
+## V3: "Claude, edit this" (full-screen vertical)
+
+`out/VibeEditing_ClaudeEditsThis_9x16.mp4`: 1080x1920, 30 fps, 78 s, -14 LUFS. Built from the new reference style
+(`reference/style-analysis.md`): every spoken command is executed on screen at the moment it is said (music drops on
+"put some music", SFX start on "add sound effects", captions change style on each request, he becomes a sticker on a
+whiteboard, the course appears in a 3D laptop mockup).
+
+| Step | Tool |
+| --- | --- |
+| Un-mirror, 30 fps, grade, mattes | `tools/v3_extract.sh`, `tools/v3_matte.py` |
+| Cut list with command "beats" | `tools/v3_edl.py` -> `edit/v3_edl.json` |
+| Timeline (frame map, head track, word times, voice/music envelopes) | `tools/v3_timeline.py` |
+| Stage (all beats keyed to word indices; exports the SFX cue sheet) | `stage_v3.html`, `stage_v3.js`, `render_v3.js` |
+| Mix | `tools/v3_mix.py` |
+
+Stock: Mixkit free licence (commercial use, no attribution): clips 1728, 21546, 50610, 44074, 50406, 42620; music
+"House 02" by Lily J (#744). SFX generated with ElevenLabs.

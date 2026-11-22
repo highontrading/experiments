@@ -1,0 +1,35 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: "Inter Tight"; font-weight: 500; src: url(assets/fonts/inter-tight-latin-500-normal.woff2); }
+  @font-face { font-family: "Inter Tight"; font-weight: 600; src: url(assets/fonts/inter-tight-latin-600-normal.woff2); }
+  @font-face { font-family: "Inter Tight"; font-weight: 700; src: url(assets/fonts/inter-tight-latin-700-normal.woff2); }
+  @font-face { font-family: "Inter Tight"; font-weight: 800; src: url(assets/fonts/inter-tight-latin-800-normal.woff2); }
+  @font-face { font-family: "Inter Tight"; font-weight: 900; src: url(assets/fonts/inter-tight-latin-900-normal.woff2); }
+  @font-face { font-family: "Instrument Serif"; font-style: italic; src: url(assets/fonts/instrument-serif-latin-400-italic.woff2); }
+  @font-face { font-family: "Archivo Expanded"; font-weight: 900; src: url(assets/fonts/Archivo-Expanded-900.ttf); }
+  @font-face { font-family: "Anton"; src: url(assets/fonts/anton-latin-400-normal.woff2); }
+  @font-face { font-family: "Playfair Display"; font-weight: 900; src: url(assets/fonts/playfair-display-latin-900-normal.woff2); }
+  @font-face { font-family: "Playfair Display"; font-weight: 700; font-style: italic; src: url(assets/fonts/playfair-display-latin-700-italic.woff2); }
+  @font-face { font-family: "Caveat"; font-weight: 700; src: url(assets/fonts/caveat-latin-700-normal.woff2); }
+  @font-face { font-family: "Caveat"; font-weight: 500; src: url(assets/fonts/caveat-latin-500-normal.woff2); }
+  @font-face { font-family: "Montserrat"; font-weight: 900; src: url(assets/fonts/montserrat-latin-900-normal.woff2); }
+  html, body { margin: 0; background: #000; width: 1080px; height: 1920px; overflow: hidden; }
+  canvas { display: block; position: absolute; left: 0; top: 0; }
+  #lap { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; perspective: 2100px; pointer-events: none; }
+  #lapBody { position: absolute; left: 150px; top: 0; width: 780px; transform-style: preserve-3d; opacity: 0; }
+  #lid { width: 780px; height: 500px; background: linear-gradient(#2a2b2e, #151518); border-radius: 30px 30px 10px 10px;
+         padding: 16px 16px 26px; box-sizing: border-box; transform-origin: 50% 100%;
+         box-shadow: 0 40px 90px rgba(0,0,0,.45), inset 0 0 0 2px #3a3b40; }
+  #scr { position: relative; width: 748px; height: 458px; border-radius: 12px; }
+  #base { width: 900px; height: 250px; margin-left: -60px; transform-origin: 50% 0; transform: rotateX(84deg);
+          background: linear-gradient(#e4e6ea, #a9aeb5); border-radius: 6px 6px 36px 36px;
+          box-shadow: inset 0 -10px 30px rgba(0,0,0,.25); }
+</style></head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div id="lap"><div id="lapBody"><div id="lid"><canvas id="scr" width="748" height="458"></canvas></div><div id="base"></div></div></div>
+<canvas id="o" width="1080" height="1920"></canvas>
+<script src="build/v3/timeline.js"></script>
+<script src="stage_v3.js"></script>
+</body></html>
