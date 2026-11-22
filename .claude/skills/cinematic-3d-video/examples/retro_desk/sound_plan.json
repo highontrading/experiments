@@ -1,0 +1,9 @@
+{
+  "duration": 7.0,
+  "layers": [
+    {"name": "room", "prompt": "Quiet sunlit study room at golden hour, soft distant birds outside a half-open window, faint high-pitched hum and gentle fan of an old CRT computer, intimate, no music", "len": 8, "at": 0, "gain": 0.55},
+    {"name": "pad", "prompt": "Warm nostalgic analog synth pad, single sustained soft chord slowly swelling, lo-fi tape warmth, cinematic, no drums", "len": 8, "at": 0, "gain": 0.30, "fade_in": 2},
+    {"name": "whoosh", "prompt": "Soft airy cinematic whoosh transition, subtle and smooth", "len": 1.5, "at": 3.3, "gain": 0.45},
+    {"name": "keys", "prompt": "A few soft slow clicks on a vintage beige mechanical computer keyboard, close up, quiet room", "len": 2.5, "at": 4.4, "gain": 0.6}
+  ]
+}
