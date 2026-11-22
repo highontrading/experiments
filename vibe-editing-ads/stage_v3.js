@@ -716,18 +716,14 @@ function ctaButton(c, t) {
   c.restore();
   const rp = win(t, W(211), 0.6); if (rp > 0 && rp < 1) { c.strokeStyle = `rgba(255,255,255,${0.8 * (1 - rp)})`; c.lineWidth = 4; c.beginPath(); c.arc(540, y + h / 2, 40 + rp * 260, 0, 7); c.stroke(); }
 }
-function endCard(c, t) {
+function endCard(c, t) {   // black card, VIBE EDITING in bold
   if (t < ENDT + 0.1) return;
-  const p = 1;
-  c.fillStyle = "#0B0A0B"; c.fillRect(0, 0, W_, H_);
-  const g = c.createRadialGradient(540, 1250, 50, 540, 1250, 1100); g.addColorStop(0, "rgba(232,35,27,0.38)"); g.addColorStop(1, "rgba(232,35,27,0)"); c.fillStyle = g; c.fillRect(0, 0, W_, H_);
-  const g2 = c.createRadialGradient(200, 300, 10, 200, 300, 700); g2.addColorStop(0, "rgba(255,255,255,0.07)"); g2.addColorStop(1, "rgba(255,255,255,0)"); c.fillStyle = g2; c.fillRect(0, 0, W_, H_);
-  const t0 = ENDT + 0.15;
-  maskText(c, "✦  VIBE EDITING  ✦", 540, 520, t0, t, { size: 28, fam: SANS, w: 800, fill: RED2, ls: 10, per: 0.012 });
-  maskText(c, "THE", 540, 700, t0 + 0.08, t, { size: 120, fam: WIDE, w: 900, fill: "#fff", per: 0.03 });
-  maskText(c, "COURSE", 540, 900, t0 + 0.16, t, { size: 168, fam: WIDE, w: 900, fill: "#fff", per: 0.035 });
-  maskText(c, "prompts · skill files · the whole workflow", 540, 1010, t0 + 0.32, t, { size: 52, fam: SERIF, w: 400, it: true, fill: "rgba(255,255,255,0.85)", per: 0.008 });
-  const lp = eOut(win(t, t0 + 0.3, 0.6)); c.fillStyle = `rgba(255,255,255,${0.25 * lp})`; c.fillRect(540 - 300 * lp, 1080, 600 * lp, 2);
+  c.fillStyle = "#000"; c.fillRect(0, 0, W_, H_);
+  const t0 = ENDT + 0.16;
+  maskText(c, "VIBE", 540, 860, t0, t, { size: 300, fam: WIDE, w: 900, fill: "#fff", per: 0.045, ls: -4 });
+  maskText(c, "EDITING", 540, 1080, t0 + 0.1, t, { size: 172, fam: WIDE, w: 900, fill: "#fff", per: 0.035, ls: -2 });
+  const lp = eOut(win(t, t0 + 0.35, 0.5)); c.fillStyle = RED2; c.fillRect(540 - 230 * lp, 1140, 460 * lp, 6);
+  maskText(c, "THE COURSE", 540, 1215, t0 + 0.45, t, { size: 34, fam: SANS, w: 800, fill: "rgba(255,255,255,0.7)", per: 0.015, ls: 12 });
 }
 // premium text reveal: each glyph rises out of a mask line with a spring (no blur)
 function spring(x) { if (x <= 0) return 0; if (x >= 1) return 1; return 1 - Math.exp(-6 * x) * Math.cos(9 * x); }

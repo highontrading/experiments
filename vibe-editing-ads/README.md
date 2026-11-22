@@ -75,3 +75,9 @@ Stock: Mixkit free licence (commercial use, no attribution): clips 1728, 21546, 
   whiteboard with hand-wobbled marker and eraser wipes, sticker re-blocked per step.
 - Sound: music cuts dead on the record scratch and re-enters on the highlight beat, goes low-passed on the whiteboard and
   opens on "put me back"; every zoom-through has a whoosh + sub hit; risers into the magazine, whiteboard and end card.
+
+### Comparison reel
+`out/VibeEditing_Comparison_Reel_9x16.mp4`: Instagram-safe 9:16. Title "AI edited this.", BEFORE (the untouched raw take,
+mapped through the same cut so it stays in sync) next to AFTER (the finished edit), "JOIN VIBE EDITING" CTA. Built with
+`reel.html` / `reel.js` / `render_reel.js`. Both the reel and `VibeEditing_ClaudeEditsThis_9x16.mp4` are encoded at
+1.05x (frames read at 31.5 fps, output 30 fps, audio atempo 1.05). The edit now ends on a black card with VIBE EDITING in bold.
