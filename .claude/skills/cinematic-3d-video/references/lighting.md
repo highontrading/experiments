@@ -23,10 +23,17 @@ Pick the recipe closest to the brief, then adjust. Energies assume a closed room
 - Check the sun actually reaches the subject: rays travel from the window along `direction`;
   sketch it (window x,y,z + t*direction) before rendering.
 
-## 2. Night: desk lamp + screen glow
+## 2. Night: desk lamp + screen glow  (examples/night_camera)
 - World (0.002, 0.003, 0.006). No sun.
-- Key: `spot(loc=lamp head, target=desk, energy=40-80, color=(1.0, 0.72, 0.45), cone_deg=60, blend=0.5, radius=0.02)`.
-  Put an emissive bulb mesh (emission 20-40) inside a lamp shade so the practical reads in frame.
+- Key: `spot(loc=just past the bulb along the shade axis, target=hero, color=(1.0, 0.70, 0.42), cone_deg=30-48, blend=0.55, radius=0.02)`.
+  Energy depends on distance squared: ~40-60 W at 0.5 m, ~150 W at 0.9 m (tested), ~300 W at 1.3 m.
+  Rule: `W_new = W_known x (d_new / d_known)^2`.
+- The visible bulb: `practical_bulb(strength=5-10)` or the scan's own bulb material at emission ~6.
+  A spot *inside* an opaque bulb mesh is blocked - use practical_bulb (shadow-transparent) or move the
+  spot 5-8 cm out along the shade axis.
+- Window behind: `thin_glass()` pane, an emissive city card 5-7 m outside (DOF -> bokeh), and a cool
+  `area(size=(2.6, 1.5), energy=40)` just outside the pane as city rim light.
+- Fill (~1:10) and a tiny front kicker (0.2 m, <1 W) with `reflect=False` so they don't appear in the glass.
 - Screen: `screen_mat(strength=1.5-2.5)` - at night the screen is a real light; it will tint the
   face of the hero/keyboard cool. Add a weak cool area light just in front of the screen (energy 2-4,
   colour (0.6, 0.75, 1.0)) if the glow needs to reach further.
@@ -57,6 +64,9 @@ Pick the recipe closest to the brief, then adjust. Energies assume a closed room
   (`light.data.keyframe_insert('energy')` then add modifier, strength ~20% of energy, scale 3-5).
 
 ## 7. Tuning rules
+- Unmotivated lights (fill, kicker, bounce) should usually be `reflect=False`: otherwise they show up as
+  softbox shapes in glass, screens, chrome and varnish, which gives the setup away.
+- Lights behind a window only reach the room through `thin_glass()`; refractive `glass()` blocks them.
 - Change one light at a time between preview stills.
 - If the image looks flat: lower fill, lower world, raise key. If it looks harsh: raise fill a
   little or enlarge the key (bigger area / larger sun angle) - don't add more lights.

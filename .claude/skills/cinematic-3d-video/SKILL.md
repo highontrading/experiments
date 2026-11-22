@@ -14,12 +14,18 @@ Everything you need is bundled:
 - `scripts/cine.py` - Blender helper library (materials, bevelled geometry, rooms with windows,
   blinds, lights, dust, cameras with focus targets and handheld drift, cuts, render presets, bloom/lens).
 - `scripts/polyhaven.py` - search/download CC0 scanned models, PBR textures and HDRIs.
-- `scripts/render.py`, `scripts/render_chunk.sh` - preview stills and final frame-range chunks.
+- `scripts/lookdev.sh` - one look-dev pass: rebuild scene.py, render preview stills, stack them into a sheet.
+- `scripts/render.py` - stills, frame ranges, and diagnostics: `inframe` (where each object lands in
+  frame), `witness` (wide view of the whole set - shows where lights/windows really are), `inspect`
+  (sizes, variants and material names of imported scans).
+- `scripts/render_chunk.sh` - final frame range -> near-lossless chunk.
 - `scripts/assemble.sh` - joins chunks, grades (bloom, warmth, vignette, grain), upscales, muxes audio.
 - `scripts/sfx.py` - layered sound design via ElevenLabs sound effects.
 - `scripts/contact_sheet.sh` - one image of a video over time, for reviewing motion and continuity.
-- `examples/retro_desk/` - a complete, proven scene (golden-hour retro computer, 2 shots, 7 s).
-  Read its `scene.py` before writing a new scene: it is the pattern to copy.
+- `examples/retro_desk/` - golden-hour retro computer: modelled hero, sun through blinds, 2 shots, 7 s.
+- `examples/night_camera/` - night product shot: scanned hero, desk-lamp practical, thin window glass
+  with city bokeh, recoloured scan, orbit camera.
+  Read the example closest to the brief before writing a new scene: it is the pattern to copy.
 
 References (read when you reach that stage, not all up front):
 - `references/look-bible.md` - what makes it look real; the look-dev checklist. **Read before look-dev.**
@@ -47,11 +53,16 @@ push-in + detail shot) and say what you chose - don't stall on questions.
 
 ### 2. Set up
 ```bash
-SKILL=<this skill's directory>; export CINE_LIB=$SKILL/scripts
+SKILL=<this skill's directory>; export CINE_LIB=$SKILL/scripts   # re-export in every shell call, or use absolute paths
 BLENDER=$(bash $CINE_LIB/setup_blender.sh)          # installs Blender 4.2 LTS once
 python3 $CINE_LIB/polyhaven.py search models "plant book lamp"   # find supporting props
 python3 $CINE_LIB/polyhaven.py model <ids...>; python3 $CINE_LIB/polyhaven.py texture <ids...>
 ```
+Before placing a scanned asset, run `$BLENDER -b scene.blend -P $CINE_LIB/render.py -- inspect <name>`
+to learn its real size, which way it faces, its variants and material names. Scans can carry real
+trademarks in their textures (e.g. a camera maker's name on the lens ring): check at 100% and paint
+them out or choose another asset - see modeling-materials.md.
+
 Work in a project folder (e.g. `<repo>/<project-name>/`) holding `shots.md`, `scene.py`, a
 `make_textures.py` for screens/labels/posters, and a `setup.sh` that fetches assets and generates
 textures - so any machine can rebuild the scene from the repo alone.
@@ -66,14 +77,21 @@ Spend the effort on the hero: bevelled edges, seams, vents, buttons, labels, cab
 slightly irregular repeated parts. A generic primitive with perfect edges is what makes 3D look cheap.
 
 ### 4. Look-dev loop (the most important step)
-Render preview stills and *look at them* (Read the PNG):
+Rebuild and render preview stills in one command, then *look at the sheet* (Read the PNG):
 ```bash
-$BLENDER -b scene.blend -P $CINE_LIB/render.py -- still <frame> prev.png --pct 30 --samples 16
+bash $CINE_LIB/lookdev.sh scene.py v1            # first/middle/last frame, 50% res, 16 samples (~10 s each)
+bash $CINE_LIB/lookdev.sh scene.py v2 97,130,168 # specific frames, e.g. per shot
 ```
-Check the first, middle and last frame of every shot. Go through the checklist in
-`look-bible.md`. Fix one thing at a time and re-render; expect 4-8 iterations. Typical fixes:
-light not reaching the hero, flat even lighting, stretched textures, soft focus, cluttered framing.
-Combine stills side by side with ffmpeg `hstack` to compare before/after.
+Check the first, middle and last frame of every shot against the checklist in `look-bible.md`.
+Change one lighting variable at a time (independent bug fixes can go together); expect 4-8 passes.
+Typical fixes: light not reaching the hero, flat even lighting, stretched textures, soft focus,
+props drifting out of frame, lights showing up as blotches in glass/varnish.
+
+When a still is wrong and you can't tell why, don't guess - diagnose:
+- `render.py -- witness w.png --pct 40 --samples 12` - see the whole set from outside: where the
+  key actually lands, whether the window is open, what's blocking what.
+- `render.py -- inframe 1,48,96` - which objects are IN / PARTIAL / OUT of frame at those frames.
+- Hide one object at a time (`hide_render`) in a throwaway still to find what's causing an artefact.
 
 Move on only when a 50%-res still would pass for a frame from a real film. Rendering a full
 sequence with a lighting mistake wastes an hour.

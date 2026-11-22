@@ -88,7 +88,21 @@ def metal(name, color=(0.8, 0.8, 0.8), rough=0.25, grime=0.08):
 
 
 def glass(name, tint=(1, 1, 1), rough=0.02):
+    """Solid refractive glass (bottles, lenses, paperweights). NOT for window panes - see thin_glass."""
     return mat(name, tint, rough, **{'Transmission Weight': 1.0, 'IOR': 1.5})
+
+
+def thin_glass(name, rough=0.01, ior=1.35):
+    """Window pane / picture-frame glass: transparent + Fresnel-weighted gloss. No refraction and
+    shadow rays pass straight through, so lights and city cards outside the window still reach the
+    room. (A solidified refractive pane blocks them and renders black or blown-out.)"""
+    m = bpy.data.materials.new(name); m.use_nodes = True; n = m.node_tree.nodes; l = m.node_tree.links
+    n.remove(n['Principled BSDF']); out = n['Material Output']
+    tr = n.new('ShaderNodeBsdfTransparent'); gl = n.new('ShaderNodeBsdfGlossy'); gl.inputs['Roughness'].default_value = rough
+    fr = n.new('ShaderNodeFresnel'); fr.inputs['IOR'].default_value = ior; mx = n.new('ShaderNodeMixShader')
+    l.new(fr.outputs[0], mx.inputs[0]); l.new(tr.outputs[0], mx.inputs[1]); l.new(gl.outputs[0], mx.inputs[2])
+    l.new(mx.outputs[0], out.inputs['Surface'])
+    return m
 
 
 def pbr(name, folder, scale=1.0, rot=0.0, bump=0.3, rough_mul=1.0, tint=None, **principled):
@@ -260,23 +274,76 @@ def instances(mesh_obj, transforms, name='inst', material_overrides=None):
     return out
 
 
-def import_asset(path, loc, rot_z=0.0, scale=1.0, name=None):
-    """Import a glTF/GLB (e.g. from scripts/polyhaven.py) under one empty you can move/scale."""
+def import_asset(path, loc, rot_z=0.0, scale=1.0, name=None, only=None, recenter=False):
+    """Import a glTF/GLB (e.g. from scripts/polyhaven.py) under one empty you can move/scale.
+    only = list of top-level object names to keep (some scans ship several variants side by side;
+    run `render.py -- inspect` to see their names). recenter = move kept parts to the empty's origin
+    in XY (useful after dropping a variant that sat off-centre)."""
     before = set(bpy.data.objects)
     bpy.ops.import_scene.gltf(filepath=path)
     new = [o for o in bpy.data.objects if o not in before]
+    if only:
+        keep = set()
+        for o in new:
+            top = o
+            while top.parent is not None: top = top.parent
+            if top.name in only: keep.add(o)
+        for o in [o for o in new if o not in keep]: bpy.data.objects.remove(o)
+        new = [o for o in new if o in keep]
     root = bpy.data.objects.new(name or os.path.splitext(os.path.basename(path))[0], None)
     sc.collection.objects.link(root)
     for o in new:
         if o.parent is None: o.parent = root
+    if recenter and new:
+        bpy.context.view_layer.update()
+        lo, hi = bbox(root)
+        cx, cy = (lo.x + hi.x) / 2, (lo.y + hi.y) / 2
+        for o in new:
+            if o.parent is root: o.location.x -= cx; o.location.y -= cy
     root.location = loc; root.rotation_euler = (0, 0, rot_z); root.scale = (scale,) * 3
+    bpy.context.view_layer.update()
     return root
+
+
+def bbox(obj):
+    """World-space (min, max) Vectors over obj and all its mesh descendants."""
+    bpy.context.view_layer.update()
+    pts = []
+    for o in [obj] + list(obj.children_recursive):
+        if o.type == 'MESH':
+            pts += [o.matrix_world @ Vector(c) for c in o.bound_box]
+    if not pts: return obj.matrix_world.translation.copy(), obj.matrix_world.translation.copy()
+    return (Vector((min(p.x for p in pts), min(p.y for p in pts), min(p.z for p in pts))),
+            Vector((max(p.x for p in pts), max(p.y for p in pts), max(p.z for p in pts))))
+
+
+def recolor(obj, saturation=1.0, value=1.0, hue=0.5, skip=('light', 'emiss', 'bulb', 'glass')):
+    """Repaint an imported scan by inserting a Hue/Saturation node before Base Color on every
+    material under obj (e.g. orange lamp -> matte black: saturation=0.15, value=0.22).
+    Materials whose name contains a `skip` word are left alone. Shared materials change everywhere."""
+    done = set()
+    for o in [obj] + list(obj.children_recursive):
+        for ms in getattr(o, 'material_slots', []):
+            m = ms.material
+            if not m or m.name in done or not m.use_nodes or any(w in m.name.lower() for w in skip): continue
+            done.add(m.name); nt = m.node_tree; b = nt.nodes.get('Principled BSDF')
+            if not b: continue
+            hs = nt.nodes.new('ShaderNodeHueSaturation')
+            hs.inputs['Hue'].default_value = hue; hs.inputs['Saturation'].default_value = saturation; hs.inputs['Value'].default_value = value
+            link = next((l for l in nt.links if l.to_socket == b.inputs['Base Color']), None)
+            if link:
+                nt.links.new(link.from_socket, hs.inputs['Color'])
+            else:
+                hs.inputs['Color'].default_value = b.inputs['Base Color'].default_value
+            nt.links.new(hs.outputs['Color'], b.inputs['Base Color'])
+    return obj
 
 
 # ------------------------------------------------------------------ environment
 def room(wall_m, floor_m, size=(8, 8, 3), window=None, thickness=0.12):
     """Closed box room so light only enters where you let it. Centred on the origin in XY,
-    floor at z=0. window = dict(side='left'|'right'|'back', x_or_y=-1.5, span=(-0.9,0.9), z=(0.95,2.25))
+    floor at z=0. window = dict(side='left'|'right'|'back', at=-1.5, span=(-0.9,0.9), z=(0.95,2.25))
+    (`at` = the wall's x for left/right, y for back; span = opening along the wall; z = sill/head height)
     cuts an opening in that wall. Returns dict with the window's plane coordinate for blinds()/sky_card()."""
     W, D, H = size
     box('floor', (W, D, 0.02), (0, 0, -0.01), floor_m)
@@ -298,9 +365,10 @@ def room(wall_m, floor_m, size=(8, 8, 3), window=None, thickness=0.12):
             box('wall_b', (length / 2 - s1, thickness, z1 - z0), ((length / 2 + s1) / 2, coord, (z0 + z1) / 2), wall_m)
 
     back_y = win.get('back_y', 1.15); right_x = win.get('right_x', 2.2); front_y = win.get('front_y', -3.5); left_x = win.get('left_x', -2.2)
-    if side == 'left': left_x = win['x_or_y']
-    if side == 'right': right_x = win['x_or_y']
-    if side == 'back': back_y = win['x_or_y']
+    at = win.get('at', win.get('x_or_y'))
+    if side == 'left': left_x = at
+    if side == 'right': right_x = at
+    if side == 'back': back_y = at
     for nm, axis, coord, length in [('left', 'x', left_x, D), ('right', 'x', right_x, D), ('back', 'y', back_y, W), ('front', 'y', front_y, W)]:
         if nm == side: wall_with_hole(axis, coord, length)
         else: box('wall_' + nm, (thickness, length, H) if axis == 'x' else (length, thickness, H),
@@ -355,27 +423,51 @@ def sun(direction, energy=12.0, color=(1.0, 0.62, 0.30), angle_deg=0.9):
     return o
 
 
-def area(loc, target, energy, size=0.8, color=(1, 1, 1), shape='DISK', name='area', spread_deg=None):
+def area(loc, target, energy, size=0.8, color=(1, 1, 1), shape='DISK', name='area', spread_deg=None, reflect=True):
+    """Soft source. size = float, or (x, y) for RECTANGLE/ELLIPSE (auto-switches a DISK to ELLIPSE).
+    reflect=False hides it from glossy rays - use for unmotivated fills/kickers so they don't show up
+    as a softbox blotch in glass, screens or varnish."""
     bpy.ops.object.light_add(type='AREA', location=loc)
     o = bpy.context.object; o.name = name
-    o.data.shape = shape; o.data.size = size; o.data.energy = energy; o.data.color = color
+    if isinstance(size, (tuple, list)):
+        o.data.shape = {'DISK': 'ELLIPSE', 'SQUARE': 'RECTANGLE'}.get(shape, shape)
+        o.data.size, o.data.size_y = size
+    else:
+        o.data.shape = shape; o.data.size = size
+    o.data.energy = energy; o.data.color = color
     if spread_deg: o.data.spread = math.radians(spread_deg)
+    o.visible_glossy = reflect
     look_at(o, target); return o
 
 
-def spot(loc, target, energy, color=(1, 0.8, 0.6), cone_deg=45, blend=0.4, radius=0.02, name='spot'):
-    """Practical lamp / key spot. radius controls shadow softness."""
+def spot(loc, target, energy, color=(1, 0.8, 0.6), cone_deg=45, blend=0.4, radius=0.02, name='spot', reflect=True):
+    """Practical lamp / key spot. radius controls shadow softness. Energy scales with distance squared:
+    a desk lamp ~0.5 m from the subject wants ~40-60 W, ~0.9 m wants ~130-180 W (see lighting.md).
+    If it sits inside a lamp shade with a bulb mesh, use practical_bulb() (shadow-transparent) or place
+    the spot just past the bulb along the shade axis."""
     bpy.ops.object.light_add(type='SPOT', location=loc)
     o = bpy.context.object; o.name = name
     o.data.energy = energy; o.data.color = color; o.data.spot_size = math.radians(cone_deg)
     o.data.spot_blend = blend; o.data.shadow_soft_size = radius
+    o.visible_glossy = reflect
     look_at(o, target); return o
 
 
-def point(loc, energy, color=(1, 0.75, 0.5), radius=0.03, name='point'):
+def point(loc, energy, color=(1, 0.75, 0.5), radius=0.03, name='point', reflect=True):
     bpy.ops.object.light_add(type='POINT', location=loc)
     o = bpy.context.object; o.name = name
     o.data.energy = energy; o.data.color = color; o.data.shadow_soft_size = radius
+    o.visible_glossy = reflect
+    return o
+
+
+def practical_bulb(loc, radius=0.02, strength=8.0, color=(1.0, 0.8, 0.55), name='bulb'):
+    """Visible glowing bulb that doesn't block the real light placed inside/behind it
+    (visible_shadow=False). Strength 5-10 reads as 'on' without clipping the whole shade."""
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=radius, location=loc, segments=24, ring_count=12)
+    o = bpy.context.object; o.name = name
+    for p in o.data.polygons: p.use_smooth = True
+    o.data.materials.append(emission_mat(name + '_emit', color, strength)); o.visible_shadow = False
     return o
 
 
@@ -401,7 +493,9 @@ def camera(name, keys, lens=45, fstop=2.8, handheld=0.003, handheld_scale=60, se
     """Camera that looks at a moving target (which is also the focus point, so focus pulls are free).
     keys = [(frame, cam_location, target_location), ...]. Two keys = simple move; add a middle key
     to hold or change pace. handheld = metres of Perlin drift (0.002-0.005 reads as a real operator).
-    Returns the camera object; its target is cam['target']."""
+    Returns the camera object; its target is cam['target'].
+    9:16 note: with sensor fit AUTO the 36 mm sensor spans the frame's HEIGHT in portrait, so a lens
+    looks ~1.8x tighter horizontally than in 16:9 (35 mm portrait ~ 62 mm landscape across)."""
     cd = bpy.data.cameras.new(name); cam = bpy.data.objects.new(name, cd); sc.collection.objects.link(cam)
     cd.lens = lens; cd.sensor_width = sensor
     cd.dof.use_dof = True; cd.dof.aperture_fstop = fstop; cd.dof.aperture_blades = blades
@@ -420,6 +514,27 @@ def camera(name, keys, lens=45, fstop=2.8, handheld=0.003, handheld_scale=60, se
             md = fc.modifiers.new('NOISE'); md.scale = handheld_scale; md.strength = handheld; md.phase = i * 13 + len(name)
     cam['target'] = tgt.name
     if sc.camera is None: sc.camera = cam
+    return cam
+
+
+def orbit_camera(name, center, target, frames, angle_deg=(30, -10), radius=(0.45, 0.4), height=(0.12, 0.11),
+                 lens=35, fstop=2.8, handheld=0.003, handheld_scale=50):
+    """Eased orbit around `center` (x, y, z of the subject's base): the camera swings from
+    angle_deg[0] to angle_deg[1] (0 = in front, on -Y; positive = to the right), while radius and
+    height (above center z) interpolate - so you get orbit + push-in + crane in one move.
+    `target` is the focus/aim point (usually the hero's lens/logo/face)."""
+    f0, f1 = frames
+    pivot = bpy.data.objects.new(name + '_pivot', None); sc.collection.objects.link(pivot)
+    pivot.location = (center[0], center[1], 0)
+    cz = center[2]
+    cam = camera(name, [(f0, (0, -radius[0], cz + height[0]), target), (f1, (0, -radius[1], cz + height[1]), target)],
+                 lens=lens, fstop=fstop, handheld=handheld, handheld_scale=handheld_scale)
+    cam.parent = pivot
+    for f, a in ((f0, angle_deg[0]), (f1, angle_deg[1])):
+        pivot.rotation_euler = (0, 0, math.radians(a)); pivot.keyframe_insert('rotation_euler', frame=f)
+    for fc in pivot.animation_data.action.fcurves:
+        for k in fc.keyframe_points:
+            k.interpolation = 'BEZIER'; k.handle_left_type = k.handle_right_type = 'AUTO_CLAMPED'
     return cam
 
 

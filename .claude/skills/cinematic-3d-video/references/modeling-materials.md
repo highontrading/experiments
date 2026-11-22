@@ -21,6 +21,16 @@ Useful shapes in cine.py: `box`, `tapered_box` (CRT/TV/speaker/lamp head), `pane
 bulge, paper with curl, posters), `cylinder` (cups, cans, lenses, knobs; `hollow=` for cups),
 `mug`, `cable`, `instances`. Anything else: plain bpy/bmesh, then `C._smooth_bevel(obj, w, seg)`.
 
+## Working with scans
+- Learn the asset first: `render.py -- inspect <name>` prints each part's world bbox, parent and
+  materials - its real size, which way it faces, and whether the file ships several variants.
+- Multi-variant files (e.g. a notebook open + closed side by side): `import_asset(..., only=['part_name'], recenter=True)`.
+- Repaint: `cine.recolor(root, saturation=0.15, value=0.22)` (orange lamp -> matte black); `hue` shifts colour.
+- **Trademarks**: some scans carry real brand lettering in their diffuse textures (Poly Haven's Camera_01
+  shows a maker's name on the lens ring). For anything published, paint it out: open the Diffuse/Base
+  texture with PIL, fill the lettering region with a sampled nearby colour (or blur it), save a copy and
+  point the material's image node at it; or pick another asset. Check a 100% crop of a close frame.
+
 ## When to use Poly Haven instead
 Plants, books with real covers, paper stacks, fabric, food, tools, furniture, worn wood - anything
 organic or irregular. `python3 scripts/polyhaven.py search models "<words>"`, then
@@ -39,7 +49,8 @@ assets are real-world metres already.
 | Painted plaster wall | `pbr(name, tex/beige_wall_002, 1.5, bump=0.5, tint=...)` - tint darker than you think |
 | Paper / sticky note | `mat(c, 0.8, **{'Subsurface Weight':0.2})` |
 | Ceramic mug | `mat(c, 0.15, **{'Coat Weight':0.8})` |
-| Glass | `glass(name)`; thin glass = solidify 2-3 mm; tinted = tint colour 0.9-0.98 |
+| Solid glass (bottle, lens, paperweight) | `glass(name)`; tinted = tint colour 0.9-0.98 |
+| Window pane / frame glass | `thin_glass(name)` - never a solidified refractive pane (blocks light, renders black/white) |
 | Rubber / matte black | `mat((0.02,0.02,0.02), 0.6-0.8)` - never pure 0 black |
 | Fabric | `mat(c, 0.9, **{'Sheen Weight':0.5})` + noise bump |
 | Screen | `screen_mat(name, png, strength=0.6-1.2 day, 1.5-2.5 night)` |

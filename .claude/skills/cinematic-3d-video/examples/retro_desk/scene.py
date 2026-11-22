@@ -38,7 +38,7 @@ m_screen = C.screen_mat('crt', A('screen_ui.png'), 0.9)
 
 # ---------------------------------------------------------------- room + the light path (window on the left)
 WX = -1.5; SPAN = (-0.9, 0.9); WZ = (0.95, 2.25)
-C.room(m_wall, m_floor, size=(8, 8, 3), window=dict(side='left', x_or_y=WX, span=SPAN, z=WZ))
+C.room(m_wall, m_floor, size=(8, 8, 3), window=dict(side='left', at=WX, span=SPAN, z=WZ))
 C.blinds(WX, SPAN, WZ, m_blind, side='left', spacing=0.085, slat_w=0.07, tilt_deg=-16)
 for yy in (-0.55, 0.0, 0.55):
     C.box('cord', (0.003, 0.003, WZ[1] - WZ[0]), (WX + 0.1, yy, sum(WZ) / 2), m_blind)

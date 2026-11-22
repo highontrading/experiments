@@ -12,6 +12,14 @@
 | Screen looks like a flat sticker | Emission too high + no vignette/glass | `screen_mat` strength 0.6-1.2 + dark vignette and glow in the image itself |
 | Everything evenly lit, looks like CG | Fill/world too strong | world near black, fill ~1/8 of key, darken the wall tint |
 | Image orange and saturated, "toy" look | Albedos too saturated/bright | Desaturate base colours (beige 0.70,0.64,0.53 not 0.72,0.63,0.48) |
+| Window renders pure white or pure black; city card behind it invisible | Solidified refractive `glass()` pane; lights behind it blocked | `thin_glass()` for panes; keep window lights outside the pane |
+| Softbox-shaped blotch in glass/screen/varnish | An area light visible to glossy rays | `area(..., reflect=False)` for fills and kickers |
+| Lamp spot does nothing | Spot placed inside the opaque bulb/shade mesh | `practical_bulb()` (shadow-transparent) or move the spot 5-8 cm out along the shade axis |
+| Night key far too weak | Recipe energy assumed a closer lamp | Scale with distance squared (lighting.md section 2) |
+| Prop missing / a sliver at frame edge | Orbit/push moved it out | `render.py -- inframe` before rendering; move the prop or adjust the move |
+| Brand name readable on a scanned prop | Scan textures carry real trademarks | Paint out of the diffuse texture or swap asset (modeling-materials.md) |
+| Imported scan appears twice | Asset file ships variants side by side | `import_asset(..., only=[...], recenter=True)`; names via `render.py -- inspect` |
+| `Python file "/scripts/render.py" could not be opened` | `CINE_LIB` not set in this shell call | Use `lookdev.sh` (sets it) or absolute paths |
 | Polyhaven API 403 | No User-Agent header | `polyhaven.py` sets one |
 | Bash killed the background render | `nohup ... &` inside a foreground call can die with the shell | Use the tool's `run_in_background` |
 | Hour-long renders | 4-core CPU, ~1.5-2.5 min/frame at 720p | Time one frame first, then distribute (rendering-delivery.md) |

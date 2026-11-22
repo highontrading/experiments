@@ -20,7 +20,8 @@ open the aperture less for close work or nothing will be sharp.
   close to lens; target stays on subject. Foreground blur = depth.
 - **Low slide + tilt-up + rack focus**: start inches above the surface focused on a foreground
   detail, slide forward and tilt up so the target travels to the hero, focus follows. Reference shot B.
-- **Orbit**: camera on an arc (3+ keys, or parent to a rotating empty), 20-45 deg over 4 s. Product.
+- **Orbit**: `cine.orbit_camera(name, center, target, frames, angle_deg=(30,-10), radius=(0.43,0.375), height=(0.115,0.105))`
+  - 20-45 deg over 4 s, with a slight push (radius) and crane (height) built in. Product hero shots.
 - **Crane down / top-down**: camera descends 0.3-0.6 m while target stays; or straight overhead
   for flat-lays with a slow rotation (5-10 deg).
 - **Hold with breath**: static keys + handheld 0.002-0.003. Good for the CTA/end frame.
@@ -32,6 +33,8 @@ Middle keyframes change pacing: put the 2nd key at ~40% of the shot with ~70% of
 `handheld=0.002-0.005` m, `handheld_scale=40-60` frames. Lower for macro, higher for wide.
 
 ## Vertical 9:16 composition
+- Lens feel in portrait: Blender fits the 36 mm sensor to the frame's *height*, so horizontally a
+  35 mm in 9:16 frames like a ~62 mm in 16:9. Go wider than instinct for room-scale shots (24-32 mm).
 - Hero in the middle third vertically, slightly below centre, leaving headroom for captions top
   and UI bottom (platform overlays cover ~15% top and ~20% bottom).
 - Use the height: foreground (desk edge, keyboard) low, hero middle, background (shelf/print) top.
