@@ -15,6 +15,19 @@ mus = load(f"{W3}/music.mp3"); env = np.abs(mus[:SR * 3, 0]); first = int(np.arg
 mus = mus[max(0, first - int(0.01 * SR)):]
 music = np.zeros((N, 2), np.float32); i0 = int(mt * SR); n = min(N - i0, len(mus)); music[i0:i0 + n] = mus[:n]
 music *= (np.clip((t - mt) / 0.02, 0, 1) * np.clip((dur - t) / 1.4, 0, 1))[:, None]
+ev = json.load(open(f"{ROOT}/build/v3/events.json"))
+# music edit 1: dead stop on the record scratch, re-enter on a downbeat when the highlight style lands
+st, rs = ev["stop"], ev["restart"]
+mute = np.clip((t - st) / 0.03, 0, 1) * (1 - np.clip((t - rs) / 0.01, 0, 1))
+re_i = int(rs * SR); seg = mus[int((rs - mt) * SR):]                      # continue the track from where it would be
+music[re_i:] = 0; n2 = min(N - re_i, len(seg)); music[re_i:re_i + n2] = seg[:n2]
+music *= (1 - mute)[:, None]; music *= np.clip((dur - t) / 1.4, 0, 1)[:, None]
+# music edit 2: muffled while he is a sticker on the whiteboard, opens back up on "put me back"
+tmpm = f"{ROOT}/build/v3/_m.wav"
+subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ac", "2", "-ar", str(SR), "-i", "-", tmpm], input=music.astype(np.float32).tobytes(), check=True)
+muff = load(tmpm, af="lowpass=f=700,lowpass=f=1100")[:N]; os.remove(tmpm)
+lp = (np.clip((t - ev["lpf0"]) / 0.4, 0, 1) * (1 - np.clip((t - ev["lpf1"]) / 0.15, 0, 1)))[:, None]
+music = music * (1 - lp) + muff * lp * db(1.5)
 # duck under the voice
 e = np.abs(voice[:, 0]); hop = 480; ev = np.array([e[k:k + hop].max() for k in range(0, N, hop)]); ev = np.convolve(ev, np.ones(10) / 10, "same")
 duck = np.interp(np.arange(N), np.arange(len(ev)) * hop, np.clip(ev / 0.12, 0, 1))
@@ -32,7 +45,7 @@ for c in cues:
     if not os.path.exists(p): print("missing sfx", c["name"]); continue
     if c["name"] not in cache: x = load(p); x /= max(1e-4, np.abs(x).max()); cache[c["name"]] = x * db(-6)
     x = cache[c["name"]] * c["g"]; i = int(c["t"] * SR)
-    if c["name"] in ("rise",): i = int((c["t"] - len(x) / SR + 0.15) * SR)
+    if c["name"] in ("rise", "riser"): i = int((c["t"] - len(x) / SR + 0.12) * SR)
     if i < 0: x = x[-i:]; i = 0
     j = min(N, i + len(x)); fx[i:j] += x[:j - i]
 mix = voice + music + fx * db(-5)

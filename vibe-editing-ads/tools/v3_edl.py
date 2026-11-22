@@ -61,11 +61,33 @@ def main():
             out = min(nxt - 0.03, e + POST)
             if k == len(phrases) - 1 and hold: out = min(nxt - 0.06, e + POST + hold)
             segs.append({"in": round(max(prev_end, s - PRE), 3), "out": round(out, 3), "w": [a, b]})
+    # waveform-level tightening: silences > 0.2 s inside a kept phrase (that the transcript folded into a word)
+    # are cut down to 0.08 s. Command "holds" at the very end of a segment are left alone.
+    out = []
+    for s in segs:
+        hold_from = s["out"] - 0.0
+        i0, i1 = int(s["in"] * 100), int(s["out"] * 100)
+        cuts, k = [], i0 + 5
+        while k < i1 - 5:
+            if db[k] < -45:
+                j = k
+                while j < i1 - 5 and db[j] < -45: j += 1
+                if (j - k) / 100 > 0.2 and j < i1 - 6:
+                    cuts.append(((k + 4) / 100, (j - 4) / 100))
+                k = j
+            else: k += 1
+        cur = s["in"]
+        for c0, c1 in cuts:
+            out.append({"in": round(cur, 3), "out": round(c0, 3), "w": s["w"]}); cur = c1
+        out.append({"in": round(cur, 3), "out": s["out"], "w": s["w"]})
+        if cuts: print("tightened", s["w"], [(round(c0, 2), round(c1, 2)) for c0, c1 in cuts])
+    segs = out
     t = 0; words = []
     for s in segs:
         s["t"] = round(t, 3)
         for i in range(s["w"][0], s["w"][1] + 1):
             w = ws[i]
+            if not (s["in"] - 0.05 <= w["start"] < s["out"]): continue
             words.append({"i": i, "text": w["text"], "start": round(t + max(0, w["start"] - s["in"]), 3),
                           "end": round(t + min(s["out"], w["end"]) - s["in"], 3)})
         t += s["out"] - s["in"]

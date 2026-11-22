@@ -23,8 +23,8 @@ def main():
         if t < speech_end:
             j = max(i for i, s in enumerate(segs) if s["t"] <= t + 1e-6)
             src = segs[j]["in"] + (t - segs[j]["t"])
-        else:
-            src = segs[-1]["out"] + (t - speech_end)
+        else:   # end card: hold the last spoken frame (the raw take after this is him ending the recording)
+            src = segs[-1]["out"] - 0.12
         frames.append(min(total, int(round(src * FPS)) + 1))
     meta = {}
     for p in glob.glob(f"{WORK}/mk/meta_*.json"):
@@ -60,7 +60,7 @@ def main():
         if t < 0: menv.append(0.); continue
         i = int(t * 12000); menv.append(float(np.sqrt(np.mean(m[i:i + mh] ** 2))) if i + mh < len(m) else 0.)
     mm = max(menv) or 1; menv = [round(x / mm, 3) for x in menv]
-    tl = dict(fps=FPS, dur=round(dur, 3), nframes=nfr, speech_end=speech_end, frames=frames, head=head, words=words,
+    tl = dict(cuts=[round(sg["t"], 3) for sg in segs], fps=FPS, dur=round(dur, 3), nframes=nfr, speech_end=speech_end, frames=frames, head=head, words=words,
               amp=amp, menv=menv, music_t=round(music_t, 3), frame_dir=f"{WORK}/fr", mask_dir=f"{WORK}/mk",
               stock_dir=f"{WORK}/stock", has_mask=[os.path.exists(f"{WORK}/mk/s{f:05d}.png") for f in frames])
     os.makedirs(f"{ROOT}/build/v3", exist_ok=True)

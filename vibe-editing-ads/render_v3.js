@@ -18,9 +18,10 @@ else { const from = +opt("--from", 0), to = Math.min(+opt("--to", META.nframes -
     page.on("console", (m) => { if (m.type() === "error") console.error(m.text()); });
     await page.goto(`file://${path.join(__dirname, "stage_v3.html")}`);
     await page.evaluate(() => window.stageReady);
-    if (w === 0) fs.writeFileSync(path.join(__dirname, "build/v3/sfx.json"), JSON.stringify(await page.evaluate(() => window.SFX_CUES), null, 1));
+    if (w === 0) { fs.writeFileSync(path.join(__dirname, "build/v3/sfx.json"), JSON.stringify(await page.evaluate(() => window.SFX_CUES), null, 1));
+      fs.writeFileSync(path.join(__dirname, "build/v3/events.json"), JSON.stringify(await page.evaluate(() => window.MIX_EVENTS))); }
     for (const j of mine) {
-      await page.evaluate((f) => window.renderAt(f), j.f);
+      await page.evaluate((f) => window.renderFrame(f), j.f);
       await page.screenshot({ path: path.join(__dirname, j.out) });
       if (++done % 200 === 0) console.log(`v3: ${done}/${jobs.length}  ${((Date.now() - t0) / done).toFixed(0)} ms/frame`);
     }

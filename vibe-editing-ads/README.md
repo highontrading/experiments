@@ -65,3 +65,13 @@ whiteboard, the course appears in a 3D laptop mockup).
 
 Stock: Mixkit free licence (commercial use, no attribution): clips 1728, 21546, 50610, 44074, 50406, 42620; music
 "House 02" by Lily J (#744). SFX generated with ElevenLabs.
+
+### V3.1 premium pass
+- Cut list now also tightens silences the transcript folded into words (waveform level): fixes the "tap the... button"
+  hesitation and three other mid-phrase pauses. The ending cuts on the last word into a designed end card; none of the raw
+  wrap-up footage is used.
+- Real motion blur (4 sub-frames per frame, 180 degree shutter), relit wall with a contact shadow, multi-cam framing per cut
+  with gimbal drift, zoom-through transitions with light leaks, spring/mask type reveals, frosted prompt bar, textured
+  whiteboard with hand-wobbled marker and eraser wipes, sticker re-blocked per step.
+- Sound: music cuts dead on the record scratch and re-enters on the highlight beat, goes low-passed on the whiteboard and
+  opens on "put me back"; every zoom-through has a whoosh + sub hit; risers into the magazine, whiteboard and end card.

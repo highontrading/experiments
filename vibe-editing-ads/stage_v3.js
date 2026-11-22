@@ -65,28 +65,46 @@ for (let g = 0; g < 4; g++) {
   c.putImageData(id, 0, 0); grain.push(k);
 }
 
-// --------------------------------------------------------------- camera (zoom around the face, never below fill)
-const ZK = [  // [time, zoom, ease seconds]
-  [0, 1.0, 0.01], [0.2, 1.06, 4.0], [MUSIC_T, 1.13, 0.12], [W(24) - 0.08, 1.38, 0.16], [WE(24) + 0.2, 1.08, 0.3],
-  [SFX_ON, 1.0, 0.2], [W(32), 1.05, 2.5], [T.nothing, 1.2, 0.1], [T.code1, 1.04, 0.01], [W(51), 1.32, 0.1],
-  [WE(53) + 0.3, 1.05, 0.3], [W(60) - 0.05, 1.36, 0.14], [W(61), 1.06, 0.3], [T.mag - 0.02, 1.0, 0.01],
-  [T.behind, 1.0, 0.01], [T.hand, 1.06, 0.5], [W(77), 1.22, 0.14], [W(80), 1.06, 0.25], [T.cut0, 1.0, 0.4],
-  [T.back + 0.6, 1.0, 0.01], [T.course1, 1.04, 0.4], [W(209) - 0.05, 1.18, 0.12], [W(210), 1.06, 0.3], [T.end, 1.1, 2.4],
-];
-function zoomAt(t) {
-  let v = 1, prev = 1;
-  for (const [kt, z, d] of ZK) { if (t < kt) break; v = lerp(prev, z, eInOut(clamp((t - kt) / d))); prev = z; }
-  return v;
+// --------------------------------------------------------------- camera: multi-cam framing per cut, dolly push, gimbal drift
+const FRAMING = [1.04, 1.17, 1.08, 1.27, 1.12, 1.21];
+const LOCKED = [[T.titles0 - 0.1, T.barIn + 0.5, 1.03], [T.mag - 0.15, T.behind - 0.05, 1.03], [T.behind - 0.05, T.hand + 0.15, 1.03],
+  [T.cut0 - 0.1, T.back + 0.75, 1.03], [T.course0 - 0.1, T.course1 + 0.1, 1.04], [W(206) - 0.2, 99, 1.05]];
+const REACT = [[W(24) - 0.06, WE(24) + 0.25], [W(51) - 0.04, WE(53) + 0.1], [W(60) - 0.05, WE(60) + 0.25], [W(77) - 0.04, WE(79) + 0.1]];
+const ZT = [T.code0, T.code1, T.mag, T.grid0, T.grid1, T.board + 0.45, T.back + 0.45, ENDT + 0.1];   // zoom-through cuts
+function segIndex(t) { let k = 0; for (let i = 0; i < TL.cuts.length; i++) if (TL.cuts[i] <= t + 1e-6) k = i; return k; }
+function baseZoom(t) {
+  for (const [a, b, z] of LOCKED) if (t >= a && t < b) {
+    if (a === LOCKED[0][0]) return lerp(1.03, 1.1, eInOut(win(t, a, b - a)));   // slow push through the hook
+    if (a === LOCKED[5][0]) return lerp(1.05, 1.16, eInOut(win(t, a, 4.5)));
+    return z;
+  }
+  const k = segIndex(t), s0 = TL.cuts[k], s1 = TL.cuts[k + 1] ?? s0 + 2;
+  return FRAMING[k % FRAMING.length] + 0.025 * win(t, s0, s1 - s0);        // dolly-in within each shot
 }
-const IMPACTS = [[MUSIC_T, 10], [SFX_ON + 0.05, 6], [T.nothing, 12], [T.crumble, 6], [T.mag, 4], [T.board + 0.55, 8], [T.back + 0.5, 8], [W(211), 6]];
+function zoomAt(t) {
+  let z = baseZoom(t);
+  for (const [a, b] of REACT) { const e = smooth(t, a, a + 0.12) * (1 - smooth(t, b, b + 0.25)); z = lerp(z, 1.42, e); }
+  return z;
+}
+function globalZoom(t) {   // whole-picture zoom-through around each section cut (motion blur turns it into a whip)
+  let g = 1;
+  for (const tz of ZT) g *= 1 + 0.45 * eIn(win(t, tz - 0.14, 0.14)) * (t < tz ? 1 : 0) + 0.45 * (1 - eOut(win(t, tz, 0.24))) * (t >= tz ? 1 : 0);
+  return g;
+}
+ZT.forEach((tz) => { cue("whoosh", tz - 0.2, 0.55); cue("whoosh_soft", tz - 0.05, 0.35); cue("bass_drop", tz, 0.32); });
+cue("riser", T.mag, 0.45); cue("riser", T.board + 0.45, 0.4); cue("riser", ENDT + 0.1, 0.4); cue("scratch", W(51) - 0.06, 0.75);
+cue("impact", ENDT + 0.12, 0.6); cue("tada", ENDT + 0.45, 0.35);
+window.MIX_EVENTS = { stop: W(51) - 0.04, restart: T.hl, lpf0: T.cut0 + 0.4, lpf1: T.back + 0.45, end: ENDT + 0.1 };
+const IMPACTS = [[MUSIC_T, 10], [SFX_ON + 0.05, 6], [T.nothing, 12], [T.crumble, 6], [W(211), 6]];
 function camera(t, fi) {
   const z = zoomAt(t);
   const top = TL.head[0][fi], cx = TL.head[1][fi], neck = TL.head[3][fi];
   const fx = cx * W_, fy = (top + (neck - top) * 0.5) * H_;
   let x0 = fx - fx * z, y0 = fy - fy * z;
+  x0 += Math.sin(t * 0.83) * 6 + Math.sin(t * 0.31 + 1) * 9; y0 += Math.cos(t * 0.67) * 5 + Math.sin(t * 0.23) * 6;   // gimbal drift
   x0 = clamp(x0, W_ - W_ * z, 0); y0 = clamp(y0, H_ - H_ * z, 0);
   for (const [it, a] of IMPACTS) { const k = t - it; if (k >= 0 && k < 0.35) { const d = (1 - k / 0.35) ** 2 * a; x0 += Math.sin(k * 90) * d; y0 += Math.cos(k * 77) * d; } }
-  return { z, x0, y0 };
+  return { z, x0, y0, rot: Math.sin(t * 0.41) * 0.0035 };
 }
 function headScreen(cam, fi) {
   const top = TL.head[0][fi], cx = TL.head[1][fi], hw = TL.head[2][fi], neck = TL.head[3][fi];
@@ -96,38 +114,16 @@ function headScreen(cam, fi) {
 // --------------------------------------------------------------- type helpers
 function wideFill(c, y0, y1) { const g = c.createLinearGradient(0, y0, 0, y1); g.addColorStop(0, "#0B0F1F"); g.addColorStop(0.55, "#1B2C7A"); g.addColorStop(1, "#3D63FF"); return g; }
 // letters typed on one by one (reference: ~1 frame per letter, blur in)
-function typeOn(c, text, x, y, t0, opt) {
-  const { size, fam, w = 900, fill = "#fff", align = "center", per = 0.035, ls = 0, stroke, shadow, t1 = 1e9, it = false } = opt;
-  font(c, w, size, fam, it); c.letterSpacing = ls + "px";
-  const total = c.measureText(text).width;
-  let x_ = align === "center" ? x - total / 2 : align === "right" ? x - total : x;
-  const q = win(t1 === 1e9 ? -1 : (opt.now ?? 0), t1, 0.2);
-  [...text].forEach((ch, i) => {
-    const cw = c.measureText(ch).width;
-    const p = eOut(win(opt.now, t0 + i * per, 0.18));
-    if (p > 0) {
-      c.save(); c.globalAlpha = p * (1 - win(opt.now, t1 - 0.12, 0.12));
-      const b = (1 - p) * 10; if (b > 0.4) c.filter = `blur(${b.toFixed(1)}px)`;
-      c.translate(x_ + cw / 2, y + (1 - p) * size * 0.25); c.textAlign = "center"; c.textBaseline = "alphabetic";
-      if (shadow) { c.shadowColor = shadow; c.shadowBlur = 30; c.shadowOffsetY = 8; }
-      if (stroke) { c.lineJoin = "round"; c.lineWidth = stroke[1]; c.strokeStyle = stroke[0]; c.strokeText(ch, 0, 0); }
-      c.fillStyle = typeof fill === "function" ? fill(c, size) : fill; c.fillText(ch, 0, 0);
-      c.restore();
-    }
-    x_ += cw;
-  });
-  c.letterSpacing = "0px";
-  return total;
-}
+function typeOn(c, text, x, y, t0, opt) { return maskText(c, text, x, y, t0, opt.now, { ...opt, per: (opt.per ?? 0.03) * 0.9 }); }
 function chrome(c, text, x, y, size, now, t0, t1) {
   font(c, 900, size, WIDE); c.letterSpacing = "2px"; const fitW = c.measureText(text).width; if (fitW > 1000) { size *= 1000 / fitW; font(c, 900, size, WIDE); }
   const total = c.measureText(text).width; let x_ = x - total / 2;
   [...text].forEach((ch, i) => {
     const cw = c.measureText(ch).width, p = eOut(win(now, t0 + i * 0.045, 0.22));
     if (p > 0) {
-      c.save(); c.globalAlpha = p * (1 - win(now, t1 - 0.12, 0.15)); c.translate(x_ + cw / 2, y + (1 - p) * 40);
-      c.scale(lerp(1.25, 1, p), lerp(1.25, 1, p)); c.textAlign = "center"; c.textBaseline = "alphabetic";
-      if (p < 1) c.filter = `blur(${((1 - p) * 8).toFixed(1)}px)`;
+      const sp = spring(win(now, t0 + i * 0.04, 0.6));
+      c.save(); c.globalAlpha = (1 - win(now, t1 - 0.12, 0.15)); c.beginPath(); c.rect(x_ - 30, y - size * 1.1, cw + 60, size * 1.35); c.clip();
+      c.translate(x_ + cw / 2, y + (1 - sp) * size * 1.1); c.textAlign = "center"; c.textBaseline = "alphabetic";
       for (let k = 10; k >= 1; k--) { c.fillStyle = `rgb(${18 + k * 4},${20 + k * 4},${26 + k * 4})`; c.fillText(ch, k * 1.1, k * 1.6); }
       const g = c.createLinearGradient(0, -size * 0.75, 0, 0);
       g.addColorStop(0, "#E9EDF2"); g.addColorStop(0.3, "#7C8692"); g.addColorStop(0.47, "#FFFFFF"); g.addColorStop(0.58, "#2E343C"); g.addColorStop(0.8, "#59626D"); g.addColorStop(1, "#B8C0C9");
@@ -152,15 +148,17 @@ function hand(c, text, x, y, size, t0, now, col = INK, dur = 0.5, align = "cente
   c.fillStyle = col; c.textAlign = "left"; c.textBaseline = "alphabetic"; c.fillText(text, 0, 0);
   c.restore(); return tw;
 }
-function marker(c, pts, p, col = RED, lw = 7) {     // draw a polyline progressively
-  if (p <= 0) return; let L = 0; const seg = [];
-  for (let i = 1; i < pts.length; i++) { const d = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); seg.push(d); L += d; }
-  c.save(); c.strokeStyle = col; c.lineWidth = lw; c.lineCap = "round"; c.lineJoin = "round"; c.beginPath(); c.moveTo(...pts[0]);
-  let left = L * clamp(p);
-  for (let i = 1; i < pts.length && left > 0; i++) {
-    const k = Math.min(1, left / seg[i - 1]); c.lineTo(lerp(pts[i - 1][0], pts[i][0], k), lerp(pts[i - 1][1], pts[i][1], k)); left -= seg[i - 1];
-  }
-  c.stroke(); c.restore();
+function marker(c, pts, p, col = RED, lw = 7) {     // hand-drawn: wobble, ink pressure, progressive draw
+  if (p <= 0) return; const seed = Math.round(pts[0][0] * 7 + pts[0][1] * 3);
+  const jp = pts.map(([x, y], i) => [x + Math.sin(i * 1.9 + seed) * lw * 0.22, y + Math.cos(i * 1.3 + seed) * lw * 0.22]);
+  let L = 0; const seg = [];
+  for (let i = 1; i < jp.length; i++) { const d = Math.hypot(jp[i][0] - jp[i - 1][0], jp[i][1] - jp[i - 1][1]); seg.push(d); L += d; }
+  const path = (off) => { c.beginPath(); c.moveTo(jp[0][0] + off, jp[0][1] + off); let left = L * clamp(p);
+    for (let i = 1; i < jp.length && left > 0; i++) { const k = Math.min(1, left / seg[i - 1]); c.lineTo(lerp(jp[i - 1][0], jp[i][0], k) + off, lerp(jp[i - 1][1], jp[i][1], k) + off); left -= seg[i - 1]; } };
+  c.save(); c.lineCap = "round"; c.lineJoin = "round";
+  c.globalAlpha *= 0.94; c.strokeStyle = col; c.lineWidth = lw; path(0); c.stroke();
+  c.globalAlpha *= 0.35; c.lineWidth = lw * 0.55; c.strokeStyle = "#000"; path(lw * 0.12); c.stroke();   // darker ink core
+  c.restore();
 }
 const ellipsePts = (cx, cy, rx, ry, n = 60, wob = 0.04) => Array.from({ length: n + 6 }, (_, i) => { const a = -2.2 + i / n * Math.PI * 2; const r = 1 + Math.sin(i * 1.7) * wob; return [cx + Math.cos(a) * rx * r, cy + Math.sin(a) * ry * r]; });
 
@@ -248,14 +246,14 @@ function capHand(c, g, t, hs) {
 }
 const heartPts = (x, y, s) => Array.from({ length: 40 }, (_, i) => { const a = i / 39 * Math.PI * 2; return [x + s * 16 * Math.sin(a) ** 3 * 2.2, y - s * (13 * Math.cos(a) - 5 * Math.cos(2 * a) - 2 * Math.cos(3 * a) - Math.cos(4 * a)) * 2.2]; });
 function capBoard(c, g, t) {
-  const words = g.words, x0 = 70, y = 1335, a = 1 - win(t, g.t1 - 0.08, 0.08);
+  const words = g.words, sd = stickerSide(g.t0 + 0.2), x0 = sd > 0 ? 70 : 580, y = 1335, a = 1 - win(t, g.t1 - 0.08, 0.08);
   font(c, 900, 62, SANS); let line = 0, x = x0;
   c.save(); c.globalAlpha = a; c.letterSpacing = "-1.5px";
   words.forEach((w) => {
     const s = w.text, ww = c.measureText(s).width;
-    if (x + ww > 520 && x > x0) { line++; x = x0; }
-    const p = eOut(win(t, w.t - 0.04, 0.18));
-    if (p > 0) { c.save(); c.globalAlpha = a * p; c.fillStyle = PUNCH.has(w.i) ? RED : INK; c.textAlign = "left"; c.fillText(s, x, y + line * 70 + (1 - p) * 14); c.restore(); }
+    if (x + ww > x0 + 450 && x > x0) { line++; x = x0; }
+    const xx = x, ln = line;
+    wordRise(c, w, xx, y + ln * 70, 62, t, g.t1, 1, () => { font(c, 900, 62, SANS); c.letterSpacing = "-1.5px"; c.fillStyle = PUNCH.has(w.i) ? RED : INK; c.textAlign = "left"; c.fillText(s, 0, 0); });
     x += ww + 18;
   });
   c.restore(); c.letterSpacing = "0px";
@@ -264,18 +262,22 @@ function capTop(c, g, t) {
   const words = g.words, y = 330, a = 1 - win(t, g.t1 - 0.08, 0.08);
   const st = (w) => PUNCH.has(w.i) ? font(c, 400, 104, COND) : font(c, 900, 70, SANS);
   const L = layWords(c, words.map((w) => ({ ...w, text: w.text.toUpperCase() })), st, 960, 20);
-  words.forEach((w, i) => { const p = eOut(win(t, w.t - 0.04, 0.2)); if (p <= 0) return; st(w);
-    c.save(); c.globalAlpha = a * p; c.translate(540 + L.xs[i], y + (1 - p) * 24); c.scale(L.k, L.k); c.textAlign = "center";
-    c.fillStyle = PUNCH.has(w.i) ? RED : INK; c.fillText(w.text.toUpperCase(), 0, 0); c.restore(); });
+  words.forEach((w, i) => { st(w); const sz = PUNCH.has(w.i) ? 104 : 70;
+    wordRise(c, w, 540 + L.xs[i], y, sz * L.k, t, g.t1, L.k, () => { st(w); c.textAlign = "center"; c.fillStyle = PUNCH.has(w.i) ? RED : INK; c.fillText(w.text.toUpperCase(), 0, 0); }); });
+}
+function wordRise(c, w, x, y, size, t, t1, k, draw) {
+  const p = spring(win(t, w.t - 0.05, 0.5)); if (p <= 0) return;
+  const out = win(t, t1 - 0.16, 0.16);
+  c.save(); c.beginPath(); c.rect(x - 1000, y - size * 1.05, 2000, size * 1.3); c.clip();
+  c.translate(x, y + (1 - p) * size * 1.05 - out * size * 1.1); c.scale(k, k); draw(); c.restore();
 }
 function capPrem(c, g, t) {
   const words = g.words.map((w) => ({ ...w, text: w.text.toUpperCase() }));
   const st = (w) => PUNCH.has(w.i) ? (font(c, 400, 150, COND), c.letterSpacing = "1px") : (font(c, 900, 66, SANS), c.letterSpacing = "-1px");
   const L = layWords(c, words, st, 960, 22), y = 1290, a = 1 - win(t, g.t1 - 0.1, 0.1);
-  words.forEach((w, i) => { const p = eOut(win(t, w.t - 0.04, 0.2)); if (p <= 0) return; st(w);
-    c.save(); c.globalAlpha = a * p; c.translate(540 + L.xs[i], y + (1 - p) * 26); const s = L.k * lerp(1.3, 1, p); c.scale(s, s);
-    if (p < 1) c.filter = `blur(${((1 - p) * 8).toFixed(1)}px)`; c.textAlign = "center";
-    c.shadowColor = "rgba(0,0,0,0.5)"; c.shadowBlur = 24; c.shadowOffsetY = 6; c.fillStyle = PUNCH.has(w.i) ? RED2 : "#fff"; c.fillText(w.text, 0, 0); c.restore(); });
+  words.forEach((w, i) => { st(w); const sz = PUNCH.has(w.i) ? 150 : 66;
+    wordRise(c, w, 540 + L.xs[i], y, sz * L.k, t, g.t1, L.k, () => { st(w); c.textAlign = "center"; c.shadowColor = "rgba(0,0,0,0.5)"; c.shadowBlur = 24; c.shadowOffsetY = 6;
+      c.fillStyle = PUNCH.has(w.i) ? RED2 : "#fff"; c.fillText(w.text, 0, 0); }); });
   c.letterSpacing = "0px";
 }
 
@@ -288,7 +290,11 @@ function promptBar(c, t) {
   const y = 1420, w = 900, h = 104, x = 540 - w / 2;
   c.save(); c.globalAlpha = clamp(vis); c.translate(0, (1 - clamp(vis)) * 60);
   c.shadowColor = "rgba(0,0,0,0.25)"; c.shadowBlur = 40; c.shadowOffsetY = 14;
-  rr(c, x, y, w, h, 34); c.fillStyle = "rgba(255,255,255,0.96)"; c.fill(); c.shadowColor = "transparent";
+  rr(c, x, y, w, h, 34); c.fillStyle = "rgba(255,255,255,0.3)"; c.fill(); c.shadowColor = "transparent";
+  c.save(); rr(c, x, y, w, h, 34); c.clip(); c.filter = "blur(22px) saturate(1.4)"; c.drawImage(C, x - 40, y - 40, w + 80, h + 80, x - 40, y - 40, w + 80, h + 80); c.filter = "none";
+  c.fillStyle = "rgba(255,255,255,0.74)"; c.fillRect(x, y, w, h);
+  const gl = c.createLinearGradient(0, y, 0, y + h); gl.addColorStop(0, "rgba(255,255,255,0.65)"); gl.addColorStop(0.5, "rgba(255,255,255,0)"); c.fillStyle = gl; c.fillRect(x, y, w, h / 2); c.restore();
+  rr(c, x + 0.75, y + 0.75, w - 1.5, h - 1.5, 34); c.strokeStyle = "rgba(255,255,255,0.9)"; c.lineWidth = 1.5; c.stroke();
   c.strokeStyle = "rgba(0,0,0,0.08)"; c.lineWidth = 1.5; c.stroke();
   // spark icon
   c.save(); c.translate(x + 52, y + h / 2); c.rotate(Math.sin(t * 2) * 0.2); c.fillStyle = RED; c.beginPath();
@@ -516,22 +522,42 @@ function recap(c, t, img, cam, hs) {
 cue("peel", W(90), 0.8); cue("rise", W(92) - 0.1, 0.6); cue("swipe", T.board, 0.7); cue("thud", T.board + 0.55, 0.9);
 cue("rise", T.back + 0.1, 0.6); cue("whoosh", T.back + 0.3, 0.7); cue("thud", T.back + 0.55, 0.7);
 function boardAmt(t) { return smooth(t, T.board, T.board + 0.55) * (1 - smooth(t, T.back + 0.05, T.back + 0.55)); }
+// the sticker is re-blocked on every whiteboard step: right, left, right... gliding during the eraser wipe
+function stickerSide(t) {
+  if (typeof BEATS === "undefined") return 1;
+  let side = 1;
+  BEATS.forEach(([a], i) => { const tgt = i % 2 ? -1 : 1; if (i === 0) side = tgt; else side = lerp(side, tgt, eInOut(win(t, a - 0.18, 0.5))); });
+  return side;
+}
 function stickerXf(t) {   // person transform: lift during "cut me out", shrink to bottom-right on the board
   const lift = smooth(t, W(92), W(92) + 0.3) * (1 - smooth(t, T.back + 0.45, T.back + 0.6));
-  const k = eInOut(boardAmt(t));
-  return { s: lerp(1 + 0.025 * lift, 0.56, k), dx: lerp(0, 330, k), dy: lerp(-14 * lift, 520, k), lift };
+  const k = eInOut(boardAmt(t)), side = stickerSide(t);
+  return { s: lerp(1 + 0.025 * lift, 0.56, k), dx: lerp(0, 330 * side, k), dy: lerp(-14 * lift, 520, k), lift };
 }
-function whiteboard(c, t) {
-  c.fillStyle = PAPER; c.fillRect(0, 0, W_, H_);
-  c.fillStyle = "rgba(0,0,0,0.05)"; for (let x = 0; x < W_; x += 54) c.fillRect(x, 0, 1, H_); for (let y = 0; y < H_; y += 54) c.fillRect(0, y, W_, 1);
-  const g = c.createRadialGradient(540, 760, 300, 540, 900, 1400); g.addColorStop(0, "rgba(255,255,255,0.5)"); g.addColorStop(1, "rgba(0,0,0,0.025)"); c.fillStyle = g; c.fillRect(0, 0, W_, H_);
-  c.fillStyle = "#C9CDD2"; c.fillRect(0, 0, W_, 16); c.fillStyle = "rgba(0,0,0,0.08)"; c.fillRect(0, 16, W_, 4);
-}
+const [wbC, wbX] = mk(W_, H_);
+(function buildBoard() {
+  const c = wbX, r = rnd(4242);
+  c.fillStyle = "#F3F3F0"; c.fillRect(0, 0, W_, H_);
+  const id = c.getImageData(0, 0, W_, H_), d = id.data;            // fine surface noise
+  for (let i = 0; i < d.length; i += 4) { const n = (r() - 0.5) * 7; d[i] += n; d[i + 1] += n; d[i + 2] += n + 0.5; } c.putImageData(id, 0, 0);
+  for (let k = 0; k < 12; k++) {                                     // old marker ghosts + smudges
+    c.save(); c.globalAlpha = 0.012 + r() * 0.014; c.strokeStyle = r() > 0.7 ? "#7a5050" : "#555a66"; c.lineWidth = 6 + r() * 12; c.lineCap = "round";
+    c.beginPath(); let x = r() * W_, y = r() * H_ * 0.8; c.moveTo(x, y); for (let j = 0; j < 6; j++) { x += (r() - 0.5) * 260; y += (r() - 0.5) * 90; c.lineTo(x, y); } c.stroke(); c.restore();
+  }
+  for (let k = 0; k < 9; k++) { const x = r() * W_, y = r() * H_, rad = 120 + r() * 260; const g = c.createRadialGradient(x, y, 0, x, y, rad);
+    g.addColorStop(0, "rgba(120,124,132,0.06)"); g.addColorStop(1, "rgba(120,124,132,0)"); c.fillStyle = g; c.fillRect(0, 0, W_, H_); }
+  const gl = c.createLinearGradient(0, 0, W_, H_ * 0.6);               // glossy reflection band
+  gl.addColorStop(0.28, "rgba(255,255,255,0)"); gl.addColorStop(0.38, "rgba(255,255,255,0.55)"); gl.addColorStop(0.46, "rgba(255,255,255,0)"); c.fillStyle = gl; c.fillRect(0, 0, W_, H_);
+  const fr = c.createLinearGradient(0, 0, 0, 26); fr.addColorStop(0, "#E7E9EC"); fr.addColorStop(0.5, "#B7BCC3"); fr.addColorStop(1, "#8E949C");   // aluminium frame
+  c.fillStyle = fr; c.fillRect(0, 0, W_, 26); c.fillStyle = "rgba(0,0,0,0.12)"; c.fillRect(0, 26, W_, 6);
+  const v = c.createRadialGradient(540, 760, 400, 540, 900, 1400); v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(40,36,30,0.13)"); c.fillStyle = v; c.fillRect(0, 0, W_, H_);
+})();
+function whiteboard(c, t) { c.drawImage(wbC, 0, 0); }
 const BEATS = [ // [start, end, drawer]
   [T.board + 0.3, W(112) - 0.1, bTitle], [W(112) - 0.1, W(123) - 0.1, bStep1], [W(123) - 0.1, W(137) - 0.1, bStep2],
   [W(137) - 0.1, W(158) - 0.1, bStep3], [W(158) - 0.1, W(171) - 0.1, bCheap], [W(171) - 0.1, T.back + 0.2, bTool],
 ];
-BEATS.forEach(([a], i) => i && cue("swipe", a, 0.45));
+BEATS.forEach(([a], i) => { if (i) { cue("swipe", a, 0.45); cue("whoosh_soft", a - 0.1, 0.3); } });
 cue("marker", W(106), 0.6); cue("marker", W(110), 0.5); cue("marker", W(113), 0.5); cue("pop", W(117), 0.5); cue("marker", W(120), 0.5);
 cue("marker", W(124), 0.5); cue("keys", W(127), 0.35); cue("ding", W(131), 0.45); cue("pop", W(135), 0.5); cue("marker", W(142), 0.6);
 cue("pop", W(147), 0.5); for (let k = 0; k < 5; k++) cue("keys", W(150) + k * 0.5, 0.25); cue("pop", W(160), 0.5); cue("thud", W(170), 0.9);
@@ -539,8 +565,14 @@ cue("marker", W(174), 0.6); cue("marker", W(176), 0.6);
 async function boardContent(c, t, img, base = 1) {
   for (const [a, b, fn] of BEATS) {
     if (t < a - 0.05 || t > b + 0.3) continue;
-    const pin = eOut(win(t, a, 0.3)), pout = eIn(win(t, b - 0.02, 0.3));
-    c.save(); c.globalAlpha = base * pin * (1 - pout); c.translate(-pout * 400 + (1 - pin) * 120, 130); await fn(c, t, img); c.restore();
+    const pin = eOut(win(t, a, 0.25)), pout = eInOut(win(t, b - 0.12, 0.42));
+    const ex = lerp(-160, W_ + 160, pout);                                  // felt eraser sweeps left -> right
+    c.save(); c.globalAlpha = base * pin; if (pout > 0) { c.beginPath(); c.rect(ex + 40, 0, W_, H_); c.clip(); }
+    const dz = 1 + 0.045 * eInOut(win(t, a, Math.max(1, b - a))); c.translate(540, 700); c.scale(dz, dz); c.translate(-540, -700);
+    c.translate((1 - pin) * 40, 130); await fn(c, t, img); c.restore();
+    if (pout > 0 && pout < 1) { c.save(); c.globalAlpha = base; c.translate(ex, 760 + Math.sin(pout * 9) * 30); c.rotate(-0.08);
+      c.shadowColor = "rgba(0,0,0,0.3)"; c.shadowBlur = 24; c.shadowOffsetY = 10; rr(c, -60, -140, 120, 280, 18); c.fillStyle = "#2B2D31"; c.fill(); c.shadowColor = "transparent";
+      rr(c, -60, -140, 34, 280, [18, 0, 0, 18]); c.fillStyle = "#D9D6CF"; c.fill(); font(c, 800, 18, SANS); c.save(); c.rotate(-Math.PI / 2); c.fillStyle = "#fff"; c.textAlign = "center"; c.fillText("VIBE", 0, 18); c.restore(); c.restore(); }
   }
 }
 function tapedCard(c, img, x, y, w, h, rot, p) {
@@ -685,93 +717,164 @@ function ctaButton(c, t) {
   const rp = win(t, W(211), 0.6); if (rp > 0 && rp < 1) { c.strokeStyle = `rgba(255,255,255,${0.8 * (1 - rp)})`; c.lineWidth = 4; c.beginPath(); c.arc(540, y + h / 2, 40 + rp * 260, 0, 7); c.stroke(); }
 }
 function endCard(c, t) {
-  const p = win(t, T.end, 0.5); if (p <= 0) return;
-  c.save(); c.globalAlpha = eOut(p) * 0.55; c.fillStyle = "#000"; c.fillRect(0, 0, W_, H_); c.restore();
-  const el = (d, fn) => { const q = eOut(win(t, T.end + d, 0.4)); if (q <= 0) return; c.save(); c.globalAlpha = q; c.translate(0, (1 - q) * 30); if (q < 1) c.filter = `blur(${((1 - q) * 8).toFixed(1)}px)`; fn(); c.restore(); };
-  el(0.15, () => { font(c, 800, 26, SANS); c.letterSpacing = "8px"; c.fillStyle = RED2; c.textAlign = "center"; c.fillText("✦  VIBE EDITING  ✦", 540, 560); c.letterSpacing = "0px"; });
-  el(0.3, () => { font(c, 400, 190, COND); c.fillStyle = "#fff"; c.textAlign = "center"; c.fillText("THE COURSE", 540, 770); });
-  el(0.45, () => { font(c, 700, 58, DIDONE, true); c.fillStyle = "#fff"; c.textAlign = "center"; c.fillText("prompts · skill files · workflow", 540, 860); });
+  if (t < ENDT + 0.1) return;
+  const p = 1;
+  c.fillStyle = "#0B0A0B"; c.fillRect(0, 0, W_, H_);
+  const g = c.createRadialGradient(540, 1250, 50, 540, 1250, 1100); g.addColorStop(0, "rgba(232,35,27,0.38)"); g.addColorStop(1, "rgba(232,35,27,0)"); c.fillStyle = g; c.fillRect(0, 0, W_, H_);
+  const g2 = c.createRadialGradient(200, 300, 10, 200, 300, 700); g2.addColorStop(0, "rgba(255,255,255,0.07)"); g2.addColorStop(1, "rgba(255,255,255,0)"); c.fillStyle = g2; c.fillRect(0, 0, W_, H_);
+  const t0 = ENDT + 0.15;
+  maskText(c, "✦  VIBE EDITING  ✦", 540, 520, t0, t, { size: 28, fam: SANS, w: 800, fill: RED2, ls: 10, per: 0.012 });
+  maskText(c, "THE", 540, 700, t0 + 0.08, t, { size: 120, fam: WIDE, w: 900, fill: "#fff", per: 0.03 });
+  maskText(c, "COURSE", 540, 900, t0 + 0.16, t, { size: 168, fam: WIDE, w: 900, fill: "#fff", per: 0.035 });
+  maskText(c, "prompts · skill files · the whole workflow", 540, 1010, t0 + 0.32, t, { size: 52, fam: SERIF, w: 400, it: true, fill: "rgba(255,255,255,0.85)", per: 0.008 });
+  const lp = eOut(win(t, t0 + 0.3, 0.6)); c.fillStyle = `rgba(255,255,255,${0.25 * lp})`; c.fillRect(540 - 300 * lp, 1080, 600 * lp, 2);
+}
+// premium text reveal: each glyph rises out of a mask line with a spring (no blur)
+function spring(x) { if (x <= 0) return 0; if (x >= 1) return 1; return 1 - Math.exp(-6 * x) * Math.cos(9 * x); }
+function maskText(c, text, x, y, t0, now, opt) {
+  const { size, fam, w = 900, fill = "#fff", align = "center", per = 0.03, ls = 0, it = false, t1 = 1e9, shadow } = opt;
+  font(c, w, size, fam, it); c.letterSpacing = ls + "px";
+  const total = c.measureText(text).width; let x_ = align === "center" ? x - total / 2 : align === "right" ? x - total : x;
+  const out = win(now, t1 - 0.2, 0.2); if (out >= 1) { c.letterSpacing = "0px"; return total; }
+  c.save(); c.beginPath(); c.rect(x_ - 40, y - size * 1.15, total + 80, size * 1.15 + size * 0.28); c.clip();
+  [...text].forEach((ch, i) => {
+    const cw = c.measureText(ch).width, p = spring(win(now, t0 + i * per, 0.55));
+    if (p > 0) {
+      c.save(); c.translate(x_ + cw / 2, y + (1 - p) * size * 1.05 - out * size * 1.1); c.textAlign = "center"; c.textBaseline = "alphabetic";
+      if (shadow) { c.shadowColor = shadow; c.shadowBlur = 30; c.shadowOffsetY = 10; }
+      c.fillStyle = typeof fill === "function" ? fill(c, size) : fill; c.fillText(ch, 0, 0); c.restore();
+    }
+    x_ += cw;
+  });
+  c.restore(); c.letterSpacing = "0px"; return total;
 }
 
-// --------------------------------------------------------------- flashes / glitch transitions (reference style, 2-3 frames)
-const FLASH = [[T.code0, "invert"], [T.code1 - 0.07, "pixel"], [T.mag - 0.07, "white"], [T.grid0, "invert"], [T.board + 0.5, "white"], [T.back + 0.5, "white"], [T.course0 + 0.4, "pixel"], [ENDT + 0.08, "invert"]];
+// --------------------------------------------------------------- transitions: glitch only for the code cutaway, light leaks on zoom-throughs
+const FLASH = [[T.code0, "invert"], [T.code1 - 0.07, "pixel"]];
 function flashes(c, t) {
   for (const [ft, kind] of FLASH) {
     const k = (t - ft) * fps; if (k < 0 || k >= 3) continue;
-    if (kind === "white") { c.fillStyle = `rgba(255,255,255,${0.85 - k * 0.28})`; c.fillRect(0, 0, W_, H_); }
     if (kind === "invert") { c.save(); c.globalCompositeOperation = "difference"; c.fillStyle = k < 1 ? "#fff" : "#7fdfff"; c.fillRect(0, 0, W_, H_); c.restore(); }
     if (kind === "pixel") { smX.imageSmoothingEnabled = false; smX.drawImage(C, 0, 0, 108 / (k + 1) * 1.5, 192 / (k + 1) * 1.5); c.imageSmoothingEnabled = false; c.drawImage(smC, 0, 0, 108 / (k + 1) * 1.5, 192 / (k + 1) * 1.5, 0, 0, W_, H_); c.imageSmoothingEnabled = true; }
   }
 }
+function lightLeaks(c, t) {
+  ZT.forEach((tz, i) => {
+    const k = (t - tz + 0.22) / 0.6; if (k <= 0 || k >= 1) return;
+    const a = Math.sin(k * Math.PI), x = lerp(-300, 1380, k), r = rnd(i * 13 + 5);
+    c.save(); c.globalCompositeOperation = "screen";
+    [[x, 500 + r() * 800, 700, "255,120,60"], [x - 300, 1300 - r() * 600, 520, "255,40,30"], [x + 200, 300, 380, "255,230,200"]].forEach(([lx, ly, rad, col]) => {
+      const g = c.createRadialGradient(lx, ly, 0, lx, ly, rad); g.addColorStop(0, `rgba(${col},${0.38 * a})`); g.addColorStop(1, `rgba(${col},0)`); c.fillStyle = g; c.fillRect(0, 0, W_, H_); });
+    c.restore();
+  });
+}
 
-// --------------------------------------------------------------- frame
-async function renderAt(fi) {
-  const t = fi / fps, src = TL.frames[fi];
-  const img = await loadImg(`${TL.frame_dir}/s${pad(src, 5)}.jpg`);
+// --------------------------------------------------------------- caches
+const imgCache = new Map();
+async function cachedImg(src) { if (imgCache.has(src)) return imgCache.get(src); const im = await loadImg(src); imgCache.set(src, im); if (imgCache.size > 6) imgCache.delete(imgCache.keys().next().value); return im; }
+let maskSrc = -1;
+async function loadMask(src) {
+  if (maskSrc === src) return true;
+  const m = await cachedImg(`${TL.mask_dir}/s${pad(src, 5)}.png`);
+  mX.clearRect(0, 0, 576, 1024); mX.drawImage(m, 0, 0); const id = mX.getImageData(0, 0, 576, 1024), d = id.data;
+  for (let i = 0; i < d.length; i += 4) { d[i + 3] = d[i]; d[i] = d[i + 1] = d[i + 2] = 255; } mX.putImageData(id, 0, 0); maskSrc = src; return true;
+}
+const [shC, shX] = mk(270, 480);   // low-res contact shadow
+// relit wall: studio light falloff behind the head, darker edges; the person is redrawn on top untouched
+function relight(c, hs) {
+  c.save(); c.globalCompositeOperation = "multiply";
+  const g = c.createRadialGradient(hs.cx + 60, hs.top + 120, 120, hs.cx, hs.top + 500, 1350);
+  g.addColorStop(0, "#FFFFFF"); g.addColorStop(0.45, "#EEE9E3"); g.addColorStop(1, "#8C8680"); c.fillStyle = g; c.fillRect(0, 0, W_, H_);
+  c.restore();
+}
+function contactShadow(c) {
+  shX.clearRect(0, 0, 270, 480); shX.drawImage(perC, 0, 0, 270, 480); shX.globalCompositeOperation = "source-in"; shX.fillStyle = "#1a1410"; shX.fillRect(0, 0, 270, 480); shX.globalCompositeOperation = "source-over";
+  c.save(); c.globalAlpha = 0.2; c.filter = "blur(26px)"; c.drawImage(shC, 46, 34, W_, H_); c.restore();
+}
+function grade(c) {   // filmic vignette over the footage
+  const v = c.createRadialGradient(540, 860, 520, 540, 960, 1250); v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(10,8,6,0.32)"); c.fillStyle = v; c.fillRect(0, 0, W_, H_);
+}
+
+// --------------------------------------------------------------- frame (one sub-frame)
+async function renderAt(fi, dt = 0) {
+  const t = fi / fps + dt, src = TL.frames[fi];
+  const img = await cachedImg(`${TL.frame_dir}/s${pad(src, 5)}.jpg`);
   const cam = camera(t, fi), hs = headScreen(cam, fi);
-  const inCode = t >= T.code0 && t < T.code1, inGrid = t >= T.grid0 && t < T.grid1;
+  const inCode = t >= T.code0 && t < T.code1, inGrid = t >= T.grid0 && t < T.grid1, inEnd = t >= ENDT + 0.1;
   const bk = boardAmt(t), cutting = t >= T.cut0 && t < T.back + 0.7;
-  const depthNeeded = (t >= T.titles0 && t < T.barIn + 0.6) || (t >= T.mag && t < T.behind + 0.2) || (t >= T.behind && t < T.hand + 0.2) || t >= W(207) - 0.1 || cutting;
-  let maskOK = false;
-  if (depthNeeded && TL.has_mask[fi]) {
-    const m = await loadImg(`${TL.mask_dir}/s${pad(src, 5)}.png`);
-    mX.clearRect(0, 0, 576, 1024); mX.drawImage(m, 0, 0); const id = mX.getImageData(0, 0, 576, 1024), d = id.data;
-    for (let i = 0; i < d.length; i += 4) { d[i + 3] = d[i]; d[i] = d[i + 1] = d[i + 2] = 255; } mX.putImageData(id, 0, 0); maskOK = true;
-  }
-  const person = () => {   // matted person into perC with the camera transform
-    perX.clearRect(0, 0, W_, H_); perX.drawImage(img, cam.x0, cam.y0, W_ * cam.z, H_ * cam.z);
-    perX.globalCompositeOperation = "destination-in"; perX.drawImage(mC, cam.x0, cam.y0, W_ * cam.z, H_ * cam.z); perX.globalCompositeOperation = "source-over";
+  const maskOK = TL.has_mask[fi] ? await loadMask(src) : false;
+  const foot = (c) => { c.save(); c.translate(540, 960); c.rotate(cam.rot); c.translate(-540, -960); c.drawImage(img, cam.x0, cam.y0, W_ * cam.z, H_ * cam.z); c.restore(); };
+  const person = () => {
+    perX.clearRect(0, 0, W_, H_); perX.save(); perX.translate(540, 960); perX.rotate(cam.rot); perX.translate(-540, -960);
+    perX.drawImage(img, cam.x0, cam.y0, W_ * cam.z, H_ * cam.z);
+    perX.globalCompositeOperation = "destination-in"; perX.drawImage(mC, cam.x0, cam.y0, W_ * cam.z, H_ * cam.z); perX.restore(); perX.globalCompositeOperation = "source-over";
   };
   Q.clearRect(0, 0, W_, H_);
-  // ---- main world
-  if (inCode) await codeCut(X, t);
+  if (inEnd) { endCard(X, t); }
+  else if (inCode) await codeCut(X, t);
   else if (inGrid) recap(X, t, img, cam, hs);
   else if (cutting && maskOK) {
     const sx = stickerXf(t);
-    // background: wall fades/darkens while lifted, then the whiteboard slides in
-    X.drawImage(img, cam.x0, cam.y0, W_ * cam.z, H_ * cam.z);
+    foot(X); relight(X, hs);
     if (sx.lift > 0) { X.fillStyle = `rgba(10,10,12,${0.55 * sx.lift * (1 - bk)})`; X.fillRect(0, 0, W_, H_); }
     if (bk > 0) { X.save(); X.translate((1 - eOut(bk)) * W_, 0); whiteboard(X, t); await boardContent(X, t, img, bk); X.restore(); }
     person();
-    // sticker outline (white), drawn from the dilated matte
     const ol = smooth(t, W(90), W(90) + 0.5) * (1 - smooth(t, T.back + 0.45, T.back + 0.7));
     X.save(); X.translate(540, 960); X.scale(sx.s, sx.s); X.translate(-540 + sx.dx / sx.s, -960 + sx.dy / sx.s);
+    X.translate(540, 960); X.rotate(Math.sin(t * 1.3) * 0.012 * bk); X.translate(-540, -960);    // the sticker breathes on the board
     if (ol > 0) {
-      olX.clearRect(0, 0, 576, 1024); for (let k = 0; k < 16; k++) { const a = k / 16 * Math.PI * 2; olX.drawImage(mC, Math.cos(a) * 6, Math.sin(a) * 6); }
+      olX.clearRect(0, 0, 576, 1024); for (let k = 0; k < 16; k++) { const a = k / 16 * Math.PI * 2; olX.drawImage(mC, Math.cos(a) * 6.5, Math.sin(a) * 6.5); }
       olX.globalCompositeOperation = "source-in"; olX.fillStyle = "#fff"; olX.fillRect(0, 0, 576, 1024); olX.globalCompositeOperation = "source-over";
-      olX.save(); olX.globalCompositeOperation = "destination-over"; for (let k = 0; k < 16; k++) { const a = k / 16 * Math.PI * 2; olX.drawImage(mC, Math.cos(a) * 7.2, Math.sin(a) * 7.2); }
-      olX.globalCompositeOperation = "source-atop"; olX.restore();
-      olX.save(); olX.globalCompositeOperation = "destination-over"; olX.filter = "none"; olX.restore();
       X.save(); X.shadowColor = `rgba(0,0,0,${0.3 + 0.25 * Math.max(sx.lift, bk)})`; X.shadowBlur = 46; X.shadowOffsetY = 22;
       const rev = clamp(ol * 1.2); X.beginPath(); X.rect(0, 0, W_, H_ * rev); X.clip();
       X.globalAlpha = ol; X.drawImage(olC, cam.x0, cam.y0, W_ * cam.z, H_ * cam.z); X.restore();
     }
     X.drawImage(perC, 0, 0); X.restore();
   } else {
-    X.drawImage(img, cam.x0, cam.y0, W_ * cam.z, H_ * cam.z);
+    foot(X);
     if (maskOK) {
+      relight(X, hs);
       hookTitles(X, t); magazine(X, t, hs, true); depthWords(X, t); ctaTitles(X, t);
-      person(); X.drawImage(perC, 0, 0); hookTitles(X, t, true);
+      person(); contactShadow(X); X.drawImage(perC, 0, 0); hookTitles(X, t, true);
     } else { hookTitles(X, t); magazine(X, t, hs, true); depthWords(X, t); ctaTitles(X, t); }
+    grade(X);
     if (t >= T.mag && t < T.behind + 0.2) magazine(X, t, hs, false);
   }
-  if (!inCode && !inGrid && !cutting) { await appWindows(X, t); }
-  musicDrop(X, t); sfxBurst(X, t);
-  const lapOn = laptop(t);
-  // ---- overlay: captions, prompt bar, CTA, end card, flashes, grain
+  if (!inCode && !inGrid && !cutting && !inEnd) { await appWindows(X, t); }
+  if (!inEnd) { musicDrop(X, t); sfxBurst(X, t); }
+  laptop(t);
   for (const g of GROUPS) {
+    if (inEnd) break;
     if (g[2] === "basic") { if (t >= g.t0 && t < g.t1) capBasic(Q, g, t); continue; }
     if (t < g.t0 - 0.05 || t > g.t1 + 0.05) continue;
     if (g[2] === "hl") capHL(Q, g, t); else if (g[2] === "mag") capMag(Q, g, t); else if (g[2] === "hand") { if (!inGrid) capHand(Q, g, t, hs); }
     else if (g[2] === "board") capBoard(Q, g, t); else if (g[2] === "top") capTop(Q, g, t); else if (g[2] === "prem") capPrem(Q, g, t);
   }
-  promptBar(Q, t); ctaButton(Q, t); endCard(Q, t);
-  flashes(Q, t);
-  Q.save(); Q.globalCompositeOperation = "overlay"; Q.globalAlpha = 0.07; Q.drawImage(grain[fi % 4], 0, 0, W_, H_); Q.restore();
-  if (flashesNeedMain(t)) flashes(X, t);
+  if (!inEnd) promptBar(Q, t);
+  ctaButton(Q, t);
+  flashes(Q, t); lightLeaks(Q, t);
+  // whole-picture zoom-through (both layers)
+  const gz = globalZoom(t);
+  if (gz > 1.0005) for (const [cv, cx] of [[C, X], [O, Q]]) {
+    tmpX.clearRect(0, 0, W_, H_); tmpX.drawImage(cv, 0, 0); cx.clearRect(0, 0, W_, H_);
+    cx.save(); cx.translate(540, 960); cx.scale(gz, gz); cx.translate(-540, -960); cx.drawImage(tmpC, 0, 0); cx.restore();
+  }
 }
-const flashesNeedMain = () => false;
-
+// --------------------------------------------------------------- motion blur: 4 sub-frames across a 180° shutter
+const [aC, aX] = mk(W_, H_), [bC, bX] = mk(W_, H_);
+const SUBS = [-0.375, -0.125, 0.125, 0.375].map((k) => k * 0.5 / fps);
+async function renderFrame(fi) {
+  for (let k = 0; k < SUBS.length; k++) {
+    await renderAt(fi, SUBS[k]);
+    X.drawImage(O, 0, 0);                        // flatten overlay into the picture for a true average
+    if (k === 0) { aX.globalAlpha = 1; aX.clearRect(0, 0, W_, H_); } else aX.globalAlpha = 1 / (k + 1);
+    aX.drawImage(C, 0, 0);
+  }
+  aX.globalAlpha = 1;
+  X.clearRect(0, 0, W_, H_); X.drawImage(aC, 0, 0); Q.clearRect(0, 0, W_, H_);
+  Q.save(); Q.globalCompositeOperation = "overlay"; Q.globalAlpha = 0.075; Q.drawImage(grain[fi % 4], 0, 0, W_, H_); Q.restore();
+}
+window.renderFrame = renderFrame;
 window.renderAt = renderAt;
 window.SFX_CUES = CUES.sort((a, b) => a.t - b.t);
 window.stageReady = (async () => {
