@@ -1,4 +1,16 @@
-# The Lever Is Price — ORF explainer (vertical, 96 s)
+# The Lever Is Price — ORF explainer
+
+Two cuts:
+
+- **16:9** `out/the_lever_is_price_explainer_16x9.mp4`: 1920x1080, 30 fps, 95 s. New continuous script,
+  narrated with ElevenLabs **eleven_v4** (voice "Brian", one uncut take). The layout changes from shot to shot:
+  full-screen colour footage, footage with theme graphics on top (stamps, handwriting, numbers), graphics only
+  (title poster, map, charts, cards, chess king, end card) and a footage/graphics split. Captions are plain white
+  Inter, with no outline or shadow. Built from `v2/` (`v2/make2.sh`): `timeline2.py` (shots, transitions, SFX, music cut),
+  `extract2.py`, `head.js` + `scenes.js` -> `stage2.js`, `render2.js`, `mix2.py`; script in `v2/script.txt`.
+- **9:16** (first version, below).
+
+## 9:16 version (96 s)
 
 A 9:16 explainer for the Observer Research Foundation Special Report No. 321,
 *The Lever Is Price: China's New Leverage Play in Thailand* (Jaibal Naduvath, September 2026).
