@@ -1,0 +1,8 @@
+build/
+assets/stock/
+out/draft.mp4
+__pycache__/
+assets/vo/daniel.*
+assets/vo/daniel2.*
+assets/music/music2.mp3
+assets/geo/ne50.geojson
