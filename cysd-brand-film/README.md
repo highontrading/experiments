@@ -10,6 +10,8 @@ pictures bloom from black and white into colour on the word "Together".
 | --- | --- |
 | `out/cysd_brand_film.mp4` | the film: 1920x1080, 30 fps, 90 s, H.264 + AAC, narrated |
 | `out/cysd_brand_film_no_vo.mp4` | the same picture with music and SFX only (no narration) |
+| `out/cysd_brand_film_attentionlabs.mp4` | client preview: the narrated film with the Attention Labs watermark, bottom right |
+| `out/cysd_brand_film_attentionlabs_no_vo.mp4` | client preview, music and SFX only, watermarked |
 | `out/poster.jpg` | a still for thumbnails |
 | `src/index.html` | the whole film as `setTime(t)`: 13 scenes, transitions, grain, dust, shake |
 | `src/render.js` | renders frames or stills with headless Chromium (Playwright) |
