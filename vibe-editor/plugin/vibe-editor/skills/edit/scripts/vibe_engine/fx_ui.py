@@ -2187,7 +2187,7 @@ EVENTS = {
     "cursor": ev_cursor,
     "poll": ev_poll,
     "question": ev_question,
-    "sticker": ev_sticker,
+    "story_sticker": ev_sticker,
 }
 
 DOCS = {
@@ -2229,7 +2229,7 @@ DOCS = {
     "question": "Question-box sticker: coloured header 'Ask me a question' with avatar, body field with typed `text` or "
                 "a placeholder. options: title, text, placeholder, header (colour, default brand accent), position, "
                 "theme.",
-    "sticker": "Small tilted pill sticker with a drawn icon that springs in. options: style location|link|mention|"
+    "story_sticker": "Story-style tilted pill sticker with a drawn icon that springs in. options: style location|link|mention|"
                "hashtag|music|time, text, tilt (deg, default -4), size s|m|l, badge (icon colour), position (default "
                "top), x, theme light|dark.",
 }

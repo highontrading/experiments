@@ -933,7 +933,7 @@ def ev_head_stack(ctx, e):
     h, gap, pad = fs * 1.75, 10 * u, 28 * u
     avail = y - ctx.safe_top
     if n * (h + gap) > avail and avail > 0:
-        sc = max(0.62, avail / (n * (h + gap)))
+        sc = max(0.75, avail / (n * (h + gap)))
         fs, h, gap, pad = fs * sc, h * sc, gap * sc, pad * sc
     if n * (h + gap) > y - ctx.safe_top:
         y = min(ctx.safe_bottom, ctx.safe_top + n * (h + gap))
