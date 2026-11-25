@@ -7,6 +7,7 @@ import time
 import traceback
 
 from . import ai, captions, fx_text, fx_video, presets
+from .core import num  # noqa: F401
 from .core import (FPS, SR, WARNINGS, VibeError, build_segments, die, ensure_fonts, find_ws, info, load_brand,
                    load_json, probe, resolve_job, run_ff, save_json, set_ws, slug, sound_path, TimeMap, warn, ws_paths)
 from .text import Ctx, ass_header, ass_time, ev_window
@@ -37,7 +38,7 @@ SAFE_LEVELS = [
     {"filter", "ass", "frame", "pullback", "layout", "text_mask", "slice", "double_exposure"} | ai.AI_TYPES | {"__behind__", "freeze",
                                                                                                              "spotlight", "__blur__"},
     _VIDEO_ALL | ai.AI_TYPES | {"__behind__", "__blur__", "ass", "filter"},
-    "__captions_only__",
+    {"__captions_only__"},
 ]
 
 
@@ -71,7 +72,7 @@ def build_plan(ws, jd, edit, fmt, preview, force_front=None, drop_types=()):
         if t not in KNOWN:
             warn(f"Unknown effect type '{t}' — skipped. (Run `list effects`.)")
             continue
-        if t in drop_types or drop_types == "__captions_only__":
+        if t in drop_types or "__captions_only__" in drop_types:
             continue
         clean.append(e)
     events = clean
@@ -94,7 +95,7 @@ def build_plan(ws, jd, edit, fmt, preview, force_front=None, drop_types=()):
             if e.get("sfx") and typ in ASS_HANDLERS and typ not in ("checklist", "counter", "countdown", "cta", "tag", "lower_third"):
                 at = r[0] if r else ctx.t(e.get("at"), 0.0)
                 if not any(abs(s[0] - at) < 0.02 and s[1] == e["sfx"] for s in ctx.extra_sfx):
-                    ctx.extra_sfx.append((at, e["sfx"], float(e.get("sfx_volume", 0.55))))
+                    ctx.extra_sfx.append((at, e["sfx"], num(e.get("sfx_volume"), 0.55)))
         except VibeError:
             raise
         except Exception as ex:  # one broken effect must never break the video
@@ -107,7 +108,7 @@ def build_plan(ws, jd, edit, fmt, preview, force_front=None, drop_types=()):
                 traceback.print_exc()
     ctx.group = None
     ctx.behind = False
-    if "__blur__" in drop_types or drop_types == "__captions_only__":
+    if "__blur__" in drop_types or "__captions_only__" in drop_types:
         ctx.video_requests = []
     try:
         captions.build_captions(ctx, edit.get("captions", {}), hide)
@@ -174,7 +175,7 @@ def zoom_chain(G, ctx, events):
             e["_a"], e["_b"] = a_, b_
             (zooms if t == "zoom" else shakes).append(e)
             if e.get("sfx"):
-                ctx.extra_sfx.append((a_, e["sfx"], float(e.get("sfx_volume", 0.5))))
+                ctx.extra_sfx.append((a_, e["sfx"], num(e.get("sfx_volume"), 0.5)))
     if zooms or shakes:
         z, x, y = fx_video.zoom_expr(ctx, zooms, shakes)
         G.chain(f"zoompan=z='{z}':x='{x}':y='{y}':d=1:s={G.RW}x{G.RH}:fps={FPS}")
@@ -220,7 +221,7 @@ def audio_graph(G, plan, edit, audio_idx, ws, ctx):
     sfx_list = []
     for e in plan["events"]:
         if e.get("type") == "sfx":
-            sfx_list.append((ctx.t(e.get("at"), 0.0), e.get("name", "whoosh"), float(e.get("volume", 0.55))))
+            sfx_list.append((ctx.t(e.get("at"), 0.0), e.get("name", "whoosh"), num(e.get("volume"), 0.55)))
     if edit.get("auto_sfx", True):
         sfx_list += ctx.extra_sfx
     seen = set()
@@ -306,12 +307,23 @@ def render_job(a):
         fmt = "9:16"
     preview = a.preview
     t_start = time.time()
+    wd = os.path.join(jd, f".work-{os.getpid()}")  # private scratch: parallel renders never clash
+    os.makedirs(wd, exist_ok=True)
+    try:
+        return _render_levels(ws, jd, edit, fmt, preview, a, wd, t_start)
+    finally:
+        shutil.rmtree(wd, ignore_errors=True)
+
+
+def _render_levels(ws, jd, edit, fmt, preview, a, wd, t_start):
     last_err = None
     for level, drop in enumerate(SAFE_LEVELS):
         if level and last_err:
-            info(f"🛟 Retrying in safe mode (level {level}): skipping {', '.join(sorted(t for t in drop if not t.startswith('__'))) or 'advanced layers'}")
+            what = "everything except captions" if "__captions_only__" in drop else \
+                (", ".join(sorted(t for t in drop if not t.startswith("__"))) or "advanced layers")
+            info(f"🛟 Retrying in safe mode (level {level}): skipping {what}")
         try:
-            out = _render_once(ws, jd, edit, fmt, preview, drop, a)
+            out = _render_once(ws, jd, edit, fmt, preview, drop, a, wd)
             if level:
                 warn(f"Rendered in safe mode — some advanced effects were skipped ({last_err.splitlines()[0][:160]}).")
             info(f"✅ Done in {time.time() - t_start:.0f}s → {out}")
@@ -320,14 +332,18 @@ def render_job(a):
             return out
         except VibeError as ex:
             last_err = str(ex)
-            if "failed" not in last_err:
+            if "failed" not in last_err and "not found" not in last_err.lower():
                 raise
             if os.environ.get("VIBE_DEBUG"):
                 print(last_err)
+        except Exception as ex:  # a bad option deep in an effect must never stop the video
+            last_err = f"{type(ex).__name__}: {ex}"
+            if os.environ.get("VIBE_DEBUG"):
+                traceback.print_exc()
     die("Render failed even in safe mode:\n" + (last_err or ""))
 
 
-def _render_once(ws, jd, edit, fmt, preview, drop, a):
+def _render_once(ws, jd, edit, fmt, preview, drop, a, wd):
     plan = build_plan(ws, jd, edit, fmt, preview, drop_types=drop)
     ctx = plan["ctx"]
     tm = plan["tm"]
@@ -336,12 +352,12 @@ def _render_once(ws, jd, edit, fmt, preview, drop, a):
     if need_ai and not ai.available():
         warn("AI cut-out needs onnxruntime (`python3 vibe.py install`). Text-behind and cut-out effects were shown in front / skipped.")
         need_ai = False
-        drop = set(drop) | ai.AI_TYPES | {"__behind__"}
+        drop = set(drop) | set(ai.AI_TYPES) | {"__behind__"}
         plan = build_plan(ws, jd, edit, fmt, preview, drop_types=drop)
         ctx = plan["ctx"]
     if need_ai:
-        base_path = os.path.join(jd, "base_preview.mp4" if preview else "base.mp4")
-        G0 = fx_video.Graph(plan["RW"], plan["RH"], tm.duration, jd, preview)
+        base_path = os.path.join(wd, "base.mp4")
+        G0 = fx_video.Graph(plan["RW"], plan["RH"], tm.duration, wd, preview)
         sidx = G0.add_input(["-i", plan["job"]["source"]])
         base_chain(G0, plan, sidx, edit)
         zoom_chain(G0, plan["ctx"], plan["events"])
@@ -349,9 +365,9 @@ def _render_once(ws, jd, edit, fmt, preview, drop, a):
         info("🎞  Preparing base video for AI effects…")
         run_ff(G0.inputs + ["-filter_complex", ";".join(G0.lines), "-map", "[vout]", "-an", "-c:v", "libx264",
                             "-preset", "ultrafast" if preview else "veryfast", "-crf", "16" if preview else "10",
-                            "-r", str(FPS), "-pix_fmt", "yuv420p", "-t", f"{tm.duration:.3f}", base_path], cwd=jd,
+                            "-r", str(FPS), "-pix_fmt", "yuv420p", "-t", f"{tm.duration:.3f}", base_path], cwd=wd,
                desc="base render")
-        mask_path = os.path.join(jd, "mask_preview.mkv" if preview else "mask.mkv")
+        mask_path = os.path.join(wd, "mask.mkv")
         bg = behind_groups(ctx)
         wins = ai.ai_windows(ctx, plan["events"], bg)
         samples, msize = ai.compute_mask(base_path, wins, tm.duration, plan["RW"], plan["RH"], mask_path, preview)
@@ -372,18 +388,18 @@ def _render_once(ws, jd, edit, fmt, preview, drop, a):
                  f"they were hidden behind you.")
             plan = build_plan(ws, jd, edit, fmt, preview, force_front=force, drop_types=drop)
             ctx = plan["ctx"]
-    write_ass(ctx, os.path.join(jd, "overlay.ass"), behind=False)
-    nb = write_ass(ctx, os.path.join(jd, "behind.ass"), behind=True)
+    write_ass(ctx, os.path.join(wd, "overlay.ass"), behind=False)
+    nb = write_ass(ctx, os.path.join(wd, "behind.ass"), behind=True)
     if not nb or not mask_path:
         try:
-            os.remove(os.path.join(jd, "behind.ass"))
+            os.remove(os.path.join(wd, "behind.ass"))
         except OSError:
             pass
         if nb and not mask_path:
             # no AI available: draw behind-lines in front instead
             ctx.lines = [l[:6] + (False,) for l in ctx.lines]
-            write_ass(ctx, os.path.join(jd, "overlay.ass"), behind=False)
-    G, n_sfx = build_graph(plan, edit, ws, jd, preview, drop, base_path, mask_path)
+            write_ass(ctx, os.path.join(wd, "overlay.ass"), behind=False)
+    G, n_sfx = build_graph(plan, edit, ws, wd, preview, drop, base_path, mask_path)
     job = plan["job"]
     out_name = slug((edit.get("output") or {}).get("name") or job["name"])
     suffix = "" if fmt == "9:16" else "-" + fmt.replace(":", "x")
@@ -401,7 +417,7 @@ def _render_once(ws, jd, edit, fmt, preview, drop, a):
          f"{len(plan['events'])} effects, {n_sfx} sounds…")
     run_ff(G.inputs + ["-filter_complex", ";".join(G.lines), "-map", "[vout]", "-map", "[aout]"] + venc +
            ["-r", str(FPS), "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart",
-            "-t", f"{tm.duration:.3f}", out], cwd=jd, desc="render")
+            "-t", f"{tm.duration:.3f}", out], cwd=wd, desc="render")
     save_json(os.path.join(jd, "last_render.json"), {
         "file": out, "duration": tm.duration, "preview": preview, "format": fmt,
         "events": [{"type": e.get("type"), "at": round(ctx.t(e.get("at"), 0.0), 2)} for e in plan["events"]],

@@ -57,6 +57,21 @@ def save_json(path, data):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 
+def num(v, default=0.0, lo=None, hi=None):
+    """Forgiving number parsing for user options: bad values fall back to the default."""
+    try:
+        x = float(v)
+        if x != x or x in (float("inf"), float("-inf")):
+            raise ValueError
+    except (TypeError, ValueError, OverflowError):
+        x = float(default)
+    if lo is not None:
+        x = max(lo, x)
+    if hi is not None:
+        x = min(hi, x)
+    return x
+
+
 def slug(s):
     s = re.sub(r"[^a-zA-Z0-9]+", "-", str(s)).strip("-").lower()
     return s or "reel"
@@ -636,7 +651,9 @@ def resolve_job(a):
 
 
 def find_media(ws, rel, kind, required=False):
-    if not rel:
+    if not rel or not isinstance(rel, str):
+        if rel not in (None, "", False):
+            warn(f"Expected a file name for {kind}, got {rel!r} — that effect was skipped.")
         return None
     for base in ("", ws, os.path.join(ws, kind), os.path.join(ws, "brand"), os.path.join(ws, "inbox"),
                  os.path.join(ws, "broll"), os.path.join(ws, "references")):

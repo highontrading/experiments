@@ -2,7 +2,7 @@
 import random
 import re
 
-from .core import FPS, resolve_font
+from .core import num, FPS, resolve_font
 from .text import (a_tag, c_tag, check_path, enter_tag, esc, ev_window, exit_tag, path_poly, rect, rrect, sizes_map,
                    theme_color, ypos, xpos)
 
@@ -33,17 +33,17 @@ def ev_title(ctx, e, size_default=118, pos_default="top"):
     upper = e.get("uppercase", style not in ("serif", "sketch", "glass") and not font.startswith(("instrument", "caveat")))
     if upper:
         text = text.upper()
-    max_w = ctx.W * float(e.get("width", 0.86))
-    lines, fs = ctx.wrap(text, font, size, max_w, max_lines=int(e.get("max_lines", 4)))
+    max_w = ctx.W * num(e.get("width"), 0.86)
+    lines, fs = ctx.wrap(text, font, size, max_w, max_lines=int(num(e.get("max_lines"), 4)))
     x = xpos(ctx, e.get("x"), 0.5)
     y = ypos(ctx, e.get("position", e.get("y")), pos_default)
     box = style == "highlight" or bool(e.get("box"))
     st = ctx.style(font, fs, color, e.get("outline_color", "#000000"),
-                   round((18 if box else float(e.get("outline", 0 if style in ("serif", "glass", "press") else 6))) * u),
-                   round(float(e.get("shadow", 0 if style in ("glass",) else 4)) * u),
+                   round((18 if box else num(e.get("outline"), 0 if style in ("serif", "glass", "press") else 6, 0, 40)) * u),
+                   round(num(e.get("shadow"), 0 if style in ("glass",) else 4, 0, 40) * u),
                    box=box, back=accent if box else "#000000", back_alpha=0)
     dur_ms = int((b - a) * 1000)
-    lh = ctx.size_px(font, fs) * float(e.get("line_height", 1.0)) * (1.12 / ctx.font(font).get("norm", 1.0) * ctx.font(font).get("norm", 1.0))
+    lh = ctx.size_px(font, fs) * num(e.get("line_height"), 1.0) * (1.12 / ctx.font(font).get("norm", 1.0) * ctx.font(font).get("norm", 1.0))
     lh = fs * 1.12
     exit_k = e.get("exit", "fade")
     ex = exit_tag(exit_k if style != "blow" else "none", dur_ms)
@@ -405,7 +405,7 @@ def _fix_outline(ctx, e):
     text = str(e.get("text", ""))
     if e.get("uppercase", True):
         text = text.upper()
-    lines, fs = ctx.wrap(text, font, size, ctx.W * float(e.get("width", 0.86)))
+    lines, fs = ctx.wrap(text, font, size, ctx.W * num(e.get("width"), 0.86))
     x = xpos(ctx, e.get("x"), 0.5)
     y = ypos(ctx, e.get("position", e.get("y")), "top")
     st = ctx.style(font, fs, color, color, round(3 * u), 0)
@@ -444,7 +444,7 @@ def ev_card(ctx, e):
     accent = ctx.accent
     font = resolve_font(e.get("font") or th.get("font") or ctx.fkey("title"))
     body_font = ctx.fkey("body")
-    w = ctx.W * float(e.get("width", 0.82))
+    w = ctx.W * num(e.get("width"), 0.82)
     pad = 52 * u
     text = str(e.get("text", ""))
     if e.get("style") == "quote":
@@ -498,7 +498,7 @@ def ev_checklist(ctx, e):
     a, b = ev_window(ctx, e, max(3.0, 1.2 * len(items)))
     u = ctx.u
     dark = e.get("style") == "dark"
-    w = ctx.W * float(e.get("width", 0.84))
+    w = ctx.W * num(e.get("width"), 0.84)
     pad = 46 * u
     fs = sizes_map(e.get("size"), 64) * u
     font = ctx.fkey("title")
@@ -582,7 +582,7 @@ def ev_counter(ctx, e):
     x = xpos(ctx, e.get("x"), 0.5)
     y = ctx.clamp_y(ypos(ctx, e.get("position"), "upper"), size * 1.6)
     st = ctx.style(font, size, color, "#000000", round(7 * u), round(5 * u))
-    run = min(float(e.get("run", (b - a) * 0.7)), b - a)
+    run = min(num(e.get("run"), (b - a) * 0.7, 0.1), b - a)
     n = max(2, int(run * FPS))
     shift = ctx.cap_shift(font, size)
     widest = ctx.text_w(pre + fmt_num(max(abs(frm), abs(to)), dec, e.get("indian", "₹" in pre)) + suf, font, size)
@@ -670,7 +670,7 @@ def ev_progress(ctx, e):
     u = ctx.u
     a = ctx.t(e.get("at"), 0.0)
     b = ctx.t(e.get("end"), ctx.dur) if e.get("end") is not None else ctx.dur
-    hgt = float(e.get("height", 12)) * u
+    hgt = num(e.get("height"), 12) * u
     y = 0 if e.get("position", "top") == "top" else ctx.H - hgt
     ms = int((b - a) * 1000)
     ctx.shape(a, b, rect(ctx.W, hgt), "#FFFFFF", 0xB0, f"\\an7\\pos(0,{y:.0f})", 20)
@@ -681,14 +681,14 @@ def ev_progress(ctx, e):
 
 def ev_flash(ctx, e):
     a = ctx.t(e.get("at"), 0.0)
-    d = float(e.get("dur", 0.3))
+    d = num(e.get("dur"), 0.3)
     ctx.shape(a, a + d, rect(ctx.W, ctx.H), e.get("color", "#FFFFFF"), 0, f"\\an7\\pos(0,0)\\fad(0,{int(d * 1000)})", 30)
     return None
 
 
 def ev_letterbox(ctx, e):
     a, b = ev_window(ctx, e, 3.0)
-    bh = ctx.H * float(e.get("size", 0.1))
+    bh = ctx.H * num(e.get("size"), 0.1)
     ctx.shape(a, b, rect(ctx.W, bh), "#000000", 0, f"\\an7\\move(0,{-bh:.0f},0,0,0,300)\\fad(0,250)", 25)
     ctx.shape(a, b, rect(ctx.W, bh), "#000000", 0, f"\\an7\\move(0,{ctx.H:.0f},0,{ctx.H - bh:.0f},0,300)\\fad(0,250)", 25)
     return None
@@ -696,7 +696,7 @@ def ev_letterbox(ctx, e):
 
 def ev_countdown(ctx, e):
     try:
-        n = max(1, min(10, int(float(e.get("from", 3)))))
+        n = max(1, min(10, int(num(e.get("from"), 3))))
     except (TypeError, ValueError, OverflowError):
         n = 3
     a, b = ev_window(ctx, e, float(n))

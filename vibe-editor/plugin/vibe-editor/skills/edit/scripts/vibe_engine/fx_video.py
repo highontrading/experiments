@@ -4,6 +4,7 @@ import os
 import re
 import subprocess
 
+from .core import num
 from .core import FPS, find_media, looks_reg, run_ff, warn, ffmpeg, resolve_font
 from .text import (c_tag, circle, enter_tag, esc, ev_window, exit_tag, polygon, rect, rrect, sizes_map, xpos, ypos)
 
@@ -195,7 +196,7 @@ def zoom_expr(ctx, zooms, shake):
         a, b = z["_a"], z["_b"]
         st = z.get("style", "punch")
         default_amt = {"punch": 1.25, "through": 2.2, "push": 1.15, "slow": 1.12, "pulse": 1.18, "pull": 1.25}.get(st, 1.2)
-        amt = float(z.get("amount", default_amt)) - 1.0
+        amt = num(z.get("amount"), default_amt) - 1.0
         if st == "punch":
             ri, ro = 0.12, 0.08
         elif st in ("push", "slow"):
@@ -222,8 +223,8 @@ def zoom_expr(ctx, zooms, shake):
         terms.append(f"0.06*between(in/30,{s['_a']:.3f},{s['_b']:.3f})")
     z = "1+" + "+".join(terms) if terms else "1"
     fx, fy = (focus or [0.5, 0.42])
-    sx = "+".join(f"{float(s.get('amount', 14)) * ctx.u:.1f}*sin(in*2.1)*between(in/30,{s['_a']:.3f},{s['_b']:.3f})" for s in shake) or "0"
-    sy = "+".join(f"{float(s.get('amount', 14)) * ctx.u:.1f}*cos(in*2.7)*between(in/30,{s['_a']:.3f},{s['_b']:.3f})" for s in shake) or "0"
+    sx = "+".join(f"{num(s.get("amount"), 14) * ctx.u:.1f}*sin(in*2.1)*between(in/30,{s['_a']:.3f},{s['_b']:.3f})" for s in shake) or "0"
+    sy = "+".join(f"{num(s.get("amount"), 14) * ctx.u:.1f}*cos(in*2.7)*between(in/30,{s['_a']:.3f},{s['_b']:.3f})" for s in shake) or "0"
     x = f"max(0,min(iw-iw/zoom,(iw-iw/zoom)*{fx}+({sx})))"
     y = f"max(0,min(ih-ih/zoom,(ih-ih/zoom)*{fy}+({sy})))"
     return z, x, y
@@ -258,7 +259,7 @@ def window_filters(G, ctx, events):
         en = f"enable='between(t,{a_:.3f},{b_:.3f})'"
         pv = 0.5 if G.preview else 1.0
         if typ == "glitch":
-            s = int(float(e.get("amount", 18)) * ctx.u * pv)
+            s = int(num(e.get("amount"), 18) * ctx.u * pv)
             chain += [f"rgbashift=rh={s}:bh=-{s}:gv={max(1, s // 2)}:{en}", f"noise=alls=30:allf=t:{en}"]
         elif typ == "bw":
             chain.append(f"hue=s=0:{en}")
@@ -267,16 +268,16 @@ def window_filters(G, ctx, events):
         elif typ == "invert":
             chain.append(f"negate=enable='between(t,{a_:.3f},{b_:.3f})'")
         elif typ == "pixelate":
-            p = max(2, int(float(e.get("amount", 24)) * pv))
+            p = max(2, int(num(e.get("amount"), 24) * pv))
             chain.append(f"scale=iw/{p}:ih/{p}:flags=neighbor:{en},scale={G.RW}:{G.RH}:flags=neighbor")
         elif typ == "mirror":
             chain.append(f"hflip=enable='between(t,{a_:.3f},{b_:.3f})'")
         elif typ == "vhs":
             chain += [f"rgbashift=rh=4:bh=-4:{en}", f"noise=alls=18:allf=t:{en}", f"eq=saturation=0.8:contrast=1.1:{en}"]
         elif typ == "blur":
-            chain.append(f"gblur=sigma={float(e.get('amount', 18)) * pv:.1f}:{en}")
+            chain.append(f"gblur=sigma={num(e.get("amount"), 18) * pv:.1f}:{en}")
         elif typ == "darken":
-            chain.append(f"eq=brightness=-{float(e.get('amount', 0.25)):.2f}:{en}")
+            chain.append(f"eq=brightness=-{num(e.get("amount"), 0.25):.2f}:{en}")
         elif typ == "blackout":
             chain.append(f"drawbox=x=0:y=0:w=iw:h=ih:color=black:t=fill:{en}")
         elif typ == "impact":
@@ -286,7 +287,7 @@ def window_filters(G, ctx, events):
         elif typ == "rack_focus":
             n = 6
             direction = e.get("direction", "in")
-            peak = float(e.get("amount", 24)) * pv
+            peak = num(e.get("amount"), 24) * pv
             d = (b_ - a_) / n
             for i in range(n):
                 sig = peak * (1 - i / n) if direction == "in" else peak * ((i + 1) / n)
@@ -317,8 +318,8 @@ def freeze_frames(G, ctx, events):
             continue
         a_, b_ = ev_window(ctx, e, 1.2)
         try:
-            tilt = float(e.get("tilt", 0))
-            scale = float(e.get("scale", 1.0))
+            tilt = num(e.get("tilt"), 0)
+            scale = num(e.get("scale"), 1.0)
         except (TypeError, ValueError):
             tilt, scale = 0.0, 1.0
         scale = min(1.0, max(0.4, scale))
@@ -371,12 +372,12 @@ def spotlight(G, ctx, events):
         if e.get("type") != "spotlight":
             continue
         a_, b_ = ev_window(ctx, e, 2.0)
-        cx = float(e.get("x", 0.5)) * G.RW
-        cy = float(e.get("y", 0.40)) * G.RH
-        rad = float(e.get("size", 0.36)) * G.RW
+        cx = num(e.get("x"), 0.5) * G.RW
+        cy = num(e.get("y"), 0.40) * G.RH
+        rad = num(e.get("size"), 0.36) * G.RW
         mpath = os.path.join(G.cwd, f"spot_{int(cx)}_{int(cy)}_{int(rad)}_{G.RW}.png")
         png_mask(mpath, G.RW, G.RH, "ellipse", cx=cx, cy=cy, rx=rad, ry=rad * 1.25, feather=0.35,
-                 darkness=float(e.get("darkness", 0.78)))
+                 darkness=num(e.get("darkness"), 0.78))
         idx = G.add_input(["-loop", "1", "-t", f"{b_ - a_ + 0.5:.3f}", "-i", mpath])
         sp = G.lab("sp")
         G.push(f"[{idx}:v]format=rgba,fade=t=in:st=0:d=0.3:alpha=1,fade=t=out:st={max(0, b_ - a_ - 0.3):.3f}:d=0.3:alpha=1,"
@@ -398,7 +399,7 @@ def overlays(G, ctx, events, ws, look):
             if is_img:
                 idx = G.add_input(["-loop", "1", "-t", f"{dur + 0.5:.3f}", "-i", p])
             else:
-                idx = G.add_input(["-ss", f"{float(e.get('from', 0)):.3f}", "-t", f"{dur + 0.5:.3f}", "-i", p])
+                idx = G.add_input(["-ss", f"{num(e.get("from"), 0):.3f}", "-t", f"{dur + 0.5:.3f}", "-i", p])
             mode = e.get("mode", "full")
             RW, RH = G.RW, G.RH
             if mode == "full":
@@ -408,9 +409,9 @@ def overlays(G, ctx, events, ws, look):
                 sc = f"scale={RW}:{RH // 2}:force_original_aspect_ratio=increase,crop={RW}:{RH // 2},setsar=1"
                 pos = ("0", "0" if mode == "split-top" else str(RH // 2))
             else:
-                pw = int(RW * float(e.get("size", 0.86))) // 2 * 2
+                pw = int(RW * num(e.get("size"), 0.86)) // 2 * 2
                 sc = f"scale={pw}:-2,setsar=1"
-                pos = ("(W-w)/2", f"{RH * float(e.get('y', 0.12)):.0f}")
+                pos = ("(W-w)/2", f"{RH * num(e.get("y"), 0.12):.0f}")
             kb = ""
             if is_img and e.get("kenburns", True) and mode == "full":
                 kb = f",zoompan=z='1+0.0015*on':d=1:s={RW}x{RH}:fps={FPS}"
@@ -433,7 +434,7 @@ def overlays(G, ctx, events, ws, look):
                 idx = G.add_input(["-stream_loop", "-1", "-t", f"{b_ - a_ + 0.5:.3f}", "-i", p])
             else:
                 idx = G.add_input(["-loop", "1", "-t", f"{b_ - a_ + 0.5:.3f}", "-i", p])
-            iw = int(G.RW * float(e.get("size", 0.22))) // 2 * 2
+            iw = int(G.RW * num(e.get("size"), 0.22)) // 2 * 2
             RW, RH = G.RW, G.RH
             posmap = {"top-right": (f"W-w-{RW * 0.05:.0f}", f"{RH * 0.06:.0f}"), "top-left": (f"{RW * 0.05:.0f}", f"{RH * 0.06:.0f}"),
                       "center": ("(W-w)/2", "(H-h)/2"), "bottom-right": (f"W-w-{RW * 0.05:.0f}", f"H-h-{RH * 0.16:.0f}"),
@@ -453,7 +454,7 @@ def overlays(G, ctx, events, ws, look):
             if not p:
                 continue
             img = p.lower().endswith((".png", ".jpg", ".jpeg", ".webp"))
-            idx = G.add_input((["-loop", "1"] if img else ["-ss", f"{float(e.get('from', 0)):.3f}"]) +
+            idx = G.add_input((["-loop", "1"] if img else ["-ss", f"{num(e.get("from"), 0):.3f}"]) +
                               ["-t", f"{b_ - a_ + 0.5:.3f}", "-i", p])
             keep, src = G.split(2, win=(a_, b_))
             d = G.lab("de")
@@ -514,7 +515,7 @@ def frames_layouts(G, ctx, events, ws):
             tpl = FRAME_TEMPLATES.get(e.get("style", "window"), FRAME_TEMPLATES["window"])
             x, y, w, h = _win_px(G, tpl, e)
             s_end = w / G.RW
-            ramp = float(e.get("ramp", 0.55))
+            ramp = num(e.get("ramp"), 0.55)
             keep, src = G.split(2, win=(a_, b_))
             canvas = G.canvas(e.get("canvas", tpl["canvas"]), a_, b_)
             p = f"min(1,max(0,(t-{a_:.3f})/{ramp:.3f}))"
@@ -551,7 +552,7 @@ def frames_layouts(G, ctx, events, ws):
                            f"setpts=PTS-STARTPTS+{a_:.3f}/TB[{l_}o]")
                     comp = G.overlay(comp, f"{l_}o", "0", str(0 if style == "split-top" else vh))
             elif style == "pip":
-                pw = int(RW * float(e.get("size", 0.38))) // 2 * 2
+                pw = int(RW * num(e.get("size"), 0.38)) // 2 * 2
                 ph = int(pw * RH / RW) // 2 * 2
                 base = canvas
                 if other is not None:
@@ -569,7 +570,7 @@ def frames_layouts(G, ctx, events, ws):
                 py = f"H-h-{RH * 0.16:.0f}" if "bottom" in corner else f"{RH * 0.08:.0f}"
                 comp = G.overlay(base, f"{l_}a", px, py)
             else:  # card: video in a rounded card on the canvas
-                cw = int(RW * float(e.get("size", 0.8))) // 2 * 2
+                cw = int(RW * num(e.get("size"), 0.8)) // 2 * 2
                 ch = int(cw * RH / RW * 0.62) // 2 * 2
                 mpath = os.path.join(G.cwd, f"mask_rrect_{cw}x{ch}.png")
                 if not os.path.exists(mpath):
@@ -577,7 +578,7 @@ def frames_layouts(G, ctx, events, ws):
                 idx = G.add_input(["-loop", "1", "-i", mpath])
                 G.push(f"[{src}]scale={cw}:{ch}:force_original_aspect_ratio=increase,crop={cw}:{ch},format=yuva420p[{l_}v];"
                        f"[{idx}:v]format=gray,scale={cw}:{ch}[{l_}m];[{l_}v][{l_}m]alphamerge[{l_}a]")
-                comp = G.overlay(canvas, f"{l_}a", "(W-w)/2", f"{RH * float(e.get('y', 0.40)):.0f}-h/2")
+                comp = G.overlay(canvas, f"{l_}a", "(W-w)/2", f"{RH * num(e.get("y"), 0.40):.0f}-h/2")
             G.cur = G.overlay(keep, comp, a=a_, b=b_)
         elif typ == "text_mask":
             a_, b_ = ev_window(ctx, e, 2.2)
@@ -596,12 +597,12 @@ def frames_layouts(G, ctx, events, ws):
             a_, b_ = ev_window(ctx, e, 0.6)
             mpath = os.path.join(G.cwd, f"mask_half_{G.RW}x{G.RH}.png")
             if not os.path.exists(mpath):
-                png_mask(mpath, G.RW, G.RH, "halfplane", angle=float(e.get("angle", -0.35)))
+                png_mask(mpath, G.RW, G.RH, "halfplane", angle=num(e.get("angle"), -0.35))
             idx = G.add_input(["-loop", "1", "-i", mpath])
             keep, src = G.split(2, win=(a_, b_))
             s_ = G.lab("sl")
             G.push(f"[{src}]format=yuva420p[{s_}v];[{idx}:v]format=gray,scale={G.RW}:{G.RH}[{s_}m];[{s_}v][{s_}m]alphamerge[{s_}]")
-            dist = float(e.get("amount", 60)) * ctx.u * G.RW / ctx.W
+            dist = num(e.get("amount"), 60) * ctx.u * G.RW / ctx.W
             prog = f"min(1,max(0,(t-{a_:.3f})/0.18))*min(1,max(0,({b_:.3f}-t)/0.18))"
             s_ = G.pad_start(s_, a_)
             new = G.lab("o")
@@ -616,12 +617,12 @@ def _write_text_mask(ctx, e, a, b, path):
     font = resolve_font(e.get("font", "dm-serif"))
     text = str(e.get("text", "dive."))
     size = sizes_map(e.get("size"), 520) * u
-    zoom = float(e.get("zoom", 1.2))
+    zoom = num(e.get("zoom"), 1.2)
     lines, fs = m.wrap(text, font, size, ctx.W * 0.92 / max(1.0, zoom * 0.9), max_lines=2)
     st = m.style(font, fs, "#FFFFFF", "#FFFFFF", 0, 0)
     dur_ms = int((b - a) * 1000)
     lh = fs * 1.0
-    y = ctx.H * float(e.get("y", 0.47))
+    y = ctx.H * num(e.get("y"), 0.47)
     y0 = y - lh * (len(lines) - 1) / 2
     for i, ln in enumerate(lines):
         m.add(a, b, st, "{" + f"\\an5\\pos({ctx.W / 2:.0f},{y0 + i * lh + m.cap_shift(font, fs):.0f})\\fscx90\\fscy90"
@@ -650,7 +651,7 @@ def ass_freeze(ctx, e):
         h = fs * 1.7
         cx = ctx.clamp_x(xpos(ctx, e.get("x"), 0.5), tw)
         cy = ctx.clamp_y(ypos(ctx, e.get("position"), "upper"), h)
-        rot = float(e.get("label_tilt", -4))
+        rot = num(e.get("label_tilt"), -4)
         tag = enter_tag("stamp", cx, cy, u) + f"\\frz{rot}" + exit_tag("fade", int((b - a) * 1000))
         ctx.shape(a, b, rrect(tw, h, 10 * u), e.get("label_color", "#FFFFFF"), 0, tag, 26)
         st = ctx.style(font, fs, e.get("label_text", "#161616"), "#000000", 0, 0)
@@ -804,7 +805,7 @@ def ass_slice(ctx, e):
     a, b = ev_window(ctx, e, 0.6)
     u = ctx.u
     import math
-    ang = float(e.get("angle", -0.35))
+    ang = num(e.get("angle"), -0.35)
     L = math.hypot(ctx.W, ctx.H)
     cx, cy = ctx.W / 2, ctx.H / 2
     dx, dy = math.cos(ang) * L / 2, -math.sin(ang) * L / 2
@@ -841,7 +842,7 @@ def ass_pullback(ctx, e):
     ee = dict(e)
     ee["style"] = e.get("style", "window")
     if ee["style"] in ("window", "phone"):
-        sub_e = dict(ee, at=a + float(e.get("ramp", 0.55)), dur=max(0.3, b - a - float(e.get("ramp", 0.55))))
+        sub_e = dict(ee, at=a + num(e.get("ramp"), 0.55), dur=max(0.3, b - a - num(e.get("ramp"), 0.55)))
         sub_e.pop("until", None)
         ass_frame(ctx, sub_e)
     _ = tpl

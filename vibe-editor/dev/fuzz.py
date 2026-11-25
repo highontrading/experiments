@@ -18,7 +18,7 @@ from vibe_engine import render, core  # noqa: E402
 WS, JOB = sys.argv[1], sys.argv[2]
 N = int(sys.argv[3]) if len(sys.argv) > 3 else 40
 NR = int(sys.argv[4]) if len(sys.argv) > 4 else 2
-rng = random.Random(42)
+rng = random.Random(int(os.environ.get("FUZZ_SEED", 42)))
 TYPES = sorted(render.KNOWN - {"preset"}) + sorted(core.lib("presets.json"))
 WEIRD = [None, "", "???", -5, 0, 1e9, "nonsense phrase xyz", [], {}, True, "0:03", "-2", 3.3, "here's the thing"]
 TEXTS = ["Hi", "This is a deliberately very long piece of text that should wrap and shrink without ever going off screen at all",

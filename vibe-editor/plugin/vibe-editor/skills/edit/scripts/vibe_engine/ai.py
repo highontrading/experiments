@@ -4,6 +4,7 @@ import subprocess
 import time
 import urllib.request
 
+from .core import num
 from .core import FPS, find_media, ffmpeg, info, user_cache, warn, die
 from .fx_video import png_mask
 from .text import ev_window
@@ -230,7 +231,7 @@ def apply_ai(G, ctx, events, pool, ws):
         elif typ == "outline":
             keep = G.cur
             m1, m2 = pool.get((a, b)), pool.get((a, b))
-            d = _dilate(G, m1, float(e.get("width", 7)) * u * sx)
+            d = _dilate(G, m1, num(e.get("width"), 7) * u * sx)
             ring = G.lab("rg")
             G.push(f"[{d}][{m2}]blend=all_mode=subtract[{ring}]")
             solid = _solid(G, e.get("color", "#FFFFFF"), ring, a, b)
@@ -249,12 +250,12 @@ def apply_ai(G, ctx, events, pool, ws):
                 vlab, m1, m2 = (freeze_branch(G, src, a, b, True), freeze_branch(G, m1, a, b, True),
                                 freeze_branch(G, m2, a, b, True))
             person = _rgba_from(G, vlab, m1)
-            d = _dilate(G, m2, float(e.get("outline", 14)) * u * sx)
+            d = _dilate(G, m2, num(e.get("outline"), 14) * u * sx)
             white = _solid(G, e.get("outline_color", "#FFFFFF"), d, a, b)
             st = G.lab("stk")
             G.push(f"[{white}][{person}]overlay=format=auto[{st}]")
-            sc = float(e.get("scale", 0.86))
-            tilt = float(e.get("tilt", -4))
+            sc = num(e.get("scale"), 0.86)
+            tilt = num(e.get("tilt"), -4)
             sw, sh = int(G.RW * sc) // 2 * 2, int(G.RH * sc) // 2 * 2
             st2 = G.lab("stk")
             G.push(f"[{st}]scale={sw}:{sh},rotate={tilt}*PI/180:c=none:ow=rotw({tilt}*PI/180):oh=roth({tilt}*PI/180)[{st2}]")
@@ -262,20 +263,20 @@ def apply_ai(G, ctx, events, pool, ws):
             shadow = G.lab("sh")
             G.push(f"[{st2}]split[{st2}a][{st2}b];[{st2}b]colorchannelmixer=rr=0:gg=0:bb=0:aa=0.35,gblur=sigma=14[{shadow}]")
             comp = G.overlay(bg, shadow, f"(W-w)/2+{14 * u * sx:.0f}", f"(H-h)/2+{30 * u * sx:.0f}")
-            comp = G.overlay(comp, f"{st2}a", "(W-w)/2", f"(H-h)/2+{float(e.get('y_offset', 0.04)) * G.RH:.0f}")
+            comp = G.overlay(comp, f"{st2}a", "(W-w)/2", f"(H-h)/2+{num(e.get("y_offset"), 0.04) * G.RH:.0f}")
             G.cur = G.overlay(keep, comp, a=a, b=b)
         elif typ == "clone":
             keep, src = G.split(2, win=(a, b))
             try:
-                count = max(1, min(6, int(float(e.get("count", 4)))))
+                count = max(1, min(6, int(num(e.get("count"), 4))))
             except (TypeError, ValueError):
                 count = 4
             person = _rgba_from(G, src, pool.get((a, b)))
             labs = [G.lab("cl") for _ in range(count + 1)]
             G.push(f"[{person}]split={count + 1}" + "".join(f"[{l}]" for l in labs))
             cur = keep
-            sc = float(e.get("scale", 0.62))
-            spread = float(e.get("spread", 0.26))
+            sc = num(e.get("scale"), 0.62)
+            spread = num(e.get("spread"), 0.26)
             offsets = []
             for i in range(count):
                 side = -1 if i % 2 == 0 else 1
@@ -288,13 +289,13 @@ def apply_ai(G, ctx, events, pool, ws):
                 delay = 0.08 * i
                 G.push(f"[{labs[i]}]scale={cw}:{ch},format=yuva420p,colorchannelmixer=aa=0.95[{c2}]")
                 x = f"(W-w)/2+{off * G.RW:.0f}"
-                y = f"{G.RH * float(e.get('y', 0.06)):.0f}+(H-h)*0.5-{G.RH * 0.06:.0f}"
+                y = f"{G.RH * num(e.get("y"), 0.06):.0f}+(H-h)*0.5-{G.RH * 0.06:.0f}"
                 cur = G.overlay(cur, c2, x, y, a + delay, b, pad_at=a)
             G.cur = G.overlay(cur, labs[count], "0", "0", a, b)
         elif typ == "dolly":
             keep, src, zsrc = G.split(3, win=(a, b))
             try:
-                amt = min(1.0, max(0.05, float(e.get("amount", 1.35)) - 1))
+                amt = min(1.0, max(0.05, num(e.get("amount"), 1.35) - 1))
             except (TypeError, ValueError):
                 amt = 0.35
             p = f"min(1,max(0,(in/{FPS})/{max(0.2, b - a):.3f}))"
@@ -307,12 +308,12 @@ def apply_ai(G, ctx, events, pool, ws):
         elif typ == "frame_break":
             keep, src = G.split(2, win=(a, b))
             try:
-                s = min(0.95, max(0.5, float(e.get("scale", 0.80))))
+                s = min(0.95, max(0.5, num(e.get("scale"), 0.80)))
             except (TypeError, ValueError):
                 s = 0.8
             sw, sh = int(G.RW * s) // 2 * 2, int(G.RH * s) // 2 * 2
             X, Y = (G.RW - sw) // 2, int(G.RH * 0.12)
-            fx0, fy0 = X + int(sw * 0.07), Y + int(sh * float(e.get('frame_top', 0.40)))
+            fx0, fy0 = X + int(sw * 0.07), Y + int(sh * num(e.get("frame_top"), 0.40))
             fw, fh = int(sw * 0.86) // 2 * 2, int(sh * 0.56) // 2 * 2
             sc = G.lab("fb")
             G.push(f"[{src}]scale={sw}:{sh}[{sc}];[{sc}]split[{sc}a][{sc}b]")
