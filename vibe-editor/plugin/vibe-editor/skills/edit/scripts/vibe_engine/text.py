@@ -7,7 +7,15 @@ from .core import fonts_reg, resolve_font, norm_word, info, warn
 # --------------------------------------------------------------------------- colours / time
 
 
+NAMED_COLORS = {"white": "FFFFFF", "black": "000000", "red": "FF3B30", "green": "34C759", "blue": "0A84FF",
+                "yellow": "FFD400", "orange": "FF9500", "pink": "FF2D78", "purple": "8B5CF6", "gray": "8A8A8E",
+                "grey": "8A8A8E", "cream": "F6F4EF", "gold": "F2C66D", "teal": "14B8A6", "navy": "1E3A8A"}
+
+
 def _hex(h):
+    if not isinstance(h, str):
+        h = "#FFFFFF"
+    h = NAMED_COLORS.get(h.strip().lower(), h)
     h = (h or "#FFFFFF").strip().lstrip("#")
     if len(h) == 3:
         h = "".join(c * 2 for c in h)

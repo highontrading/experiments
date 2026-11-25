@@ -268,8 +268,7 @@ def window_filters(G, ctx, events):
         elif typ == "invert":
             chain.append(f"negate=enable='between(t,{a_:.3f},{b_:.3f})'")
         elif typ == "pixelate":
-            p = max(2, int(num(e.get("amount"), 24) * pv))
-            chain.append(f"scale=iw/{p}:ih/{p}:flags=neighbor:{en},scale={G.RW}:{G.RH}:flags=neighbor")
+            continue  # handled as its own branch (scale can't be time-limited)
         elif typ == "mirror":
             chain.append(f"hflip=enable='between(t,{a_:.3f},{b_:.3f})'")
         elif typ == "vhs":
@@ -310,6 +309,19 @@ def freeze_branch(G, lab, a, b, windowed=False):
     x = G.lab("fq")
     G.push(f"[{lab}]split[{x}a][{x}b];[{x}a][{x}b]freezeframes=first={n0}:last={n1}:replace={n0}[{x}]")
     return x
+
+
+def pixelate_windows(G, ctx, events):
+    for e in events:
+        if e.get("type") != "pixelate":
+            continue
+        a_, b_ = ev_window(ctx, e, 1.5)
+        p = int(num(e.get("amount"), 24, 2, 200) * (0.5 if G.preview else 1))
+        p = max(2, p)
+        keep, src = G.split(2, win=(a_, b_))
+        px = G.lab("px")
+        G.push(f"[{src}]scale=trunc(iw/{p}/2)*2:trunc(ih/{p}/2)*2:flags=neighbor,scale={G.RW}:{G.RH}:flags=neighbor[{px}]")
+        G.cur = G.overlay(keep, px, a=a_, b=b_)
 
 
 def freeze_frames(G, ctx, events):

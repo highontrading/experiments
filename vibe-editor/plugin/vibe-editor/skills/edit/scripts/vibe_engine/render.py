@@ -265,6 +265,7 @@ def build_graph(plan, edit, ws, jd, preview, drop, base_path=None, mask_path=Non
     if lk:
         G.chain(lk)
     fx_video.window_filters(G, ctx, events)
+    fx_video.pixelate_windows(G, ctx, events)
     if "freeze" not in drop:
         fx_video.freeze_frames(G, ctx, events)
     pool = None

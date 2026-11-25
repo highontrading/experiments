@@ -567,12 +567,6 @@ def fmt_num(v, decimals=0, indian=False):
 def ev_counter(ctx, e):
     a, b = ev_window(ctx, e, 2.5)
     u = ctx.u
-    def num(v, d):
-        try:
-            x = float(v)
-            return d if x != x or abs(x) == float("inf") else max(-1e15, min(1e15, x))
-        except (TypeError, ValueError):
-            return d
     frm, to = num(e.get("from", 0), 0.0), num(e.get("to", 100), 100.0)
     dec = int(max(0, min(4, num(e.get("decimals", 0), 0))))
     pre, suf = str(e.get("prefix", "")), str(e.get("suffix", ""))
