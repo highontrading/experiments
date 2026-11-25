@@ -1,0 +1,127 @@
+{
+ "whoosh": {
+  "file": "whoosh.wav",
+  "seconds": 0.55,
+  "desc": "Airy whoosh for transitions and title entrances"
+ },
+ "whoosh-fast": {
+  "file": "whoosh-fast.wav",
+  "seconds": 0.28,
+  "desc": "Short, quick swoosh for snappy cuts"
+ },
+ "swipe": {
+  "file": "swipe.wav",
+  "seconds": 0.22,
+  "desc": "Downward swipe, good for slides/cards leaving"
+ },
+ "pop": {
+  "file": "pop.wav",
+  "seconds": 0.09,
+  "desc": "Bubbly pop for captions, stickers and cards appearing"
+ },
+ "bubble": {
+  "file": "bubble.wav",
+  "seconds": 0.18,
+  "desc": "Rising bubble blip for playful pop-ups"
+ },
+ "click": {
+  "file": "click.wav",
+  "seconds": 0.03,
+  "desc": "Single crisp click"
+ },
+ "mouse-click": {
+  "file": "mouse-click.wav",
+  "seconds": 0.13,
+  "desc": "Mouse click (down/up) for UI and cursor moments"
+ },
+ "typing": {
+  "file": "typing.wav",
+  "seconds": 1.6,
+  "desc": "Keyboard typing burst for typed text / prompts"
+ },
+ "ding": {
+  "file": "ding.wav",
+  "seconds": 1.2,
+  "desc": "Bright bell ding for a key point or correct answer"
+ },
+ "notification": {
+  "file": "notification.wav",
+  "seconds": 0.47,
+  "desc": "Phone notification chime for DM / alert moments"
+ },
+ "success": {
+  "file": "success.wav",
+  "seconds": 0.93,
+  "desc": "Rising 4-note success jingle"
+ },
+ "error": {
+  "file": "error.wav",
+  "seconds": 0.55,
+  "desc": "Wrong-answer buzzer for myths / mistakes"
+ },
+ "riser": {
+  "file": "riser.wav",
+  "seconds": 1.6,
+  "desc": "Tension riser that builds into a reveal"
+ },
+ "impact": {
+  "file": "impact.wav",
+  "seconds": 1.3,
+  "desc": "Cinematic hit/boom for big statements"
+ },
+ "bass-drop": {
+  "file": "bass-drop.wav",
+  "seconds": 1.5,
+  "desc": "Deep bass drop for dramatic reveals"
+ },
+ "shutter": {
+  "file": "shutter.wav",
+  "seconds": 0.19,
+  "desc": "Camera shutter for freeze-frames and photos"
+ },
+ "glitch": {
+  "file": "glitch.wav",
+  "seconds": 0.45,
+  "desc": "Digital glitch burst to pair with the glitch effect"
+ },
+ "tick": {
+  "file": "tick.wav",
+  "seconds": 0.04,
+  "desc": "Single clock tick"
+ },
+ "tick-tock": {
+  "file": "tick-tock.wav",
+  "seconds": 1.54,
+  "desc": "Clock tick-tock for countdowns / time pressure"
+ },
+ "cash": {
+  "file": "cash.wav",
+  "seconds": 1.28,
+  "desc": "Cash-register style ka-ching for money moments"
+ },
+ "heartbeat": {
+  "file": "heartbeat.wav",
+  "seconds": 1.86,
+  "desc": "Double heartbeat for suspense"
+ },
+ "sparkle": {
+  "file": "sparkle.wav",
+  "seconds": 0.9,
+  "desc": "Magic sparkle shimmer for reveals and 'aha' moments"
+ },
+ "boing": {
+  "file": "boing.wav",
+  "seconds": 0.5,
+  "desc": "Cartoon boing for funny moments"
+ },
+ "record-stop": {
+  "file": "record-stop.wav",
+  "seconds": 0.6,
+  "desc": "Tape-stop / record-stop for 'wait, what?' moments"
+ },
+ "zoom": {
+  "file": "zoom.wav",
+  "seconds": 0.35,
+  "desc": "Mechanical zoom sound to pair with punch-in zooms"
+ }
+}
