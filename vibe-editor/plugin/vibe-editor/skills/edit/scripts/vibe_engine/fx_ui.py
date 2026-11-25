@@ -61,6 +61,8 @@ def _str(v, d="", n=140):
     if v is None or isinstance(v, (dict, list, tuple, bool)):
         v = d
     s = " ".join(str(v).split())
+    if not s:
+        s = " ".join(str(d).split())
     if len(s) > n:
         s = s[:n - 1].rstrip() + "…"
     return s
@@ -767,7 +769,7 @@ def ev_phone(ctx, e):
         maxw = sx0 + sw - 0.06 * pw - lx
         step = _cl((b - 0.8 - t_first) / max(1, len(rows)), 0.12, 0.45)
         for i, r_ in enumerate(rows):
-            lines, rfs = _wrapn(ctx, r_, F_BODY, fs, maxw, 2)
+            lines, rfs = _wrapn(ctx, r_, F_BODY, fs, maxw, 2, shrink=1.0)
             rh = len(lines) * lh + 30 * u * k
             if y + rh > cbot:
                 break
@@ -977,7 +979,7 @@ def ev_search(ctx, e):
     sugg = [s for s in sugg if s]
     if not sugg:
         base = text.rstrip("?!. ")
-        sugg = [f"{base} for beginners", f"{base} fast", f"best {base} tips"]
+        sugg = [f"{base} for beginners", f"{base} fast", f"{base} step by step"]
     a, b = ev_window(ctx, e, _cl(2.6 + len(text) * 0.07 + 0.3 * len(sugg), 3.5, 7.0))
     D = b - a
     pal = _pal(ctx, e)
@@ -1721,7 +1723,7 @@ def ev_browser(ctx, e):
     ufs = 34 * u
     utx = ux0 + 60 * u
     ts = a + min(0.55, D * 0.15)
-    times, tend = _type_times(len(url), ts, min(b - D * 0.45, ts + len(url) * 0.08), 0.035, 0.09, seed=13)
+    times, tend = _type_times(len(url), ts, min(b - D * 0.5, ts + len(url) * 0.06), 0.03, 0.07, seed=13)
     tload = min(tend + 0.2, b - 0.8)
     _typed_lines(rig, ctx, [url], times, b, utx, y0 + tbh / 2, 0, F_BODY, ufs, pal["ink"], 23, caret_col=pal["acc"],
                  maxw=uw - 90 * u, tail=True, blink_to=tload)

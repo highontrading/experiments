@@ -176,6 +176,14 @@ def _dr(ctx, a, b, path, tag, layer, color=WHITE, alpha=0, bord=0, ocolor=None, 
     ctx.add(a, b, ctx.shape_style(), s, layer, behind=behind)
 
 
+def _reg(ctx, a, b, x0, y0, x1, y1, kind="graphic"):
+    """Register a bounding box, clipped to the frame (the layout check flags boxes that leave the screen)."""
+    x0, x1 = max(0.0, min(x0, x1)), min(float(ctx.W), max(x0, x1))
+    y0, y1 = max(0.0, min(y0, y1)), min(float(ctx.H), max(y0, y1))
+    if x1 > x0 and y1 > y0:
+        ctx.register(a, b, x0, y0, x1, y1, kind)
+
+
 def _poly_path(pts):
     return polygon(pts) if pts else ""
 
@@ -516,7 +524,7 @@ def ev_doodle(ctx, e):
         _strokes_fx(ctx, a, b, var, x, y, color, width, 16, t0=t0, draw=draw, anim=anim, rot=rot,
                     shadow=d.get("shadow", True) is not False, boil=boil, glow=bool(d.get("glow")))
         x0, y0, x1, y1 = _bbox(var[0], x, y, rot, width)
-        ctx.register(t0, b, x0, y0, x1, y1)
+        _reg(ctx, t0, b, x0, y0, x1, y1)
         if sounds < 3:
             snd = "sparkle" if shape in ("star", "sparkle", "crown") else ("pop" if anim == "pop" else "swipe")
             _sfx(ctx, e, t0 + 0.02, snd, 0.32 if snd != "pop" else 0.45)
@@ -599,7 +607,7 @@ def ev_arrow(ctx, e):
                                           f"\\t(0,90,\\alpha&H00&)\\t(0,180,\\fscx104\\fscy104)\\t(180,260,\\fscx100\\fscy100)"
                                           f"\\t({max(0, dur - 240)},{dur},\\alpha&HFF&)"),
                        color, ctx.accent, 17, register=True, clamp=True)
-    ctx.register(a, b, x0, y0, x1, y1)
+    _reg(ctx, a, b, x0, y0, x1, y1)
     _sfx(ctx, e, t_draw + 0.03, "swipe", 0.35)
     return a, b
 
@@ -631,7 +639,7 @@ def ev_circle_highlight(ctx, e):
     _strokes_fx(ctx, a, b, var, cx, cy, color, width, 16, t0=a, draw=_num(e.get("draw"), 0.7, 0.1, 3), boil=boil,
                 shadow=e.get("shadow", True) is not False, rot=_num(e.get("rotate"), 0, -90, 90))
     x0, y0, x1, y1 = _bbox(var[0], cx, cy, 0, width)
-    ctx.register(a, b, x0, y0, x1, y1)
+    _reg(ctx, a, b, x0, y0, x1, y1)
     _sfx(ctx, e, a + 0.02, "swipe", 0.3)
     return a, b
 
@@ -678,7 +686,7 @@ def ev_scribble_frame(ctx, e):
         _strokes_fx(ctx, a, b, v2, 0, 0, color, width * 0.55, 16, t0=a + draw * 0.45, draw=draw * 0.9, boil=boil,
                     shadow=False, alpha=0x50)
     if has_t:
-        ctx.register(a, b, x0 - width, y0 - width, x1 + width, y1 + width)
+        _reg(ctx, a, b, x0 - width, y0 - width, x1 + width, y1 + width)
     _sfx(ctx, e, a + 0.02, "swipe", 0.3)
     return a, b
 
@@ -757,7 +765,7 @@ def ev_notes_wall(ctx, e):
         body = "\\N".join(ctx.markup(ln, ink, ctx.accent) for ln in lines)
         ctx.add(t0, t1, st, "{" + f"\\an5\\pos({cx:.0f},{cy + ctx.cap_shift(font, fs) + 4 * u:.0f})\\org({cx:.0f},{cy:.0f})"
                 f"\\q2" + anim + "}" + body, 14)
-        ctx.register(t0, t1, cx - nw / 2, cy - nh / 2 - th_ / 2, cx + nw / 2, cy + nh / 2)
+        _reg(ctx, t0, t1, cx - nw / 2, cy - nh / 2 - th_ / 2, cx + nw / 2, cy + nh / 2)
         if i < 9:
             _sfx(ctx, e, t0 + 0.02, "pop" if i % 2 == 0 else "bubble", 0.3)
     return a, b
@@ -841,7 +849,7 @@ def ev_orbit_text(ctx, e):
             ctx.add(t1, t2, st, "{" + tag + "}" + esc(chars[j]), 17 if dm > 0 else 13,
                     behind=(dm < 0) if wrap else None)
             k0 = k1
-    ctx.register(a, b, cx - R, cy - ry - fs, cx + R, cy + ry + fs)
+    _reg(ctx, a, b, cx - R, cy - ry - fs, cx + R, cy + ry + fs)
     _sfx(ctx, e, a, "whoosh", 0.35)
     return a, b
 
@@ -914,7 +922,7 @@ def ev_orbit_cards(ctx, e):
                     f"\\t({sc2}\\alpha{_al(al2)})" + "}" + esc(it), L + 3)
         k0 = k1
     maxw = max(c[1] for c in cards)
-    ctx.register(a, b, cx - R - maxw / 2, cy - ry - h, cx + R + maxw / 2, cy + ry + h)
+    _reg(ctx, a, b, cx - R - maxw / 2, cy - ry - h, cx + R + maxw / 2, cy + ry + h)
     _sfx(ctx, e, a, "whoosh", 0.3)
     _sfx(ctx, e, a + 0.1, "pop", 0.3)
     return a, b
@@ -989,7 +997,7 @@ def ev_head_stack(ctx, e):
         chip(te, b, yc, yc - 46 * u, f"\\fad(0,{max(60, od - 20)})", rot)
         _sfx(ctx, e, tl - 0.01, "pop" if i % 2 == 0 else "click", 0.38)
     if x0s:
-        ctx.register(a, b, min(x0s), ytop, max(x1s), y)
+        _reg(ctx, a, b, min(x0s), ytop, max(x1s), y)
     return a, b
 
 
@@ -1088,7 +1096,7 @@ def ev_chip_roll(ctx, e):
     ctx.add(t_land, b, st, "{" + f"\\an5\\pos({pcx:.0f},{y + shift:.0f})" + clip +
             "\\t(0,90,\\fscx108\\fscy108)\\t(90,220,\\fscx100\\fscy100)" + f"\\fad(0,{min(250, int((b - t_land) * 500))})" + "}"
             + esc(final), 14)
-    ctx.register(a, b, x - tot / 2, y - h / 2, x + tot / 2, y + h / 2)
+    _reg(ctx, a, b, x - tot / 2, y - h / 2, x + tot / 2, y + h / 2)
     _sfx(ctx, e, t_land, "pop", 0.5)
     _ = dur
     return a, b
@@ -1183,7 +1191,7 @@ def ev_confetti(ctx, e):
     scale = _num(e.get("scale"), 1.0, 0.3, 3)
     rng = _rng(e, "confetti")
     ox, oy = _xy(ctx, e, 0.5, 0.62)
-    seg = 4 * DT
+    seg = max(4, int(math.ceil(n * (b - a) * FPS / 2400.0))) * DT
     fade_s = min(0.45, (b - a) * 0.25)
     for i in range(n):
         kind = rng.choice(("rect", "rect", "strip", "circle", "square", "tri"))
@@ -1280,7 +1288,7 @@ def ev_sparkles(ctx, e):
                     blur=round(s * 0.22, 1))
             _dr(ctx, t, t2, path, tag, 16, col, 0)
             t = t2 + rng.uniform(0.0, 0.3)
-    ctx.register(a, b, cx - w / 2 * 1.2, cy - h / 2 * 1.2, cx + w / 2 * 1.2, cy + h / 2 * 1.2)
+    _reg(ctx, a, b, cx - w / 2 * 1.2, cy - h / 2 * 1.2, cx + w / 2 * 1.2, cy + h / 2 * 1.2)
     _sfx(ctx, e, a, "sparkle", 0.45)
     return a, b
 
@@ -1588,7 +1596,7 @@ def ev_burst(ctx, e):
         ctx.add(a + 0.06, b, st, "{" + f"\\an5\\pos({x:.0f},{y0 + i * lh + ctx.cap_shift(font, fs):.0f})\\org({x:.0f},{y:.0f})"
                 f"\\frz{-(rot - 24):.1f}\\fscx0\\fscy0\\t(0,170,\\fscx122\\fscy122\\frz{-rot:.1f})\\t(170,300,\\fscx100\\fscy100)"
                 f"\\t({es},{dur},\\fscx0\\fscy0)" + "}" + ctx.markup(ln, ink, ctx.accent), 17)
-    ctx.register(a, b, x - 1.12 * R, y - R, x + 1.12 * R + so[0], y + R + so[1])
+    _reg(ctx, a, b, x - 1.12 * R, y - R, x + 1.12 * R + so[0], y + R + so[1])
     _sfx(ctx, e, a, "pop", 0.55)
     return a, b
 
@@ -1636,7 +1644,7 @@ def ev_word_sticker(ctx, e):
         ctx.add(a, b, st_b, "{" + f"\\an5\\pos({x:.0f},{yy:.0f})\\org({x:.0f},{y:.0f})\\blur{0.8 * u:.1f}" + anim + "}" + body, 16)
         ctx.add(a, b, st_t, "{" + f"\\an5\\pos({x:.0f},{yy:.0f})\\org({x:.0f},{y:.0f})" + anim + "}" +
                 ctx.markup(ln, tc, ctx.accent), 17)
-    ctx.register(a, b, x - bw / 2 - border, y - bh / 2 - border, x + bw / 2 + border, y + bh / 2 + border)
+    _reg(ctx, a, b, x - bw / 2 - border, y - bh / 2 - border, x + bw / 2 + border, y + bh / 2 + border)
     _sfx(ctx, e, a, "pop", 0.55)
     return a, b
 
@@ -1665,6 +1673,62 @@ EVENTS = {
     "scribble_frame": ev_scribble_frame,
 }
 
-DOCS = {}
+DOCS = {
+    "notes_wall": "Headline wall: 5–9 paper notes (white/cream, tilted, tape strip, marker ink) pop in around the frame "
+                  "edges, keeping the face clear. Options: items[] (short texts, *accent* ok), count 1–9, color (paper), "
+                  "text_color, font (default marker), scale 0.5–1.6, seed.",
+    "orbit_text": "Ring of letters orbiting a point in pseudo-3D (back half small, dim and mirrored). Options: text (repeated to "
+                  "fill the ring), x,y (default head 0.5,0.30), radius (fraction of the short side, default 0.36), tilt "
+                  "(deg, 15), roll (deg, -6), speed (turns/s, 0.28; negative = reverse), size, font, color, separator ' • ', "
+                  "wrap true (back half goes behind the speaker via AI cut-out).",
+    "orbit_cards": "4–6 small rounded UI cards (label + accent dot) orbiting a point in pseudo-3D with depth scale/fade. "
+                   "Options: items[] (≤6 labels), x,y (0.5,0.30), radius (0.38), tilt (16), roll, speed (0.16 turns/s), "
+                   "theme light|dark, fill, color, accent, size, font.",
+    "head_stack": "Monospace chips drop from above one by one and stack on top of the head, then float away. Options: "
+                  "items[] (≤6), x,y (stack base = top of head, default 0.5,0.22), theme light|dark, fill, color, accent, "
+                  "size, font (default space-mono), seed.",
+    "chip_roll": "Slot-machine word roller: white pill, words roll vertically (fast → eased, motion blur, ticks) and land on "
+                 "the last item or `final`. Options: items[], final, prefix (white text left of the pill, e.g. 'Made with'), "
+                 "x,y/position (default 0.5,0.2), roll (seconds), spins (rows rolled, 11), size, font, fill, color.",
+    "doodle": "Hand-drawn white doodle drawn on stroke-by-stroke (or popped) with a subtle hand-drawn line boil. Options: "
+              "shape star|heart|arrow|circle|underline|sparkle|lightning|crown|question|exclamation|smile|clapper|scribble|"
+              "burst, x,y (default 0.76,0.2), size (170), rotate, color, stroke (px), anim draw|pop, draw (s), boil false, "
+              "glow true, shadow false; shapes:[name or {shape,x,y,size,rotate,color,anim}] places several (auto-spread "
+              "around the head), stagger (0.18 s).",
+    "arrow": "Hand-drawn curved arrow drawn on from a start point to `target`, optional handwritten label at the tail. Options: "
+             "target [x,y] (default 0.42,0.42), from [x,y] (or x,y; auto if omitted), bend (-1..1, 0.28), text, font "
+             "(caveat), size (label, 72), color, stroke (9), draw (s), anim draw|pop.",
+    "circle_highlight": "Imperfect hand-drawn ellipse (two overlapping strokes) drawn on around `target` [x,y,w,h] (centre + "
+                        "size as frame fractions, default [0.5,0.34,0.56,0.3]). Options: color, stroke (8), draw (0.7 s), "
+                        "rotate, boil false.",
+    "speed_lines": "Manga radial speed lines rushing toward a point, flickering every 2 frames. Options: x,y (0.5,0.42), "
+                   "color white|black|hex, alpha (0–255), count (72), radius (clear zone multiplier, 1.0).",
+    "shockwave": "2–5 expanding rings with fading blur, core glow, debris dots and an optional flash. Options: x,y "
+                 "(0.5,0.42), color, rings (3), radius (fraction of the diagonal, 0.5), flash false, flash_alpha, debris "
+                 "(count, 14).",
+    "confetti": "Falling, tumbling confetti (rects, strips, dots, triangles; neutral + accent). Options: mode rain|burst "
+                "(burst shoots up from x,y default 0.5,0.62), count (70), colors[], accent, scale, dur, seed.",
+    "sparkles": "Twinkling 4-point stars + tiny dots around a region. Options: target [x,y,w,h] (default the head), count "
+                "(12), size (74), color.",
+    "doors": "Transition: two charcoal panels slide in, meet with a light seam, then open. Options: dur (0.8; 1.4 with "
+             "text), text (title shown while closed), theme dark|light, color, text_color, font, size.",
+    "paper_tear": "Transition: a cream paper sheet slides up over the video, then tears along a jagged line and the halves "
+                  "fly apart. Options: dur (1.0; 1.5 with text), text (marker ink on the paper, *accent* ok), color, "
+                  "text_color, font, tear_y (0.2–0.85).",
+    "typewall": "Rows of huge repeated text scrolling sideways in alternating directions, filling the frame (filled + "
+                "outline rows). Best with \"behind\": true. Options: text, style mixed|solid|outline, color, alpha "
+                "(0x68), size (230), rows, speed (px/s, 160), font (anton), separator, line_height.",
+    "light_leak": "Warm film light leak: big blurred translucent blobs drifting across with a soft wash. Options: color "
+                  "warm|pink|gold|cool|red|hex, side left|right|top|bottom, intensity (0.1–2), count (4), dur.",
+    "burst": "Comic starburst (white, ink outline, hard shadow) popping with a tilt and wobbling, with text. Options: text "
+             "('WOW!'), x,y (default 0.76,0.2), size (radius, 170), rotate, spikes (16), fill, color, outline, shadow, "
+             "font (bangers).",
+    "word_sticker": "Die-cut word sticker: big word with a thick white border and shadow, pops in, wiggles, pops out. "
+                    "Options: text ('WOW'), x,y (default 0.72,0.22), size (120), rotate (-6), color (text, ink), "
+                    "border_color (white), border (px), font, uppercase false.",
+    "scribble_frame": "Rough hand-drawn rectangle (double sketch lines, overshooting corners) drawn on around the screen "
+                      "edges or a `target` [x,y,w,h]. Options: inset (0.045), color, stroke (7), draw (0.8 s), double "
+                      "false, boil false.",
+}
 
 HIDE_CAPTIONS = set()
