@@ -1,28 +1,441 @@
 {
-  "poppins-black": {"file": "Poppins-Black.ttf", "family": "Poppins Black", "bold": false, "width": 0.388, "desc": "Heavy, rounded geometric. The default punchy reel font.", "norm": 1.475},
-  "poppins-extrabold": {"file": "Poppins-ExtraBold.ttf", "family": "Poppins ExtraBold", "bold": false, "width": 0.385, "desc": "Slightly lighter Poppins.", "norm": 1.475},
-  "poppins-bold": {"file": "Poppins-Bold.ttf", "family": "Poppins", "bold": true, "width": 0.38, "desc": "Clean bold geometric.", "norm": 1.475},
-  "poppins-semibold": {"file": "Poppins-SemiBold.ttf", "family": "Poppins SemiBold", "bold": false, "width": 0.374, "desc": "For body text on cards.", "norm": 1.475},
-  "inter-extrabold": {"file": "Inter-ExtraBold.otf", "family": "Inter ExtraBold", "bold": false, "width": 0.573, "desc": "Modern, neutral, very readable.", "norm": 1.0},
-  "inter-bold": {"file": "Inter-Bold.otf", "family": "Inter", "bold": true, "width": 0.571, "desc": "Neutral UI-style bold.", "norm": 1.0},
-  "anton": {"file": "Anton-Regular.ttf", "family": "Anton", "bold": false, "width": 0.272, "desc": "Tall condensed impact font. Great for huge single words.", "norm": 1.204},
-  "bebas": {"file": "BebasNeue-Regular.ttf", "family": "Bebas Neue", "bold": false, "width": 0.3, "desc": "Condensed all-caps display font.", "norm": 1.113},
-  "archivo-black": {"file": "ArchivoBlack-Regular.ttf", "family": "Archivo Black", "bold": false, "width": 0.568, "desc": "Chunky grotesque.", "norm": 1.157},
-  "archivo-expanded": {"file": "Archivo-Expanded-900.ttf", "family": "Archivo Expanded Black", "bold": false, "width": 0.605, "desc": "Wide, techy, premium.", "norm": 1.311},
-  "bangers": {"file": "Bangers-Regular.ttf", "family": "Bangers", "bold": false, "width": 0.245, "desc": "Comic-book style.", "norm": 1.405},
-  "caveat": {"file": "Caveat-600.ttf", "family": "Caveat SemiBold", "bold": false, "width": 0.406, "desc": "Handwritten, friendly.", "norm": 0.952},
-  "marker": {"file": "PermanentMarker-Regular.ttf", "family": "Permanent Marker", "bold": false, "width": 0.457, "desc": "Thick marker handwriting.", "norm": 1.113},
-  "serif": {"file": "DMSerifDisplay-Regular.ttf", "family": "DM Serif Display", "bold": false, "width": 0.449, "desc": "Elegant high-contrast serif.", "norm": 1.229},
-  "serif-italic": {"file": "DMSerifDisplay-Italic.ttf", "family": "DM Serif Display", "bold": false, "italic": true, "width": 0.449, "desc": "Elegant italic serif.", "norm": 1.229},
-  "noto-black": {"file": "NotoSans-Black.ttf", "family": "Noto Sans Black", "bold": false, "width": 0.453, "desc": "Latin fallback with wide symbol coverage (₹, €, ✓).", "norm": 1.283},
-  "noto-bold": {"file": "NotoSans-Bold.ttf", "family": "Noto Sans", "bold": true, "width": 0.443, "desc": "Latin fallback, bold.", "norm": 1.283},
-  "devanagari": {"file": "NotoSansDevanagari-Black.ttf", "family": "Noto Sans Devanagari Black", "bold": false, "width": 0.256, "desc": "Hindi / Marathi / Nepali (Devanagari script).", "norm": 1.283},
-  "devanagari-bold": {"file": "NotoSansDevanagari-Bold.ttf", "family": "Noto Sans Devanagari", "bold": true, "width": 0.243, "desc": "Devanagari, bold.", "norm": 1.283},
-  "tamil": {"file": "NotoSansTamil-Bold.ttf", "family": "Noto Sans Tamil", "bold": true, "width": 0.354, "desc": "Tamil script.", "norm": 1.283},
-  "telugu": {"file": "NotoSansTelugu-Bold.ttf", "family": "Noto Sans Telugu", "bold": true, "width": 0.351, "desc": "Telugu script.", "norm": 1.283},
-  "bengali": {"file": "NotoSansBengali-Bold.ttf", "family": "Noto Sans Bengali", "bold": true, "width": 0.349, "desc": "Bengali / Assamese script.", "norm": 1.283},
-  "gujarati": {"file": "NotoSansGujarati-Bold.ttf", "family": "Noto Sans Gujarati", "bold": true, "width": 0.353, "desc": "Gujarati script.", "norm": 1.283},
-  "kannada": {"file": "NotoSansKannada-Bold.ttf", "family": "Noto Sans Kannada", "bold": true, "width": 0.348, "desc": "Kannada script.", "norm": 1.283},
-  "malayalam": {"file": "NotoSansMalayalam-Bold.ttf", "family": "Noto Sans Malayalam", "bold": true, "width": 0.36, "desc": "Malayalam script.", "norm": 1.283},
-  "gurmukhi": {"file": "NotoSansGurmukhi-Bold.ttf", "family": "Noto Sans Gurmukhi", "bold": true, "width": 0.352, "desc": "Punjabi (Gurmukhi script).", "norm": 1.283}
+ "poppins-black": {
+  "file": "Poppins-Black.ttf",
+  "family": "Poppins Black",
+  "bold": false,
+  "desc": "Heavy rounded geometric — the default punchy reel font"
+ },
+ "poppins-extrabold": {
+  "file": "Poppins-ExtraBold.ttf",
+  "family": "Poppins ExtraBold",
+  "bold": false,
+  "desc": "Slightly lighter Poppins"
+ },
+ "poppins-bold": {
+  "file": "Poppins-Bold.ttf",
+  "family": "Poppins",
+  "bold": true,
+  "desc": "Clean bold geometric"
+ },
+ "poppins-semibold": {
+  "file": "Poppins-SemiBold.ttf",
+  "family": "Poppins SemiBold",
+  "bold": false,
+  "desc": "Poppins for body text on cards"
+ },
+ "montserrat-black": {
+  "file": "Montserrat-Black.ttf",
+  "family": "Montserrat Black",
+  "bold": false,
+  "desc": "Montserrat Black — bold modern classic"
+ },
+ "montserrat-extrabold": {
+  "file": "Montserrat-ExtraBold.ttf",
+  "family": "Montserrat ExtraBold",
+  "bold": false,
+  "desc": "Montserrat ExtraBold"
+ },
+ "montserrat-bold": {
+  "file": "Montserrat-Bold.ttf",
+  "family": "Montserrat Bold",
+  "bold": false,
+  "desc": "Montserrat Bold — great body/caption font"
+ },
+ "montserrat-black-italic": {
+  "file": "Montserrat-BlackItalic.ttf",
+  "family": "Montserrat Black Italic",
+  "bold": false,
+  "desc": "Montserrat Black Italic — sporty, fast"
+ },
+ "inter-extrabold": {
+  "file": "Inter-ExtraBold.otf",
+  "family": "Inter ExtraBold",
+  "bold": false,
+  "desc": "Inter ExtraBold — neutral, very readable"
+ },
+ "inter-bold": {
+  "file": "Inter-Bold.otf",
+  "family": "Inter",
+  "bold": true,
+  "desc": "Inter Bold — neutral UI font"
+ },
+ "barlow-black": {
+  "file": "Barlow-Black.ttf",
+  "family": "Barlow Black",
+  "bold": false,
+  "desc": "Barlow Black — friendly grotesque"
+ },
+ "barlow-extrabold": {
+  "file": "Barlow-ExtraBold.ttf",
+  "family": "Barlow ExtraBold",
+  "bold": false,
+  "desc": "Barlow ExtraBold"
+ },
+ "barlow-semibold": {
+  "file": "Barlow-SemiBold.ttf",
+  "family": "Barlow SemiBold",
+  "bold": false,
+  "desc": "Barlow SemiBold — clean body text"
+ },
+ "barlow-condensed": {
+  "file": "BarlowCondensed-ExtraBold.ttf",
+  "family": "Barlow Condensed ExtraBold",
+  "bold": false,
+  "desc": "Barlow Condensed ExtraBold — tall, compact"
+ },
+ "barlow-condensed-black": {
+  "file": "BarlowCondensed-Black.ttf",
+  "family": "Barlow Condensed Black",
+  "bold": false,
+  "desc": "Barlow Condensed Black"
+ },
+ "kanit-black": {
+  "file": "Kanit-Black.ttf",
+  "family": "Kanit Black",
+  "bold": false,
+  "desc": "Kanit Black — techy, bold"
+ },
+ "kanit-semibold": {
+  "file": "Kanit-SemiBold.ttf",
+  "family": "Kanit SemiBold",
+  "bold": false,
+  "desc": "Kanit SemiBold"
+ },
+ "anton": {
+  "file": "Anton-Regular.ttf",
+  "family": "Anton",
+  "bold": false,
+  "desc": "Anton — tall condensed impact font for huge words"
+ },
+ "bebas": {
+  "file": "BebasNeue-Regular.ttf",
+  "family": "Bebas Neue",
+  "bold": false,
+  "desc": "Bebas Neue — condensed all-caps display"
+ },
+ "archivo-black": {
+  "file": "ArchivoBlack-Regular.ttf",
+  "family": "Archivo Black",
+  "bold": false,
+  "desc": "Archivo Black — chunky grotesque"
+ },
+ "archivo-expanded": {
+  "file": "Archivo-Expanded-900.ttf",
+  "family": "Archivo Expanded Black",
+  "bold": false,
+  "desc": "Archivo Expanded Black — wide, techy, premium"
+ },
+ "russo-one": {
+  "file": "RussoOne-Regular.ttf",
+  "family": "Russo One",
+  "bold": false,
+  "desc": "Russo One — sporty, gaming"
+ },
+ "chakra-petch": {
+  "file": "ChakraPetch-Bold.ttf",
+  "family": "Chakra Petch Bold",
+  "bold": false,
+  "desc": "Chakra Petch Bold — futuristic tech"
+ },
+ "black-ops": {
+  "file": "BlackOpsOne-Regular.ttf",
+  "family": "Black Ops One Regular",
+  "bold": false,
+  "desc": "Black Ops One — military stencil"
+ },
+ "bowlby": {
+  "file": "BowlbyOne-Regular.ttf",
+  "family": "Bowlby One Regular",
+  "bold": false,
+  "desc": "Bowlby One — fat retro display"
+ },
+ "rubik-mono": {
+  "file": "RubikMonoOne-Regular.ttf",
+  "family": "Rubik Mono One Regular",
+  "bold": false,
+  "desc": "Rubik Mono One — blocky monospace display"
+ },
+ "bungee": {
+  "file": "Bungee-Regular.ttf",
+  "family": "Bungee Regular",
+  "bold": false,
+  "desc": "Bungee — urban signage"
+ },
+ "lilita": {
+  "file": "LilitaOne-Regular.ttf",
+  "family": "Lilita One",
+  "bold": false,
+  "desc": "Lilita One — playful bold"
+ },
+ "luckiest": {
+  "file": "LuckiestGuy-Regular.ttf",
+  "family": "Luckiest Guy Regular",
+  "bold": false,
+  "desc": "Luckiest Guy — cartoon / kids"
+ },
+ "bangers": {
+  "file": "Bangers-Regular.ttf",
+  "family": "Bangers",
+  "bold": false,
+  "desc": "Bangers — comic book"
+ },
+ "righteous": {
+  "file": "Righteous-Regular.ttf",
+  "family": "Righteous",
+  "bold": false,
+  "desc": "Righteous — retro rounded"
+ },
+ "monoton": {
+  "file": "Monoton-Regular.ttf",
+  "family": "Monoton",
+  "bold": false,
+  "desc": "Monoton — neon tube outline (use big)"
+ },
+ "ultra": {
+  "file": "Ultra-Regular.ttf",
+  "family": "Ultra Regular",
+  "bold": false,
+  "desc": "Ultra — heavy slab serif"
+ },
+ "abril": {
+  "file": "AbrilFatface-Regular.ttf",
+  "family": "Abril Fatface",
+  "bold": false,
+  "desc": "Abril Fatface — magazine headline serif"
+ },
+ "serif": {
+  "file": "DMSerifDisplay-Regular.ttf",
+  "family": "DM Serif Display",
+  "bold": false,
+  "desc": "DM Serif Display — elegant high-contrast serif"
+ },
+ "dm-serif": {
+  "file": "DMSerifDisplay-Regular.ttf",
+  "family": "DM Serif Display",
+  "bold": false,
+  "desc": "DM Serif Display — elegant high-contrast serif"
+ },
+ "serif-italic": {
+  "file": "DMSerifDisplay-Italic.ttf",
+  "family": "DM Serif Display",
+  "bold": false,
+  "desc": "DM Serif Display Italic",
+  "italic": false
+ },
+ "instrument-serif": {
+  "file": "InstrumentSerif-Regular.ttf",
+  "family": "Instrument Serif Regular",
+  "bold": false,
+  "desc": "Instrument Serif — trendy editorial serif"
+ },
+ "instrument-serif-italic": {
+  "file": "InstrumentSerif-Italic.ttf",
+  "family": "Instrument Serif Italic",
+  "bold": false,
+  "desc": "Instrument Serif Italic — the 'aesthetic' script-like serif"
+ },
+ "shrikhand": {
+  "file": "Shrikhand-Regular.ttf",
+  "family": "Shrikhand Regular",
+  "bold": false,
+  "desc": "Shrikhand — bold retro italic display"
+ },
+ "pacifico": {
+  "file": "Pacifico-Regular.ttf",
+  "family": "Pacifico Regular",
+  "bold": false,
+  "desc": "Pacifico — surfy brush script"
+ },
+ "satisfy": {
+  "file": "Satisfy-Regular.ttf",
+  "family": "Satisfy Regular",
+  "bold": false,
+  "desc": "Satisfy — elegant script"
+ },
+ "caveat": {
+  "file": "Caveat-600.ttf",
+  "family": "Caveat SemiBold",
+  "bold": false,
+  "desc": "Caveat — friendly handwriting"
+ },
+ "marker": {
+  "file": "PermanentMarker-Regular.ttf",
+  "family": "Permanent Marker",
+  "bold": false,
+  "desc": "Permanent Marker — thick marker handwriting"
+ },
+ "gloria": {
+  "file": "GloriaHallelujah.ttf",
+  "family": "Gloria Hallelujah",
+  "bold": false,
+  "desc": "Gloria Hallelujah — doodle handwriting"
+ },
+ "shadows": {
+  "file": "ShadowsIntoLight.ttf",
+  "family": "Shadows Into Light",
+  "bold": false,
+  "desc": "Shadows Into Light — light pen handwriting"
+ },
+ "special-elite": {
+  "file": "SpecialElite-Regular.ttf",
+  "family": "Special Elite Regular",
+  "bold": false,
+  "desc": "Special Elite — typewriter"
+ },
+ "space-mono": {
+  "file": "SpaceMono-Bold.ttf",
+  "family": "Space Mono Bold",
+  "bold": false,
+  "desc": "Space Mono Bold — code / tech mono"
+ },
+ "space-mono-regular": {
+  "file": "SpaceMono-Regular.ttf",
+  "family": "Space Mono Regular",
+  "bold": false,
+  "desc": "Space Mono Regular"
+ },
+ "plex-mono": {
+  "file": "IBMPlexMono-Bold.ttf",
+  "family": "IBM Plex Mono Bold",
+  "bold": false,
+  "desc": "IBM Plex Mono Bold — clean code font"
+ },
+ "plex-mono-medium": {
+  "file": "IBMPlexMono-Medium.ttf",
+  "family": "IBM Plex Mono Medium",
+  "bold": false,
+  "desc": "IBM Plex Mono Medium"
+ },
+ "pixel": {
+  "file": "PressStart2P-Regular.ttf",
+  "family": "Press Start 2P Regular",
+  "bold": false,
+  "desc": "Press Start 2P — 8-bit pixel game"
+ },
+ "vt323": {
+  "file": "VT323-Regular.ttf",
+  "family": "VT323 Regular",
+  "bold": false,
+  "desc": "VT323 — retro terminal"
+ },
+ "noto-black": {
+  "file": "NotoSans-Black.ttf",
+  "family": "Noto Sans Black",
+  "bold": false,
+  "desc": "Noto Sans Black — wide symbol coverage (₹ € ✓)"
+ },
+ "noto-bold": {
+  "file": "NotoSans-Bold.ttf",
+  "family": "Noto Sans",
+  "bold": true,
+  "desc": "Noto Sans Bold"
+ },
+ "devanagari": {
+  "file": "NotoSansDevanagari-Black.ttf",
+  "family": "Noto Sans Devanagari Black",
+  "bold": false,
+  "desc": "Hindi/Marathi (Devanagari) — Noto Black"
+ },
+ "devanagari-bold": {
+  "file": "NotoSansDevanagari-Bold.ttf",
+  "family": "Noto Sans Devanagari",
+  "bold": true,
+  "desc": "Devanagari — Noto Bold"
+ },
+ "hind": {
+  "file": "Hind-Bold.ttf",
+  "family": "Hind Bold",
+  "bold": false,
+  "desc": "Hind Bold — clean Hindi + Latin"
+ },
+ "mukta": {
+  "file": "Mukta-ExtraBold.ttf",
+  "family": "Mukta ExtraBold",
+  "bold": false,
+  "desc": "Mukta ExtraBold — modern Hindi + Latin"
+ },
+ "rozha": {
+  "file": "RozhaOne-Regular.ttf",
+  "family": "Rozha One Regular",
+  "bold": false,
+  "desc": "Rozha One — Hindi display serif (headlines)"
+ },
+ "kalam": {
+  "file": "Kalam-Bold.ttf",
+  "family": "Kalam Bold",
+  "bold": false,
+  "desc": "Kalam — Hindi handwriting"
+ },
+ "yatra": {
+  "file": "YatraOne-Regular.ttf",
+  "family": "Yatra One Regular",
+  "bold": false,
+  "desc": "Yatra One — Hindi decorative display"
+ },
+ "tamil": {
+  "file": "NotoSansTamil-Bold.ttf",
+  "family": "Noto Sans Tamil",
+  "bold": true,
+  "desc": "Tamil — Noto Bold"
+ },
+ "tamil-hind": {
+  "file": "HindMadurai-Bold.ttf",
+  "family": "Hind Madurai Bold",
+  "bold": false,
+  "desc": "Hind Madurai — Tamil + Latin"
+ },
+ "telugu": {
+  "file": "NotoSansTelugu-Bold.ttf",
+  "family": "Noto Sans Telugu",
+  "bold": true,
+  "desc": "Telugu — Noto Bold"
+ },
+ "bengali": {
+  "file": "NotoSansBengali-Bold.ttf",
+  "family": "Noto Sans Bengali",
+  "bold": true,
+  "desc": "Bengali/Assamese — Noto Bold"
+ },
+ "bengali-hind": {
+  "file": "HindSiliguri-Bold.ttf",
+  "family": "Hind Siliguri Bold",
+  "bold": false,
+  "desc": "Hind Siliguri — Bengali + Latin"
+ },
+ "gujarati": {
+  "file": "NotoSansGujarati-Bold.ttf",
+  "family": "Noto Sans Gujarati",
+  "bold": true,
+  "desc": "Gujarati — Noto Bold"
+ },
+ "gujarati-hind": {
+  "file": "HindVadodara-Bold.ttf",
+  "family": "Hind Vadodara Bold",
+  "bold": false,
+  "desc": "Hind Vadodara — Gujarati + Latin"
+ },
+ "kannada": {
+  "file": "NotoSansKannada-Bold.ttf",
+  "family": "Noto Sans Kannada",
+  "bold": true,
+  "desc": "Kannada — Noto Bold"
+ },
+ "malayalam": {
+  "file": "NotoSansMalayalam-Bold.ttf",
+  "family": "Noto Sans Malayalam",
+  "bold": true,
+  "desc": "Malayalam — Noto Bold"
+ },
+ "gurmukhi": {
+  "file": "NotoSansGurmukhi-Bold.ttf",
+  "family": "Noto Sans Gurmukhi",
+  "bold": true,
+  "desc": "Punjabi (Gurmukhi) — Noto Bold"
+ },
+ "gurmukhi-mukta": {
+  "file": "MuktaMahee-ExtraBold.ttf",
+  "family": "Mukta Mahee ExtraBold",
+  "bold": false,
+  "desc": "Mukta Mahee — Punjabi + Latin"
+ }
 }

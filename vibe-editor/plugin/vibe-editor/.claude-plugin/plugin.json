@@ -1,8 +1,8 @@
 {
   "name": "vibe-editor",
   "displayName": "Vibe Editor",
-  "version": "1.0.0",
-  "description": "Turn Claude into your reel editor. Drop a raw video, say what you want, get a finished reel with auto-cut pauses, word-by-word captions (Hindi, Hinglish & 50+ languages), animated titles, cards, zooms, b-roll, sound effects, music, colour looks, a cover and a post caption.",
+  "version": "2.0.0",
+  "description": "Turn Claude into your reel editor. Drop a raw video, say what you want, get a finished reel: auto-cut pauses and retakes, 47 caption styles (Hindi, Hinglish and 8 Indian scripts), 90+ motion effects, UI mockups, charts, AI cut-out effects (text behind you, stickers, background swap, clones), 36 looks, 50 sounds, 70+ fonts, cover and post caption. Match any reference style and add your own fonts, sounds and colour grades.",
   "author": {"name": "Vibe Editor"},
   "license": "Proprietary"
 }

@@ -18,7 +18,7 @@ Be warm and quick. The user should be editing within ~10 minutes. Explain in pla
 ## 1. Install the engine (one time)
 
 1. `python3 "<ENGINE>" doctor --no-render-test`
-2. If anything fails: tell the user "Setting up your editor, this takes a few minutes the first time ☕", then run `python3 "<ENGINE>" install`. (It installs the speech engine and ffmpeg via pip and downloads the speech model. If they mainly speak Hindi or another Indian language and have a decent laptop, use `install --model medium` and remember to pass `--model medium` to `prep` later.)
+2. If anything fails: tell the user "Setting up your editor, this takes a few minutes the first time ☕", then run `python3 "<ENGINE>" install`. (It installs the speech engine, ffmpeg, font tools and the AI cut-out runtime via pip, and downloads the speech model and the AI cut-out model. If they mainly speak Hindi or another Indian language and have a decent laptop, use `install --model medium` and remember to pass `--model medium` to `prep` later.)
 3. Re-run `doctor` until everything is ✅. If something keeps failing, follow the **doctor** skill.
 
 ## 2. Create the workspace
@@ -33,7 +33,11 @@ Tell them what the folders are for, briefly:
 - **brand**: logo + brand fonts (optional)
 - **broll**: extra clips/images to cut away to
 - **music**: background music they're allowed to use
-- **references**: 1–3 reels they love the style of
+- **references**: 1–3 reels/screenshots they love the style of
+- **fonts**: their own fonts (.ttf/.otf), usable in every caption and effect
+- **sounds**: their own sound effects (.wav/.mp3)
+- **looks**: their own colour grades (.cube LUT files)
+- **styles**: where their saved caption styles, looks and custom effects live (Claude fills this)
 
 ## 3. Build their style profile
 
@@ -47,7 +51,7 @@ Ask these in **one** friendly message (they can answer in any order, Hinglish is
 6. Your usual call-to-action (e.g. "Follow for more", "Comment GUIDE")?
 7. Any reels you love the style of? Drop them in **references/** (or send links/screenshots).
 
-If they added reference videos, study them: `python3 "<ENGINE>" peek "<workspace>/references/<file>"` then open the contact sheet image and note caption font weight/case/colour/position, how much text is on screen, colour grade, and pacing. Pick the closest caption style, look and fonts from the library (`python3 "<ENGINE>" list`).
+If they added references (videos or screenshots), follow the **style** skill (`/vibe-editor:style`): study them, match captions/titles/effects/colour/sound, build anything missing, and save it as their own style. Otherwise pick from the library (`python3 "<ENGINE>" list`: 47 caption styles, 36 looks, 50 sounds, 70+ fonts, 90+ effects, preset combos).
 
 Then write `<workspace>/brand/brand.json`:
 
@@ -56,7 +60,7 @@ Then write `<workspace>/brand/brand.json`:
   "name": "Priya", "handle": "priya.studies", "niche": "study tips for college students",
   "vibe": "energetic, friendly", "language": "hi", "caption_script": "roman",
   "colors": {"accent": "#FFD400", "accent2": "#8B5CF6", "text": "#FFFFFF", "dark": "#111111", "card": "#FFFFFF"},
-  "fonts": {"title": "poppins-black", "body": "inter-extrabold"},
+  "fonts": {"title": "poppins-black", "body": "inter-extrabold", "serif": "instrument-serif-italic"},
   "caption_style": "bold-pop", "look": "punchy",
   "cta": "Follow for daily study hacks", "logo": "logo.png",
   "notes": ["Likes fast cuts", "Always zoom on the punchline"]
@@ -64,7 +68,7 @@ Then write `<workspace>/brand/brand.json`:
 ```
 
 - `language`: `en`, `hi`, `ta`, `te`, `bn`, `mr`, `gu`, `kn`, `ml`, `pa` … or `auto`.
-- Fonts are keys from `list fonts` (custom .ttf/.otf files they put in `brand/` are copied automatically; use their exact family name only if you add it to the library, otherwise stick to built-in keys).
+- Fonts are keys from `list fonts`. Their own .ttf/.otf files in `fonts/` (or `brand/`) are registered automatically; `python3 "<ENGINE>" fonts` shows the key to use.
 - Accent colour drives caption highlights, title accents, cards, CTA. Choose high-contrast colours that read on video (yellow, lime, cyan, hot pink, orange, purple).
 - `notes`: add preferences they mention over time ("hates emojis", "keep it under 30s").
 

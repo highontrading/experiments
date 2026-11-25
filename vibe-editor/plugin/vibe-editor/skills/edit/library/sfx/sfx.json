@@ -123,5 +123,130 @@
   "file": "zoom.wav",
   "seconds": 0.35,
   "desc": "Mechanical zoom sound to pair with punch-in zooms"
+ },
+ "tap": {
+  "file": "tap.wav",
+  "seconds": 0.05,
+  "desc": "Soft UI tap"
+ },
+ "toggle": {
+  "file": "toggle.wav",
+  "seconds": 0.12,
+  "desc": "UI switch toggle"
+ },
+ "swish": {
+  "file": "swish.wav",
+  "seconds": 0.4,
+  "desc": "Medium swish for slides and wipes"
+ },
+ "whoosh-long": {
+  "file": "whoosh-long.wav",
+  "seconds": 1.1,
+  "desc": "Long cinematic whoosh"
+ },
+ "reverse-whoosh": {
+  "file": "reverse-whoosh.wav",
+  "seconds": 0.9,
+  "desc": "Reverse suck-in whoosh before a reveal"
+ },
+ "coin": {
+  "file": "coin.wav",
+  "seconds": 0.43,
+  "desc": "8-bit coin pickup"
+ },
+ "level-up": {
+  "file": "level-up.wav",
+  "seconds": 0.42,
+  "desc": "Game level-up arpeggio"
+ },
+ "alarm": {
+  "file": "alarm.wav",
+  "seconds": 0.72,
+  "desc": "Alarm / warning siren"
+ },
+ "kick": {
+  "file": "kick.wav",
+  "seconds": 0.4,
+  "desc": "Punchy kick drum hit"
+ },
+ "clap": {
+  "file": "clap.wav",
+  "seconds": 0.25,
+  "desc": "Hand clap"
+ },
+ "snap": {
+  "file": "snap.wav",
+  "seconds": 0.06,
+  "desc": "Finger snap"
+ },
+ "laser": {
+  "file": "laser.wav",
+  "seconds": 0.35,
+  "desc": "Sci-fi laser zap"
+ },
+ "beep": {
+  "file": "beep.wav",
+  "seconds": 0.15,
+  "desc": "Single beep"
+ },
+ "countdown-beep": {
+  "file": "countdown-beep.wav",
+  "seconds": 3.4,
+  "desc": "3-2-1 countdown beeps"
+ },
+ "enter-key": {
+  "file": "enter-key.wav",
+  "seconds": 0.11,
+  "desc": "Keyboard enter / send"
+ },
+ "paper": {
+  "file": "paper.wav",
+  "seconds": 0.6,
+  "desc": "Paper rustle for notes and paper tears"
+ },
+ "camera-flash": {
+  "file": "camera-flash.wav",
+  "seconds": 0.79,
+  "desc": "Camera flash with charge whine"
+ },
+ "magic": {
+  "file": "magic.wav",
+  "seconds": 1.4,
+  "desc": "Magical chime cascade"
+ },
+ "bubble-pop": {
+  "file": "bubble-pop.wav",
+  "seconds": 0.27,
+  "desc": "Bubble + pop"
+ },
+ "transition-hit": {
+  "file": "transition-hit.wav",
+  "seconds": 0.7,
+  "desc": "Short punchy transition hit"
+ },
+ "ding-dong": {
+  "file": "ding-dong.wav",
+  "seconds": 1.3,
+  "desc": "Doorbell ding-dong"
+ },
+ "message-sent": {
+  "file": "message-sent.wav",
+  "seconds": 0.25,
+  "desc": "Message sent swoop"
+ },
+ "heart-pop": {
+  "file": "heart-pop.wav",
+  "seconds": 0.34,
+  "desc": "Like / heart pop"
+ },
+ "drum-roll": {
+  "file": "drum-roll.wav",
+  "seconds": 1.4,
+  "desc": "Accelerating drum roll for reveals"
+ },
+ "swoosh-up": {
+  "file": "swoosh-up.wav",
+  "seconds": 0.5,
+  "desc": "Rising swoosh for titles flying up"
  }
 }

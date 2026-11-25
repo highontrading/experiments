@@ -28,5 +28,12 @@ Start with `python3 "<ENGINE>" doctor` (add `--ws "<workspace>"` if you know it)
 | Audio out of sync | re-run `prep --reset` on the original file; if it's a screen recording with variable frame rate, convert first: `ffmpeg -i in.mp4 -r 30 -c:a copy fixed.mp4` (use the engine's ffmpeg path from doctor) |
 | "File not found" for b-roll/music/logo | files must be inside the workspace's `broll/`, `music/`, `brand/` folders |
 | Workspace not writable | pick a folder in Documents/Desktop that the user owns |
+| "AI cut-out runtime missing" | `install` again; if onnxruntime can't install on that machine, everything else still works (text-behind/cut-out effects are shown in front / skipped) |
+| AI model download fails | needs huggingface.co once; retry `install`. The model is cached in ~/.cache/vibe-editor |
+| Text behind the person "moved in front" | the readability check found the person would hide it: move it higher/bigger or use a shorter word |
+| "Rendered in safe mode" | an advanced effect broke ffmpeg; the video is fine without it. Check the named effect's options (see reference) and re-render |
+| A custom look/filter "rejected" | the ffmpeg filter string is invalid; fix or remove it (it never breaks the render) |
+| Own font not used | file must be .ttf/.otf in fonts/ or brand/; run `fonts` to see its key; `install` adds fonttools for exact sizing |
+| Effect "could not be built and was skipped" | run `check <job>`; fix that effect's options; set `VIBE_DEBUG=1` to see the full error |
 
 If you can't fix it, collect: the doctor output, the exact command, and the last lines of the error, and tell the user to send those to the Vibe Editor support contact from their purchase email.

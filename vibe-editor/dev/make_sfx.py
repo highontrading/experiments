@@ -312,6 +312,213 @@ SOUNDS = {
 }
 
 
+# ---------------------------------------------------------------- v2 sounds
+
+def tap():
+    d = 0.05
+    s = tone(1800 * np.exp(-t(d) * 30) + 600, d) * env(int(SR * d), 0.0005, 0.02, 2)
+    return fade(norm(s), 0.0005, 0.004)
+
+
+def toggle():
+    a = tone(1200, 0.04) * env(int(SR * 0.04), 0.0005, 0.02, 2)
+    b = tone(1600, 0.05) * env(int(SR * 0.05), 0.0005, 0.03, 2)
+    return fade(norm(np.concatenate([a, np.zeros(int(0.03 * SR)), b])))
+
+
+def swish():
+    return whoosh(0.4, True) * 0.8
+
+
+def whoosh_long():
+    return whoosh(1.1, True)
+
+
+def reverse_whoosh():
+    x = whoosh(0.9, True)
+    return fade(norm(x[::-1] * np.linspace(0.3, 1, len(x))))
+
+
+def coin():
+    a = tone(988, 0.08, "square") * env(int(SR * 0.08), 0.001, 0.07, 1)
+    b = tone(1319, 0.35, "square") * env(int(SR * 0.35), 0.001, 0.3, 1.4)
+    return fade(norm(lowpass(np.concatenate([a, b]), 6000)))
+
+
+def level_up():
+    out = []
+    for f in [392, 523.25, 659.25, 783.99, 1046.5, 1318.5]:
+        out.append(tone(f, 0.07, "square") * env(int(SR * 0.07), 0.001, 0.06, 1))
+    return fade(norm(lowpass(np.concatenate(out), 5000)))
+
+
+def alarm():
+    seg = np.concatenate([tone(880, 0.12, "square"), tone(660, 0.12, "square")])
+    s = np.tile(seg, 3) * 0.6
+    return fade(norm(lowpass(s, 4000)))
+
+
+def kick():
+    d = 0.4
+    f = 45 + 120 * np.exp(-t(d) * 35)
+    s = tone(f, d) * env(int(SR * d), 0.001, 0.3, 1.2)
+    return fade(norm(np.tanh(s * 2)))
+
+
+def clap():
+    out = np.zeros(int(SR * 0.25))
+    for i, dly in enumerate([0, 0.012, 0.024]):
+        b = bandnoise(0.2, 900, 5000) * env(int(SR * 0.2), 0.0005, 0.06 if i < 2 else 0.12, 2)
+        st = int(dly * SR)
+        out[st:st + len(b)] += b[: len(out) - st]
+    return fade(norm(out))
+
+
+def snap():
+    s = bandnoise(0.06, 2500, 12000) * env(int(SR * 0.06), 0.0003, 0.015, 2)
+    return fade(norm(s), 0.0003, 0.005)
+
+
+def laser():
+    d = 0.35
+    f = 2400 * np.exp(-t(d) * 9) + 200
+    s = tone(f, d, "square") * env(int(SR * d), 0.001, 0.3, 1)
+    return fade(norm(lowpass(s, 7000)))
+
+
+def beep():
+    d = 0.15
+    return fade(norm(tone(1000, d) * env(int(SR * d), 0.003, 0.13, 0.5)))
+
+
+def countdown_beep():
+    a = beep()
+    g = np.zeros(int(0.85 * SR))
+    hi = fade(norm(tone(1500, 0.4) * env(int(SR * 0.4), 0.003, 0.38, 0.5)))
+    return np.concatenate([a, g, a, g, a, g, hi])
+
+
+def enter_key():
+    a = click() * 0.8
+    b = bandnoise(0.08, 300, 2500) * env(int(SR * 0.08), 0.001, 0.04, 2) * 0.6
+    out = np.zeros(len(a) + len(b))
+    out[: len(a)] += a
+    out[len(a) // 2: len(a) // 2 + len(b)] += b
+    return fade(norm(out))
+
+
+def paper():
+    d = 0.6
+    n = int(SR * d)
+    s = bandnoise(d, 1500, 9000) * (np.abs(np.sin(2 * np.pi * 7 * t(d))) ** 3 + 0.2) * np.sin(np.pi * np.linspace(0, 1, n))
+    return fade(norm(s))
+
+
+def camera_flash():
+    a = shutter()
+    d = 0.6
+    w = tone(3000 + 2000 * t(d) / d, d) * np.linspace(0.25, 0, int(SR * d))
+    out = np.zeros(len(a) + len(w))
+    out[: len(a)] += a
+    out[len(a) // 3: len(a) // 3 + len(w)] += w
+    return fade(norm(out))
+
+
+def magic():
+    d = 1.4
+    out = np.zeros(int(SR * d))
+    for i, f in enumerate([1046.5, 1318.5, 1568, 2093, 2637]):
+        g = tone(f, 1.0) * env(int(SR * 1.0), 0.002, 0.8, 1.5) * 0.5
+        st = int(i * 0.07 * SR)
+        out[st:st + len(g)] += g[: len(out) - st]
+    return fade(norm(out))
+
+
+def bubble_pop():
+    a = bubble()
+    b = pop()
+    return fade(norm(np.concatenate([a, b * 0.8])))
+
+
+def transition_hit():
+    d = 0.7
+    body = tone(60 + 60 * np.exp(-t(d) * 20), d) * env(int(SR * d), 0.001, 0.5, 1.4)
+    noise = bandnoise(d, 300, 6000) * env(int(SR * d), 0.001, 0.15, 2) * 0.5
+    return fade(norm(body + noise))
+
+
+def ding_dong():
+    a = tone(659.25, 0.5) * env(int(SR * 0.5), 0.003, 0.45, 1)
+    b = tone(523.25, 0.8) * env(int(SR * 0.8), 0.003, 0.75, 1)
+    return fade(norm(np.concatenate([a, b])))
+
+
+def message_sent():
+    d = 0.25
+    f = 600 + 1400 * (t(d) / d) ** 1.4
+    return fade(norm(tone(f, d) * env(int(SR * d), 0.003, 0.2, 1.5)))
+
+
+def heart_pop():
+    a = pop()
+    b = tone(1568, 0.25) * env(int(SR * 0.25), 0.002, 0.2, 2) * 0.6
+    return fade(norm(np.concatenate([a, b])))
+
+
+def glitch_short():
+    return glitch()[: int(0.2 * SR)]
+
+
+def drum_roll():
+    d = 1.4
+    out = np.zeros(int(SR * d))
+    pos = 0.0
+    k = 0
+    while pos < d - 0.05:
+        b = bandnoise(0.06, 200, 3000) * env(int(SR * 0.06), 0.0005, 0.03, 2) * (0.4 + 0.6 * pos / d)
+        st = int(pos * SR)
+        out[st:st + len(b)] += b[: len(out) - st]
+        pos += max(0.025, 0.07 - k * 0.002)
+        k += 1
+    return fade(norm(out))
+
+
+def swoosh_up():
+    d = 0.5
+    f = 300 * 2 ** (t(d) / d * 3)
+    s = 0.5 * tone(f, d, "tri") * np.sin(np.pi * np.linspace(0, 1, int(SR * d))) + 0.5 * whoosh(d, True)[: int(SR * d)]
+    return fade(norm(s))
+
+
+SOUNDS.update({
+    "tap": (tap, "Soft UI tap"),
+    "toggle": (toggle, "UI switch toggle"),
+    "swish": (swish, "Medium swish for slides and wipes"),
+    "whoosh-long": (whoosh_long, "Long cinematic whoosh"),
+    "reverse-whoosh": (reverse_whoosh, "Reverse suck-in whoosh before a reveal"),
+    "coin": (coin, "8-bit coin pickup"),
+    "level-up": (level_up, "Game level-up arpeggio"),
+    "alarm": (alarm, "Alarm / warning siren"),
+    "kick": (kick, "Punchy kick drum hit"),
+    "clap": (clap, "Hand clap"),
+    "snap": (snap, "Finger snap"),
+    "laser": (laser, "Sci-fi laser zap"),
+    "beep": (beep, "Single beep"),
+    "countdown-beep": (countdown_beep, "3-2-1 countdown beeps"),
+    "enter-key": (enter_key, "Keyboard enter / send"),
+    "paper": (paper, "Paper rustle for notes and paper tears"),
+    "camera-flash": (camera_flash, "Camera flash with charge whine"),
+    "magic": (magic, "Magical chime cascade"),
+    "bubble-pop": (bubble_pop, "Bubble + pop"),
+    "transition-hit": (transition_hit, "Short punchy transition hit"),
+    "ding-dong": (ding_dong, "Doorbell ding-dong"),
+    "message-sent": (message_sent, "Message sent swoop"),
+    "heart-pop": (heart_pop, "Like / heart pop"),
+    "drum-roll": (drum_roll, "Accelerating drum roll for reveals"),
+    "swoosh-up": (swoosh_up, "Rising swoosh for titles flying up"),
+})
+
+
 def write_wav(path, x):
     st = stereo(x, 0.4)
     data = (np.clip(st, -1, 1) * 32767).astype("<i2")
