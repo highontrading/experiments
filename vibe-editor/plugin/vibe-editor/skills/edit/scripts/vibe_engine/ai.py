@@ -151,10 +151,10 @@ class MaskPool:
         G.push("__MASK__")
         self.labels = []
 
-    def get(self):
+    def get(self, win=None):
         lab = self.G.lab("m")
         self.labels.append(lab)
-        return lab
+        return self.G.window(lab, *win) if win else lab
 
     def finalize(self):
         G = self.G
@@ -182,10 +182,10 @@ def _rgba_from(G, video_lab, mask_lab):
     return out
 
 
-def _solid(G, color, alpha_lab):
+def _solid(G, color, alpha_lab, a, b):
     out = G.lab("sd")
-    G.push(f"color=c=0x{color.lstrip('#')}:s={G.RW}x{G.RH}:r={FPS}:d={G.total + 1:.3f},format=yuva420p[{out}c];"
-           f"[{out}c][{alpha_lab}]alphamerge[{out}]")
+    c = G.canvas(color, a, b)
+    G.push(f"[{c}]format=yuva420p[{out}c];[{out}c][{alpha_lab}]alphamerge[{out}]")
     return out
 
 
@@ -196,10 +196,10 @@ def _bg_source(G, ctx, spec, ws, a, b, base_lab=None):
         G.push(f"[{base_lab}]gblur=sigma={30 * (0.5 if G.preview else 1):.0f},eq=brightness=-0.05[{out}]")
         return out
     if isinstance(spec, str) and spec.startswith("#"):
-        return G.canvas(spec)
+        return G.canvas(spec, a, b)
     p = find_media(ws, spec, "broll")
     if not p:
-        return G.canvas("#F2F0EB")
+        return G.canvas("#F2F0EB", a, b)
     img = p.lower().endswith((".png", ".jpg", ".jpeg", ".webp"))
     idx = G.add_input((["-loop", "1"] if img else ["-stream_loop", "-1"]) + ["-t", f"{b - a + 0.5:.3f}", "-i", p])
     out = G.lab("bf")
@@ -220,43 +220,37 @@ def apply_ai(G, ctx, events, pool, ws):
         dflt = {"dolly": 1.6, "outline": 2.5}.get(typ, 2.0)
         a, b = ev_window(ctx, e, dflt)
         if typ == "background":
-            keep, src, bgsrc = G.split(3)
+            keep, src, bgsrc = G.split(3, win=(a, b))
             bg = _bg_source(G, ctx, e.get("bg", "blur"), ws, a, b, bgsrc)
             if e.get("bg", "blur") != "blur":
                 G.push(f"[{bgsrc}]nullsink")
             out = G.lab("bgm")
-            G.push(f"[{bg}]format=yuv420p[{out}b];[{src}]format=yuv420p[{out}s];[{out}b][{out}s][{pool.get()}]maskedmerge[{out}]")
+            G.push(f"[{bg}]format=yuv420p[{out}b];[{src}]format=yuv420p[{out}s];[{out}b][{out}s][{pool.get((a, b))}]maskedmerge[{out}]")
             G.cur = G.overlay(keep, out, a=a, b=b)
         elif typ == "outline":
             keep = G.cur
-            m1, m2 = pool.get(), pool.get()
+            m1, m2 = pool.get((a, b)), pool.get((a, b))
             d = _dilate(G, m1, float(e.get("width", 7)) * u * sx)
             ring = G.lab("rg")
             G.push(f"[{d}][{m2}]blend=all_mode=subtract[{ring}]")
-            solid = _solid(G, e.get("color", "#FFFFFF"), ring)
+            solid = _solid(G, e.get("color", "#FFFFFF"), ring, a, b)
             if e.get("glow"):
                 gl = G.lab("gw")
                 G.push(f"[{solid}]gblur=sigma=8[{gl}]")
                 keep = G.overlay(keep, gl, a=a, b=b)
             G.cur = G.overlay(keep, solid, a=a, b=b)
         elif typ == "cutout":
-            keep, src = G.split(2)
-            m1, m2 = pool.get(), pool.get()
+            keep, src = G.split(2, win=(a, b))
+            m1, m2 = pool.get((a, b)), pool.get((a, b))
             freeze = e.get("freeze", True)
             vlab = src
             if freeze:
-                fz = G.lab("fz")
-                n = int((b - a) * FPS) + 2
-                G.push(f"[{src}]trim=start={a:.3f}:end={a + 1.0 / FPS + 0.001:.3f},setpts=PTS-STARTPTS,loop=loop={n}:size=1,"
-                       f"setpts=N/{FPS}/TB+{a:.3f}/TB[{fz}]")
-                G.push(f"[{m1}]trim=start={a:.3f}:end={a + 1.0 / FPS + 0.001:.3f},setpts=PTS-STARTPTS,loop=loop={n}:size=1,"
-                       f"setpts=N/{FPS}/TB+{a:.3f}/TB[{fz}m1]")
-                G.push(f"[{m2}]trim=start={a:.3f}:end={a + 1.0 / FPS + 0.001:.3f},setpts=PTS-STARTPTS,loop=loop={n}:size=1,"
-                       f"setpts=N/{FPS}/TB+{a:.3f}/TB[{fz}m2]")
-                vlab, m1, m2 = fz, f"{fz}m1", f"{fz}m2"
+                from .fx_video import freeze_branch
+                vlab, m1, m2 = (freeze_branch(G, src, a, b, True), freeze_branch(G, m1, a, b, True),
+                                freeze_branch(G, m2, a, b, True))
             person = _rgba_from(G, vlab, m1)
             d = _dilate(G, m2, float(e.get("outline", 14)) * u * sx)
-            white = _solid(G, e.get("outline_color", "#FFFFFF"), d)
+            white = _solid(G, e.get("outline_color", "#FFFFFF"), d, a, b)
             st = G.lab("stk")
             G.push(f"[{white}][{person}]overlay=format=auto[{st}]")
             sc = float(e.get("scale", 0.86))
@@ -271,9 +265,12 @@ def apply_ai(G, ctx, events, pool, ws):
             comp = G.overlay(comp, f"{st2}a", "(W-w)/2", f"(H-h)/2+{float(e.get('y_offset', 0.04)) * G.RH:.0f}")
             G.cur = G.overlay(keep, comp, a=a, b=b)
         elif typ == "clone":
-            keep, src = G.split(2)
-            count = max(1, min(6, int(e.get("count", 4))))
-            person = _rgba_from(G, src, pool.get())
+            keep, src = G.split(2, win=(a, b))
+            try:
+                count = max(1, min(6, int(float(e.get("count", 4)))))
+            except (TypeError, ValueError):
+                count = 4
+            person = _rgba_from(G, src, pool.get((a, b)))
             labs = [G.lab("cl") for _ in range(count + 1)]
             G.push(f"[{person}]split={count + 1}" + "".join(f"[{l}]" for l in labs))
             cur = keep
@@ -292,20 +289,27 @@ def apply_ai(G, ctx, events, pool, ws):
                 G.push(f"[{labs[i]}]scale={cw}:{ch},format=yuva420p,colorchannelmixer=aa=0.95[{c2}]")
                 x = f"(W-w)/2+{off * G.RW:.0f}"
                 y = f"{G.RH * float(e.get('y', 0.06)):.0f}+(H-h)*0.5-{G.RH * 0.06:.0f}"
-                cur = G.overlay(cur, c2, x, y, a + delay, b)
+                cur = G.overlay(cur, c2, x, y, a + delay, b, pad_at=a)
             G.cur = G.overlay(cur, labs[count], "0", "0", a, b)
         elif typ == "dolly":
-            keep, src, zsrc = G.split(3)
-            amt = float(e.get("amount", 1.35)) - 1
-            p = f"min(1,max(0,(in/30-{a:.3f})/{max(0.2, b - a):.3f}))"
+            keep, src, zsrc = G.split(3, win=(a, b))
+            try:
+                amt = min(1.0, max(0.05, float(e.get("amount", 1.35)) - 1))
+            except (TypeError, ValueError):
+                amt = 0.35
+            p = f"min(1,max(0,(in/{FPS})/{max(0.2, b - a):.3f}))"
             zl = G.lab("dz")
-            G.push(f"[{zsrc}]zoompan=z='1+{amt:.3f}*(1-{p})':x='(iw-iw/zoom)/2':y='(ih-ih/zoom)*0.42':d=1:s={G.RW}x{G.RH}:fps={FPS}[{zl}]")
+            G.push(f"[{zsrc}]zoompan=z='1+{amt:.3f}*(1-{p})':x='(iw-iw/zoom)/2':y='(ih-ih/zoom)*0.42':d=1:s={G.RW}x{G.RH}:fps={FPS},"
+                   f"setpts=PTS-STARTPTS+{G.n0(a) / FPS:.4f}/TB[{zl}]")
             out = G.lab("dm")
-            G.push(f"[{zl}]format=yuv420p[{out}z];[{src}]format=yuv420p[{out}s];[{out}z][{out}s][{pool.get()}]maskedmerge[{out}]")
+            G.push(f"[{zl}]format=yuv420p[{out}z];[{src}]format=yuv420p[{out}s];[{out}z][{out}s][{pool.get((a, b))}]maskedmerge[{out}]")
             G.cur = G.overlay(keep, out, a=a, b=b)
         elif typ == "frame_break":
-            keep, src = G.split(2)
-            s = float(e.get("scale", 0.80))
+            keep, src = G.split(2, win=(a, b))
+            try:
+                s = min(0.95, max(0.5, float(e.get("scale", 0.80))))
+            except (TypeError, ValueError):
+                s = 0.8
             sw, sh = int(G.RW * s) // 2 * 2, int(G.RH * s) // 2 * 2
             X, Y = (G.RW - sw) // 2, int(G.RH * 0.12)
             fx0, fy0 = X + int(sw * 0.07), Y + int(sh * float(e.get('frame_top', 0.40)))
@@ -314,12 +318,12 @@ def apply_ai(G, ctx, events, pool, ws):
             G.push(f"[{src}]scale={sw}:{sh}[{sc}];[{sc}]split[{sc}a][{sc}b]")
             inset = G.lab("fi")
             G.push(f"[{sc}a]crop={fw}:{fh}:{fx0 - X}:{fy0 - Y}[{inset}]")
-            canvas = G.canvas(e.get("bg", ctx.ui["paper"]))
+            canvas = G.canvas(e.get("bg", ctx.ui["paper"]), a, b)
             comp = G.overlay(canvas, inset, str(fx0), str(fy0))
             bw = max(4, int(10 * u * sx))
             c2 = G.lab("fbx")
             G.push(f"[{comp}]drawbox=x={fx0 - bw}:y={fy0 - bw}:w={fw + 2 * bw}:h={fh + 2 * bw}:color=0x{e.get('frame_color', '#161616').lstrip('#')}:t={bw}[{c2}]")
-            m = pool.get()
+            m = pool.get((a, b))
             ms = G.lab("fm")
             G.push(f"[{m}]scale={sw}:{sh}[{ms}]")
             person = _rgba_from(G, f"{sc}b", ms)

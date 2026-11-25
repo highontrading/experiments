@@ -3,17 +3,84 @@ FONT LICENCES
 
 All fonts in this folder are free for commercial use (including client work) and may be bundled with software.
 
-SIL Open Font License 1.1 (full text below):
-  Poppins (Indian Type Foundry), Inter (Rasmus Andersson), Anton (Vernon Adams), Bebas Neue (Dharma Type),
-  Archivo Black & Archivo Expanded (Omnibus-Type), Bangers (Vernon Adams), Caveat (Impallari Type),
-  DM Serif Display (Colophon Foundry), Noto Sans + Noto Sans Devanagari/Tamil/Telugu/Bengali/Gujarati/
-  Kannada/Malayalam/Gurmukhi (Google / Noto project)
-
 Apache License 2.0:
-  Permanent Marker (Font Diner)
+  LuckiestGuy-Regular.ttf
+  PermanentMarker-Regular.ttf
+  Satisfy-Regular.ttf
+  SpecialElite-Regular.ttf
+  Ultra-Regular.ttf
 
-Sound effects in ../sfx are original works generated for Vibe Editor.
+SIL Open Font License 1.1 (full text below):
+  AbrilFatface-Regular.ttf
+  Anton-Regular.ttf
+  Archivo-Expanded-900.ttf
+  ArchivoBlack-Regular.ttf
+  Bangers-Regular.ttf
+  Barlow-Black.ttf
+  Barlow-ExtraBold.ttf
+  Barlow-SemiBold.ttf
+  BarlowCondensed-Black.ttf
+  BarlowCondensed-ExtraBold.ttf
+  BebasNeue-Regular.ttf
+  BlackOpsOne-Regular.ttf
+  BowlbyOne-Regular.ttf
+  Bungee-Regular.ttf
+  Caveat-600.ttf
+  ChakraPetch-Bold.ttf
+  DMSerifDisplay-Italic.ttf
+  DMSerifDisplay-Regular.ttf
+  GloriaHallelujah.ttf
+  Hind-Bold.ttf
+  HindMadurai-Bold.ttf
+  HindSiliguri-Bold.ttf
+  HindVadodara-Bold.ttf
+  IBMPlexMono-Bold.ttf
+  IBMPlexMono-Medium.ttf
+  InstrumentSerif-Italic.ttf
+  InstrumentSerif-Regular.ttf
+  Inter-Bold.otf
+  Inter-ExtraBold.otf
+  Kalam-Bold.ttf
+  Kanit-Black.ttf
+  Kanit-SemiBold.ttf
+  LilitaOne-Regular.ttf
+  Monoton-Regular.ttf
+  Montserrat-Black.ttf
+  Montserrat-BlackItalic.ttf
+  Montserrat-Bold.ttf
+  Montserrat-ExtraBold.ttf
+  Mukta-ExtraBold.ttf
+  MuktaMahee-ExtraBold.ttf
+  NotoSans-Black.ttf
+  NotoSans-Bold.ttf
+  NotoSansBengali-Bold.ttf
+  NotoSansDevanagari-Black.ttf
+  NotoSansDevanagari-Bold.ttf
+  NotoSansGujarati-Bold.ttf
+  NotoSansGurmukhi-Bold.ttf
+  NotoSansKannada-Bold.ttf
+  NotoSansMalayalam-Bold.ttf
+  NotoSansTamil-Bold.ttf
+  NotoSansTelugu-Bold.ttf
+  Pacifico-Regular.ttf
+  Poppins-Black.ttf
+  Poppins-Bold.ttf
+  Poppins-ExtraBold.ttf
+  Poppins-SemiBold.ttf
+  PressStart2P-Regular.ttf
+  Righteous-Regular.ttf
+  RozhaOne-Regular.ttf
+  RubikMonoOne-Regular.ttf
+  RussoOne-Regular.ttf
+  ShadowsIntoLight.ttf
+  Shrikhand-Regular.ttf
+  SpaceMono-Bold.ttf
+  SpaceMono-Regular.ttf
+  VT323-Regular.ttf
+  YatraOne-Regular.ttf
 
+Sound effects in ../sfx are original works generated for Vibe Editor (dev/make_sfx.py).
+The AI cut-out model (MODNet, Apache 2.0) is downloaded at install time and not bundled.
 -----------------------------------------------------------------
 PREAMBLE
 The goals of the Open Font License (OFL) are to stimulate worldwide

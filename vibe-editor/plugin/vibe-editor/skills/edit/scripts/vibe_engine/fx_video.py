@@ -1,4 +1,5 @@
 """Video-level effects and the filter-graph builder."""
+import math
 import os
 import re
 import subprocess
@@ -41,20 +42,56 @@ class Graph:
         self.cur = new
         return new
 
-    def split(self, n=2):
+    def split(self, n=2, win=None):
+        """Split the current stream. With win=(a, b) every copy except the first is trimmed to that window,
+        so effect branches only process the frames where the effect is visible (fast, constant memory)."""
         labs = [self.lab("s") for _ in range(n)]
         self.push(f"[{self.cur}]split={n}" + "".join(f"[{l}]" for l in labs))
+        if win:
+            out = [labs[0]]
+            for l in labs[1:]:
+                out.append(self.window(l, *win))
+            return out
         return labs
 
-    def overlay(self, base, top, x="0", y="0", a=None, b=None, extra=""):
+    def window(self, lab, a, b):
+        """Trim a branch to [a, b] keeping its original timestamps."""
+        w = self.lab("w")
+        self.push(f"[{lab}]trim=start_frame={self.n0(a)}:end_frame={self.n1(b)}[{w}]")
+        return w
+
+    def n0(self, a):
+        return int(max(0.0, a - 0.02) * FPS)
+
+    def n1(self, b):
+        return int(math.ceil((b + 0.04) * FPS))
+
+    def pad_start(self, lab, a):
+        """Give a windowed branch cheap blank frames from t=0 so overlay never has to look ahead (no buffering)."""
+        n0 = self.n0(a)
+        if n0 <= 0:
+            return lab
+        p = self.lab("pd")
+        self.push(f"[{lab}]setpts=PTS-STARTPTS,tpad=start_duration={n0 / FPS:.4f}:start_mode=add:color=black@0[{p}]")
+        return p
+
+    def overlay(self, base, top, x="0", y="0", a=None, b=None, extra="", pad=True, pad_at=None):
+        if a is not None and pad:
+            top = self.pad_start(top, a if pad_at is None else pad_at)
         new = self.lab("o")
         en = f":enable='between(t,{a:.3f},{b:.3f})'" if a is not None else ""
         self.push(f"[{base}][{top}]overlay=x='{x}':y='{y}'{en}:eof_action=pass{extra}[{new}]")
         return new
 
-    def canvas(self, color, a=0.0):
+    def canvas(self, color, a=None, b=None):
+        """Solid colour source; with a window it only exists (and only costs) during [a, b]."""
         lab = self.lab("c")
-        self.push(f"color=c=0x{color.lstrip('#')}:s={self.RW}x{self.RH}:r={FPS}:d={self.total + 1:.3f}[{lab}]")
+        col = "0x" + str(color or "#F2F0EB").lstrip("#")
+        if a is None:
+            self.push(f"color=c={col}:s={self.RW}x{self.RH}:r={FPS}:d={self.total + 1:.3f}[{lab}]")
+        else:
+            n0, n1 = self.n0(a), self.n1(b)
+            self.push(f"color=c={col}:s={self.RW}x{self.RH}:r={FPS}:d={(n1 - n0) / FPS:.4f},setpts=PTS+{n0 / FPS:.4f}/TB[{lab}]")
         return lab
 
 
@@ -264,32 +301,44 @@ def window_filters(G, ctx, events):
         G.chain(",".join(chain))
 
 
+def freeze_branch(G, lab, a, b, windowed=False):
+    """Freeze `lab` on its frame at time a for [a, b] — lockstep (no frame buffering, constant memory).
+    windowed=True when `lab` was already trimmed to start at a (frame numbers are then relative)."""
+    n0 = 0 if windowed else max(0, int(round(a * FPS)))
+    n1 = n0 + max(1, int(round((b - a) * FPS)))
+    x = G.lab("fq")
+    G.push(f"[{lab}]split[{x}a][{x}b];[{x}a][{x}b]freezeframes=first={n0}:last={n1}:replace={n0}[{x}]")
+    return x
+
+
 def freeze_frames(G, ctx, events):
     for e in events:
         if e.get("type") != "freeze":
             continue
         a_, b_ = ev_window(ctx, e, 1.2)
-        keep, src = G.split(2)
-        fz = G.lab("fz")
-        tilt = float(e.get("tilt", 0))
-        scale = float(e.get("scale", 1.0))
-        extra = ""
+        try:
+            tilt = float(e.get("tilt", 0))
+            scale = float(e.get("scale", 1.0))
+        except (TypeError, ValueError):
+            tilt, scale = 0.0, 1.0
+        scale = min(1.0, max(0.4, scale))
         if scale != 1.0 or tilt:
+            keep, src = G.split(2, win=(a_, b_))
+            fz = freeze_branch(G, src, a_, b_, windowed=True)
             sw = int(G.RW * scale) // 2 * 2
             sh = int(G.RH * scale) // 2 * 2
-            extra = f",scale={sw}:{sh}"
-            if tilt:
-                extra += f",format=rgba,rotate={tilt}*PI/180:c=none:ow=rotw({tilt}*PI/180):oh=roth({tilt}*PI/180)"
-        G.push(f"[{src}]trim=start={a_:.3f}:end={a_ + 1.0 / FPS + 0.001:.3f},setpts=PTS-STARTPTS,"
-               f"loop=loop={int((b_ - a_) * FPS) + 2}:size=1,setpts=N/{FPS}/TB+{a_:.3f}/TB{extra}[{fz}]")
-        if scale != 1.0 or tilt:
+            fz2 = G.lab("fz")
+            G.push(f"[{fz}]scale={sw}:{sh},format=rgba,rotate={tilt}*PI/180:c=none:ow=rotw({tilt}*PI/180):oh=roth({tilt}*PI/180)[{fz2}]")
             bg = G.lab("fb")
             G.push(f"[{keep}]split[{bg}a][{bg}b]")
             dim = G.lab("fd")
-            G.push(f"[{bg}b]gblur=sigma=18,eq=brightness=-0.15[{dim}]")
+            bgw = G.window(f"{bg}b", a_, b_)
+            G.push(f"[{bgw}]gblur=sigma=18,eq=brightness=-0.15[{dim}]")
             base2 = G.overlay(f"{bg}a", dim, a=a_, b=b_)
-            G.cur = G.overlay(base2, fz, "(W-w)/2", "(H-h)/2", a_, b_)
+            G.cur = G.overlay(base2, fz2, "(W-w)/2", "(H-h)/2", a_, b_)
         else:
+            keep, src = G.split(2, win=(a_, b_))
+            fz = freeze_branch(G, src, a_, b_, windowed=True)
             G.cur = G.overlay(keep, fz, a=a_, b=b_)
         if e.get("flash", True):
             ctx.extra_sfx.append((a_, e.get("sfx", "shutter"), 0.6))
@@ -309,7 +358,7 @@ def blur_regions(G, ctx):
         if not os.path.exists(mpath):
             png_mask(mpath, w, h, "rrect", r=r.get("r", 36) * sx)
         idx = G.add_input(["-loop", "1", "-i", mpath])
-        keep, src = G.split(2)
+        keep, src = G.split(2, win=(r["a"], r["b"]))
         g = G.lab("gl")
         sig = r.get("sigma", 22) * (0.5 if G.preview else 1)
         G.push(f"[{src}]crop={w}:{h}:{x}:{y},gblur=sigma={sig:.1f},eq=brightness=0.04:saturation=1.1,format=yuva420p[{g}c];"
@@ -332,7 +381,7 @@ def spotlight(G, ctx, events):
         sp = G.lab("sp")
         G.push(f"[{idx}:v]format=rgba,fade=t=in:st=0:d=0.3:alpha=1,fade=t=out:st={max(0, b_ - a_ - 0.3):.3f}:d=0.3:alpha=1,"
                f"setpts=PTS-STARTPTS+{a_:.3f}/TB[{sp}]")
-        G.cur = G.overlay(G.cur, sp, a=a_, b=b_)
+        G.cur = G.overlay(G.cur, sp, a=a_, b=b_, pad=False)
 
 
 def overlays(G, ctx, events, ws, look):
@@ -370,7 +419,7 @@ def overlays(G, ctx, events, ws, look):
             b = G.lab("b")
             G.push(f"[{idx}:v]{sc}{kb},fps={FPS}{lk},format=yuva420p,fade=t=in:st=0:d=0.15:alpha=1,"
                    f"setpts=PTS-STARTPTS+{a_:.3f}/TB[{b}]")
-            G.cur = G.overlay(G.cur, b, pos[0], pos[1], a_, b_)
+            G.cur = G.overlay(G.cur, b, pos[0], pos[1], a_, b_, pad=False)
             k += 1
         elif typ in ("image", "overlay", "sticker_file"):
             a_, b_ = ev_window(ctx, e, 3.0)
@@ -396,7 +445,7 @@ def overlays(G, ctx, events, ws, look):
             i_ = G.lab("i")
             G.push(f"[{idx}:v]scale={iw}:-2,fps={FPS},format=yuva420p,fade=t=in:st=0:d=0.25:alpha=1,"
                    f"setpts=PTS-STARTPTS+{a_:.3f}/TB[{i_}]")
-            G.cur = G.overlay(G.cur, i_, pos[0], pos[1], a_, b_)
+            G.cur = G.overlay(G.cur, i_, pos[0], pos[1], a_, b_, pad=False)
             k += 1
         elif typ == "double_exposure":
             a_, b_ = ev_window(ctx, e, 2.5)
@@ -406,7 +455,7 @@ def overlays(G, ctx, events, ws, look):
             img = p.lower().endswith((".png", ".jpg", ".jpeg", ".webp"))
             idx = G.add_input((["-loop", "1"] if img else ["-ss", f"{float(e.get('from', 0)):.3f}"]) +
                               ["-t", f"{b_ - a_ + 0.5:.3f}", "-i", p])
-            keep, src = G.split(2)
+            keep, src = G.split(2, win=(a_, b_))
             d = G.lab("de")
             G.push(f"[{idx}:v]scale={G.RW}:{G.RH}:force_original_aspect_ratio=increase,crop={G.RW}:{G.RH},fps={FPS},hue=s=0,"
                    f"setpts=PTS-STARTPTS+{a_:.3f}/TB,format=yuv420p[{d}b];"
@@ -445,8 +494,8 @@ def frames_layouts(G, ctx, events, ws):
             tpl = FRAME_TEMPLATES.get(e.get("style", "newspaper"), FRAME_TEMPLATES["newspaper"])
             a_, b_ = ev_window(ctx, e, 2.5)
             x, y, w, h = _win_px(G, tpl, e)
-            keep, src = G.split(2)
-            canvas = G.canvas(e.get("canvas", tpl["canvas"]))
+            keep, src = G.split(2, win=(a_, b_))
+            canvas = G.canvas(e.get("canvas", tpl["canvas"]), a_, b_)
             f = G.lab("fr")
             filt = tpl.get("filter") or "null"
             G.push(f"[{src}]scale={w}:{h}:force_original_aspect_ratio=increase,crop={w}:{h},{filt},format=yuva420p[{f}v]")
@@ -466,8 +515,8 @@ def frames_layouts(G, ctx, events, ws):
             x, y, w, h = _win_px(G, tpl, e)
             s_end = w / G.RW
             ramp = float(e.get("ramp", 0.55))
-            keep, src = G.split(2)
-            canvas = G.canvas(e.get("canvas", tpl["canvas"]))
+            keep, src = G.split(2, win=(a_, b_))
+            canvas = G.canvas(e.get("canvas", tpl["canvas"]), a_, b_)
             p = f"min(1,max(0,(t-{a_:.3f})/{ramp:.3f}))"
             ease = f"(1-pow(1-{p},3))"
             sc = f"(1-(1-{s_end:.4f})*{ease})"
@@ -481,8 +530,8 @@ def frames_layouts(G, ctx, events, ws):
         elif typ == "layout":
             a_, b_ = ev_window(ctx, e, 3.0)
             style = e.get("style", "split-top")
-            keep, src = G.split(2)
-            canvas = G.canvas(e.get("canvas", ctx.ui["paper"]))
+            keep, src = G.split(2, win=(a_, b_))
+            canvas = G.canvas(e.get("canvas", ctx.ui["paper"]), a_, b_)
             other = None
             if e.get("file"):
                 p = find_media(ws, e["file"], "broll")
@@ -535,10 +584,11 @@ def frames_layouts(G, ctx, events, ws):
             k = len(G.lines)
             mfile = f"mask_text_{k}.ass"
             _write_text_mask(ctx, e, a_, b_, os.path.join(G.cwd, mfile))
-            keep, src = G.split(2)
-            canvas = G.canvas(e.get("canvas", ctx.ui["paper"]))
+            keep, src = G.split(2, win=(a_, b_))
+            canvas = G.canvas(e.get("canvas", ctx.ui["paper"]), a_, b_)
             m = G.lab("tm")
-            G.push(f"color=c=black:s={ctx.W}x{ctx.H}:r={FPS}:d={G.total + 1:.3f},ass={mfile},scale={G.RW}:{G.RH},format=gray[{m}m];"
+            G.push(f"color=c=black:s={ctx.W}x{ctx.H}:r={FPS}:d={(G.n1(b_) - G.n0(a_)) / FPS:.4f},setpts=PTS+{G.n0(a_) / FPS:.4f}/TB,"
+                   f"ass={mfile},scale={G.RW}:{G.RH},format=gray[{m}m];"
                    f"[{src}]format=yuva420p[{m}v];[{m}v][{m}m]alphamerge[{m}a]")
             comp = G.overlay(canvas, f"{m}a")
             G.cur = G.overlay(keep, comp, a=a_, b=b_)
@@ -548,11 +598,12 @@ def frames_layouts(G, ctx, events, ws):
             if not os.path.exists(mpath):
                 png_mask(mpath, G.RW, G.RH, "halfplane", angle=float(e.get("angle", -0.35)))
             idx = G.add_input(["-loop", "1", "-i", mpath])
-            keep, src = G.split(2)
+            keep, src = G.split(2, win=(a_, b_))
             s_ = G.lab("sl")
             G.push(f"[{src}]format=yuva420p[{s_}v];[{idx}:v]format=gray,scale={G.RW}:{G.RH}[{s_}m];[{s_}v][{s_}m]alphamerge[{s_}]")
             dist = float(e.get("amount", 60)) * ctx.u * G.RW / ctx.W
             prog = f"min(1,max(0,(t-{a_:.3f})/0.18))*min(1,max(0,({b_:.3f}-t)/0.18))"
+            s_ = G.pad_start(s_, a_)
             new = G.lab("o")
             G.push(f"[{keep}][{s_}]overlay=x='-{dist:.1f}*{prog}':y='{dist * 0.4:.1f}*{prog}':enable='between(t,{a_:.3f},{b_:.3f})':eval=frame[{new}]")
             G.cur = new

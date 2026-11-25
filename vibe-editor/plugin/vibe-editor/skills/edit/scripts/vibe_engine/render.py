@@ -87,7 +87,9 @@ def build_plan(ws, jd, edit, fmt, preview, force_front=None, drop_types=()):
                 r = fx_video.ASS_EVENTS[typ](ctx, e)
             if typ in ASS_HANDLERS:
                 r = ASS_HANDLERS[typ](ctx, e)
-            if r and e.get("hide_captions", typ in HIDE_CAPTIONS):
+            if e.get("hide_captions", typ in HIDE_CAPTIONS):
+                if not r:  # video/AI effects have no ASS part: hide captions for their whole window
+                    r = ev_window(ctx, e, {"freeze": 1.2, "impact": 0.9, "dolly": 1.6}.get(typ, 2.0))
                 hide.append(r)
             if e.get("sfx") and typ in ASS_HANDLERS and typ not in ("checklist", "counter", "countdown", "cta", "tag", "lower_third"):
                 at = r[0] if r else ctx.t(e.get("at"), 0.0)

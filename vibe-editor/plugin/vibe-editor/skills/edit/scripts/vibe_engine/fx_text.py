@@ -552,6 +552,7 @@ def ev_checklist(ctx, e):
 
 
 def fmt_num(v, decimals=0, indian=False):
+    decimals = max(0, min(4, int(decimals)))
     if decimals:
         return f"{v:,.{decimals}f}"
     n = int(round(abs(v)))
@@ -566,8 +567,14 @@ def fmt_num(v, decimals=0, indian=False):
 def ev_counter(ctx, e):
     a, b = ev_window(ctx, e, 2.5)
     u = ctx.u
-    frm, to = float(e.get("from", 0)), float(e.get("to", 100))
-    dec = int(e.get("decimals", 0))
+    def num(v, d):
+        try:
+            x = float(v)
+            return d if x != x or abs(x) == float("inf") else max(-1e15, min(1e15, x))
+        except (TypeError, ValueError):
+            return d
+    frm, to = num(e.get("from", 0), 0.0), num(e.get("to", 100), 100.0)
+    dec = int(max(0, min(4, num(e.get("decimals", 0), 0))))
     pre, suf = str(e.get("prefix", "")), str(e.get("suffix", ""))
     font = resolve_font(e.get("font", "noto-black"))
     size = sizes_map(e.get("size"), 150) * u
@@ -688,7 +695,10 @@ def ev_letterbox(ctx, e):
 
 
 def ev_countdown(ctx, e):
-    n = max(1, int(e.get("from", 3)))
+    try:
+        n = max(1, min(10, int(float(e.get("from", 3)))))
+    except (TypeError, ValueError, OverflowError):
+        n = 3
     a, b = ev_window(ctx, e, float(n))
     step = (b - a) / n
     u = ctx.u
