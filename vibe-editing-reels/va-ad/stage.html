@@ -1,0 +1,393 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>VA ad stage</title>
+<style>
+@font-face{font-family:Inter;font-weight:300;src:url(assets/fonts/inter-latin-300-normal.woff2)}
+@font-face{font-family:Inter;font-weight:400;src:url(assets/fonts/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:500;src:url(assets/fonts/inter-latin-500-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(assets/fonts/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(assets/fonts/inter-latin-800-normal.woff2)}
+@font-face{font-family:Serif;font-style:italic;src:url(assets/fonts/InstrumentSerif-Italic.ttf)}
+:root{
+  --ink:#1B2229; --muted:#5E6973; --hair:rgba(27,34,41,.16);
+  --blue:#3A74C9; --blue-hi:#6EA2E8; --blue-lo:#24559F;
+  --glass:rgba(250,252,255,.46); --glass-line:rgba(255,255,255,.75);
+  --dark:rgba(20,26,32,.66);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:Inter,sans-serif;color:var(--ink)}
+canvas{position:absolute;left:0;top:0}
+.layer{position:absolute;inset:0;pointer-events:none}
+.abs{position:absolute;will-change:transform,opacity,filter}
+.lead{font-family:Inter;font-weight:300;font-size:46px;letter-spacing:-.01em;color:var(--ink);white-space:nowrap}
+.serif{font-family:Serif;font-style:italic;font-weight:400;line-height:.86;white-space:nowrap;
+  background:linear-gradient(180deg,var(--blue-hi) 0%,var(--blue) 48%,var(--blue-lo) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;padding:0 .08em .12em}
+.glass{background:var(--glass);backdrop-filter:blur(22px) saturate(1.35);-webkit-backdrop-filter:blur(22px) saturate(1.35);
+  border:1.5px solid var(--glass-line);box-shadow:0 24px 60px rgba(18,28,40,.16),inset 0 1px 0 rgba(255,255,255,.9)}
+.dglass{background:var(--dark);backdrop-filter:blur(20px) saturate(1.2);-webkit-backdrop-filter:blur(20px) saturate(1.2);
+  border:1px solid rgba(255,255,255,.16);box-shadow:0 18px 44px rgba(10,16,22,.25);color:#fff}
+.glossy{font-family:Inter;font-weight:800;letter-spacing:-.04em;line-height:1;
+  background:linear-gradient(180deg,#F2F8FF 0%,#BCD6F4 30%,#6F9FDC 62%,#2E5EA8 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.pill{border-radius:999px}
+.muted{color:var(--muted)}
+.check{display:inline-block}
+#grain{position:absolute;inset:0}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="bg" width="1080" height="1920"></canvas>
+  <div id="behind" class="layer"></div>
+  <canvas id="person" width="1080" height="1920"></canvas>
+  <div id="shade" class="layer" style="background:linear-gradient(180deg,rgba(10,18,24,0) 62%,rgba(16,26,32,.30) 100%)"></div>
+  <div id="front" class="layer"></div>
+  <canvas id="hands" width="1080" height="1920"></canvas>
+  <div id="top" class="layer"></div>
+</div>
+<script>
+const W=1080,H=1920,FPS=30;
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const lerp=(a,b,p)=>a+(b-a)*p;
+const eOut=p=>1-Math.pow(1-p,3);
+const eInOut=p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+const eExpo=p=>p>=1?1:1-Math.pow(2,-10*p);
+const prog=(t,t0,d)=>clamp((t-t0)/d);
+
+// --- element factory -------------------------------------------------------
+const els={};const $=id=>document.getElementById(id);
+function mk(id,parent,html,css,cls='abs'){
+  const d=document.createElement('div');d.id=id;d.className=cls;d.innerHTML=html||'';
+  Object.assign(d.style,css||{});document.getElementById(parent).appendChild(d);els[id]=d;return d;
+}
+// visibility envelope: blur-in with a light horizontal smear, blur-out with smear to the right
+function env(t,t0,t1,{din=.2,dout=.2,dx=-22,blur=16,y=0}={}){
+  if(t<t0||t>t1+dout) return null;
+  const pi=eOut(prog(t,t0,din)), po=t>t1?eInOut(prog(t,t1,dout)):0;
+  const op=pi*(1-po);
+  const bl=(1-pi)*blur+po*blur*1.1;
+  const tx=(1-pi)*dx+po*28;
+  const sx=1+(1-pi)*.05+po*.07;
+  const ty=(1-pi)*y;
+  return {op,bl,tx,ty,sx,pi,po};
+}
+function apply(el,e,extra=''){
+  if(!e){el.style.opacity=0;el.style.display='none';return false}
+  el.style.display='block';el.style.opacity=e.op.toFixed(3);
+  el.style.filter=e.bl>.2?`blur(${e.bl.toFixed(1)}px)`:'none';
+  el.style.transform=`translate(${e.tx.toFixed(1)}px,${e.ty.toFixed(1)}px) scaleX(${e.sx.toFixed(4)}) ${extra}`;
+  return true;
+}
+function centerText(el,cx,cy){el.style.left=cx+'px';el.style.top=cy+'px';el.style.translate='-50% -50%'}
+
+// --- footage + matte --------------------------------------------------------
+const bgc=document.getElementById('bg').getContext('2d');
+const pc=document.getElementById('person').getContext('2d');
+const hc=document.getElementById('hands').getContext('2d');
+function loadImg(src){return new Promise((res,rej)=>{const i=new Image();i.onload=()=>i.decode().then(()=>res(i),()=>res(i));i.onerror=rej;i.src=src})}
+// camera: per cut segment scale (alternating framing hides the jump cuts), focus on the face
+const CUTS=[0,9.233,9.967,10.633,17.667,22.367,26.8];
+const CAM=[[1.00,1.045],[1.10,1.11],[1.04,1.045],[1.00,1.05],[1.065,1.02],[1.00,1.055]];
+function camAt(t){
+  let k=0;while(k<CAM.length-1&&t>=CUTS[k+1])k++;
+  const p=eInOut(clamp((t-CUTS[k])/(CUTS[k+1]-CUTS[k])));
+  return lerp(CAM[k][0],CAM[k][1],p);
+}
+const FX=540,FY=660;
+function drawPlate(ctx,img,s,blur){
+  ctx.save();ctx.clearRect(0,0,W,H);
+  if(blur>.3) ctx.filter=`blur(${blur.toFixed(1)}px)`;
+  ctx.translate(FX,FY);ctx.scale(s,s);ctx.translate(-FX,-FY);
+  ctx.drawImage(img,0,0,W,H);ctx.restore();
+}
+// soft "breath" transition at the big section change (17.667): footage defocuses and settles
+function breathBlur(t){const c=17.667;const d=Math.abs(t-c);return d<.3?Math.pow(1-d/.3,2)*10:0}
+
+// --- build the scenes -------------------------------------------------------
+// S0 hook
+mk('s0lead','behind','are you looking to',{left:'540px',top:'250px'},'abs lead');
+mk('s0hero','behind','<span class="serif" style="font-size:270px">hire?</span>',{left:'540px',top:'412px'});
+mk('s0card','behind',`
+  <div class="glass" style="width:820px;height:236px;border-radius:44px;padding:34px 40px">
+    <div style="display:flex;align-items:center;gap:14px;font:500 26px Inter;color:var(--muted);letter-spacing:.02em">
+      <span id="s0dot" style="width:12px;height:12px;border-radius:50%;background:var(--blue);display:inline-block"></span>new role</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:26px">
+      <div style="font:500 52px Inter;letter-spacing:-.02em;color:var(--ink);display:flex;align-items:center">
+        <span id="s0type"></span><span id="s0caret" style="display:inline-block;width:3px;height:56px;background:var(--blue);margin-left:6px;border-radius:2px"></span></div>
+      <div id="s0post" class="pill" style="font:600 28px Inter;padding:18px 34px;background:rgba(27,34,41,.08);color:var(--muted)">Post</div>
+    </div>
+  </div>`,{left:'130px',top:'170px'});
+
+// S1 candidate card
+mk('s1card','behind',`
+  <div class="glass" style="width:800px;border-radius:48px;padding:40px 44px">
+    <div style="display:flex;align-items:center;gap:28px">
+      <div style="width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#DCE9F9,#7FA7DE 60%,#3E6CB4);
+        display:flex;align-items:center;justify-content:center;font:600 40px Inter;color:#fff;letter-spacing:.02em">VA</div>
+      <div>
+        <div style="font:500 44px Inter;letter-spacing:-.02em">Your new assistant</div>
+        <div style="font:300 32px Inter;color:var(--muted);margin-top:6px">virtual assistant</div>
+      </div>
+    </div>
+    <div style="height:1.5px;background:var(--hair);margin:34px 0 30px"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div id="s1badge" class="pill" style="display:flex;align-items:center;gap:14px;padding:14px 26px 14px 16px;background:rgba(58,116,201,.12);font:500 30px Inter;color:var(--blue-lo);white-space:nowrap">
+        <svg width="38" height="38" viewBox="0 0 38 38"><circle cx="19" cy="19" r="17" fill="none" stroke="#3A74C9" stroke-width="2.5" opacity=".35"/>
+        <path id="s1tick" d="M11 19.5l5.5 5.5L27.5 13" fill="none" stroke="#3A74C9" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>
+        highly trained</div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <span style="font:300 30px Inter;color:var(--muted)">industry</span>
+        <div style="position:relative;width:330px;height:76px;overflow:hidden">
+          <div id="s1roll" style="position:absolute;left:0;top:0;width:330px"></div>
+        </div>
+      </div>
+    </div>
+  </div>`,{left:'140px',top:'96px'});
+const ROLL=['real estate','healthcare','e-commerce','legal','yours'];
+$('s1roll').innerHTML=ROLL.map(w=>`<div style="height:76px;display:flex;align-items:center;justify-content:flex-end"><span class="serif" style="font-size:60px;line-height:1">${w}</span></div>`).join('');
+
+// S2 price ticket
+mk('s2card','behind',`
+  <div class="glass" style="width:880px;height:310px;border-radius:54px;padding:30px 50px;display:flex;align-items:center;justify-content:space-between">
+    <div>
+      <div style="font:300 34px Inter;color:var(--muted);margin-left:6px">starting at</div>
+      <div class="glossy" style="font-size:210px;display:flex;align-items:flex-end;height:210px;margin-top:2px">
+        <span>$</span>
+        <div style="position:relative;height:210px;width:128px;overflow:hidden">
+          <div id="s2digits" style="position:absolute;left:0;top:0"></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-start;width:300px">
+      <div id="s2hour"><span class="serif" style="font-size:96px;line-height:1">/ hour</span></div>
+      <div id="s2rule" style="height:1.5px;width:100%;background:var(--hair);margin:22px 0 22px;transform-origin:left"></div>
+      <div id="s2all" style="display:flex;align-items:center;gap:16px;font:500 36px Inter">
+        <svg width="42" height="42" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#3A74C9"/>
+        <path id="s2tick" d="M12 20.5l5.5 5.5L28.5 14" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>
+        all in</div>
+    </div>
+  </div>`,{left:'100px',top:'104px'});
+$('s2digits').innerHTML=[0,1,2,3,4,5,6,7,8].map(n=>`<div class="glossy" style="height:210px;font-size:210px;line-height:210px">${n}</div>`).join('');
+
+// S3 no fees / no contracts (strike)
+mk('s3a','behind',`<div style="display:flex;align-items:baseline;gap:22px"><span class="lead">no</span>
+  <span style="position:relative;display:inline-block"><span class="serif" style="font-size:190px">fees</span>
+  <span id="s3la" style="position:absolute;left:-6px;right:-6px;top:56%;height:5px;border-radius:3px;background:var(--ink);transform-origin:left"></span></span></div>`,{left:'96px',top:'120px'});
+mk('s3b','behind',`<div style="display:flex;align-items:baseline;gap:22px;justify-content:flex-end"><span class="lead">no</span>
+  <span style="position:relative;display:inline-block"><span class="serif" style="font-size:190px">contracts</span>
+  <span id="s3lb" style="position:absolute;left:-6px;right:-6px;top:56%;height:5px;border-radius:3px;background:var(--ink);transform-origin:left"></span></span></div>`,{right:'70px',top:'290px'});
+
+// S4 bilingual morph + US hours dial
+mk('s4lead','behind','all VAs are bilingual',{left:'540px',top:'250px'},'abs lead');
+mk('s4w1','behind','<span class="serif" style="font-size:230px">hello</span>',{left:'540px',top:'412px'});
+mk('s4w2','behind','<span class="serif" style="font-size:230px">hola</span>',{left:'540px',top:'412px'});
+mk('s4tag','behind','<span style="font:500 26px Inter;letter-spacing:.32em;color:var(--muted)">BILINGUAL</span>',{left:'540px',top:'640px'});
+mk('s4dial','behind',`
+  <div class="dglass" style="width:300px;height:300px;border-radius:50%;position:relative">
+    <svg width="300" height="300" viewBox="0 0 300 300" style="position:absolute;left:0;top:0">
+      <circle cx="150" cy="150" r="118" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="10"/>
+      <g stroke="rgba(255,255,255,.35)" stroke-width="2">${Array.from({length:24},(_,i)=>{const a=i/24*Math.PI*2-Math.PI/2;return `<line x1="${150+Math.cos(a)*96}" y1="${150+Math.sin(a)*96}" x2="${150+Math.cos(a)*(i%6?101:106)}" y2="${150+Math.sin(a)*(i%6?101:106)}"/>`}).join('')}</g>
+      <circle id="s4arc" cx="150" cy="150" r="118" fill="none" stroke="url(#ag)" stroke-width="10" stroke-linecap="round"
+        pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" transform="rotate(${9/24*360-90} 150 150)"/>
+      <defs><linearGradient id="ag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9CC3F2"/><stop offset="1" stop-color="#3A74C9"/></linearGradient></defs>
+    </svg>
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+      <div style="font:300 24px Inter;opacity:.7;letter-spacing:.04em">9 — 5</div>
+      <div style="font:500 36px Inter;margin-top:4px">US hours</div>
+    </div>
+  </div>`,{left:'748px',top:'560px',transform:'scale(.9)'});
+
+// S5 tool orbit (each tile exists in front and behind; depth decides which one shows)
+const TOOLS=[['S','Slack'],['G','Gmail'],['S','Sheets'],['Z','Zoom'],['N','Notion'],['H','HubSpot']];
+TOOLS.forEach(([g,n],i)=>{
+  for(const L of ['top','behind']){
+    mk(`t${i}${L[0]}`,L,`<div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+      <div class="glass" style="width:156px;height:156px;border-radius:42px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
+        <span style="font:600 60px Inter;color:var(--blue-lo);letter-spacing:-.02em;line-height:1">${g}</span>
+        <span style="font:500 22px Inter;color:var(--ink);opacity:.8">${n}</span></div></div>`,{left:'0px',top:'0px'});
+  }
+});
+mk('s5cap','behind','trained on the tools you',{left:'540px',top:'280px'},'abs lead');
+mk('s5hero','behind','<span class="serif" style="font-size:200px">already use</span>',{left:'540px',top:'430px'});
+
+// S6 we handle everything + checklist
+mk('s6lead','behind','we handle',{left:'96px',top:'262px'},'abs lead');
+mk('s6hero','behind','<span class="serif" style="font-size:200px">everything</span>',{left:'70px',top:'318px'});
+const ROWS=['payroll','compliance','ongoing coaching'];
+ROWS.forEach((r,i)=>mk(`s6r${i}`,'behind',`<div class="glass" style="display:flex;align-items:center;gap:14px;height:80px;padding:0 24px 0 16px;border-radius:24px;width:max-content">
+  <svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="none" stroke="rgba(58,116,201,.35)" stroke-width="2.5"/>
+  <circle id="s6c${i}" cx="24" cy="24" r="21" fill="#3A74C9" opacity="0"/>
+  <path id="s6k${i}" d="M14.5 24.5l6.5 6.5 12.5-13" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>
+  <span style="font:500 31px Inter;letter-spacing:-.015em;white-space:nowrap">${r}</span></div>`,{left:'40px',top:`${600+i*96}px`}));
+
+// S7 CTA button, cursor, booking card, final word
+mk('s7btn','front',`<div class="glass pill" style="display:flex;align-items:center;gap:18px;padding:30px 54px;font:600 44px Inter;letter-spacing:-.01em">
+  Learn More <svg width="34" height="34" viewBox="0 0 34 34"><path d="M7 17h19M18 9l8 8-8 8" fill="none" stroke="#1B2229" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`,{left:'540px',top:'1300px'});
+mk('s7ring','top','<div style="width:150px;height:150px;border-radius:50%;border:3px solid rgba(255,255,255,.95)"></div>',{left:'0px',top:'0px'});
+mk('s7cur','top',`<svg width="60" height="72" viewBox="0 0 60 72" style="filter:drop-shadow(0 8px 14px rgba(0,0,0,.28))">
+  <path d="M6 4l44 30-20 3 11 22-9 4-11-22-15 14z" fill="#fff" stroke="#1B2229" stroke-width="3" stroke-linejoin="round"/></svg>`,{left:'0px',top:'0px'});
+mk('s7book','behind',`<div class="glass" style="width:720px;border-radius:48px;padding:36px 40px">
+  <div style="display:flex;align-items:center;justify-content:space-between">
+    <div style="font:500 42px Inter;letter-spacing:-.02em">Book a call</div>
+    <div style="font:300 28px Inter;color:var(--muted)">free</div></div>
+  <div style="display:flex;gap:16px;margin-top:28px">
+    ${['Mon','Tue','Wed','Thu'].map((d,i)=>`<div id="s7d${i}" style="flex:1;height:110px;border-radius:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:rgba(27,34,41,.05);border:1.5px solid rgba(27,34,41,.08)">
+      <span style="font:300 26px Inter;color:var(--muted)">${d}</span><span style="font:600 34px Inter">${12+i}</span></div>`).join('')}
+  </div></div>`,{left:'180px',top:'120px'});
+mk('s7lead','behind','interview candidates for',{left:'540px',top:'270px'},'abs lead');
+mk('s7hero','behind','<span class="serif" style="font-size:330px">free</span>',{left:'540px',top:'450px'});
+
+['s0lead','s0hero','s4lead','s4w1','s4w2','s4tag','s7lead','s7hero','s5cap','s5hero','s7btn'].forEach(id=>els[id].style.translate='-50% -50%');
+['s0lead','s0hero','s4lead','s4w1','s4w2','s4tag','s7lead','s7hero','s5cap','s7btn'].forEach(id=>{els[id].style.transformOrigin='50% 50%'});
+
+// --- per-frame update --------------------------------------------------------
+const TYPE='Virtual Assistant';
+function setDash(id,p){document.getElementById(id).setAttribute('stroke-dashoffset',(1-clamp(p)).toFixed(4))}
+function update(t){
+  // S0
+  apply(els.s0lead,env(t,.32,1.3,{din:.24}));
+  apply(els.s0hero,env(t,.36,1.34,{din:.26,blur:22}));
+  if(apply(els.s0card,env(t,1.42,2.5,{din:.24,y:26,dx:0}))){
+    const n=Math.round(clamp((t-1.56)/(2.16-1.56))*TYPE.length);
+    // human rhythm: tiny holds on spaces
+    document.getElementById('s0type').textContent=TYPE.slice(0,n);
+    document.getElementById('s0caret').style.opacity=(t>2.18?(Math.floor(t*2.4)%2?0.15:1):1);
+    const on=prog(t,2.22,.18);
+    const post=document.getElementById('s0post');
+    post.style.background=`rgba(${lerp(27,58,on)},${lerp(34,116,on)},${lerp(41,201,on)},${lerp(.08,1,on)})`;
+    post.style.color=on>.5?'#fff':'var(--muted)';
+    post.style.transform=`scale(${1+Math.sin(on*Math.PI)*.06})`;
+  }
+  // S1
+  if(apply(els.s1card,env(t,2.96,6.26,{din:.26,y:30,dx:0}))){
+    setDash('s1tick',eOut(prog(t,4.02,.32)));
+    const b=document.getElementById('s1badge');b.style.opacity=(.35+.65*eOut(prog(t,3.86,.25))).toFixed(3);
+    // industry roller: settles on "yours" as he says "industry"
+    const r0=5.12,r1=6.0, p=eOut(prog(t,r0,r1-r0));
+    const y=-p*(ROLL.length-1)*76;
+    const sp=(t>r0&&t<r1)?Math.sin(p*Math.PI)*6:0;
+    $('s1roll').style.transform=`translateY(${y.toFixed(1)}px)`;$('s1roll').style.filter=sp>.3?`blur(${sp.toFixed(1)}px)`:'none';
+  }
+  // S2
+  if(apply(els.s2card,env(t,6.52,9.74,{din:.26,y:30,dx:0}))){
+    const p=eExpo(prog(t,7.28,.78));
+    $('s2digits').style.transform=`translateY(${(-p*8*210).toFixed(1)}px)`;
+    const v=(t>7.28&&t<8.0)?(1-p)*10:0;$('s2digits').style.filter=v>.3?`blur(0 ${v}px)`:'none';
+    $('s2digits').style.filter=v>.3?`blur(${(v*.6).toFixed(1)}px)`:'none';
+    const h=eOut(prog(t,8.08,.3));const hh=document.getElementById('s2hour');hh.style.opacity=h;hh.style.filter=h<1?`blur(${((1-h)*10).toFixed(1)}px)`:'none';hh.style.transform=`translateX(${((1-h)*-16).toFixed(1)}px)`;
+    document.getElementById('s2rule').style.transform=`scaleX(${eOut(prog(t,8.9,.38)).toFixed(3)})`;
+    const a=eOut(prog(t,9.2,.24));const al=document.getElementById('s2all');al.style.opacity=a;al.style.filter=a<1?`blur(${((1-a)*10).toFixed(1)}px)`:'none';
+    setDash('s2tick',eOut(prog(t,9.31,.3)));
+  }
+  // S3
+  apply(els.s3a,env(t,9.98,11.5,{din:.24,blur:20}));
+  apply(els.s3b,env(t,10.6,11.52,{din:.24,blur:20,dx:22}));
+  document.getElementById('s3la').style.transform=`scaleX(${eInOut(prog(t,10.36,.3)).toFixed(3)})`;
+  document.getElementById('s3lb').style.transform=`scaleX(${eInOut(prog(t,11.06,.34)).toFixed(3)})`;
+  // S4
+  apply(els.s4lead,env(t,11.78,13.22,{din:.24}));
+  const w1=env(t,11.84,12.38,{din:.26,blur:22,dout:.22});
+  apply(els.s4w1,w1);
+  apply(els.s4w2,env(t,12.42,13.24,{din:.22,blur:22,dx:-10}));
+  apply(els.s4tag,null);
+  if(apply(els.s4dial,env(t,13.44,14.66,{din:.26,y:24,dx:0}))){
+    document.getElementById('s4arc').setAttribute('stroke-dashoffset',(1-eInOut(prog(t,13.6,.62))*(8/24)).toFixed(4));
+  }
+  // S5 orbit
+  const oe=env(t,14.96,17.3,{din:.32,blur:18,dx:0,dout:.24});
+  TOOLS.forEach((_,i)=>{
+    const th=i/TOOLS.length*Math.PI*2+ (t-14.96)*0.62 - .9;
+    const z=Math.sin(th), x=540+Math.cos(th)*440, y=1050+z*-70+Math.cos(th)*-18;
+    const s=.78+.22*(z*.5+.5);
+    const f=els[`t${i}t`], b=els[`t${i}b`];
+    const front=z>0;
+    for(const [el,show] of [[f,front],[b,!front]]){
+      if(!oe||!show){el.style.display='none';continue}
+      el.style.display='block';
+      const st=clamp(prog(t,14.96+i*.06,.32));const op=oe.op*eOut(st)*(front?1:.82);
+      el.style.opacity=op.toFixed(3);
+      el.style.left=(x-78)+'px';el.style.top=(y-78)+'px';
+      el.style.filter=`blur(${(oe.bl+(1-eOut(st))*12+(front?0:1.2)).toFixed(1)}px)`;
+      el.style.transform=`scale(${s.toFixed(3)})`;
+    }
+  });
+  apply(els.s5cap,env(t,14.92,17.32,{din:.24}));
+  apply(els.s5hero,env(t,16.62,17.34,{din:.26,blur:22}));
+  // S6
+  apply(els.s6lead,env(t,17.74,22.05,{din:.24}));
+  apply(els.s6hero,env(t,17.8,22.08,{din:.28,blur:22}));
+  const RT=[19.1,19.56,21.12];
+  ROWS.forEach((_,i)=>{
+    if(apply(els[`s6r${i}`],env(t,RT[i],22.02+i*.04,{din:.26,dx:-40}))){
+      const k=eOut(prog(t,RT[i]+.16,.28));
+      document.getElementById(`s6c${i}`).setAttribute('opacity',k.toFixed(3));
+      setDash(`s6k${i}`,eOut(prog(t,RT[i]+.22,.3)));
+    }
+  });
+  // S7
+  const be=env(t,22.36,23.42,{din:.24,y:24,dx:0,dout:.2});
+  if(apply(els.s7btn,be)){
+    const press=t>22.93&&t<23.13?Math.sin(prog(t,22.93,.2)*Math.PI):0;
+    els.s7btn.style.transform+=` scale(${(1-press*.05).toFixed(3)})`;
+  }
+  // cursor glides in, clicks "Learn More"
+  const cp=eInOut(prog(t,22.42,.48));
+  if(t>22.38&&t<23.45){
+    const cx=lerp(930,560,cp), cy=lerp(1640,1318,cp);
+    const ce=env(t,22.38,23.25,{din:.16,dout:.2,blur:8,dx:0});
+    if(apply(els.s7cur,ce)){els.s7cur.style.left=(cx)+'px';els.s7cur.style.top=(cy)+'px';
+      const pr=t>22.93&&t<23.13?Math.sin(prog(t,22.93,.2)*Math.PI):0;els.s7cur.style.transform+=` scale(${(1-pr*.12).toFixed(3)})`}
+  } else apply(els.s7cur,null);
+  if(t>22.95&&t<23.55){const rp=prog(t,22.95,.55);els.s7ring.style.display='block';els.s7ring.style.left=(560-75)+'px';els.s7ring.style.top=(1318-75)+'px';
+    els.s7ring.style.opacity=((1-rp)*.9).toFixed(3);els.s7ring.style.transform=`scale(${(.3+rp*1.3).toFixed(3)})`;els.s7ring.style.filter='none'} else els.s7ring.style.display='none';
+  if(apply(els.s7book,env(t,23.4,24.5,{din:.28,y:28,dx:0}))){
+    for(let i=0;i<4;i++){const d=document.getElementById(`s7d${i}`);const on=i===1?eOut(prog(t,23.9,.22)):0;
+      d.style.background=`rgba(${lerp(27,58,on)},${lerp(34,116,on)},${lerp(41,201,on)},${lerp(.05,1,on)})`;d.style.color=on>.5?'#fff':'';
+      d.querySelectorAll('span')[0].style.color=on>.5?'rgba(255,255,255,.8)':'';d.style.transform=`scale(${1+Math.sin(on*Math.PI)*.05})`}
+    const bk=env(t,23.4,24.5,{din:.28,y:28,dx:0}); // staggered pills
+    for(let i=0;i<4;i++){const d=document.getElementById(`s7d${i}`);const s=eOut(prog(t,23.48+i*.05,.24));d.style.opacity=s.toFixed(3)}
+  }
+  apply(els.s7lead,env(t,24.86,27,{din:.26}));
+  const fe=env(t,24.92,27,{din:.3,blur:24});
+  if(apply(els.s7hero,fe)){els.s7hero.style.transform+=` translateY(${(-(t-24.92)*6).toFixed(1)}px)`}
+}
+
+let cache={f:-1,img:null,mat:null};
+window.renderAt=async function(t){
+  const f=Math.min(804,Math.max(1,Math.round(t*FPS)+1));
+  const id=String(f).padStart(4,'0');
+  if(cache.f!==f){
+    const [img,mat]=await Promise.all([loadImg(`build/base/${id}.jpg`),loadImg(`build/matte/${id}.png`)]);
+    cache={f,img,mat};
+  }
+  const s=camAt(t), bb=breathBlur(t);
+  drawPlate(bgc,cache.img,s,bb);
+  // person = footage masked by matte (same camera)
+  drawPlate(pc,cache.img,s,bb);
+  pc.save();pc.globalCompositeOperation='destination-in';
+  if(bb>.3) pc.filter=`blur(${bb.toFixed(1)}px)`;
+  pc.translate(FX,FY);pc.scale(s,s);pc.translate(-FX,-FY);pc.drawImage(cache.mat,0,0,W,H);pc.restore();
+  // hands layer: skin pixels of the presenter drawn above the glass cards
+  const hm=await loadImg(`build/hands/${id}.png`);
+  drawPlate(hc,cache.img,s,bb);
+  hc.save();hc.globalCompositeOperation='destination-in';hc.translate(FX,FY);hc.scale(s,s);hc.translate(-FX,-FY);hc.drawImage(hm,0,0,W,H);hc.restore();
+  // opening light scan through the presenter (0 - 0.55 s)
+  if(t<.62){
+    const p=eInOut(prog(t,.02,.55));const yy=lerp(300,1900,p);
+    pc.save();pc.globalCompositeOperation='source-atop';
+    const g=pc.createLinearGradient(0,yy-160,0,yy+160);
+    g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(.5,`rgba(235,244,255,${(.38*Math.sin(Math.min(1,p*1.2)*Math.PI)).toFixed(3)})`);g.addColorStop(1,'rgba(255,255,255,0)');
+    pc.fillStyle=g;pc.fillRect(0,0,W,H);pc.restore();
+  }
+  update(t);
+  await document.fonts.ready;
+  await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+};
+window.stageReady=document.fonts.ready.then(()=>Promise.all([...document.fonts].map(f=>f.load()))).then(()=>true);
+</script>
+</body>
+</html>
