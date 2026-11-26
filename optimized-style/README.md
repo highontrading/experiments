@@ -55,3 +55,14 @@ Check a few moments first: `node engine/render.js plans/<name>.json --times 1.2,
 
 Card `x`/`y` are fractions of the frame (`y` is the text baseline; for images, the centre).
 Sizes: captions `S` `M` `L`; cards `S` `P` `M` `L`. Colours: `ink`, `red`, `white`, `blue` or any hex.
+
+## Edits made with it
+
+| Reel | How to rebuild |
+|---|---|
+| `out/va-ad.mp4`: "hire a virtual assistant" ad | `python3 tools/build_va.py <raw.mp4> plans/va-ad.words.json && node engine/render.js plans/va-ad.json && python3 engine/compose.py va-ad build/va-ad/aroll.mp4` |
+
+`tools/build_va.py` shows the full workflow for a new raw video: cut the pauses (60 ms of air kept),
+alternate a wide and a tight framing at every cut (the reference's A/B camera rhythm), then lay the
+script out as captions and cards from the word timestamps. `tools/cutout.py` cuts a person out of a
+stock photo for the white cards. Stock photos come from Pexels (see `assets/stock/CREDITS.md`).

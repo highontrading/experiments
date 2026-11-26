@@ -142,21 +142,63 @@ function drawCaption(cap, now) {
 // card = { t0, t1, enter: "cut"|"wipe", groups: [{ t1?, exit: "slide"|"cut", items: [...] }] }
 // text item: { type:"text", text, t, x, y, size:"S"|"M"|"L", color:"ink"|"red", align }
 // img item:  { type:"img", src, t, x, y, w }   (x,y = centre, fractions of the frame; w = fraction of width)
+// pill item: { type:"pill", text, t, x, y, size?, bg?, color?, press? }   a tappable button (CTA)
+// img extras: tile:true (rounded photo with soft shadow), from:{dx,dy}, dur (custom entrance),
+//             press: t (quick scale dip, e.g. a cursor tap), until: t (hard cut off)
+// text extras: size may be a number in px (e.g. 420 for a giant price)
+function pressScale(now, t) {
+  if (t == null || now < t) return 1;
+  const p = (now - t) / 0.16; if (p >= 1) return 1;
+  return 1 - 0.07 * Math.sin(Math.PI * p);
+}
+function itemEnter(it, now, spec) {
+  if (!it.from && !it.dur) return enterState(now, it.t, spec);
+  const sp = { ...spec, dur: it.dur || spec.dur, dx: it.from ? it.from.dx || 0 : spec.dx, dy: it.from ? it.from.dy || 0 : spec.dy };
+  return enterState(now, it.t, sp);
+}
+function roundRect(x, y, w, h, r) {
+  ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+}
 function drawItem(it, now, exitAt) {
+  if (it.until != null && now >= it.until) return;
   if (it.type === "img") {
     const img = IMGS[it.src]; if (!img) return;
-    const st = enterState(now, it.t, T.imgEnter); if (!st) return;
+    const st = itemEnter(it, now, T.imgEnter); if (!st) return;
+    st.scale *= pressScale(now, it.press);
     const w = it.w * T.W, h = w * (img.naturalHeight / img.naturalWidth);
-    drawAnimated(now, it.x * T.W, it.y * T.H, st, exitAt, () => ctx.drawImage(img, -w / 2, -h / 2, w, h));
+    drawAnimated(now, it.x * T.W, it.y * T.H, st, exitAt, () => {
+      if (it.tile) {
+        const r = it.radius || 44;
+        ctx.save(); ctx.shadowColor = "rgba(20,30,60,0.22)"; ctx.shadowBlur = 50; ctx.shadowOffsetY = 18;
+        roundRect(-w / 2, -h / 2, w, h, r); ctx.fillStyle = "#fff"; ctx.fill(); ctx.restore();
+        ctx.save(); roundRect(-w / 2, -h / 2, w, h, r); ctx.clip(); ctx.drawImage(img, -w / 2, -h / 2, w, h); ctx.restore();
+      } else ctx.drawImage(img, -w / 2, -h / 2, w, h);
+    });
     return;
   }
-  const size = T.card[it.size || "S"], weight = T.card.weight[it.size || "S"];
-  const st = enterState(now, it.t); if (!st) return;
+  if (it.type === "pill") {
+    const size = typeof it.size === "number" ? it.size : T.card[it.size || "M"] * 0.62;
+    const st = itemEnter(it, now, T.enter); if (!st) return;
+    st.scale *= pressScale(now, it.press);
+    const tw = textWidth(it.text, size, 700), pw = tw + size * 1.6, ph = size * 2.0;
+    drawAnimated(now, it.x * T.W, it.y * T.H, st, exitAt, () => {
+      ctx.save(); ctx.shadowColor = "rgba(0,0,0,0.35)"; ctx.shadowBlur = 34; ctx.shadowOffsetY = 10;
+      roundRect(-pw / 2, -ph / 2, pw, ph, ph / 2); ctx.fillStyle = colorOf(it.bg, T.color.red); ctx.fill(); ctx.restore();
+      setFont(size, 700); ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillStyle = colorOf(it.color, T.color.white); ctx.fillText(it.text, 0, size * 0.04);
+    });
+    return;
+  }
+  const size = typeof it.size === "number" ? it.size : T.card[it.size || "S"];
+  const weight = typeof it.size === "number" ? 700 : T.card.weight[it.size || "S"];
+  const st = itemEnter(it, now, T.enter); if (!st) return;
   const width = textWidth(it.text, size, weight);
   const al = it.align || "left";
   const x = it.x * T.W + (al === "left" ? width / 2 : al === "right" ? -width / 2 : 0);
   drawAnimated(now, x, it.y * T.H, st, exitAt, () => {
     setFont(size, weight); ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+    if (it.shadow) { ctx.shadowColor = T.cap.shadow; ctx.shadowBlur = T.cap.shadowBlur; ctx.shadowOffsetY = T.cap.shadowY; }
     ctx.fillStyle = colorOf(it.color, T.color.ink); ctx.fillText(it.text, 0, 0);
   });
 }
@@ -176,7 +218,7 @@ function drawCard(card, now) {
       for (const it of g.items) {
         if (it.type !== "text") continue;
         if (it.follow && prev) {
-          const ps = T.card[prev.size || "S"], pw = T.card.weight[prev.size || "S"];
+          const ps = typeof prev.size === "number" ? prev.size : T.card[prev.size || "S"], pw = 700;
           it.x = prev.x + (textWidth(prev.text, ps, pw) + textWidth(" ", ps, pw) * 0.8) / T.W;
           it.y = it.y ?? prev.y; it.align = "left";
         }
@@ -184,8 +226,9 @@ function drawCard(card, now) {
       }
       g._laid = true;
     }
-    const items = [...g.items].sort((a, b) => a.y - b.y);   // exit staggers top to bottom
-    items.forEach((it, i) => {
+    const order = [...g.items].sort((a, b) => a.y - b.y);   // exit staggers top to bottom...
+    g.items.forEach((it) => {                                // ...but draw in the plan's order (layering)
+      const i = order.indexOf(it);
       const ex = g.exit === "slide" && g.t1 != null ? g.t1 + i * T.exit.stagger : null;
       if (g.t1 != null && g.exit !== "slide" && now >= g.t1) return;
       if (ex != null && now > ex + T.exit.dur) return;

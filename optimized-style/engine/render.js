@@ -26,8 +26,8 @@ const fps = plan.fps || 30;
     fs.mkdirSync(path.join(outDir, "stills"), { recursive: true });
     jobs = opt("--times").split(",").map(Number).map((t) => ({ t, file: path.join(outDir, "stills", `t${t.toFixed(2)}.png`) }));
   } else {
-    fs.rmSync(outDir, { recursive: true, force: true });
-    fs.mkdirSync(outDir, { recursive: true });
+    fs.mkdirSync(outDir, { recursive: true });                 // clear old frames only (keep A-roll, sfx...)
+    for (const f of fs.readdirSync(outDir)) if (/^f\d{5}\.png$/.test(f)) fs.unlinkSync(path.join(outDir, f));
     const n = Math.round(plan.dur * fps);
     jobs = Array.from({ length: n }, (_, f) => ({ t: f / fps, file: path.join(outDir, `f${String(f + 1).padStart(5, "0")}.png`) }));
   }

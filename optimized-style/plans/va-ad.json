@@ -1,0 +1,965 @@
+{
+ "name": "va-ad",
+ "w": 1080,
+ "h": 1920,
+ "fps": 30,
+ "dur": 25.823,
+ "punch": 1.0,
+ "captions": [
+  {
+   "t0": 0.0,
+   "t1": 1.24,
+   "lines": [
+    {
+     "size": "S",
+     "align": "left",
+     "words": [
+      {
+       "text": "Are",
+       "t": 0.0
+      },
+      {
+       "text": "you",
+       "t": 0.22
+      },
+      {
+       "text": "looking",
+       "t": 0.46
+      }
+     ]
+    },
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "to",
+       "t": 0.7
+      },
+      {
+       "text": "hire",
+       "t": 0.96
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 1.24,
+   "t1": 2.84,
+   "lines": [
+    {
+     "size": "S",
+     "align": "left",
+     "words": [
+      {
+       "text": "a",
+       "t": 1.24
+      },
+      {
+       "text": "virtual",
+       "t": 1.56
+      }
+     ]
+    },
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "assistant?",
+       "t": 1.98
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 2.84,
+   "t1": 3.5,
+   "lines": [
+    {
+     "size": "M",
+     "align": "center",
+     "words": [
+      {
+       "text": "We",
+       "t": 2.84
+      },
+      {
+       "text": "will",
+       "t": 2.88
+      },
+      {
+       "text": "hire",
+       "t": 3.04
+      },
+      {
+       "text": "you",
+       "t": 3.28
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 6.282,
+   "t1": 7.202,
+   "lines": [
+    {
+     "size": "S",
+     "align": "left",
+     "words": [
+      {
+       "text": "starting",
+       "t": 6.282
+      },
+      {
+       "text": "at",
+       "t": 6.722
+      }
+     ]
+    },
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "just",
+       "t": 6.982
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 8.821,
+   "t1": 9.584,
+   "lines": [
+    {
+     "size": "M",
+     "align": "center",
+     "words": [
+      {
+       "text": "all",
+       "t": 8.821
+      },
+      {
+       "text": "in,",
+       "t": 9.044
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 9.584,
+   "t1": 10.435,
+   "lines": [
+    {
+     "size": "S",
+     "align": "center",
+     "words": [
+      {
+       "text": "no",
+       "t": 9.584
+      }
+     ]
+    },
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "fees,",
+       "t": 9.744
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 10.435,
+   "t1": 11.475,
+   "lines": [
+    {
+     "size": "S",
+     "align": "center",
+     "words": [
+      {
+       "text": "no",
+       "t": 10.435
+      }
+     ]
+    },
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "contracts.",
+       "t": 10.655
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 11.475,
+   "t1": 12.795,
+   "lines": [
+    {
+     "size": "S",
+     "align": "left",
+     "words": [
+      {
+       "text": "All",
+       "t": 11.475
+      },
+      {
+       "text": "VAs",
+       "t": 11.555
+      },
+      {
+       "text": "are",
+       "t": 11.895
+      }
+     ]
+    },
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "bilingual,",
+       "t": 12.135
+      }
+     ]
+    }
+   ],
+   "items": [
+    {
+     "type": "img",
+     "src": "assets/icons/va/bubbles.svg",
+     "t": 12.235,
+     "x": 0.5,
+     "y": 0.775,
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "t0": 12.795,
+   "t1": 14.375,
+   "lines": [
+    {
+     "size": "S",
+     "align": "left",
+     "words": [
+      {
+       "text": "work",
+       "t": 12.795
+      },
+      {
+       "text": "in",
+       "t": 13.035
+      }
+     ]
+    },
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "US",
+       "t": 13.275
+      },
+      {
+       "text": "hours",
+       "t": 13.555
+      }
+     ]
+    }
+   ],
+   "items": [
+    {
+     "type": "img",
+     "src": "assets/icons/va/clock.svg",
+     "t": 13.635,
+     "x": 0.5,
+     "y": 0.775,
+     "w": 0.18
+    }
+   ]
+  },
+  {
+   "t0": 17.27,
+   "t1": 18.610999999999997,
+   "lines": [
+    {
+     "size": "S",
+     "align": "center",
+     "words": [
+      {
+       "text": "We",
+       "t": 17.27
+      },
+      {
+       "text": "handle",
+       "t": 17.41
+      }
+     ]
+    },
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "everything,",
+       "t": 17.83
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 21.883,
+   "t1": 22.783,
+   "lines": [
+    {
+     "size": "S",
+     "align": "center",
+     "words": [
+      {
+       "text": "Click",
+       "t": 21.883
+      },
+      {
+       "text": "the",
+       "t": 21.963
+      }
+     ]
+    }
+   ],
+   "items": [
+    {
+     "type": "pill",
+     "text": "Learn More",
+     "t": 22.123,
+     "x": 0.5,
+     "y": 0.725,
+     "size": 74,
+     "press": 22.513
+    },
+    {
+     "type": "img",
+     "src": "assets/icons/va/cursor.svg",
+     "t": 22.323,
+     "x": 0.6,
+     "y": 0.76,
+     "w": 0.085,
+     "press": 22.513,
+     "from": {
+      "dx": 260,
+      "dy": 300
+     },
+     "dur": 0.32
+    }
+   ]
+  },
+  {
+   "t0": 22.783,
+   "t1": 23.583,
+   "lines": [
+    {
+     "size": "S",
+     "align": "left",
+     "words": [
+      {
+       "text": "to",
+       "t": 22.783
+      },
+      {
+       "text": "book",
+       "t": 22.963
+      },
+      {
+       "text": "a",
+       "t": 23.163
+      }
+     ]
+    },
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "call",
+       "t": 23.283
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 23.583,
+   "t1": 24.913,
+   "lines": [
+    {
+     "size": "S",
+     "align": "left",
+     "words": [
+      {
+       "text": "and",
+       "t": 23.583
+      },
+      {
+       "text": "interview",
+       "t": 23.873
+      }
+     ]
+    },
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "candidates",
+       "t": 24.313
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 24.913,
+   "t1": 25.823,
+   "lines": [
+    {
+     "size": "S",
+     "align": "center",
+     "words": [
+      {
+       "text": "for",
+       "t": 24.913
+      }
+     ]
+    },
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "free.",
+       "t": 25.321
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "cards": [
+  {
+   "t0": 3.5,
+   "t1": 6.282,
+   "enter": "cut",
+   "groups": [
+    {
+     "t1": 5.24,
+     "exit": "slide",
+     "items": [
+      {
+       "type": "img",
+       "src": "assets/stock/va.png",
+       "t": 3.5,
+       "x": 0.66,
+       "y": 0.735,
+       "w": 0.74
+      },
+      {
+       "type": "text",
+       "text": "a",
+       "t": 3.5,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "x": 0.1,
+       "y": 0.26
+      },
+      {
+       "type": "text",
+       "text": "highly",
+       "t": 3.72,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "follow": true
+      },
+      {
+       "type": "text",
+       "text": "trained",
+       "t": 4.02,
+       "size": "L",
+       "color": "red",
+       "align": "left",
+       "x": 0.1,
+       "y": 0.335
+      },
+      {
+       "type": "text",
+       "text": "virtual",
+       "t": 4.4,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "x": 0.1,
+       "y": 0.4
+      },
+      {
+       "type": "text",
+       "text": "assistant",
+       "t": 4.68,
+       "size": "M",
+       "color": "ink",
+       "align": "left",
+       "x": 0.1,
+       "y": 0.455
+      }
+     ]
+    },
+    {
+     "items": [
+      {
+       "type": "text",
+       "text": "in",
+       "t": 5.26,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "x": 0.14,
+       "y": 0.4
+      },
+      {
+       "type": "text",
+       "text": "your",
+       "t": 5.542,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "follow": true
+      },
+      {
+       "type": "text",
+       "text": "industry,",
+       "t": 5.822,
+       "size": "L",
+       "color": "red",
+       "align": "left",
+       "x": 0.14,
+       "y": 0.475
+      },
+      {
+       "type": "img",
+       "src": "assets/icons/va/briefcase.svg",
+       "t": 5.822,
+       "x": 0.2,
+       "y": 0.585,
+       "w": 0.15
+      },
+      {
+       "type": "img",
+       "src": "assets/icons/va/house.svg",
+       "t": 5.892,
+       "x": 0.4,
+       "y": 0.585,
+       "w": 0.15
+      },
+      {
+       "type": "img",
+       "src": "assets/icons/va/medical.svg",
+       "t": 5.962,
+       "x": 0.6,
+       "y": 0.585,
+       "w": 0.15
+      },
+      {
+       "type": "img",
+       "src": "assets/icons/va/cart.svg",
+       "t": 6.032,
+       "x": 0.8,
+       "y": 0.585,
+       "w": 0.15
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 7.202,
+   "t1": 8.821,
+   "enter": "wipe",
+   "groups": [
+    {
+     "items": [
+      {
+       "type": "text",
+       "text": "$8",
+       "t": 7.242,
+       "size": 430,
+       "color": "red",
+       "align": "center",
+       "x": 0.5,
+       "y": 0.56
+      },
+      {
+       "type": "text",
+       "text": "an",
+       "t": 7.675,
+       "size": "M",
+       "color": "ink",
+       "align": "left",
+       "x": 0.285,
+       "y": 0.665
+      },
+      {
+       "type": "text",
+       "text": "hour,",
+       "t": 8.285,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "follow": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 14.375,
+   "t1": 17.27,
+   "enter": "cut",
+   "groups": [
+    {
+     "items": [
+      {
+       "type": "text",
+       "text": "and",
+       "t": 14.375,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "x": 0.1,
+       "y": 0.25
+      },
+      {
+       "type": "text",
+       "text": "are",
+       "t": 14.375,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "follow": true
+      },
+      {
+       "type": "text",
+       "text": "trained",
+       "t": 14.675,
+       "size": "M",
+       "color": "ink",
+       "align": "left",
+       "x": 0.1,
+       "y": 0.31
+      },
+      {
+       "type": "text",
+       "text": "on",
+       "t": 15.115,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "follow": true
+      },
+      {
+       "type": "text",
+       "text": "the",
+       "t": 15.375,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "x": 0.1,
+       "y": 0.385
+      },
+      {
+       "type": "text",
+       "text": "tools",
+       "t": 15.495,
+       "size": "L",
+       "color": "red",
+       "align": "left",
+       "x": 0.1,
+       "y": 0.465
+      },
+      {
+       "type": "img",
+       "src": "assets/icons/va/laptop.svg",
+       "t": 14.375,
+       "x": 0.5,
+       "y": 0.64,
+       "w": 0.86
+      },
+      {
+       "type": "img",
+       "src": "assets/icons/va/t-mail.svg",
+       "t": 15.495,
+       "x": 0.33,
+       "y": 0.565,
+       "w": 0.12
+      },
+      {
+       "type": "img",
+       "src": "assets/icons/va/t-cal.svg",
+       "t": 15.555,
+       "x": 0.5,
+       "y": 0.565,
+       "w": 0.12
+      },
+      {
+       "type": "img",
+       "src": "assets/icons/va/t-chat.svg",
+       "t": 15.614999999999998,
+       "x": 0.67,
+       "y": 0.565,
+       "w": 0.12
+      },
+      {
+       "type": "img",
+       "src": "assets/icons/va/t-sheet.svg",
+       "t": 15.674999999999999,
+       "x": 0.33,
+       "y": 0.66,
+       "w": 0.12
+      },
+      {
+       "type": "img",
+       "src": "assets/icons/va/t-video.svg",
+       "t": 15.735,
+       "x": 0.5,
+       "y": 0.66,
+       "w": 0.12
+      },
+      {
+       "type": "img",
+       "src": "assets/icons/va/t-folder.svg",
+       "t": 15.795,
+       "x": 0.67,
+       "y": 0.66,
+       "w": 0.12
+      },
+      {
+       "type": "text",
+       "text": "you",
+       "t": 15.835,
+       "size": "P",
+       "color": "ink",
+       "align": "left",
+       "x": 0.15,
+       "y": 0.86
+      },
+      {
+       "type": "text",
+       "text": "already",
+       "t": 16.295,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "follow": true
+      },
+      {
+       "type": "text",
+       "text": "use.",
+       "t": 16.655,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "follow": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 18.610999999999997,
+   "t1": 21.883,
+   "enter": "wipe",
+   "groups": [
+    {
+     "t1": 19.461000000000002,
+     "exit": "slide",
+     "items": [
+      {
+       "type": "img",
+       "src": "assets/icons/va/doc.svg",
+       "t": 18.641,
+       "x": 0.22,
+       "y": 0.43,
+       "w": 0.15
+      },
+      {
+       "type": "text",
+       "text": "payroll",
+       "t": 18.641,
+       "size": "M",
+       "color": "ink",
+       "align": "left",
+       "x": 0.33,
+       "y": 0.455
+      },
+      {
+       "type": "img",
+       "src": "assets/icons/va/shield.svg",
+       "t": 18.901,
+       "x": 0.22,
+       "y": 0.555,
+       "w": 0.16
+      },
+      {
+       "type": "text",
+       "text": "compliance",
+       "t": 18.901,
+       "size": "M",
+       "color": "red",
+       "align": "left",
+       "x": 0.33,
+       "y": 0.58
+      }
+     ]
+    },
+    {
+     "items": [
+      {
+       "type": "text",
+       "text": "and",
+       "t": 19.481,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "x": 0.1,
+       "y": 0.215
+      },
+      {
+       "type": "text",
+       "text": "you",
+       "t": 19.881,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "follow": true
+      },
+      {
+       "type": "text",
+       "text": "even",
+       "t": 20.121,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "follow": true
+      },
+      {
+       "type": "text",
+       "text": "get",
+       "t": 20.461,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "follow": true
+      },
+      {
+       "type": "text",
+       "text": "ongoing",
+       "t": 20.661,
+       "size": "M",
+       "color": "ink",
+       "align": "left",
+       "x": 0.1,
+       "y": 0.285
+      },
+      {
+       "type": "text",
+       "text": "coaching.",
+       "t": 21.201,
+       "size": "L",
+       "color": "red",
+       "align": "left",
+       "x": 0.1,
+       "y": 0.37
+      },
+      {
+       "type": "img",
+       "src": "assets/stock/coaching.jpg",
+       "t": 19.481,
+       "x": 0.5,
+       "y": 0.635,
+       "w": 0.86,
+       "tile": true,
+       "radius": 48
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "keep": [
+  [
+   0.0,
+   5.38483
+  ],
+  [
+   5.58293,
+   7.51533
+  ],
+  [
+   7.59463,
+   7.95268
+  ],
+  [
+   8.110479999999999,
+   9.25637
+  ],
+  [
+   9.61746,
+   11.163400000000001
+  ],
+  [
+   11.3917,
+   15.2006
+  ],
+  [
+   15.3813,
+   18.376199999999997
+  ],
+  [
+   18.5206,
+   19.962799999999998
+  ],
+  [
+   20.0322,
+   23.224
+  ],
+  [
+   23.4217,
+   25.317899999999998
+  ],
+  [
+   25.528000000000002,
+   26.9787
+  ],
+  [
+   27.1507,
+   27.762999999999998
+  ],
+  [
+   27.8286,
+   27.887007
+  ]
+ ]
+}

@@ -42,7 +42,7 @@ if plan.get("music"):
     m = add("-stream_loop", "-1", "-i", plan["music"])
     filt.append(f"[{m}:a]aresample=48000,volume={plan.get('music_vol', 0.07)},afade=t=out:st={max(0, dur-0.6)}:d=0.6[mus]")
     mix.append("[mus]")
-filt.append("".join(mix) + f"amix=inputs={len(mix)}:normalize=0[aout]")
+filt.append("".join(mix) + f"amix=inputs={len(mix)}:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[aout]")  # social-media loudness
 subprocess.run(["ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", ";".join(filt),
                 "-map", "[v]", "-map", "[aout]", "-t", str(dur), "-c:v", "libx264", "-crf", "17",
                 "-preset", "medium", "-c:a", "aac", "-b:a", "192k", out], check=True)
