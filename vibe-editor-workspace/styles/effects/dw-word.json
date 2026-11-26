@@ -1,46 +1,47 @@
 {
-  "desc": "Dynamic Word: small light lead line + huge blue italic-serif keyword behind you, blur-in / smear-out",
-  "params": {
-    "lead": "welcome to",
-    "word": "surin",
-    "pos": 0.22,
-    "lead_pos": 0.17,
-    "dur": 1.6
+ "desc": "Dynamic Word: small light lead line + huge blue italic-serif keyword behind you, blur-in / smear-out",
+ "params": {
+  "lead": "welcome to",
+  "word": "surin",
+  "pos": 0.22,
+  "lead_pos": 0.17,
+  "dur": 1.6,
+  "lead_color": "#F2F5F7"
+ },
+ "events": [
+  {
+   "type": "text",
+   "at": 0,
+   "dur": "{dur}",
+   "text": "{lead}",
+   "style": "blur",
+   "exit": "blur",
+   "font": "inter-light",
+   "size": 50,
+   "color": "{lead_color}",
+   "position": "{lead_pos}",
+   "sfx": "whoosh",
+   "sfx_volume": 0.22,
+   "outline": 0,
+   "shadow": 1,
+   "uppercase": false
   },
-  "events": [
-    {
-      "type": "text",
-      "at": 0,
-      "dur": "{dur}",
-      "text": "{lead}",
-      "style": "blur",
-      "exit": "blur",
-      "font": "inter-light",
-      "size": 50,
-      "color": "#F2F5F7",
-      "position": "{lead_pos}",
-      "sfx": "whoosh",
-      "sfx_volume": 0.35,
-      "outline": 0,
-      "shadow": 1,
-      "uppercase": false
-    },
-    {
-      "type": "title",
-      "at": 0.03,
-      "dur": "{dur}",
-      "text": "{word}",
-      "style": "blur",
-      "exit": "blur",
-      "font": "instrument-serif-italic",
-      "size": 300,
-      "color": "#4A86D8",
-      "position": "{pos}",
-      "behind": true,
-      "sfx": false,
-      "outline": 0,
-      "shadow": 0,
-      "uppercase": false
-    }
-  ]
+  {
+   "type": "title",
+   "at": 0.03,
+   "dur": "{dur}",
+   "text": "{word}",
+   "style": "blur",
+   "exit": "blur",
+   "font": "instrument-serif-italic",
+   "size": 300,
+   "color": "#4A86D8",
+   "position": "{pos}",
+   "behind": true,
+   "sfx": false,
+   "outline": 0,
+   "shadow": 0,
+   "uppercase": false
+  }
+ ]
 }

@@ -108,11 +108,11 @@ Everything is saved in this workspace, and `brand/brand.json` now points to it.
 
 | Reference element | Use | Notes |
 |---|---|---|
-| Lead + keyword behind you | `{"type":"dw-word","at":"<phrase>","lead":"welcome to","word":"surin"}` | Options: `pos` (keyword y, 0.22 default; 0.5 for mid), `lead_pos`, `dur` |
+| Lead + keyword behind you | `{"type":"dw-word","at":"<phrase>","lead":"welcome to","word":"surin"}` | Options: `pos` (keyword y, 0.22 default; 0.5 for mid), `lead_pos`, `dur`, `lead_color` (use `#2E353C` on light backgrounds) |
 | Cut-out blink | `{"type":"dw-blink","at":0}` | **Approximation**: the engine can only trace a white contour, not fill the silhouette. Its `glow` option also crashes the engine, so the preset leaves it off. |
 | Search + location chip | `{"type":"dw-search","at":…,"text":"villa surin, marbella","chip":"villa surin"}` | |
 | Feature chip | `{"type":"dw-chip","at":"spa","text":"private spa","x":0.3,"y":0.72}` | Pop entrance (the engine's tag has no blur-in) |
-| Glossy number count-up | `python3 styles/tools/dw_counter.py --from 6 --to 20 --at 7.17 --dur 1.9 --run 0.67` → paste the printed JSON | The library `counter` forces a black outline, so this tool builds the outline-free gradient version |
+| Glossy number count-up | `python3 styles/tools/dw_counter.py --from 6 --to 20 --at 7.17 --dur 1.9 --run 0.67 [--prefix $] [--suffix %]` → paste the printed JSON | The library `counter` forces a black outline, so this tool builds the outline-free gradient version |
 | Number with side words | `dw-count` (library counter) **or** the tool above + two `text` events in `inter-light` | |
 | Measurement line | `{"type":"dw-measure","at":"meter","label":"meter infinity pool","y":1250}` | `y` is in 1080×1920 pixels |
 | Area chart behind you | `{"type":"dw-area-chart","at":"perched","y":1150,"dur":1.2}` | Generic rising shape |
@@ -132,7 +132,7 @@ Everything is saved in this workspace, and `brand/brand.json` now points to it.
 4. Start each hero ~0.25 s before its keyword, put chips on the word, and end everything on the phrase's last syllable.
 5. Open with `dw-blink` and close with `dw-outro`. Mask any cut with `dw-blur-whip`.
 
-A working example plan is `styles/dw-example-edit.json`. It was rendered on a test clip; the storyboard is in the session notes.
+Working example plans: `styles/dw-example-edit.json` (test) and `styles/dw-example-va-edit.json` (a real 27 s talking-head ad on a light studio wall, with hand-placed sound and the lead colour darkened). It was rendered on a test clip; the storyboard is in the session notes.
 
 ---
 

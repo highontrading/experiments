@@ -28,6 +28,9 @@
     "Graphics land 0.1-0.3 s BEFORE their keyword; chips land ON the spoken word; counters finish just AFTER the number word.",
     "Entrances: 5-6 frame blur-in. Exits: 6 frame blur + horizontal smear. Hide hard cuts with dw-blur-whip in breath pauses.",
     "Numbers: styles/tools/dw_counter.py (glossy ice-blue, no outline). Measurements: dw-measure. Charts: dw-area-chart.",
-    "Sound: soft whoosh per keyword, typing under search, pop per chip, sparkle on counter landing, low music bed under VO."
+    "Sound: soft whoosh per keyword, typing under search, pop per chip, sparkle on counter landing, low music bed under VO.",
+    "Light/bright backgrounds: pass \"lead_color\":\"#2E353C\" to dw-word so the thin lead line stays readable.",
+    "Sound design: set auto_sfx false and place every sound as {\"type\":\"sfx\"} events (auto_sfx false also mutes effects' built-in sounds). Keep whooshes ~0.16, typing ~0.2, one sparkle on the price, a click on the CTA, music bed ~0.09 ducked.",
+    "Keep numbers and labels off the face: put counters on the torso (y ~1300 for a mid shot)."
   ]
 }

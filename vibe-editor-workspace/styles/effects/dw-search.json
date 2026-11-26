@@ -1,37 +1,37 @@
 {
-  "desc": "Dynamic Word: white glass search pill types the place, then a dark location chip pops under it",
-  "params": {
-    "text": "villa surin, marbella",
-    "chip": "villa surin",
-    "dur": 1.6
+ "desc": "Dynamic Word: white glass search pill types the place, then a dark location chip pops under it",
+ "params": {
+  "text": "villa surin, marbella",
+  "chip": "villa surin",
+  "dur": 1.6
+ },
+ "events": [
+  {
+   "type": "search",
+   "at": 0,
+   "dur": "{dur}",
+   "text": "{text}",
+   "suggestions": [],
+   "select": false,
+   "theme": "light",
+   "position": 0.62,
+   "sfx": "typing",
+   "sfx_volume": 0.3
   },
-  "events": [
-    {
-      "type": "search",
-      "at": 0,
-      "dur": "{dur}",
-      "text": "{text}",
-      "suggestions": [],
-      "select": false,
-      "theme": "light",
-      "position": 0.62,
-      "sfx": "typing",
-      "sfx_volume": 0.45
-    },
-    {
-      "type": "tag",
-      "at": 0.75,
-      "dur": 0.85,
-      "text": "{chip}",
-      "style": "dark",
-      "fill": "#1E2329",
-      "color": "#FFFFFF",
-      "size": 38,
-      "x": 0.66,
-      "position": 0.69,
-      "sfx": "pop",
-      "sfx_volume": 0.35,
-      "font": "inter-bold"
-    }
-  ]
+  {
+   "type": "tag",
+   "at": 0.75,
+   "dur": 0.85,
+   "text": "{chip}",
+   "style": "dark",
+   "fill": "#1E2329",
+   "color": "#FFFFFF",
+   "size": 38,
+   "x": 0.66,
+   "position": 0.69,
+   "sfx": "tap",
+   "sfx_volume": 0.25,
+   "font": "inter-bold"
+  }
+ ]
 }

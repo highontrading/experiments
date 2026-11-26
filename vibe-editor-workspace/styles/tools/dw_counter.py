@@ -5,7 +5,7 @@ The library `counter` always draws a black outline; the reference uses an outlin
 vertically graded (ice-blue top -> steel-blue bottom), slightly translucent heavy number
 that rises in with blur and counts with a cubic ease-out (fast first, slow landing).
 
-Usage:  python3 dw_counter.py --from 6 --to 20 --at 7.17 --dur 1.9 --run 0.67 [--y 1050] [--size 300]
+Usage:  python3 dw_counter.py --from 6 --to 20 --at 7.17 --dur 1.9 --run 0.67 [--y 1050] [--size 300] [--prefix $] [--suffix %] [--sfx sparkle]
 Prints one JSON event to paste into edit.json "events".
 """
 import argparse, json
@@ -21,7 +21,9 @@ ap.add_argument("--y", type=int, default=1100, help="centre y on the 1080x1920 c
 ap.add_argument("--size", type=int, default=300)
 ap.add_argument("--font", default="inter-extrabold")
 ap.add_argument("--fps", type=int, default=30)
-ap.add_argument("--sfx", default="sparkle")
+ap.add_argument("--sfx", default="")
+ap.add_argument("--prefix", default="")
+ap.add_argument("--suffix", default="")
 a = ap.parse_args()
 
 BANDS = ["#EAF5FE", "#D2E7F9", "#B5D6F3", "#98C3EA", "#7FAEDF", "#6797D0", "#5383C2", "#4373B3", "#3A68A6"]  # top -> bottom
@@ -53,11 +55,11 @@ for k, (v, t0) in enumerate(vals):
             ms = int((t1 - t0) * 1000)
             tag += f"\\t({max(0, ms - 220)},{ms},\\blur12\\alpha&HFF&\\fscx104)"
         layers.append({"start": round(t0, 3), "end": round(t1, 3), "layer": 9, "font": a.font,
-                       "size": a.size, "color": col, "text": "{" + tag + "}" + str(int(v))})
+                       "size": a.size, "color": col, "text": "{" + tag + "}" + a.prefix + str(int(v)) + a.suffix})
     # soft inner highlight
     layers.append({"start": round(t0, 3), "end": round(t1, 3), "layer": 10, "font": a.font, "size": a.size,
-                   "color": "#FFFFFF", "text": "{\\an5\\pos(%d,%d)\\bord0\\shad0\\alpha&HC8&\\blur2\\clip(0,%d,1080,%d)}%d"
-                   % (a.x, a.y, top - 60, top + cap * 0.18, int(v))})
+                   "color": "#FFFFFF", "text": "{\\an5\\pos(%d,%d)\\bord0\\shad0\\alpha&HC8&\\blur2\\clip(0,%d,1080,%d)}"
+                   % (a.x, a.y, top - 60, top + cap * 0.18) + a.prefix + str(int(v)) + a.suffix})
 ev = {"type": "ass", "at": a.at, "dur": a.dur, "layers": layers, "box": [0.2, (a.y - cap) / 1920, 0.8, (a.y + cap) / 1920]}
 if a.sfx:
     ev["sfx"] = a.sfx
