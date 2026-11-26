@@ -29,6 +29,10 @@ for s, e in zip(starts, ends):
     if s + PAD < e - PAD and s > cur:
         keep.append((cur, s + PAD)); cur = e - PAD
 keep.append((cur, min(dur, end_of_speech)))
+# snap every cut to the 30 fps frame grid so picture and sound are cut at exactly the same instant
+# (otherwise each cut adds up to a frame of lip-sync drift)
+keep = [(round(a * 30) / 30, round(b * 30) / 30) for a, b in keep]
+keep = [(a, b) for a, b in keep if b - a >= 1 / 30]
 
 def remap(t):
     """raw time -> edited time (times inside a removed pause snap to the next kept frame)"""
@@ -52,7 +56,7 @@ for i, (a, b) in enumerate(keep):
     parts.append(f"[0:v]trim={a}:{b},setpts=PTS-STARTPTS,crop={cw}:{ch}:(iw-{cw})/2:ih*{cy}-{ch}/2,"
                  f"scale=1080:1920:flags=lanczos,setsar=1[v{i}]")
     parts.append(f"[0:a]atrim={a}:{b},asetpts=PTS-STARTPTS,afade=t=in:d=0.012,"
-                 f"afade=t=out:st={max(0, b - a - 0.012):.3f}:d=0.012[a{i}]")
+                 f"afade=t=out:st={max(0, b - a - 0.012):.3f}:d=0.012,apad,atrim=0:{b - a:.6f}[a{i}]")
     labels.append(f"[v{i}][a{i}]")
 parts.append("".join(labels) + f"concat=n={len(keep)}:v=1:a=1[v][a]")
 aroll = os.path.join(OUT, "aroll.mp4")
