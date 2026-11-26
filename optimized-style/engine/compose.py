@@ -6,7 +6,7 @@ usage: engine/compose.py <plan-name> <a-roll.mp4 | placeholder> [out.mp4]
 The A-roll must already be cut to the edited timeline (the plan's timings).
 Grade: +contrast, a touch warmer and brighter, crisper. Punch-in 1.18x (the reference frames
 the optimized version ~18% tighter than the raw). Optional plan keys:
-  "music": "path/to/bed.mp3", "music_vol": 0.07, "punch": 1.18
+  "music": "path/to/bed.mp3", "music_vol": 0.12, "punch": 1.18
 """
 import json, os, subprocess, sys
 
@@ -40,13 +40,15 @@ filt.append(f"[a][{ov}:v]overlay=format=auto,format=yuv420p[v]")
 mixwav, finalwav = f"build/{name}/mix.wav", f"build/{name}/final.wav"
 ain = ["-f", "lavfi", "-t", str(dur), "-i", "anullsrc=r=48000:cl=stereo"] if src == "placeholder" else ["-i", src]
 ain += ["-i", f"build/{name}/sfx.wav"]
-af = ["[0:a]aresample=48000,aformat=sample_fmts=fltp:channel_layouts=stereo[voice]",
+af = ["[0:a]aresample=48000,aformat=sample_fmts=fltp:channel_layouts=stereo" + (",asplit=2[voice][key]" if plan.get("music") else "[voice]"),
       "[1:a]aresample=48000,aformat=sample_fmts=fltp:channel_layouts=stereo[fx]"]
 mix = ["[voice]", "[fx]"]
 if plan.get("music"):
     ain += ["-stream_loop", "-1", "-i", plan["music"]]
-    af.append(f"[2:a]aresample=48000,aformat=sample_fmts=fltp:channel_layouts=stereo,volume={plan.get('music_vol', 0.07)},"
-              f"afade=t=out:st={max(0, dur-0.6)}:d=0.6[mus]")
+    # soft bed: quiet, fades in/out, and dips a few dB under the voice (sidechain) so words stay clear
+    af.append(f"[2:a]aresample=48000,aformat=sample_fmts=fltp:channel_layouts=stereo,atrim=0:{dur},volume={plan.get('music_vol', 0.12)},"
+              f"afade=t=in:d=0.8,afade=t=out:st={max(0, dur-1.2)}:d=1.2[bed]")
+    af.append("[bed][key]sidechaincompress=threshold=0.03:ratio=3:attack=40:release=600:knee=4[mus]")
     mix.append("[mus]")
 af.append("".join(mix) + f"amix=inputs={len(mix)}:duration=first:normalize=0,atrim=0:{dur}[aout]")
 subprocess.run(["ffmpeg", "-v", "error", "-y", *ain, "-filter_complex", ";".join(af), "-map", "[aout]",

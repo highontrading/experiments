@@ -5,6 +5,14 @@
  "fps": 30,
  "dur": 25.833,
  "punch": 1.0,
+ "music": "assets/music/soft-keys-86bpm.mp3",
+ "music_vol": 0.12,
+ "sfx": [
+  {
+   "name": "shimmer",
+   "t": 7.292999999999999
+  }
+ ],
  "captions": [
   {
    "t0": 0.0,

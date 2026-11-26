@@ -175,6 +175,8 @@ cards = [
 ]
 
 plan = {"name": "va-ad", "w": 1080, "h": 1920, "fps": 30, "dur": total, "punch": 1.0,
+        "music": "assets/music/soft-keys-86bpm.mp3", "music_vol": 0.12,
+        "sfx": [{"name": "shimmer", "t": g("$8", 1) + 0.02}],
         "captions": caps, "cards": cards, "keep": keep}
 json.dump(plan, open(os.path.join(ROOT, "plans", "va-ad.json"), "w"), indent=1)
 print(f"{len(keep)} segments kept, {dur:.2f}s -> {total:.2f}s; plan + A-roll written")

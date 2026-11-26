@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- "Raw vs Edited" comparison reel, in the Optimized design system:
+     warm paper white, black Inter Display, one red accent, white cards with soft shadows,
+     panels tilted in 3D like the reference's Raw/Optimized layout. Driven frame by frame by render.js. -->
+<style>
+  @font-face { font-family: "Inter Display"; font-weight: 500; src: url("../assets/fonts/InterDisplay-SemiBold.otf"); }
+  @font-face { font-family: "Inter Display"; font-weight: 700; src: url("../assets/fonts/InterDisplay-Bold.otf"); }
+  @font-face { font-family: "Inter Display"; font-weight: 800; src: url("../assets/fonts/InterDisplay-ExtraBold.otf"); }
+  :root { --ink: #0B0B0B; --red: #F2000A; --paper: #F6F4F0; --muted: #6B6B6B; }
+  html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; }
+  body { background: var(--paper); font-family: "Inter Display", sans-serif; color: var(--ink); position: relative; }
+  /* soft warm light + a faint red glow behind the panels */
+  #bg { position: absolute; inset: 0;
+        background:
+          radial-gradient(900px 700px at 62% 50%, rgba(242,0,10,0.07), transparent 70%),
+          radial-gradient(1200px 900px at 50% 0%, #FFFFFF, transparent 70%),
+          linear-gradient(180deg, #FAF9F6 0%, #F1EFEA 100%); }
+  /* fine dot grid, barely there */
+  #grid { position: absolute; inset: 0; opacity: .5;
+          background-image: radial-gradient(rgba(0,0,0,0.07) 1.4px, transparent 1.6px); background-size: 36px 36px;
+          -webkit-mask-image: radial-gradient(70% 60% at 50% 50%, #000, transparent); }
+  .t { position: absolute; left: 0; right: 0; text-align: center; letter-spacing: -0.035em; }
+  #title { top: 150px; font-size: 104px; font-weight: 800; line-height: 1; }
+  #title .ai { color: var(--red); }
+  #kicker { top: 96px; font-size: 30px; font-weight: 700; letter-spacing: 0.22em; color: var(--muted); text-transform: uppercase; }
+  #cta { top: 1592px; font-size: 112px; font-weight: 800; line-height: 1; }
+  #cta .q { color: var(--red); }
+  #sub { top: 1726px; font-size: 46px; font-weight: 500; color: #3A3A3A; letter-spacing: -0.02em; }
+  .w { display: inline-block; will-change: transform, filter, opacity; }
+  #stage { position: absolute; inset: 0; perspective: 2200px; perspective-origin: 50% 46%; }
+  .panel { position: absolute; border-radius: 40px; overflow: hidden; background: #ddd; transform-style: preserve-3d;
+           will-change: transform, filter, opacity; }
+  .panel img { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .shadow { position: absolute; border-radius: 40px; will-change: transform, opacity; }
+  #rawP  { left: 92px;  top: 560px; width: 432px; height: 768px; }
+  #editP { left: 436px; top: 452px; width: 560px; height: 996px; }
+  #rawS  { left: 92px;  top: 560px; width: 432px; height: 768px; box-shadow: 0 30px 70px rgba(20,20,30,.22), 0 6px 16px rgba(20,20,30,.12); }
+  #editS { left: 436px; top: 452px; width: 560px; height: 996px; box-shadow: 0 46px 110px rgba(20,20,30,.30), 0 10px 26px rgba(20,20,30,.14); }
+  #editP::after { content: ""; position: absolute; inset: 0; border-radius: 40px; box-shadow: inset 0 0 0 2px rgba(255,255,255,.35); }
+  /* reference-style labels: outlined tag + thin connector line down to the panel */
+  .label { position: absolute; display: flex; flex-direction: column; align-items: center; will-change: opacity, transform; }
+  .tag { font-size: 40px; font-weight: 700; padding: 8px 22px 10px; border: 3px solid var(--ink); border-radius: 14px;
+         letter-spacing: -0.02em; background: rgba(255,255,255,.7); }
+  .tag.red { border-color: var(--red); color: #fff; background: var(--red); }
+  .line { width: 3px; background: var(--ink); transform-origin: top; }
+  .line.red { background: var(--red); }
+  #rawL  { left: 248px; top: 432px; }  #rawL .line  { height: 70px; }
+  #editL { left: 642px; top: 300px; }  #editL .line { height: 92px; }
+</style>
+</head>
+<body>
+<div id="bg"></div><div id="grid"></div>
+<div class="t" id="kicker"><span class="w">Before&nbsp;&nbsp;/&nbsp;&nbsp;After</span></div>
+<div class="t" id="title"><span class="w">Fully</span> <span class="w">Edited</span> <span class="w">by</span> <span class="w ai">AI</span></div>
+<div id="stage">
+  <div class="shadow" id="rawS"></div>
+  <div class="panel" id="rawP"><img id="rawI"></div>
+  <div class="shadow" id="editS"></div>
+  <div class="panel" id="editP"><img id="editI"></div>
+</div>
+<div class="label" id="rawL"><div class="tag">Raw</div><div class="line"></div></div>
+<div class="label" id="editL"><div class="tag red">Edited</div><div class="line red"></div></div>
+<div class="t" id="cta"><span class="w">Comment</span> <span class="w q">"VIBE"</span></div>
+<div class="t" id="sub"><span class="w">And</span> <span class="w">I'll</span> <span class="w">share</span> <span class="w">the</span> <span class="w">guide</span></div>
+<script>
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const ease = (p) => 1 - Math.pow(1 - p, 2.4);
+// same entrance as every word in the style: fade + blur + scale-down + rise
+function enter(el, now, t0, dur = 0.16, dy = 24, blur = 10, scale = 1.10) {
+  const p = ease(clamp((now - t0) / dur));
+  el.style.opacity = p;
+  el.style.filter = p < 1 ? `blur(${(1 - p) * blur}px)` : "none";
+  el.style.transform = `translateY(${(1 - p) * dy}px) scale(${1 + (scale - 1) * (1 - p)})`;
+}
+function panel(el, sh, now, t0, rotY, rotX, float) {
+  const p = ease(clamp((now - t0) / 0.55));
+  const y = (1 - p) * 140 + Math.sin(now * 2 * Math.PI / 7 + float) * 7;
+  const r = rotY + (1 - p) * 10;
+  const tf = `translateY(${y}px) rotateY(${r}deg) rotateX(${rotX}deg) scale(${0.94 + 0.06 * p})`;
+  el.style.transform = tf; sh.style.transform = tf;
+  el.style.opacity = p; sh.style.opacity = p;
+  el.style.filter = p < 1 ? `blur(${(1 - p) * 14}px)` : "none";
+}
+window.frameAt = async (f, fps) => {
+  const now = (f - 1) / fps;
+  const ri = document.getElementById("rawI"), ei = document.getElementById("editI");
+  const pad = (n) => String(n).padStart(5, "0");
+  const rf = Math.min(f, window.RAW_N), ef = Math.min(f, window.EDIT_N);
+  ri.src = `../build/compare/raw/${pad(rf)}.jpg`; ei.src = `../build/compare/edit/${pad(ef)}.jpg`;
+  await Promise.all([ri.decode(), ei.decode()]);
+  document.querySelectorAll("#title .w").forEach((w, i) => enter(w, now, 0.05 + i * 0.12));
+  enter(document.querySelector("#kicker .w"), now, 0.0, 0.25, 12, 8, 1.04);
+  panel(document.getElementById("rawP"), document.getElementById("rawS"), now, 0.18, 14, 2, 0.0);
+  panel(document.getElementById("editP"), document.getElementById("editS"), now, 0.32, -9, 1, 1.7);
+  for (const [id, t0] of [["rawL", 0.62], ["editL", 0.74]]) {
+    const L = document.getElementById(id), p = ease(clamp((now - t0) / 0.22));
+    L.style.opacity = p; L.style.transform = `translateX(-50%) translateY(${(1 - p) * 16}px)`;
+    L.querySelector(".line").style.transform = `scaleY(${ease(clamp((now - t0 - 0.12) / 0.25))})`;
+  }
+  document.querySelectorAll("#cta .w").forEach((w, i) => enter(w, now, 0.95 + i * 0.16));
+  document.querySelectorAll("#sub .w").forEach((w, i) => enter(w, now, 1.35 + i * 0.07));
+  // gentle breathing on "VIBE" after it lands, to keep the eye on the CTA
+  const q = document.querySelector("#cta .q");
+  if (now > 1.4) q.style.transform = `scale(${1 + 0.025 * Math.sin((now - 1.4) * 2 * Math.PI / 2.4)})`;
+};
+</script>
+</body>
+</html>
