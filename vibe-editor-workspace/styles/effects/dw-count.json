@@ -1,0 +1,62 @@
+{
+  "desc": "Dynamic Word: ease-out count-up number (ice-blue) with a small lead word above-left and a label below-right",
+  "params": {
+    "lead": "beautiful",
+    "from": 2,
+    "to": 6,
+    "label": "bedrooms",
+    "pos": 0.6,
+    "lead_pos": 0.53,
+    "label_pos": 0.67,
+    "dur": 1.6
+  },
+  "events": [
+    {
+      "type": "counter",
+      "at": 0,
+      "dur": "{dur}",
+      "from": "{from}",
+      "to": "{to}",
+      "label": "",
+      "position": "{pos}",
+      "font": "inter-extrabold",
+      "size": 260,
+      "color": "#A9CDF0",
+      "sfx": "sparkle",
+      "sfx_volume": 0.35,
+      "end_color": "#A9CDF0"
+    },
+    {
+      "type": "text",
+      "at": 0.17,
+      "dur": "{dur}",
+      "text": "{lead}",
+      "style": "blur",
+      "exit": "blur",
+      "font": "inter-light",
+      "size": 48,
+      "color": "#F2F5F7",
+      "position": "{lead_pos}",
+      "x": 0.38,
+      "outline": 0,
+      "shadow": 1,
+      "uppercase": false
+    },
+    {
+      "type": "text",
+      "at": 0.2,
+      "dur": "{dur}",
+      "text": "{label}",
+      "style": "blur",
+      "exit": "blur",
+      "font": "inter-light",
+      "size": 48,
+      "color": "#F2F5F7",
+      "position": "{label_pos}",
+      "x": 0.62,
+      "outline": 0,
+      "shadow": 1,
+      "uppercase": false
+    }
+  ]
+}

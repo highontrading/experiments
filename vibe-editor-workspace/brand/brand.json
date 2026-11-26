@@ -1,0 +1,33 @@
+{
+  "name": "",
+  "handle": "",
+  "niche": "",
+  "vibe": "premium, calm, editorial (Dynamic Word Reels)",
+  "language": "auto",
+  "caption_script": "roman",
+  "colors": {
+    "accent": "#4A86D8",
+    "accent2": "#A9CDF0",
+    "text": "#F2F5F7",
+    "dark": "#1E2329",
+    "card": "#F5F8FB"
+  },
+  "fonts": {
+    "title": "inter-bold",
+    "body": "inter-light",
+    "serif": "instrument-serif-italic"
+  },
+  "caption_style": "dw-keyword",
+  "look": "dw-cool-matte",
+  "cta": "Follow for more",
+  "logo": "",
+  "notes": [
+    "Style: Dynamic Word Reels. See styles/DYNAMIC-WORD-REELS.md before editing.",
+    "No running captions. One keyword per phrase: dw-word (light lead + blue italic serif keyword BEHIND the person).",
+    "Open with dw-blink at 0s. Every phrase = one graphic scene, fully cleared before the next.",
+    "Graphics land 0.1-0.3 s BEFORE their keyword; chips land ON the spoken word; counters finish just AFTER the number word.",
+    "Entrances: 5-6 frame blur-in. Exits: 6 frame blur + horizontal smear. Hide hard cuts with dw-blur-whip in breath pauses.",
+    "Numbers: styles/tools/dw_counter.py (glossy ice-blue, no outline). Measurements: dw-measure. Charts: dw-area-chart.",
+    "Sound: soft whoosh per keyword, typing under search, pop per chip, sparkle on counter landing, low music bed under VO."
+  ]
+}

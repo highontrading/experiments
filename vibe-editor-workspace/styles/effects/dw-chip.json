@@ -1,0 +1,26 @@
+{
+  "desc": "Dynamic Word: small dark-glass lowercase pill chip (feature callout), lands on the spoken word",
+  "params": {
+    "text": "private spa",
+    "x": 0.72,
+    "y": 0.62,
+    "dur": 1.4
+  },
+  "events": [
+    {
+      "type": "tag",
+      "at": 0,
+      "dur": "{dur}",
+      "text": "{text}",
+      "style": "dark",
+      "fill": "#1E2329",
+      "color": "#FFFFFF",
+      "size": 40,
+      "x": "{x}",
+      "position": "{y}",
+      "sfx": "pop",
+      "sfx_volume": 0.35,
+      "font": "inter-bold"
+    }
+  ]
+}

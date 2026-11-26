@@ -1,0 +1,27 @@
+{
+  "desc": "Dynamic Word: rounded listing cards orbiting the person at waist height (back half hidden behind them)",
+  "params": {
+    "items": [
+      "pool",
+      "terrace",
+      "living",
+      "view"
+    ],
+    "y": 0.5,
+    "dur": 2.0
+  },
+  "events": [
+    {
+      "type": "orbit_cards",
+      "at": 0,
+      "dur": "{dur}",
+      "items": "{items}",
+      "y": "{y}",
+      "radius": 0.34,
+      "tilt": 14,
+      "speed": 0.12,
+      "theme": "dark",
+      "behind": true
+    }
+  ]
+}

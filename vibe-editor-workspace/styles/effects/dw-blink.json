@@ -1,0 +1,22 @@
+{
+  "desc": "Dynamic Word: opening cut-out blink, a bright white contour flashes on the person twice (2 frames each, 0.2 s apart). Approximation: the reference fills the whole silhouette white.",
+  "events": [
+    {
+      "type": "outline",
+      "at": 0.033,
+      "dur": 0.1,
+      "color": "#FFFFFF",
+      "width": 14,
+      "sfx": "swoosh-up",
+      "sfx_volume": 0.5
+    },
+    {
+      "type": "outline",
+      "at": 0.233,
+      "dur": 0.1,
+      "color": "#FFFFFF",
+      "width": 14,
+      "sfx": false
+    }
+  ]
+}

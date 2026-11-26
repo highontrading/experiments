@@ -1,0 +1,15 @@
+VIBE EDITOR
+===========
+
+inbox/       Put your raw videos here.
+output/      Finished reels, covers and captions appear here.
+brand/       Your logo + brand.json (colours, fonts, caption style, CTA).
+broll/       Extra clips or images to cut away to.
+music/       Background music you have the rights to use.
+references/  Reels or screenshots you love, so Claude can match the style.
+fonts/       Your own fonts (.ttf / .otf) — usable in every effect.
+sounds/      Your own sound effects (.wav / .mp3) — use them by file name.
+looks/       Your own colour grades (.cube LUT files).
+styles/      Your saved caption styles, looks and custom effects.
+
+Then just tell Claude:  /vibe-editor:edit  make my latest video a reel

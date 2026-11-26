@@ -1,0 +1,68 @@
+{
+  "desc": "Dynamic Word: measurement line drawing out from centre with end ticks (white to blue) and a small label",
+  "params": {
+    "label": "meter infinity pool",
+    "y": 1180,
+    "dur": 2.0
+  },
+  "events": [
+    {
+      "type": "ass",
+      "at": 0,
+      "dur": "{dur}",
+      "params": {
+        "label": "{label}",
+        "y": "{y}"
+      },
+      "layers": [
+        {
+          "start": 0,
+          "end": "{dur}",
+          "layer": 9,
+          "shape": true,
+          "color": "#FFFFFF",
+          "text": "{\\an6\\pos({cx},{y})\\fscx0\\t(0,380,0.6,\\fscx100)\\fad(0,200)\\blur0.6\\p1}m 0 0 l 400 0 400 4 0 4"
+        },
+        {
+          "start": 0,
+          "end": "{dur}",
+          "layer": 9,
+          "shape": true,
+          "color": "#4A86D8",
+          "text": "{\\an4\\pos({cx},{y})\\fscx0\\t(0,380,0.6,\\fscx100)\\fad(0,200)\\blur0.6\\p1}m 0 0 l 400 0 400 4 0 4"
+        },
+        {
+          "start": 0,
+          "end": "{dur}",
+          "layer": 9,
+          "shape": true,
+          "color": "#FFFFFF",
+          "text": "{\\an5\\move({cx},{y},140,{y},0,380)\\fad(80,200)\\p1}m 0 -18 l 4 -18 4 18 0 18"
+        },
+        {
+          "start": 0,
+          "end": "{dur}",
+          "layer": 9,
+          "shape": true,
+          "color": "#4A86D8",
+          "text": "{\\an5\\move({cx},{y},940,{y},0,380)\\fad(80,200)\\p1}m 0 -18 l 4 -18 4 18 0 18"
+        },
+        {
+          "start": 0.25,
+          "end": "{dur}",
+          "layer": 9,
+          "font": "inter-light",
+          "size": 38,
+          "color": "#E8EEF3",
+          "text": "{\\an8\\pos({cx},1200)\\blur6\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H20&)\\fad(0,200)}{label}"
+        }
+      ],
+      "box": [
+        0.1,
+        0.59,
+        0.9,
+        0.66
+      ]
+    }
+  ]
+}
