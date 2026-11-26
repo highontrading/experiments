@@ -10,4 +10,4 @@ python3 mix.py           # voice chain + ducked felt-piano bed + SFX, -14 LUFS
 O=../../vibe-editor-workspace/output
 ffmpeg -v error -y -i build/gfx.mp4 -i build/audio/mix.wav -vf "unsharp=5:5:0.3:5:5:0,noise=alls=3:allf=t,format=yuv420p" \
   -c:v libx264 -crf 20 -preset slow -tune grain -maxrate 14M -bufsize 28M -profile:v high -c:a aac -b:a 256k -movflags +faststart -shortest $O/va-reel-v2.mp4
-python3 compare.py       # raw vs edited
+python3 compare.py       # raw vs edited promo layout (title, Raw/Edited cards, Comment "VIBE" CTA)
