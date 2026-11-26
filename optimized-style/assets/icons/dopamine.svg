@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 260" width="340" height="260">
+<g fill="none" stroke="#111" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+<polygon points="186.4,161.0 150.0,182.0 113.6,161.0 113.6,119.0 150.0,98.0 186.4,119.0"/>
+<line x1="150.0" y1="170.0" x2="124.0" y2="155.0"/>
+<line x1="124.0" y1="125.0" x2="150.0" y2="110.0"/>
+<line x1="176.0" y1="125.0" x2="176.0" y2="155.0"/>
+<polyline points="186.4,161.0 222.4,140.0 258.4,161.0 286.4,145.0"/>
+<line x1="113.6" y1="119.0" x2="83.6" y2="137.0"/>
+<line x1="150.0" y1="98.0" x2="120.0" y2="80.0"/>
+</g>
+<g font-family="Inter Display, Inter, sans-serif" font-weight="700" font-size="30" fill="#111">
+<text x="68.0" y="76.0">HO</text><text x="31.6" y="163.0">HO</text><text x="290.4" y="155.0">NH2</text>
+</g>
+<circle cx="83.6" cy="137.0" r="9" fill="#E0242B"/>
+<circle cx="120.0" cy="80.0" r="9" fill="#E0242B"/>
+</svg>

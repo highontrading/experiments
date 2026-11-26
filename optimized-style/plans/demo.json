@@ -1,0 +1,611 @@
+{
+ "name": "demo",
+ "w": 1080,
+ "h": 1920,
+ "fps": 30,
+ "dur": 13.44,
+ "captions": [
+  {
+   "t0": 0.0,
+   "t1": 0.93,
+   "lines": [
+    {
+     "size": "S",
+     "align": "left",
+     "words": [
+      {
+       "text": "most",
+       "t": 0.0
+      }
+     ]
+    },
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "people",
+       "t": 0.37
+      }
+     ]
+    },
+    {
+     "size": "S",
+     "align": "right",
+     "words": [
+      {
+       "text": "think",
+       "t": 0.63
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 0.97,
+   "t1": 1.7,
+   "lines": [
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "Dopamine",
+       "t": 0.97
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 3.77,
+   "t1": 4.57,
+   "lines": [
+    {
+     "size": "S",
+     "align": "center",
+     "words": [
+      {
+       "text": "But",
+       "t": 3.85
+      }
+     ]
+    },
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "dopamine",
+       "t": 3.93
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 4.6,
+   "t1": 5.43,
+   "lines": [
+    {
+     "size": "S",
+     "align": "left",
+     "words": [
+      {
+       "text": "is",
+       "t": 4.6
+      }
+     ]
+    },
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "actually",
+       "t": 4.8
+      }
+     ]
+    },
+    {
+     "size": "S",
+     "align": "right",
+     "words": [
+      {
+       "text": "called",
+       "t": 5.1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 6.83,
+   "t1": 7.12,
+   "lines": [
+    {
+     "size": "M",
+     "align": "center",
+     "words": [
+      {
+       "text": "And so",
+       "t": 6.83
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 7.13,
+   "t1": 7.19,
+   "lines": [
+    {
+     "size": "M",
+     "align": "center",
+     "words": [
+      {
+       "text": "I'm",
+       "t": 7.13
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 7.2,
+   "t1": 7.35,
+   "lines": [
+    {
+     "size": "M",
+     "align": "center",
+     "words": [
+      {
+       "text": "gonna",
+       "t": 7.2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 7.37,
+   "t1": 7.61,
+   "lines": [
+    {
+     "size": "M",
+     "align": "center",
+     "words": [
+      {
+       "text": "talk",
+       "t": 7.37
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 7.63,
+   "t1": 7.78,
+   "lines": [
+    {
+     "size": "M",
+     "align": "center",
+     "words": [
+      {
+       "text": "about",
+       "t": 7.63
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 7.8,
+   "t1": 8.05,
+   "lines": [
+    {
+     "size": "M",
+     "align": "center",
+     "words": [
+      {
+       "text": "how to",
+       "t": 7.8
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 8.07,
+   "t1": 9.27,
+   "lines": [
+    {
+     "size": "S",
+     "align": "center",
+     "words": [
+      {
+       "text": "use",
+       "t": 8.07
+      },
+      {
+       "text": "this",
+       "t": 8.47
+      }
+     ]
+    },
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "chemical",
+       "t": 8.6
+      }
+     ]
+    }
+   ],
+   "items": [
+    {
+     "type": "img",
+     "src": "assets/icons/hex-cluster.svg",
+     "t": 8.63,
+     "x": 0.5,
+     "y": 0.735,
+     "w": 0.16
+    }
+   ]
+  },
+  {
+   "t0": 11.33,
+   "t1": 11.59,
+   "lines": [
+    {
+     "size": "M",
+     "align": "center",
+     "words": [
+      {
+       "text": "that",
+       "t": 11.33
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 11.6,
+   "t1": 11.72,
+   "lines": [
+    {
+     "size": "M",
+     "align": "center",
+     "words": [
+      {
+       "text": "you",
+       "t": 11.6
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 11.73,
+   "t1": 11.92,
+   "lines": [
+    {
+     "size": "M",
+     "align": "center",
+     "words": [
+      {
+       "text": "need",
+       "t": 11.73
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 11.93,
+   "t1": 12.27,
+   "lines": [
+    {
+     "size": "M",
+     "align": "center",
+     "words": [
+      {
+       "text": "to to",
+       "t": 11.93
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 12.3,
+   "t1": 12.8,
+   "lines": [
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "create",
+       "t": 12.3
+      }
+     ]
+    },
+    {
+     "size": "S",
+     "align": "left",
+     "words": [
+      {
+       "text": "the",
+       "t": 12.47
+      },
+      {
+       "text": "life",
+       "t": 12.57
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 12.83,
+   "t1": 13.44,
+   "lines": [
+    {
+     "size": "S",
+     "align": "center",
+     "words": [
+      {
+       "text": "that",
+       "t": 12.83
+      }
+     ]
+    },
+    {
+     "size": "L",
+     "align": "center",
+     "words": [
+      {
+       "text": "you",
+       "t": 12.93
+      },
+      {
+       "text": "want.",
+       "t": 13.07
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "cards": [
+  {
+   "t0": 1.7,
+   "t1": 3.77,
+   "enter": "cut",
+   "groups": [
+    {
+     "t1": 2.94,
+     "exit": "slide",
+     "items": [
+      {
+       "type": "img",
+       "src": "assets/icons/molecule.svg",
+       "t": 1.7,
+       "x": 0.58,
+       "y": 0.47,
+       "w": 0.3
+      },
+      {
+       "type": "text",
+       "text": "is",
+       "t": 1.83,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "x": 0.15,
+       "y": 0.4
+      },
+      {
+       "type": "text",
+       "text": "a",
+       "t": 2.13,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "follow": true
+      },
+      {
+       "type": "text",
+       "text": "feel",
+       "t": 2.27,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "x": 0.15,
+       "y": 0.44
+      },
+      {
+       "type": "text",
+       "text": "good",
+       "t": 2.57,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "follow": true
+      },
+      {
+       "type": "text",
+       "text": "chemical",
+       "t": 2.77,
+       "size": "M",
+       "color": "red",
+       "align": "left",
+       "x": 0.38,
+       "y": 0.59
+      }
+     ]
+    },
+    {
+     "items": [
+      {
+       "type": "text",
+       "text": "on your brain.",
+       "t": 3.2,
+       "size": "P",
+       "color": "ink",
+       "align": "center",
+       "x": 0.5,
+       "y": 0.52
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 5.43,
+   "t1": 6.83,
+   "enter": "wipe",
+   "groups": [
+    {
+     "items": [
+      {
+       "type": "text",
+       "text": "The",
+       "t": 5.47,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "x": 0.15,
+       "y": 0.39
+      },
+      {
+       "type": "img",
+       "src": "assets/icons/dopamine.svg",
+       "t": 5.47,
+       "x": 0.4,
+       "y": 0.5,
+       "w": 0.3
+      },
+      {
+       "type": "text",
+       "text": "chemical",
+       "t": 5.8,
+       "size": "M",
+       "color": "red",
+       "align": "left",
+       "x": 0.15,
+       "y": 0.442
+      },
+      {
+       "type": "text",
+       "text": "of",
+       "t": 6.0,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "x": 0.6,
+       "y": 0.553
+      },
+      {
+       "type": "text",
+       "text": "motivation",
+       "t": 6.17,
+       "size": "M",
+       "color": "ink",
+       "align": "left",
+       "x": 0.36,
+       "y": 0.607
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 9.27,
+   "t1": 11.33,
+   "enter": "cut",
+   "groups": [
+    {
+     "t1": 10.1,
+     "exit": "slide",
+     "items": [
+      {
+       "type": "img",
+       "src": "assets/icons/hex-cluster.svg",
+       "t": 9.27,
+       "x": 0.55,
+       "y": 0.46,
+       "w": 0.26
+      },
+      {
+       "type": "text",
+       "text": "in",
+       "t": 9.33,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "x": 0.15,
+       "y": 0.4
+      },
+      {
+       "type": "text",
+       "text": "your",
+       "t": 9.5,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "x": 0.15,
+       "y": 0.437
+      },
+      {
+       "type": "text",
+       "text": "brain",
+       "t": 9.73,
+       "size": "M",
+       "color": "red",
+       "align": "left",
+       "x": 0.48,
+       "y": 0.575
+      }
+     ]
+    },
+    {
+     "items": [
+      {
+       "type": "text",
+       "text": "to",
+       "t": 10.37,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "x": 0.13,
+       "y": 0.49
+      },
+      {
+       "type": "text",
+       "text": "take",
+       "t": 10.53,
+       "size": "S",
+       "color": "ink",
+       "align": "left",
+       "follow": true
+      },
+      {
+       "type": "text",
+       "text": "action",
+       "t": 10.75,
+       "size": "L",
+       "color": "red",
+       "align": "left",
+       "x": 0.13,
+       "y": 0.565
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
