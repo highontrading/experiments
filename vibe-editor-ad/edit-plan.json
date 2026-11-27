@@ -1,0 +1,424 @@
+{
+ "format": "9:16",
+ "reframe": {
+  "mode": "crop",
+  "x": 0.5,
+  "y": 0.5
+ },
+ "look": "clean-neutral",
+ "cuts": {
+  "remove_pauses": false,
+  "remove_fillers": false,
+  "drop_words": [],
+  "drop": []
+ },
+ "captions": {
+  "enabled": false
+ },
+ "audio": {
+  "denoise": false,
+  "loudness": -14
+ },
+ "brand_override": {
+  "colors": {
+   "accent": "#FF5A1F"
+  },
+  "fonts": {
+   "title": "anton"
+  }
+ },
+ "events": [
+  {
+   "type": "zoom",
+   "style": "punch",
+   "at": 0,
+   "dur": 2.1,
+   "amount": 1.12
+  },
+  {
+   "type": "text",
+   "text": "Reel Edit Mein",
+   "at": 0.0,
+   "until": 2.1,
+   "style": "cascade",
+   "font": "inter-extrabold",
+   "size": 70,
+   "color": "#FFFFFF",
+   "position": 0.11
+  },
+  {
+   "type": "title",
+   "text": "POORA DIN?",
+   "at": 0.67,
+   "until": 2.1,
+   "style": "punch",
+   "font": "anton",
+   "size": 200,
+   "color": "#FFFFFF",
+   "position": 0.17,
+   "sfx": "whoosh"
+  },
+  {
+   "type": "text",
+   "text": "Isliye Maine Banaya",
+   "at": 2.16,
+   "until": 4.12,
+   "style": "cascade",
+   "font": "inter-extrabold",
+   "size": 70,
+   "color": "#FFFFFF",
+   "position": 0.11
+  },
+  {
+   "type": "title",
+   "text": "VIBE *EDITOR*",
+   "at": 3.1,
+   "until": 4.12,
+   "style": "pop",
+   "font": "anton",
+   "size": 200,
+   "color": "#FFFFFF",
+   "position": 0.17,
+   "sfx": "impact"
+  },
+  {
+   "type": "text",
+   "text": "Claude Mein Bas",
+   "at": 4.13,
+   "until": 6.05,
+   "style": "cascade",
+   "font": "inter-extrabold",
+   "size": 70,
+   "color": "#111111",
+   "position": 0.11,
+   "outline": 0,
+   "shadow": 0
+  },
+  {
+   "type": "title",
+   "text": "EK *PLUGIN*",
+   "at": 4.75,
+   "until": 6.05,
+   "style": "punch",
+   "font": "anton",
+   "size": 240,
+   "color": "#111111",
+   "position": 0.17,
+   "outline": 0,
+   "shadow": 0,
+   "sfx": "whoosh"
+  },
+  {
+   "type": "card",
+   "style": "note",
+   "label": "Claude plugin",
+   "text": "*Vibe Editor*",
+   "sub": "Installing\u2026 done \u2713",
+   "at": 4.6,
+   "until": 8.1,
+   "position": 0.42,
+   "anim": "pop"
+  },
+  {
+   "type": "text",
+   "text": "Tumhara",
+   "at": 6.09,
+   "until": 8.1,
+   "style": "fade",
+   "font": "inter-extrabold",
+   "size": 70,
+   "color": "#111111",
+   "position": 0.6,
+   "outline": 0,
+   "shadow": 0
+  },
+  {
+   "type": "title",
+   "text": "VIDEO EDITOR",
+   "at": 6.42,
+   "until": 8.1,
+   "style": "punch",
+   "font": "anton",
+   "size": 200,
+   "color": "#111111",
+   "position": 0.68,
+   "sfx": "whoosh",
+   "outline": 0,
+   "shadow": 0
+  },
+  {
+   "type": "text",
+   "text": "Raw Video Daalo",
+   "at": 8.19,
+   "until": 9.15,
+   "style": "cascade",
+   "font": "inter-extrabold",
+   "size": 70,
+   "color": "#111111",
+   "position": 0.11,
+   "outline": 0,
+   "shadow": 0
+  },
+  {
+   "type": "prompt",
+   "text": "/vibe-editor:edit raw.mp4",
+   "label": "Claude",
+   "at": 8.25,
+   "until": 13.95,
+   "position": 0.33,
+   "theme": "light",
+   "size": "l"
+  },
+  {
+   "type": "text",
+   "text": "Aur Claude Khud",
+   "at": 9.19,
+   "until": 13.95,
+   "style": "cascade",
+   "font": "inter-extrabold",
+   "size": 70,
+   "color": "#111111",
+   "position": 0.11,
+   "outline": 0,
+   "shadow": 0
+  },
+  {
+   "type": "title",
+   "text": "RETAKES",
+   "at": 10.11,
+   "until": 11.36,
+   "style": "punch",
+   "font": "anton",
+   "size": 240,
+   "color": "#111111",
+   "position": 0.17,
+   "exit": "none",
+   "outline": 0,
+   "shadow": 0
+  },
+  {
+   "type": "title",
+   "text": "CAPTIONS",
+   "at": 11.38,
+   "until": 12.55,
+   "style": "punch",
+   "font": "anton",
+   "size": 240,
+   "color": "#111111",
+   "position": 0.17,
+   "exit": "none",
+   "outline": 0,
+   "shadow": 0
+  },
+  {
+   "type": "title",
+   "text": "GRAPHICS",
+   "at": 12.57,
+   "until": 13.95,
+   "style": "punch",
+   "font": "anton",
+   "size": 240,
+   "color": "#111111",
+   "position": 0.17,
+   "outline": 0,
+   "shadow": 0
+  },
+  {
+   "type": "checklist",
+   "items": [
+    "Retakes cut",
+    "Hinglish captions",
+    "Motion graphics"
+   ],
+   "times": [
+    10.4,
+    11.6,
+    12.8
+   ],
+   "at": 9.9,
+   "until": 13.95,
+   "position": 0.6,
+   "style": "light"
+  },
+  {
+   "type": "text",
+   "text": "Har Video Ke Liye",
+   "at": 14.0,
+   "until": 17.3,
+   "style": "cascade",
+   "font": "inter-extrabold",
+   "size": 70,
+   "color": "#111111",
+   "position": 0.11,
+   "outline": 0,
+   "shadow": 0
+  },
+  {
+   "type": "title",
+   "text": "90+ *EFFECTS*",
+   "at": 14.09,
+   "until": 15.6,
+   "style": "punch",
+   "font": "anton",
+   "size": 200,
+   "color": "#111111",
+   "position": 0.17,
+   "exit": "none",
+   "outline": 0,
+   "shadow": 0
+  },
+  {
+   "type": "title",
+   "text": "47 *CAPTIONS*",
+   "at": 15.62,
+   "until": 17.3,
+   "style": "punch",
+   "font": "anton",
+   "size": 200,
+   "color": "#111111",
+   "position": 0.17,
+   "outline": 0,
+   "shadow": 0
+  },
+  {
+   "type": "orbit_cards",
+   "items": [
+    "Text behind you",
+    "UI mockups",
+    "Charts",
+    "Clone row",
+    "Background swap",
+    "Glitch"
+   ],
+   "at": 14.1,
+   "until": 17.3,
+   "x": 0.5,
+   "y": 0.55,
+   "theme": "light",
+   "size": 62,
+   "radius": 0.3
+  },
+  {
+   "type": "text",
+   "text": "Aur Kisi Bhi Reel Ka",
+   "at": 17.35,
+   "until": 20.3,
+   "style": "cascade",
+   "font": "inter-extrabold",
+   "size": 70,
+   "color": "#111111",
+   "position": 0.11,
+   "outline": 0,
+   "shadow": 0
+  },
+  {
+   "type": "title",
+   "text": "STYLE",
+   "at": 18.6,
+   "until": 19.36,
+   "style": "punch",
+   "font": "anton",
+   "size": 240,
+   "color": "#111111",
+   "position": 0.17,
+   "exit": "none",
+   "outline": 0,
+   "shadow": 0
+  },
+  {
+   "type": "title",
+   "text": "*COPY* KARO",
+   "at": 19.38,
+   "until": 20.3,
+   "style": "punch",
+   "font": "anton",
+   "size": 200,
+   "color": "#111111",
+   "position": 0.17,
+   "sfx": "impact",
+   "outline": 0,
+   "shadow": 0
+  },
+  {
+   "type": "prompt",
+   "text": "/vibe-editor:style make it like this reel",
+   "label": "Claude",
+   "at": 17.5,
+   "until": 20.3,
+   "position": 0.5,
+   "theme": "light",
+   "size": "l"
+  },
+  {
+   "type": "text",
+   "text": "Aur Haan, Ye Ad Bhi",
+   "at": 20.33,
+   "until": 22.2,
+   "style": "cascade",
+   "font": "inter-extrabold",
+   "size": 70,
+   "color": "#FFFFFF",
+   "position": 0.11
+  },
+  {
+   "type": "title",
+   "text": "ISI SE *BANA*",
+   "at": 21.3,
+   "until": 22.2,
+   "style": "punch",
+   "font": "anton",
+   "size": 200,
+   "color": "#FFFFFF",
+   "position": 0.17,
+   "sfx": "whoosh"
+  },
+  {
+   "type": "text",
+   "text": "Comment Karo",
+   "at": 22.45,
+   "until": 25.35,
+   "style": "cascade",
+   "font": "inter-extrabold",
+   "size": 70,
+   "color": "#FFFFFF",
+   "position": 0.11
+  },
+  {
+   "type": "title",
+   "text": "VIBE",
+   "at": 23.0,
+   "until": 25.35,
+   "style": "punch",
+   "font": "anton",
+   "size": 300,
+   "color": "#FFFFFF",
+   "position": 0.2,
+   "exit": "none",
+   "sfx": "impact"
+  },
+  {
+   "type": "comment",
+   "text": "VIBE",
+   "at": 22.6,
+   "until": 25.35,
+   "position": 0.5,
+   "theme": "light"
+  },
+  {
+   "type": "notification",
+   "app": "Instagram",
+   "title": "Vibe Editor",
+   "body": "Link bhej diya! Tap to open",
+   "time": "now",
+   "icon": "V",
+   "icon_color": "#FF5A1F",
+   "at": 24.0,
+   "until": 25.35,
+   "position": 0.68,
+   "theme": "light"
+  }
+ ],
+ "output": {
+  "name": "vibe-editor-ad-draft"
+ }
+}
