@@ -1,0 +1,29 @@
+{
+  "desc": "Full-screen black card, one white word/phrase centred (rapid word-flash sequence; alternate with yo-flash-white every 0.25-0.45s)",
+  "params": {
+    "text": "It won't",
+    "size": 118
+  },
+  "events": [
+    {
+      "type": "ass",
+      "hide_captions": true,
+      "params": {},
+      "layers": [
+        {
+          "layer": 20,
+          "shape": true,
+          "color": "#000000",
+          "text": "{\\an7\\pos(0,0)\\p1}m 0 0 l 1080 0 1080 1920 0 1920"
+        },
+        {
+          "layer": 21,
+          "font": "inter-extrabold",
+          "size": "{size}",
+          "color": "#FFFFFF",
+          "text": "{\\an5\\pos(540,960)\\fsp-4}{text}"
+        }
+      ]
+    }
+  ]
+}

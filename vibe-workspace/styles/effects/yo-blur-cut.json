@@ -1,0 +1,20 @@
+{
+  "desc": "Signature transition: focus pull out (0.2s) into the cut, focus pull in (0.2s) after it. Put 'at' 0.2s before the cut.",
+  "params": {},
+  "events": [
+    {
+      "type": "rack_focus",
+      "at": 0,
+      "dur": 0.2,
+      "direction": "out",
+      "amount": 26
+    },
+    {
+      "type": "rack_focus",
+      "at": 0.2,
+      "dur": 0.2,
+      "direction": "in",
+      "amount": 26
+    }
+  ]
+}

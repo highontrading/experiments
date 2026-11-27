@@ -1,0 +1,33 @@
+{
+  "desc": "Yellow glowing sans line that blurs+rises in over b-roll (reference: 'you up against')",
+  "params": {
+    "text": "you up against",
+    "y": 560,
+    "size": 92,
+    "color": "#E6D23A"
+  },
+  "events": [
+    {
+      "type": "ass",
+      "hide_captions": true,
+      "layers": [
+        {
+          "layer": 18,
+          "font": "inter-extrabold",
+          "size": "{size}",
+          "color": "{color}",
+          "bord": 10,
+          "outline": "{color}",
+          "text": "{\\an5\\move(540,{y},540,{y},0,1)\\alpha&HB0&\\blur22\\fsp-3\\fad(250,120)}{text}"
+        },
+        {
+          "layer": 19,
+          "font": "inter-extrabold",
+          "size": "{size}",
+          "color": "{color}",
+          "text": "{\\an5\\move(560,{y},540,{y},0,320)\\blur14\\t(0,320,\\blur0.6)\\fsp-3\\fad(200,120)\\shad3\\4c&H303000&\\4a&H90&}{text}"
+        }
+      ]
+    }
+  ]
+}

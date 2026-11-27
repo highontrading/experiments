@@ -1,0 +1,37 @@
+{
+  "name": "",
+  "handle": "",
+  "niche": "",
+  "vibe": "premium minimal, monochrome + one accent per scene, kinetic type, 3D motion",
+  "language": "auto",
+  "caption_script": "roman",
+  "colors": {
+    "accent": "#E6D23A",
+    "accent2": "#DC964A",
+    "lime": "#B8C000",
+    "text": "#FFFFFF",
+    "dark": "#000000",
+    "card": "#FFFFFF",
+    "canvas": "#E3E8EE",
+    "gridline": "#454449"
+  },
+  "fonts": {
+    "title": "inter-extrabold",
+    "body": "inter-extrabold",
+    "serif": "satisfy"
+  },
+  "caption_style": "yonomi-word",
+  "look": "yonomi-warm",
+  "cta": "Follow for more",
+  "logo": "",
+  "notes": [
+    "Style source: references/yonomi-style/DESIGN_SYSTEM.md (read before every edit)",
+    "Open with yo-open (blur-to-sharp + slow push); hook uses yonomi-stack captions, rest yonomi-word",
+    "Change the visual state every 1.5-2 s; ~60% of runtime is full-screen graphics/b-roll replacing the speaker",
+    "Transitions: yo-blur-cut between talking head and b-roll; whoosh-fast slam/whip into graphic panels; hard cuts back to the speaker",
+    "Punchline beats: yo-flash-black / yo-flash-white alternating one word per cut (0.25-0.45 s each)",
+    "Graphic panels: yo-panel (black square on grid wall) -> yo-swoosh (lime arc); b-roll titles: yo-glow-title, yo-script-title",
+    "Captions hidden whenever a full-screen graphic carries the words",
+    "Sound: low music bed ducked under VO, subtle whooshes on big moves only, no caption pops (auto_sfx false)"
+  ]
+}

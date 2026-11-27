@@ -1,0 +1,29 @@
+{
+  "desc": "Full-screen white card, one black word/phrase centred (pairs with yo-flash-black)",
+  "params": {
+    "text": "really",
+    "size": 118
+  },
+  "events": [
+    {
+      "type": "ass",
+      "hide_captions": true,
+      "params": {},
+      "layers": [
+        {
+          "layer": 20,
+          "shape": true,
+          "color": "#FFFFFF",
+          "text": "{\\an7\\pos(0,0)\\p1}m 0 0 l 1080 0 1080 1920 0 1920"
+        },
+        {
+          "layer": 21,
+          "font": "inter-extrabold",
+          "size": "{size}",
+          "color": "#0A0A0A",
+          "text": "{\\an5\\pos(540,960)\\fsp-4}{text}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "yonomi-warm": {
+    "filter": "eq=contrast=1.07:saturation=0.86:brightness=-0.015:gamma=0.97,colorbalance=rs=0.035:gs=0.005:bs=-0.035:rm=0.02:bm=-0.025:rh=0.01:bh=-0.01,vignette=angle=PI/5",
+    "desc": "Warm moody studio grade from the reference: brown woods, slightly desaturated skin, deep but not crushed blacks, soft vignette"
+  }
+}

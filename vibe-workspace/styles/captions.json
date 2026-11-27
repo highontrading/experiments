@@ -1,0 +1,35 @@
+{
+  "yonomi-word": {
+    "desc": "Reference style: 1-2 word chunks, white Inter ExtraBold, no outline, soft shadow, blur-in, on the chest",
+    "font": "inter-extrabold",
+    "size": 100,
+    "color": "#FFFFFF",
+    "highlight": "#FFFFFF",
+    "outline": "#000000",
+    "outline_w": 0,
+    "shadow": 4,
+    "anim": "blur",
+    "uppercase": false,
+    "max_words": 2,
+    "position": 0.5,
+    "brand_highlight": false,
+    "line_height": 0.86
+  },
+  "yonomi-stack": {
+    "desc": "Reference hook style: 3 words stacked on tight leading, white, blur-rise",
+    "font": "inter-extrabold",
+    "size": 104,
+    "color": "#FFFFFF",
+    "highlight": "#FFFFFF",
+    "outline": "#000000",
+    "outline_w": 0,
+    "shadow": 4,
+    "anim": "stack",
+    "uppercase": false,
+    "max_words": 3,
+    "position": 0.5,
+    "emphasis_scale": 1.0,
+    "emphasis_color": "#FFFFFF",
+    "line_height": 0.8
+  }
+}

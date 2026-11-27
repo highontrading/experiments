@@ -1,0 +1,46 @@
+{
+ "desc": "Two-tier title: big glowing yellow script word + small white sans kicker above-right (reference: 'one of the biggest / Challenges')",
+ "params": {
+  "script": "Challenges",
+  "small": "one of the biggest",
+  "y": 1180,
+  "color": "#D8C428",
+  "ys": 1122
+ },
+ "events": [
+  {
+   "type": "ass",
+   "hide_captions": true,
+   "layers": [
+    {
+     "layer": 18,
+     "start": 0,
+     "font": "inter-extrabold",
+     "size": 44,
+     "color": "#FFFFFF",
+     "shad": 3,
+     "text": "{\\an4\\pos(620,{ys})\\fsp-1\\4c&H404040&\\4a&H60&\\clip(600,0,600,1920)\\t(0,520,\\clip(600,0,1080,1920))}{small}"
+    },
+    {
+     "layer": 19,
+     "start": 0.55,
+     "font": "satisfy",
+     "size": 200,
+     "color": "{color}",
+     "bord": 12,
+     "outline": "{color}",
+     "text": "{\\an5\\pos(500,{y})\\frz4\\alpha&HC0&\\blur26\\fad(240,120)}{script}"
+    },
+    {
+     "layer": 20,
+     "start": 0.55,
+     "font": "satisfy",
+     "size": 200,
+     "color": "{color}",
+     "shad": 4,
+     "text": "{\\an5\\pos(500,{y})\\frz4\\fscx92\\fscy92\\blur16\\t(0,300,\\fscx100\\fscy100\\blur0.5)\\fad(200,120)\\4c&H202000&\\4a&H80&}{script}"
+    }
+   ]
+  }
+ ]
+}

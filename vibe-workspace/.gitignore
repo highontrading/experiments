@@ -1,0 +1,5 @@
+.vibe/
+inbox/*
+output/*
+references/**/*.png
+references/**/*.mp4
