@@ -1,0 +1,35 @@
+{
+  "name": "",
+  "handle": "",
+  "niche": "",
+  "vibe": "premium dark-blue tech agency: glowing kinetic typography on the chest, mixed sans + display serif, neon UI graphics",
+  "language": "auto",
+  "caption_script": "roman",
+  "colors": {
+    "accent": "#5BCDE7",
+    "accent2": "#FFE14A",
+    "text": "#FFFFFF",
+    "dark": "#04102A",
+    "card": "#EAF2FA",
+    "blue_deep": "#033E85",
+    "blue_wall": "#0B5280"
+  },
+  "fonts": {
+    "title": "poppins-bold",
+    "body": "poppins-semibold",
+    "serif": "dm-serif"
+  },
+  "caption_style": "blue-glow",
+  "look": "blue-glow",
+  "cta": "Follow for more",
+  "logo": "",
+  "notes": [
+    "Design system: styles/blue-glow-design-system.md (read before every edit)",
+    "No running subtitles: show each phrase as kinetic 2-tier text (small white sans kicker + big glowing serif/rounded-sans hero word) on the chest, ~58-62% height",
+    "Text sits BEHIND hands/person (AI cut-out), letters reveal in random order with blur+glow, exit by random letter dissolve or 4-frame fade",
+    "Hero word: horizontal gradient cyan #54BAE6 -> #6CD6E8 -> white-grey #CCDBE4 + soft outer glow; gold #FFE14A gradient only for 'premium/quality' words",
+    "Every 6-8s cut to a full-screen navy grid 'graphic scene' via vertical motion-blur push; return the same way",
+    "Sound: sub-bass boom on every scene change and big reveal, sparkle/shimmer on gold or emoji reveals, soft ticks on UI; no music bed (or very low)",
+    "Open with 0.2s blur-to-sharp focus pull; occasional 1.08-1.12x punch-in jump cuts"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "blue-glow": {
+    "filter": "eq=contrast=1.12:saturation=1.18:brightness=-0.02:gamma=0.96,colorbalance=rs=-0.07:gs=-0.01:bs=0.10:rm=-0.03:bm=0.05:rh=0.02,vignette=angle=PI/5",
+    "desc": "Saturated cobalt-blue background, deep blue-black shadows, natural warm skin, soft vignette"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "blue-glow": {
+    "desc": "Words stacked line by line, emphasis words big in accent (the 'digital zoom' look).",
+    "font": "poppins-semibold",
+    "size": 84,
+    "color": "#FFFFFF",
+    "highlight": "#5BCDE7",
+    "outline": "#000000",
+    "outline_w": 0,
+    "shadow": 0,
+    "anim": "blur",
+    "uppercase": false,
+    "max_words": 4,
+    "position": 0.6,
+    "emphasis_scale": 2.1,
+    "emphasis_color": "#5BCDE7",
+    "emphasis_font": "dm-serif",
+    "line_height": 0.82
+  }
+}
