@@ -14,8 +14,12 @@ PY
 rm -rf build/compare/raw build/compare/edit && mkdir -p build/compare/raw build/compare/edit
 ffmpeg -v error -y -i build/va-ad/raw_cut.mp4 -q:v 3 build/compare/raw/%05d.jpg
 ffmpeg -v error -y -i out/va-ad.mp4 -vf scale=720:1280:flags=lanczos -q:v 2 build/compare/edit/%05d.jpg
-node compare/render.js
-ffmpeg -v error -y -framerate 30 -i build/compare/frames/f%05d.png -i out/va-ad.mp4 -i assets/sfx/premium/soft-whoosh.wav \
-  -filter_complex "[2:a]aresample=48000,volume=0.16,adelay=220|220[w];[1:a][w]amix=inputs=2:normalize=0:duration=first[a]" \
-  -map 0:v -map "[a]" -c:v libx264 -crf 17 -preset medium -pix_fmt yuv420p -c:a aac -b:a 192k -ar 48000 -shortest out/va-ad-compare.mp4
-echo "-> out/va-ad-compare.mp4"
+for THEME in light dark; do
+  node compare/render.js --theme $THEME
+  FR=build/compare/frames; OUT=out/va-ad-compare.mp4
+  [ $THEME = dark ] && FR=build/compare/frames-dark && OUT=out/va-ad-compare-dark.mp4
+  ffmpeg -v error -y -framerate 30 -i $FR/f%05d.png -i out/va-ad.mp4 -i assets/sfx/premium/soft-whoosh.wav \
+    -filter_complex "[2:a]aresample=48000,volume=0.16,adelay=220|220[w];[1:a][w]amix=inputs=2:normalize=0:duration=first[a]" \
+    -map 0:v -map "[a]" -c:v libx264 -crf 17 -preset medium -pix_fmt yuv420p -c:a aac -b:a 192k -ar 48000 -shortest $OUT
+  echo "-> $OUT"
+done

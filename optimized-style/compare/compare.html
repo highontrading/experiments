@@ -49,6 +49,21 @@
   .line.red { background: var(--red); }
   #rawL  { left: 248px; top: 432px; }  #rawL .line  { height: 70px; }
   #editL { left: 642px; top: 300px; }  #editL .line { height: 92px; }
+  /* ---------- dark theme (compare.html?theme=dark) ---------- */
+  body.dark { --ink: #FFFFFF; --paper: #0A0A0B; --muted: #8A8A8E; background: var(--paper); }
+  body.dark #bg { background:
+          radial-gradient(820px 680px at 62% 50%, rgba(242,0,10,0.20), transparent 70%),
+          radial-gradient(1100px 700px at 50% 108%, rgba(242,0,10,0.10), transparent 70%),
+          radial-gradient(1200px 900px at 50% -10%, #1C1C20, transparent 70%),
+          linear-gradient(180deg, #121214 0%, #070708 100%); }
+  body.dark #grid { opacity: .55; background-image: radial-gradient(rgba(255,255,255,0.09) 1.4px, transparent 1.6px); }
+  body.dark #sub { color: #B9B9BD; }
+  body.dark .tag { background: rgba(255,255,255,.06); border-color: #FFFFFF; }
+  body.dark .tag.red { background: var(--red); border-color: var(--red); }
+  body.dark #rawS  { box-shadow: 0 30px 80px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.06); }
+  body.dark #editS { box-shadow: 0 50px 120px rgba(0,0,0,.75), 0 0 90px rgba(242,0,10,.22), 0 0 0 1px rgba(255,255,255,.08); }
+  body.dark #editP::after { box-shadow: inset 0 0 0 2px rgba(255,255,255,.18); }
+  body.dark #rawP img { filter: brightness(.92); }
 </style>
 </head>
 <body>
@@ -66,6 +81,7 @@
 <div class="t" id="cta"><span class="w">Comment</span> <span class="w q">"VIBE"</span></div>
 <div class="t" id="sub"><span class="w">And</span> <span class="w">I'll</span> <span class="w">share</span> <span class="w">the</span> <span class="w">guide</span></div>
 <script>
+if (new URLSearchParams(location.search).get("theme") === "dark") document.body.classList.add("dark");
 const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 const ease = (p) => 1 - Math.pow(1 - p, 2.4);
 // same entrance as every word in the style: fade + blur + scale-down + rise
