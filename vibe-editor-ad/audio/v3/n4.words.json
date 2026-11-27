@@ -1,0 +1,20 @@
+{
+ "text": "Ninety plus effects.",
+ "words": [
+  {
+   "w": "Ninety",
+   "s": 0.0,
+   "e": 0.32
+  },
+  {
+   "w": "plus",
+   "s": 0.384,
+   "e": 0.64
+  },
+  {
+   "w": "effects.",
+   "s": 0.71,
+   "e": 1.28
+  }
+ ]
+}
