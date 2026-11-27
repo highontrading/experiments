@@ -1,0 +1,7 @@
+# per-machine state written by scripts/setup.py, build_index.py and taste.py
+config.json
+library_index.json
+taste.json
+styles/
+.venv/
+__pycache__/

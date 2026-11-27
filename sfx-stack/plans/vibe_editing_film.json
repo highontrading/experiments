@@ -1,0 +1,14 @@
+[
+ {"type": "whoosh",  "queries": ["whoosh", "swoosh transition", "fast swish", "air whoosh"], "n": 12, "max_dur": 3, "listen": "a fast clean air whoosh swish for a motion graphics transition"},
+ {"type": "impact",  "queries": ["cinematic impact", "punch hit", "deep boom impact", "thwack"], "n": 10, "max_dur": 5, "listen": "a punchy clean cinematic impact hit"},
+ {"type": "riser",   "queries": ["riser", "whoosh riser build up", "reverse swell"], "n": 8, "max_dur": 6, "listen": "a short rising swell building tension"},
+ {"type": "pop",     "queries": ["pop", "bubble pop", "mouth pop", "cork pop"], "n": 10, "max_dur": 1.5, "listen": "a short clean bubbly pop"},
+ {"type": "click",   "queries": ["mouse click", "button click", "ui click", "switch click"], "n": 10, "max_dur": 1.5, "listen": "a single crisp computer mouse click"},
+ {"type": "typing",  "queries": ["keyboard typing", "mechanical keyboard typing"], "n": 6, "max_dur": 30, "min_dur": 2, "listen": "fast typing on a computer keyboard"},
+ {"type": "chime",   "queries": ["ding", "bell ding", "chime", "sparkle shimmer", "glockenspiel"], "n": 12, "max_dur": 4, "listen": "a bright clean bell ding chime"},
+ {"type": "foley",   "queries": ["knock on wood", "knock glass", "soft thud landing", "body fall cushion"], "n": 10, "max_dur": 3, "listen": "a knock or soft thump on a hard surface"},
+ {"type": "paper",   "queries": ["sticker peel", "tape peel", "paper peel"], "n": 6, "max_dur": 3, "listen": "peeling a sticker or tape off a surface"},
+ {"type": "cartoon", "queries": ["boing", "cartoon spring jump", "jaw harp boing"], "n": 8, "max_dur": 2, "listen": "a springy cartoon boing jump"},
+ {"type": "power",   "queries": ["power down", "shut down electronic", "turn off machine"], "n": 6, "max_dur": 4, "listen": "an electronic device powering down"},
+ {"type": "voice",   "queries": ["kids cheer yay", "small crowd cheer", "yay"], "n": 6, "max_dur": 4, "listen": "a short happy cheer, people shouting yay"}
+]
