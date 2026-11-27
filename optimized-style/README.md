@@ -5,7 +5,8 @@ kinetic captions, white explainer cards with black/red kinetic type and line-art
 and motion-blur whip transitions, a clean warm grade and light sound design.
 
 ```
-STYLE_GUIDE.md      the frame-by-frame analysis and the design system (tokens, layouts, motion)
+DESIGN_SYSTEM.md    the universal design system: use this for any new video
+STYLE_GUIDE.md      the frame-by-frame analysis of the reference it came from
 engine/style.js     design tokens + the components (caption stack, white card, wipe, whip-out)
 engine/stage.html   canvas page the renderer drives
 engine/render.js    plan -> transparent PNG per frame (headless Chromium)
