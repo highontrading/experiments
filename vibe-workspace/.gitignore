@@ -5,3 +5,4 @@ output/
 broll/
 music/
 brand/*.mov
+__pycache__/
