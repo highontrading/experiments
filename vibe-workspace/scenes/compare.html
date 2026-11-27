@@ -1,0 +1,48 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:transparent}
+  body{font-family:'Inter Display','Inter',sans-serif;font-weight:700;letter-spacing:-0.035em;-webkit-font-smoothing:antialiased;color:#0B0B0B}
+  .bg{position:absolute;inset:0;background:#FFFFFF;overflow:hidden}
+  .blob{position:absolute;border-radius:50%;filter:blur(120px)}
+  .abs{position:absolute}
+  .card{position:absolute;border-radius:40px}
+  .safe{position:absolute;left:65px;right:65px;top:269px;bottom:672px;outline:3px dashed rgba(255,0,0,.6)}
+</style></head>
+<body>
+<div id="root"></div>
+<script>
+// Layout (Instagram Reels safe zone: top 14% = 269px, bottom 35% = 672px, sides 6% = 65px; right-side buttons start ~y1150)
+const L = {
+  raw:    {x:172, y:568, w:340, h:604},
+  edited: {x:494, y:500, w:416, h:740},
+};
+window.L = L;
+function build(mode){
+  const r=document.getElementById('root'); r.innerHTML='';
+  if(mode==='bg'){
+    r.innerHTML=`<div class="bg">
+      <div class="blob" style="left:620px;top:-260px;width:760px;height:620px;background:#9EBBF2;opacity:.75"></div>
+      <div class="blob" style="left:-360px;top:1500px;width:860px;height:620px;background:#A9C3F4;opacity:.7"></div>
+      <div class="blob" style="left:700px;top:1650px;width:520px;height:420px;background:#C9D8F8;opacity:.55"></div>
+      </div>
+      <div class="abs" style="left:0;width:1080px;top:286px;text-align:center;font-size:90px;line-height:1">Fully edited by <span style="position:relative">AI<svg style="position:absolute;left:-14px;top:88px" width="130" height="34" viewBox="0 0 130 34"><path d="M4 8 C 40 34, 90 34, 126 6" stroke="#B8C000" stroke-width="9" stroke-linecap="round" fill="none"/></svg></span></div>
+      <div class="abs" style="left:${L.raw.x}px;width:${L.raw.w}px;top:${L.raw.y-62}px;text-align:center;font-size:44px">Raw</div>
+      <div class="abs" style="left:${L.edited.x}px;width:${L.edited.w}px;top:${L.edited.y-62}px;text-align:center;font-size:44px;opacity:0">Edited</div>
+      <div class="card" style="left:${L.raw.x}px;top:${L.raw.y}px;width:${L.raw.w}px;height:${L.raw.h}px;box-shadow:0 30px 60px rgba(30,50,90,.18);background:#ddd"></div>`;
+  } else if(mode==='edshadow'){
+    // edited label (drawn above raw label area) + soft shadow cast onto the raw card
+    r.innerHTML=`<div class="abs" style="left:${L.edited.x}px;width:${L.edited.w}px;top:${L.edited.y-62}px;text-align:center;font-size:44px">Edited</div>
+      <div class="card" style="left:${L.edited.x}px;top:${L.edited.y}px;width:${L.edited.w}px;height:${L.edited.h}px;box-shadow:-18px 34px 70px rgba(20,30,60,.28);background:#000"></div>`;
+  } else if(mode==='maskraw'||mode==='maskedited'){
+    const c=mode==='maskraw'?L.raw:L.edited;
+    document.body.style.background='#000';
+    r.innerHTML=`<div class="card" style="left:0;top:0;width:${c.w}px;height:${c.h}px;background:#fff;border-radius:${mode==='maskraw'?34:40}px"></div>`;
+  } else if(mode==='safe'){
+    r.innerHTML=`<div class="safe"></div><div class="abs" style="left:925px;top:1150px;width:90px;height:560px;outline:3px dashed rgba(0,0,255,.6)"></div>`;
+  }
+}
+window.build=build;
+</script>
+</body></html>

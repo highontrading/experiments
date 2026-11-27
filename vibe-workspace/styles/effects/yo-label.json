@@ -1,0 +1,25 @@
+{
+ "desc": "Clean white label for real footage: Inter ExtraBold, soft shadow, blur-rise in, fades out. Premium, minimal.",
+ "params": {
+  "text": "Oak",
+  "y": 1180,
+  "size": 104,
+  "y0": 1198
+ },
+ "events": [
+  {
+   "type": "ass",
+   "hide_captions": true,
+   "layers": [
+    {
+     "layer": 19,
+     "font": "inter-extrabold",
+     "size": "{size}",
+     "color": "#FFFFFF",
+     "shad": 4,
+     "text": "{\\an5\\move(540,{y0},540,{y},0,260)\\blur10\\t(0,260,\\blur0)\\fad(180,160)\\fsp-4\\4c&H000000&\\4a&H70&}{text}"
+    }
+   ]
+  }
+ ]
+}

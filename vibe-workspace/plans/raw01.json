@@ -20,7 +20,12 @@
  },
  "audio": {
   "denoise": false,
-  "loudness": -14
+  "loudness": -14,
+  "music": {
+   "file": "mk_749.mp3",
+   "volume": 0.09,
+   "duck": true
+  }
  },
  "auto_sfx": false,
  "events": [
@@ -122,30 +127,40 @@
    ]
   },
   {
-   "type": "yo-panel",
+   "type": "broll",
+   "file": "st_tea.mp4",
    "at": 2.45,
-   "until": 4.1,
-   "text": "Japanese\\Nculture",
-   "size": 112
+   "dur": 1.65,
+   "mode": "full",
+   "hide_captions": true
+  },
+  {
+   "type": "yo-label",
+   "at": 2.6,
+   "text": "Japanese culture",
+   "y": 1180,
+   "y0": 1198,
+   "dur": 1.45
   },
   {
    "type": "yo-swoosh",
    "at": 4.1,
-   "until": 6.55,
    "text": "our studio style",
-   "size": 66
+   "size": 66,
+   "sfx": false,
+   "dur": 2.45
   },
   {
    "type": "yo-flash-black",
    "at": 8.5,
-   "until": 9.45,
-   "text": "a rebrand"
+   "text": "a rebrand",
+   "dur": 0.95
   },
   {
    "type": "yo-flash-white",
    "at": 9.45,
-   "until": 10.4,
-   "text": "& a retreat"
+   "text": "& a retreat",
+   "dur": 0.95
   },
   {
    "type": "zoom",
@@ -159,79 +174,178 @@
    "at": 16.48
   },
   {
-   "type": "sfx",
-   "name": "whoosh",
-   "at": 16.55,
-   "sfx_volume": 0.45
-  },
-  {
-   "type": "yo-glow-title",
-   "at": 16.9,
-   "until": 19.45,
-   "text": "Japanese culture",
-   "y": 1500
-  },
-  {
-   "type": "yo-glow-title",
-   "at": 19.5,
+   "type": "darken",
+   "at": 18.0,
    "until": 21.72,
-   "text": "& Scandinavian style",
-   "y": 1500,
-   "size": 84
+   "amount": 0.1
+  },
+  {
+   "type": "yo-label",
+   "at": 18.1,
+   "text": "Japanese &\\NScandinavian",
+   "y": 1120,
+   "y0": 1138,
+   "size": 100,
+   "dur": 3.55
   },
   {
    "type": "broll",
    "file": "yo_materials.mp4",
    "at": 23.4,
-   "dur": 8.25,
+   "dur": 1.87,
    "mode": "full",
-   "hide_captions": true,
-   "sfx": "whoosh",
-   "sfx_volume": 0.5
+   "hide_captions": true
   },
   {
-   "type": "rack_focus",
-   "at": 31.65,
-   "dur": 0.2,
-   "direction": "in",
-   "amount": 24
+   "type": "broll",
+   "file": "st_oak.mp4",
+   "at": 25.27,
+   "dur": 1.23,
+   "mode": "full",
+   "hide_captions": true
+  },
+  {
+   "type": "yo-label",
+   "at": 25.32,
+   "text": "Oak",
+   "y": 1180,
+   "y0": 1198,
+   "dur": 1.13
+  },
+  {
+   "type": "broll",
+   "file": "st_timber.mp4",
+   "at": 26.5,
+   "dur": 1.9,
+   "mode": "full",
+   "hide_captions": true
+  },
+  {
+   "type": "yo-label",
+   "at": 26.6,
+   "text": "Dark timber",
+   "y": 1180,
+   "y0": 1198,
+   "dur": 1.75
+  },
+  {
+   "type": "broll",
+   "file": "st_cement.mp4",
+   "at": 28.4,
+   "dur": 1.55,
+   "mode": "full",
+   "hide_captions": true
+  },
+  {
+   "type": "yo-label",
+   "at": 28.48,
+   "text": "Micro cement",
+   "y": 1180,
+   "y0": 1198,
+   "dur": 1.42
+  },
+  {
+   "type": "broll",
+   "file": "st_pottery.mp4",
+   "at": 29.95,
+   "dur": 1.75,
+   "mode": "full",
+   "hide_captions": true
+  },
+  {
+   "type": "yo-label",
+   "at": 30.7,
+   "text": "Ceramics",
+   "y": 1180,
+   "y0": 1198,
+   "dur": 0.95
   },
   {
    "type": "yo-script-title",
    "at": 33.5,
-   "until": 36.04,
    "small": "quite a few",
    "script": "Urns",
-   "y": 1360,
-   "ys": 1290
+   "y": 1150,
+   "ys": 1080,
+   "dur": 2.54
   },
   {
    "type": "broll",
-   "file": "yo_curtains.mp4",
+   "file": "st_curtain.mp4",
    "at": 36.04,
-   "dur": 2.49,
+   "dur": 4.71,
    "mode": "full",
+   "hide_captions": true
+  },
+  {
+   "type": "yo-label",
+   "at": 36.3,
+   "text": "Sheer curtains",
+   "y": 860,
+   "y0": 878,
+   "dur": 1.0
+  },
+  {
+   "type": "ass",
+   "at": 37.35,
+   "until": 38.75,
    "hide_captions": true,
-   "sfx": "whoosh-fast",
-   "sfx_volume": 0.5
+   "layers": [
+    {
+     "layer": 19,
+     "shape": true,
+     "color": "#B8C000",
+     "text": "{\\an7\\pos(170,380)\\clip(0,370,1080,370)\\t(0,800,0.8,\\clip(0,370,1080,1215))\\p1}m 0 0 b 28 270 -28 540 0 820 l 12 820 b -16 540 40 270 12 0"
+    },
+    {
+     "layer": 20,
+     "shape": true,
+     "color": "#B8C000",
+     "text": "{\\an7\\pos(176,380)\\fad(120,0)\\p1}m 0 -15 b 8 -15 15 -8 15 0 b 15 8 8 15 0 15 b -8 15 -15 8 -15 0 b -15 -8 -8 -15 0 -15"
+    },
+    {
+     "layer": 20,
+     "start": 0.8,
+     "shape": true,
+     "color": "#B8C000",
+     "text": "{\\an7\\pos(176,1200)\\fad(120,0)\\p1}m 0 -15 b 8 -15 15 -8 15 0 b 15 8 8 15 0 15 b -8 15 -15 8 -15 0 b -15 -8 -8 -15 0 -15"
+    },
+    {
+     "layer": 21,
+     "font": "inter-extrabold",
+     "size": 64,
+     "color": "#FFFFFF",
+     "shad": 3,
+     "text": "{\\an4\\move(220,398,220,380,0,220)\\blur8\\t(0,220,\\blur0)\\fad(150,150)\\fsp-3}ceiling"
+    },
+    {
+     "layer": 21,
+     "start": 0.8,
+     "font": "inter-extrabold",
+     "size": 64,
+     "color": "#FFFFFF",
+     "shad": 3,
+     "text": "{\\an4\\move(220,1218,220,1200,0,220)\\blur8\\t(0,220,\\blur0)\\fad(150,150)\\fsp-3}floor"
+    }
+   ]
   },
   {
    "type": "yo-flash-black",
    "at": 40.75,
-   "until": 41.05,
-   "text": "warm"
+   "text": "warm",
+   "dur": 0.3
   },
   {
    "type": "yo-flash-white",
    "at": 41.05,
-   "until": 41.57,
-   "text": "natural"
+   "text": "natural",
+   "dur": 0.52
   },
   {
    "type": "yo-flash-black",
    "at": 41.57,
-   "until": 42.54,
-   "text": "inviting feel."
+   "text": "inviting feel.",
+   "dur": 0.97
   },
   {
    "type": "zoom",
@@ -277,33 +391,57 @@
   },
   {
    "type": "sfx",
-   "name": "whoosh-fast",
-   "at": 2.42,
-   "sfx_volume": 0.45
+   "name": "mk-air-woosh",
+   "at": 1.83,
+   "sfx_volume": 0.22
   },
   {
    "type": "sfx",
-   "name": "swish",
-   "at": 4.08,
-   "sfx_volume": 0.45
+   "name": "mk-short-sweep",
+   "at": 3.7,
+   "sfx_volume": 0.16
   },
   {
    "type": "sfx",
-   "name": "whoosh",
-   "at": 23.38,
-   "sfx_volume": 0.45
+   "name": "mk-soft-click",
+   "at": 8.4,
+   "sfx_volume": 0.35
   },
   {
    "type": "sfx",
-   "name": "whoosh-fast",
-   "at": 36.02,
-   "sfx_volume": 0.45
+   "name": "mk-soft-click",
+   "at": 9.35,
+   "sfx_volume": 0.3
   },
   {
    "type": "sfx",
-   "name": "swoosh-up",
-   "at": 33.5,
-   "sfx_volume": 0.45
+   "name": "mk-wind-swoosh",
+   "at": 16.26,
+   "sfx_volume": 0.16
+  },
+  {
+   "type": "sfx",
+   "name": "mk-air-woosh",
+   "at": 22.82,
+   "sfx_volume": 0.2
+  },
+  {
+   "type": "sfx",
+   "name": "mk-ui-click",
+   "at": 24.83,
+   "sfx_volume": 0.14
+  },
+  {
+   "type": "sfx",
+   "name": "mk-soft-click",
+   "at": 40.65,
+   "sfx_volume": 0.3
+  },
+  {
+   "type": "sfx",
+   "name": "mk-soft-click",
+   "at": 41.47,
+   "sfx_volume": 0.26
   }
  ],
  "output": {
