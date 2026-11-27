@@ -95,16 +95,12 @@ def search(query, licenses, max_dur, page_size=20):
         "q": query,
         "license": licenses,
         "page_size": page_size,
-        "category": "sound_effect",
-        "length": "short" if max_dur <= 30 else "",
     }
-    url = API + "?" + urllib.parse.urlencode({k: v for k, v in params.items() if v})
-    res = get_json(url).get("results", [])
-    if not res:   # many good effects carry no category: retry without it
-        params.pop("category")
-        url = API + "?" + urllib.parse.urlencode({k: v for k, v in params.items() if v})
-        res = get_json(url).get("results", [])
-    return res
+    # No `category` or `length` filter: category=sound_effect matches almost nothing (Freesound files carry no
+    # category), and length=short means about 30 s to 2 min, which drops exactly the short effects we want.
+    # Duration is filtered on our side instead.
+    url = API + "?" + urllib.parse.urlencode(params)
+    return get_json(url).get("results", [])
 
 
 def slug(s, n=48):

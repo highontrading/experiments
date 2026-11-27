@@ -13,6 +13,11 @@ finished reel is left.
 | File | What it is |
 | --- | --- |
 | `out/vibe_editing.mp4` | the film: 1920x1080, 30 fps, 12.0 s, AAC 320k |
+| `out/vibe_editing_real_sfx.mp4` | the same film with REAL sound effects (Openverse -> earshot -> real-sfx, see `../sfx-stack`); music unchanged |
+| `out/vibe_editing_real_sfx_track.flac` | the real SFX alone, from 0:00, to drop into any editor |
+| `out/vibe_editing_real_sfx_listen_here.flac` | the 4 moments real-sfx's critique says a human should check, 3 s each |
+| `out/SFX_CREDITS.md` | every Openverse sound in the library the film drew from (CC0 / public domain), with creator and source |
+| `export_audio.py` | writes `build/cues.json` and the music-only stem for real-sfx |
 | `out/PROMPT_PACK_Vibe_Editing.pdf` | the 6-page prompt pack, in the same layout as the original |
 | `prompts/PROMPT.txt` | the copy-ready picture prompt (BRAND block for Vibe Editing) |
 | `prompts/SOUND_PROMPT.txt` | the copy-ready sound prompt |

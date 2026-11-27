@@ -54,7 +54,7 @@ cd .claude/skills/real-sfx
 python3 scripts/setup.py add-library openverse ../../../sfx-stack/library --tier main --index
 python3 scripts/from_cues.py ../../../vibe-editing-film/build/cues.json \
     --video ../../../vibe-editing-film/out/vibe_editing.mp4 --out ../../../$W/cues.json --ui library \
-    --kind boing=role:cartoon --kind powerdown=role:power --kind yay=role:voice
+    --kind boing=role:cartoon --kind powerdown=role:power --kind yay=role:voice --kind tick=key
 python3 scripts/mix.py ../../../$W/cues.json --out ../../../$W/result/vibe_editing_sfx.mp4
 python3 scripts/critique.py ../../../$W/result/vibe_editing_sfx_resolved_cues.json \
     ../../../$W/result/vibe_editing_sfx_sfx_track.wav
