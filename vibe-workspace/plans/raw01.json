@@ -1,0 +1,312 @@
+{
+ "format": "9:16",
+ "reframe": {
+  "mode": "crop",
+  "x": 0.5,
+  "y": 0.5
+ },
+ "look": "none",
+ "cuts": {
+  "remove_pauses": true,
+  "max_pause": 0.3,
+  "remove_fillers": true,
+  "drop_words": [],
+  "drop": []
+ },
+ "captions": {
+  "enabled": true,
+  "style": "yonomi-word",
+  "position": 0.6
+ },
+ "audio": {
+  "denoise": false,
+  "loudness": -14
+ },
+ "auto_sfx": false,
+ "events": [
+  {
+   "type": "filter",
+   "at": 0,
+   "dur": 48.5,
+   "filter": "eq=contrast=1.06:saturation=0.9:brightness=0.0:gamma=1.0,colorbalance=rs=0.03:bs=-0.03:rm=0.015:bm=-0.02,vignette=angle=PI/6"
+  },
+  {
+   "type": "yo-open",
+   "at": 0
+  },
+  {
+   "type": "ass",
+   "at": 0.0,
+   "until": 1.0,
+   "hide_captions": true,
+   "layers": [
+    {
+     "start": 0.0,
+     "layer": 30,
+     "font": "inter-extrabold",
+     "size": 108,
+     "color": "#FFFFFF",
+     "shad": 3,
+     "text": "{\\an4\\move(418,1076,418,1060,0,130)\\blur8\\t(0,130,\\blur0)\\alpha&H80&\\t(0,110,\\alpha&H00&)\\fsp-4}I've"
+    },
+    {
+     "start": 0.54,
+     "layer": 30,
+     "font": "inter-extrabold",
+     "size": 108,
+     "color": "#FFFFFF",
+     "shad": 3,
+     "text": "{\\an4\\move(278,1166,278,1150,0,130)\\blur8\\t(0,130,\\blur0)\\alpha&H80&\\t(0,110,\\alpha&H00&)\\fsp-4}always"
+    },
+    {
+     "start": 0.82,
+     "layer": 30,
+     "font": "inter-extrabold",
+     "size": 108,
+     "color": "#FFFFFF",
+     "shad": 3,
+     "text": "{\\an4\\move(228,1256,228,1240,0,130)\\blur8\\t(0,130,\\blur0)\\alpha&H80&\\t(0,110,\\alpha&H00&)\\fsp-4}had"
+    }
+   ]
+  },
+  {
+   "type": "ass",
+   "at": 1.0,
+   "until": 1.82,
+   "hide_captions": true,
+   "layers": [
+    {
+     "start": 0.0,
+     "layer": 30,
+     "font": "inter-extrabold",
+     "size": 108,
+     "color": "#FFFFFF",
+     "shad": 3,
+     "text": "{\\an4\\move(368,1121,368,1105,0,130)\\blur8\\t(0,130,\\blur0)\\alpha&H80&\\t(0,110,\\alpha&H00&)\\fsp-4}a true"
+    },
+    {
+     "start": 0.3,
+     "layer": 30,
+     "font": "inter-extrabold",
+     "size": 108,
+     "color": "#FFFFFF",
+     "shad": 3,
+     "text": "{\\an4\\move(55,1211,55,1195,0,130)\\blur8\\t(0,130,\\blur0)\\alpha&H80&\\t(0,110,\\alpha&H00&)\\fsp-4}appreciation"
+    }
+   ]
+  },
+  {
+   "type": "ass",
+   "at": 1.82,
+   "until": 2.45,
+   "hide_captions": true,
+   "layers": [
+    {
+     "start": 0.0,
+     "layer": 30,
+     "font": "inter-extrabold",
+     "size": 108,
+     "color": "#FFFFFF",
+     "shad": 3,
+     "text": "{\\an4\\move(438,1121,438,1105,0,130)\\blur8\\t(0,130,\\blur0)\\alpha&H80&\\t(0,110,\\alpha&H00&)\\fsp-4}for"
+    },
+    {
+     "start": 0.52,
+     "layer": 30,
+     "font": "inter-extrabold",
+     "size": 108,
+     "color": "#FFFFFF",
+     "shad": 3,
+     "text": "{\\an4\\move(448,1211,448,1195,0,130)\\blur8\\t(0,130,\\blur0)\\alpha&H80&\\t(0,110,\\alpha&H00&)\\fsp-4}the"
+    }
+   ]
+  },
+  {
+   "type": "yo-panel",
+   "at": 2.45,
+   "until": 4.1,
+   "text": "Japanese\\Nculture",
+   "size": 112
+  },
+  {
+   "type": "yo-swoosh",
+   "at": 4.1,
+   "until": 6.55,
+   "text": "our studio style",
+   "size": 66
+  },
+  {
+   "type": "yo-flash-black",
+   "at": 8.5,
+   "until": 9.45,
+   "text": "a rebrand"
+  },
+  {
+   "type": "yo-flash-white",
+   "at": 9.45,
+   "until": 10.4,
+   "text": "& a retreat"
+  },
+  {
+   "type": "zoom",
+   "at": 13.0,
+   "until": 16.66,
+   "style": "slow",
+   "amount": 1.1
+  },
+  {
+   "type": "yo-blur-cut",
+   "at": 16.48
+  },
+  {
+   "type": "sfx",
+   "name": "whoosh",
+   "at": 16.55,
+   "sfx_volume": 0.45
+  },
+  {
+   "type": "yo-glow-title",
+   "at": 16.9,
+   "until": 19.45,
+   "text": "Japanese culture",
+   "y": 1500
+  },
+  {
+   "type": "yo-glow-title",
+   "at": 19.5,
+   "until": 21.72,
+   "text": "& Scandinavian style",
+   "y": 1500,
+   "size": 84
+  },
+  {
+   "type": "broll",
+   "file": "yo_materials.mp4",
+   "at": 23.4,
+   "dur": 8.25,
+   "mode": "full",
+   "hide_captions": true,
+   "sfx": "whoosh",
+   "sfx_volume": 0.5
+  },
+  {
+   "type": "rack_focus",
+   "at": 31.65,
+   "dur": 0.2,
+   "direction": "in",
+   "amount": 24
+  },
+  {
+   "type": "yo-script-title",
+   "at": 33.5,
+   "until": 36.04,
+   "small": "quite a few",
+   "script": "Urns",
+   "y": 1360,
+   "ys": 1290
+  },
+  {
+   "type": "broll",
+   "file": "yo_curtains.mp4",
+   "at": 36.04,
+   "dur": 2.49,
+   "mode": "full",
+   "hide_captions": true,
+   "sfx": "whoosh-fast",
+   "sfx_volume": 0.5
+  },
+  {
+   "type": "yo-flash-black",
+   "at": 40.75,
+   "until": 41.05,
+   "text": "warm"
+  },
+  {
+   "type": "yo-flash-white",
+   "at": 41.05,
+   "until": 41.57,
+   "text": "natural"
+  },
+  {
+   "type": "yo-flash-black",
+   "at": 41.57,
+   "until": 42.54,
+   "text": "inviting feel."
+  },
+  {
+   "type": "zoom",
+   "at": 42.6,
+   "until": 47.2,
+   "style": "slow",
+   "amount": 1.08
+  },
+  {
+   "type": "ass",
+   "at": 47.26,
+   "until": 48.5,
+   "hide_captions": true,
+   "layers": [
+    {
+     "start": 0.0,
+     "layer": 30,
+     "font": "inter-extrabold",
+     "size": 108,
+     "color": "#FFFFFF",
+     "shad": 3,
+     "text": "{\\an4\\move(282,1076,282,1060,0,130)\\blur8\\t(0,130,\\blur0)\\alpha&H80&\\t(0,110,\\alpha&H00&)\\fsp-4}welcome"
+    },
+    {
+     "start": 0.22,
+     "layer": 30,
+     "font": "inter-extrabold",
+     "size": 108,
+     "color": "#FFFFFF",
+     "shad": 3,
+     "text": "{\\an4\\move(460,1166,460,1150,0,130)\\blur8\\t(0,130,\\blur0)\\alpha&H80&\\t(0,110,\\alpha&H00&)\\fsp-4}you to"
+    },
+    {
+     "start": 0.68,
+     "layer": 30,
+     "font": "inter-extrabold",
+     "size": 108,
+     "color": "#FFFFFF",
+     "shad": 3,
+     "text": "{\\an4\\move(232,1256,232,1240,0,130)\\blur8\\t(0,130,\\blur0)\\alpha&H80&\\t(0,110,\\alpha&H00&)\\fsp-4}our space."
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "name": "whoosh-fast",
+   "at": 2.42,
+   "sfx_volume": 0.45
+  },
+  {
+   "type": "sfx",
+   "name": "swish",
+   "at": 4.08,
+   "sfx_volume": 0.45
+  },
+  {
+   "type": "sfx",
+   "name": "whoosh",
+   "at": 23.38,
+   "sfx_volume": 0.45
+  },
+  {
+   "type": "sfx",
+   "name": "whoosh-fast",
+   "at": 36.02,
+   "sfx_volume": 0.45
+  },
+  {
+   "type": "sfx",
+   "name": "swoosh-up",
+   "at": 33.5,
+   "sfx_volume": 0.45
+  }
+ ],
+ "output": {
+  "name": "raw01_yonomi"
+ }
+}

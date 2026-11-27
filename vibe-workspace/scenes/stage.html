@@ -1,0 +1,205 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  :root{
+    --canvas:#E3E8EE; --minor:#D3D9E1; --major:#454449; --lime:#B8C000;
+    --or1:#E1B15B; --or2:#D67F3A; --peach:#F7EAD3; --pill:rgba(255,255,255,.42); --btn:#F2E8DC;
+    --ink:#0B0B0B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:#fff}
+  body{font-family:'Inter Display','Inter',sans-serif;font-weight:700;letter-spacing:-0.035em;-webkit-font-smoothing:antialiased}
+  .scene{position:absolute;inset:0;display:none;overflow:hidden}
+  .abs{position:absolute}
+  /* ---------- materials ---------- */
+  #materials{background:#fff;perspective:1800px}
+  .card{position:absolute;left:160px;top:0;width:760px;height:330px;border-radius:46px;
+    background:linear-gradient(135deg,var(--or1),var(--or2));
+    box-shadow:0 34px 70px rgba(190,110,40,.28),inset 0 2px 0 rgba(255,255,255,.25);
+    transform-origin:50% 50%;color:#fff}
+  .avatar{left:44px;top:44px;width:124px;height:124px;border-radius:50%;background:#F6DFBC;overflow:hidden}
+  .ctitle{left:196px;top:44px;font-size:58px;white-space:nowrap}
+  .pill{top:124px;height:46px;border-radius:30px;background:var(--pill);font-size:26px;line-height:46px;text-align:center;font-weight:600;letter-spacing:-0.01em;color:rgba(255,255,255,.95)}
+  .csub{left:46px;top:206px;font-size:25px;font-weight:600;letter-spacing:-0.01em;opacity:.92;white-space:nowrap}
+  .cbul{left:46px;top:246px;font-size:27px;line-height:34px;white-space:nowrap}
+  .btn{left:438px;top:218px;width:280px;height:84px;border-radius:44px;background:var(--btn);color:#D98A40;font-size:42px;line-height:84px;text-align:center}
+  .tile{position:absolute;width:300px;height:340px;transform-style:preserve-3d}
+  .face{position:absolute;inset:0;border-radius:36px;backface-visibility:hidden;overflow:hidden}
+  .front{background:linear-gradient(150deg,var(--or1),var(--or2));display:flex;align-items:center;justify-content:center;
+    font-size:170px;font-weight:900;color:#2B1A0D;box-shadow:0 22px 40px rgba(190,110,40,.25)}
+  .back{transform:rotateY(180deg);background:linear-gradient(150deg,var(--or1),var(--or2));box-shadow:0 22px 40px rgba(190,110,40,.25)}
+  .sw{position:absolute;left:18px;top:18px;right:18px;height:228px;border-radius:24px;overflow:hidden}
+  .lab{position:absolute;left:0;right:0;bottom:22px;text-align:center;color:#fff;font-size:40px;white-space:nowrap}
+  .oak{background:
+      repeating-linear-gradient(96deg,rgba(120,66,18,.20) 0 3px,transparent 3px 13px),
+      repeating-linear-gradient(88deg,rgba(255,235,200,.18) 0 2px,transparent 2px 23px),
+      linear-gradient(180deg,#DDB680,#C99A5E)}
+  .timber{background:
+      repeating-linear-gradient(94deg,rgba(0,0,0,.32) 0 3px,transparent 3px 12px),
+      repeating-linear-gradient(86deg,rgba(150,96,56,.28) 0 2px,transparent 2px 21px),
+      linear-gradient(180deg,#5A3824,#3B2416)}
+  .cement{background:
+      radial-gradient(circle at 20% 30%,rgba(255,255,255,.35),transparent 30%),
+      radial-gradient(circle at 70% 60%,rgba(90,85,80,.25),transparent 35%),
+      radial-gradient(circle at 45% 85%,rgba(255,255,255,.25),transparent 28%),
+      radial-gradient(circle at 85% 15%,rgba(80,75,70,.2),transparent 25%),
+      linear-gradient(160deg,#C9C4BC,#ADA8A0)}
+  .ceramic{background:linear-gradient(180deg,#F3EEE6,#E4DCCF)}
+  .plus{position:absolute;left:0;top:0;width:240px;height:240px}
+  .plus:before,.plus:after{content:"";position:absolute;background:#0A0A0A;border-radius:6px}
+  .plus:before{left:96px;top:0;width:48px;height:240px}
+  .plus:after{left:0;top:96px;width:240px;height:48px}
+  /* ---------- curtains ---------- */
+  #curtains{background:var(--canvas)}
+  .wall{position:absolute;left:-200px;top:-400px;width:1480px;height:2720px;
+    background:
+      linear-gradient(var(--major),var(--major)) 338px 0/6px 100% no-repeat,
+      linear-gradient(var(--major),var(--major)) 1122px 0/6px 100% no-repeat,
+      linear-gradient(var(--major),var(--major)) 0 978px/100% 6px no-repeat,
+      linear-gradient(var(--major),var(--major)) 0 1742px/100% 6px no-repeat,
+      repeating-linear-gradient(90deg,var(--minor) 0 2px,transparent 2px 90px),
+      repeating-linear-gradient(0deg,var(--minor) 0 2px,transparent 2px 90px),
+      var(--canvas)}
+  .curtain{position:absolute;left:250px;top:0;width:640px;overflow:hidden;transform-origin:50% 0;
+    background:repeating-linear-gradient(90deg,rgba(255,255,255,.88) 0 34px,rgba(255,255,255,.55) 34px 64px,rgba(255,255,255,.78) 64px 96px);
+    box-shadow:0 0 40px rgba(255,255,255,.6);filter:blur(1.2px)}
+  .rod{position:absolute;left:220px;top:226px;width:700px;height:10px;border-radius:5px;background:#0A0A0A}
+  .glyphs span{display:inline-block;white-space:pre}
+</style></head>
+<body>
+<!-- ================= MATERIALS ================= -->
+<div class="scene" id="materials">
+  <div class="card" id="card">
+    <div class="abs avatar" id="av">
+      <svg width="124" height="124" viewBox="0 0 124 124"><path d="M50 30h24v8c10 6 16 18 16 32 0 18-12 30-28 30S34 88 34 70c0-14 6-26 16-32z" fill="#1A1A1A"/></svg>
+    </div>
+    <div class="abs ctitle glyphs" id="ct"></div>
+    <div class="abs pill" id="p1" style="left:198px;width:170px">Japanese</div>
+    <div class="abs pill" id="p2" style="left:384px;width:140px">Scandi</div>
+    <div class="abs csub" id="cs">Exposed wood in all tones</div>
+    <div class="abs cbul" id="cb">- Natural<br>- Textured</div>
+    <div class="abs btn" id="bt">Warm</div>
+  </div>
+  <div id="tiles"></div>
+  <div class="plus" id="plus"></div>
+</div>
+<!-- ================= CURTAINS ================= -->
+<div class="scene" id="curtains">
+  <div id="cam" style="position:absolute;inset:0">
+    <div class="wall"></div>
+    <div class="rod" id="rod"></div>
+    <div class="curtain" id="cur"></div>
+    <svg id="line" class="abs" style="left:0;top:0" width="1080" height="1920"></svg>
+    <div class="abs glyphs" id="lc" style="left:222px;top:262px;font-size:64px;color:var(--ink)"></div>
+    <div class="abs glyphs" id="lf" style="left:222px;top:1640px;font-size:64px;color:var(--ink)"></div>
+    <div class="abs glyphs" id="tt" style="left:0;width:1080px;top:880px;text-align:center;font-size:120px;color:var(--ink);line-height:.86"></div>
+  </div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const eOut=p=>1-Math.pow(1-p,3);
+const eInOut=p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+const eBack=p=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2)};
+const mix=(a,b,p)=>a+(b-a)*p;
+
+// glyph reveal: one glyph per frame, each rises + unblurs
+function glyphs(el,text,t,t0,per=1/30,rise=26){
+  if(el._t!==text){el.innerHTML=[...text].map(c=>c==='\n'?'<br>':`<span>${c===' '?' ':c}</span>`).join('');el._t=text}
+  const sp=el.querySelectorAll('span');
+  sp.forEach((s,i)=>{const p=eOut(lin(t,t0+i*per,t0+i*per+0.16));
+    s.style.opacity=p;s.style.transform=`translateY(${(1-p)*rise}px)`;s.style.filter=`blur(${(1-p)*6}px)`});
+}
+
+// ---------------- MATERIALS ----------------
+const MAT=[["Oak","oak",1.90],["Dark timber","timber",3.18],["Micro cement","cement",5.06],["Ceramics","ceramic",7.39]];
+(function(){
+  const tl=$('tiles');
+  MAT.forEach((m,i)=>{const d=document.createElement('div');d.className='tile';d.id='t'+i;
+    d.innerHTML=`<div class="face front">?</div><div class="face back"><div class="sw ${m[1]}">${m[1]==='ceramic'?
+      '<svg width="264" height="228" viewBox="0 0 264 228"><path d="M112 40h40v14c22 12 34 34 34 60 0 38-24 70-54 70s-54-32-54-70c0-26 12-48 34-60z" fill="#161616"/><path d="M186 100c14 0 22 10 22 22s-8 20-20 20" stroke="#161616" stroke-width="9" fill="none"/></svg>':''}</div><div class="lab">${m[0]}</div></div>`;
+    tl.appendChild(d)});
+})();
+function materials(t){
+  // card swoop-in 0..0.45, overshoot
+  const p=lin(t,0,0.45), e=eBack(p);
+  const lift=eInOut(lin(t,1.0,1.5));
+  const fl=Math.max(0,t-0.45);
+  const x=mix(-760,0,e), y=mix(900,0,e)+mix(600,470,lift)-165 + Math.sin(fl*1.6)*7;
+  const rz=mix(-20,0,e)+Math.sin(fl*1.1)*0.9, ry=mix(28,0,e)+Math.sin(fl*0.9)*3.5, rx=mix(-12,0,e);
+  const sc=mix(.78,1,eOut(p));
+  const blur=24*Math.pow(1-p,2);
+  const c=$('card');
+  c.style.transform=`translate(${x}px,${y}px) rotateX(${rx}deg) rotateY(${ry}deg) rotate(${rz}deg) scale(${sc})`;
+  c.style.filter=`blur(${blur}px)`;
+  // content build
+  const pop=(el,a)=>{const q=eBack(lin(t,a,a+0.22));el.style.opacity=cl(q);el.style.transform=`scale(${mix(.6,1,q)})`};
+  pop($('av'),0.16);
+  glyphs($('ct'),'Studio palette',t,0.30);
+  pop($('p1'),0.26);pop($('p2'),0.32);
+  [$('cs'),$('cb')].forEach((el,i)=>{const q=eOut(lin(t,0.48+i*0.08,0.70+i*0.08));el.style.opacity=q;el.style.transform=`translateY(${(1-q)*14}px)`;el.style.filter=`blur(${(1-q)*5}px)`});
+  pop($('bt'),0.56);
+  // plus: spins in from top-right, lands under the card, then opens into tiles
+  const pp=eInOut(lin(t,0.55,1.02));
+  const plus=$('plus');
+  const vis=t>=0.55 && t<1.32;
+  plus.style.display=vis?'block':'none';
+  if(vis){
+    const px=mix(1000,540,pp), py=mix(-260,1180,pp), rot=mix(-30,540,pp), s=mix(2.4,0.42,pp);
+    const sp=Math.sin(Math.PI*pp); // speed proxy
+    const shrink=1-eOut(lin(t,1.02,1.30));
+    plus.style.transform=`translate(${px-120}px,${py-120}px) rotate(${rot}deg) scale(${s*shrink})`;
+    plus.style.filter=`blur(${sp*16}px)`;
+  }
+  // tiles 2x2
+  const gx=[540-168-150,540+18], gy=[860,1236];
+  MAT.forEach((m,i)=>{
+    const el=$('t'+i);
+    const a=1.02+i*0.06, q=eBack(lin(t,a,a+0.38)), o=lin(t,a,a+0.25);
+    const fp=eInOut(lin(t,m[2]-0.05,m[2]+0.35)); // flip
+    const bob=Math.sin((t+i*0.7)*1.5)*5;
+    const tilt=Math.sin((t+i)*1.0)*2.5;
+    const bump=1+0.07*Math.sin(Math.PI*fp);
+    const yy=gy[i>>1]+mix(60,0,q)-mix(0,130,lift)+130+bob;
+    el.style.transform=`translate(${gx[i&1]}px,${yy-130}px) scale(${mix(.55,1,q)*bump}) rotateY(${fp*180+tilt}deg)`;
+    el.style.opacity=o;
+    el.querySelector('.front').style.background=o<1?`linear-gradient(150deg, ${blend('#F7EAD3','#E1B15B',o)}, ${blend('#F7EAD3','#D67F3A',o)})`:'';
+    el.style.filter=o<1?`blur(${(1-o)*8}px)`:'none';
+    if(o>=1) el.style.opacity='';
+  });
+}
+function blend(a,b,p){const h=s=>[1,3,5].map(i=>parseInt(s.substr(i,2),16));const A=h(a),B=h(b);return `rgb(${A.map((v,i)=>Math.round(mix(v,B[i],p))).join(',')})`}
+
+// ---------------- CURTAINS ----------------
+function curtains(t){
+  // vertical whip in: whole wall slides down from above with motion blur
+  const w=eOut(lin(t,0,0.26));
+  const drift=t*14;
+  $('cam').style.transform=`translateY(${mix(-700,0,w)-drift}px)`;
+  $('cam').style.filter=`blur(${Math.pow(1-w,2)*26}px)`;
+  // rod + curtain unfurls top->bottom
+  const r=eOut(lin(t,0.12,0.36));
+  $('rod').style.transform=`scaleX(${r})`;
+  const h=eOut(lin(t,0.22,1.25))*1520;
+  const cur=$('cur');
+  cur.style.top='236px';cur.style.height=h+'px';
+  cur.style.transform=`skewX(${Math.sin(t*2.2)*1.2}deg)`;
+  // title
+  glyphs($('tt'),'Sheer\ncurtains',t,0.28);
+  // lime line ceiling -> floor
+  const lp=eInOut(lin(t,1.30,2.08));
+  const y0=300,y1=y0+lp*(1680-y0);
+  $('line').innerHTML=lp>0?`<path d="M 175 ${y0} C 205 ${mix(y0,y1,.33)}, 145 ${mix(y0,y1,.66)}, 175 ${y1}" stroke="#B8C000" stroke-width="12" stroke-linecap="round" fill="none"/>
+     <circle cx="175" cy="${y0}" r="16" fill="#B8C000"/>${lp>=1?'<circle cx="175" cy="1680" r="16" fill="#B8C000"/>':''}`:'';
+  glyphs($('lc'),'ceiling',t,1.30);
+  glyphs($('lf'),'floor',t,2.00);
+}
+
+const SCENES={materials,curtains};
+window.renderAt=(name,t)=>{
+  document.querySelectorAll('.scene').forEach(s=>s.style.display=s.id===name?'block':'none');
+  SCENES[name](t);
+};
+</script>
+</body></html>
