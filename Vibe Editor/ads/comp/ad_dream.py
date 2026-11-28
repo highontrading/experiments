@@ -25,19 +25,32 @@ def phrase_words():
 
 
 def caption_layer(words, t, y=1600):
-    """Elegant italic serif caption, words fading in on their spoken time."""
+    """Elegant italic serif caption (wraps to two balanced lines), words fading in on their spoken time."""
     def draw(d, im):
         f = V.font("serif_i", 92)
-        txt = " ".join(x[0] for x in words)
-        total = d.textlength(txt, font=f)
-        x = V.W / 2 - total / 2
-        for (wd, s, e) in words:
-            a = V.ease((t - s + 0.05) / 0.35)
-            if a > 0:
-                ww = d.textlength(wd + " ", font=f)
-                d.text((x + 3, y + 4), wd, font=f, fill=(0, 0, 0, int(110 * a)), anchor="lm")
-                d.text((x, y), wd, font=f, fill=(255, 255, 255, int(255 * a)), anchor="lm")
-            x += d.textlength(wd + " ", font=f)
+        sp = d.textlength(" ", font=f)
+        widths = [d.textlength(x[0], font=f) for x in words]
+        lines = [list(range(len(words)))]
+        if sum(widths) + sp * (len(words) - 1) > 920:
+            best = None
+            for k in range(1, len(words)):
+                a_ = sum(widths[:k]) + sp * (k - 1)
+                b_ = sum(widths[k:]) + sp * (len(words) - k - 1)
+                if best is None or max(a_, b_) < best[0]:
+                    best = (max(a_, b_), k)
+            lines = [list(range(best[1])), list(range(best[1], len(words)))]
+        y0 = y - (len(lines) - 1) * 55
+        for li, idx in enumerate(lines):
+            tot = sum(widths[i] for i in idx) + sp * (len(idx) - 1)
+            x = V.W / 2 - tot / 2
+            yy = y0 + li * 110
+            for i in idx:
+                wd, s0, e0 = words[i]
+                a = V.ease((t - s0 + 0.05) / 0.35)
+                if a > 0:
+                    d.text((x + 3, yy + 4), wd, font=f, fill=(0, 0, 0, int(110 * a)), anchor="lm")
+                    d.text((x, yy), wd, font=f, fill=(255, 255, 255, int(255 * a)), anchor="lm")
+                x += widths[i] + sp
     return V.text_layer(draw)
 
 
@@ -81,9 +94,9 @@ def main():
         V.place(canvas, scr, img.astype(np.float32), reflect=0.35, glow=glow)
         # slow dreamy push toward the TV on the cloud
         p = V.ease(t / dur)
-        zoom = 1.0 + 0.32 * p
+        zoom = 1.0 + 0.95 * p
         cx = 0.5 * (1 - p) + (sx / P.w) * p
-        cy = 0.47 * (1 - p) + (sy / P.h + 0.06) * p
+        cy = 0.47 * (1 - p) + (sy / P.h + 0.13) * p
         frame = V.camera(canvas, zoom=zoom, cx=cx, cy=cy)
         g = V.camera(glow, zoom=zoom, cx=cx, cy=cy)
         frame = V.finish(frame, t, grain=0.028, vignette=0.18, bloom=0.22, glowimg=g)
@@ -132,7 +145,7 @@ def audio():
     t_edit = PW[2][2][1]
     sfx = [("sfx-chime.mp3", 0.6, -16), ("sfx-ch-switch.mp3", t_edit, -18), ("sfx-whoosh-soft.mp3", PW[3][0][1] - 0.2, -14),
            ("sfx-chime.mp3", dur - 2.5, -13), ("sfx-boom-soft.mp3", dur - 2.55, -12)]
-    wav = MX.mix("ad4-dream", dur, vo=vo, music=("music-dream.mp3", -13, 1.2, 2.0, 0.0),
+    wav = MX.mix("ad4-dream", dur, vo=vo, music=("music-dream.mp3", -11, 1.2, 2.0, 0.0),
                  beds=[("sfx-meadow.mp3", 0.0, -20, 1.5)], sfx=sfx, duck_db=-6)
     return MX.mux(os.path.join(V.ADS, "renders", "ad4-dream-video.mp4"), wav, os.path.join(V.OUT, "ads", "ad4-dream.mp4"))
 

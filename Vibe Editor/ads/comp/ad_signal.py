@@ -175,7 +175,7 @@ def main():
             frame = V.over(frame, in_lock, alpha=V.ease((t - T["vibe"] + 0.1) / 0.25))
         if t >= T["out_end"] + 0.15:  # end card
             a = V.ease((t - T["out_end"] - 0.15) / 0.35)
-            frame = frame * (1 - 0.8 * a)
+            frame = frame * (1 - a) + cv2.GaussianBlur(frame, (0, 0), 30) * 0.16 * a
             frame = V.over(frame, lock, alpha=a, dy=(1 - a) * 20)
         if t < 0.35:
             frame = frame * V.ease(t / 0.35)
