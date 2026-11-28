@@ -1,0 +1,366 @@
+{
+  "format": "9:16",
+  "reframe": {
+    "mode": "crop",
+    "x": 0.5,
+    "y": 0.5
+  },
+  "look": "cinematic",
+  "brand_override": {
+    "colors": {
+      "accent": "#FFC93C"
+    },
+    "fonts": {
+      "title": "anton"
+    }
+  },
+  "cuts": {
+    "remove_pauses": false,
+    "trim_ends": false,
+    "remove_fillers": false,
+    "drop_words": [
+      [
+        80,
+        84
+      ]
+    ],
+    "drop": [
+      [
+        0,
+        0.35
+      ],
+      [
+        6.95,
+        8.33
+      ],
+      [
+        13.55,
+        15.62
+      ],
+      [
+        28.55,
+        30.02
+      ],
+      [
+        40.3,
+        45.2
+      ]
+    ]
+  },
+  "captions": {
+    "enabled": true,
+    "style": "classic-yellow",
+    "position": 0.74,
+    "max_words": 3,
+    "emphasis": [
+      "pandrah",
+      "sau?",
+      "baarah",
+      "lakh",
+      "solah",
+      "hazaar",
+      "rupaye!",
+      "ChatGPT",
+      "Claude",
+      "Vibe",
+      "Editor",
+      "₹1,499.",
+      "baar.",
+      "subscription,",
+      "credits.",
+      "neeche"
+    ]
+  },
+  "audio": {
+    "denoise": false,
+    "loudness": -14,
+    "music": {
+      "file": "score-edit.mp3",
+      "volume": 0.14,
+      "duck": true
+    }
+  },
+  "events": [
+    {
+      "type": "call",
+      "at": 0,
+      "dur": 2.0,
+      "name": "Editor Bhai",
+      "sub": "Incoming call",
+      "position": "top",
+      "theme": "dark",
+      "sfx": "phone-ring",
+      "sfx_volume": 0.9
+    },
+    {
+      "type": "zoom",
+      "style": "punch",
+      "at": "kya?",
+      "amount": 1.18,
+      "focus": [
+        0.5,
+        0.32
+      ],
+      "dur": 0.9,
+      "sfx": "whoosh-fast"
+    },
+    {
+      "type": "stamp",
+      "text": "₹1,500 / *REEL?!*",
+      "at": "pandrah",
+      "until": "sau?",
+      "position": 0.6,
+      "size": "xl",
+      "sfx": "impact"
+    },
+    {
+      "type": "shake",
+      "at": "sau?",
+      "dur": 0.35,
+      "amount": 1,
+      "sfx": false
+    },
+    {
+      "type": "zoom",
+      "style": "push",
+      "at": 5.4,
+      "dur": 1.2,
+      "amount": 1.35,
+      "focus": [
+        0.5,
+        0.27
+      ],
+      "sfx": "record-stop",
+      "sfx_volume": 0.8
+    },
+    {
+      "type": "spotlight",
+      "at": 5.55,
+      "dur": 1.05,
+      "x": 0.5,
+      "y": 0.27,
+      "size": 0.45,
+      "darkness": 0.55,
+      "sfx": false
+    },
+    {
+      "type": "card",
+      "style": "dark-glass",
+      "label": "EDITOR KA BILL",
+      "text": "₹1,500 × *12 reels* × 12 months",
+      "at": 6.72,
+      "until": 8.6,
+      "position": 0.64,
+      "hide_captions": true,
+      "sfx": "tick-tock"
+    },
+    {
+      "type": "counter",
+      "from": 0,
+      "to": 216000,
+      "prefix": "₹",
+      "label": "har saal · sirf editing pe",
+      "at": "matlab",
+      "until": 12.2,
+      "position": 0.64,
+      "color": "#FF4D4D",
+      "hide_captions": true,
+      "sfx": "cash",
+      "size": "xl"
+    },
+    {
+      "type": "shake",
+      "at": "rupaye!",
+      "dur": 0.4,
+      "amount": 1.2,
+      "sfx": "impact"
+    },
+    {
+      "type": "flash",
+      "at": "rupaye!",
+      "dur": 0.2,
+      "color": "#FF4D4D",
+      "sfx": false
+    },
+    {
+      "type": "zoom",
+      "style": "through",
+      "at": "Ab",
+      "dur": 0.5,
+      "sfx": "transition-hit"
+    },
+    {
+      "type": "title",
+      "text": "ChatGPT *ya* Claude",
+      "at": "ChatGPT",
+      "until": "ho.",
+      "style": "pop",
+      "position": 0.6,
+      "size": "l",
+      "sfx": "swoosh-up",
+      "hide_captions": true
+    },
+    {
+      "type": "title",
+      "text": "VIBE *EDITOR*",
+      "at": "Vibe",
+      "until": 17.5,
+      "style": "punch",
+      "size": "xl",
+      "position": 0.56,
+      "behind": false,
+      "sfx": "bass-drop",
+      "sfx_volume": 0.8,
+      "hide_captions": true
+    },
+    {
+      "type": "tag",
+      "text": "Plugin for ChatGPT & Claude",
+      "at": "plugin",
+      "until": 17.5,
+      "position": 0.67,
+      "sfx": "pop",
+      "hide_captions": true
+    },
+    {
+      "type": "prompt",
+      "text": "Pauses kaato, Hinglish captions daalo, zoom karo",
+      "label": "Vibe Editor",
+      "at": 17.55,
+      "until": 23.45,
+      "position": 0.63,
+      "theme": "dark",
+      "hide_captions": true,
+      "sfx": "typing"
+    },
+    {
+      "type": "slice",
+      "at": "kaato,",
+      "angle": -18,
+      "sfx": "swish"
+    },
+    {
+      "type": "zoom",
+      "style": "punch",
+      "at": "zoom",
+      "amount": 1.22,
+      "focus": [
+        0.5,
+        0.3
+      ],
+      "dur": 0.8,
+      "sfx": "zoom"
+    },
+    {
+      "type": "word_sticker",
+      "text": "REEL READY!",
+      "at": "reel#3",
+      "until": 24.75,
+      "x": 0.5,
+      "y": 0.62,
+      "size": 120,
+      "rotate": -5,
+      "sfx": "success"
+    },
+    {
+      "type": "confetti",
+      "at": "ready!",
+      "mode": "burst",
+      "dur": 1.2,
+      "x": 0.5,
+      "y": 0.66,
+      "count": 60,
+      "sfx": false
+    },
+    {
+      "type": "darken",
+      "at": "Aur#2",
+      "until": "price?",
+      "amount": 0.35,
+      "sfx": "drum-roll",
+      "sfx_volume": 0.6
+    },
+    {
+      "type": "price_tag",
+      "old": 216000,
+      "new": 1499,
+      "currency": "₹",
+      "badge": "",
+      "label": "ONE-TIME",
+      "at": 25.6,
+      "until": 28.0,
+      "position": 0.62,
+      "theme": "dark",
+      "hide_captions": true,
+      "sfx": "cash"
+    },
+    {
+      "type": "zoom",
+      "style": "punch",
+      "at": "₹1,499.",
+      "amount": 1.12,
+      "focus": [
+        0.5,
+        0.3
+      ],
+      "dur": 0.7,
+      "sfx": false
+    },
+    {
+      "type": "title",
+      "text": "NO SUBSCRIPTION|NO *CREDITS*",
+      "at": "Na",
+      "until": "credits.",
+      "style": "punch",
+      "position": 0.62,
+      "size": "l",
+      "sfx": "impact",
+      "hide_captions": true
+    },
+    {
+      "type": "checklist",
+      "title": "Bas itna chahiye",
+      "items": [
+        "Mac / Windows laptop",
+        "Paid ChatGPT or Claude plan"
+      ],
+      "times": [
+        "laptop",
+        "plan"
+      ],
+      "at": "Bas",
+      "until": "chahiye.",
+      "style": "dark",
+      "position": 0.62,
+      "hide_captions": true
+    },
+    {
+      "type": "cta",
+      "text": "Get Vibe Editor · *₹1,499*",
+      "at": "Link",
+      "until": -0.01,
+      "position": 0.8,
+      "style": "pill",
+      "sfx": "pop"
+    },
+    {
+      "type": "arrow",
+      "at": "neeche",
+      "dur": 1.6,
+      "from": [
+        0.72,
+        0.62
+      ],
+      "target": [
+        0.6,
+        0.76
+      ],
+      "bend": 0.3,
+      "color": "#FFC93C",
+      "sfx": false
+    }
+  ],
+  "output": {
+    "name": "vibe-editor-editor-bill"
+  }
+}
