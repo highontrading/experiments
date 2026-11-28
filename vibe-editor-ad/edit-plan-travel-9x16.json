@@ -1,0 +1,475 @@
+{
+ "format": "9:16",
+ "reframe": {
+  "mode": "crop",
+  "x": 0.5,
+  "y": 0.5
+ },
+ "look": {
+  "filter": "eq=saturation=1.0"
+ },
+ "cuts": {
+  "remove_pauses": false,
+  "remove_fillers": false,
+  "drop_words": [],
+  "drop": [],
+  "trim_ends": false
+ },
+ "captions": {
+  "enabled": true,
+  "style": "boxed",
+  "position": 0.7,
+  "max_words": 3,
+  "emphasis": [
+   "Vibe",
+   "Editor,",
+   "Claude",
+   "VIBE,",
+   "boring.",
+   "editing"
+  ]
+ },
+ "auto_sfx": true,
+ "audio": {
+  "denoise": false,
+  "loudness": -14,
+  "music": {
+   "file": "bed-30s.mp3",
+   "volume": 0.12,
+   "duck": true
+  }
+ },
+ "brand_override": {
+  "colors": {
+   "accent": "#FF5A1F"
+  },
+  "fonts": {
+   "title": "anton"
+  }
+ },
+ "events": [
+  {
+   "type": "zoom",
+   "style": "push",
+   "at": 0,
+   "dur": 5.1,
+   "amount": 1.06,
+   "focus": [
+    0.5,
+    0.3
+   ],
+   "sfx": false
+  },
+  {
+   "type": "title",
+   "text": "YOUR VIDEOS AREN'T *BORING*",
+   "at": 0.0,
+   "until": 1.8,
+   "style": "punch",
+   "font": "anton",
+   "size": 112,
+   "color": "#FFFFFF",
+   "position": 0.065,
+   "outline": 0,
+   "shadow": 3,
+   "exit": "fade",
+   "sfx": false,
+   "sfx_volume": 0.4
+  },
+  {
+   "type": "title",
+   "text": "YOUR *EDITING* IS.",
+   "at": 1.82,
+   "until": 3.6,
+   "style": "punch",
+   "font": "anton",
+   "size": 150,
+   "color": "#FFFFFF",
+   "position": 0.065,
+   "outline": 0,
+   "shadow": 3,
+   "exit": "fade",
+   "sfx": "pro-impact",
+   "sfx_volume": 0.45
+  },
+  {
+   "type": "title",
+   "text": "HERE'S WHAT *FIXED MINE*",
+   "at": 3.62,
+   "until": 5.3,
+   "style": "rise",
+   "font": "anton",
+   "size": 125,
+   "color": "#FFFFFF",
+   "position": 0.065,
+   "outline": 0,
+   "shadow": 3,
+   "exit": "fade",
+   "sfx": "pro-whoosh",
+   "sfx_volume": 0.4
+  },
+  {
+   "type": "zoom",
+   "style": "through",
+   "at": 5.15,
+   "dur": 0.4,
+   "amount": 1.3,
+   "sfx": "pro-whoosh",
+   "sfx_volume": 0.5
+  },
+  {
+   "type": "title",
+   "text": "VIBE *EDITOR*",
+   "at": 5.9,
+   "until": 7.45,
+   "style": "punch",
+   "font": "anton",
+   "size": 190,
+   "color": "#FFFFFF",
+   "position": 0.075,
+   "outline": 0,
+   "shadow": 3,
+   "exit": "fade",
+   "sfx": "pro-impact",
+   "sfx_volume": 0.45
+  },
+  {
+   "type": "card",
+   "style": "glass",
+   "label": "Claude plugin",
+   "text": "*Vibe Editor*",
+   "sub": "Installed \u2713",
+   "at": 7.55,
+   "until": 9.2,
+   "position": 0.42,
+   "size": 120,
+   "width": 0.82,
+   "anim": "pop",
+   "sfx": "pro-pop",
+   "sfx_volume": 0.45
+  },
+  {
+   "type": "prompt",
+   "text": "/vibe-editor:edit my-reel.mp4",
+   "label": "Claude",
+   "at": 9.22,
+   "until": 11.26,
+   "position": 0.42,
+   "size": "l",
+   "theme": "light",
+   "sfx": "pro-type",
+   "sfx_volume": 0.4
+  },
+  {
+   "type": "title",
+   "text": "YOUR PERSONAL|*VIDEO EDITOR*",
+   "at": 9.96,
+   "until": 11.26,
+   "style": "rise",
+   "font": "anton",
+   "size": 140,
+   "color": "#FFFFFF",
+   "position": 0.075,
+   "outline": 0,
+   "shadow": 3,
+   "exit": "fade",
+   "sfx": "pro-whoosh",
+   "sfx_volume": 0.4
+  },
+  {
+   "type": "zoom",
+   "style": "through",
+   "at": 11.12,
+   "dur": 0.4,
+   "amount": 1.3,
+   "sfx": "pro-whoosh",
+   "sfx_volume": 0.5
+  },
+  {
+   "type": "prompt",
+   "text": "make it energetic, clean captions, zoom on key words",
+   "label": "Claude",
+   "at": 11.4,
+   "until": 14.1,
+   "position": 0.42,
+   "size": "l",
+   "theme": "light",
+   "sfx": "pro-type",
+   "sfx_volume": 0.4
+  },
+  {
+   "type": "title",
+   "text": "DROP YOUR|*RAW CLIP*",
+   "at": 11.8,
+   "until": 13.45,
+   "style": "rise",
+   "font": "anton",
+   "size": 150,
+   "color": "#FFFFFF",
+   "position": 0.075,
+   "outline": 0,
+   "shadow": 3,
+   "exit": "fade",
+   "sfx": "pro-whoosh",
+   "sfx_volume": 0.4
+  },
+  {
+   "type": "title",
+   "text": "TELL IT|*THE VIBE*",
+   "at": 13.47,
+   "until": 14.12,
+   "style": "rise",
+   "font": "anton",
+   "size": 150,
+   "color": "#FFFFFF",
+   "position": 0.075,
+   "outline": 0,
+   "shadow": 3,
+   "exit": "fade",
+   "sfx": "pro-swoosh-text",
+   "sfx_volume": 0.4
+  },
+  {
+   "type": "zoom",
+   "style": "push",
+   "at": 14.12,
+   "dur": 3.6,
+   "amount": 1.05,
+   "focus": [
+    0.5,
+    0.3
+   ],
+   "sfx": false
+  },
+  {
+   "type": "title",
+   "text": "\u2702 *PAUSES*",
+   "at": 14.88,
+   "until": 15.64,
+   "style": "pop",
+   "font": "anton",
+   "size": 170,
+   "color": "#111111",
+   "position": 0.075,
+   "outline": 0,
+   "shadow": 0,
+   "exit": "none",
+   "sfx": "pro-tick",
+   "sfx_volume": 0.45
+  },
+  {
+   "type": "title",
+   "text": "CAPTIONS",
+   "at": 15.66,
+   "until": 16.62,
+   "style": "pop",
+   "font": "anton",
+   "size": 170,
+   "color": "#111111",
+   "position": 0.075,
+   "outline": 0,
+   "shadow": 0,
+   "exit": "none",
+   "sfx": "pro-tick",
+   "sfx_volume": 0.45
+  },
+  {
+   "type": "title",
+   "text": "*MOTION GRAPHICS*",
+   "at": 16.74,
+   "until": 17.85,
+   "style": "pop",
+   "font": "anton",
+   "size": 150,
+   "color": "#111111",
+   "position": 0.075,
+   "outline": 0,
+   "shadow": 0,
+   "exit": "fade",
+   "sfx": "pro-tick",
+   "sfx_volume": 0.45
+  },
+  {
+   "type": "zoom",
+   "style": "through",
+   "at": 17.72,
+   "dur": 0.4,
+   "amount": 1.3,
+   "sfx": "pro-whoosh",
+   "sfx_volume": 0.5
+  },
+  {
+   "type": "zoom",
+   "style": "push",
+   "at": 17.87,
+   "dur": 3.3,
+   "amount": 1.05,
+   "focus": [
+    0.5,
+    0.3
+   ],
+   "sfx": false
+  },
+  {
+   "type": "title",
+   "text": "ANY REEL *YOU LOVE*",
+   "at": 18.9,
+   "until": 20.04,
+   "style": "rise",
+   "font": "anton",
+   "size": 135,
+   "color": "#111111",
+   "position": 0.065,
+   "outline": 0,
+   "shadow": 0,
+   "exit": "fade",
+   "sfx": "pro-whoosh",
+   "sfx_volume": 0.4
+  },
+  {
+   "type": "title",
+   "text": "COPIES *THE STYLE*",
+   "at": 20.06,
+   "until": 21.2,
+   "style": "rise",
+   "font": "anton",
+   "size": 140,
+   "color": "#111111",
+   "position": 0.065,
+   "outline": 0,
+   "shadow": 0,
+   "exit": "fade",
+   "sfx": "pro-impact",
+   "sfx_volume": 0.4
+  },
+  {
+   "type": "title",
+   "text": "BETTER THAN *THE LAST*",
+   "at": 22.1,
+   "until": 23.3,
+   "style": "rise",
+   "font": "anton",
+   "size": 125,
+   "color": "#111111",
+   "position": 0.065,
+   "outline": 0,
+   "shadow": 0,
+   "exit": "fade",
+   "sfx": "pro-whoosh",
+   "sfx_volume": 0.4
+  },
+  {
+   "type": "zoom",
+   "style": "through",
+   "at": 23.18,
+   "dur": 0.4,
+   "amount": 1.3,
+   "sfx": "pro-whoosh",
+   "sfx_volume": 0.5
+  },
+  {
+   "type": "zoom",
+   "style": "push",
+   "at": 23.33,
+   "dur": 4.9,
+   "amount": 1.06,
+   "focus": [
+    0.5,
+    0.3
+   ],
+   "sfx": false
+  },
+  {
+   "type": "title",
+   "text": "NO TIMELINE",
+   "at": 23.52,
+   "until": 24.64,
+   "style": "pop",
+   "font": "anton",
+   "size": 170,
+   "color": "#FFFFFF",
+   "position": 0.075,
+   "outline": 0,
+   "shadow": 3,
+   "exit": "none",
+   "sfx": "pro-tick",
+   "sfx_volume": 0.4
+  },
+  {
+   "type": "title",
+   "text": "NO EDITING APPS",
+   "at": 24.66,
+   "until": 25.9,
+   "style": "pop",
+   "font": "anton",
+   "size": 170,
+   "color": "#FFFFFF",
+   "position": 0.075,
+   "outline": 0,
+   "shadow": 3,
+   "exit": "none",
+   "sfx": "pro-tick",
+   "sfx_volume": 0.4
+  },
+  {
+   "type": "title",
+   "text": "JUST *TALK TO IT*",
+   "at": 25.92,
+   "until": 28.2,
+   "style": "pop",
+   "font": "anton",
+   "size": 170,
+   "color": "#FFFFFF",
+   "position": 0.075,
+   "outline": 0,
+   "shadow": 3,
+   "exit": "fade",
+   "sfx": "pro-impact",
+   "sfx_volume": 0.45
+  },
+  {
+   "type": "title",
+   "text": "COMMENT *VIBE*",
+   "at": 28.24,
+   "until": 32.33,
+   "style": "punch",
+   "font": "anton",
+   "size": 200,
+   "color": "#FFFFFF",
+   "position": 0.075,
+   "outline": 0,
+   "shadow": 3,
+   "exit": "none",
+   "sfx": "pro-impact",
+   "sfx_volume": 0.5
+  },
+  {
+   "type": "comment",
+   "text": "VIBE",
+   "at": 28.4,
+   "until": 32.33,
+   "position": 0.84,
+   "theme": "light",
+   "sfx": "pro-type",
+   "sfx_volume": 0.4
+  },
+  {
+   "type": "card",
+   "style": "glass",
+   "label": "Plugin for Claude",
+   "text": "*Vibe Editor*",
+   "sub": "Your AI video editor",
+   "at": 30.7,
+   "until": 32.33,
+   "position": 0.45,
+   "size": 120,
+   "width": 0.82,
+   "anim": "pop",
+   "sfx": "pro-pop",
+   "sfx_volume": 0.5
+  }
+ ],
+ "output": {
+  "name": "vibe-editor-travel-ad"
+ }
+}
