@@ -27,7 +27,7 @@ html,body{width:1080px;height:1920px;background:#000;overflow:hidden}
 .cursor{position:absolute;left:0;top:0;will-change:transform,filter}
 .pill{position:absolute;left:30px;top:38px;display:flex;align-items:center;gap:8px;padding:9px 18px 9px 14px;border-radius:999px;font:700 27px Int;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.25)}
 .dot{position:absolute;left:24px;top:34px;width:26px;height:26px;border-radius:50%;box-shadow:0 0 0 4px rgba(255,255,255,.9)}
-.ripple{position:absolute;border-radius:50%;border:4px solid}
+.ripple{position:absolute;border-radius:50%;border:2.5px solid}
 #caps{position:absolute;left:60px;right:60px;top:1322px;height:110px;text-align:center;font:700 56px/1.15 Pop;color:#fff;text-shadow:0 3px 16px rgba(0,0,0,.6),0 1px 3px rgba(0,0,0,.5);letter-spacing:-.5px}
 #caps span{display:inline-block;margin:0 7px;transition:none}
 .row{display:flex;align-items:center;height:78px;padding:0 30px;font:700 34px Int;border-radius:20px;margin:0 14px}
@@ -36,6 +36,7 @@ html,body{width:1080px;height:1920px;background:#000;overflow:hidden}
 .tile{position:absolute;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.45)}
 .tlabel{position:absolute;font:700 22px Mono;color:#fff;white-space:nowrap;text-shadow:0 2px 8px rgba(0,0,0,.6)}
 .slot{position:absolute;border:3px dashed;border-radius:24px}
+#crop,#zchip,#lbchip,#chipC,#notif,#done,#slotL,#slotR,#lblL,#lblC,#lblR{display:none!important}
 </style></head>
 <body>
 <div id="stage">
@@ -181,7 +182,7 @@ document.querySelectorAll('svg.spark').forEach(s=>{s.innerHTML=SPARK;s.style.col
 
 // visibility with blur-in / blur-out (reference style)
 function vis(el,t,a,b,o={}){
-  const din=o.din??.28, dout=o.dout??.28, blur=o.blur??22, s0=o.s0??.94, dy=o.dy??0;
+  const din=(o.din??.3)*1.45, dout=(o.dout??.3)*1.35, blur=(o.blur??20)*.85, s0=1-(1-(o.s0??.95))*.6, dy=o.dy??0;
   let pin=a===null?1:eout(prog(t,a,a+din)), pout=b===null?0:eio(prog(t,b-dout,b));
   const v=Math.min(pin,1-pout);
   if(v<=0.001){el.style.display='none';return 0}
@@ -214,9 +215,11 @@ const LBL = {
  B:[[0,'Claude'],[14.66,'B-roll']],
  Y:[[0,'Claude'],[15.16,'Sound']]
 };
-const DONE = {R:23.35,P:23.45,G:23.55,B:23.65,Y:23.75};
+const DONE = {R:23.75,P:23.85,G:23.95,B:24.05,Y:24.15};
 const POPIN = {Y:.25,B:.4,R:.55,P:.7,G:.85};
-const CLICKS = [['Y',2.95],['B',9.05],['Y',11.98],['B',21.18],['R',22.05],['Y',24.35],['B',24.75]];
+const CLICKS = [['Y',2.95],['B',9.05],['Y',11.98],['B',21.18],['R',22.05]];
+const SHOW = {Y:[[0.2,2.4],[2.5,4.95],[11.2,12.6],[23.3,99]],B:[[0.35,2.4],[8.5,9.65],[20.95,22.25],[23.4,99]],R:[[0.5,2.4],[5.8,6.95],[21.55,22.6],[23.5,99]],P:[[0.65,2.4],[6.9,7.95],[23.6,99]],G:[[0.8,2.4],[7.7,8.75],[23.7,99]]};
+function showV(k,t){let v=0;for(const [a,b] of SHOW[k]){v=Math.max(v,Math.min(eout(prog(t,a,a+.4)),1-eio(prog(t,b-.4,b))))}return v}
 
 const curEls={};
 for(const k in CUR){
@@ -240,8 +243,11 @@ function drawCursors(t){
   for(const k in CUR){
     const el=curEls[k];const [x,y]=curPos(k,t);const [x2,y2]=curPos(k,t-1/30);
     const v=Math.hypot(x-x2,y-y2)*30;
-    el.style.transform=`translate(${x}px,${y}px)`;
-    el.style.filter=v>500?`blur(${Math.min((v-500)/700,3.2)}px)`:'none';
+    const sv=showV(k,t); if(sv<=0.001){el.style.display='none';continue} el.style.display='';
+    el.style.opacity=sv;
+    el.style.transform=`translate(${x}px,${y+(1-sv)*10}px)`;
+    const mb=v>500?Math.min((v-500)/700,3.2):0; const fb=mb+(1-sv)*8;
+    el.style.filter=fb>0.01?`blur(${fb}px)`:'none';
     const pill=el.querySelector('.pill'),dot=el.querySelector('.dot');
     const pp=prog(t,POPIN[k],POPIN[k]+.32);
     dot.style.opacity=1-clamp(pp*3);
@@ -260,7 +266,7 @@ function drawCursors(t){
   }
   // ripples
   let html='';
-  for(const [k,ct] of CLICKS){const dt=t-ct;if(dt>=0&&dt<.42){const [x,y]=curPos(k,ct);const p=eout(dt/.42);const r=lerp(6,46,p);
+  for(const [k,ct] of CLICKS){const dt=t-ct;if(dt>=0&&dt<.42){const [x,y]=curPos(k,ct);const p=eout(dt/.42);const r=lerp(6,34,p);
     html+=`<div class="ripple" style="left:${x+2-r}px;top:${y+2-r}px;width:${2*r}px;height:${2*r}px;border-color:${CUR[k].c};opacity:${1-p}"></div>`}}
   $('ripples').innerHTML=html;
 }
