@@ -1,0 +1,33 @@
+{
+ "format": "16:9",
+ "reframe": {
+  "mode": "crop",
+  "x": 0.5,
+  "y": 0.38
+ },
+ "look": "natural",
+ "cuts": {
+  "remove_pauses": false,
+  "trim_ends": false,
+  "remove_fillers": false,
+  "drop_words": [],
+  "drop": [
+   [
+    12.3,
+    13.033
+   ]
+  ]
+ },
+ "captions": {
+  "enabled": false
+ },
+ "audio": {
+  "denoise": false,
+  "loudness": -14
+ },
+ "auto_sfx": false,
+ "events": [],
+ "output": {
+  "name": "style3-before-hi"
+ }
+}

@@ -1,0 +1,205 @@
+{
+  "file": "/home/user/experiments/Vibe Editor/.vibe/jobs/en/preview.mp4",
+  "duration": 12.966666666666669,
+  "preview": true,
+  "format": "9:16",
+  "events": [
+    {
+      "type": "ass",
+      "at": 0.0
+    },
+    {
+      "type": "sfx",
+      "at": 0.0
+    },
+    {
+      "type": "ass",
+      "at": 1.74
+    },
+    {
+      "type": "sfx",
+      "at": 1.74
+    },
+    {
+      "type": "sfx",
+      "at": 2.02
+    },
+    {
+      "type": "ass",
+      "at": 2.62
+    },
+    {
+      "type": "sfx",
+      "at": 2.62
+    },
+    {
+      "type": "sfx",
+      "at": 3.08
+    },
+    {
+      "type": "ass",
+      "at": 3.68
+    },
+    {
+      "type": "sfx",
+      "at": 3.68
+    },
+    {
+      "type": "ass",
+      "at": 4.22
+    },
+    {
+      "type": "sfx",
+      "at": 4.22
+    },
+    {
+      "type": "sfx",
+      "at": 4.76
+    },
+    {
+      "type": "ass",
+      "at": 5.36
+    },
+    {
+      "type": "sfx",
+      "at": 5.36
+    },
+    {
+      "type": "sfx",
+      "at": 5.24
+    },
+    {
+      "type": "ass",
+      "at": 5.84
+    },
+    {
+      "type": "sfx",
+      "at": 5.84
+    },
+    {
+      "type": "ass",
+      "at": 6.56
+    },
+    {
+      "type": "sfx",
+      "at": 6.56
+    },
+    {
+      "type": "sfx",
+      "at": 7.38
+    },
+    {
+      "type": "ass",
+      "at": 7.99
+    },
+    {
+      "type": "sfx",
+      "at": 7.99
+    },
+    {
+      "type": "ass",
+      "at": 9.27
+    },
+    {
+      "type": "sfx",
+      "at": 9.27
+    },
+    {
+      "type": "sfx",
+      "at": 9.56
+    },
+    {
+      "type": "ass",
+      "at": 10.17
+    },
+    {
+      "type": "sfx",
+      "at": 10.17
+    },
+    {
+      "type": "ass",
+      "at": 11.71
+    },
+    {
+      "type": "sfx",
+      "at": 11.71
+    },
+    {
+      "type": "zoom",
+      "at": 0.0
+    },
+    {
+      "type": "sfx",
+      "at": 0.0
+    },
+    {
+      "type": "ass",
+      "at": 1.0
+    },
+    {
+      "type": "sfx",
+      "at": 0.69
+    },
+    {
+      "type": "sfx",
+      "at": 1.27
+    },
+    {
+      "type": "ass",
+      "at": 7.2
+    },
+    {
+      "type": "sfx",
+      "at": 6.89
+    },
+    {
+      "type": "sfx",
+      "at": 7.34
+    },
+    {
+      "type": "sfx",
+      "at": 4.88
+    },
+    {
+      "type": "zoom",
+      "at": 5.88
+    },
+    {
+      "type": "sfx",
+      "at": 5.97
+    },
+    {
+      "type": "sfx",
+      "at": 6.32
+    },
+    {
+      "type": "light_leak",
+      "at": 7.78
+    },
+    {
+      "type": "sfx",
+      "at": 7.32
+    },
+    {
+      "type": "zoom",
+      "at": 10.21
+    },
+    {
+      "type": "sfx",
+      "at": 10.5
+    },
+    {
+      "type": "ass",
+      "at": 12.24
+    },
+    {
+      "type": "sfx",
+      "at": 11.9
+    },
+    {
+      "type": "sfx",
+      "at": 12.15
+    }
+  ],
+  "warnings": []
+}

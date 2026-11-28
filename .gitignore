@@ -1,3 +1,21 @@
 /.vibe/
 Vibe Editor/.vibe/fonts/
 Vibe Editor/.vibe/cache/
+# Vibe Editor: large or regenerable media stays out of git
+Vibe Editor/.vibe/parts/
+Vibe Editor/.vibe/peek/
+Vibe Editor/.vibe/*.log
+Vibe Editor/.vibe/fontcache.json
+Vibe Editor/.vibe/jobs/*/*.mp4
+Vibe Editor/.vibe/jobs/*/*.jpg
+Vibe Editor/.vibe/jobs/*/*.png
+Vibe Editor/.vibe/jobs/*/*.ass
+Vibe Editor/.vibe/jobs/*/*/
+Vibe Editor/broll/*.mp4
+Vibe Editor/broll/gen/
+Vibe Editor/references/
+Vibe Editor/brand/bg/
+Vibe Editor/music/*.wav
+Vibe Editor/output/*.mp4
+Vibe Editor/tools/__pycache__/
+Vibe Editor/plans/test.json

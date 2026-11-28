@@ -1,0 +1,3120 @@
+{
+ "format": "9:16",
+ "reframe": {
+  "mode": "crop",
+  "x": 0.5,
+  "y": 0.4,
+  "zoom": 1.25
+ },
+ "look": {
+  "filter": "eq=contrast=1.07:saturation=1.04:brightness=-0.01,colorbalance=gs=0.01:bs=-0.01,vignette=PI/5"
+ },
+ "cuts": {
+  "remove_pauses": false,
+  "trim_ends": false,
+  "remove_fillers": false,
+  "drop_words": [],
+  "drop": [
+   [
+    7.933,
+    8.167
+   ],
+   [
+    11.9,
+    13.733
+   ]
+  ]
+ },
+ "captions": {
+  "enabled": false
+ },
+ "audio": {
+  "denoise": false,
+  "loudness": -14,
+  "music": {
+   "file": "m-neon.wav",
+   "volume": 0.22,
+   "duck": true
+  }
+ },
+ "auto_sfx": true,
+ "events": [
+  {
+   "type": "ass",
+   "at": 0.0,
+   "dur": 1.06,
+   "layers": [
+    {
+     "start": 0,
+     "end": 1.06,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(900,1060,\\alpha&HFF&)\\p1}m 0 1027 l 1080 1027 1080 1029 0 1029"
+    },
+    {
+     "start": 0,
+     "end": 1.06,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(900,1060,\\alpha&HFF&)\\p1}m 0 1316 l 1080 1316 1080 1318 0 1318"
+    },
+    {
+     "start": 0,
+     "end": 1.06,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(900,1060,\\alpha&HFF&)\\p1}m 220 0 l 222 0 222 1920 220 1920"
+    },
+    {
+     "start": 0,
+     "end": 1.06,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(900,1060,\\alpha&HFF&)\\p1}m 858 0 l 860 0 860 1920 858 1920"
+    },
+    {
+     "start": 0,
+     "end": 1.06,
+     "layer": 4,
+     "shape": true,
+     "color": "#000000",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H78&)\\t(900,1060,\\alpha&HFF&)\\p1}m 221 1028 l 859 1028 859 1317 221 1317"
+    },
+    {
+     "start": 0,
+     "end": 1.06,
+     "layer": 5,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(900,1060,\\alpha&HFF&)\\p1}m 220 1027 l 860 1027 860 1318 220 1318 m 223 1030 l 223 1315 857 1315 857 1030"
+    },
+    {
+     "start": 0,
+     "end": 1.06,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(900,1060,\\alpha&HFF&)\\p1}m 220.7 1018.7 b 225.6 1018.7 229.7 1022.7 229.7 1027.7 b 229.7 1032.7 225.6 1036.7 220.7 1036.7 b 215.7 1036.7 211.7 1032.7 211.7 1027.7 b 211.7 1022.7 215.7 1018.7 220.7 1018.7"
+    },
+    {
+     "start": 0,
+     "end": 1.06,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(900,1060,\\alpha&HFF&)\\p1}m 540.0 1018.7 b 545.0 1018.7 549.0 1022.7 549.0 1027.7 b 549.0 1032.7 545.0 1036.7 540.0 1036.7 b 535.0 1036.7 531.0 1032.7 531.0 1027.7 b 531.0 1022.7 535.0 1018.7 540.0 1018.7"
+    },
+    {
+     "start": 0,
+     "end": 1.06,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(900,1060,\\alpha&HFF&)\\p1}m 859.3 1018.7 b 864.3 1018.7 868.3 1022.7 868.3 1027.7 b 868.3 1032.7 864.3 1036.7 859.3 1036.7 b 854.4 1036.7 850.3 1032.7 850.3 1027.7 b 850.3 1022.7 854.4 1018.7 859.3 1018.7"
+    },
+    {
+     "start": 0,
+     "end": 1.06,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(900,1060,\\alpha&HFF&)\\p1}m 220.7 1307.8 b 225.6 1307.8 229.7 1311.8 229.7 1316.8 b 229.7 1321.7 225.6 1325.8 220.7 1325.8 b 215.7 1325.8 211.7 1321.7 211.7 1316.8 b 211.7 1311.8 215.7 1307.8 220.7 1307.8"
+    },
+    {
+     "start": 0,
+     "end": 1.06,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(900,1060,\\alpha&HFF&)\\p1}m 540.0 1307.8 b 545.0 1307.8 549.0 1311.8 549.0 1316.8 b 549.0 1321.7 545.0 1325.8 540.0 1325.8 b 535.0 1325.8 531.0 1321.7 531.0 1316.8 b 531.0 1311.8 535.0 1307.8 540.0 1307.8"
+    },
+    {
+     "start": 0,
+     "end": 1.06,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(900,1060,\\alpha&HFF&)\\p1}m 859.3 1307.8 b 864.3 1307.8 868.3 1311.8 868.3 1316.8 b 868.3 1321.7 864.3 1325.8 859.3 1325.8 b 854.4 1325.8 850.3 1321.7 850.3 1316.8 b 850.3 1311.8 854.4 1307.8 859.3 1307.8"
+    },
+    {
+     "start": 0.0,
+     "end": 1.06,
+     "layer": 7,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1088,540,1078,0,240)\\blur10\\bord4\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H68&)\\t(910,1060,\\alpha&HFF&)}Here’s"
+    },
+    {
+     "start": 0.0,
+     "end": 1.06,
+     "layer": 8,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1088,540,1078,0,240)\\blur4\\alpha&HFF&\\t(0,200,\\blur0\\alpha&H00&)\\t(910,1060,\\alpha&HFF&)}Here’s"
+    },
+    {
+     "start": 0.82,
+     "end": 1.06,
+     "layer": 6,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur24\\bord12\\3c&H000000&\\alpha&HFF&\\t(0,150,\\alpha&H88&)\\t(80,240,\\alpha&HFF&)}something"
+    },
+    {
+     "start": 0.82,
+     "end": 1.06,
+     "layer": 7,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur26\\bord10\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H58&)\\t(80,240,\\alpha&HFF&)}something"
+    },
+    {
+     "start": 0.82,
+     "end": 1.06,
+     "layer": 8,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur3\\bord2\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H00&)\\t(80,240,\\alpha&HFF&)}something"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 0.0,
+   "name": "ve-swish.wav",
+   "volume": 0.13
+  },
+  {
+   "type": "ass",
+   "at": 2.62,
+   "dur": 1.1,
+   "layers": [
+    {
+     "start": 0.04,
+     "end": 1.1,
+     "layer": 7,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1088,540,1078,0,240)\\blur10\\bord4\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H68&)\\t(910,1060,\\alpha&HFF&)}Your content is"
+    },
+    {
+     "start": 0.04,
+     "end": 1.1,
+     "layer": 8,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1088,540,1078,0,240)\\blur4\\alpha&HFF&\\t(0,200,\\blur0\\alpha&H00&)\\t(910,1060,\\alpha&HFF&)}Your content is"
+    },
+    {
+     "start": 0.7,
+     "end": 1.1,
+     "layer": 6,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur24\\bord12\\3c&H000000&\\alpha&HFF&\\t(0,150,\\alpha&H88&)\\t(240,400,\\alpha&HFF&)}fine"
+    },
+    {
+     "start": 0.7,
+     "end": 1.1,
+     "layer": 7,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur26\\bord10\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H58&)\\t(240,400,\\alpha&HFF&)}fine"
+    },
+    {
+     "start": 0.7,
+     "end": 1.1,
+     "layer": 8,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur3\\bord2\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H00&)\\t(240,400,\\alpha&HFF&)}fine"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 2.628,
+   "name": "ve-swish.wav",
+   "volume": 0.13
+  },
+  {
+   "type": "ass",
+   "at": 3.68,
+   "dur": 0.58,
+   "layers": [
+    {
+     "start": 0,
+     "end": 0.58,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(420,580,\\alpha&HFF&)\\p1}m 0 1027 l 1080 1027 1080 1029 0 1029"
+    },
+    {
+     "start": 0,
+     "end": 0.58,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(420,580,\\alpha&HFF&)\\p1}m 0 1316 l 1080 1316 1080 1318 0 1318"
+    },
+    {
+     "start": 0,
+     "end": 0.58,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(420,580,\\alpha&HFF&)\\p1}m 301 0 l 303 0 303 1920 301 1920"
+    },
+    {
+     "start": 0,
+     "end": 0.58,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(420,580,\\alpha&HFF&)\\p1}m 777 0 l 779 0 779 1920 777 1920"
+    },
+    {
+     "start": 0,
+     "end": 0.58,
+     "layer": 4,
+     "shape": true,
+     "color": "#000000",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H78&)\\t(420,580,\\alpha&HFF&)\\p1}m 302 1028 l 778 1028 778 1317 302 1317"
+    },
+    {
+     "start": 0,
+     "end": 0.58,
+     "layer": 5,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(420,580,\\alpha&HFF&)\\p1}m 301 1027 l 779 1027 779 1318 301 1318 m 304 1030 l 304 1315 776 1315 776 1030"
+    },
+    {
+     "start": 0,
+     "end": 0.58,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(420,580,\\alpha&HFF&)\\p1}m 301.6 1018.7 b 306.5 1018.7 310.6 1022.7 310.6 1027.7 b 310.6 1032.7 306.5 1036.7 301.6 1036.7 b 296.6 1036.7 292.6 1032.7 292.6 1027.7 b 292.6 1022.7 296.6 1018.7 301.6 1018.7"
+    },
+    {
+     "start": 0,
+     "end": 0.58,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(420,580,\\alpha&HFF&)\\p1}m 540.0 1018.7 b 545.0 1018.7 549.0 1022.7 549.0 1027.7 b 549.0 1032.7 545.0 1036.7 540.0 1036.7 b 535.0 1036.7 531.0 1032.7 531.0 1027.7 b 531.0 1022.7 535.0 1018.7 540.0 1018.7"
+    },
+    {
+     "start": 0,
+     "end": 0.58,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(420,580,\\alpha&HFF&)\\p1}m 778.4 1018.7 b 783.4 1018.7 787.4 1022.7 787.4 1027.7 b 787.4 1032.7 783.4 1036.7 778.4 1036.7 b 773.5 1036.7 769.4 1032.7 769.4 1027.7 b 769.4 1022.7 773.5 1018.7 778.4 1018.7"
+    },
+    {
+     "start": 0,
+     "end": 0.58,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(420,580,\\alpha&HFF&)\\p1}m 301.6 1307.8 b 306.5 1307.8 310.6 1311.8 310.6 1316.8 b 310.6 1321.7 306.5 1325.8 301.6 1325.8 b 296.6 1325.8 292.6 1321.7 292.6 1316.8 b 292.6 1311.8 296.6 1307.8 301.6 1307.8"
+    },
+    {
+     "start": 0,
+     "end": 0.58,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(420,580,\\alpha&HFF&)\\p1}m 540.0 1307.8 b 545.0 1307.8 549.0 1311.8 549.0 1316.8 b 549.0 1321.7 545.0 1325.8 540.0 1325.8 b 535.0 1325.8 531.0 1321.7 531.0 1316.8 b 531.0 1311.8 535.0 1307.8 540.0 1307.8"
+    },
+    {
+     "start": 0,
+     "end": 0.58,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(420,580,\\alpha&HFF&)\\p1}m 778.4 1307.8 b 783.4 1307.8 787.4 1311.8 787.4 1316.8 b 787.4 1321.7 783.4 1325.8 778.4 1325.8 b 773.5 1325.8 769.4 1321.7 769.4 1316.8 b 769.4 1311.8 773.5 1307.8 778.4 1307.8"
+    },
+    {
+     "start": 0.04,
+     "end": 0.58,
+     "layer": 7,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1088,540,1078,0,240)\\blur10\\bord4\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H68&)\\t(390,540,\\alpha&HFF&)}it’s your"
+    },
+    {
+     "start": 0.04,
+     "end": 0.58,
+     "layer": 8,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1088,540,1078,0,240)\\blur4\\alpha&HFF&\\t(0,200,\\blur0\\alpha&H00&)\\t(390,540,\\alpha&HFF&)}it’s your"
+    },
+    {
+     "start": 0.36,
+     "end": 0.58,
+     "layer": 6,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur24\\bord12\\3c&H000000&\\alpha&HFF&\\t(0,150,\\alpha&H88&)\\t(60,220,\\alpha&HFF&)}editing"
+    },
+    {
+     "start": 0.36,
+     "end": 0.58,
+     "layer": 7,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur26\\bord10\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H58&)\\t(60,220,\\alpha&HFF&)}editing"
+    },
+    {
+     "start": 0.36,
+     "end": 0.58,
+     "layer": 8,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur3\\bord2\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H00&)\\t(60,220,\\alpha&HFF&)}editing"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 3.688,
+   "name": "ve-swish.wav",
+   "volume": 0.13
+  },
+  {
+   "type": "ass",
+   "at": 4.22,
+   "dur": 1.18,
+   "layers": [
+    {
+     "start": 0.04,
+     "end": 1.18,
+     "layer": 7,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1088,540,1078,0,240)\\blur10\\bord4\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H68&)\\t(990,1140,\\alpha&HFF&)}that’s killing your"
+    },
+    {
+     "start": 0.04,
+     "end": 1.18,
+     "layer": 8,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1088,540,1078,0,240)\\blur4\\alpha&HFF&\\t(0,200,\\blur0\\alpha&H00&)\\t(990,1140,\\alpha&HFF&)}that’s killing your"
+    },
+    {
+     "start": 0.76,
+     "end": 1.18,
+     "layer": 6,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur24\\bord12\\3c&H000000&\\alpha&HFF&\\t(0,150,\\alpha&H88&)\\t(260,420,\\alpha&HFF&)}views"
+    },
+    {
+     "start": 0.76,
+     "end": 1.18,
+     "layer": 7,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur26\\bord10\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H58&)\\t(260,420,\\alpha&HFF&)}views"
+    },
+    {
+     "start": 0.76,
+     "end": 1.18,
+     "layer": 8,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur3\\bord2\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H00&)\\t(260,420,\\alpha&HFF&)}views"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 4.228,
+   "name": "ve-swish.wav",
+   "volume": 0.13
+  },
+  {
+   "type": "ass",
+   "at": 5.36,
+   "dur": 0.52,
+   "layers": [
+    {
+     "start": 0,
+     "end": 0.52,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(360,520,\\alpha&HFF&)\\p1}m 0 1027 l 1080 1027 1080 1029 0 1029"
+    },
+    {
+     "start": 0,
+     "end": 0.52,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(360,520,\\alpha&HFF&)\\p1}m 0 1316 l 1080 1316 1080 1318 0 1318"
+    },
+    {
+     "start": 0,
+     "end": 0.52,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(360,520,\\alpha&HFF&)\\p1}m 322 0 l 324 0 324 1920 322 1920"
+    },
+    {
+     "start": 0,
+     "end": 0.52,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(360,520,\\alpha&HFF&)\\p1}m 756 0 l 758 0 758 1920 756 1920"
+    },
+    {
+     "start": 0,
+     "end": 0.52,
+     "layer": 4,
+     "shape": true,
+     "color": "#000000",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H78&)\\t(360,520,\\alpha&HFF&)\\p1}m 323 1028 l 757 1028 757 1317 323 1317"
+    },
+    {
+     "start": 0,
+     "end": 0.52,
+     "layer": 5,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(360,520,\\alpha&HFF&)\\p1}m 322 1027 l 758 1027 758 1318 322 1318 m 325 1030 l 325 1315 755 1315 755 1030"
+    },
+    {
+     "start": 0,
+     "end": 0.52,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(360,520,\\alpha&HFF&)\\p1}m 322.8 1018.7 b 327.8 1018.7 331.8 1022.7 331.8 1027.7 b 331.8 1032.7 327.8 1036.7 322.8 1036.7 b 317.9 1036.7 313.8 1032.7 313.8 1027.7 b 313.8 1022.7 317.9 1018.7 322.8 1018.7"
+    },
+    {
+     "start": 0,
+     "end": 0.52,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(360,520,\\alpha&HFF&)\\p1}m 540.0 1018.7 b 545.0 1018.7 549.0 1022.7 549.0 1027.7 b 549.0 1032.7 545.0 1036.7 540.0 1036.7 b 535.0 1036.7 531.0 1032.7 531.0 1027.7 b 531.0 1022.7 535.0 1018.7 540.0 1018.7"
+    },
+    {
+     "start": 0,
+     "end": 0.52,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(360,520,\\alpha&HFF&)\\p1}m 757.2 1018.7 b 762.1 1018.7 766.2 1022.7 766.2 1027.7 b 766.2 1032.7 762.1 1036.7 757.2 1036.7 b 752.2 1036.7 748.2 1032.7 748.2 1027.7 b 748.2 1022.7 752.2 1018.7 757.2 1018.7"
+    },
+    {
+     "start": 0,
+     "end": 0.52,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(360,520,\\alpha&HFF&)\\p1}m 322.8 1307.8 b 327.8 1307.8 331.8 1311.8 331.8 1316.8 b 331.8 1321.7 327.8 1325.8 322.8 1325.8 b 317.9 1325.8 313.8 1321.7 313.8 1316.8 b 313.8 1311.8 317.9 1307.8 322.8 1307.8"
+    },
+    {
+     "start": 0,
+     "end": 0.52,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(360,520,\\alpha&HFF&)\\p1}m 540.0 1307.8 b 545.0 1307.8 549.0 1311.8 549.0 1316.8 b 549.0 1321.7 545.0 1325.8 540.0 1325.8 b 535.0 1325.8 531.0 1321.7 531.0 1316.8 b 531.0 1311.8 535.0 1307.8 540.0 1307.8"
+    },
+    {
+     "start": 0,
+     "end": 0.52,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(360,520,\\alpha&HFF&)\\p1}m 757.2 1307.8 b 762.1 1307.8 766.2 1311.8 766.2 1316.8 b 766.2 1321.7 762.1 1325.8 757.2 1325.8 b 752.2 1325.8 748.2 1321.7 748.2 1316.8 b 748.2 1311.8 752.2 1307.8 757.2 1307.8"
+    },
+    {
+     "start": 0.04,
+     "end": 0.52,
+     "layer": 7,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1088,540,1078,0,240)\\blur10\\bord4\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H68&)\\t(330,480,\\alpha&HFF&)}People"
+    },
+    {
+     "start": 0.04,
+     "end": 0.52,
+     "layer": 8,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1088,540,1078,0,240)\\blur4\\alpha&HFF&\\t(0,200,\\blur0\\alpha&H00&)\\t(330,480,\\alpha&HFF&)}People"
+    },
+    {
+     "start": 0.18,
+     "end": 0.52,
+     "layer": 6,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur24\\bord12\\3c&H000000&\\alpha&HFF&\\t(0,150,\\alpha&H88&)\\t(180,340,\\alpha&HFF&)}decide"
+    },
+    {
+     "start": 0.18,
+     "end": 0.52,
+     "layer": 7,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur26\\bord10\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H58&)\\t(180,340,\\alpha&HFF&)}decide"
+    },
+    {
+     "start": 0.18,
+     "end": 0.52,
+     "layer": 8,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur3\\bord2\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H00&)\\t(180,340,\\alpha&HFF&)}decide"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 5.368,
+   "name": "ve-swish.wav",
+   "volume": 0.13
+  },
+  {
+   "type": "ass",
+   "at": 6.56,
+   "dur": 0.7,
+   "layers": [
+    {
+     "start": 0,
+     "end": 0.7,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(540,700,\\alpha&HFF&)\\p1}m 0 1027 l 1080 1027 1080 1029 0 1029"
+    },
+    {
+     "start": 0,
+     "end": 0.7,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(540,700,\\alpha&HFF&)\\p1}m 0 1316 l 1080 1316 1080 1318 0 1318"
+    },
+    {
+     "start": 0,
+     "end": 0.7,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(540,700,\\alpha&HFF&)\\p1}m 356 0 l 358 0 358 1920 356 1920"
+    },
+    {
+     "start": 0,
+     "end": 0.7,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(540,700,\\alpha&HFF&)\\p1}m 722 0 l 724 0 724 1920 722 1920"
+    },
+    {
+     "start": 0,
+     "end": 0.7,
+     "layer": 4,
+     "shape": true,
+     "color": "#000000",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H78&)\\t(540,700,\\alpha&HFF&)\\p1}m 357 1028 l 723 1028 723 1317 357 1317"
+    },
+    {
+     "start": 0,
+     "end": 0.7,
+     "layer": 5,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(540,700,\\alpha&HFF&)\\p1}m 356 1027 l 724 1027 724 1318 356 1318 m 359 1030 l 359 1315 721 1315 721 1030"
+    },
+    {
+     "start": 0,
+     "end": 0.7,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(540,700,\\alpha&HFF&)\\p1}m 357.5 1018.7 b 362.5 1018.7 366.5 1022.7 366.5 1027.7 b 366.5 1032.7 362.5 1036.7 357.5 1036.7 b 352.5 1036.7 348.5 1032.7 348.5 1027.7 b 348.5 1022.7 352.5 1018.7 357.5 1018.7"
+    },
+    {
+     "start": 0,
+     "end": 0.7,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(540,700,\\alpha&HFF&)\\p1}m 540.0 1018.7 b 545.0 1018.7 549.0 1022.7 549.0 1027.7 b 549.0 1032.7 545.0 1036.7 540.0 1036.7 b 535.0 1036.7 531.0 1032.7 531.0 1027.7 b 531.0 1022.7 535.0 1018.7 540.0 1018.7"
+    },
+    {
+     "start": 0,
+     "end": 0.7,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(540,700,\\alpha&HFF&)\\p1}m 722.5 1018.7 b 727.5 1018.7 731.5 1022.7 731.5 1027.7 b 731.5 1032.7 727.5 1036.7 722.5 1036.7 b 717.5 1036.7 713.5 1032.7 713.5 1027.7 b 713.5 1022.7 717.5 1018.7 722.5 1018.7"
+    },
+    {
+     "start": 0,
+     "end": 0.7,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(540,700,\\alpha&HFF&)\\p1}m 357.5 1307.8 b 362.5 1307.8 366.5 1311.8 366.5 1316.8 b 366.5 1321.7 362.5 1325.8 357.5 1325.8 b 352.5 1325.8 348.5 1321.7 348.5 1316.8 b 348.5 1311.8 352.5 1307.8 357.5 1307.8"
+    },
+    {
+     "start": 0,
+     "end": 0.7,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(540,700,\\alpha&HFF&)\\p1}m 540.0 1307.8 b 545.0 1307.8 549.0 1311.8 549.0 1316.8 b 549.0 1321.7 545.0 1325.8 540.0 1325.8 b 535.0 1325.8 531.0 1321.7 531.0 1316.8 b 531.0 1311.8 535.0 1307.8 540.0 1307.8"
+    },
+    {
+     "start": 0,
+     "end": 0.7,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(540,700,\\alpha&HFF&)\\p1}m 722.5 1307.8 b 727.5 1307.8 731.5 1311.8 731.5 1316.8 b 731.5 1321.7 727.5 1325.8 722.5 1325.8 b 717.5 1325.8 713.5 1321.7 713.5 1316.8 b 713.5 1311.8 717.5 1307.8 722.5 1307.8"
+    },
+    {
+     "start": 0.04,
+     "end": 0.7,
+     "layer": 7,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1088,540,1078,0,240)\\blur10\\bord4\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H68&)\\t(510,660,\\alpha&HFF&)}whether to"
+    },
+    {
+     "start": 0.04,
+     "end": 0.7,
+     "layer": 8,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1088,540,1078,0,240)\\blur4\\alpha&HFF&\\t(0,200,\\blur0\\alpha&H00&)\\t(510,660,\\alpha&HFF&)}whether to"
+    },
+    {
+     "start": 0.52,
+     "end": 0.7,
+     "layer": 6,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur24\\bord12\\3c&H000000&\\alpha&HFF&\\t(0,150,\\alpha&H88&)\\t(20,180,\\alpha&HFF&)}stay"
+    },
+    {
+     "start": 0.52,
+     "end": 0.7,
+     "layer": 7,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur26\\bord10\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H58&)\\t(20,180,\\alpha&HFF&)}stay"
+    },
+    {
+     "start": 0.52,
+     "end": 0.7,
+     "layer": 8,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur3\\bord2\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H00&)\\t(20,180,\\alpha&HFF&)}stay"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 6.568,
+   "name": "ve-swish.wav",
+   "volume": 0.13
+  },
+  {
+   "type": "ass",
+   "at": 7.987,
+   "dur": 1.32,
+   "layers": [
+    {
+     "start": 0,
+     "end": 1.32,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(1160,1320,\\alpha&HFF&)\\p1}m 0 1027 l 1080 1027 1080 1029 0 1029"
+    },
+    {
+     "start": 0,
+     "end": 1.32,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(1160,1320,\\alpha&HFF&)\\p1}m 0 1316 l 1080 1316 1080 1318 0 1318"
+    },
+    {
+     "start": 0,
+     "end": 1.32,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(1160,1320,\\alpha&HFF&)\\p1}m 338 0 l 340 0 340 1920 338 1920"
+    },
+    {
+     "start": 0,
+     "end": 1.32,
+     "layer": 4,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H70&)\\t(1160,1320,\\alpha&HFF&)\\p1}m 740 0 l 742 0 742 1920 740 1920"
+    },
+    {
+     "start": 0,
+     "end": 1.32,
+     "layer": 4,
+     "shape": true,
+     "color": "#000000",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,200,\\alpha&H78&)\\t(1160,1320,\\alpha&HFF&)\\p1}m 339 1028 l 741 1028 741 1317 339 1317"
+    },
+    {
+     "start": 0,
+     "end": 1.32,
+     "layer": 5,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(1160,1320,\\alpha&HFF&)\\p1}m 338 1027 l 742 1027 742 1318 338 1318 m 341 1030 l 341 1315 739 1315 739 1030"
+    },
+    {
+     "start": 0,
+     "end": 1.32,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(1160,1320,\\alpha&HFF&)\\p1}m 338.8 1018.7 b 343.8 1018.7 347.8 1022.7 347.8 1027.7 b 347.8 1032.7 343.8 1036.7 338.8 1036.7 b 333.8 1036.7 329.8 1032.7 329.8 1027.7 b 329.8 1022.7 333.8 1018.7 338.8 1018.7"
+    },
+    {
+     "start": 0,
+     "end": 1.32,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(1160,1320,\\alpha&HFF&)\\p1}m 540.0 1018.7 b 545.0 1018.7 549.0 1022.7 549.0 1027.7 b 549.0 1032.7 545.0 1036.7 540.0 1036.7 b 535.0 1036.7 531.0 1032.7 531.0 1027.7 b 531.0 1022.7 535.0 1018.7 540.0 1018.7"
+    },
+    {
+     "start": 0,
+     "end": 1.32,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(1160,1320,\\alpha&HFF&)\\p1}m 741.2 1018.7 b 746.2 1018.7 750.2 1022.7 750.2 1027.7 b 750.2 1032.7 746.2 1036.7 741.2 1036.7 b 736.2 1036.7 732.2 1032.7 732.2 1027.7 b 732.2 1022.7 736.2 1018.7 741.2 1018.7"
+    },
+    {
+     "start": 0,
+     "end": 1.32,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(1160,1320,\\alpha&HFF&)\\p1}m 338.8 1307.8 b 343.8 1307.8 347.8 1311.8 347.8 1316.8 b 347.8 1321.7 343.8 1325.8 338.8 1325.8 b 333.8 1325.8 329.8 1321.7 329.8 1316.8 b 329.8 1311.8 333.8 1307.8 338.8 1307.8"
+    },
+    {
+     "start": 0,
+     "end": 1.32,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(1160,1320,\\alpha&HFF&)\\p1}m 540.0 1307.8 b 545.0 1307.8 549.0 1311.8 549.0 1316.8 b 549.0 1321.7 545.0 1325.8 540.0 1325.8 b 535.0 1325.8 531.0 1321.7 531.0 1316.8 b 531.0 1311.8 535.0 1307.8 540.0 1307.8"
+    },
+    {
+     "start": 0,
+     "end": 1.32,
+     "layer": 6,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,160,\\alpha&H00&)\\t(1160,1320,\\alpha&HFF&)\\p1}m 741.2 1307.8 b 746.2 1307.8 750.2 1311.8 750.2 1316.8 b 750.2 1321.7 746.2 1325.8 741.2 1325.8 b 736.2 1325.8 732.2 1321.7 732.2 1316.8 b 732.2 1311.8 736.2 1307.8 741.2 1307.8"
+    },
+    {
+     "start": 0.04,
+     "end": 1.32,
+     "layer": 7,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1088,540,1078,0,240)\\blur10\\bord4\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H68&)\\t(1130,1280,\\alpha&HFF&)}So the same"
+    },
+    {
+     "start": 0.04,
+     "end": 1.32,
+     "layer": 8,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1088,540,1078,0,240)\\blur4\\alpha&HFF&\\t(0,200,\\blur0\\alpha&H00&)\\t(1130,1280,\\alpha&HFF&)}So the same"
+    },
+    {
+     "start": 0.56,
+     "end": 1.32,
+     "layer": 6,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur24\\bord12\\3c&H000000&\\alpha&HFF&\\t(0,150,\\alpha&H88&)\\t(600,760,\\alpha&HFF&)}video"
+    },
+    {
+     "start": 0.56,
+     "end": 1.32,
+     "layer": 7,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur26\\bord10\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H58&)\\t(600,760,\\alpha&HFF&)}video"
+    },
+    {
+     "start": 0.56,
+     "end": 1.32,
+     "layer": 8,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur3\\bord2\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H00&)\\t(600,760,\\alpha&HFF&)}video"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 7.995,
+   "name": "ve-swish.wav",
+   "volume": 0.13
+  },
+  {
+   "type": "ass",
+   "at": 9.267,
+   "dur": 0.94,
+   "layers": [
+    {
+     "start": 0.04,
+     "end": 0.94,
+     "layer": 6,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur24\\bord12\\3c&H000000&\\alpha&HFF&\\t(0,150,\\alpha&H88&)\\t(740,900,\\alpha&HFF&)}edited"
+    },
+    {
+     "start": 0.04,
+     "end": 0.94,
+     "layer": 7,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur26\\bord10\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H58&)\\t(740,900,\\alpha&HFF&)}edited"
+    },
+    {
+     "start": 0.04,
+     "end": 0.94,
+     "layer": 8,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur3\\bord2\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H00&)\\t(740,900,\\alpha&HFF&)}edited"
+    },
+    {
+     "start": 0.26,
+     "end": 0.94,
+     "layer": 7,
+     "font": "ve-inter-regular",
+     "size": 52,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1281,540,1271,0,240)\\blur10\\bord4\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H68&)\\t(530,680,\\alpha&HFF&)}right"
+    },
+    {
+     "start": 0.26,
+     "end": 0.94,
+     "layer": 8,
+     "font": "ve-inter-regular",
+     "size": 52,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1281,540,1271,0,240)\\blur4\\alpha&HFF&\\t(0,200,\\blur0\\alpha&H00&)\\t(530,680,\\alpha&HFF&)}right"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 9.275,
+   "name": "ve-swish.wav",
+   "volume": 0.13
+  },
+  {
+   "type": "ass",
+   "at": 11.713,
+   "dur": 0.53,
+   "layers": [
+    {
+     "start": 0.04,
+     "end": 0.53,
+     "layer": 7,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1088,540,1078,0,240)\\blur10\\bord4\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H68&)\\t(340,490,\\alpha&HFF&)}Let me"
+    },
+    {
+     "start": 0.04,
+     "end": 0.53,
+     "layer": 8,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1088,540,1078,0,240)\\blur4\\alpha&HFF&\\t(0,200,\\blur0\\alpha&H00&)\\t(340,490,\\alpha&HFF&)}Let me"
+    },
+    {
+     "start": 0.32,
+     "end": 0.53,
+     "layer": 6,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur24\\bord12\\3c&H000000&\\alpha&HFF&\\t(0,150,\\alpha&H88&)\\t(50,210,\\alpha&HFF&)}show"
+    },
+    {
+     "start": 0.32,
+     "end": 0.53,
+     "layer": 7,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur26\\bord10\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H58&)\\t(50,210,\\alpha&HFF&)}show"
+    },
+    {
+     "start": 0.32,
+     "end": 0.53,
+     "layer": 8,
+     "font": "instrument-serif-italic",
+     "size": 165,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1180)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur3\\bord2\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H00&)\\t(50,210,\\alpha&HFF&)}show"
+    },
+    {
+     "start": 0.48,
+     "end": 0.53,
+     "layer": 7,
+     "font": "ve-inter-regular",
+     "size": 52,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1281,540,1271,0,240)\\blur10\\bord4\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H68&)\\t(-100,50,\\alpha&HFF&)}you"
+    },
+    {
+     "start": 0.48,
+     "end": 0.53,
+     "layer": 8,
+     "font": "ve-inter-regular",
+     "size": 52,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1281,540,1271,0,240)\\blur4\\alpha&HFF&\\t(0,200,\\blur0\\alpha&H00&)\\t(-100,50,\\alpha&HFF&)}you"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 11.721,
+   "name": "ve-swish.wav",
+   "volume": 0.13
+  },
+  {
+   "type": "zoom",
+   "at": 0,
+   "dur": 0.6,
+   "style": "punch",
+   "amount": 1.12
+  },
+  {
+   "type": "sfx",
+   "at": 0.0,
+   "name": "ve-whoosh-air.wav",
+   "volume": 0.3
+  },
+  {
+   "type": "ass",
+   "at": 1.0,
+   "dur": 0.78,
+   "layers": [
+    {
+     "start": 0,
+     "end": 0.78,
+     "layer": 2,
+     "shape": true,
+     "color": "#040503",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,120,\\alpha&H00&)\\t(660,780,\\alpha&HFF&)\\p1}m -10 -10 l 1090 -10 1090 1930 -10 1930"
+    },
+    {
+     "start": 0,
+     "end": 0.78,
+     "layer": 3,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,150,\\alpha&H50&)\\p1}m 257.0 1042.7 b 258.2 1042.7 259.2 1043.7 259.2 1044.9 b 259.2 1046.1 258.2 1047.1 257.0 1047.1 b 255.8 1047.1 254.8 1046.1 254.8 1044.9 b 254.8 1043.7 255.8 1042.7 257.0 1042.7 m 989.2 909.0 b 989.9 909.0 990.4 909.5 990.4 910.2 b 990.4 910.8 989.9 911.4 989.2 911.4 b 988.6 911.4 988.0 910.8 988.0 910.2 b 988.0 909.5 988.6 909.0 989.2 909.0 m 654.0 1741.9 b 655.7 1741.9 657.0 1743.3 657.0 1744.9 b 657.0 1746.6 655.7 1747.9 654.0 1747.9 b 652.4 1747.9 651.0 1746.6 651.0 1744.9 b 651.0 1743.3 652.4 1741.9 654.0 1741.9 m 280.1 446.9 b 281.8 446.9 283.1 448.3 283.1 449.9 b 283.1 451.6 281.8 452.9 280.1 452.9 b 278.4 452.9 277.1 451.6 277.1 449.9 b 277.1 448.3 278.4 446.9 280.1 446.9 m 584.3 1052.3 b 585.9 1052.3 587.3 1053.6 587.3 1055.3 b 587.3 1056.9 585.9 1058.3 584.3 1058.3 b 582.6 1058.3 581.3 1056.9 581.3 1055.3 b 581.3 1053.6 582.6 1052.3 584.3 1052.3 m 690.2 287.6 b 691.1 287.6 691.8 288.3 691.8 289.2 b 691.8 290.1 691.1 290.8 690.2 290.8 b 689.3 290.8 688.6 290.1 688.6 289.2 b 688.6 288.3 689.3 287.6 690.2 287.6 m 937.5 1003.3 b 938.2 1003.3 938.7 1003.8 938.7 1004.5 b 938.7 1005.2 938.2 1005.7 937.5 1005.7 b 936.8 1005.7 936.3 1005.2 936.3 1004.5 b 936.3 1003.8 936.8 1003.3 937.5 1003.3 m 725.1 121.7 b 725.8 121.7 726.3 122.3 726.3 122.9 b 726.3 123.6 725.8 124.1 725.1 124.1 b 724.5 124.1 723.9 123.6 723.9 122.9 b 723.9 122.3 724.5 121.7 725.1 121.7 m 325.4 57.3 b 326.6 57.3 327.6 58.3 327.6 59.5 b 327.6 60.8 326.6 61.7 325.4 61.7 b 324.2 61.7 323.2 60.8 323.2 59.5 b 323.2 58.3 324.2 57.3 325.4 57.3 m 510.6 1377.1 b 512.2 1377.1 513.6 1378.5 513.6 1380.1 b 513.6 1381.8 512.2 1383.1 510.6 1383.1 b 508.9 1383.1 507.6 1381.8 507.6 1380.1 b 507.6 1378.5 508.9 1377.1 510.6 1377.1 m 771.3 1765.5 b 772.9 1765.5 774.3 1766.9 774.3 1768.5 b 774.3 1770.2 772.9 1771.5 771.3 1771.5 b 769.6 1771.5 768.3 1770.2 768.3 1768.5 b 768.3 1766.9 769.6 1765.5 771.3 1765.5 m 786.4 1106.1 b 787.3 1106.1 788.0 1106.8 788.0 1107.7 b 788.0 1108.6 787.3 1109.3 786.4 1109.3 b 785.5 1109.3 784.8 1108.6 784.8 1107.7 b 784.8 1106.8 785.5 1106.1 786.4 1106.1 m 949.2 185.5 b 950.1 185.5 950.8 186.2 950.8 187.1 b 950.8 188.0 950.1 188.7 949.2 188.7 b 948.3 188.7 947.6 188.0 947.6 187.1 b 947.6 186.2 948.3 185.5 949.2 185.5 m 534.5 492.3 b 536.1 492.3 537.5 493.7 537.5 495.3 b 537.5 497.0 536.1 498.3 534.5 498.3 b 532.8 498.3 531.5 497.0 531.5 495.3 b 531.5 493.7 532.8 492.3 534.5 492.3 m 841.3 1639.0 b 842.9 1639.0 844.3 1640.4 844.3 1642.0 b 844.3 1643.7 842.9 1645.0 841.3 1645.0 b 839.6 1645.0 838.3 1643.7 838.3 1642.0 b 838.3 1640.4 839.6 1639.0 841.3 1639.0 m 547.8 738.7 b 549.0 738.7 550.0 739.6 550.0 740.9 b 550.0 742.1 549.0 743.1 547.8 743.1 b 546.6 743.1 545.6 742.1 545.6 740.9 b 545.6 739.6 546.6 738.7 547.8 738.7 m 576.8 780.9 b 577.7 780.9 578.4 781.7 578.4 782.5 b 578.4 783.4 577.7 784.1 576.8 784.1 b 575.9 784.1 575.2 783.4 575.2 782.5 b 575.2 781.7 575.9 780.9 576.8 780.9 m 976.5 1308.2 b 977.2 1308.2 977.7 1308.7 977.7 1309.4 b 977.7 1310.1 977.2 1310.6 976.5 1310.6 b 975.9 1310.6 975.3 1310.1 975.3 1309.4 b 975.3 1308.7 975.9 1308.2 976.5 1308.2 m 924.9 1901.1 b 925.8 1901.1 926.5 1901.8 926.5 1902.7 b 926.5 1903.6 925.8 1904.3 924.9 1904.3 b 924.0 1904.3 923.3 1903.6 923.3 1902.7 b 923.3 1901.8 924.0 1901.1 924.9 1901.1 m 754.5 625.5 b 755.2 625.5 755.7 626.0 755.7 626.7 b 755.7 627.3 755.2 627.9 754.5 627.9 b 753.8 627.9 753.3 627.3 753.3 626.7 b 753.3 626.0 753.8 625.5 754.5 625.5 m 770.9 403.2 b 772.1 403.2 773.1 404.1 773.1 405.4 b 773.1 406.6 772.1 407.6 770.9 407.6 b 769.7 407.6 768.7 406.6 768.7 405.4 b 768.7 404.1 769.7 403.2 770.9 403.2 m 307.8 118.8 b 309.4 118.8 310.8 120.2 310.8 121.8 b 310.8 123.5 309.4 124.8 307.8 124.8 b 306.1 124.8 304.8 123.5 304.8 121.8 b 304.8 120.2 306.1 118.8 307.8 118.8 m 95.6 1534.1 b 97.3 1534.1 98.6 1535.5 98.6 1537.1 b 98.6 1538.8 97.3 1540.1 95.6 1540.1 b 93.9 1540.1 92.6 1538.8 92.6 1537.1 b 92.6 1535.5 93.9 1534.1 95.6 1534.1 m 968.9 35.6 b 970.5 35.6 971.9 37.0 971.9 38.6 b 971.9 40.3 970.5 41.6 968.9 41.6 b 967.2 41.6 965.9 40.3 965.9 38.6 b 965.9 37.0 967.2 35.6 968.9 35.6 m 830.3 1674.5 b 831.0 1674.5 831.5 1675.0 831.5 1675.7 b 831.5 1676.4 831.0 1676.9 830.3 1676.9 b 829.6 1676.9 829.1 1676.4 829.1 1675.7 b 829.1 1675.0 829.6 1674.5 830.3 1674.5 m 653.4 1459.3 b 655.0 1459.3 656.4 1460.7 656.4 1462.3 b 656.4 1464.0 655.0 1465.3 653.4 1465.3 b 651.7 1465.3 650.4 1464.0 650.4 1462.3 b 650.4 1460.7 651.7 1459.3 653.4 1459.3 m 775.9 633.2 b 777.1 633.2 778.1 634.2 778.1 635.4 b 778.1 636.6 777.1 637.6 775.9 637.6 b 774.7 637.6 773.7 636.6 773.7 635.4 b 773.7 634.2 774.7 633.2 775.9 633.2 m 545.9 1914.9 b 547.1 1914.9 548.1 1915.9 548.1 1917.1 b 548.1 1918.4 547.1 1919.3 545.9 1919.3 b 544.6 1919.3 543.7 1918.4 543.7 1917.1 b 543.7 1915.9 544.6 1914.9 545.9 1914.9 m 7.8 206.4 b 8.5 206.4 9.0 206.9 9.0 207.6 b 9.0 208.3 8.5 208.8 7.8 208.8 b 7.1 208.8 6.6 208.3 6.6 207.6 b 6.6 206.9 7.1 206.4 7.8 206.4 m 1024.8 1862.9 b 1026.0 1862.9 1027.0 1863.9 1027.0 1865.1 b 1027.0 1866.4 1026.0 1867.3 1024.8 1867.3 b 1023.6 1867.3 1022.6 1866.4 1022.6 1865.1 b 1022.6 1863.9 1023.6 1862.9 1024.8 1862.9 m 659.3 298.7 b 660.0 298.7 660.5 299.2 660.5 299.9 b 660.5 300.6 660.0 301.1 659.3 301.1 b 658.6 301.1 658.1 300.6 658.1 299.9 b 658.1 299.2 658.6 298.7 659.3 298.7 m 1058.3 650.2 b 1059.5 650.2 1060.5 651.2 1060.5 652.4 b 1060.5 653.7 1059.5 654.6 1058.3 654.6 b 1057.1 654.6 1056.1 653.7 1056.1 652.4 b 1056.1 651.2 1057.1 650.2 1058.3 650.2 m 1035.4 1718.6 b 1037.0 1718.6 1038.4 1719.9 1038.4 1721.6 b 1038.4 1723.2 1037.0 1724.6 1035.4 1724.6 b 1033.7 1724.6 1032.4 1723.2 1032.4 1721.6 b 1032.4 1719.9 1033.7 1718.6 1035.4 1718.6 m 406.9 1667.2 b 408.5 1667.2 409.9 1668.5 409.9 1670.2 b 409.9 1671.8 408.5 1673.2 406.9 1673.2 b 405.2 1673.2 403.9 1671.8 403.9 1670.2 b 403.9 1668.5 405.2 1667.2 406.9 1667.2 m 695.4 1142.4 b 696.1 1142.4 696.6 1143.0 696.6 1143.6 b 696.6 1144.3 696.1 1144.8 695.4 1144.8 b 694.7 1144.8 694.2 1144.3 694.2 1143.6 b 694.2 1143.0 694.7 1142.4 695.4 1142.4 m 669.7 1803.8 b 671.0 1803.8 671.9 1804.8 671.9 1806.0 b 671.9 1807.2 671.0 1808.2 669.7 1808.2 b 668.5 1808.2 667.5 1807.2 667.5 1806.0 b 667.5 1804.8 668.5 1803.8 669.7 1803.8 m 465.7 1381.4 b 466.6 1381.4 467.3 1382.1 467.3 1383.0 b 467.3 1383.9 466.6 1384.6 465.7 1384.6 b 464.8 1384.6 464.1 1383.9 464.1 1383.0 b 464.1 1382.1 464.8 1381.4 465.7 1381.4 m 1011.4 837.7 b 1012.6 837.7 1013.6 838.7 1013.6 839.9 b 1013.6 841.1 1012.6 842.1 1011.4 842.1 b 1010.1 842.1 1009.2 841.1 1009.2 839.9 b 1009.2 838.7 1010.1 837.7 1011.4 837.7 m 562.8 1051.8 b 563.5 1051.8 564.0 1052.3 564.0 1053.0 b 564.0 1053.6 563.5 1054.2 562.8 1054.2 b 562.2 1054.2 561.6 1053.6 561.6 1053.0 b 561.6 1052.3 562.2 1051.8 562.8 1051.8 m 851.5 1893.7 b 852.7 1893.7 853.7 1894.7 853.7 1895.9 b 853.7 1897.1 852.7 1898.1 851.5 1898.1 b 850.3 1898.1 849.3 1897.1 849.3 1895.9 b 849.3 1894.7 850.3 1893.7 851.5 1893.7 m 21.7 1180.7 b 22.5 1180.7 23.3 1181.4 23.3 1182.3 b 23.3 1183.2 22.5 1183.9 21.7 1183.9 b 20.8 1183.9 20.1 1183.2 20.1 1182.3 b 20.1 1181.4 20.8 1180.7 21.7 1180.7 m 64.9 1201.5 b 66.5 1201.5 67.9 1202.8 67.9 1204.5 b 67.9 1206.2 66.5 1207.5 64.9 1207.5 b 63.2 1207.5 61.9 1206.2 61.9 1204.5 b 61.9 1202.8 63.2 1201.5 64.9 1201.5 m 381.1 1759.1 b 382.4 1759.1 383.3 1760.1 383.3 1761.3 b 383.3 1762.5 382.4 1763.5 381.1 1763.5 b 379.9 1763.5 378.9 1762.5 378.9 1761.3 b 378.9 1760.1 379.9 1759.1 381.1 1759.1 m 797.1 41.4 b 797.7 41.4 798.3 41.9 798.3 42.6 b 798.3 43.3 797.7 43.8 797.1 43.8 b 796.4 43.8 795.9 43.3 795.9 42.6 b 795.9 41.9 796.4 41.4 797.1 41.4 m 1031.2 38.6 b 1032.4 38.6 1033.4 39.6 1033.4 40.8 b 1033.4 42.0 1032.4 43.0 1031.2 43.0 b 1030.0 43.0 1029.0 42.0 1029.0 40.8 b 1029.0 39.6 1030.0 38.6 1031.2 38.6 m 271.2 873.9 b 272.4 873.9 273.4 874.9 273.4 876.1 b 273.4 877.3 272.4 878.3 271.2 878.3 b 270.0 878.3 269.0 877.3 269.0 876.1 b 269.0 874.9 270.0 873.9 271.2 873.9 m 191.6 353.5 b 192.8 353.5 193.8 354.5 193.8 355.7 b 193.8 356.9 192.8 357.9 191.6 357.9 b 190.4 357.9 189.4 356.9 189.4 355.7 b 189.4 354.5 190.4 353.5 191.6 353.5 m 911.3 504.1 b 913.0 504.1 914.3 505.5 914.3 507.1 b 914.3 508.8 913.0 510.1 911.3 510.1 b 909.7 510.1 908.3 508.8 908.3 507.1 b 908.3 505.5 909.7 504.1 911.3 504.1 m 113.3 1559.5 b 114.1 1559.5 114.9 1560.2 114.9 1561.1 b 114.9 1562.0 114.1 1562.7 113.3 1562.7 b 112.4 1562.7 111.7 1562.0 111.7 1561.1 b 111.7 1560.2 112.4 1559.5 113.3 1559.5 m 334.8 425.1 b 336.0 425.1 337.0 426.1 337.0 427.3 b 337.0 428.5 336.0 429.5 334.8 429.5 b 333.6 429.5 332.6 428.5 332.6 427.3 b 332.6 426.1 333.6 425.1 334.8 425.1 m 257.8 356.8 b 259.4 356.8 260.8 358.1 260.8 359.8 b 260.8 361.5 259.4 362.8 257.8 362.8 b 256.1 362.8 254.8 361.5 254.8 359.8 b 254.8 358.1 256.1 356.8 257.8 356.8 m 701.5 184.1 b 702.7 184.1 703.7 185.1 703.7 186.3 b 703.7 187.5 702.7 188.5 701.5 188.5 b 700.3 188.5 699.3 187.5 699.3 186.3 b 699.3 185.1 700.3 184.1 701.5 184.1 m 1025.1 1294.3 b 1026.0 1294.3 1026.7 1295.0 1026.7 1295.9 b 1026.7 1296.7 1026.0 1297.5 1025.1 1297.5 b 1024.2 1297.5 1023.5 1296.7 1023.5 1295.9 b 1023.5 1295.0 1024.2 1294.3 1025.1 1294.3 m 473.5 1641.0 b 474.4 1641.0 475.1 1641.7 475.1 1642.6 b 475.1 1643.5 474.4 1644.2 473.5 1644.2 b 472.6 1644.2 471.9 1643.5 471.9 1642.6 b 471.9 1641.7 472.6 1641.0 473.5 1641.0 m 86.3 1423.2 b 87.2 1423.2 87.9 1423.9 87.9 1424.8 b 87.9 1425.7 87.2 1426.4 86.3 1426.4 b 85.5 1426.4 84.7 1425.7 84.7 1424.8 b 84.7 1423.9 85.5 1423.2 86.3 1423.2 m 955.7 864.5 b 956.6 864.5 957.3 865.2 957.3 866.1 b 957.3 867.0 956.6 867.7 955.7 867.7 b 954.8 867.7 954.1 867.0 954.1 866.1 b 954.1 865.2 954.8 864.5 955.7 864.5 m 850.0 63.5 b 850.9 63.5 851.6 64.2 851.6 65.1 b 851.6 66.0 850.9 66.7 850.0 66.7 b 849.1 66.7 848.4 66.0 848.4 65.1 b 848.4 64.2 849.1 63.5 850.0 63.5 m 340.4 1603.9 b 341.2 1603.9 342.0 1604.6 342.0 1605.5 b 342.0 1606.4 341.2 1607.1 340.4 1607.1 b 339.5 1607.1 338.8 1606.4 338.8 1605.5 b 338.8 1604.6 339.5 1603.9 340.4 1603.9 m 932.8 651.8 b 933.5 651.8 934.0 652.3 934.0 653.0 b 934.0 653.7 933.5 654.2 932.8 654.2 b 932.2 654.2 931.6 653.7 931.6 653.0 b 931.6 652.3 932.2 651.8 932.8 651.8 m 870.8 661.3 b 871.6 661.3 872.4 662.1 872.4 662.9 b 872.4 663.8 871.6 664.5 870.8 664.5 b 869.9 664.5 869.2 663.8 869.2 662.9 b 869.2 662.1 869.9 661.3 870.8 661.3 m 455.0 993.1 b 456.2 993.1 457.2 994.1 457.2 995.3 b 457.2 996.5 456.2 997.5 455.0 997.5 b 453.8 997.5 452.8 996.5 452.8 995.3 b 452.8 994.1 453.8 993.1 455.0 993.1 m 501.9 1215.4 b 503.1 1215.4 504.1 1216.4 504.1 1217.6 b 504.1 1218.8 503.1 1219.8 501.9 1219.8 b 500.7 1219.8 499.7 1218.8 499.7 1217.6 b 499.7 1216.4 500.7 1215.4 501.9 1215.4 m 453.4 783.3 b 455.0 783.3 456.4 784.6 456.4 786.3 b 456.4 787.9 455.0 789.3 453.4 789.3 b 451.7 789.3 450.4 787.9 450.4 786.3 b 450.4 784.6 451.7 783.3 453.4 783.3 m 168.5 6.0 b 170.1 6.0 171.5 7.3 171.5 9.0 b 171.5 10.6 170.1 12.0 168.5 12.0 b 166.8 12.0 165.5 10.6 165.5 9.0 b 165.5 7.3 166.8 6.0 168.5 6.0 m 603.6 1891.1 b 604.5 1891.1 605.2 1891.8 605.2 1892.7 b 605.2 1893.5 604.5 1894.3 603.6 1894.3 b 602.7 1894.3 602.0 1893.5 602.0 1892.7 b 602.0 1891.8 602.7 1891.1 603.6 1891.1 m 34.9 874.6 b 36.1 874.6 37.1 875.6 37.1 876.8 b 37.1 878.0 36.1 879.0 34.9 879.0 b 33.7 879.0 32.7 878.0 32.7 876.8 b 32.7 875.6 33.7 874.6 34.9 874.6 m 587.4 1707.0 b 588.0 1707.0 588.6 1707.6 588.6 1708.2 b 588.6 1708.9 588.0 1709.4 587.4 1709.4 b 586.7 1709.4 586.2 1708.9 586.2 1708.2 b 586.2 1707.6 586.7 1707.0 587.4 1707.0 m 926.6 1863.1 b 927.3 1863.1 927.8 1863.6 927.8 1864.3 b 927.8 1864.9 927.3 1865.5 926.6 1865.5 b 926.0 1865.5 925.4 1864.9 925.4 1864.3 b 925.4 1863.6 926.0 1863.1 926.6 1863.1 m 875.0 84.9 b 875.9 84.9 876.6 85.7 876.6 86.5 b 876.6 87.4 875.9 88.1 875.0 88.1 b 874.1 88.1 873.4 87.4 873.4 86.5 b 873.4 85.7 874.1 84.9 875.0 84.9 m 968.3 1726.2 b 969.0 1726.2 969.5 1726.7 969.5 1727.4 b 969.5 1728.0 969.0 1728.6 968.3 1728.6 b 967.6 1728.6 967.1 1728.0 967.1 1727.4 b 967.1 1726.7 967.6 1726.2 968.3 1726.2 m 14.2 1429.4 b 15.1 1429.4 15.8 1430.1 15.8 1431.0 b 15.8 1431.9 15.1 1432.6 14.2 1432.6 b 13.3 1432.6 12.6 1431.9 12.6 1431.0 b 12.6 1430.1 13.3 1429.4 14.2 1429.4 m 543.4 457.8 b 544.1 457.8 544.6 458.3 544.6 459.0 b 544.6 459.6 544.1 460.2 543.4 460.2 b 542.8 460.2 542.2 459.6 542.2 459.0 b 542.2 458.3 542.8 457.8 543.4 457.8 m 567.0 793.2 b 567.6 793.2 568.2 793.7 568.2 794.4 b 568.2 795.1 567.6 795.6 567.0 795.6 b 566.3 795.6 565.8 795.1 565.8 794.4 b 565.8 793.7 566.3 793.2 567.0 793.2 m 368.7 481.8 b 370.3 481.8 371.7 483.1 371.7 484.8 b 371.7 486.4 370.3 487.8 368.7 487.8 b 367.0 487.8 365.7 486.4 365.7 484.8 b 365.7 483.1 367.0 481.8 368.7 481.8 m 876.5 116.2 b 877.4 116.2 878.1 116.9 878.1 117.8 b 878.1 118.7 877.4 119.4 876.5 119.4 b 875.6 119.4 874.9 118.7 874.9 117.8 b 874.9 116.9 875.6 116.2 876.5 116.2 m 213.1 1025.3 b 213.8 1025.3 214.3 1025.8 214.3 1026.5 b 214.3 1027.2 213.8 1027.7 213.1 1027.7 b 212.5 1027.7 211.9 1027.2 211.9 1026.5 b 211.9 1025.8 212.5 1025.3 213.1 1025.3 m 185.0 1518.4 b 185.9 1518.4 186.6 1519.1 186.6 1520.0 b 186.6 1520.9 185.9 1521.6 185.0 1521.6 b 184.1 1521.6 183.4 1520.9 183.4 1520.0 b 183.4 1519.1 184.1 1518.4 185.0 1518.4 m 889.4 11.4 b 891.0 11.4 892.4 12.8 892.4 14.4 b 892.4 16.1 891.0 17.4 889.4 17.4 b 887.7 17.4 886.4 16.1 886.4 14.4 b 886.4 12.8 887.7 11.4 889.4 11.4 m 53.9 518.9 b 55.1 518.9 56.1 519.9 56.1 521.1 b 56.1 522.3 55.1 523.3 53.9 523.3 b 52.7 523.3 51.7 522.3 51.7 521.1 b 51.7 519.9 52.7 518.9 53.9 518.9 m 667.5 996.6 b 668.2 996.6 668.7 997.1 668.7 997.8 b 668.7 998.4 668.2 999.0 667.5 999.0 b 666.9 999.0 666.3 998.4 666.3 997.8 b 666.3 997.1 666.9 996.6 667.5 996.6"
+    },
+    {
+     "start": 0,
+     "end": 0.78,
+     "layer": 3,
+     "shape": true,
+     "color": "#9BE81A",
+     "text": "{\\an7\\pos(0,0)\\blur120\\alpha&HFF&\\t(0,300,\\alpha&H10&)\\p1}m 760.0 1340.0 b 1069.3 1340.0 1320.0 1590.7 1320.0 1900.0 b 1320.0 2209.3 1069.3 2460.0 760.0 2460.0 b 450.7 2460.0 200.0 2209.3 200.0 1900.0 b 200.0 1590.7 450.7 1340.0 760.0 1340.0"
+    },
+    {
+     "start": 0,
+     "end": 0.78,
+     "layer": 3,
+     "shape": true,
+     "color": "#E9FF8A",
+     "text": "{\\an7\\pos(0,0)\\blur90\\alpha&HFF&\\t(0,300,\\alpha&H30&)\\p1}m 860.0 1630.0 b 1042.3 1630.0 1190.0 1777.7 1190.0 1960.0 b 1190.0 2142.3 1042.3 2290.0 860.0 2290.0 b 677.7 2290.0 530.0 2142.3 530.0 1960.0 b 530.0 1777.7 677.7 1630.0 860.0 1630.0"
+    },
+    {
+     "start": 0,
+     "end": 0.78,
+     "layer": 3,
+     "shape": true,
+     "color": "#000000",
+     "text": "{\\an7\\pos(10,30)\\org(120,140)\\fscx100\\fscy100\\frz0\\t(0,780,\\frz-120)\\blur18\\alpha&H60&\\p1}m 198.0 110.0 l 219.1 124.4 216.3 138.5 191.3 143.7 186.2 154.0 197.3 177.0 187.8 187.8 163.6 179.8 154.0 186.2 152.1 211.6 138.5 216.3 121.5 197.2 110.0 198.0 95.6 219.1 81.5 216.3 76.3 191.3 66.0 186.2 43.0 197.3 32.2 187.8 40.2 163.6 33.8 154.0 8.4 152.1 3.7 138.5 22.8 121.5 22.0 110.0 0.9 95.6 3.7 81.5 28.7 76.3 33.8 66.0 22.7 43.0 32.2 32.2 56.4 40.2 66.0 33.8 67.9 8.4 81.5 3.7 98.5 22.8 110.0 22.0 124.4 0.9 138.5 3.7 143.7 28.7 154.0 33.8 177.0 22.7 187.8 32.2 179.8 56.4 186.2 66.0 211.6 67.9 216.3 81.5 197.2 98.5 m 110.0 75.0 b 90.7 75.0 75.0 90.7 75.0 110.0 b 75.0 129.3 90.7 145.0 110.0 145.0 b 129.3 145.0 145.0 129.3 145.0 110.0 b 145.0 90.7 129.3 75.0 110.0 75.0"
+    },
+    {
+     "start": 0,
+     "end": 0.78,
+     "layer": 4,
+     "shape": true,
+     "color": "#8E9296",
+     "text": "{\\an7\\pos(10,30)\\org(120,140)\\fscx100\\fscy100\\frz0\\t(0,780,\\frz-120)\\bord3\\3c&HE8E4E0&\\blur1\\p1}m 198.0 110.0 l 219.1 124.4 216.3 138.5 191.3 143.7 186.2 154.0 197.3 177.0 187.8 187.8 163.6 179.8 154.0 186.2 152.1 211.6 138.5 216.3 121.5 197.2 110.0 198.0 95.6 219.1 81.5 216.3 76.3 191.3 66.0 186.2 43.0 197.3 32.2 187.8 40.2 163.6 33.8 154.0 8.4 152.1 3.7 138.5 22.8 121.5 22.0 110.0 0.9 95.6 3.7 81.5 28.7 76.3 33.8 66.0 22.7 43.0 32.2 32.2 56.4 40.2 66.0 33.8 67.9 8.4 81.5 3.7 98.5 22.8 110.0 22.0 124.4 0.9 138.5 3.7 143.7 28.7 154.0 33.8 177.0 22.7 187.8 32.2 179.8 56.4 186.2 66.0 211.6 67.9 216.3 81.5 197.2 98.5 m 110.0 75.0 b 90.7 75.0 75.0 90.7 75.0 110.0 b 75.0 129.3 90.7 145.0 110.0 145.0 b 129.3 145.0 145.0 129.3 145.0 110.0 b 145.0 90.7 129.3 75.0 110.0 75.0"
+    },
+    {
+     "start": 0,
+     "end": 0.78,
+     "layer": 5,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(10,30)\\org(120,140)\\fscx100\\fscy100\\frz0\\t(0,780,\\frz-120)\\blur10\\alpha&H90&\\p1}m 170.0 92.0 l 186.3 102.1 184.4 111.9 165.4 115.0 162.0 122.0 171.1 138.9 164.4 146.4 146.5 139.6 140.0 144.0 139.5 163.1 129.9 166.4 117.8 151.5 110.0 152.0 99.9 168.3 90.1 166.4 87.0 147.4 80.0 144.0 63.1 153.1 55.6 146.4 62.4 128.5 58.0 122.0 38.9 121.5 35.6 111.9 50.5 99.8 50.0 92.0 33.7 81.9 35.6 72.1 54.6 69.0 58.0 62.0 48.9 45.1 55.6 37.6 73.5 44.4 80.0 40.0 80.5 20.9 90.1 17.6 102.2 32.5 110.0 32.0 120.1 15.7 129.9 17.6 133.0 36.6 140.0 40.0 156.9 30.9 164.4 37.6 157.6 55.5 162.0 62.0 181.1 62.5 184.4 72.1 169.5 84.2 m 110.0 57.0 b 90.7 57.0 75.0 72.7 75.0 92.0 b 75.0 111.3 90.7 127.0 110.0 127.0 b 129.3 127.0 145.0 111.3 145.0 92.0 b 145.0 72.7 129.3 57.0 110.0 57.0"
+    },
+    {
+     "start": 0,
+     "end": 0.78,
+     "layer": 3,
+     "shape": true,
+     "color": "#000000",
+     "text": "{\\an7\\pos(812,1502)\\org(950,1640)\\fscx125\\fscy125\\frz0\\t(0,780,\\frz90)\\blur18\\alpha&H60&\\p1}m 198.0 110.0 l 219.1 124.4 216.3 138.5 191.3 143.7 186.2 154.0 197.3 177.0 187.8 187.8 163.6 179.8 154.0 186.2 152.1 211.6 138.5 216.3 121.5 197.2 110.0 198.0 95.6 219.1 81.5 216.3 76.3 191.3 66.0 186.2 43.0 197.3 32.2 187.8 40.2 163.6 33.8 154.0 8.4 152.1 3.7 138.5 22.8 121.5 22.0 110.0 0.9 95.6 3.7 81.5 28.7 76.3 33.8 66.0 22.7 43.0 32.2 32.2 56.4 40.2 66.0 33.8 67.9 8.4 81.5 3.7 98.5 22.8 110.0 22.0 124.4 0.9 138.5 3.7 143.7 28.7 154.0 33.8 177.0 22.7 187.8 32.2 179.8 56.4 186.2 66.0 211.6 67.9 216.3 81.5 197.2 98.5 m 110.0 75.0 b 90.7 75.0 75.0 90.7 75.0 110.0 b 75.0 129.3 90.7 145.0 110.0 145.0 b 129.3 145.0 145.0 129.3 145.0 110.0 b 145.0 90.7 129.3 75.0 110.0 75.0"
+    },
+    {
+     "start": 0,
+     "end": 0.78,
+     "layer": 4,
+     "shape": true,
+     "color": "#8E9296",
+     "text": "{\\an7\\pos(812,1502)\\org(950,1640)\\fscx125\\fscy125\\frz0\\t(0,780,\\frz90)\\bord3\\3c&HE8E4E0&\\blur1\\p1}m 198.0 110.0 l 219.1 124.4 216.3 138.5 191.3 143.7 186.2 154.0 197.3 177.0 187.8 187.8 163.6 179.8 154.0 186.2 152.1 211.6 138.5 216.3 121.5 197.2 110.0 198.0 95.6 219.1 81.5 216.3 76.3 191.3 66.0 186.2 43.0 197.3 32.2 187.8 40.2 163.6 33.8 154.0 8.4 152.1 3.7 138.5 22.8 121.5 22.0 110.0 0.9 95.6 3.7 81.5 28.7 76.3 33.8 66.0 22.7 43.0 32.2 32.2 56.4 40.2 66.0 33.8 67.9 8.4 81.5 3.7 98.5 22.8 110.0 22.0 124.4 0.9 138.5 3.7 143.7 28.7 154.0 33.8 177.0 22.7 187.8 32.2 179.8 56.4 186.2 66.0 211.6 67.9 216.3 81.5 197.2 98.5 m 110.0 75.0 b 90.7 75.0 75.0 90.7 75.0 110.0 b 75.0 129.3 90.7 145.0 110.0 145.0 b 129.3 145.0 145.0 129.3 145.0 110.0 b 145.0 90.7 129.3 75.0 110.0 75.0"
+    },
+    {
+     "start": 0,
+     "end": 0.78,
+     "layer": 5,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(812,1502)\\org(950,1640)\\fscx125\\fscy125\\frz0\\t(0,780,\\frz90)\\blur10\\alpha&H90&\\p1}m 170.0 92.0 l 186.3 102.1 184.4 111.9 165.4 115.0 162.0 122.0 171.1 138.9 164.4 146.4 146.5 139.6 140.0 144.0 139.5 163.1 129.9 166.4 117.8 151.5 110.0 152.0 99.9 168.3 90.1 166.4 87.0 147.4 80.0 144.0 63.1 153.1 55.6 146.4 62.4 128.5 58.0 122.0 38.9 121.5 35.6 111.9 50.5 99.8 50.0 92.0 33.7 81.9 35.6 72.1 54.6 69.0 58.0 62.0 48.9 45.1 55.6 37.6 73.5 44.4 80.0 40.0 80.5 20.9 90.1 17.6 102.2 32.5 110.0 32.0 120.1 15.7 129.9 17.6 133.0 36.6 140.0 40.0 156.9 30.9 164.4 37.6 157.6 55.5 162.0 62.0 181.1 62.5 184.4 72.1 169.5 84.2 m 110.0 57.0 b 90.7 57.0 75.0 72.7 75.0 92.0 b 75.0 111.3 90.7 127.0 110.0 127.0 b 129.3 127.0 145.0 111.3 145.0 92.0 b 145.0 72.7 129.3 57.0 110.0 57.0"
+    },
+    {
+     "start": 0,
+     "end": 0.78,
+     "layer": 3,
+     "shape": true,
+     "color": "#000000",
+     "text": "{\\an7\\pos(850,470)\\org(900,520)\\fscx45\\fscy45\\frz0\\t(0,780,\\frz-200)\\blur18\\alpha&H60&\\p1}m 198.0 110.0 l 219.1 124.4 216.3 138.5 191.3 143.7 186.2 154.0 197.3 177.0 187.8 187.8 163.6 179.8 154.0 186.2 152.1 211.6 138.5 216.3 121.5 197.2 110.0 198.0 95.6 219.1 81.5 216.3 76.3 191.3 66.0 186.2 43.0 197.3 32.2 187.8 40.2 163.6 33.8 154.0 8.4 152.1 3.7 138.5 22.8 121.5 22.0 110.0 0.9 95.6 3.7 81.5 28.7 76.3 33.8 66.0 22.7 43.0 32.2 32.2 56.4 40.2 66.0 33.8 67.9 8.4 81.5 3.7 98.5 22.8 110.0 22.0 124.4 0.9 138.5 3.7 143.7 28.7 154.0 33.8 177.0 22.7 187.8 32.2 179.8 56.4 186.2 66.0 211.6 67.9 216.3 81.5 197.2 98.5 m 110.0 75.0 b 90.7 75.0 75.0 90.7 75.0 110.0 b 75.0 129.3 90.7 145.0 110.0 145.0 b 129.3 145.0 145.0 129.3 145.0 110.0 b 145.0 90.7 129.3 75.0 110.0 75.0"
+    },
+    {
+     "start": 0,
+     "end": 0.78,
+     "layer": 4,
+     "shape": true,
+     "color": "#8E9296",
+     "text": "{\\an7\\pos(850,470)\\org(900,520)\\fscx45\\fscy45\\frz0\\t(0,780,\\frz-200)\\bord3\\3c&HE8E4E0&\\blur1\\p1}m 198.0 110.0 l 219.1 124.4 216.3 138.5 191.3 143.7 186.2 154.0 197.3 177.0 187.8 187.8 163.6 179.8 154.0 186.2 152.1 211.6 138.5 216.3 121.5 197.2 110.0 198.0 95.6 219.1 81.5 216.3 76.3 191.3 66.0 186.2 43.0 197.3 32.2 187.8 40.2 163.6 33.8 154.0 8.4 152.1 3.7 138.5 22.8 121.5 22.0 110.0 0.9 95.6 3.7 81.5 28.7 76.3 33.8 66.0 22.7 43.0 32.2 32.2 56.4 40.2 66.0 33.8 67.9 8.4 81.5 3.7 98.5 22.8 110.0 22.0 124.4 0.9 138.5 3.7 143.7 28.7 154.0 33.8 177.0 22.7 187.8 32.2 179.8 56.4 186.2 66.0 211.6 67.9 216.3 81.5 197.2 98.5 m 110.0 75.0 b 90.7 75.0 75.0 90.7 75.0 110.0 b 75.0 129.3 90.7 145.0 110.0 145.0 b 129.3 145.0 145.0 129.3 145.0 110.0 b 145.0 90.7 129.3 75.0 110.0 75.0"
+    },
+    {
+     "start": 0,
+     "end": 0.78,
+     "layer": 5,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(850,470)\\org(900,520)\\fscx45\\fscy45\\frz0\\t(0,780,\\frz-200)\\blur10\\alpha&H90&\\p1}m 170.0 92.0 l 186.3 102.1 184.4 111.9 165.4 115.0 162.0 122.0 171.1 138.9 164.4 146.4 146.5 139.6 140.0 144.0 139.5 163.1 129.9 166.4 117.8 151.5 110.0 152.0 99.9 168.3 90.1 166.4 87.0 147.4 80.0 144.0 63.1 153.1 55.6 146.4 62.4 128.5 58.0 122.0 38.9 121.5 35.6 111.9 50.5 99.8 50.0 92.0 33.7 81.9 35.6 72.1 54.6 69.0 58.0 62.0 48.9 45.1 55.6 37.6 73.5 44.4 80.0 40.0 80.5 20.9 90.1 17.6 102.2 32.5 110.0 32.0 120.1 15.7 129.9 17.6 133.0 36.6 140.0 40.0 156.9 30.9 164.4 37.6 157.6 55.5 162.0 62.0 181.1 62.5 184.4 72.1 169.5 84.2 m 110.0 57.0 b 90.7 57.0 75.0 72.7 75.0 92.0 b 75.0 111.3 90.7 127.0 110.0 127.0 b 129.3 127.0 145.0 111.3 145.0 92.0 b 145.0 72.7 129.3 57.0 110.0 57.0"
+    },
+    {
+     "start": 0,
+     "end": 0.78,
+     "layer": 3,
+     "shape": true,
+     "color": "#000000",
+     "text": "{\\an7\\pos(108,718)\\org(150,760)\\fscx38\\fscy38\\frz0\\t(0,780,\\frz160)\\blur18\\alpha&H60&\\p1}m 198.0 110.0 l 219.1 124.4 216.3 138.5 191.3 143.7 186.2 154.0 197.3 177.0 187.8 187.8 163.6 179.8 154.0 186.2 152.1 211.6 138.5 216.3 121.5 197.2 110.0 198.0 95.6 219.1 81.5 216.3 76.3 191.3 66.0 186.2 43.0 197.3 32.2 187.8 40.2 163.6 33.8 154.0 8.4 152.1 3.7 138.5 22.8 121.5 22.0 110.0 0.9 95.6 3.7 81.5 28.7 76.3 33.8 66.0 22.7 43.0 32.2 32.2 56.4 40.2 66.0 33.8 67.9 8.4 81.5 3.7 98.5 22.8 110.0 22.0 124.4 0.9 138.5 3.7 143.7 28.7 154.0 33.8 177.0 22.7 187.8 32.2 179.8 56.4 186.2 66.0 211.6 67.9 216.3 81.5 197.2 98.5 m 110.0 75.0 b 90.7 75.0 75.0 90.7 75.0 110.0 b 75.0 129.3 90.7 145.0 110.0 145.0 b 129.3 145.0 145.0 129.3 145.0 110.0 b 145.0 90.7 129.3 75.0 110.0 75.0"
+    },
+    {
+     "start": 0,
+     "end": 0.78,
+     "layer": 4,
+     "shape": true,
+     "color": "#8E9296",
+     "text": "{\\an7\\pos(108,718)\\org(150,760)\\fscx38\\fscy38\\frz0\\t(0,780,\\frz160)\\bord3\\3c&HE8E4E0&\\blur1\\p1}m 198.0 110.0 l 219.1 124.4 216.3 138.5 191.3 143.7 186.2 154.0 197.3 177.0 187.8 187.8 163.6 179.8 154.0 186.2 152.1 211.6 138.5 216.3 121.5 197.2 110.0 198.0 95.6 219.1 81.5 216.3 76.3 191.3 66.0 186.2 43.0 197.3 32.2 187.8 40.2 163.6 33.8 154.0 8.4 152.1 3.7 138.5 22.8 121.5 22.0 110.0 0.9 95.6 3.7 81.5 28.7 76.3 33.8 66.0 22.7 43.0 32.2 32.2 56.4 40.2 66.0 33.8 67.9 8.4 81.5 3.7 98.5 22.8 110.0 22.0 124.4 0.9 138.5 3.7 143.7 28.7 154.0 33.8 177.0 22.7 187.8 32.2 179.8 56.4 186.2 66.0 211.6 67.9 216.3 81.5 197.2 98.5 m 110.0 75.0 b 90.7 75.0 75.0 90.7 75.0 110.0 b 75.0 129.3 90.7 145.0 110.0 145.0 b 129.3 145.0 145.0 129.3 145.0 110.0 b 145.0 90.7 129.3 75.0 110.0 75.0"
+    },
+    {
+     "start": 0,
+     "end": 0.78,
+     "layer": 5,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(108,718)\\org(150,760)\\fscx38\\fscy38\\frz0\\t(0,780,\\frz160)\\blur10\\alpha&H90&\\p1}m 170.0 92.0 l 186.3 102.1 184.4 111.9 165.4 115.0 162.0 122.0 171.1 138.9 164.4 146.4 146.5 139.6 140.0 144.0 139.5 163.1 129.9 166.4 117.8 151.5 110.0 152.0 99.9 168.3 90.1 166.4 87.0 147.4 80.0 144.0 63.1 153.1 55.6 146.4 62.4 128.5 58.0 122.0 38.9 121.5 35.6 111.9 50.5 99.8 50.0 92.0 33.7 81.9 35.6 72.1 54.6 69.0 58.0 62.0 48.9 45.1 55.6 37.6 73.5 44.4 80.0 40.0 80.5 20.9 90.1 17.6 102.2 32.5 110.0 32.0 120.1 15.7 129.9 17.6 133.0 36.6 140.0 40.0 156.9 30.9 164.4 37.6 157.6 55.5 162.0 62.0 181.1 62.5 184.4 72.1 169.5 84.2 m 110.0 57.0 b 90.7 57.0 75.0 72.7 75.0 92.0 b 75.0 111.3 90.7 127.0 110.0 127.0 b 129.3 127.0 145.0 111.3 145.0 92.0 b 145.0 72.7 129.3 57.0 110.0 57.0"
+    },
+    {
+     "start": 0.06,
+     "end": 0.78,
+     "layer": 6,
+     "font": "instrument-serif-italic",
+     "size": 210,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,900)\\fsp0\\fscx118\\fscy118\\t(0,260,\\fscx100\\fscy100)\\blur24\\bord12\\3c&H000000&\\alpha&HFF&\\t(0,150,\\alpha&H88&)\\t(560,720,\\alpha&HFF&)}nobody"
+    },
+    {
+     "start": 0.06,
+     "end": 0.78,
+     "layer": 7,
+     "font": "instrument-serif-italic",
+     "size": 210,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,900)\\fsp0\\fscx118\\fscy118\\t(0,260,\\fscx100\\fscy100)\\blur26\\bord10\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H58&)\\t(560,720,\\alpha&HFF&)}nobody"
+    },
+    {
+     "start": 0.06,
+     "end": 0.78,
+     "layer": 8,
+     "font": "instrument-serif-italic",
+     "size": 210,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,900)\\fsp0\\fscx118\\fscy118\\t(0,260,\\fscx100\\fscy100)\\blur3\\bord2\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H00&)\\t(560,720,\\alpha&HFF&)}nobody"
+    },
+    {
+     "start": 0.36,
+     "end": 0.78,
+     "layer": 7,
+     "font": "ve-inter-regular",
+     "size": 64,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(560,1045,560,1035,0,240)\\blur10\\bord4\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H68&)\\t(270,420,\\alpha&HFF&)}tells you"
+    },
+    {
+     "start": 0.36,
+     "end": 0.78,
+     "layer": 8,
+     "font": "ve-inter-regular",
+     "size": 64,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(560,1045,560,1035,0,240)\\blur4\\alpha&HFF&\\t(0,200,\\blur0\\alpha&H00&)\\t(270,420,\\alpha&HFF&)}tells you"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 0.706,
+   "name": "ve-whoosh-deep.wav",
+   "volume": 0.38
+  },
+  {
+   "type": "sfx",
+   "at": 0.516,
+   "name": "ve-neon.wav",
+   "volume": 0.3
+  },
+  {
+   "type": "ass",
+   "at": 1.73,
+   "dur": 0.93,
+   "layers": [
+    {
+     "start": 0,
+     "end": 0.93,
+     "layer": 2,
+     "shape": true,
+     "color": "#F4F5F0",
+     "text": "{\\an7\\pos(0,0)\\p1}m -10 -10 l 1090 -10 1090 1930 -10 1930"
+    },
+    {
+     "start": 0,
+     "end": 0.93,
+     "layer": 5,
+     "font": "ve-grotesk-black",
+     "size": 330,
+     "color": "#4A5A12",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,820)\\fsp-6\\fscx112\\fscy112\\t(0,300,\\fscx100\\fscy100)\\blur8\\t(0,200,\\blur0)}Reels"
+    },
+    {
+     "start": 0.0,
+     "end": 0.93,
+     "layer": 5,
+     "font": "ve-inter-regular",
+     "size": 64,
+     "color": "#4A5A12",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1010)\\alpha&HFF&\\t(80,260,\\alpha&H00&)}about"
+    },
+    {
+     "start": 0,
+     "end": 0.93,
+     "layer": 6,
+     "shape": true,
+     "color": "#C9FF2E",
+     "text": "{\\an7\\pos(0,0)\\bord5\\3c&H2EFFC9&\\1a&HFF&\\blur1\\clip(0,0,0,1920)\\t(0,500,\\clip(0,0,1080,1920))\\p1}m -80 1300 b 300 1180 700 1420 1160 1120 l 1160 1121 b 700 1421 300 1181 -80 1301"
+    },
+    {
+     "start": 0,
+     "end": 0.93,
+     "layer": 6,
+     "shape": true,
+     "color": "#222222",
+     "text": "{\\an7\\pos(0,0)\\bord3\\3c&H222222&\\1a&HFF&\\blur1\\clip(0,0,0,1920)\\t(80,600,\\clip(0,0,1080,1920))\\p1}m -80 1360 b 260 1260 760 1480 1160 1200 l 1160 1201 b 760 1481 260 1261 -80 1361"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 1.613,
+   "name": "ve-whoosh-air.wav",
+   "volume": 0.32
+  },
+  {
+   "type": "ass",
+   "at": 5.84,
+   "dur": 0.76,
+   "layers": [
+    {
+     "start": 0,
+     "end": 0.76,
+     "layer": 7,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\fscy10\\t(0,200,\\fscy100)\\p1}m 450 970 b 490 908 590 908 630 970 b 590 1032 490 1032 450 970"
+    },
+    {
+     "start": 0,
+     "end": 0.76,
+     "layer": 8,
+     "shape": true,
+     "color": "#111111",
+     "text": "{\\an7\\pos(0,0)\\p1}m 540.0 940.0 b 556.6 940.0 570.0 953.4 570.0 970.0 b 570.0 986.6 556.6 1000.0 540.0 1000.0 b 523.4 1000.0 510.0 986.6 510.0 970.0 b 510.0 953.4 523.4 940.0 540.0 940.0"
+    },
+    {
+     "start": 0,
+     "end": 0.76,
+     "layer": 9,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\p1}m 550.0 951.0 b 555.0 951.0 559.0 955.0 559.0 960.0 b 559.0 965.0 555.0 969.0 550.0 969.0 b 545.0 969.0 541.0 965.0 541.0 960.0 b 541.0 955.0 545.0 951.0 550.0 951.0"
+    },
+    {
+     "start": 0.12,
+     "end": 0.15,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}0.0s"
+    },
+    {
+     "start": 0.12,
+     "end": 0.15,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}0.0s"
+    },
+    {
+     "start": 0.12,
+     "end": 0.15,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}0.0s"
+    },
+    {
+     "start": 0.15,
+     "end": 0.18,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}0.1s"
+    },
+    {
+     "start": 0.15,
+     "end": 0.18,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}0.1s"
+    },
+    {
+     "start": 0.15,
+     "end": 0.18,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}0.1s"
+    },
+    {
+     "start": 0.18,
+     "end": 0.21,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}0.2s"
+    },
+    {
+     "start": 0.18,
+     "end": 0.21,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}0.2s"
+    },
+    {
+     "start": 0.18,
+     "end": 0.21,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}0.2s"
+    },
+    {
+     "start": 0.21,
+     "end": 0.24,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}0.3s"
+    },
+    {
+     "start": 0.21,
+     "end": 0.24,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}0.3s"
+    },
+    {
+     "start": 0.21,
+     "end": 0.24,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}0.3s"
+    },
+    {
+     "start": 0.24,
+     "end": 0.27,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}0.4s"
+    },
+    {
+     "start": 0.24,
+     "end": 0.27,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}0.4s"
+    },
+    {
+     "start": 0.24,
+     "end": 0.27,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}0.4s"
+    },
+    {
+     "start": 0.27,
+     "end": 0.3,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}0.5s"
+    },
+    {
+     "start": 0.27,
+     "end": 0.3,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}0.5s"
+    },
+    {
+     "start": 0.27,
+     "end": 0.3,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}0.5s"
+    },
+    {
+     "start": 0.3,
+     "end": 0.33,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}0.6s"
+    },
+    {
+     "start": 0.3,
+     "end": 0.33,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}0.6s"
+    },
+    {
+     "start": 0.3,
+     "end": 0.33,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}0.6s"
+    },
+    {
+     "start": 0.33,
+     "end": 0.36,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}0.7s"
+    },
+    {
+     "start": 0.33,
+     "end": 0.36,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}0.7s"
+    },
+    {
+     "start": 0.33,
+     "end": 0.36,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}0.7s"
+    },
+    {
+     "start": 0.36,
+     "end": 0.39,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}0.8s"
+    },
+    {
+     "start": 0.36,
+     "end": 0.39,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}0.8s"
+    },
+    {
+     "start": 0.36,
+     "end": 0.39,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}0.8s"
+    },
+    {
+     "start": 0.39,
+     "end": 0.42,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}0.9s"
+    },
+    {
+     "start": 0.39,
+     "end": 0.42,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}0.9s"
+    },
+    {
+     "start": 0.39,
+     "end": 0.42,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}0.9s"
+    },
+    {
+     "start": 0.42,
+     "end": 0.45,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}1.0s"
+    },
+    {
+     "start": 0.42,
+     "end": 0.45,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}1.0s"
+    },
+    {
+     "start": 0.42,
+     "end": 0.45,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}1.0s"
+    },
+    {
+     "start": 0.45,
+     "end": 0.48,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}1.1s"
+    },
+    {
+     "start": 0.45,
+     "end": 0.48,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}1.1s"
+    },
+    {
+     "start": 0.45,
+     "end": 0.48,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}1.1s"
+    },
+    {
+     "start": 0.48,
+     "end": 0.51,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}1.2s"
+    },
+    {
+     "start": 0.48,
+     "end": 0.51,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}1.2s"
+    },
+    {
+     "start": 0.48,
+     "end": 0.51,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}1.2s"
+    },
+    {
+     "start": 0.51,
+     "end": 0.54,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}1.3s"
+    },
+    {
+     "start": 0.51,
+     "end": 0.54,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}1.3s"
+    },
+    {
+     "start": 0.51,
+     "end": 0.54,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}1.3s"
+    },
+    {
+     "start": 0.54,
+     "end": 0.57,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}1.4s"
+    },
+    {
+     "start": 0.54,
+     "end": 0.57,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}1.4s"
+    },
+    {
+     "start": 0.54,
+     "end": 0.57,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}1.4s"
+    },
+    {
+     "start": 0.57,
+     "end": 0.6,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}1.5s"
+    },
+    {
+     "start": 0.57,
+     "end": 0.6,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}1.5s"
+    },
+    {
+     "start": 0.57,
+     "end": 0.6,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}1.5s"
+    },
+    {
+     "start": 0.6,
+     "end": 0.63,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}1.6s"
+    },
+    {
+     "start": 0.6,
+     "end": 0.63,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}1.6s"
+    },
+    {
+     "start": 0.6,
+     "end": 0.63,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}1.6s"
+    },
+    {
+     "start": 0.63,
+     "end": 0.66,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}1.7s"
+    },
+    {
+     "start": 0.63,
+     "end": 0.66,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}1.7s"
+    },
+    {
+     "start": 0.63,
+     "end": 0.66,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}1.7s"
+    },
+    {
+     "start": 0.66,
+     "end": 0.69,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}1.8s"
+    },
+    {
+     "start": 0.66,
+     "end": 0.69,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}1.8s"
+    },
+    {
+     "start": 0.66,
+     "end": 0.69,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}1.8s"
+    },
+    {
+     "start": 0.69,
+     "end": 0.72,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}1.9s"
+    },
+    {
+     "start": 0.69,
+     "end": 0.72,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}1.9s"
+    },
+    {
+     "start": 0.69,
+     "end": 0.72,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}1.9s"
+    },
+    {
+     "start": 0.72,
+     "end": 0.76,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}2.0s"
+    },
+    {
+     "start": 0.72,
+     "end": 0.76,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}2.0s"
+    },
+    {
+     "start": 0.72,
+     "end": 0.76,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1140)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}2.0s"
+    },
+    {
+     "start": 0.05,
+     "end": 0.76,
+     "layer": 7,
+     "font": "ve-inter-regular",
+     "size": 56,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1280,540,1270,0,240)\\blur10\\bord4\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H68&)\\t(560,710,\\alpha&HFF&)}in two seconds"
+    },
+    {
+     "start": 0.05,
+     "end": 0.76,
+     "layer": 8,
+     "font": "ve-inter-regular",
+     "size": 56,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1280,540,1270,0,240)\\blur4\\alpha&HFF&\\t(0,200,\\blur0\\alpha&H00&)\\t(560,710,\\alpha&HFF&)}in two seconds"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 5.881,
+   "name": "ve-tick.wav",
+   "volume": 0.3
+  },
+  {
+   "type": "sfx",
+   "at": 6.535,
+   "name": "ve-ding.wav",
+   "volume": 0.22
+  },
+  {
+   "type": "ass",
+   "at": 7.21,
+   "dur": 0.817,
+   "layers": [
+    {
+     "start": 0,
+     "end": 0.817,
+     "layer": 2,
+     "shape": true,
+     "color": "#040503",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,120,\\alpha&H00&)\\t(697,817,\\alpha&HFF&)\\p1}m -10 -10 l 1090 -10 1090 1930 -10 1930"
+    },
+    {
+     "start": 0,
+     "end": 0.817,
+     "layer": 3,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,150,\\alpha&H50&)\\p1}m 500.0 715.2 b 500.9 715.2 501.6 715.9 501.6 716.8 b 501.6 717.6 500.9 718.4 500.0 718.4 b 499.2 718.4 498.4 717.6 498.4 716.8 b 498.4 715.9 499.2 715.2 500.0 715.2 m 201.0 1297.0 b 202.3 1297.0 203.2 1297.9 203.2 1299.2 b 203.2 1300.4 202.3 1301.4 201.0 1301.4 b 199.8 1301.4 198.8 1300.4 198.8 1299.2 b 198.8 1297.9 199.8 1297.0 201.0 1297.0 m 543.0 1723.5 b 543.7 1723.5 544.2 1724.1 544.2 1724.7 b 544.2 1725.4 543.7 1725.9 543.0 1725.9 b 542.3 1725.9 541.8 1725.4 541.8 1724.7 b 541.8 1724.1 542.3 1723.5 543.0 1723.5 m 360.7 1796.7 b 361.4 1796.7 361.9 1797.2 361.9 1797.9 b 361.9 1798.5 361.4 1799.1 360.7 1799.1 b 360.1 1799.1 359.5 1798.5 359.5 1797.9 b 359.5 1797.2 360.1 1796.7 360.7 1796.7 m 786.4 322.3 b 788.1 322.3 789.4 323.6 789.4 325.3 b 789.4 326.9 788.1 328.3 786.4 328.3 b 784.8 328.3 783.4 326.9 783.4 325.3 b 783.4 323.6 784.8 322.3 786.4 322.3 m 1027.4 809.8 b 1028.3 809.8 1029.0 810.5 1029.0 811.4 b 1029.0 812.3 1028.3 813.0 1027.4 813.0 b 1026.5 813.0 1025.8 812.3 1025.8 811.4 b 1025.8 810.5 1026.5 809.8 1027.4 809.8 m 257.1 211.8 b 257.7 211.8 258.3 212.4 258.3 213.0 b 258.3 213.7 257.7 214.2 257.1 214.2 b 256.4 214.2 255.9 213.7 255.9 213.0 b 255.9 212.4 256.4 211.8 257.1 211.8 m 836.1 735.4 b 836.8 735.4 837.3 736.0 837.3 736.6 b 837.3 737.3 836.8 737.8 836.1 737.8 b 835.5 737.8 834.9 737.3 834.9 736.6 b 834.9 736.0 835.5 735.4 836.1 735.4 m 992.5 391.9 b 993.4 391.9 994.1 392.6 994.1 393.5 b 994.1 394.4 993.4 395.1 992.5 395.1 b 991.6 395.1 990.9 394.4 990.9 393.5 b 990.9 392.6 991.6 391.9 992.5 391.9 m 783.8 808.6 b 784.4 808.6 785.0 809.1 785.0 809.8 b 785.0 810.4 784.4 811.0 783.8 811.0 b 783.1 811.0 782.6 810.4 782.6 809.8 b 782.6 809.1 783.1 808.6 783.8 808.6 m 834.4 1746.8 b 836.0 1746.8 837.4 1748.2 837.4 1749.8 b 837.4 1751.5 836.0 1752.8 834.4 1752.8 b 832.7 1752.8 831.4 1751.5 831.4 1749.8 b 831.4 1748.2 832.7 1746.8 834.4 1746.8 m 303.7 1552.7 b 304.6 1552.7 305.3 1553.4 305.3 1554.3 b 305.3 1555.1 304.6 1555.9 303.7 1555.9 b 302.8 1555.9 302.1 1555.1 302.1 1554.3 b 302.1 1553.4 302.8 1552.7 303.7 1552.7 m 765.5 7.1 b 767.2 7.1 768.5 8.5 768.5 10.1 b 768.5 11.8 767.2 13.1 765.5 13.1 b 763.8 13.1 762.5 11.8 762.5 10.1 b 762.5 8.5 763.8 7.1 765.5 7.1 m 59.2 724.3 b 60.8 724.3 62.2 725.7 62.2 727.3 b 62.2 729.0 60.8 730.3 59.2 730.3 b 57.5 730.3 56.2 729.0 56.2 727.3 b 56.2 725.7 57.5 724.3 59.2 724.3 m 150.3 453.3 b 150.9 453.3 151.5 453.9 151.5 454.5 b 151.5 455.2 150.9 455.7 150.3 455.7 b 149.6 455.7 149.1 455.2 149.1 454.5 b 149.1 453.9 149.6 453.3 150.3 453.3 m 1041.1 5.8 b 1042.0 5.8 1042.7 6.6 1042.7 7.4 b 1042.7 8.3 1042.0 9.0 1041.1 9.0 b 1040.2 9.0 1039.5 8.3 1039.5 7.4 b 1039.5 6.6 1040.2 5.8 1041.1 5.8 m 966.9 388.7 b 967.6 388.7 968.1 389.2 968.1 389.9 b 968.1 390.5 967.6 391.1 966.9 391.1 b 966.3 391.1 965.7 390.5 965.7 389.9 b 965.7 389.2 966.3 388.7 966.9 388.7 m 963.9 254.5 b 964.5 254.5 965.1 255.0 965.1 255.7 b 965.1 256.4 964.5 256.9 963.9 256.9 b 963.2 256.9 962.7 256.4 962.7 255.7 b 962.7 255.0 963.2 254.5 963.9 254.5 m 540.9 1098.5 b 541.8 1098.5 542.5 1099.2 542.5 1100.1 b 542.5 1101.0 541.8 1101.7 540.9 1101.7 b 540.0 1101.7 539.3 1101.0 539.3 1100.1 b 539.3 1099.2 540.0 1098.5 540.9 1098.5 m 453.7 763.2 b 454.4 763.2 454.9 763.8 454.9 764.4 b 454.9 765.1 454.4 765.6 453.7 765.6 b 453.1 765.6 452.5 765.1 452.5 764.4 b 452.5 763.8 453.1 763.2 453.7 763.2 m 756.9 277.9 b 757.6 277.9 758.1 278.4 758.1 279.1 b 758.1 279.7 757.6 280.3 756.9 280.3 b 756.3 280.3 755.7 279.7 755.7 279.1 b 755.7 278.4 756.3 277.9 756.9 277.9 m 58.5 1064.1 b 59.4 1064.1 60.1 1064.8 60.1 1065.7 b 60.1 1066.6 59.4 1067.3 58.5 1067.3 b 57.6 1067.3 56.9 1066.6 56.9 1065.7 b 56.9 1064.8 57.6 1064.1 58.5 1064.1 m 804.8 1413.6 b 805.4 1413.6 806.0 1414.2 806.0 1414.8 b 806.0 1415.5 805.4 1416.0 804.8 1416.0 b 804.1 1416.0 803.6 1415.5 803.6 1414.8 b 803.6 1414.2 804.1 1413.6 804.8 1413.6 m 131.0 1352.9 b 131.9 1352.9 132.6 1353.6 132.6 1354.5 b 132.6 1355.4 131.9 1356.1 131.0 1356.1 b 130.2 1356.1 129.4 1355.4 129.4 1354.5 b 129.4 1353.6 130.2 1352.9 131.0 1352.9 m 174.7 967.2 b 175.9 967.2 176.9 968.2 176.9 969.4 b 176.9 970.6 175.9 971.6 174.7 971.6 b 173.5 971.6 172.5 970.6 172.5 969.4 b 172.5 968.2 173.5 967.2 174.7 967.2 m 913.3 1001.2 b 914.0 1001.2 914.5 1001.7 914.5 1002.4 b 914.5 1003.0 914.0 1003.6 913.3 1003.6 b 912.7 1003.6 912.1 1003.0 912.1 1002.4 b 912.1 1001.7 912.7 1001.2 913.3 1001.2 m 936.8 208.9 b 938.0 208.9 939.0 209.9 939.0 211.1 b 939.0 212.3 938.0 213.3 936.8 213.3 b 935.5 213.3 934.6 212.3 934.6 211.1 b 934.6 209.9 935.5 208.9 936.8 208.9 m 487.4 771.0 b 488.1 771.0 488.6 771.5 488.6 772.2 b 488.6 772.8 488.1 773.4 487.4 773.4 b 486.7 773.4 486.2 772.8 486.2 772.2 b 486.2 771.5 486.7 771.0 487.4 771.0 m 409.3 1165.7 b 409.9 1165.7 410.5 1166.2 410.5 1166.9 b 410.5 1167.5 409.9 1168.1 409.3 1168.1 b 408.6 1168.1 408.1 1167.5 408.1 1166.9 b 408.1 1166.2 408.6 1165.7 409.3 1165.7 m 468.3 406.8 b 469.9 406.8 471.3 408.1 471.3 409.8 b 471.3 411.4 469.9 412.8 468.3 412.8 b 466.6 412.8 465.3 411.4 465.3 409.8 b 465.3 408.1 466.6 406.8 468.3 406.8 m 291.2 1562.0 b 292.4 1562.0 293.4 1563.0 293.4 1564.2 b 293.4 1565.4 292.4 1566.4 291.2 1566.4 b 290.0 1566.4 289.0 1565.4 289.0 1564.2 b 289.0 1563.0 290.0 1562.0 291.2 1562.0 m 679.9 196.7 b 680.5 196.7 681.1 197.2 681.1 197.9 b 681.1 198.6 680.5 199.1 679.9 199.1 b 679.2 199.1 678.7 198.6 678.7 197.9 b 678.7 197.2 679.2 196.7 679.9 196.7 m 27.4 1496.0 b 29.1 1496.0 30.4 1497.3 30.4 1499.0 b 30.4 1500.6 29.1 1502.0 27.4 1502.0 b 25.8 1502.0 24.4 1500.6 24.4 1499.0 b 24.4 1497.3 25.8 1496.0 27.4 1496.0 m 537.1 1360.5 b 538.0 1360.5 538.7 1361.3 538.7 1362.1 b 538.7 1363.0 538.0 1363.7 537.1 1363.7 b 536.2 1363.7 535.5 1363.0 535.5 1362.1 b 535.5 1361.3 536.2 1360.5 537.1 1360.5 m 611.3 125.7 b 612.2 125.7 612.9 126.4 612.9 127.3 b 612.9 128.1 612.2 128.9 611.3 128.9 b 610.4 128.9 609.7 128.1 609.7 127.3 b 609.7 126.4 610.4 125.7 611.3 125.7 m 103.4 1458.4 b 104.7 1458.4 105.6 1459.4 105.6 1460.6 b 105.6 1461.8 104.7 1462.8 103.4 1462.8 b 102.2 1462.8 101.2 1461.8 101.2 1460.6 b 101.2 1459.4 102.2 1458.4 103.4 1458.4 m 1032.3 1074.5 b 1033.2 1074.5 1033.9 1075.2 1033.9 1076.1 b 1033.9 1077.0 1033.2 1077.7 1032.3 1077.7 b 1031.4 1077.7 1030.7 1077.0 1030.7 1076.1 b 1030.7 1075.2 1031.4 1074.5 1032.3 1074.5 m 720.9 326.2 b 722.1 326.2 723.1 327.2 723.1 328.4 b 723.1 329.6 722.1 330.6 720.9 330.6 b 719.7 330.6 718.7 329.6 718.7 328.4 b 718.7 327.2 719.7 326.2 720.9 326.2 m 31.7 1802.2 b 32.6 1802.2 33.3 1802.9 33.3 1803.8 b 33.3 1804.7 32.6 1805.4 31.7 1805.4 b 30.8 1805.4 30.1 1804.7 30.1 1803.8 b 30.1 1802.9 30.8 1802.2 31.7 1802.2 m 284.0 314.1 b 284.7 314.1 285.2 314.6 285.2 315.3 b 285.2 316.0 284.7 316.5 284.0 316.5 b 283.3 316.5 282.8 316.0 282.8 315.3 b 282.8 314.6 283.3 314.1 284.0 314.1 m 655.1 21.6 b 655.7 21.6 656.3 22.1 656.3 22.8 b 656.3 23.5 655.7 24.0 655.1 24.0 b 654.4 24.0 653.9 23.5 653.9 22.8 b 653.9 22.1 654.4 21.6 655.1 21.6 m 486.5 1508.0 b 487.7 1508.0 488.7 1509.0 488.7 1510.2 b 488.7 1511.4 487.7 1512.4 486.5 1512.4 b 485.3 1512.4 484.3 1511.4 484.3 1510.2 b 484.3 1509.0 485.3 1508.0 486.5 1508.0 m 660.5 1853.4 b 661.7 1853.4 662.7 1854.3 662.7 1855.6 b 662.7 1856.8 661.7 1857.8 660.5 1857.8 b 659.3 1857.8 658.3 1856.8 658.3 1855.6 b 658.3 1854.3 659.3 1853.4 660.5 1853.4 m 307.8 921.2 b 309.0 921.2 310.0 922.1 310.0 923.4 b 310.0 924.6 309.0 925.6 307.8 925.6 b 306.6 925.6 305.6 924.6 305.6 923.4 b 305.6 922.1 306.6 921.2 307.8 921.2 m 148.3 164.0 b 149.5 164.0 150.5 165.0 150.5 166.2 b 150.5 167.5 149.5 168.4 148.3 168.4 b 147.1 168.4 146.1 167.5 146.1 166.2 b 146.1 165.0 147.1 164.0 148.3 164.0 m 751.7 122.9 b 753.3 122.9 754.7 124.3 754.7 125.9 b 754.7 127.6 753.3 128.9 751.7 128.9 b 750.0 128.9 748.7 127.6 748.7 125.9 b 748.7 124.3 750.0 122.9 751.7 122.9 m 153.9 1075.9 b 155.6 1075.9 156.9 1077.2 156.9 1078.9 b 156.9 1080.6 155.6 1081.9 153.9 1081.9 b 152.3 1081.9 150.9 1080.6 150.9 1078.9 b 150.9 1077.2 152.3 1075.9 153.9 1075.9 m 635.2 1539.1 b 636.4 1539.1 637.4 1540.1 637.4 1541.3 b 637.4 1542.5 636.4 1543.5 635.2 1543.5 b 634.0 1543.5 633.0 1542.5 633.0 1541.3 b 633.0 1540.1 634.0 1539.1 635.2 1539.1 m 833.4 1687.1 b 835.1 1687.1 836.4 1688.4 836.4 1690.1 b 836.4 1691.7 835.1 1693.1 833.4 1693.1 b 831.8 1693.1 830.4 1691.7 830.4 1690.1 b 830.4 1688.4 831.8 1687.1 833.4 1687.1 m 376.8 1770.3 b 378.0 1770.3 379.0 1771.3 379.0 1772.5 b 379.0 1773.7 378.0 1774.7 376.8 1774.7 b 375.6 1774.7 374.6 1773.7 374.6 1772.5 b 374.6 1771.3 375.6 1770.3 376.8 1770.3 m 571.1 331.6 b 571.8 331.6 572.3 332.1 572.3 332.8 b 572.3 333.5 571.8 334.0 571.1 334.0 b 570.5 334.0 569.9 333.5 569.9 332.8 b 569.9 332.1 570.5 331.6 571.1 331.6 m 175.2 1514.9 b 175.9 1514.9 176.4 1515.5 176.4 1516.1 b 176.4 1516.8 175.9 1517.3 175.2 1517.3 b 174.5 1517.3 174.0 1516.8 174.0 1516.1 b 174.0 1515.5 174.5 1514.9 175.2 1514.9 m 219.1 906.4 b 220.8 906.4 222.1 907.7 222.1 909.4 b 222.1 911.0 220.8 912.4 219.1 912.4 b 217.5 912.4 216.1 911.0 216.1 909.4 b 216.1 907.7 217.5 906.4 219.1 906.4 m 89.9 1051.1 b 91.1 1051.1 92.1 1052.1 92.1 1053.3 b 92.1 1054.6 91.1 1055.5 89.9 1055.5 b 88.6 1055.5 87.7 1054.6 87.7 1053.3 b 87.7 1052.1 88.6 1051.1 89.9 1051.1 m 578.3 1806.1 b 578.9 1806.1 579.5 1806.6 579.5 1807.3 b 579.5 1807.9 578.9 1808.5 578.3 1808.5 b 577.6 1808.5 577.1 1807.9 577.1 1807.3 b 577.1 1806.6 577.6 1806.1 578.3 1806.1 m 627.5 1120.7 b 629.2 1120.7 630.5 1122.1 630.5 1123.7 b 630.5 1125.4 629.2 1126.7 627.5 1126.7 b 625.8 1126.7 624.5 1125.4 624.5 1123.7 b 624.5 1122.1 625.8 1120.7 627.5 1120.7 m 587.9 1003.9 b 588.6 1003.9 589.1 1004.4 589.1 1005.1 b 589.1 1005.8 588.6 1006.3 587.9 1006.3 b 587.2 1006.3 586.7 1005.8 586.7 1005.1 b 586.7 1004.4 587.2 1003.9 587.9 1003.9 m 947.6 1099.6 b 948.8 1099.6 949.8 1100.6 949.8 1101.8 b 949.8 1103.1 948.8 1104.0 947.6 1104.0 b 946.4 1104.0 945.4 1103.1 945.4 1101.8 b 945.4 1100.6 946.4 1099.6 947.6 1099.6 m 69.5 429.0 b 70.3 429.0 71.1 429.8 71.1 430.6 b 71.1 431.5 70.3 432.2 69.5 432.2 b 68.6 432.2 67.9 431.5 67.9 430.6 b 67.9 429.8 68.6 429.0 69.5 429.0 m 111.5 1340.1 b 113.1 1340.1 114.5 1341.4 114.5 1343.1 b 114.5 1344.7 113.1 1346.1 111.5 1346.1 b 109.8 1346.1 108.5 1344.7 108.5 1343.1 b 108.5 1341.4 109.8 1340.1 111.5 1340.1 m 65.3 1705.5 b 65.9 1705.5 66.5 1706.0 66.5 1706.7 b 66.5 1707.3 65.9 1707.9 65.3 1707.9 b 64.6 1707.9 64.1 1707.3 64.1 1706.7 b 64.1 1706.0 64.6 1705.5 65.3 1705.5 m 733.1 54.5 b 734.0 54.5 734.7 55.2 734.7 56.1 b 734.7 57.0 734.0 57.7 733.1 57.7 b 732.2 57.7 731.5 57.0 731.5 56.1 b 731.5 55.2 732.2 54.5 733.1 54.5 m 949.0 440.7 b 950.7 440.7 952.0 442.1 952.0 443.7 b 952.0 445.4 950.7 446.7 949.0 446.7 b 947.4 446.7 946.0 445.4 946.0 443.7 b 946.0 442.1 947.4 440.7 949.0 440.7 m 945.9 67.9 b 946.6 67.9 947.1 68.5 947.1 69.1 b 947.1 69.8 946.6 70.3 945.9 70.3 b 945.3 70.3 944.7 69.8 944.7 69.1 b 944.7 68.5 945.3 67.9 945.9 67.9 m 662.3 1298.9 b 664.0 1298.9 665.3 1300.2 665.3 1301.9 b 665.3 1303.5 664.0 1304.9 662.3 1304.9 b 660.7 1304.9 659.3 1303.5 659.3 1301.9 b 659.3 1300.2 660.7 1298.9 662.3 1298.9 m 635.6 153.8 b 636.3 153.8 636.8 154.4 636.8 155.0 b 636.8 155.7 636.3 156.2 635.6 156.2 b 635.0 156.2 634.4 155.7 634.4 155.0 b 634.4 154.4 635.0 153.8 635.6 153.8 m 656.8 346.9 b 657.4 346.9 658.0 347.5 658.0 348.1 b 658.0 348.8 657.4 349.3 656.8 349.3 b 656.1 349.3 655.6 348.8 655.6 348.1 b 655.6 347.5 656.1 346.9 656.8 346.9 m 32.3 1196.2 b 33.9 1196.2 35.3 1197.6 35.3 1199.2 b 35.3 1200.9 33.9 1202.2 32.3 1202.2 b 30.6 1202.2 29.3 1200.9 29.3 1199.2 b 29.3 1197.6 30.6 1196.2 32.3 1196.2 m 28.0 1486.9 b 29.3 1486.9 30.2 1487.9 30.2 1489.1 b 30.2 1490.3 29.3 1491.3 28.0 1491.3 b 26.8 1491.3 25.8 1490.3 25.8 1489.1 b 25.8 1487.9 26.8 1486.9 28.0 1486.9 m 91.4 614.2 b 93.0 614.2 94.4 615.6 94.4 617.2 b 94.4 618.9 93.0 620.2 91.4 620.2 b 89.7 620.2 88.4 618.9 88.4 617.2 b 88.4 615.6 89.7 614.2 91.4 614.2 m 1030.4 1130.3 b 1032.0 1130.3 1033.4 1131.6 1033.4 1133.3 b 1033.4 1134.9 1032.0 1136.3 1030.4 1136.3 b 1028.7 1136.3 1027.4 1134.9 1027.4 1133.3 b 1027.4 1131.6 1028.7 1130.3 1030.4 1130.3 m 1065.2 1597.7 b 1065.9 1597.7 1066.4 1598.3 1066.4 1598.9 b 1066.4 1599.6 1065.9 1600.1 1065.2 1600.1 b 1064.6 1600.1 1064.0 1599.6 1064.0 1598.9 b 1064.0 1598.3 1064.6 1597.7 1065.2 1597.7 m 964.1 1285.8 b 965.8 1285.8 967.1 1287.1 967.1 1288.8 b 967.1 1290.4 965.8 1291.8 964.1 1291.8 b 962.4 1291.8 961.1 1290.4 961.1 1288.8 b 961.1 1287.1 962.4 1285.8 964.1 1285.8 m 842.4 367.4 b 843.3 367.4 844.0 368.1 844.0 369.0 b 844.0 369.8 843.3 370.6 842.4 370.6 b 841.5 370.6 840.8 369.8 840.8 369.0 b 840.8 368.1 841.5 367.4 842.4 367.4 m 117.5 100.0 b 118.1 100.0 118.7 100.6 118.7 101.2 b 118.7 101.9 118.1 102.4 117.5 102.4 b 116.8 102.4 116.3 101.9 116.3 101.2 b 116.3 100.6 116.8 100.0 117.5 100.0 m 1013.2 1872.1 b 1014.4 1872.1 1015.4 1873.1 1015.4 1874.3 b 1015.4 1875.5 1014.4 1876.5 1013.2 1876.5 b 1012.0 1876.5 1011.0 1875.5 1011.0 1874.3 b 1011.0 1873.1 1012.0 1872.1 1013.2 1872.1 m 111.9 43.4 b 112.8 43.4 113.5 44.1 113.5 45.0 b 113.5 45.9 112.8 46.6 111.9 46.6 b 111.0 46.6 110.3 45.9 110.3 45.0 b 110.3 44.1 111.0 43.4 111.9 43.4 m 399.0 1217.1 b 399.9 1217.1 400.6 1217.8 400.6 1218.7 b 400.6 1219.5 399.9 1220.3 399.0 1220.3 b 398.2 1220.3 397.4 1219.5 397.4 1218.7 b 397.4 1217.8 398.2 1217.1 399.0 1217.1 m 5.9 1464.0 b 6.8 1464.0 7.5 1464.8 7.5 1465.6 b 7.5 1466.5 6.8 1467.2 5.9 1467.2 b 5.0 1467.2 4.3 1466.5 4.3 1465.6 b 4.3 1464.8 5.0 1464.0 5.9 1464.0 m 16.7 485.1 b 17.4 485.1 17.9 485.6 17.9 486.3 b 17.9 486.9 17.4 487.5 16.7 487.5 b 16.1 487.5 15.5 486.9 15.5 486.3 b 15.5 485.6 16.1 485.1 16.7 485.1"
+    },
+    {
+     "start": 0,
+     "end": 0.817,
+     "layer": 3,
+     "shape": true,
+     "color": "#9BE81A",
+     "text": "{\\an7\\pos(0,0)\\blur120\\alpha&HFF&\\t(0,300,\\alpha&H10&)\\p1}m 760.0 1340.0 b 1069.3 1340.0 1320.0 1590.7 1320.0 1900.0 b 1320.0 2209.3 1069.3 2460.0 760.0 2460.0 b 450.7 2460.0 200.0 2209.3 200.0 1900.0 b 200.0 1590.7 450.7 1340.0 760.0 1340.0"
+    },
+    {
+     "start": 0,
+     "end": 0.817,
+     "layer": 3,
+     "shape": true,
+     "color": "#E9FF8A",
+     "text": "{\\an7\\pos(0,0)\\blur90\\alpha&HFF&\\t(0,300,\\alpha&H30&)\\p1}m 860.0 1630.0 b 1042.3 1630.0 1190.0 1777.7 1190.0 1960.0 b 1190.0 2142.3 1042.3 2290.0 860.0 2290.0 b 677.7 2290.0 530.0 2142.3 530.0 1960.0 b 530.0 1777.7 677.7 1630.0 860.0 1630.0"
+    },
+    {
+     "start": 0.27,
+     "end": 0.817,
+     "layer": 6,
+     "font": "ve-grotesk-black",
+     "size": 250,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-4\\move(1240,960,496,960,0,260)\\blur14\\fscx150\\alpha&HC0&\\t(260,400,\\fscx100\\blur0)}scroll"
+    },
+    {
+     "start": 0.27,
+     "end": 0.817,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 250,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-4\\move(1380,960,520,960,0,260)\\blur9\\fscx130\\alpha&H90&\\t(260,400,\\fscx100\\blur0)}scroll"
+    },
+    {
+     "start": 0.27,
+     "end": 0.817,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 250,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-4\\move(1500,960,540,960,0,260)\\blur4\\fscx110\\alpha&H00&\\t(260,400,\\fscx100\\blur0)}scroll"
+    },
+    {
+     "start": 0.05,
+     "end": 0.817,
+     "layer": 7,
+     "font": "ve-inter-regular",
+     "size": 60,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1130,540,1120,0,240)\\blur10\\bord4\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H68&)\\t(617,767,\\alpha&HFF&)}or"
+    },
+    {
+     "start": 0.05,
+     "end": 0.817,
+     "layer": 8,
+     "font": "ve-inter-regular",
+     "size": 60,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1130,540,1120,0,240)\\blur4\\alpha&HFF&\\t(0,200,\\blur0\\alpha&H00&)\\t(617,767,\\alpha&HFF&)}or"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 6.896,
+   "name": "ve-whoosh-deep.wav",
+   "volume": 0.35
+  },
+  {
+   "type": "sfx",
+   "at": 7.548,
+   "name": "ve-swish.wav",
+   "volume": 0.35
+  },
+  {
+   "type": "light_leak",
+   "at": 7.777,
+   "dur": 0.9,
+   "color": "#D8FF4A",
+   "side": "top",
+   "intensity": 1.3
+  },
+  {
+   "type": "zoom",
+   "at": 8.027,
+   "dur": 1.3,
+   "style": "push",
+   "amount": 1.08
+  },
+  {
+   "type": "sfx",
+   "at": 7.278,
+   "name": "ve-reverse.wav",
+   "volume": 0.3
+  },
+  {
+   "type": "ass",
+   "at": 10.167,
+   "dur": 1.586,
+   "layers": [
+    {
+     "start": 0.36,
+     "end": 0.4,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}1x"
+    },
+    {
+     "start": 0.36,
+     "end": 0.4,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}1x"
+    },
+    {
+     "start": 0.36,
+     "end": 0.4,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}1x"
+    },
+    {
+     "start": 0.4,
+     "end": 0.44,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}2x"
+    },
+    {
+     "start": 0.4,
+     "end": 0.44,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}2x"
+    },
+    {
+     "start": 0.4,
+     "end": 0.44,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}2x"
+    },
+    {
+     "start": 0.44,
+     "end": 0.48,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}3x"
+    },
+    {
+     "start": 0.44,
+     "end": 0.48,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}3x"
+    },
+    {
+     "start": 0.44,
+     "end": 0.48,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}3x"
+    },
+    {
+     "start": 0.48,
+     "end": 0.52,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}4x"
+    },
+    {
+     "start": 0.48,
+     "end": 0.52,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}4x"
+    },
+    {
+     "start": 0.48,
+     "end": 0.52,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}4x"
+    },
+    {
+     "start": 0.52,
+     "end": 0.56,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}5x"
+    },
+    {
+     "start": 0.52,
+     "end": 0.56,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}5x"
+    },
+    {
+     "start": 0.52,
+     "end": 0.56,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}5x"
+    },
+    {
+     "start": 0.56,
+     "end": 0.6,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}6x"
+    },
+    {
+     "start": 0.56,
+     "end": 0.6,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}6x"
+    },
+    {
+     "start": 0.56,
+     "end": 0.6,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}6x"
+    },
+    {
+     "start": 0.6,
+     "end": 0.64,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}7x"
+    },
+    {
+     "start": 0.6,
+     "end": 0.64,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}7x"
+    },
+    {
+     "start": 0.6,
+     "end": 0.64,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}7x"
+    },
+    {
+     "start": 0.64,
+     "end": 0.68,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}8x"
+    },
+    {
+     "start": 0.64,
+     "end": 0.68,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}8x"
+    },
+    {
+     "start": 0.64,
+     "end": 0.68,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}8x"
+    },
+    {
+     "start": 0.68,
+     "end": 0.72,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&}9x"
+    },
+    {
+     "start": 0.68,
+     "end": 0.72,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&}9x"
+    },
+    {
+     "start": 0.68,
+     "end": 0.72,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&}9x"
+    },
+    {
+     "start": 0.72,
+     "end": 1.586,
+     "layer": 6,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur24\\bord12\\3c&H000000&\\alpha&H88&\\t(706,866,\\alpha&HFF&)}10x"
+    },
+    {
+     "start": 0.72,
+     "end": 1.586,
+     "layer": 7,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur26\\bord10\\3c&H2EFFC9&\\alpha&H58&\\t(706,866,\\alpha&HFF&)}10x"
+    },
+    {
+     "start": 0.72,
+     "end": 1.586,
+     "layer": 8,
+     "font": "ve-inter-medium",
+     "size": 260,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1150)\\fsp0\\blur3\\bord2\\3c&H2EFFC9&\\alpha&H00&\\t(706,866,\\alpha&HFF&)}10x"
+    },
+    {
+     "start": 0.76,
+     "end": 1.586,
+     "layer": 6,
+     "font": "instrument-serif-italic",
+     "size": 130,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1330)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur24\\bord12\\3c&H000000&\\alpha&HFF&\\t(0,150,\\alpha&H88&)\\t(666,826,\\alpha&HFF&)}Views+"
+    },
+    {
+     "start": 0.76,
+     "end": 1.586,
+     "layer": 7,
+     "font": "instrument-serif-italic",
+     "size": 130,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1330)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur26\\bord10\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H58&)\\t(666,826,\\alpha&HFF&)}Views+"
+    },
+    {
+     "start": 0.76,
+     "end": 1.586,
+     "layer": 8,
+     "font": "instrument-serif-italic",
+     "size": 130,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,1330)\\fsp0\\fscx80\\fscy80\\t(0,200,\\fscx104\\fscy104)\\t(200,320,\\fscx100\\fscy100)\\blur3\\bord2\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H00&)\\t(666,826,\\alpha&HFF&)}Views+"
+    },
+    {
+     "start": 0.04,
+     "end": 1.586,
+     "layer": 7,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,990,540,980,0,240)\\blur10\\bord4\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H68&)\\t(1396,1546,\\alpha&HFF&)}can do"
+    },
+    {
+     "start": 0.04,
+     "end": 1.586,
+     "layer": 8,
+     "font": "ve-inter-regular",
+     "size": 58,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,990,540,980,0,240)\\blur4\\alpha&HFF&\\t(0,200,\\blur0\\alpha&H00&)\\t(1396,1546,\\alpha&HFF&)}can do"
+    },
+    {
+     "start": 0.98,
+     "end": 1.586,
+     "layer": 7,
+     "font": "ve-inter-regular",
+     "size": 52,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1460,540,1450,0,240)\\blur10\\bord4\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H68&)\\t(456,606,\\alpha&HFF&)}better"
+    },
+    {
+     "start": 0.98,
+     "end": 1.586,
+     "layer": 8,
+     "font": "ve-inter-regular",
+     "size": 52,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1460,540,1450,0,240)\\blur4\\alpha&HFF&\\t(0,200,\\blur0\\alpha&H00&)\\t(456,606,\\alpha&HFF&)}better"
+    }
+   ]
+  },
+  {
+   "type": "zoom",
+   "at": 10.527,
+   "dur": 0.5,
+   "style": "punch",
+   "amount": 1.1
+  },
+  {
+   "type": "sfx",
+   "at": 10.502,
+   "name": "ve-cash.wav",
+   "volume": 0.35
+  },
+  {
+   "type": "sfx",
+   "at": 10.403,
+   "name": "ve-neon.wav",
+   "volume": 0.25
+  },
+  {
+   "type": "ass",
+   "at": 12.243,
+   "dur": 0.724,
+   "layers": [
+    {
+     "start": 0,
+     "end": 0.724,
+     "layer": 2,
+     "shape": true,
+     "color": "#040503",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,120,\\alpha&H00&)\\t(604,724,\\alpha&HFF&)\\p1}m -10 -10 l 1090 -10 1090 1930 -10 1930"
+    },
+    {
+     "start": 0,
+     "end": 0.724,
+     "layer": 3,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(0,0)\\alpha&HFF&\\t(0,150,\\alpha&H50&)\\p1}m 672.7 1423.0 b 673.4 1423.0 673.9 1423.6 673.9 1424.2 b 673.9 1424.9 673.4 1425.4 672.7 1425.4 b 672.1 1425.4 671.5 1424.9 671.5 1424.2 b 671.5 1423.6 672.1 1423.0 672.7 1423.0 m 907.6 1488.2 b 908.5 1488.2 909.2 1489.0 909.2 1489.8 b 909.2 1490.7 908.5 1491.4 907.6 1491.4 b 906.7 1491.4 906.0 1490.7 906.0 1489.8 b 906.0 1489.0 906.7 1488.2 907.6 1488.2 m 700.9 1728.5 b 701.6 1728.5 702.1 1729.1 702.1 1729.7 b 702.1 1730.4 701.6 1730.9 700.9 1730.9 b 700.2 1730.9 699.7 1730.4 699.7 1729.7 b 699.7 1729.1 700.2 1728.5 700.9 1728.5 m 401.5 1664.4 b 403.2 1664.4 404.5 1665.8 404.5 1667.4 b 404.5 1669.1 403.2 1670.4 401.5 1670.4 b 399.9 1670.4 398.5 1669.1 398.5 1667.4 b 398.5 1665.8 399.9 1664.4 401.5 1664.4 m 587.3 1100.8 b 587.9 1100.8 588.5 1101.3 588.5 1102.0 b 588.5 1102.6 587.9 1103.2 587.3 1103.2 b 586.6 1103.2 586.1 1102.6 586.1 1102.0 b 586.1 1101.3 586.6 1100.8 587.3 1100.8 m 789.7 782.1 b 790.6 782.1 791.3 782.8 791.3 783.7 b 791.3 784.5 790.6 785.3 789.7 785.3 b 788.8 785.3 788.1 784.5 788.1 783.7 b 788.1 782.8 788.8 782.1 789.7 782.1 m 989.7 1468.6 b 990.5 1468.6 991.3 1469.3 991.3 1470.2 b 991.3 1471.1 990.5 1471.8 989.7 1471.8 b 988.8 1471.8 988.1 1471.1 988.1 1470.2 b 988.1 1469.3 988.8 1468.6 989.7 1468.6 m 822.9 135.1 b 824.5 135.1 825.9 136.5 825.9 138.1 b 825.9 139.8 824.5 141.1 822.9 141.1 b 821.2 141.1 819.9 139.8 819.9 138.1 b 819.9 136.5 821.2 135.1 822.9 135.1 m 136.8 2.2 b 137.5 2.2 138.0 2.7 138.0 3.4 b 138.0 4.1 137.5 4.6 136.8 4.6 b 136.2 4.6 135.6 4.1 135.6 3.4 b 135.6 2.7 136.2 2.2 136.8 2.2 m 226.2 412.1 b 227.1 412.1 227.8 412.8 227.8 413.7 b 227.8 414.6 227.1 415.3 226.2 415.3 b 225.3 415.3 224.6 414.6 224.6 413.7 b 224.6 412.8 225.3 412.1 226.2 412.1 m 942.2 553.9 b 943.1 553.9 943.8 554.6 943.8 555.5 b 943.8 556.3 943.1 557.1 942.2 557.1 b 941.3 557.1 940.6 556.3 940.6 555.5 b 940.6 554.6 941.3 553.9 942.2 553.9 m 582.4 1299.8 b 583.2 1299.8 584.0 1300.6 584.0 1301.4 b 584.0 1302.3 583.2 1303.0 582.4 1303.0 b 581.5 1303.0 580.8 1302.3 580.8 1301.4 b 580.8 1300.6 581.5 1299.8 582.4 1299.8 m 196.2 1858.0 b 197.1 1858.0 197.8 1858.7 197.8 1859.6 b 197.8 1860.5 197.1 1861.2 196.2 1861.2 b 195.3 1861.2 194.6 1860.5 194.6 1859.6 b 194.6 1858.7 195.3 1858.0 196.2 1858.0 m 1043.9 1713.8 b 1045.1 1713.8 1046.1 1714.8 1046.1 1716.0 b 1046.1 1717.2 1045.1 1718.2 1043.9 1718.2 b 1042.7 1718.2 1041.7 1717.2 1041.7 1716.0 b 1041.7 1714.8 1042.7 1713.8 1043.9 1713.8 m 23.3 795.0 b 24.2 795.0 24.9 795.7 24.9 796.6 b 24.9 797.5 24.2 798.2 23.3 798.2 b 22.4 798.2 21.7 797.5 21.7 796.6 b 21.7 795.7 22.4 795.0 23.3 795.0 m 284.9 636.0 b 285.6 636.0 286.1 636.5 286.1 637.2 b 286.1 637.8 285.6 638.4 284.9 638.4 b 284.3 638.4 283.7 637.8 283.7 637.2 b 283.7 636.5 284.3 636.0 284.9 636.0 m 643.7 1357.5 b 644.3 1357.5 644.9 1358.1 644.9 1358.7 b 644.9 1359.4 644.3 1359.9 643.7 1359.9 b 643.0 1359.9 642.5 1359.4 642.5 1358.7 b 642.5 1358.1 643.0 1357.5 643.7 1357.5 m 334.8 1568.6 b 336.4 1568.6 337.8 1569.9 337.8 1571.6 b 337.8 1573.2 336.4 1574.6 334.8 1574.6 b 333.1 1574.6 331.8 1573.2 331.8 1571.6 b 331.8 1569.9 333.1 1568.6 334.8 1568.6 m 752.1 351.8 b 753.8 351.8 755.1 353.1 755.1 354.8 b 755.1 356.4 753.8 357.8 752.1 357.8 b 750.5 357.8 749.1 356.4 749.1 354.8 b 749.1 353.1 750.5 351.8 752.1 351.8 m 761.0 108.2 b 761.7 108.2 762.2 108.8 762.2 109.4 b 762.2 110.1 761.7 110.6 761.0 110.6 b 760.4 110.6 759.8 110.1 759.8 109.4 b 759.8 108.8 760.4 108.2 761.0 108.2 m 1025.2 683.7 b 1026.8 683.7 1028.2 685.0 1028.2 686.7 b 1028.2 688.3 1026.8 689.7 1025.2 689.7 b 1023.5 689.7 1022.2 688.3 1022.2 686.7 b 1022.2 685.0 1023.5 683.7 1025.2 683.7 m 19.5 1510.3 b 20.7 1510.3 21.7 1511.2 21.7 1512.5 b 21.7 1513.7 20.7 1514.7 19.5 1514.7 b 18.3 1514.7 17.3 1513.7 17.3 1512.5 b 17.3 1511.2 18.3 1510.3 19.5 1510.3 m 406.5 1612.2 b 408.1 1612.2 409.5 1613.5 409.5 1615.2 b 409.5 1616.8 408.1 1618.2 406.5 1618.2 b 404.8 1618.2 403.5 1616.8 403.5 1615.2 b 403.5 1613.5 404.8 1612.2 406.5 1612.2 m 50.5 345.8 b 51.3 345.8 52.1 346.5 52.1 347.4 b 52.1 348.2 51.3 349.0 50.5 349.0 b 49.6 349.0 48.9 348.2 48.9 347.4 b 48.9 346.5 49.6 345.8 50.5 345.8 m 128.5 469.5 b 130.2 469.5 131.5 470.8 131.5 472.5 b 131.5 474.1 130.2 475.5 128.5 475.5 b 126.9 475.5 125.5 474.1 125.5 472.5 b 125.5 470.8 126.9 469.5 128.5 469.5 m 371.9 679.0 b 373.1 679.0 374.1 680.0 374.1 681.2 b 374.1 682.4 373.1 683.4 371.9 683.4 b 370.7 683.4 369.7 682.4 369.7 681.2 b 369.7 680.0 370.7 679.0 371.9 679.0 m 837.7 205.3 b 838.9 205.3 839.9 206.2 839.9 207.5 b 839.9 208.7 838.9 209.7 837.7 209.7 b 836.4 209.7 835.5 208.7 835.5 207.5 b 835.5 206.2 836.4 205.3 837.7 205.3 m 928.5 69.1 b 929.1 69.1 929.7 69.7 929.7 70.3 b 929.7 71.0 929.1 71.5 928.5 71.5 b 927.8 71.5 927.3 71.0 927.3 70.3 b 927.3 69.7 927.8 69.1 928.5 69.1 m 225.2 982.5 b 226.4 982.5 227.4 983.5 227.4 984.7 b 227.4 985.9 226.4 986.9 225.2 986.9 b 223.9 986.9 223.0 985.9 223.0 984.7 b 223.0 983.5 223.9 982.5 225.2 982.5 m 991.5 651.5 b 992.2 651.5 992.7 652.1 992.7 652.7 b 992.7 653.4 992.2 653.9 991.5 653.9 b 990.9 653.9 990.3 653.4 990.3 652.7 b 990.3 652.1 990.9 651.5 991.5 651.5 m 337.4 606.7 b 338.3 606.7 339.0 607.4 339.0 608.3 b 339.0 609.1 338.3 609.9 337.4 609.9 b 336.6 609.9 335.8 609.1 335.8 608.3 b 335.8 607.4 336.6 606.7 337.4 606.7 m 862.7 1201.3 b 863.9 1201.3 864.9 1202.3 864.9 1203.5 b 864.9 1204.7 863.9 1205.7 862.7 1205.7 b 861.5 1205.7 860.5 1204.7 860.5 1203.5 b 860.5 1202.3 861.5 1201.3 862.7 1201.3 m 1076.5 308.9 b 1077.1 308.9 1077.7 309.5 1077.7 310.1 b 1077.7 310.8 1077.1 311.3 1076.5 311.3 b 1075.8 311.3 1075.3 310.8 1075.3 310.1 b 1075.3 309.5 1075.8 308.9 1076.5 308.9 m 87.4 1150.2 b 89.1 1150.2 90.4 1151.6 90.4 1153.2 b 90.4 1154.9 89.1 1156.2 87.4 1156.2 b 85.8 1156.2 84.4 1154.9 84.4 1153.2 b 84.4 1151.6 85.8 1150.2 87.4 1150.2 m 34.4 1419.7 b 35.6 1419.7 36.6 1420.7 36.6 1421.9 b 36.6 1423.1 35.6 1424.1 34.4 1424.1 b 33.2 1424.1 32.2 1423.1 32.2 1421.9 b 32.2 1420.7 33.2 1419.7 34.4 1419.7 m 892.4 871.9 b 894.1 871.9 895.4 873.2 895.4 874.9 b 895.4 876.5 894.1 877.9 892.4 877.9 b 890.7 877.9 889.4 876.5 889.4 874.9 b 889.4 873.2 890.7 871.9 892.4 871.9 m 157.3 1878.6 b 157.9 1878.6 158.5 1879.1 158.5 1879.8 b 158.5 1880.4 157.9 1881.0 157.3 1881.0 b 156.6 1881.0 156.1 1880.4 156.1 1879.8 b 156.1 1879.1 156.6 1878.6 157.3 1878.6 m 865.8 640.0 b 866.7 640.0 867.4 640.8 867.4 641.6 b 867.4 642.5 866.7 643.2 865.8 643.2 b 864.9 643.2 864.2 642.5 864.2 641.6 b 864.2 640.8 864.9 640.0 865.8 640.0 m 141.0 1403.2 b 141.9 1403.2 142.6 1403.9 142.6 1404.8 b 142.6 1405.7 141.9 1406.4 141.0 1406.4 b 140.1 1406.4 139.4 1405.7 139.4 1404.8 b 139.4 1403.9 140.1 1403.2 141.0 1403.2 m 680.8 1511.8 b 681.5 1511.8 682.0 1512.3 682.0 1513.0 b 682.0 1513.6 681.5 1514.2 680.8 1514.2 b 680.2 1514.2 679.6 1513.6 679.6 1513.0 b 679.6 1512.3 680.2 1511.8 680.8 1511.8 m 182.3 715.0 b 183.0 715.0 183.5 715.5 183.5 716.2 b 183.5 716.8 183.0 717.4 182.3 717.4 b 181.7 717.4 181.1 716.8 181.1 716.2 b 181.1 715.5 181.7 715.0 182.3 715.0 m 912.3 563.0 b 914.0 563.0 915.3 564.4 915.3 566.0 b 915.3 567.7 914.0 569.0 912.3 569.0 b 910.7 569.0 909.3 567.7 909.3 566.0 b 909.3 564.4 910.7 563.0 912.3 563.0 m 995.8 1189.6 b 996.6 1189.6 997.4 1190.3 997.4 1191.2 b 997.4 1192.1 996.6 1192.8 995.8 1192.8 b 994.9 1192.8 994.2 1192.1 994.2 1191.2 b 994.2 1190.3 994.9 1189.6 995.8 1189.6 m 1054.1 867.8 b 1055.7 867.8 1057.1 869.1 1057.1 870.8 b 1057.1 872.5 1055.7 873.8 1054.1 873.8 b 1052.4 873.8 1051.1 872.5 1051.1 870.8 b 1051.1 869.1 1052.4 867.8 1054.1 867.8 m 743.9 607.8 b 745.2 607.8 746.1 608.8 746.1 610.0 b 746.1 611.2 745.2 612.2 743.9 612.2 b 742.7 612.2 741.7 611.2 741.7 610.0 b 741.7 608.8 742.7 607.8 743.9 607.8 m 314.3 773.7 b 315.2 773.7 315.9 774.4 315.9 775.3 b 315.9 776.2 315.2 776.9 314.3 776.9 b 313.4 776.9 312.7 776.2 312.7 775.3 b 312.7 774.4 313.4 773.7 314.3 773.7 m 121.6 1576.7 b 122.4 1576.7 123.2 1577.5 123.2 1578.3 b 123.2 1579.2 122.4 1579.9 121.6 1579.9 b 120.7 1579.9 120.0 1579.2 120.0 1578.3 b 120.0 1577.5 120.7 1576.7 121.6 1576.7 m 677.1 956.5 b 678.3 956.5 679.3 957.5 679.3 958.7 b 679.3 959.9 678.3 960.9 677.1 960.9 b 675.9 960.9 674.9 959.9 674.9 958.7 b 674.9 957.5 675.9 956.5 677.1 956.5 m 194.5 942.2 b 195.7 942.2 196.7 943.2 196.7 944.4 b 196.7 945.6 195.7 946.6 194.5 946.6 b 193.3 946.6 192.3 945.6 192.3 944.4 b 192.3 943.2 193.3 942.2 194.5 942.2 m 68.2 1524.5 b 69.4 1524.5 70.4 1525.5 70.4 1526.7 b 70.4 1527.9 69.4 1528.9 68.2 1528.9 b 66.9 1528.9 66.0 1527.9 66.0 1526.7 b 66.0 1525.5 66.9 1524.5 68.2 1524.5 m 750.2 1272.7 b 751.4 1272.7 752.4 1273.7 752.4 1274.9 b 752.4 1276.1 751.4 1277.1 750.2 1277.1 b 748.9 1277.1 748.0 1276.1 748.0 1274.9 b 748.0 1273.7 748.9 1272.7 750.2 1272.7 m 392.5 1350.4 b 393.7 1350.4 394.7 1351.4 394.7 1352.6 b 394.7 1353.8 393.7 1354.8 392.5 1354.8 b 391.3 1354.8 390.3 1353.8 390.3 1352.6 b 390.3 1351.4 391.3 1350.4 392.5 1350.4 m 902.1 506.3 b 903.3 506.3 904.3 507.3 904.3 508.5 b 904.3 509.7 903.3 510.7 902.1 510.7 b 900.8 510.7 899.9 509.7 899.9 508.5 b 899.9 507.3 900.8 506.3 902.1 506.3 m 1033.4 651.3 b 1034.3 651.3 1035.0 652.1 1035.0 652.9 b 1035.0 653.8 1034.3 654.5 1033.4 654.5 b 1032.6 654.5 1031.8 653.8 1031.8 652.9 b 1031.8 652.1 1032.6 651.3 1033.4 651.3 m 627.1 20.0 b 628.3 20.0 629.3 21.0 629.3 22.2 b 629.3 23.4 628.3 24.4 627.1 24.4 b 625.9 24.4 624.9 23.4 624.9 22.2 b 624.9 21.0 625.9 20.0 627.1 20.0 m 352.0 523.3 b 353.2 523.3 354.2 524.3 354.2 525.5 b 354.2 526.7 353.2 527.7 352.0 527.7 b 350.8 527.7 349.8 526.7 349.8 525.5 b 349.8 524.3 350.8 523.3 352.0 523.3 m 882.0 1240.9 b 883.2 1240.9 884.2 1241.9 884.2 1243.1 b 884.2 1244.3 883.2 1245.3 882.0 1245.3 b 880.8 1245.3 879.8 1244.3 879.8 1243.1 b 879.8 1241.9 880.8 1240.9 882.0 1240.9 m 375.7 1233.6 b 377.4 1233.6 378.7 1234.9 378.7 1236.6 b 378.7 1238.3 377.4 1239.6 375.7 1239.6 b 374.1 1239.6 372.7 1238.3 372.7 1236.6 b 372.7 1234.9 374.1 1233.6 375.7 1233.6 m 378.0 1615.3 b 379.7 1615.3 381.0 1616.7 381.0 1618.3 b 381.0 1620.0 379.7 1621.3 378.0 1621.3 b 376.4 1621.3 375.0 1620.0 375.0 1618.3 b 375.0 1616.7 376.4 1615.3 378.0 1615.3 m 1054.2 1834.9 b 1055.1 1834.9 1055.8 1835.6 1055.8 1836.5 b 1055.8 1837.4 1055.1 1838.1 1054.2 1838.1 b 1053.3 1838.1 1052.6 1837.4 1052.6 1836.5 b 1052.6 1835.6 1053.3 1834.9 1054.2 1834.9 m 571.7 316.9 b 572.9 316.9 573.9 317.8 573.9 319.1 b 573.9 320.3 572.9 321.3 571.7 321.3 b 570.5 321.3 569.5 320.3 569.5 319.1 b 569.5 317.8 570.5 316.9 571.7 316.9 m 1012.4 915.1 b 1013.0 915.1 1013.6 915.6 1013.6 916.3 b 1013.6 917.0 1013.0 917.5 1012.4 917.5 b 1011.7 917.5 1011.2 917.0 1011.2 916.3 b 1011.2 915.6 1011.7 915.1 1012.4 915.1 m 777.3 1400.7 b 778.1 1400.7 778.9 1401.4 778.9 1402.3 b 778.9 1403.2 778.1 1403.9 777.3 1403.9 b 776.4 1403.9 775.7 1403.2 775.7 1402.3 b 775.7 1401.4 776.4 1400.7 777.3 1400.7 m 666.1 1794.6 b 667.8 1794.6 669.1 1795.9 669.1 1797.6 b 669.1 1799.2 667.8 1800.6 666.1 1800.6 b 664.5 1800.6 663.1 1799.2 663.1 1797.6 b 663.1 1795.9 664.5 1794.6 666.1 1794.6 m 326.9 1060.0 b 328.1 1060.0 329.1 1060.9 329.1 1062.2 b 329.1 1063.4 328.1 1064.4 326.9 1064.4 b 325.7 1064.4 324.7 1063.4 324.7 1062.2 b 324.7 1060.9 325.7 1060.0 326.9 1060.0 m 778.0 51.4 b 778.9 51.4 779.6 52.2 779.6 53.0 b 779.6 53.9 778.9 54.6 778.0 54.6 b 777.2 54.6 776.4 53.9 776.4 53.0 b 776.4 52.2 777.2 51.4 778.0 51.4 m 633.4 1196.6 b 634.2 1196.6 635.0 1197.3 635.0 1198.2 b 635.0 1199.1 634.2 1199.8 633.4 1199.8 b 632.5 1199.8 631.8 1199.1 631.8 1198.2 b 631.8 1197.3 632.5 1196.6 633.4 1196.6 m 236.6 1315.8 b 237.2 1315.8 237.8 1316.4 237.8 1317.0 b 237.8 1317.7 237.2 1318.2 236.6 1318.2 b 235.9 1318.2 235.4 1317.7 235.4 1317.0 b 235.4 1316.4 235.9 1315.8 236.6 1315.8 m 1065.4 1879.5 b 1066.3 1879.5 1067.0 1880.3 1067.0 1881.1 b 1067.0 1882.0 1066.3 1882.7 1065.4 1882.7 b 1064.5 1882.7 1063.8 1882.0 1063.8 1881.1 b 1063.8 1880.3 1064.5 1879.5 1065.4 1879.5 m 58.5 254.2 b 59.7 254.2 60.7 255.2 60.7 256.4 b 60.7 257.6 59.7 258.6 58.5 258.6 b 57.3 258.6 56.3 257.6 56.3 256.4 b 56.3 255.2 57.3 254.2 58.5 254.2 m 1045.4 925.5 b 1046.1 925.5 1046.6 926.0 1046.6 926.7 b 1046.6 927.4 1046.1 927.9 1045.4 927.9 b 1044.8 927.9 1044.2 927.4 1044.2 926.7 b 1044.2 926.0 1044.8 925.5 1045.4 925.5 m 448.7 672.9 b 449.4 672.9 449.9 673.4 449.9 674.1 b 449.9 674.8 449.4 675.3 448.7 675.3 b 448.1 675.3 447.5 674.8 447.5 674.1 b 447.5 673.4 448.1 672.9 448.7 672.9 m 637.4 454.5 b 638.6 454.5 639.6 455.5 639.6 456.7 b 639.6 457.9 638.6 458.9 637.4 458.9 b 636.2 458.9 635.2 457.9 635.2 456.7 b 635.2 455.5 636.2 454.5 637.4 454.5 m 0.7 776.1 b 1.9 776.1 2.9 777.1 2.9 778.3 b 2.9 779.5 1.9 780.5 0.7 780.5 b -0.5 780.5 -1.5 779.5 -1.5 778.3 b -1.5 777.1 -0.5 776.1 0.7 776.1 m 924.3 1661.3 b 925.5 1661.3 926.5 1662.3 926.5 1663.5 b 926.5 1664.7 925.5 1665.7 924.3 1665.7 b 923.1 1665.7 922.1 1664.7 922.1 1663.5 b 922.1 1662.3 923.1 1661.3 924.3 1661.3 m 1041.5 1053.7 b 1042.7 1053.7 1043.7 1054.7 1043.7 1055.9 b 1043.7 1057.1 1042.7 1058.1 1041.5 1058.1 b 1040.3 1058.1 1039.3 1057.1 1039.3 1055.9 b 1039.3 1054.7 1040.3 1053.7 1041.5 1053.7 m 102.4 1044.6 b 103.6 1044.6 104.6 1045.6 104.6 1046.8 b 104.6 1048.0 103.6 1049.0 102.4 1049.0 b 101.2 1049.0 100.2 1048.0 100.2 1046.8 b 100.2 1045.6 101.2 1044.6 102.4 1044.6 m 1027.2 560.7 b 1028.4 560.7 1029.4 561.7 1029.4 562.9 b 1029.4 564.1 1028.4 565.1 1027.2 565.1 b 1026.0 565.1 1025.0 564.1 1025.0 562.9 b 1025.0 561.7 1026.0 560.7 1027.2 560.7 m 884.0 802.5 b 885.2 802.5 886.2 803.5 886.2 804.7 b 886.2 805.9 885.2 806.9 884.0 806.9 b 882.8 806.9 881.8 805.9 881.8 804.7 b 881.8 803.5 882.8 802.5 884.0 802.5 m 504.9 298.0 b 506.5 298.0 507.9 299.4 507.9 301.0 b 507.9 302.7 506.5 304.0 504.9 304.0 b 503.2 304.0 501.9 302.7 501.9 301.0 b 501.9 299.4 503.2 298.0 504.9 298.0"
+    },
+    {
+     "start": 0,
+     "end": 0.724,
+     "layer": 3,
+     "shape": true,
+     "color": "#9BE81A",
+     "text": "{\\an7\\pos(0,0)\\blur120\\alpha&HFF&\\t(0,300,\\alpha&H10&)\\p1}m 760.0 1340.0 b 1069.3 1340.0 1320.0 1590.7 1320.0 1900.0 b 1320.0 2209.3 1069.3 2460.0 760.0 2460.0 b 450.7 2460.0 200.0 2209.3 200.0 1900.0 b 200.0 1590.7 450.7 1340.0 760.0 1340.0"
+    },
+    {
+     "start": 0,
+     "end": 0.724,
+     "layer": 3,
+     "shape": true,
+     "color": "#E9FF8A",
+     "text": "{\\an7\\pos(0,0)\\blur90\\alpha&HFF&\\t(0,300,\\alpha&H30&)\\p1}m 860.0 1630.0 b 1042.3 1630.0 1190.0 1777.7 1190.0 1960.0 b 1190.0 2142.3 1042.3 2290.0 860.0 2290.0 b 677.7 2290.0 530.0 2142.3 530.0 1960.0 b 530.0 1777.7 677.7 1630.0 860.0 1630.0"
+    },
+    {
+     "start": 0,
+     "end": 0.724,
+     "layer": 3,
+     "shape": true,
+     "color": "#000000",
+     "text": "{\\an7\\pos(10,30)\\org(120,140)\\fscx100\\fscy100\\frz0\\t(0,724,\\frz-120)\\blur18\\alpha&H60&\\p1}m 198.0 110.0 l 219.1 124.4 216.3 138.5 191.3 143.7 186.2 154.0 197.3 177.0 187.8 187.8 163.6 179.8 154.0 186.2 152.1 211.6 138.5 216.3 121.5 197.2 110.0 198.0 95.6 219.1 81.5 216.3 76.3 191.3 66.0 186.2 43.0 197.3 32.2 187.8 40.2 163.6 33.8 154.0 8.4 152.1 3.7 138.5 22.8 121.5 22.0 110.0 0.9 95.6 3.7 81.5 28.7 76.3 33.8 66.0 22.7 43.0 32.2 32.2 56.4 40.2 66.0 33.8 67.9 8.4 81.5 3.7 98.5 22.8 110.0 22.0 124.4 0.9 138.5 3.7 143.7 28.7 154.0 33.8 177.0 22.7 187.8 32.2 179.8 56.4 186.2 66.0 211.6 67.9 216.3 81.5 197.2 98.5 m 110.0 75.0 b 90.7 75.0 75.0 90.7 75.0 110.0 b 75.0 129.3 90.7 145.0 110.0 145.0 b 129.3 145.0 145.0 129.3 145.0 110.0 b 145.0 90.7 129.3 75.0 110.0 75.0"
+    },
+    {
+     "start": 0,
+     "end": 0.724,
+     "layer": 4,
+     "shape": true,
+     "color": "#8E9296",
+     "text": "{\\an7\\pos(10,30)\\org(120,140)\\fscx100\\fscy100\\frz0\\t(0,724,\\frz-120)\\bord3\\3c&HE8E4E0&\\blur1\\p1}m 198.0 110.0 l 219.1 124.4 216.3 138.5 191.3 143.7 186.2 154.0 197.3 177.0 187.8 187.8 163.6 179.8 154.0 186.2 152.1 211.6 138.5 216.3 121.5 197.2 110.0 198.0 95.6 219.1 81.5 216.3 76.3 191.3 66.0 186.2 43.0 197.3 32.2 187.8 40.2 163.6 33.8 154.0 8.4 152.1 3.7 138.5 22.8 121.5 22.0 110.0 0.9 95.6 3.7 81.5 28.7 76.3 33.8 66.0 22.7 43.0 32.2 32.2 56.4 40.2 66.0 33.8 67.9 8.4 81.5 3.7 98.5 22.8 110.0 22.0 124.4 0.9 138.5 3.7 143.7 28.7 154.0 33.8 177.0 22.7 187.8 32.2 179.8 56.4 186.2 66.0 211.6 67.9 216.3 81.5 197.2 98.5 m 110.0 75.0 b 90.7 75.0 75.0 90.7 75.0 110.0 b 75.0 129.3 90.7 145.0 110.0 145.0 b 129.3 145.0 145.0 129.3 145.0 110.0 b 145.0 90.7 129.3 75.0 110.0 75.0"
+    },
+    {
+     "start": 0,
+     "end": 0.724,
+     "layer": 5,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(10,30)\\org(120,140)\\fscx100\\fscy100\\frz0\\t(0,724,\\frz-120)\\blur10\\alpha&H90&\\p1}m 170.0 92.0 l 186.3 102.1 184.4 111.9 165.4 115.0 162.0 122.0 171.1 138.9 164.4 146.4 146.5 139.6 140.0 144.0 139.5 163.1 129.9 166.4 117.8 151.5 110.0 152.0 99.9 168.3 90.1 166.4 87.0 147.4 80.0 144.0 63.1 153.1 55.6 146.4 62.4 128.5 58.0 122.0 38.9 121.5 35.6 111.9 50.5 99.8 50.0 92.0 33.7 81.9 35.6 72.1 54.6 69.0 58.0 62.0 48.9 45.1 55.6 37.6 73.5 44.4 80.0 40.0 80.5 20.9 90.1 17.6 102.2 32.5 110.0 32.0 120.1 15.7 129.9 17.6 133.0 36.6 140.0 40.0 156.9 30.9 164.4 37.6 157.6 55.5 162.0 62.0 181.1 62.5 184.4 72.1 169.5 84.2 m 110.0 57.0 b 90.7 57.0 75.0 72.7 75.0 92.0 b 75.0 111.3 90.7 127.0 110.0 127.0 b 129.3 127.0 145.0 111.3 145.0 92.0 b 145.0 72.7 129.3 57.0 110.0 57.0"
+    },
+    {
+     "start": 0,
+     "end": 0.724,
+     "layer": 3,
+     "shape": true,
+     "color": "#000000",
+     "text": "{\\an7\\pos(812,1502)\\org(950,1640)\\fscx125\\fscy125\\frz0\\t(0,724,\\frz90)\\blur18\\alpha&H60&\\p1}m 198.0 110.0 l 219.1 124.4 216.3 138.5 191.3 143.7 186.2 154.0 197.3 177.0 187.8 187.8 163.6 179.8 154.0 186.2 152.1 211.6 138.5 216.3 121.5 197.2 110.0 198.0 95.6 219.1 81.5 216.3 76.3 191.3 66.0 186.2 43.0 197.3 32.2 187.8 40.2 163.6 33.8 154.0 8.4 152.1 3.7 138.5 22.8 121.5 22.0 110.0 0.9 95.6 3.7 81.5 28.7 76.3 33.8 66.0 22.7 43.0 32.2 32.2 56.4 40.2 66.0 33.8 67.9 8.4 81.5 3.7 98.5 22.8 110.0 22.0 124.4 0.9 138.5 3.7 143.7 28.7 154.0 33.8 177.0 22.7 187.8 32.2 179.8 56.4 186.2 66.0 211.6 67.9 216.3 81.5 197.2 98.5 m 110.0 75.0 b 90.7 75.0 75.0 90.7 75.0 110.0 b 75.0 129.3 90.7 145.0 110.0 145.0 b 129.3 145.0 145.0 129.3 145.0 110.0 b 145.0 90.7 129.3 75.0 110.0 75.0"
+    },
+    {
+     "start": 0,
+     "end": 0.724,
+     "layer": 4,
+     "shape": true,
+     "color": "#8E9296",
+     "text": "{\\an7\\pos(812,1502)\\org(950,1640)\\fscx125\\fscy125\\frz0\\t(0,724,\\frz90)\\bord3\\3c&HE8E4E0&\\blur1\\p1}m 198.0 110.0 l 219.1 124.4 216.3 138.5 191.3 143.7 186.2 154.0 197.3 177.0 187.8 187.8 163.6 179.8 154.0 186.2 152.1 211.6 138.5 216.3 121.5 197.2 110.0 198.0 95.6 219.1 81.5 216.3 76.3 191.3 66.0 186.2 43.0 197.3 32.2 187.8 40.2 163.6 33.8 154.0 8.4 152.1 3.7 138.5 22.8 121.5 22.0 110.0 0.9 95.6 3.7 81.5 28.7 76.3 33.8 66.0 22.7 43.0 32.2 32.2 56.4 40.2 66.0 33.8 67.9 8.4 81.5 3.7 98.5 22.8 110.0 22.0 124.4 0.9 138.5 3.7 143.7 28.7 154.0 33.8 177.0 22.7 187.8 32.2 179.8 56.4 186.2 66.0 211.6 67.9 216.3 81.5 197.2 98.5 m 110.0 75.0 b 90.7 75.0 75.0 90.7 75.0 110.0 b 75.0 129.3 90.7 145.0 110.0 145.0 b 129.3 145.0 145.0 129.3 145.0 110.0 b 145.0 90.7 129.3 75.0 110.0 75.0"
+    },
+    {
+     "start": 0,
+     "end": 0.724,
+     "layer": 5,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(812,1502)\\org(950,1640)\\fscx125\\fscy125\\frz0\\t(0,724,\\frz90)\\blur10\\alpha&H90&\\p1}m 170.0 92.0 l 186.3 102.1 184.4 111.9 165.4 115.0 162.0 122.0 171.1 138.9 164.4 146.4 146.5 139.6 140.0 144.0 139.5 163.1 129.9 166.4 117.8 151.5 110.0 152.0 99.9 168.3 90.1 166.4 87.0 147.4 80.0 144.0 63.1 153.1 55.6 146.4 62.4 128.5 58.0 122.0 38.9 121.5 35.6 111.9 50.5 99.8 50.0 92.0 33.7 81.9 35.6 72.1 54.6 69.0 58.0 62.0 48.9 45.1 55.6 37.6 73.5 44.4 80.0 40.0 80.5 20.9 90.1 17.6 102.2 32.5 110.0 32.0 120.1 15.7 129.9 17.6 133.0 36.6 140.0 40.0 156.9 30.9 164.4 37.6 157.6 55.5 162.0 62.0 181.1 62.5 184.4 72.1 169.5 84.2 m 110.0 57.0 b 90.7 57.0 75.0 72.7 75.0 92.0 b 75.0 111.3 90.7 127.0 110.0 127.0 b 129.3 127.0 145.0 111.3 145.0 92.0 b 145.0 72.7 129.3 57.0 110.0 57.0"
+    },
+    {
+     "start": 0,
+     "end": 0.724,
+     "layer": 3,
+     "shape": true,
+     "color": "#000000",
+     "text": "{\\an7\\pos(850,470)\\org(900,520)\\fscx45\\fscy45\\frz0\\t(0,724,\\frz-200)\\blur18\\alpha&H60&\\p1}m 198.0 110.0 l 219.1 124.4 216.3 138.5 191.3 143.7 186.2 154.0 197.3 177.0 187.8 187.8 163.6 179.8 154.0 186.2 152.1 211.6 138.5 216.3 121.5 197.2 110.0 198.0 95.6 219.1 81.5 216.3 76.3 191.3 66.0 186.2 43.0 197.3 32.2 187.8 40.2 163.6 33.8 154.0 8.4 152.1 3.7 138.5 22.8 121.5 22.0 110.0 0.9 95.6 3.7 81.5 28.7 76.3 33.8 66.0 22.7 43.0 32.2 32.2 56.4 40.2 66.0 33.8 67.9 8.4 81.5 3.7 98.5 22.8 110.0 22.0 124.4 0.9 138.5 3.7 143.7 28.7 154.0 33.8 177.0 22.7 187.8 32.2 179.8 56.4 186.2 66.0 211.6 67.9 216.3 81.5 197.2 98.5 m 110.0 75.0 b 90.7 75.0 75.0 90.7 75.0 110.0 b 75.0 129.3 90.7 145.0 110.0 145.0 b 129.3 145.0 145.0 129.3 145.0 110.0 b 145.0 90.7 129.3 75.0 110.0 75.0"
+    },
+    {
+     "start": 0,
+     "end": 0.724,
+     "layer": 4,
+     "shape": true,
+     "color": "#8E9296",
+     "text": "{\\an7\\pos(850,470)\\org(900,520)\\fscx45\\fscy45\\frz0\\t(0,724,\\frz-200)\\bord3\\3c&HE8E4E0&\\blur1\\p1}m 198.0 110.0 l 219.1 124.4 216.3 138.5 191.3 143.7 186.2 154.0 197.3 177.0 187.8 187.8 163.6 179.8 154.0 186.2 152.1 211.6 138.5 216.3 121.5 197.2 110.0 198.0 95.6 219.1 81.5 216.3 76.3 191.3 66.0 186.2 43.0 197.3 32.2 187.8 40.2 163.6 33.8 154.0 8.4 152.1 3.7 138.5 22.8 121.5 22.0 110.0 0.9 95.6 3.7 81.5 28.7 76.3 33.8 66.0 22.7 43.0 32.2 32.2 56.4 40.2 66.0 33.8 67.9 8.4 81.5 3.7 98.5 22.8 110.0 22.0 124.4 0.9 138.5 3.7 143.7 28.7 154.0 33.8 177.0 22.7 187.8 32.2 179.8 56.4 186.2 66.0 211.6 67.9 216.3 81.5 197.2 98.5 m 110.0 75.0 b 90.7 75.0 75.0 90.7 75.0 110.0 b 75.0 129.3 90.7 145.0 110.0 145.0 b 129.3 145.0 145.0 129.3 145.0 110.0 b 145.0 90.7 129.3 75.0 110.0 75.0"
+    },
+    {
+     "start": 0,
+     "end": 0.724,
+     "layer": 5,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(850,470)\\org(900,520)\\fscx45\\fscy45\\frz0\\t(0,724,\\frz-200)\\blur10\\alpha&H90&\\p1}m 170.0 92.0 l 186.3 102.1 184.4 111.9 165.4 115.0 162.0 122.0 171.1 138.9 164.4 146.4 146.5 139.6 140.0 144.0 139.5 163.1 129.9 166.4 117.8 151.5 110.0 152.0 99.9 168.3 90.1 166.4 87.0 147.4 80.0 144.0 63.1 153.1 55.6 146.4 62.4 128.5 58.0 122.0 38.9 121.5 35.6 111.9 50.5 99.8 50.0 92.0 33.7 81.9 35.6 72.1 54.6 69.0 58.0 62.0 48.9 45.1 55.6 37.6 73.5 44.4 80.0 40.0 80.5 20.9 90.1 17.6 102.2 32.5 110.0 32.0 120.1 15.7 129.9 17.6 133.0 36.6 140.0 40.0 156.9 30.9 164.4 37.6 157.6 55.5 162.0 62.0 181.1 62.5 184.4 72.1 169.5 84.2 m 110.0 57.0 b 90.7 57.0 75.0 72.7 75.0 92.0 b 75.0 111.3 90.7 127.0 110.0 127.0 b 129.3 127.0 145.0 111.3 145.0 92.0 b 145.0 72.7 129.3 57.0 110.0 57.0"
+    },
+    {
+     "start": 0,
+     "end": 0.724,
+     "layer": 3,
+     "shape": true,
+     "color": "#000000",
+     "text": "{\\an7\\pos(108,718)\\org(150,760)\\fscx38\\fscy38\\frz0\\t(0,724,\\frz160)\\blur18\\alpha&H60&\\p1}m 198.0 110.0 l 219.1 124.4 216.3 138.5 191.3 143.7 186.2 154.0 197.3 177.0 187.8 187.8 163.6 179.8 154.0 186.2 152.1 211.6 138.5 216.3 121.5 197.2 110.0 198.0 95.6 219.1 81.5 216.3 76.3 191.3 66.0 186.2 43.0 197.3 32.2 187.8 40.2 163.6 33.8 154.0 8.4 152.1 3.7 138.5 22.8 121.5 22.0 110.0 0.9 95.6 3.7 81.5 28.7 76.3 33.8 66.0 22.7 43.0 32.2 32.2 56.4 40.2 66.0 33.8 67.9 8.4 81.5 3.7 98.5 22.8 110.0 22.0 124.4 0.9 138.5 3.7 143.7 28.7 154.0 33.8 177.0 22.7 187.8 32.2 179.8 56.4 186.2 66.0 211.6 67.9 216.3 81.5 197.2 98.5 m 110.0 75.0 b 90.7 75.0 75.0 90.7 75.0 110.0 b 75.0 129.3 90.7 145.0 110.0 145.0 b 129.3 145.0 145.0 129.3 145.0 110.0 b 145.0 90.7 129.3 75.0 110.0 75.0"
+    },
+    {
+     "start": 0,
+     "end": 0.724,
+     "layer": 4,
+     "shape": true,
+     "color": "#8E9296",
+     "text": "{\\an7\\pos(108,718)\\org(150,760)\\fscx38\\fscy38\\frz0\\t(0,724,\\frz160)\\bord3\\3c&HE8E4E0&\\blur1\\p1}m 198.0 110.0 l 219.1 124.4 216.3 138.5 191.3 143.7 186.2 154.0 197.3 177.0 187.8 187.8 163.6 179.8 154.0 186.2 152.1 211.6 138.5 216.3 121.5 197.2 110.0 198.0 95.6 219.1 81.5 216.3 76.3 191.3 66.0 186.2 43.0 197.3 32.2 187.8 40.2 163.6 33.8 154.0 8.4 152.1 3.7 138.5 22.8 121.5 22.0 110.0 0.9 95.6 3.7 81.5 28.7 76.3 33.8 66.0 22.7 43.0 32.2 32.2 56.4 40.2 66.0 33.8 67.9 8.4 81.5 3.7 98.5 22.8 110.0 22.0 124.4 0.9 138.5 3.7 143.7 28.7 154.0 33.8 177.0 22.7 187.8 32.2 179.8 56.4 186.2 66.0 211.6 67.9 216.3 81.5 197.2 98.5 m 110.0 75.0 b 90.7 75.0 75.0 90.7 75.0 110.0 b 75.0 129.3 90.7 145.0 110.0 145.0 b 129.3 145.0 145.0 129.3 145.0 110.0 b 145.0 90.7 129.3 75.0 110.0 75.0"
+    },
+    {
+     "start": 0,
+     "end": 0.724,
+     "layer": 5,
+     "shape": true,
+     "color": "#FFFFFF",
+     "text": "{\\an7\\pos(108,718)\\org(150,760)\\fscx38\\fscy38\\frz0\\t(0,724,\\frz160)\\blur10\\alpha&H90&\\p1}m 170.0 92.0 l 186.3 102.1 184.4 111.9 165.4 115.0 162.0 122.0 171.1 138.9 164.4 146.4 146.5 139.6 140.0 144.0 139.5 163.1 129.9 166.4 117.8 151.5 110.0 152.0 99.9 168.3 90.1 166.4 87.0 147.4 80.0 144.0 63.1 153.1 55.6 146.4 62.4 128.5 58.0 122.0 38.9 121.5 35.6 111.9 50.5 99.8 50.0 92.0 33.7 81.9 35.6 72.1 54.6 69.0 58.0 62.0 48.9 45.1 55.6 37.6 73.5 44.4 80.0 40.0 80.5 20.9 90.1 17.6 102.2 32.5 110.0 32.0 120.1 15.7 129.9 17.6 133.0 36.6 140.0 40.0 156.9 30.9 164.4 37.6 157.6 55.5 162.0 62.0 181.1 62.5 184.4 72.1 169.5 84.2 m 110.0 57.0 b 90.7 57.0 75.0 72.7 75.0 92.0 b 75.0 111.3 90.7 127.0 110.0 127.0 b 129.3 127.0 145.0 111.3 145.0 92.0 b 145.0 72.7 129.3 57.0 110.0 57.0"
+    },
+    {
+     "start": 0.1,
+     "end": 0.724,
+     "layer": 6,
+     "font": "instrument-serif-italic",
+     "size": 190,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,900)\\fsp0\\fscx118\\fscy118\\t(0,260,\\fscx100\\fscy100)\\blur24\\bord12\\3c&H000000&\\alpha&HFF&\\t(0,150,\\alpha&H88&)\\t(464,624,\\alpha&HFF&)}Vibe Editor"
+    },
+    {
+     "start": 0.1,
+     "end": 0.724,
+     "layer": 7,
+     "font": "instrument-serif-italic",
+     "size": 190,
+     "color": "#C9FF2E",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,900)\\fsp0\\fscx118\\fscy118\\t(0,260,\\fscx100\\fscy100)\\blur26\\bord10\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H58&)\\t(464,624,\\alpha&HFF&)}Vibe Editor"
+    },
+    {
+     "start": 0.1,
+     "end": 0.724,
+     "layer": 8,
+     "font": "instrument-serif-italic",
+     "size": 190,
+     "color": "#ECFF9A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\pos(540,900)\\fsp0\\fscx118\\fscy118\\t(0,260,\\fscx100\\fscy100)\\blur3\\bord2\\3c&H2EFFC9&\\alpha&HFF&\\t(0,150,\\alpha&H00&)\\t(464,624,\\alpha&HFF&)}Vibe Editor"
+    },
+    {
+     "start": 0.3,
+     "end": 0.724,
+     "layer": 7,
+     "font": "ve-inter-regular",
+     "size": 56,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1050,540,1040,0,240)\\blur10\\bord4\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H68&)\\t(274,424,\\alpha&HFF&)}edit like this, in minutes"
+    },
+    {
+     "start": 0.3,
+     "end": 0.724,
+     "layer": 8,
+     "font": "ve-inter-regular",
+     "size": 56,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\move(540,1050,540,1040,0,240)\\blur4\\alpha&HFF&\\t(0,200,\\blur0\\alpha&H00&)\\t(274,424,\\alpha&HFF&)}edit like this, in minutes"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 11.899,
+   "name": "ve-whoosh-deep.wav",
+   "volume": 0.35
+  },
+  {
+   "type": "sfx",
+   "at": 12.155,
+   "name": "ve-shimmer.wav",
+   "volume": 0.28
+  }
+ ],
+ "output": {
+  "name": "style4-neon-en"
+ }
+}

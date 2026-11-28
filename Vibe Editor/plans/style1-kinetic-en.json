@@ -1,0 +1,1214 @@
+{
+ "format": "9:16",
+ "reframe": {
+  "mode": "crop",
+  "x": 0.5,
+  "y": 0.5
+ },
+ "look": {
+  "filter": "eq=contrast=1.12:saturation=0.82:brightness=-0.025,vignette=PI/5"
+ },
+ "cuts": {
+  "remove_pauses": false,
+  "trim_ends": false,
+  "remove_fillers": false,
+  "drop_words": [],
+  "drop": [
+   [
+    7.933,
+    8.167
+   ],
+   [
+    11.9,
+    13.733
+   ]
+  ]
+ },
+ "captions": {
+  "enabled": false
+ },
+ "audio": {
+  "denoise": false,
+  "loudness": -14,
+  "music": {
+   "file": "m-kinetic.wav",
+   "volume": 0.2,
+   "duck": true
+  }
+ },
+ "auto_sfx": true,
+ "events": [
+  {
+   "type": "background",
+   "at": 0,
+   "until": 8.027,
+   "bg": "bg/teal-spot.png"
+  },
+  {
+   "type": "background",
+   "at": 8.027,
+   "until": 10.207,
+   "bg": "bg/red-wall.png"
+  },
+  {
+   "type": "background",
+   "at": 10.207,
+   "until": 11.753,
+   "bg": "bg/white-seamless.png"
+  },
+  {
+   "type": "bw",
+   "at": 10.207,
+   "until": 11.753
+  },
+  {
+   "type": "background",
+   "at": 11.753,
+   "dur": 1.214,
+   "bg": "bg/teal-spot.png"
+  },
+  {
+   "type": "zoom",
+   "at": 0,
+   "dur": 1.1,
+   "style": "push",
+   "amount": 1.08
+  },
+  {
+   "type": "zoom",
+   "at": 4.26,
+   "dur": 1.2,
+   "style": "push",
+   "amount": 1.1
+  },
+  {
+   "type": "zoom",
+   "at": 8.027,
+   "dur": 1.4,
+   "style": "push",
+   "amount": 1.1
+  },
+  {
+   "type": "zoom",
+   "at": 10.207,
+   "dur": 1.3,
+   "style": "push",
+   "amount": 1.12
+  },
+  {
+   "type": "zoom",
+   "at": 11.753,
+   "dur": 1.2136666666666684,
+   "style": "slow",
+   "amount": 1.06
+  },
+  {
+   "type": "ass",
+   "at": 0.0,
+   "dur": 1.06,
+   "layers": [
+    {
+     "start": 0.0,
+     "end": 1.06,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 150,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,304,84,288,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(910,1060,\\alpha&HFF&)}here’s"
+    },
+    {
+     "start": 0.0,
+     "end": 1.06,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 150,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,304,84,288,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(910,1060,\\alpha&HFF&\\blur8)}here’s"
+    },
+    {
+     "start": 0.82,
+     "end": 1.06,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 230,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(40,467,40,451,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(90,240,\\alpha&HFF&)}something"
+    },
+    {
+     "start": 0.82,
+     "end": 1.06,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 230,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(40,467,40,451,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(90,240,\\alpha&HFF&\\blur8)}something"
+    }
+   ],
+   "behind": true
+  },
+  {
+   "type": "ass",
+   "at": 1.01,
+   "dur": 0.77,
+   "layers": [
+    {
+     "start": 0.05,
+     "end": 0.77,
+     "layer": 7,
+     "font": "ve-script",
+     "size": 250,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(460,352,460,336,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(570,720,\\alpha&HFF&)}nobody"
+    },
+    {
+     "start": 0.05,
+     "end": 0.77,
+     "layer": 8,
+     "font": "ve-script",
+     "size": 250,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(460,352,460,336,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(570,720,\\alpha&HFF&\\blur8)}nobody"
+    },
+    {
+     "start": 0.35,
+     "end": 0.77,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 140,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,510,84,494,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(270,420,\\alpha&HFF&)}tells"
+    },
+    {
+     "start": 0.35,
+     "end": 0.77,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 140,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,510,84,494,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(270,420,\\alpha&HFF&\\blur8)}tells"
+    },
+    {
+     "start": 0.61,
+     "end": 0.77,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 140,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(347,510,347,494,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(10,160,\\alpha&HFF&)}you"
+    },
+    {
+     "start": 0.61,
+     "end": 0.77,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 140,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(347,510,347,494,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(10,160,\\alpha&HFF&\\blur8)}you"
+    }
+   ]
+  },
+  {
+   "type": "ass",
+   "at": 1.73,
+   "dur": 0.93,
+   "layers": [
+    {
+     "start": 0.27,
+     "end": 0.93,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 360,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-8\\move(540,396,540,366,0,320)\\fscx120\\fscy120\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(510,660,\\alpha&HFF&\\blur8)}reels"
+    },
+    {
+     "start": 0.05,
+     "end": 0.93,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 100,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-3\\move(540,202,540,186,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(730,880,\\alpha&HFF&)}about"
+    },
+    {
+     "start": 0.05,
+     "end": 0.93,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 100,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-3\\move(540,202,540,186,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(730,880,\\alpha&HFF&\\blur8)}about"
+    }
+   ],
+   "behind": true
+  },
+  {
+   "type": "sfx",
+   "at": 1.833,
+   "name": "ve-whoosh-air.wav",
+   "volume": 0.32
+  },
+  {
+   "type": "ass",
+   "at": 2.61,
+   "dur": 1.11,
+   "layers": [
+    {
+     "start": 0.05,
+     "end": 1.11,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 124,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,1216,84,1200,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(910,1060,\\alpha&HFF&)}your"
+    },
+    {
+     "start": 0.05,
+     "end": 1.11,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 124,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,1216,84,1200,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(910,1060,\\alpha&HFF&\\blur8)}your"
+    },
+    {
+     "start": 0.19,
+     "end": 1.11,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 124,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(515,1323,515,1307,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(770,920,\\alpha&HFF&)}content"
+    },
+    {
+     "start": 0.19,
+     "end": 1.11,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 124,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(515,1323,515,1307,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(770,920,\\alpha&HFF&\\blur8)}content"
+    },
+    {
+     "start": 0.47,
+     "end": 1.11,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 124,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(914,1323,914,1307,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(490,640,\\alpha&HFF&)}is"
+    },
+    {
+     "start": 0.47,
+     "end": 1.11,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 124,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(914,1323,914,1307,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(490,640,\\alpha&HFF&\\blur8)}is"
+    },
+    {
+     "start": 0.71,
+     "end": 1.11,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 210,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,1467,84,1451,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(250,400,\\alpha&HFF&)}fine"
+    },
+    {
+     "start": 0.71,
+     "end": 1.11,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 210,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,1467,84,1451,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(250,400,\\alpha&HFF&\\blur8)}fine"
+    }
+   ]
+  },
+  {
+   "type": "broll",
+   "at": 3.66,
+   "until": 4.26,
+   "file": "color-grading.mp4",
+   "from": 6
+  },
+  {
+   "type": "filter",
+   "at": 3.66,
+   "until": 4.26,
+   "filter": "eq=brightness=-0.08:contrast=1.1"
+  },
+  {
+   "type": "ass",
+   "at": 3.67,
+   "dur": 0.59,
+   "layers": [
+    {
+     "start": 0.37,
+     "end": 0.59,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 250,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-8\\move(540,932,540,902,0,320)\\fscx120\\fscy120\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(70,220,\\alpha&HFF&)}editing"
+    },
+    {
+     "start": 0.37,
+     "end": 0.59,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 250,
+     "color": "#43E07A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-8\\move(540,932,540,902,0,320)\\fscx120\\fscy120\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(70,220,\\alpha&HFF&\\blur8)}editing"
+    },
+    {
+     "start": 0.05,
+     "end": 0.59,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 110,
+     "color": "#43E07A",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-3\\move(540,726,540,710,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(390,540,\\alpha&HFF&\\blur8)}it’s your"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 3.366,
+   "name": "ve-whoosh-deep.wav",
+   "volume": 0.42
+  },
+  {
+   "type": "ass",
+   "at": 4.21,
+   "dur": 1.19,
+   "layers": [
+    {
+     "start": 0.77,
+     "end": 1.19,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 380,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-8\\move(540,396,540,366,0,320)\\fscx120\\fscy120\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(270,420,\\alpha&HFF&\\blur8)}views"
+    },
+    {
+     "start": 0.05,
+     "end": 1.19,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 104,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-3\\move(540,202,540,186,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(990,1140,\\alpha&HFF&)}that’s killing your"
+    },
+    {
+     "start": 0.05,
+     "end": 1.19,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 104,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-3\\move(540,202,540,186,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(990,1140,\\alpha&HFF&\\blur8)}that’s killing your"
+    }
+   ],
+   "behind": true
+  },
+  {
+   "type": "sfx",
+   "at": 4.877,
+   "name": "ve-hit.wav",
+   "volume": 0.5
+  },
+  {
+   "type": "ass",
+   "at": 5.35,
+   "dur": 0.53,
+   "layers": [
+    {
+     "start": 0.05,
+     "end": 0.53,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 124,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(677,1274,677,1258,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(330,480,\\alpha&HFF&)}people"
+    },
+    {
+     "start": 0.05,
+     "end": 0.53,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 124,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(677,1274,677,1258,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(330,480,\\alpha&HFF&\\blur8)}people"
+    },
+    {
+     "start": 0.19,
+     "end": 0.53,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 200,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,1413,84,1397,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(190,340,\\alpha&HFF&)}decide"
+    },
+    {
+     "start": 0.19,
+     "end": 0.53,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 200,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,1413,84,1397,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(190,340,\\alpha&HFF&\\blur8)}decide"
+    }
+   ]
+  },
+  {
+   "type": "broll",
+   "at": 5.82,
+   "until": 6.6,
+   "file": "eye-closeup.mp4",
+   "from": 3
+  },
+  {
+   "type": "filter",
+   "at": 5.82,
+   "until": 6.6,
+   "filter": "eq=brightness=-0.12:saturation=0.8"
+  },
+  {
+   "type": "ass",
+   "at": 5.83,
+   "dur": 0.77,
+   "layers": [
+    {
+     "start": 0.05,
+     "end": 0.77,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 130,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,761,84,745,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(570,720,\\alpha&HFF&)}in"
+    },
+    {
+     "start": 0.05,
+     "end": 0.77,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 130,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,761,84,745,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(570,720,\\alpha&HFF&\\blur8)}in"
+    },
+    {
+     "start": 0.21,
+     "end": 0.77,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 250,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(624,924,624,908,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(410,560,\\alpha&HFF&)}two"
+    },
+    {
+     "start": 0.21,
+     "end": 0.77,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 250,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(624,924,624,908,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(410,560,\\alpha&HFF&\\blur8)}two"
+    },
+    {
+     "start": 0.43,
+     "end": 0.77,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 250,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,1139,84,1123,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(190,340,\\alpha&HFF&)}seconds"
+    },
+    {
+     "start": 0.43,
+     "end": 0.77,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 250,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,1139,84,1123,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(190,340,\\alpha&HFF&\\blur8)}seconds"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 5.526,
+   "name": "ve-whoosh-deep.wav",
+   "volume": 0.38
+  },
+  {
+   "type": "sfx",
+   "at": 6.151,
+   "name": "ve-tick.wav",
+   "volume": 0.35
+  },
+  {
+   "type": "ass",
+   "at": 6.55,
+   "dur": 0.71,
+   "layers": [
+    {
+     "start": 0.05,
+     "end": 0.71,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 130,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,235,84,219,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(510,660,\\alpha&HFF&)}whether"
+    },
+    {
+     "start": 0.05,
+     "end": 0.71,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 130,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,235,84,219,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(510,660,\\alpha&HFF&\\blur8)}whether"
+    },
+    {
+     "start": 0.25,
+     "end": 0.71,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 130,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(894,346,894,330,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(310,460,\\alpha&HFF&)}to"
+    },
+    {
+     "start": 0.25,
+     "end": 0.71,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 130,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(894,346,894,330,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(310,460,\\alpha&HFF&\\blur8)}to"
+    },
+    {
+     "start": 0.53,
+     "end": 0.71,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 260,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,514,84,498,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(30,180,\\alpha&HFF&)}stay"
+    },
+    {
+     "start": 0.53,
+     "end": 0.71,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 260,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,514,84,498,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(30,180,\\alpha&HFF&\\blur8)}stay"
+    }
+   ],
+   "behind": true
+  },
+  {
+   "type": "broll",
+   "at": 7.21,
+   "until": 8.027,
+   "file": "hands-phone.mp4",
+   "from": 4
+  },
+  {
+   "type": "filter",
+   "at": 7.21,
+   "until": 8.027,
+   "filter": "eq=brightness=-0.1"
+  },
+  {
+   "type": "ass",
+   "at": 7.21,
+   "dur": 0.817,
+   "layers": [
+    {
+     "start": 0.27,
+     "end": 0.817,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 330,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-8\\move(540,1260,540,960,0,260)\\blur14\\fscy140\\t(0,260,\\blur0\\fscy100)\\t(397,547,\\alpha&HFF&)}scroll"
+    },
+    {
+     "start": 0.05,
+     "end": 0.817,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 110,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-3\\move(540,786,540,770,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(617,767,\\alpha&HFF&)}or"
+    },
+    {
+     "start": 0.05,
+     "end": 0.817,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 110,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-3\\move(540,786,540,770,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(617,767,\\alpha&HFF&\\blur8)}or"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 7.375,
+   "name": "ve-scroll.wav",
+   "volume": 0.5
+  },
+  {
+   "type": "sfx",
+   "at": 7.198,
+   "name": "ve-swish.wav",
+   "volume": 0.3
+  },
+  {
+   "type": "ass",
+   "at": 7.977,
+   "dur": 1.33,
+   "layers": [
+    {
+     "start": 0.57,
+     "end": 1.33,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 340,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-8\\move(540,396,540,366,0,320)\\fscx120\\fscy120\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(610,760,\\alpha&HFF&\\blur8)}video"
+    },
+    {
+     "start": 0.05,
+     "end": 1.33,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 104,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-3\\move(540,202,540,186,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(1130,1280,\\alpha&HFF&)}so the same"
+    },
+    {
+     "start": 0.05,
+     "end": 1.33,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 104,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-3\\move(540,202,540,186,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(1130,1280,\\alpha&HFF&\\blur8)}so the same"
+    }
+   ],
+   "behind": true
+  },
+  {
+   "type": "sfx",
+   "at": 7.278,
+   "name": "ve-reverse.wav",
+   "volume": 0.35
+  },
+  {
+   "type": "sfx",
+   "at": 8.002,
+   "name": "ve-thump.wav",
+   "volume": 0.5
+  },
+  {
+   "type": "ass",
+   "at": 9.257,
+   "dur": 0.95,
+   "layers": [
+    {
+     "start": 0.05,
+     "end": 0.95,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 200,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,1274,84,1258,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(750,900,\\alpha&HFF&)}edited"
+    },
+    {
+     "start": 0.05,
+     "end": 0.95,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 200,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,1274,84,1258,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(750,900,\\alpha&HFF&\\blur8)}edited"
+    },
+    {
+     "start": 0.27,
+     "end": 0.95,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 200,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(628,1446,628,1430,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(530,680,\\alpha&HFF&)}right"
+    },
+    {
+     "start": 0.27,
+     "end": 0.95,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 200,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(628,1446,628,1430,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(530,680,\\alpha&HFF&\\blur8)}right"
+    }
+   ]
+  },
+  {
+   "type": "ass",
+   "at": 10.157,
+   "dur": 1.596,
+   "layers": [
+    {
+     "start": 0.37,
+     "end": 1.596,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 470,
+     "color": "#141414",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-14\\move(540,426,540,386,0,320)\\fscx130\\fscy130\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(1076,1226,\\alpha&HFF&\\blur8)}10x"
+    },
+    {
+     "start": 0.05,
+     "end": 1.596,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 110,
+     "color": "#141414",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,192,84,176,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(1396,1546,\\alpha&HFF&\\blur8)}can do"
+    },
+    {
+     "start": 0.99,
+     "end": 1.596,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 140,
+     "color": "#141414",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an6\\fsp-3\\move(996,632,996,616,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(456,606,\\alpha&HFF&\\blur8)}better"
+    }
+   ],
+   "behind": true
+  },
+  {
+   "type": "sfx",
+   "at": 10.424,
+   "name": "ve-hit.wav",
+   "volume": 0.45
+  },
+  {
+   "type": "ass",
+   "at": 11.703,
+   "dur": 1.264,
+   "layers": [
+    {
+     "start": 0.05,
+     "end": 1.264,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 150,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,235,84,219,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(1064,1214,\\alpha&HFF&)}let"
+    },
+    {
+     "start": 0.05,
+     "end": 1.264,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 150,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,235,84,219,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(1064,1214,\\alpha&HFF&\\blur8)}let"
+    },
+    {
+     "start": 0.19,
+     "end": 1.264,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 150,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(270,235,270,219,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(924,1074,\\alpha&HFF&)}me"
+    },
+    {
+     "start": 0.19,
+     "end": 1.264,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 150,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(270,235,270,219,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(924,1074,\\alpha&HFF&\\blur8)}me"
+    },
+    {
+     "start": 0.33,
+     "end": 1.264,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 240,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(481,402,481,386,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(784,934,\\alpha&HFF&)}show"
+    },
+    {
+     "start": 0.33,
+     "end": 1.264,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 240,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(481,402,481,386,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(784,934,\\alpha&HFF&\\blur8)}show"
+    },
+    {
+     "start": 0.49,
+     "end": 1.264,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 150,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,570,84,554,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(624,774,\\alpha&HFF&)}you"
+    },
+    {
+     "start": 0.49,
+     "end": 1.264,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 150,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an4\\fsp-3\\move(84,570,84,554,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(624,774,\\alpha&HFF&\\blur8)}you"
+    }
+   ],
+   "behind": true
+  },
+  {
+   "type": "ass",
+   "at": 12.293,
+   "dur": 0.674,
+   "layers": [
+    {
+     "start": 0.0,
+     "end": 0.674,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 58,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp0\\move(540,1570,540,1560,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(524,674,\\alpha&HFF&)}edited with"
+    },
+    {
+     "start": 0.0,
+     "end": 0.674,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 58,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp0\\move(540,1570,540,1560,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(524,674,\\alpha&HFF&\\blur8)}edited with"
+    },
+    {
+     "start": 0.08,
+     "end": 0.674,
+     "layer": 7,
+     "font": "ve-grotesk-black",
+     "size": 150,
+     "color": "#000000",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-4\\move(540,1680,540,1660,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur18\\bord5\\3c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H90&)\\t(444,594,\\alpha&HFF&)}vibe editor"
+    },
+    {
+     "start": 0.08,
+     "end": 0.674,
+     "layer": 8,
+     "font": "ve-grotesk-black",
+     "size": 150,
+     "color": "#FFFFFF",
+     "outline": "#000000",
+     "bord": 0,
+     "shad": 0,
+     "text": "{\\an5\\fsp-4\\move(540,1680,540,1660,0,320)\\fscx112\\fscy112\\t(0,220,\\fscx100\\fscy100)\\blur10\\alpha&HFF&\\t(0,220,\\blur0\\alpha&H00&)\\t(444,594,\\alpha&HFF&\\blur8)}vibe editor"
+    }
+   ]
+  },
+  {
+   "type": "sfx",
+   "at": 12.155,
+   "name": "ve-shimmer.wav",
+   "volume": 0.3
+  },
+  {
+   "type": "sfx",
+   "at": 0.0,
+   "name": "ve-swish.wav",
+   "volume": 0.16
+  },
+  {
+   "type": "sfx",
+   "at": 1.028,
+   "name": "ve-swish.wav",
+   "volume": 0.16
+  },
+  {
+   "type": "sfx",
+   "at": 1.748,
+   "name": "ve-swish.wav",
+   "volume": 0.16
+  },
+  {
+   "type": "sfx",
+   "at": 2.628,
+   "name": "ve-swish.wav",
+   "volume": 0.16
+  },
+  {
+   "type": "sfx",
+   "at": 4.228,
+   "name": "ve-swish.wav",
+   "volume": 0.16
+  },
+  {
+   "type": "sfx",
+   "at": 5.368,
+   "name": "ve-swish.wav",
+   "volume": 0.16
+  },
+  {
+   "type": "sfx",
+   "at": 6.568,
+   "name": "ve-swish.wav",
+   "volume": 0.16
+  },
+  {
+   "type": "sfx",
+   "at": 7.995,
+   "name": "ve-swish.wav",
+   "volume": 0.16
+  },
+  {
+   "type": "sfx",
+   "at": 9.275,
+   "name": "ve-swish.wav",
+   "volume": 0.16
+  },
+  {
+   "type": "sfx",
+   "at": 10.175,
+   "name": "ve-swish.wav",
+   "volume": 0.16
+  },
+  {
+   "type": "sfx",
+   "at": 11.721,
+   "name": "ve-swish.wav",
+   "volume": 0.16
+  },
+  {
+   "type": "sfx",
+   "at": 0.0,
+   "name": "ve-whoosh-air.wav",
+   "volume": 0.3
+  }
+ ],
+ "output": {
+  "name": "style1-kinetic-en"
+ }
+}

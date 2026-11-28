@@ -1,0 +1,37 @@
+{
+ "format": "16:9",
+ "reframe": {
+  "mode": "crop",
+  "x": 0.5,
+  "y": 0.205
+ },
+ "look": "natural",
+ "cuts": {
+  "remove_pauses": false,
+  "trim_ends": false,
+  "remove_fillers": false,
+  "drop_words": [],
+  "drop": [
+   [
+    7.933,
+    8.167
+   ],
+   [
+    11.9,
+    13.733
+   ]
+  ]
+ },
+ "captions": {
+  "enabled": false
+ },
+ "audio": {
+  "denoise": false,
+  "loudness": -14
+ },
+ "auto_sfx": false,
+ "events": [],
+ "output": {
+  "name": "style3-before-en"
+ }
+}

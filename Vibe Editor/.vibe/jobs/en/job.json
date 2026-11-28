@@ -1,0 +1,14 @@
+{
+  "name": "en",
+  "source": "/home/user/experiments/Vibe Editor/inbox/raw-a.mp4",
+  "probe": {
+    "duration": 15.04,
+    "fps": 24.0,
+    "has_audio": true,
+    "has_video": true,
+    "width": 720,
+    "height": 1280
+  },
+  "language": "en",
+  "created": "2026-11-28 07:49"
+}

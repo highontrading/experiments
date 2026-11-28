@@ -1,0 +1,22 @@
+{
+ "ve-camera": 0.087,
+ "ve-cash": 0.025,
+ "ve-click": 0.04,
+ "ve-ding": 0.025,
+ "ve-film": 0.608,
+ "ve-glitch": 0.413,
+ "ve-hit": 0.103,
+ "ve-neon": 0.544,
+ "ve-pen": 0.684,
+ "ve-pop": 0.027,
+ "ve-reverse": 0.749,
+ "ve-riser": 1.272,
+ "ve-scroll": 0.105,
+ "ve-shimmer": 0.238,
+ "ve-swish": 0.032,
+ "ve-tape": 0.623,
+ "ve-thump": 0.025,
+ "ve-tick": 0.109,
+ "ve-whoosh-air": 0.167,
+ "ve-whoosh-deep": 0.344
+}
