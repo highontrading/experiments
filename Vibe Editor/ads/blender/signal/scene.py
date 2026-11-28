@@ -148,4 +148,5 @@ if ICONS:
         if o.type == "MESH" and o.name not in icon_objs:
             o.is_holdout = True
     C.sc.render.film_transparent = True
+    C.sc.use_nodes = False  # the bloom/lens compositor drops alpha
 C.save()

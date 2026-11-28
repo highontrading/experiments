@@ -60,7 +60,9 @@ def paste_rgba(canvas, patch, x, y, scale=1.0, rot=0.0):
         return
     p = patch[Y0 - y:Y1 - y, X0 - x:X1 - x]
     a = p[..., 3:4]
-    canvas[Y0:Y1, X0:X1] = canvas[Y0:Y1, X0:X1] * (1 - a) + p[..., :3] * a
+    c = canvas[Y0:Y1, X0:X1]
+    c[..., :3] = c[..., :3] * (1 - a) + p[..., :3] * a
+    c[..., 3:4] = c[..., 3:4] + a * (1 - c[..., 3:4])
 
 
 def word_layer(text, size=230, y=1500, color=(255, 255, 255)):
@@ -139,17 +141,14 @@ def main():
         frame = V.camera(canvas, zoom=zoom, cx=cx, cy=cy)
         g = V.camera(glow, zoom=zoom, cx=cx, cy=cy)
         # icons: their own float + stronger parallax than the wall
-        lay = np.zeros((P.h, P.w, 3), np.float32)
-        ia = np.zeros((P.h, P.w, 1), np.float32)
+        pl = np.zeros((P.h, P.w, 4), np.float32)
+        pulse = 1.0 + 0.06 * sum(math.exp(-((t - ts) / 0.12) ** 2) for (ts, _) in words)
         for sp in icons:
             bob = math.sin(t * 2 * math.pi * sp["f"] + sp["ph"]) * sp["amp"]
-            pulse = 1.0 + 0.06 * sum(math.exp(-((t - ts) / 0.12) ** 2) for (ts, _) in words)
-            pl = np.concatenate([lay, ia], axis=2)
             paste_rgba(pl, sp["patch"], sp["x"], sp["y"] + bob, scale=pulse, rot=math.sin(t * 0.9 + sp["ph"]) * 3)
-            lay, ia = pl[..., :3], pl[..., 3:4]
         iz = 1.0 + (zoom - 1.0) * 1.35
-        icon_rgb = V.camera(np.concatenate([lay, ia], axis=2), zoom=iz, cx=cx, cy=cy)
-        frame = frame * (1 - icon_rgb[..., 3:4]) + icon_rgb[..., :3]
+        icon_l = V.camera(pl, zoom=iz, cx=cx, cy=cy)
+        frame = frame * (1 - icon_l[..., 3:4]) + icon_l[..., :3] * icon_l[..., 3:4]
         frame = V.finish(frame, t, grain=0.035, vignette=0.28, bloom=0.32, glowimg=g)
         # the dive lands inside the TV: full-frame raw clip, then the edits rapid-fire
         if t >= t_push + 0.55:
