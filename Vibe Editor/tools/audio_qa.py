@@ -10,7 +10,11 @@ import numpy as np
 def ebur(path):
     r = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", path, "-af", "ebur128=peak=true:framelog=verbose",
                         "-f", "null", "-"], capture_output=True, text=True).stderr
-    mom = [(float(t), float(m)) for t, m in re.findall(r"t:\s*([\d.]+)\s+TARGET.*?M:\s*(-?[\d.]+)", r)]
+    m2 = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", path, "-af",
+                         "ebur128=metadata=1,ametadata=print:key=lavfi.r128.M", "-f", "null", "-"], capture_output=True, text=True).stderr
+    ts = [float(x) for x in re.findall(r"pts_time:([\d.]+)", m2)]
+    ms_ = [float(x) for x in re.findall(r"lavfi.r128.M=(-?[\d.]+)", m2)]
+    mom = list(zip(ts, ms_))
     I = float(re.search(r"I:\s*(-?[\d.]+) LUFS", r.split("Summary:")[-1]).group(1))
     tp = float(re.search(r"Peak:\s*(-?[\d.]+) dBFS", r.split("Summary:")[-1]).group(1))
     return I, tp, mom

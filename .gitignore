@@ -21,3 +21,5 @@ Vibe Editor/tools/__pycache__/
 Vibe Editor/plans/test.json
 Vibe Editor/.vibe/jobs/*/graph.txt
 Vibe Editor/.vibe/jobs/*/last_render.json
+Vibe Editor/.vibe/master/
+Vibe Editor/.vibe/*.sh

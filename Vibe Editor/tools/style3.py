@@ -21,7 +21,7 @@ CW, CH = 1920, 1080
 
 
 # ------------------------------------------------------------------ captions in the AFTER card (16:9 space)
-def cap_block(ch, y_big=850, lead=0.04):
+def cap_block(ch, y_big=800, lead=0.04):
     at = max(0.0, ch.start - lead)
     end = ch.end - at
     T = ms(end)
@@ -38,10 +38,13 @@ def cap_block(ch, y_big=850, lead=0.04):
                     font=BIGF, size=size, color="#000000", layer=7))
     layers.append(L(0, end, "{" + base + f"\\alpha&HFF&\\t({ms(t0)},{ms(t0) + 100},\\alpha&H00&)\\t({T - 120},{T},\\alpha&HFF&)}}" + big,
                     font=BIGF, size=size, color="#FFFFFF", layer=8))
-    if rest:
-        small = " ".join(w[1] for w in rest)
-        t1 = rest[0][2] - at
-        y_s = y_big - size * 0.56
+    pre = [w for w in rest if w[0] < emph[0][0]]
+    post = [w for w in rest if w[0] > emph[-1][0]]
+    for grp, y_s in ((pre, y_big - size * 0.56), (post, y_big + size * 0.56)):
+        if not grp:
+            continue
+        small = " ".join(w[1] for w in grp)
+        t1 = grp[0][2] - at
         b2 = f"\\an5\\move(960,{y_s + 14:.0f},960,{y_s:.0f},{ms(t1)},{ms(t1) + 220})"
         layers.append(L(0, end, "{" + b2 + f"\\blur9\\bord7\\3c&H000000&\\alpha&HFF&\\t({ms(t1)},{ms(t1) + 160},\\alpha&H48&)\\t({T - 120},{T},\\alpha&HFF&)}}" + small,
                         font=SMALLF, size=84, color="#000000", layer=7))
