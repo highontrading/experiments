@@ -11,5 +11,21 @@ new = ('G.push(f"[{bg}]format=gbrp[{out}b];[{src}]format=gbrp[{out}s];[{pool.get
 assert old in src, "engine changed — patch not applied"
 exec(compile(src.replace(old, new), ai.__file__, "exec"), ai.__dict__)
 
+# Hard framing changes for DESIGN_SYSTEM.md (alternate wide/tight at each cut): zoom style "cut" = instant step.
+from vibe_engine import fx_video, render  # noqa: E402
+zsrc = textwrap.dedent(inspect.getsource(fx_video.zoom_expr))
+zold = '        elif st == "pulse":'
+assert zold in zsrc, "engine changed — zoom patch not applied"
+zsrc = zsrc.replace(zold, '        elif st == "cut":\n            ri, ro = 0.001, 0.001\n' + zold)
+exec(compile(zsrc, fx_video.__file__, "exec"), fx_video.__dict__)
+
+# Music bed per DESIGN_SYSTEM.md §6: fade in 0.8 s, out 1.2 s, gentler ducking (ratio 3).
+asrc = textwrap.dedent(inspect.getsource(render.audio_graph))
+for o, n in (("afade=t=in:d=0.6", "afade=t=in:d=0.8"), ("tm.duration - 1.5):.3f}:d=1.5", "tm.duration - 1.2):.3f}:d=1.2"),
+             ("sidechaincompress=threshold=0.04:ratio=6", "sidechaincompress=threshold=0.04:ratio=3")):
+    assert o in asrc, "engine changed — audio patch not applied: " + o
+    asrc = asrc.replace(o, n)
+exec(compile(asrc, render.__file__, "exec"), render.__dict__)
+
 if __name__ == "__main__":
     cli.main()

@@ -47,8 +47,8 @@ def esc(t):
 
 # --------------------------------------------------------------------- words / chunks
 class Words:
-    def __init__(self, job):
-        ws, self.dur, self.segs = owords(job)
+    def __init__(self, job, cuts=None):
+        ws, self.dur, self.segs = owords(job, cuts=cuts)
         self.by = {w["i"]: w for w in ws}
         self.list = ws
 

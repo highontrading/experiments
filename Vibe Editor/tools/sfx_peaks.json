@@ -18,5 +18,12 @@
  "ve-thump": 0.025,
  "ve-tick": 0.109,
  "ve-whoosh-air": 0.167,
- "ve-whoosh-deep": 0.344
+ "ve-whoosh-deep": 0.344,
+ "ds-swell": 0.498,
+ "ds-tap": 0.249,
+ "ds-paper": 0.046,
+ "ds-whoosh": 0.068,
+ "ds-pop": 0.025,
+ "ds-click": 0.28,
+ "ds-shimmer": 0.025
 }
