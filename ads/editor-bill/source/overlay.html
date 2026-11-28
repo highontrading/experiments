@@ -1,0 +1,317 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:P;font-weight:900;src:url('file:///root/.claude/plugins/synced/74f9fb4e-54c6-46fc-b018-a3707af7e8e4_cc95731b-4d6e-4461-a267-c1f8fc836df4/vibe-editor/skills/edit/library/fonts/Poppins-Black.ttf')}
+@font-face{font-family:P;font-weight:800;src:url('file:///root/.claude/plugins/synced/74f9fb4e-54c6-46fc-b018-a3707af7e8e4_cc95731b-4d6e-4461-a267-c1f8fc836df4/vibe-editor/skills/edit/library/fonts/Poppins-ExtraBold.ttf')}
+@font-face{font-family:P;font-weight:700;src:url('file:///root/.claude/plugins/synced/74f9fb4e-54c6-46fc-b018-a3707af7e8e4_cc95731b-4d6e-4461-a267-c1f8fc836df4/vibe-editor/skills/edit/library/fonts/Poppins-Bold.ttf')}
+@font-face{font-family:P;font-weight:600;src:url('file:///root/.claude/plugins/synced/74f9fb4e-54c6-46fc-b018-a3707af7e8e4_cc95731b-4d6e-4461-a267-c1f8fc836df4/vibe-editor/skills/edit/library/fonts/Poppins-SemiBold.ttf')}
+@font-face{font-family:I;font-weight:700;src:url('file:///root/.claude/plugins/synced/74f9fb4e-54c6-46fc-b018-a3707af7e8e4_cc95731b-4d6e-4461-a267-c1f8fc836df4/vibe-editor/skills/edit/library/fonts/Inter-Bold.otf')}
+html,body{margin:0;width:1080px;height:1920px;background:transparent;overflow:hidden}
+*{box-sizing:border-box}
+#stage{position:absolute;inset:0;font-family:P,sans-serif;color:#fff}
+.abs{position:absolute}
+/* ---------- intro call screen ---------- */
+#intro{position:absolute;inset:0;overflow:hidden}
+#ibg{position:absolute;inset:-40px;background:url('intro-bg.jpg') center/cover}
+#ishade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,10,20,.55) 0%,rgba(6,10,20,.25) 40%,rgba(6,10,20,.65) 100%)}
+#status{position:absolute;top:44px;left:70px;right:70px;display:flex;justify-content:space-between;font:600 40px P;letter-spacing:.5px}
+#status .ic{display:flex;gap:14px;align-items:center}
+#ilabel{position:absolute;top:300px;width:100%;text-align:center;font:600 38px P;letter-spacing:6px;color:rgba(255,255,255,.75)}
+#avwrap{position:absolute;top:400px;left:50%;width:300px;height:300px;margin-left:-150px}
+.ring{position:absolute;inset:0;border-radius:50%;border:3px solid rgba(255,201,60,.8)}
+#av{position:absolute;inset:0;border-radius:50%;background:linear-gradient(145deg,#FFD66B,#FF9F1C);display:flex;align-items:center;justify-content:center;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+#iname{position:absolute;top:760px;width:100%;text-align:center;font:700 104px P;letter-spacing:-1px;text-shadow:0 6px 30px rgba(0,0,0,.35)}
+#ipill{position:absolute;top:905px;left:50%;transform:translateX(-50%);padding:14px 34px;border-radius:60px;background:rgba(255,201,60,.16);border:2px solid rgba(255,201,60,.55);font:700 44px P;color:#FFC93C;white-space:nowrap}
+#isub{position:absolute;top:1010px;width:100%;text-align:center;font:600 38px P;color:rgba(255,255,255,.7)}
+.btn{position:absolute;top:1560px;width:190px;height:190px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 18px 50px rgba(0,0,0,.4)}
+#bdec{left:170px;background:#FF3B30}
+#bacc{left:720px;background:#34C759}
+.blab{position:absolute;top:1775px;width:300px;text-align:center;font:600 38px P;color:rgba(255,255,255,.85)}
+#ldec{left:115px} #lacc{left:665px}
+#ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.45)}
+/* ---------- captions ---------- */
+#cap{position:absolute;left:60px;right:60px;top:0;text-align:center;font:800 80px/1.12 P;text-transform:uppercase;letter-spacing:.5px;
+ text-shadow:0 2px 6px rgba(0,0,0,.55),0 6px 22px rgba(0,0,0,.5),0 0 60px rgba(0,0,0,.35)}
+#cap .w{display:inline-block;margin:0 17px;transform-origin:50% 60%}
+/* ---------- heroes ---------- */
+.hero{position:absolute;left:0;right:0;text-align:center;opacity:0}
+.sh{text-shadow:0 3px 8px rgba(0,0,0,.5),0 10px 34px rgba(0,0,0,.5),0 0 70px rgba(0,0,0,.35)}
+.gold{color:#FFC93C}
+.ck{width:72px;height:72px;border-radius:50%;border:4px solid rgba(255,255,255,.5);flex:none;display:flex;align-items:center;justify-content:center}
+.glass{background:rgba(12,16,28,.78);border:1.5px solid rgba(255,255,255,.16);border-radius:28px;box-shadow:0 18px 50px rgba(0,0,0,.45)}
+</style></head>
+<body><div id="stage">
+
+<div id="intro">
+  <div id="ibg"></div><div id="ishade"></div>
+  <div id="status"><span>10:24</span><span class="ic">
+    <svg width="44" height="30" viewBox="0 0 44 30"><rect x="0" y="20" width="7" height="10" rx="2" fill="#fff"/><rect x="11" y="14" width="7" height="16" rx="2" fill="#fff"/><rect x="22" y="7" width="7" height="23" rx="2" fill="#fff"/><rect x="33" y="0" width="7" height="30" rx="2" fill="#fff"/></svg>
+    <svg width="66" height="32" viewBox="0 0 66 32"><rect x="1.5" y="1.5" width="56" height="29" rx="8" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="3"/><rect x="6" y="6" width="40" height="20" rx="4" fill="#fff"/><rect x="60" y="11" width="5" height="10" rx="2" fill="#fff" fill-opacity=".6"/></svg>
+  </span></div>
+  <div id="ilabel">INCOMING CALL</div>
+  <div id="avwrap">
+    <div class="ring" id="r1"></div><div class="ring" id="r2"></div>
+    <div id="av"><svg width="150" height="150" viewBox="0 0 64 64">
+      <rect x="8" y="26" width="48" height="30" rx="4" fill="#1b1e2b"/>
+      <path d="M8 18 L54 9 L56 18 L10 27 Z" fill="#1b1e2b"/>
+      <path d="M16 16.4 L22 24.8 M27 14.2 L33 22.6 M38 12 L44 20.4" stroke="#FFC93C" stroke-width="4"/>
+      <rect x="8" y="26" width="48" height="6" fill="#FFC93C"/>
+      <path d="M14 26 L20 32 M26 26 L32 32 M38 26 L44 32" stroke="#1b1e2b" stroke-width="4"/></svg></div>
+  </div>
+  <div id="iname">Editor Bhai</div>
+  <div id="ipill">₹1,500 / reel</div>
+  <div id="isub">mobile</div>
+  <div class="btn" id="bdec"><svg width="92" height="92" viewBox="0 0 24 24"><path fill="#fff" d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08a.956.956 0 0 1-.29-.7c0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28a11.27 11.27 0 0 0-2.67-1.85.996.996 0 0 1-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"/></svg></div>
+  <div class="btn" id="bacc"><svg width="88" height="88" viewBox="0 0 24 24"><path fill="#fff" d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+  <div class="blab" id="ldec">Decline</div><div class="blab" id="lacc">Accept</div>
+  <div id="ripple"></div>
+</div>
+
+<div id="capbg" style="position:absolute;left:40px;right:40px;height:300px;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(0,0,0,.42) 0%,rgba(0,0,0,.22) 45%,rgba(0,0,0,0) 72%);opacity:0"></div>
+<div id="cap"></div>
+
+<div id="hbg" style="position:absolute;left:0;right:0;top:930px;height:420px;background:radial-gradient(ellipse 55% 50% at 50% 50%,rgba(0,0,0,.45) 0%,rgba(0,0,0,.2) 50%,rgba(0,0,0,0) 75%);opacity:0"></div>
+<!-- H7 CTA -->
+<div class="hero" id="h7" style="top:1000px">
+  <div style="display:flex;justify-content:center"><div id="h7p" style="background:linear-gradient(180deg,#FFD25A,#FFB81C);color:#141414;border-radius:90px;padding:26px 64px 28px;box-shadow:0 22px 60px rgba(0,0,0,.5),0 0 0 6px rgba(255,201,60,.18)">
+    <div style="font:900 74px/1 P;letter-spacing:-.5px">GET VIBE EDITOR</div>
+    <div style="font:700 38px/1 P;margin-top:12px;opacity:.85">₹1,499 · one-time</div></div></div>
+  <div id="h7a" class="sh" style="margin-top:34px;font:700 40px P;color:#fff;display:flex;flex-direction:column;align-items:center;gap:6px">Link neeche hai
+    <svg width="70" height="70" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9" fill="none" stroke="#FFC93C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+</div>
+<!-- H8 price -->
+<div class="hero" id="h8" style="top:960px;display:flex;justify-content:center"><div class="glass" style="padding:28px 60px 34px;border-radius:36px;min-width:820px">
+  <div style="font:700 34px P;letter-spacing:8px;color:rgba(255,255,255,.7)">VIBE EDITOR KA PRICE</div>
+  <div style="position:relative;display:inline-block;margin-top:10px;font:800 64px P;color:rgba(255,255,255,.55)">₹2,16,000<span style="font:600 36px P"> /saal</span>
+    <div id="h8s" style="position:absolute;left:-8px;top:52%;height:7px;border-radius:4px;background:#FF4D4D;width:0"></div></div>
+  <div id="h8n" style="font:900 176px/1 P;color:#FFC93C;letter-spacing:-3px;margin-top:4px;text-shadow:0 0 50px rgba(255,201,60,.35)">₹1,499</div>
+  <div style="display:flex;justify-content:center;margin-top:14px"><div id="h8c" style="background:#FFC93C;color:#141414;font:800 38px P;padding:10px 30px;border-radius:40px">SIRF EK BAAR</div></div>
+</div></div>
+<!-- H9 checklist -->
+<div class="hero" id="h9" style="top:985px;display:flex;justify-content:center"><div class="glass" style="padding:30px 50px 36px;border-radius:36px;min-width:860px;text-align:left">
+  <div style="font:700 34px P;letter-spacing:8px;color:rgba(255,255,255,.7);margin-bottom:18px">BAS ITNA CHAHIYE</div>
+  <div id="h9a" style="display:flex;align-items:center;gap:24px;font:700 52px P;margin:10px 0"><div class="ck" id="h9ac"></div>Mac / Windows laptop</div>
+  <div id="h9b" style="display:flex;align-items:center;gap:24px;font:700 52px P;margin:10px 0"><div class="ck" id="h9bc"></div>Paid ChatGPT ya Claude plan</div>
+</div></div>
+<!-- H1 stamp -->
+<div class="hero sh" id="h1" style="top:1060px;font:900 112px/1 P;letter-spacing:-1px">₹1,500 <span class="gold">/ REEL?!</span></div>
+
+<!-- H2 counter -->
+<div class="hero" id="h2" style="top:985px;display:flex;justify-content:center"><div class="glass" style="padding:30px 60px 34px;border-radius:36px;min-width:820px">
+  <div style="font:700 34px P;letter-spacing:8px;color:rgba(255,255,255,.7)">EDITOR KA BILL · HAR SAAL</div>
+  <div id="h2n" style="font:900 160px/1.05 P;letter-spacing:-2px;margin-top:6px">₹0</div>
+  <div style="font:700 46px P;color:#FFC93C;margin-top:4px" id="h2s">sirf editing pe.</div>
+</div></div>
+
+<!-- H3 ChatGPT ya Claude -->
+<div class="hero" id="h3" style="top:1080px;display:flex;justify-content:center;align-items:center;gap:26px">
+  <div class="glass" id="h3a" style="padding:18px 40px;font:700 68px P">ChatGPT</div>
+  <div class="sh gold" id="h3b" style="font:800 56px P">ya</div>
+  <div class="glass" id="h3c" style="padding:18px 40px;font:700 68px P">Claude</div>
+</div>
+
+<!-- H4 VIBE EDITOR -->
+<div class="hero" id="h4" style="top:1020px">
+  <div class="sh" id="h4t" style="font:900 158px/1 P;letter-spacing:-2px;white-space:nowrap"></div>
+  <div style="display:flex;justify-content:center;margin-top:26px"><div class="glass" id="h4p" style="padding:14px 34px;font:600 40px P;border-radius:60px;border-color:rgba(255,201,60,.5)">AI video editing <span class="gold">plugin</span></div></div>
+</div>
+
+<!-- H5 REEL READY -->
+<div class="hero" id="h5" style="top:1080px;display:flex;justify-content:center">
+  <div style="display:flex;align-items:center;gap:22px;background:#fff;color:#111;border-radius:80px;padding:18px 46px 18px 22px;box-shadow:0 20px 60px rgba(0,0,0,.45);font:900 70px P;letter-spacing:-.5px">
+    <div style="width:92px;height:92px;border-radius:50%;background:#FFC93C;display:flex;align-items:center;justify-content:center">
+      <svg width="58" height="58" viewBox="0 0 24 24"><path id="h5c" d="M4 12.5 L9.5 18 L20 6.5" fill="none" stroke="#111" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="30" stroke-dashoffset="30"/></svg>
+    </div>REEL READY</div>
+</div>
+
+<!-- H6 NO SUBSCRIPTION / NO CREDITS -->
+<div class="hero" id="h6" style="top:1020px">
+  <div id="h6a" style="display:flex;justify-content:center;align-items:center;gap:22px;font:900 76px P" class="sh">
+    <svg width="74" height="74" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#FF4D4D"/><path d="M8 8 L16 16 M16 8 L8 16" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/></svg>NO SUBSCRIPTION</div>
+  <div id="h6b" style="display:flex;justify-content:center;align-items:center;gap:22px;font:900 76px P;margin-top:18px" class="sh">
+    <svg width="74" height="74" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#FF4D4D"/><path d="M8 8 L16 16 M16 8 L8 16" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/></svg>NO <span class="gold">CREDITS</span></div>
+</div>
+
+</div>
+<script>
+const O = 1.70;            // intro length before the clip starts
+const CAP_Y = 1110;        // caption block top (centre ~0.60 of 1920)
+let WORDS = [];
+const EMPH = new Set();
+const HIDE = [[4.05,5.45],[6.62,11.85],[13.66,17.5],[17.5,23.5],[23.62,24.72],[25.45,29.45],[29.42,40]];
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>clamp((t-a)/(b-a));
+const eOutC=x=>1-Math.pow(1-x,3);
+const eInC=x=>x*x*x;
+const eOutExpo=x=>x>=1?1:1-Math.pow(2,-10*x);
+const eOutBack=(x,s=1.7)=>{x=clamp(x);return 1+(s+1)*Math.pow(x-1,3)+s*Math.pow(x-1,2)};
+const spring=x=>{x=clamp(x);return 1-Math.exp(-6*x)*Math.cos(10*x)};
+const $=id=>document.getElementById(id);
+function inr(n){n=Math.round(n);let s=String(n);if(s.length<=3)return s;let last=s.slice(-3),rest=s.slice(0,-3);rest=rest.replace(/\B(?=(\d{2})+(?!\d))/g,',');return rest+','+last}
+function show(el,o,tf,filter){el.style.opacity=o;if(tf!==undefined)el.style.transform=tf;if(filter!==undefined)el.style.filter=filter}
+
+// ---------- caption groups ----------
+let GROUPS=[];
+function buildGroups(){
+  let cur=[];
+  const out=[];
+  WORDS.forEach((w,i)=>{
+    if(cur.length){
+      const prev=cur[cur.length-1];
+      if(cur.length>=3 || w.s-prev.e>0.45 || /[.?!,:]$/.test(prev.t)){out.push(cur);cur=[]}
+    }
+    cur.push(w);
+  });
+  if(cur.length)out.push(cur);
+  out.forEach((g,i)=>{g.start=g[0].s; const nxt=i+1<out.length?out[i+1][0].s:99; g.end=Math.min(Math.max(g[g.length-1].e+0.28,g.start+0.5),nxt)});
+  GROUPS=out.filter(g=>{for(const [a,b] of HIDE){ if(g.start<b && g.end>a){ if(g.start<a-0.3){g.end=Math.min(g.end,a);} else return false; } } return true;});
+}
+function clean(t){return t.replace(/[.,!?:]+$/,'').replace(/\.\.\.$/,'')}
+let curG=null;
+function renderCaps(a){
+  const cap=$('cap');
+  const g=GROUPS.find(g=>a>=g.start-0.02 && a<g.end);
+  if(!g){cap.style.opacity=0;$('capbg').style.opacity=0;return}
+  if(curG!==g){cap.innerHTML=g.map((w,i)=>`<span class="w" id="cw${i}">${clean(w.t)}${/\?$/.test(w.t)?'?':(/!$/.test(w.t)?'!':'')}</span>`).join('');curG=g}
+  const k=eOutBack(lin(a,g.start-0.02,g.start+0.16),1.4);
+  const out=lin(a,g.end-0.1,g.end);
+  cap.style.top=CAP_Y+'px';
+  cap.style.opacity=clamp(lin(a,g.start-0.02,g.start+0.1))*(1-out);
+  cap.style.transform=`translateY(${(1-k)*26}px) scale(${0.94+0.06*k})`;
+  const cb=$('capbg');cb.style.top=(CAP_Y+45-150)+'px';cb.style.opacity=cap.style.opacity;
+  g.forEach((w,i)=>{
+    const el=$('cw'+i);
+    const active=a>=w.s-0.04;
+    const pk=eOutBack(lin(a,w.s-0.04,w.s+0.14),2.2);
+    const sc=active?(1+0.05*(1-lin(a,w.s+0.14,w.s+0.4))*pk):1;
+    el.style.color=active&&a<w.e+0.25?'#FFC93C':'#FFFFFF';
+    el.style.transform=`scale(${sc})`;
+  });
+}
+
+// ---------- intro ----------
+function renderIntro(g0){
+  const g=g0;const ge=g0+0.32;
+  const intro=$('intro');
+  if(g>2.15){intro.style.display='none';return}
+  intro.style.display='block';
+  // background slow push
+  $('ibg').style.transform=`scale(${1.06-0.04*eOutC(lin(g,0,1.7))})`;
+  // entry animations
+  const ent=(d)=>eOutBack(lin(ge,d,d+0.35),1.3);
+  [['ilabel',0.0],['avwrap',0.04],['iname',0.08],['ipill',0.14],['isub',0.18]].forEach(([id,d])=>{
+    const k=ent(d);const el=$(id);el.style.opacity=clamp(lin(ge,d,d+0.2));
+    const base=id==='ipill'?'translateX(-50%) ':'';
+    el.style.transform=base+`translateY(${(1-k)*40}px)`;
+  });
+  [['bdec',0.1],['bacc',0.14],['ldec',0.16],['lacc',0.2]].forEach(([id,d])=>{
+    const k=ent(d);$(id).style.opacity=clamp(lin(ge,d,d+0.2));$(id).style.transform=`translateY(${(1-k)*80}px)`;
+  });
+  // pulsing rings
+  [['r1',0],['r2',0.45]].forEach(([id,off])=>{
+    const p=((g+off)%0.9)/0.9;const on=g<1.45?1:0;
+    $(id).style.transform=`scale(${1+0.55*eOutC(p)})`;$(id).style.opacity=on*(0.75*(1-p));
+  });
+  // accept button wiggle while ringing
+  const ringing=(g>0.15&&g<0.75)||(g>0.85&&g<1.4);
+  const wig=ringing?Math.sin(g*2*Math.PI*11)*9:0;
+  let accS=1;
+  if(g>=1.42){const p=lin(g,1.42,1.62);accS=1-0.14*Math.sin(Math.PI*clamp(p*1.6))}
+  $('bacc').style.transform=`translateY(${(1-ent(0.14))*80}px) rotate(${wig}deg) scale(${accS})`;
+  // tap ripple
+  const rp=lin(g,1.42,1.75);const rip=$('ripple');const R=95+200*eOutC(rp);
+  rip.style.left=(815-R)+'px';rip.style.top=(1655-R)+'px';rip.style.width=rip.style.height=(2*R)+'px';
+  rip.style.opacity=g<1.42?0:0.55*(1-rp);
+  // after tap: decline fades, labels change
+  const after=lin(g,1.48,1.62);
+  $('bdec').style.opacity=1-after;$('ldec').style.opacity=1-after;
+  $('lacc').textContent=g>=1.5?'Connecting…':'Accept';
+  $('ilabel').textContent=g>=1.5?'CONNECTED':'INCOMING CALL';
+  // reveal: circle opening from the accept button
+  const rv=eInC(lin(g,1.66,2.12));
+  const hole=rv*2300;
+  const m=`radial-gradient(circle at 815px 1655px, transparent ${hole}px, #000 ${hole+2}px)`;
+  intro.style.webkitMaskImage=m;intro.style.maskImage=m;
+  intro.style.transform=`scale(${1+0.06*rv})`;
+}
+
+// ---------- heroes ----------
+function window_(a,s,e,inD=0.18,outD=0.14){return {in:lin(a,s,s+inD),out:lin(a,e-outD,e),on:a>=s&&a<e}}
+function renderHeroes(a){
+  // H1 stamp
+  {const el=$('h1');const w=window_(a,4.05,5.42,0.14,0.12);
+   if(!w.on){el.style.opacity=0}else{const k=w.in;const sc=1+1.1*(1-eOutC(k))+0.0;const settle=1-0.03*lin(a,4.2,5.3);
+     show(el,clamp(k*3)*(1-w.out),`rotate(-4deg) scale(${sc*settle*(1+0.06*w.out)})`,`blur(${(1-k)*10}px)`)}}
+  // H2 counter
+  {const el=$('h2');const w=window_(a,8.62,11.8,0.22,0.16);
+   if(!w.on){el.style.opacity=0}else{
+     const p=eOutExpo(lin(a,8.68,10.95));$('h2n').textContent='₹'+inr(216000*p);
+     const hit=lin(a,10.98,11.2);const red=a>=10.98;
+     const n=$('h2n');n.style.color=red?'#FF4D4D':'#fff';
+     n.style.textShadow=red?'0 0 36px rgba(255,77,77,.5)':'';
+     n.style.transform=`scale(${red?1+0.14*(1-eOutC(hit)):1})`;
+     show(el,eOutC(w.in)*(1-w.out),`translateY(${(1-eOutC(w.in))*40}px) scale(${1-0.04*w.out})`,`blur(${w.out*8}px)`)}}
+  // H3
+  {const el=$('h3');const w=window_(a,13.66,15.76,0.05,0.14);
+   if(!w.on){el.style.opacity=0}else{el.style.opacity=1-w.out;el.style.filter=`blur(${w.out*8}px)`;
+     const pa=spring(lin(a,13.68,14.2)),pb=eOutBack(lin(a,14.38,14.6),2),pc=spring(lin(a,14.47,15.0));
+     show($('h3a'),clamp(lin(a,13.68,13.8)),`translateX(${(1-pa)*-120}px)`);
+     show($('h3b'),clamp(lin(a,14.38,14.46)),`scale(${0.4+0.6*pb})`);
+     show($('h3c'),clamp(lin(a,14.47,14.6)),`translateX(${(1-pc)*120}px)`);}}
+  // H4 VIBE EDITOR letters
+  {const el=$('h4');const w=window_(a,15.76,17.48,0.05,0.16);
+   if(!w.on){el.style.opacity=0}else{el.style.opacity=1-w.out;el.style.transform=`translateY(${-30*eInC(w.out)}px)`;el.style.filter=`blur(${w.out*8}px)`;
+     const txt='VIBE EDITOR';let h='';
+     for(let i=0;i<txt.length;i++){const d=15.78+i*0.035;const k=eOutBack(lin(a,d,d+0.3),1.6);const o=clamp(lin(a,d,d+0.12));
+       const c=i>=5?'#FFC93C':'#fff';
+       h+=txt[i]===' '?'<span style="display:inline-block;width:38px"></span>':`<span style="display:inline-block;color:${c};opacity:${o};transform:translateY(${(1-k)*60}px);filter:blur(${(1-clamp(k))*10}px)">${txt[i]}</span>`}
+     $('h4t').innerHTML=h;
+     const pk=eOutBack(lin(a,16.6,16.9),1.6);show($('h4p'),clamp(lin(a,16.6,16.75)),`translateY(${(1-pk)*30}px) scale(${0.9+0.1*pk})`);}}
+  // H5 REEL READY
+  {const el=$('h5');const w=window_(a,23.66,24.7,0.3,0.14);
+   if(!w.on){el.style.opacity=0}else{const k=eOutBack(w.in,2.0);show(el,clamp(w.in*3)*(1-w.out),`scale(${(0.6+0.4*k)*(1-0.08*w.out)})`);
+     $('h5c').style.strokeDashoffset=30*(1-eOutC(lin(a,23.8,24.05)))}}
+  // H6
+  {const el=$('h6');const w=window_(a,28.04,29.44,0.05,0.14);
+   if(!w.on){el.style.opacity=0}else{el.style.opacity=1-w.out;el.style.filter=`blur(${w.out*8}px)`;
+     const p1=spring(lin(a,28.06,28.6)),p2=spring(lin(a,29.0,29.4));
+     show($('h6a'),clamp(lin(a,28.06,28.16)),`translateX(${(1-p1)*-140}px)`);
+     show($('h6b'),clamp(lin(a,29.0,29.1)),`translateX(${(1-p2)*140}px)`);}}
+  // H8 price
+  {const el=$('h8');const w=window_(a,25.5,28.02,0.22,0.16);
+   if(!w.on){el.style.opacity=0}else{const k=eOutC(w.in);show(el,k*(1-w.out),`translateY(${(1-k)*40}px) scale(${1-0.04*w.out})`,`blur(${w.out*8}px)`);
+     $('h8s').style.width=(eOutC(lin(a,25.5,25.72))*100+4)+'%';
+     const nk=eOutBack(lin(a,25.66,25.96),2.0);const n=$('h8n');n.style.opacity=clamp(lin(a,25.66,25.74));n.style.transform=`scale(${0.5+0.5*nk})`;
+     const ck=eOutBack(lin(a,26.98,27.22),2.0);const c=$('h8c');c.style.opacity=clamp(lin(a,26.98,27.05));c.style.transform=`scale(${0.6+0.4*ck})`;}}
+  // H9 checklist
+  {const el=$('h9');const w=window_(a,29.45,32.92,0.24,0.16);
+   if(!w.on){el.style.opacity=0}else{const k=eOutC(w.in);show(el,k*(1-w.out),`translateY(${(1-k)*40}px) scale(${1-0.04*w.out})`,`blur(${w.out*8}px)`);
+     [['h9a','h9ac',30.17,29.5],['h9b','h9bc',32.07,29.62]].forEach(([r,c,t,app])=>{
+       const ra=eOutC(lin(a,app,app+0.3));$(r).style.opacity=0.35+0.65*clamp(lin(a,t-0.15,t+0.05))*1;$(r).style.opacity=Math.min(ra,0.45+0.55*clamp(lin(a,t-0.1,t+0.05)));
+       $(r).style.transform=`translateX(${(1-ra)*-40}px)`;
+       const ck=eOutBack(lin(a,t,t+0.25),2.2);const on=a>=t;const C=$(c);
+       C.style.background=on?'#FFC93C':'transparent';C.style.borderColor=on?'#FFC93C':'rgba(255,255,255,.5)';C.style.transform=`scale(${on?0.7+0.3*ck:1})`;
+       C.innerHTML=on?'<svg width="44" height="44" viewBox="0 0 24 24"><path d="M4 12.5 L9.5 18 L20 6.5" fill="none" stroke="#141414" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>':'';});}}
+}
+function renderExtra(a){
+  const hb=$('hbg');let o=0;
+  const w1=window_(a,4.05,5.42,0.14,0.12); if(w1.on)o=Math.max(o,clamp(w1.in*2)*(1-w1.out));
+  const w6=window_(a,28.04,29.44,0.1,0.14); if(w6.on)o=Math.max(o,w6.in*(1-w6.out));
+  const w4=window_(a,15.76,17.48,0.15,0.16); if(w4.on)o=Math.max(o,w4.in*(1-w4.out));
+  hb.style.opacity=o;
+  const el=$('h7');const w=window_(a,32.92,99,0.3,0.01);
+  if(!w.on){el.style.opacity=0}else{const k=eOutBack(w.in,1.8);el.style.opacity=clamp(w.in*2.5);
+    $('h7p').style.transform=`scale(${0.7+0.3*k})`;
+    const ak=lin(a,33.15,33.45);$('h7a').style.opacity=ak;
+    $('h7a').style.transform=`translateY(${Math.sin((a-33.15)*2*Math.PI*1.6)*8*ak}px)`;
+    const pulse=a>33.6?1+0.025*Math.sin((a-33.6)*2*Math.PI*1.2):1; $('h7p').style.transform+=` scale(${pulse})`;}
+}
+window.render=(g)=>{
+  renderIntro(g);
+  const a=g-O;
+  renderCaps(a);
+  renderHeroes(a);
+  renderExtra(a);
+};
+window.init=(words)=>{WORDS=words;buildGroups();};
+</script></body></html>
