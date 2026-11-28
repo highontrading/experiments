@@ -72,8 +72,8 @@ def main():
     out = os.path.join(V.ADS, "renders", "ad3-wall-video.mp4")
     wr = V.Writer(out)
     lockup = V.text_layer(lambda d, im: (
-        d.text((V.W / 2, 1530), "vibe editor", font=V.font("display_xb", 110), fill=(255, 255, 255, 255), anchor="mm"),
-        d.text((V.W / 2, 1640), "One clip. Endless edits.", font=V.font("display", 50), fill=(225, 228, 240, 255), anchor="mm")))
+        d.text((V.W / 2, 1690), "vibe editor", font=V.font("display_xb", 120), fill=(255, 255, 255, 255), anchor="mm"),
+        d.text((V.W / 2, 1800), "One clip. Endless edits.", font=V.font("display", 52), fill=(225, 228, 240, 255), anchor="mm")))
     cut = T["edited"]
     for k in range(n):
         t = k / V.FPS
@@ -122,6 +122,16 @@ def main():
                     if T["find"] <= t < T["vibe"] - 0.05 and name != HERO:
                         img = img * (1 - 0.72 * V.ease((t - T["find"]) / 0.35))
                 V.place(canvas, s, img.astype(np.float32), reflect=0.3, glow=glow)
+            if T["find"] <= t < T["vibe"] - 0.05:  # selection frame around the chosen screen
+                c_ = Pw.screens[HERO]["corners"]
+                a_ = V.ease((t - T["find"] - 0.15) / 0.3)
+                x0_, y0_ = c_[:, 0].min() - 22, c_[:, 1].min() - 22
+                x1_, y1_ = c_[:, 0].max() + 22, c_[:, 1].max() + 22
+                ov_ = canvas.copy()
+                cv2.rectangle(ov_, (int(x0_), int(y0_)), (int(x1_), int(y1_)), (1, 1, 1), 5, cv2.LINE_AA)
+                for (hx_, hy_) in ((x0_, y0_), (x1_, y0_), (x0_, y1_), (x1_, y1_)):
+                    cv2.rectangle(ov_, (int(hx_ - 11), int(hy_ - 11)), (int(hx_ + 11), int(hy_ + 11)), (1, 1, 1), -1)
+                canvas = canvas * (1 - a_) + ov_ * a_
             # camera: pull back from the hero screen to the full wall, then a slow push
             p = V.ease((lt) / 2.6)
             zoom = 2.6 + (1.0 - 2.6) * p
@@ -140,7 +150,8 @@ def main():
             if t >= T["vibe"]:
                 a = V.ease((t - T["vibe"] - 0.3) / 0.4)
                 dark = np.zeros_like(frame)
-                frame = frame * (1 - 0.35 * a) + dark * 0.35 * a
+                yy_ = np.linspace(0, 1, V.H, dtype=np.float32)[:, None, None]
+                frame = frame * (1 - (0.3 + 0.55 * np.clip((yy_ - 0.6) / 0.3, 0, 1)) * a)
                 frame = V.over(frame, lockup, alpha=a, dy=(1 - a) * 20)
         if t < 0.3:
             frame = frame * V.ease(t / 0.3)
