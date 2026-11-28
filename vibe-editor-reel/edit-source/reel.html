@@ -1,0 +1,403 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Pop;src:url(fonts/Poppins-Bold.ttf);font-weight:700}
+@font-face{font-family:Pop;src:url(fonts/Poppins-ExtraBold.ttf);font-weight:800}
+@font-face{font-family:Pop;src:url(fonts/Poppins-SemiBold.ttf);font-weight:600}
+@font-face{font-family:Int;src:url(fonts/Inter-Bold.otf);font-weight:700}
+@font-face{font-family:Int;src:url(fonts/Inter-ExtraBold.otf);font-weight:800}
+@font-face{font-family:Mono;src:url(fonts/IBMPlexMono-Medium.ttf);font-weight:500}
+@font-face{font-family:Mono;src:url(fonts/IBMPlexMono-Bold.ttf);font-weight:700}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;background:#000;overflow:hidden}
+#stage{position:absolute;left:0;top:0;width:1080px;height:1920px;overflow:hidden;font-family:Int,sans-serif}
+.abs{position:absolute}
+#bgwrap{position:absolute;inset:0;opacity:0}
+#bgimg{position:absolute;left:-135px;top:-240px;width:1350px;height:2400px;filter:blur(38px) brightness(.62) saturate(1.1)}
+#footwrap{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:0 0;overflow:hidden}
+#foot{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:400px 1150px}
+.glass{background:rgba(18,18,20,.72);backdrop-filter:blur(26px) saturate(1.3);-webkit-backdrop-filter:blur(26px) saturate(1.3);border:1.5px solid rgba(255,255,255,.12);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.card{position:absolute;border-radius:34px;color:#fff;will-change:transform,filter,opacity}
+.mono{font-family:Mono,monospace}
+.chip{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-family:Int;font-weight:700}
+.sel{position:absolute;border:2.5px dashed;border-radius:6px}
+.handle{position:absolute;width:13px;height:13px;background:#fff;border:2.5px solid;border-radius:2px}
+.tagsm{position:absolute;font-family:Mono;font-weight:700;font-size:20px;padding:3px 10px;border-radius:6px;color:#fff;white-space:nowrap}
+.readout{position:absolute;font-family:Mono;font-weight:700;font-size:20px;padding:3px 10px;border-radius:6px;background:#111;color:#fff;white-space:nowrap}
+.cursor{position:absolute;left:0;top:0;will-change:transform,filter}
+.pill{position:absolute;left:30px;top:38px;display:flex;align-items:center;gap:8px;padding:9px 18px 9px 14px;border-radius:999px;font:700 27px Int;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.dot{position:absolute;left:24px;top:34px;width:26px;height:26px;border-radius:50%;box-shadow:0 0 0 4px rgba(255,255,255,.9)}
+.ripple{position:absolute;border-radius:50%;border:4px solid}
+#caps{position:absolute;left:60px;right:60px;top:1322px;height:110px;text-align:center;font:700 56px/1.15 Pop;color:#fff;text-shadow:0 3px 16px rgba(0,0,0,.6),0 1px 3px rgba(0,0,0,.5);letter-spacing:-.5px}
+#caps span{display:inline-block;margin:0 7px;transition:none}
+.row{display:flex;align-items:center;height:78px;padding:0 30px;font:700 34px Int;border-radius:20px;margin:0 14px}
+.row .val{margin-left:auto;font-family:Mono;font-weight:700;font-size:30px;color:rgba(255,255,255,.85)}
+.arrow{width:28px;height:28px;margin-right:18px}
+.tile{position:absolute;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.tlabel{position:absolute;font:700 22px Mono;color:#fff;white-space:nowrap;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.slot{position:absolute;border:3px dashed;border-radius:24px}
+</style></head>
+<body>
+<div id="stage">
+  <div id="bgwrap"><img id="bgimg"></div>
+  <div id="footwrap"><img id="foot"></div>
+
+  <!-- grid slots + tiles -->
+  <div id="slotL" class="slot" style="left:40px;top:673px;width:300px;height:375px;border-color:#8B5CF6"></div>
+  <div id="slotR" class="slot" style="left:740px;top:710px;width:300px;height:300px;border-color:#F5A800"></div>
+  <div id="tileL" class="tile" style="left:40px;top:673px;width:300px;height:375px;background:#FBFAF6">
+    <div style="position:absolute;left:24px;top:20px;font:700 17px Mono;color:#8a8a80">VIBE EDITOR</div>
+    <div style="position:absolute;right:22px;top:20px;font:700 17px Mono;color:#8a8a80">1/6</div>
+    <div style="position:absolute;left:24px;right:20px;top:88px;font:800 44px/1.02 Pop;color:#141414;letter-spacing:-1.5px">Edit videos just by <span style="background:#F3D9FB;color:#7E22CE;border-radius:14px;padding:0 8px">talking.</span></div>
+    <div style="position:absolute;left:24px;bottom:58px;font:600 19px Pop;color:#555">No timeline. No editor.</div>
+    <div style="position:absolute;left:24px;bottom:22px;font:700 17px Mono;color:#141414">Swipe →</div>
+    <div style="position:absolute;right:22px;bottom:24px;display:flex;gap:6px"><i style="width:18px;height:6px;border-radius:3px;background:#141414"></i><i style="width:6px;height:6px;border-radius:3px;background:#ccc"></i><i style="width:6px;height:6px;border-radius:3px;background:#ccc"></i></div>
+  </div>
+  <div id="tileR" class="tile" style="left:740px;top:710px;width:300px;height:300px;background:#D9F99D">
+    <div style="position:absolute;left:22px;top:20px;font:700 16px Mono;color:#2F5D0A">PAY ONCE</div>
+    <div style="position:absolute;left:22px;top:58px;font:800 72px/1 Pop;color:#14280a;letter-spacing:-2px">₹1,499</div>
+    <div style="position:absolute;left:22px;top:146px;font:700 28px/1.1 Pop;color:#14280a">Edit forever.</div>
+    <div style="position:absolute;left:22px;bottom:22px;display:flex;align-items:center;gap:8px;font:700 17px Int;color:#2F5D0A"><span style="width:22px;height:22px;border-radius:6px;background:#14280a;display:inline-block"></span>Vibe Editor</div>
+  </div>
+  <div id="lblL" class="tlabel" style="left:40px;top:637px">carousel · 6 slides</div>
+  <div id="lblC" class="tlabel" style="left:375px;top:531px">reel.mp4</div>
+  <div id="lblR" class="tlabel" style="left:740px;top:674px">post.png</div>
+  <div id="chipC" class="readout" style="left:470px;top:1166px;background:#19B35C">9:16 · 0:25</div>
+
+  <!-- HOOK -->
+  <div id="hook" class="card" style="left:110px;top:192px;width:860px;height:216px;background:#000;border-radius:38px;text-align:center">
+    <div style="margin-top:38px;font:800 60px/1 Pop;letter-spacing:-1.8px;white-space:nowrap;text-shadow:0 0 22px rgba(255,255,255,.45)">Claude is editing this reel.</div>
+    <div style="margin-top:22px;font:600 37px Pop;color:#fff">right now, on my laptop. <span id="livedot" style="display:inline-block;width:16px;height:16px;border-radius:50%;background:#FF3B30;margin:0 6px 4px 8px;vertical-align:middle"></span>Live</div>
+  </div>
+  <div id="hooksel">
+    <div class="sel" style="left:100px;top:182px;width:880px;height:236px;border-color:#B07CFF"></div>
+    <div class="handle" style="left:93px;top:175px;border-color:#B07CFF"></div><div class="handle" style="left:967px;top:175px;border-color:#B07CFF"></div>
+    <div class="handle" style="left:93px;top:405px;border-color:#B07CFF"></div><div class="handle" style="left:967px;top:405px;border-color:#B07CFF"></div>
+    <div class="tagsm" style="left:100px;top:146px;background:#8B5CF6">hook</div>
+    <div class="readout" style="left:470px;top:430px">860 × 216</div>
+  </div>
+
+  <!-- FILE CARD -->
+  <div id="file" class="card glass" style="left:0;top:0;width:330px;height:104px;border-radius:22px;display:flex;align-items:center;padding:0 16px;gap:14px">
+    <div style="width:70px;height:72px;border-radius:12px;overflow:hidden;position:relative;background:#333"><img id="thumb" style="width:70px;height:124px;object-fit:cover;position:absolute;top:-30px"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><div style="width:0;height:0;border-left:16px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px"></div></div></div>
+    <div><div style="font:700 27px Int">raw-take.mp4</div><div class="mono" style="font-size:20px;color:rgba(255,255,255,.6);margin-top:4px">0:31 · 1080p</div></div>
+  </div>
+
+  <!-- PROMPT -->
+  <div id="prompt" class="card" style="left:90px;top:212px;width:900px;height:250px;background:#2A2A28;border:1.5px solid rgba(255,255,255,.1);border-radius:30px;box-shadow:0 24px 60px rgba(0,0,0,.35)">
+    <div id="ptxt" style="position:absolute;left:36px;top:32px;right:36px;font:700 40px/1.3 Int;color:#fff"></div>
+    <div style="position:absolute;left:36px;bottom:26px;width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.25);color:rgba(255,255,255,.6);font:400 34px/38px Int;text-align:center">+</div>
+    <div id="psend" style="position:absolute;right:26px;bottom:22px;width:58px;height:58px;border-radius:16px;background:#D97757;display:flex;align-items:center;justify-content:center">
+      <svg width="30" height="30" viewBox="0 0 24 24"><path id="psendico" d="M12 19V5M5 12l7-7 7 7" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>
+  <div id="ptag" class="chip" style="position:absolute;left:96px;top:164px;padding:7px 16px;background:#D97757;color:#fff;font-size:24px"><svg width="22" height="22" viewBox="-12 -12 24 24" class="spark"></svg>Vibe Editor · in Claude</div>
+
+  <!-- CROP BOX -->
+  <div id="crop">
+    <div id="cropbox" class="sel" style="border-color:#19B35C;border-width:3px"></div>
+    <div id="croptag" class="tagsm" style="background:#19B35C">9:16 crop</div>
+    <div id="cropro" class="readout"></div>
+  </div>
+  <div id="zchip" class="chip" style="position:absolute;padding:8px 16px;background:#19B35C;color:#fff;font-size:24px">Zoom 1.2×</div>
+
+  <!-- PLAN -->
+  <div id="plan" class="card glass" style="left:110px;top:150px;width:860px;height:484px;padding-top:24px">
+    <div style="display:flex;align-items:center;padding:0 44px;height:56px;font:800 36px Int"><span style="color:#D97757;margin-right:12px;display:flex"><svg width="30" height="30" viewBox="-12 -12 24 24" class="spark"></svg></span>The plan<span class="mono" style="margin-left:auto;font-size:22px;color:rgba(255,255,255,.55)">before I touch anything</span></div>
+    <div id="prow0" class="row"><svg class="arrow" viewBox="0 0 24 24"><path d="M3 2l17 8-7 2.5L10 20z" fill="#F0513A" stroke="#fff" stroke-width="1.6"/></svg>Cut 14 pauses + 2 retakes<span class="val">−6.4s</span></div>
+    <div id="prow1" class="row"><svg class="arrow" viewBox="0 0 24 24"><path d="M3 2l17 8-7 2.5L10 20z" fill="#8B5CF6" stroke="#fff" stroke-width="1.6"/></svg>Word-by-word captions<span class="val">41 words</span></div>
+    <div id="prow2" class="row"><svg class="arrow" viewBox="0 0 24 24"><path d="M3 2l17 8-7 2.5L10 20z" fill="#19B35C" stroke="#fff" stroke-width="1.6"/></svg>Punch-in zooms<span class="val">×3</span></div>
+    <div id="prow3" class="row"><svg class="arrow" viewBox="0 0 24 24"><path d="M3 2l17 8-7 2.5L10 20z" fill="#F5A800" stroke="#fff" stroke-width="1.6"/></svg>Level voice<span class="val">−14 LUFS</span></div>
+    <div style="position:absolute;left:44px;right:44px;bottom:30px;height:66px;display:flex;gap:16px;align-items:center">
+      <div class="mono" style="font-size:22px;color:rgba(255,255,255,.55)">↶ undo anytime</div>
+      <div style="margin-left:auto;height:62px;padding:0 28px;border-radius:999px;border:2px solid rgba(255,255,255,.3);font:700 28px/58px Int">Preview</div>
+      <div id="approve" style="height:62px;padding:0 34px;border-radius:999px;background:#D9F99D;color:#1d3a06;font:800 28px/62px Int">Approve</div>
+    </div>
+  </div>
+  <div id="done" class="chip" style="position:absolute;left:300px;top:286px;padding:20px 40px;background:#D9F99D;color:#14280a;font-size:44px;font-weight:800;box-shadow:0 20px 50px rgba(0,0,0,.3)">✓ Done · reel exported</div>
+
+  <!-- LEADERBOARD -->
+  <div id="lb" class="card glass" style="left:140px;top:140px;width:800px;height:586px;padding-top:22px;overflow:hidden">
+    <div style="display:flex;align-items:center;padding:0 44px;height:52px"><span class="mono" style="font-size:24px;color:rgba(255,255,255,.6)">edits · this reel</span><span class="mono" style="margin-left:auto;font-size:22px;color:#FF6B5E">● live</span></div>
+    <div id="l0" class="row"><svg class="arrow" viewBox="0 0 24 24"><path d="M3 2l17 8-7 2.5L10 20z" fill="#F0513A" stroke="#fff" stroke-width="1.6"/></svg>Silences<span class="val" id="lv0"></span></div>
+    <div id="l1" class="row"><svg class="arrow" viewBox="0 0 24 24"><path d="M3 2l17 8-7 2.5L10 20z" fill="#F0513A" stroke="#fff" stroke-width="1.6"/></svg>Retakes<span class="val" id="lv1"></span></div>
+    <div id="l2" class="row"><svg class="arrow" viewBox="0 0 24 24"><path d="M3 2l17 8-7 2.5L10 20z" fill="#8B5CF6" stroke="#fff" stroke-width="1.6"/></svg>Captions<span class="val" id="lv2"></span></div>
+    <div id="l3" class="row"><svg class="arrow" viewBox="0 0 24 24"><path d="M3 2l17 8-7 2.5L10 20z" fill="#2D7FF9" stroke="#fff" stroke-width="1.6"/></svg>B-roll<span class="val" id="lv3"></span></div>
+    <div id="l4" class="row"><svg class="arrow" viewBox="0 0 24 24"><path d="M3 2l17 8-7 2.5L10 20z" fill="#F5A800" stroke="#fff" stroke-width="1.6"/></svg>Sound<span class="val" id="lv4"></span></div>
+    <div id="l5" class="row" style="background:#fff;color:#111;margin-top:8px"><svg class="arrow" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2.5" fill="#111"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#111" stroke-width="2.6" fill="none"/></svg>This laptop<span class="val" style="color:#111">0 uploads</span></div>
+  </div>
+  <div id="lbchip" class="readout" style="left:330px;top:742px;background:#111">footage never leaves your laptop</div>
+
+  <!-- COMMENTS -->
+  <div id="cm" class="card" style="left:110px;top:240px;width:860px;height:350px;background:#262626;border-radius:36px;border:1.5px solid rgba(255,255,255,.08);box-shadow:0 24px 60px rgba(0,0,0,.4)">
+    <div style="width:70px;height:7px;border-radius:4px;background:rgba(255,255,255,.3);margin:16px auto 0"></div>
+    <div style="text-align:center;font:800 30px Int;margin-top:16px">Comments</div>
+    <div id="cmempty" style="position:absolute;top:130px;width:100%;text-align:center;font:700 26px Int;color:rgba(255,255,255,.5)">Start the conversation.</div>
+    <div id="cmrow" style="position:absolute;top:110px;left:40px;display:flex;align-items:center;gap:20px">
+      <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#FEDA75,#FA7E1E,#D62976,#962FBF)"></div>
+      <div><div style="font:700 22px Int;color:rgba(255,255,255,.6)">you <span style="font-weight:700">· now</span></div><div style="font:800 34px Int;margin-top:2px">VIBE</div></div>
+    </div>
+    <svg id="cmheart" style="position:absolute;right:48px;top:136px" width="34" height="34" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.5-9.2C1.3 8.6 3.4 5 7 5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.6 0 5.7 3.6 4.5 6.8C19.5 16.4 12 21 12 21z" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"/></svg>
+    <div style="position:absolute;left:30px;right:30px;bottom:28px;height:82px;display:flex;align-items:center;gap:20px">
+      <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#FEDA75,#FA7E1E,#D62976,#962FBF)"></div>
+      <div style="flex:1;height:72px;border-radius:999px;border:2px solid rgba(255,255,255,.2);display:flex;align-items:center;padding:0 28px">
+        <span id="cmfield" style="font:700 30px Int;color:rgba(255,255,255,.45)">Add a comment…</span><span id="cmpost" style="margin-left:auto;font:800 28px Int;color:rgba(0,149,246,.45)">Post</span></div>
+    </div>
+  </div>
+  <div id="notif" class="card glass" style="left:40px;top:40px;width:1000px;height:136px;border-radius:36px;display:flex;align-items:center;padding:0 28px;gap:22px">
+    <div style="width:84px;height:84px;border-radius:22px;background:#D9F99D;display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="-12 -12 24 24" class="spark" style="--c:#14280a"></svg></div>
+    <div style="flex:1"><div style="display:flex;font:800 30px Int">ideabro.studio<span style="margin-left:auto;font:700 24px Int;color:rgba(255,255,255,.5)">now</span></div>
+    <div style="font:700 28px Int;color:rgba(255,255,255,.85);margin-top:6px">Here's Vibe Editor → link inside</div></div>
+  </div>
+
+  <!-- END CARD -->
+  <div id="endc" class="card" style="left:90px;top:176px;width:900px;height:330px;background:#000;border-radius:40px;text-align:center">
+    <div style="margin-top:40px;font:800 84px/1 Pop;letter-spacing:-2.5px;text-shadow:0 0 24px rgba(255,255,255,.4)">Vibe Editor</div>
+    <div style="margin-top:18px;font:600 36px Pop;color:rgba(255,255,255,.88)">Edit videos just by talking to Claude.</div>
+    <div style="margin-top:30px;display:flex;justify-content:center;gap:18px;align-items:center">
+      <div style="font:700 32px Int;color:#fff;padding:14px 26px;border:2px solid rgba(255,255,255,.3);border-radius:999px">₹1,499 · one-time</div>
+      <div id="endcta" style="font:800 32px Int;color:#14280a;background:#D9F99D;padding:16px 30px;border-radius:999px">Comment VIBE ↓</div>
+    </div>
+  </div>
+
+  <div id="caps"></div>
+  <div id="cursors"></div>
+  <div id="ripples"></div>
+</div>
+
+<script>
+const W=1080,H=1920;
+const WORDS = __WORDS__;
+const $=id=>document.getElementById(id);
+const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,p)=>a+(b-a)*p;
+const eio=p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+const eout=p=>1-Math.pow(1-p,3);
+const eback=p=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2)};
+const prog=(t,a,b)=>clamp((t-a)/(b-a));
+
+// spark icon
+const SPARK = (()=>{let s='';for(let i=0;i<8;i++){const a=i*Math.PI/4;const r=i%2?7:10;s+=`<line x1="0" y1="0" x2="${(Math.cos(a)*r).toFixed(2)}" y2="${(Math.sin(a)*r).toFixed(2)}" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>`}return s})();
+document.querySelectorAll('svg.spark').forEach(s=>{s.innerHTML=SPARK;s.style.color=s.style.getPropertyValue('--c')||'currentColor'});
+
+// visibility with blur-in / blur-out (reference style)
+function vis(el,t,a,b,o={}){
+  const din=o.din??.28, dout=o.dout??.28, blur=o.blur??22, s0=o.s0??.94, dy=o.dy??0;
+  let pin=a===null?1:eout(prog(t,a,a+din)), pout=b===null?0:eio(prog(t,b-dout,b));
+  const v=Math.min(pin,1-pout);
+  if(v<=0.001){el.style.display='none';return 0}
+  el.style.display='';
+  const sc=pin<1? lerp(s0,1,o.back?eback(prog(t,a,a+din)):pin) : lerp(1,o.s1??.96,pout);
+  const ty=(1-pin)*dy + pout*(o.dyOut??0);
+  el.style.opacity=v;
+  el.style.filter=v<.999?`blur(${(1-v)*blur}px)`:'none';
+  el.style.transform=`translateY(${ty}px) scale(${sc})`;
+  return v;
+}
+
+// ---------- cursors ----------
+const CUR = {
+ R:{c:'#F0513A',tc:'#fff'}, P:{c:'#8B5CF6',tc:'#fff'}, G:{c:'#19B35C',tc:'#fff'}, B:{c:'#2D7FF9',tc:'#fff'}, Y:{c:'#F5A800',tc:'#1a1200'}
+};
+// keyframes [t,x,y]; moves ease in-out between consecutive keys
+const KF = {
+ R:[[0,905,610],[5.85,905,610],[6.2,350,486],[7.0,350,486],[7.4,880,640],[12.4,880,640],[12.6,860,300],[12.74,860,268],[13.3,860,268],[13.5,860,346],[15.5,860,346],[16.0,930,800],[17.4,930,800],[17.85,1000,1120],[21.5,1000,1120],[21.95,912,548],[22.4,912,548],[23.0,930,820],[99,930,820]],
+ P:[[0,110,1530],[6.95,110,1530],[7.36,690,486],[7.9,690,486],[8.4,110,1530],[13.75,110,1530],[14.06,960,420],[14.5,960,420],[15.2,110,1530],[18.9,110,1530],[19.32,250,960],[20.4,250,960],[20.95,110,1530],[99,110,1530]],
+ G:[[0,965,1040],[7.75,965,1040],[8.15,620,1540],[8.6,620,1540],[9.3,960,1060],[18.4,960,1060],[18.8,660,1070],[20.4,660,1070],[20.95,965,1040],[99,965,1040]],
+ B:[[0,90,880],[8.6,90,880],[9.0,912,446],[9.25,912,446],[9.7,90,880],[14.3,90,880],[14.64,880,500],[15.4,880,500],[16.0,90,880],[17.5,90,880],[17.9,60,1130],[20.9,60,1130],[21.18,420,524],[21.9,420,524],[22.3,90,880],[99,90,880]],
+ Y:[[0,770,985],[2.45,770,985],[2.92,905,300],[3.0,905,300],[4.05,650,1400],[4.3,650,1400],[4.95,770,985],[11.35,770,985],[11.9,880,586],[12.3,880,586],[12.6,770,985],[14.75,770,985],[15.14,880,580],[15.8,880,580],[16.3,770,985],[19.7,770,985],[20.1,930,900],[20.4,930,900],[20.95,770,985],[99,770,985]]
+};
+// labels over time: [t,text]  (✳ prefix = spark; ✓ = done)
+const LBL = {
+ R:[[0,'Claude'],[6.25,'Cuts']],
+ P:[[0,'Claude'],[7.4,'Captions']],
+ G:[[0,'Claude'],[8.2,'Camera']],
+ B:[[0,'Claude'],[14.66,'B-roll']],
+ Y:[[0,'Claude'],[15.16,'Sound']]
+};
+const DONE = {R:23.35,P:23.45,G:23.55,B:23.65,Y:23.75};
+const POPIN = {Y:.25,B:.4,R:.55,P:.7,G:.85};
+const CLICKS = [['Y',2.95],['B',9.05],['Y',11.98],['B',21.18],['R',22.05],['Y',24.35],['B',24.75]];
+
+const curEls={};
+for(const k in CUR){
+  const d=document.createElement('div');d.className='cursor';
+  d.innerHTML=`<svg width="40" height="48" viewBox="0 0 20 24" style="position:absolute;left:-4px;top:-3px;filter:drop-shadow(0 3px 5px rgba(0,0,0,.35))"><path d="M2 1.5l15 9.2-6.6 1.7-3.6 6.2z" fill="${CUR[k].c}" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/></svg>
+  <div class="dot" style="background:${CUR[k].c}"></div>
+  <div class="pill" style="background:${CUR[k].c};color:${CUR[k].tc}"><span class="ico" style="display:flex;width:24px;height:24px;align-items:center;justify-content:center"></span><span class="txt"></span></div>`;
+  $('cursors').appendChild(d);curEls[k]=d;
+}
+function curPos(k,t){
+  const kf=KF[k];let i=0;while(i<kf.length-1&&kf[i+1][0]<=t)i++;
+  let x,y;
+  if(i>=kf.length-1){x=kf[i][1];y=kf[i][2]}
+  else{const [t0,x0,y0]=kf[i],[t1,x1,y1]=kf[i+1];const p=eio(prog(t,t0,t1));x=lerp(x0,x1,p);y=lerp(y0,y1,p)}
+  const ph={R:0,P:1.3,G:2.1,B:3.7,Y:5.2}[k];
+  x+=7*Math.sin(t*1.15+ph)+3*Math.sin(t*2.7+ph*2);y+=6*Math.sin(t*1.42+ph*1.7)+2.5*Math.sin(t*3.1+ph);
+  return [x,y];
+}
+function label(k,t){const l=LBL[k];let s=l[0][1],ct=-9;for(const [tt,tx] of l){if(t>=tt){s=tx;ct=tt}}return [s,ct]}
+function drawCursors(t){
+  for(const k in CUR){
+    const el=curEls[k];const [x,y]=curPos(k,t);const [x2,y2]=curPos(k,t-1/30);
+    const v=Math.hypot(x-x2,y-y2)*30;
+    el.style.transform=`translate(${x}px,${y}px)`;
+    el.style.filter=v>500?`blur(${Math.min((v-500)/700,3.2)}px)`:'none';
+    const pill=el.querySelector('.pill'),dot=el.querySelector('.dot');
+    const pp=prog(t,POPIN[k],POPIN[k]+.32);
+    dot.style.opacity=1-clamp(pp*3);
+    pill.style.opacity=clamp(pp*2.2);
+    let [txt,ct]=label(k,t);
+    const done=t>=DONE[k];
+    // rename pulse
+    let sc=pp<1?lerp(.4,1,eback(pp)):1, bl=0;
+    const dtr=t-ct; if(dtr>=0&&dtr<.3){sc*=1+.14*Math.sin(Math.PI*dtr/.3)}
+    if(dtr>-.08&&dtr<.08) bl=4*(1-Math.abs(dtr)/.08);
+    const dd=t-DONE[k]; if(dd>=0&&dd<.3){sc*=1+.14*Math.sin(Math.PI*dd/.3)} if(dd>-.07&&dd<.07)bl=Math.max(bl,4*(1-Math.abs(dd)/.07));
+    pill.style.transform=`scale(${sc})`;pill.style.transformOrigin='0 50%';
+    pill.style.filter=bl?`blur(${bl}px)`:'none';
+    pill.querySelector('.txt').textContent=txt;
+    pill.querySelector('.ico').innerHTML=done?`<svg width="22" height="22" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6" stroke="currentColor" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`:`<svg width="22" height="22" viewBox="-12 -12 24 24">${SPARK}</svg>`;
+  }
+  // ripples
+  let html='';
+  for(const [k,ct] of CLICKS){const dt=t-ct;if(dt>=0&&dt<.42){const [x,y]=curPos(k,ct);const p=eout(dt/.42);const r=lerp(6,46,p);
+    html+=`<div class="ripple" style="left:${x+2-r}px;top:${y+2-r}px;width:${2*r}px;height:${2*r}px;border-color:${CUR[k].c};opacity:${1-p}"></div>`}}
+  $('ripples').innerHTML=html;
+}
+
+// ---------- captions ----------
+const GROUPS=[[0,2],[3,7],[8,13],[14,18],[19,21],[22,24],[25,26],[27,32],[33,37],[38,40],[41,41],[42,42],[43,43],[44,44],[45,45],[46,51],[52,54],[55,61],[62,63],[64,69]];
+function clean(w){return w.replace(/["“”]/g,'').replace(/^vibe$/i,'VIBE').replace(/,$/,'')}
+function drawCaps(t){
+  let g=null,gi=-1;
+  for(let i=0;i<GROUPS.length;i++){const [a,b]=GROUPS[i];const s=WORDS[a].s-.12;const nxt=i+1<GROUPS.length?WORDS[GROUPS[i+1][0]].s-.12:99;const e=Math.min(WORDS[b].e+.45,nxt);if(t>=s&&t<e){g=GROUPS[i];gi=i;break}}
+  const el=$('caps');
+  if(!g){el.innerHTML='';return}
+  const [a,b]=g;let html='';
+  for(let j=a;j<=b;j++){const w=WORDS[j];const p=prog(t,w.s-.05,w.s+.12);
+    const isV=/vibe/i.test(w.w);
+    const col=isV?'#D9F99D':'#fff';
+    const op=lerp(.38,1,p);const bl=(1-p)*0;
+    html+=`<span style="color:${col};opacity:${op};transform:translateY(${(1-eout(p))*6}px)">${clean(w.w)}</span>`}
+  el.innerHTML=html;
+  const [ga,gb]=g;const s=WORDS[ga].s-.12;const pin=eout(prog(t,s,s+.2));
+  el.style.opacity=pin;el.style.filter=pin<1?`blur(${(1-pin)*10}px)`:'none';
+}
+
+// ---------- typing helper ----------
+function typed(t,segs){ // segs: [[text, t0, t1]]
+  let out='';for(const [tx,a,b] of segs){if(t<a)break;const n=Math.round(tx.length*clamp((t-a)/(b-a)));out+=tx.slice(0,n);if(n<tx.length)break}
+  return out;
+}
+const PROMPT_SEGS=[["Cut the pauses, ",6.18,6.85],["add captions, ",7.1,7.75],["zoom in on the good parts.",8.18,9.0]];
+
+// ---------- main render ----------
+async function render(t, frameUrl){
+  const foot=$('foot'),bgimg=$('bgimg');
+  if(foot.getAttribute('src')!==frameUrl){foot.src=frameUrl;bgimg.src=frameUrl;$('thumb').src=frameUrl;
+    await Promise.all([foot.decode(),bgimg.decode()]).catch(()=>{})}
+
+  // footage zoom (camera) 8.25 -> 1.2x, back 9.2-9.65
+  let z=1+.2*eio(prog(t,8.22,8.62))-.2*eio(prog(t,9.2,9.65));
+  // jump-cut micro blur at 12.6
+  const jc=Math.max(0,1-Math.abs(t-12.6)/.09);
+  foot.style.transform=`scale(${z})`;
+  foot.style.filter=jc>0?`blur(${jc*9}px)`:'none';
+
+  // grid zoom-out 17.6-18.15, back 20.45-20.95
+  const gout=eio(prog(t,17.55,18.15)), gin=eio(prog(t,20.45,20.95));
+  const g=gout*(1-gin);
+  const TL={x:375,y:566,w:330};const sc=lerp(1,TL.w/W,g);
+  const fx=lerp(0,TL.x,g),fy=lerp(0,TL.y,g);
+  const fw=$('footwrap');
+  fw.style.transform=`translate(${fx}px,${fy}px) scale(${sc})`;
+  fw.style.borderRadius=g>0?`${(26*g)/sc}px`:'0';
+  fw.style.boxShadow=g>0?`0 ${30/sc}px ${70/sc}px rgba(0,0,0,${.5*g})`:'none';
+  $('bgwrap').style.opacity=g;
+
+  // grid tiles
+  vis($('slotL'),t,17.9,20.5,{din:.3,dout:.3,blur:8,s0:.97});
+  vis($('slotR'),t,17.95,20.5,{din:.3,dout:.3,blur:8,s0:.97});
+  vis($('tileL'),t,19.3,20.5,{din:.32,dout:.3,back:true,s0:.7});
+  vis($('tileR'),t,20.06,20.5,{din:.32,dout:.25,back:true,s0:.7});
+  vis($('lblL'),t,19.4,20.5,{din:.25,dout:.25,blur:8,s0:1,dy:8});
+  vis($('lblC'),t,18.78,20.5,{din:.25,dout:.25,blur:8,s0:1,dy:8});
+  vis($('lblR'),t,20.12,20.5,{din:.22,dout:.25,blur:8,s0:1,dy:8});
+  vis($('chipC'),t,18.85,20.5,{din:.25,dout:.25,blur:8,s0:.9});
+
+  // hook
+  vis($('hook'),t,null,2.58,{dout:.3,blur:26,s1:.97});
+  vis($('hooksel'),t,null,1.5,{dout:.35,blur:6,s1:1});
+  $('livedot').style.opacity=.35+.65*(0.5+0.5*Math.cos(t*5));
+
+  // file card carried by Y cursor
+  const fv=vis($('file'),t,2.62,4.32,{din:.28,dout:.25,blur:18,back:true,s0:.7,s1:.25});
+  if(fv>0){const [x,y]=curPos('Y',t);const fe=$('file');fe.style.left=(x-300)+'px';fe.style.top=(y-36)+'px';
+    const tilt=t>3&&t<4.05?Math.sin(prog(t,3,4.05)*Math.PI)*-5:0;fe.style.transform+=` rotate(${tilt}deg)`}
+
+  // prompt
+  vis($('prompt'),t,4.52,9.62,{din:.3,dout:.3,blur:24,dy:10,dyOut:-14,s1:.94});
+  vis($('ptag'),t,4.62,9.55,{din:.26,dout:.25,blur:10,back:true,s0:.6});
+  const ptx=typed(t,PROMPT_SEGS);
+  $('ptxt').innerHTML= ptx? ptx+`<span style="display:inline-block;width:3px;height:44px;background:#D97757;vertical-align:-6px;margin-left:2px;opacity:${(Math.floor(t*3)%2)?1:.15}"></span>`
+     : `<span style="color:rgba(255,255,255,.4)">Describe your edit…</span>`;
+  const sp=prog(t,9.03,9.2);$('psend').style.transform=`scale(${1-.12*Math.sin(Math.PI*sp)})`;
+  $('psend').style.background=t>=9.08?'#2E7D4F':'#D97757';
+  $('psendico').setAttribute('d',t>=9.08?'M5 12.5l4.5 4.5L19 7':'M12 19V5M5 12l7-7 7 7');
+
+  // crop box drawn by G cursor 7.85-8.2, fades 8.5-8.7
+  const cr=$('crop');const cv=vis(cr,t,7.85,8.7,{din:.12,dout:.22,blur:6,s0:1,s1:1});
+  if(cv>0){const [gx,gy]=curPos('G',t);const x0=180,y0=760;const x1=Math.max(x0+30,gx),y1=Math.max(y0+50,gy);
+    const b=$('cropbox');b.style.left=x0+'px';b.style.top=y0+'px';b.style.width=(x1-x0)+'px';b.style.height=(y1-y0)+'px';
+    $('croptag').style.left=x0+'px';$('croptag').style.top=(y0-36)+'px';
+    const ro=$('cropro');ro.textContent=`${Math.round((x1-x0)*1.0)} × ${Math.round((y1-y0)*1.0)}`;ro.style.left=(x0+(x1-x0)/2-60)+'px';ro.style.top=(y1+12)+'px'}
+  const zc=$('zchip');
+  const zv=vis(zc,t,8.2,9.0,{din:.22,dout:.2,blur:8,back:true,s0:.6});
+  const zv2=t>=9.15&&t<9.9;
+  if(zv>0||zv2){const [gx,gy]=curPos('G',t);zc.style.left=(gx+30)+'px';zc.style.top=(gy-70)+'px';
+    zc.textContent=t<9.1?'Zoom 1.2×':'Zoom out';if(zv2)vis(zc,t,9.15,9.9,{din:.2,dout:.2,blur:8,back:true,s0:.6})}
+
+  // plan
+  vis($('plan'),t,10.25,12.42,{din:.32,dout:.22,blur:24,dy:12,s1:.9});
+  [10.45,10.6,10.75,10.9].forEach((a,i)=>{const r=$('prow'+i);const p=eout(prog(t,a,a+.25));r.style.opacity=p;r.style.transform=`translateX(${(1-p)*-20}px)`;r.style.filter=p<1?`blur(${(1-p)*8}px)`:'none'});
+  const ap=$('approve');const apP=prog(t,11.98,12.15);
+  ap.style.transform=`scale(${1-.1*Math.sin(Math.PI*apP)})`;
+  ap.textContent=t>=12.02?'✓ Approved':'Approve';ap.style.background=t>=12.02?'#19B35C':'#D9F99D';ap.style.color=t>=12.02?'#fff':'#1d3a06';
+  vis($('done'),t,12.22,12.62,{din:.2,dout:.14,blur:16,back:true,s0:.5});
+
+  // leaderboard
+  vis($('lb'),t,12.68,17.6,{din:.3,dout:.3,blur:24,dy:12,s1:.94});
+  const LT=[12.74,13.46,14.06,14.64,15.14,15.68];
+  const LV=[[14,' cut'],[2,' cut'],[41,' words'],[3,' clips'],[-14,' LUFS ✓']];
+  LT.forEach((a,i)=>{const r=$('l'+i);const p=eout(prog(t,a-.04,a+.22));r.style.opacity=p;r.style.transform=`translateX(${(1-p)*-24}px)`;r.style.filter=p<1?`blur(${(1-p)*8}px)`:'none';
+    if(i<5){const hl=Math.max(0,1-(t-a)/.6);r.style.background=t>=a?`rgba(255,255,255,${.14*hl})`:'transparent';
+      const [n,suf]=LV[i];const c=Math.round(n*eout(prog(t,a,a+.45)));$('lv'+i).textContent=(t>=a?c:0)+suf}});
+  {let hr=0;LT.forEach((a,i)=>{hr+=eout(prog(t,a-.04,a+.22))*(i<5?78:94)});$('lb').style.height=(96+hr)+'px'}
+  vis($('lbchip'),t,16.3,17.6,{din:.25,dout:.3,blur:8,back:true,s0:.7});
+
+  // comments
+  vis($('cm'),t,20.98,23.12,{din:.3,dout:.3,blur:24,dy:14,s1:.94});
+  const ty=typed(t,[["VIBE",21.42,21.78]]);
+  const f=$('cmfield');
+  if(t<22.1){ if(ty){f.textContent=ty;f.style.color='#fff'} else if(t>=21.2){f.innerHTML=`<span style="display:inline-block;width:3px;height:34px;background:#fff;vertical-align:-6px;opacity:${(Math.floor(t*3)%2)?1:.1}"></span>`} else {f.textContent='Add a comment…';f.style.color='rgba(255,255,255,.45)'} }
+  else {f.textContent='Add a comment…';f.style.color='rgba(255,255,255,.45)'}
+  $('cmpost').style.color= (t>=21.5&&t<22.1)?'#0095F6':'rgba(0,149,246,.45)';
+  const rowP=eout(prog(t,22.1,22.35));$('cmrow').style.opacity=rowP;$('cmrow').style.transform=`translateY(${(1-rowP)*16}px)`;$('cmrow').style.filter=rowP<1?`blur(${(1-rowP)*8}px)`:'none';
+  $('cmempty').style.opacity=1-clamp(prog(t,22.05,22.15));
+  $('cmheart').style.opacity=rowP;
+  // notification drops from top
+  const nin=eback(prog(t,22.35,22.75)), nout=eio(prog(t,23.02,23.38));
+  const ne=$('notif');const nv=clamp(prog(t,22.35,22.55))*(1-nout);
+  ne.style.display=nv>0?'':'none';ne.style.opacity=nv;ne.style.transform=`translateY(${lerp(-170,0,clamp(nin,0,1.2))-nout*190}px)`;
+  ne.style.filter=nv<1?`blur(${(1-nv)*10}px)`:'none';
+
+  // end card
+  vis($('endc'),t,23.32,null,{din:.36,blur:26,dy:16});
+  const pulse=t>23.8?1+.035*Math.sin((t-23.8)*5.5):1;$('endcta').style.transform=`scale(${pulse})`;
+
+  drawCaps(t);
+  drawCursors(t);
+}
+window.render=render;
+</script>
+</body></html>
