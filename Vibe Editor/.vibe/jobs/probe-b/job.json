@@ -1,0 +1,14 @@
+{
+  "name": "probe-b",
+  "source": "/home/user/experiments/Vibe Editor/inbox/raw-b.mp4",
+  "probe": {
+    "duration": 15.04,
+    "fps": 24.0,
+    "has_audio": true,
+    "has_video": true,
+    "width": 720,
+    "height": 1280
+  },
+  "language": "hi",
+  "created": "2026-11-28 07:19"
+}

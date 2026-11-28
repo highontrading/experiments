@@ -1,0 +1,26 @@
+{
+  "format": "9:16",
+  "reframe": {
+    "mode": "crop",
+    "x": 0.5,
+    "y": 0.5
+  },
+  "look": "punchy",
+  "cuts": {
+    "remove_pauses": true,
+    "max_pause": 0.45,
+    "remove_fillers": true,
+    "drop_words": [],
+    "drop": []
+  },
+  "captions": {
+    "enabled": true,
+    "style": "bold-pop",
+    "emphasis": []
+  },
+  "audio": {
+    "denoise": false,
+    "loudness": -14
+  },
+  "events": []
+}

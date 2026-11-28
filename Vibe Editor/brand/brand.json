@@ -1,0 +1,25 @@
+{
+  "name": "",
+  "handle": "",
+  "niche": "",
+  "vibe": "clean, modern",
+  "language": "auto",
+  "caption_script": "roman",
+  "colors": {
+    "accent": "#FFD400",
+    "accent2": "#8B5CF6",
+    "text": "#FFFFFF",
+    "dark": "#161616",
+    "card": "#FFFFFF"
+  },
+  "fonts": {
+    "title": "poppins-black",
+    "body": "inter-extrabold",
+    "serif": "instrument-serif"
+  },
+  "caption_style": "bold-pop",
+  "look": "punchy",
+  "cta": "Follow for more",
+  "logo": "",
+  "notes": []
+}
