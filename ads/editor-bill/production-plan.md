@@ -87,3 +87,21 @@ Headline: **Stop paying per reel** · CTA button: **Shop now** / **Learn more**
 ## Credits needed
 - Still: ~1 · 3 clips at 1080p: ~146 (720p: ~102)
 - Budget ~1.5x for retakes: **~220 credits at 1080p**
+
+---
+
+## v2 — "Filmy phone call" style (chosen)
+
+Original character (not a lookalike of any real person): Indian man, early 40s, slicked-back
+black hair, thin mustache, wraparound sunglasses, white ribbed vest, silver flip phone.
+Blue-grey smoky studio backdrop, bright white backlight flare, high-angle wide-angle lens.
+
+Clip 1: on phone — "Haan bolo editor bhai... kya? Ek reel ka pandrah sau?!" → lowers phone →
+"Mahine ki baarah reels... matlab saal ka do lakh solah hazaar rupaye. Sirf editing pe?!"
+Clip 2: snaps phone shut — "Bas. Ab editing ChatGPT ya Claude karega. Vibe Editor ek plugin hai.
+Raw video do, bolo: pauses kaato, Hinglish captions daalo, zoom karo... aur reel ready."
+Clip 3: "Aur price? Chaudah sau ninyaanve. Sirf ek baar. Na subscription, na credits. Bas laptop
+aur paid ChatGPT ya Claude plan chahiye." → points down → "Link neeche hai... jao!"
+
+Edit additions: phone-ring SFX on frame 1, "₹1,500 / reel?!" on the shocked line, calculator
+during the stare, click SFX on the phone snap, CTA button where he points.
