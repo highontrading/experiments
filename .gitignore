@@ -23,3 +23,13 @@ Vibe Editor/.vibe/jobs/*/graph.txt
 Vibe Editor/.vibe/jobs/*/last_render.json
 Vibe Editor/.vibe/master/
 Vibe Editor/.vibe/*.sh
+# Meta ads: heavy/regenerable outputs
+Vibe Editor/ads/blender/*/plate/
+Vibe Editor/ads/blender/*/lookdev/
+Vibe Editor/ads/blender/*/*.blend
+Vibe Editor/ads/blender/*/*.blend1
+Vibe Editor/ads/blender/*/*.log
+Vibe Editor/ads/blender/dream/assets/
+Vibe Editor/ads/renders/
+Vibe Editor/ads/**/__pycache__/
+Vibe Editor/output/ads/
