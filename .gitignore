@@ -19,3 +19,5 @@ Vibe Editor/music/*.wav
 Vibe Editor/output/*.mp4
 Vibe Editor/tools/__pycache__/
 Vibe Editor/plans/test.json
+Vibe Editor/.vibe/jobs/*/graph.txt
+Vibe Editor/.vibe/jobs/*/last_render.json
